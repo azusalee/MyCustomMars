@@ -20,6 +20,10 @@
 
 iOS导入mars需要SystemConfiguration, libresolv, libz, CoreTelephony, 这个其实原来的mars里也有说明，更具体的问题看 <https://github.com/Tencent/mars/wiki/Mars-iOS%EF%BC%8FOS-X-%E6%8E%A5%E5%8F%A3%E8%AF%A6%E7%BB%86%E8%AF%B4%E6%98%8E>
 
+## 问题
+
+这只是个临时的解决方案，这个方法由于会加多mars库，包会明显增大，如果需要保持很多长连接，这个方法明显就不合适了。最好还是能从源码上修改成支持多个长连接。
+
 ## Author
 
 azusalee, 384433472@qq.com
