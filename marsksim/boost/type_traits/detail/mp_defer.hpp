@@ -12,7 +12,7 @@
 #include <boost/type_traits/integral_constant.hpp>
 #include <boost/type_traits/conditional.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 namespace type_traits_detail
@@ -25,10 +25,10 @@ template<template<class...> class F, class... T>
 struct mp_valid_impl
 {
     template<template<class...> class G, class = G<T...>>
-    static mars_boost_ksim::true_type check(int);
+    static mars_boost::true_type check(int);
 
     template<template<class...> class>
-    static mars_boost_ksim::false_type check(...);
+    static mars_boost::false_type check(...);
 
     using type = decltype(check<F>(0));
 };
@@ -47,10 +47,10 @@ template<template<class...> class F, class... T> struct mp_defer_impl
     using type = F<T...>;
 };
 
-template<template<class...> class F, class... T> using mp_defer = typename mars_boost_ksim::conditional<mp_valid<F, T...>::value, mp_defer_impl<F, T...>, mp_empty>::type;
+template<template<class...> class F, class... T> using mp_defer = typename mars_boost::conditional<mp_valid<F, T...>::value, mp_defer_impl<F, T...>, mp_empty>::type;
 
 } // namespace type_traits_detail
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // #ifndef BOOST_TYPE_TRAITS_DETAIL_MP_DEFER_HPP_INCLUDED

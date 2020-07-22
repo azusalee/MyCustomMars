@@ -1,5 +1,5 @@
 /*
-  A variadic implementation of variadic mars_boost_ksim::signals2::signal, used when variadic
+  A variadic implementation of variadic mars_boost::signals2::signal, used when variadic
   template support is detected in the compiler.
 
   Author: Frank Mori Hess <fmhess@users.sourceforge.net>
@@ -23,7 +23,7 @@
 #include <boost/type_traits/is_void.hpp> 
 #include <boost/utility/enable_if.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace signals2
   {
@@ -35,11 +35,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         class variadic_extended_signature<R (Args...)>
       {
       public:
-        typedef mars_boost_ksim::function<R (const mars_boost_ksim::signals2::connection &, Args...)> function_type;
+        typedef mars_boost::function<R (const mars_boost::signals2::connection &, Args...)> function_type;
       };
     } // namespace detail
   } // namespace signals2
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #include <boost/signals2/detail/signal_template.hpp>
 

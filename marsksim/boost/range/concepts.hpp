@@ -57,7 +57,7 @@
  * details about concept checks.
  */
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
     namespace range_detail {
 
@@ -114,8 +114,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         // Iterators that contains a functor that is not assignable therefore
         // are not correct models of the standard iterator concepts,
         // despite being adequate for most algorithms. An example of this
-        // use case is the combination of the mars_boost_ksim::adaptors::filtered
-        // class with a mars_boost_ksim::lambda::bind generated functor.
+        // use case is the combination of the mars_boost::adaptors::filtered
+        // class with a mars_boost::lambda::bind generated functor.
         // Ultimately modeling the range concepts using composition
         // with the Boost.Iterator concepts would render the library
         // incompatible with many common Boost.Lambda expressions.
@@ -156,7 +156,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             BOOST_CONCEPT_USAGE(SinglePassIteratorConcept)
             {
                 Iterator i2(++i);
-                mars_boost_ksim::ignore_unused_variable_warning(i2);
+                mars_boost::ignore_unused_variable_warning(i2);
 
                 // deliberately we are loose with the postfix version for the single pass
                 // iterator due to the commonly poor adherence to the specification means that
@@ -164,11 +164,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 // work
                 (void)(i++);
 
-                BOOST_DEDUCED_TYPENAME mars_boost_ksim::detail::iterator_traits<Iterator>::reference r1(*i);
-                mars_boost_ksim::ignore_unused_variable_warning(r1);
+                BOOST_DEDUCED_TYPENAME mars_boost::detail::iterator_traits<Iterator>::reference r1(*i);
+                mars_boost::ignore_unused_variable_warning(r1);
 
-                BOOST_DEDUCED_TYPENAME mars_boost_ksim::detail::iterator_traits<Iterator>::reference r2(*(++i));
-                mars_boost_ksim::ignore_unused_variable_warning(r2);
+                BOOST_DEDUCED_TYPENAME mars_boost::detail::iterator_traits<Iterator>::reference r2(*(++i));
+                mars_boost::ignore_unused_variable_warning(r2);
             }
         private:
             Iterator i;
@@ -181,7 +181,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             , DefaultConstructible<Iterator>
         {
 #if BOOST_RANGE_ENABLE_CONCEPT_ASSERT
-            typedef BOOST_DEDUCED_TYPENAME mars_boost_ksim::detail::iterator_traits<Iterator>::difference_type difference_type;
+            typedef BOOST_DEDUCED_TYPENAME mars_boost::detail::iterator_traits<Iterator>::difference_type difference_type;
 
             BOOST_MPL_ASSERT((is_integral<difference_type>));
             BOOST_MPL_ASSERT_RELATION(std::numeric_limits<difference_type>::is_signed, ==, true);
@@ -199,9 +199,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 // for a proxy, we can sensibly require that the dereference result
                 // is convertible to reference.
                 Iterator i2(i++);
-                mars_boost_ksim::ignore_unused_variable_warning(i2);
-                BOOST_DEDUCED_TYPENAME mars_boost_ksim::detail::iterator_traits<Iterator>::reference r(*(i++));
-                mars_boost_ksim::ignore_unused_variable_warning(r);
+                mars_boost::ignore_unused_variable_warning(i2);
+                BOOST_DEDUCED_TYPENAME mars_boost::detail::iterator_traits<Iterator>::reference r(*(i++));
+                mars_boost::ignore_unused_variable_warning(r);
             }
         private:
             Iterator i;
@@ -284,11 +284,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             // This has been modified from assigning to this->i
             // (where i was a member variable) to improve
             // compatibility with Boost.Lambda
-            iterator i1 = mars_boost_ksim::begin(*m_range);
-            iterator i2 = mars_boost_ksim::end(*m_range);
+            iterator i1 = mars_boost::begin(*m_range);
+            iterator i2 = mars_boost::end(*m_range);
 
-            mars_boost_ksim::ignore_unused_variable_warning(i1);
-            mars_boost_ksim::ignore_unused_variable_warning(i2);
+            mars_boost::ignore_unused_variable_warning(i1);
+            mars_boost::ignore_unused_variable_warning(i2);
 
             const_constraints(*m_range);
         }
@@ -296,11 +296,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     private:
         void const_constraints(const Rng& const_range)
         {
-            const_iterator ci1 = mars_boost_ksim::begin(const_range);
-            const_iterator ci2 = mars_boost_ksim::end(const_range);
+            const_iterator ci1 = mars_boost::begin(const_range);
+            const_iterator ci2 = mars_boost::end(const_range);
 
-            mars_boost_ksim::ignore_unused_variable_warning(ci1);
-            mars_boost_ksim::ignore_unused_variable_warning(ci2);
+            mars_boost::ignore_unused_variable_warning(ci1);
+            mars_boost::ignore_unused_variable_warning(ci2);
         }
 
        // Rationale:
@@ -381,6 +381,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     {
     };
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_RANGE_CONCEPTS_HPP

@@ -14,7 +14,7 @@
 #include <boost/config.hpp> // BOOST_MSVC
 #include <boost/range/iterator.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     
     namespace range_detail
@@ -138,7 +138,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #include <boost/range/detail/value_type.hpp>
 #include <boost/range/detail/common.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     
     namespace range_detail
@@ -201,7 +201,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             template< typename T, std::size_t sz >
             static T* fun( T BOOST_RANGE_ARRAY_REF()[sz] )
             {
-                return mars_boost_ksim::range_detail::array_end( boost_range_array );
+                return mars_boost::range_detail::array_end( boost_range_array );
             }
         };
         
@@ -211,7 +211,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             template< typename T, std::size_t sz >
             static T* fun( T BOOST_RANGE_ARRAY_REF()[sz] )
             {
-                return mars_boost_ksim::range_detail::array_end( boost_range_array );
+                return mars_boost::range_detail::array_end( boost_range_array );
             }
         };
         
@@ -220,7 +220,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
             static char* fun( char* s )
             {
-                return mars_boost_ksim::range_detail::str_end( s );
+                return mars_boost::range_detail::str_end( s );
             }
         };
 
@@ -229,7 +229,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
             static const char* fun( const char* s )
             {
-                return mars_boost_ksim::range_detail::str_end( s );
+                return mars_boost::range_detail::str_end( s );
             }
         };
 
@@ -238,7 +238,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
             static wchar_t* fun( wchar_t* s )
             {
-                return mars_boost_ksim::range_detail::str_end( s );
+                return mars_boost::range_detail::str_end( s );
             }
         };
 
@@ -248,7 +248,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
             static const wchar_t* fun( const wchar_t* s )
             {
-                return mars_boost_ksim::range_detail::str_end( s );
+                return mars_boost::range_detail::str_end( s );
             }
         };
 

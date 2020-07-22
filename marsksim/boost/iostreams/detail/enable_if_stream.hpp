@@ -19,10 +19,10 @@
 #if !defined(BOOST_NO_SFINAE) && \
     !BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x592))
 # define BOOST_IOSTREAMS_ENABLE_IF_STREAM(T) \
-    , typename mars_boost_ksim::enable_if< mars_boost_ksim::iostreams::is_std_io<T> >::type* = 0 \
+    , typename mars_boost::enable_if< mars_boost::iostreams::is_std_io<T> >::type* = 0 \
     /**/
 # define BOOST_IOSTREAMS_DISABLE_IF_STREAM(T) \
-    , typename mars_boost_ksim::disable_if< mars_boost_ksim::iostreams::is_std_io<T> >::type* = 0 \
+    , typename mars_boost::disable_if< mars_boost::iostreams::is_std_io<T> >::type* = 0 \
     /**/
 #else 
 # define BOOST_IOSTREAMS_ENABLE_IF_STREAM(T)

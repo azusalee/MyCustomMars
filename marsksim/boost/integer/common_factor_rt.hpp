@@ -27,7 +27,7 @@
 #pragma warning(disable:4127 4244)  // Conditional expression is constant
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 namespace integer
 {
@@ -55,7 +55,7 @@ public:
     result_type  operator ()( first_argument_type const &a,
      second_argument_type const &b ) const;
 
-};  // mars_boost_ksim::integer::gcd_evaluator
+};  // mars_boost::integer::gcd_evaluator
 
 
 //  Least common multiple evaluator class declaration  -----------------------//
@@ -71,7 +71,7 @@ public:
     result_type  operator ()( first_argument_type const &a,
      second_argument_type const &b ) const;
 
-};  // mars_boost_ksim::integer::lcm_evaluator
+};  // mars_boost::integer::lcm_evaluator
 
 
 //  Implementation details  --------------------------------------------------//
@@ -277,7 +277,7 @@ namespace detail
     BOOST_PRIVATE_GCD_UF( unsigned long );
 
 #ifdef BOOST_HAS_LONG_LONG
-    BOOST_PRIVATE_GCD_UF( mars_boost_ksim::ulong_long_type );
+    BOOST_PRIVATE_GCD_UF( mars_boost::ulong_long_type );
 #elif defined(BOOST_HAS_MS_INT64)
     BOOST_PRIVATE_GCD_UF( unsigned __int64 );
 #endif
@@ -305,7 +305,7 @@ namespace detail
 #endif
 
 #ifdef BOOST_HAS_LONG_LONG
-    BOOST_PRIVATE_GCD_SF( mars_boost_ksim::long_long_type, mars_boost_ksim::ulong_long_type );
+    BOOST_PRIVATE_GCD_SF( mars_boost::long_long_type, mars_boost::ulong_long_type );
 #elif defined(BOOST_HAS_MS_INT64)
     BOOST_PRIVATE_GCD_SF( __int64, unsigned __int64 );
 #endif
@@ -451,7 +451,7 @@ lcm
 
 
 }  // namespace integer
-}  // namespace mars_boost_ksim
+}  // namespace mars_boost
 
 #ifdef BOOST_MSVC
 #pragma warning(pop)

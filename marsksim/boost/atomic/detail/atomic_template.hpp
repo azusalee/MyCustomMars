@@ -31,7 +31,7 @@
 
 #if defined(BOOST_MSVC)
 #pragma warning(push)
-// 'mars_boost_ksim::atomics::atomic<T>' : multiple assignment operators specified
+// 'mars_boost::atomics::atomic<T>' : multiple assignment operators specified
 #pragma warning(disable: 4522)
 #endif
 
@@ -40,7 +40,7 @@
  *                      see comment for convert_memory_order_to_gcc in ops_gcc_atomic.hpp.
  */
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace atomics {
 namespace detail {
 
@@ -56,7 +56,7 @@ BOOST_FORCEINLINE BOOST_CONSTEXPR bool cas_failure_order_must_not_be_stronger_th
     return (failure_order & 15u) <= (success_order & 15u);
 }
 
-template< typename T, bool IsInt = mars_boost_ksim::is_integral< T >::value >
+template< typename T, bool IsInt = mars_boost::is_integral< T >::value >
 struct classify
 {
     typedef void type;
@@ -78,7 +78,7 @@ class base_atomic< T, int >
 private:
     typedef T value_type;
     typedef T difference_type;
-    typedef atomics::detail::operations< storage_size_of< value_type >::value, mars_boost_ksim::is_signed< T >::value > operations;
+    typedef atomics::detail::operations< storage_size_of< value_type >::value, mars_boost::is_signed< T >::value > operations;
 
 protected:
     typedef value_type value_arg_type;
@@ -724,8 +724,8 @@ typedef atomic< long > atomic_long;
 typedef atomic< uint64_t > atomic_uint64_t;
 typedef atomic< int64_t > atomic_int64_t;
 #ifdef BOOST_HAS_LONG_LONG
-typedef atomic< mars_boost_ksim::ulong_long_type > atomic_ullong;
-typedef atomic< mars_boost_ksim::long_long_type > atomic_llong;
+typedef atomic< mars_boost::ulong_long_type > atomic_ullong;
+typedef atomic< mars_boost::long_long_type > atomic_llong;
 #endif
 typedef atomic< void* > atomic_address;
 typedef atomic< bool > atomic_bool;
@@ -765,7 +765,7 @@ typedef atomic< uintptr_t > atomic_uintptr_t;
 #endif
 
 } // namespace atomics
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #if defined(BOOST_MSVC)
 #pragma warning(pop)

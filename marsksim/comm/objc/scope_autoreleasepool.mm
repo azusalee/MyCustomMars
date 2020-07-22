@@ -18,4 +18,4 @@ Scope_AutoReleasePool::~Scope_AutoReleasePool()
     [m_pool drain];
 }
 
-void comm_export_symbols_3(){}
+void comm_export_symbolsksim_3(){}

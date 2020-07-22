@@ -44,7 +44,7 @@ typedef struct
 
 }TestInputItem;
 
-extern int __CurActiveState(const ActiveLogicksim& _activeLogic) ;
+extern int __CurActiveStateksim(const ActiveLogicksim& _activeLogic) ;
 extern unsigned long __Interval(int _type, const ActiveLogicksim& _activeLogic);
 
 
@@ -135,7 +135,7 @@ void testFunc(TestCaseInfo* m_testCaseInfo, NetType netType, bool isUserNameEmpt
 	//PUBC_EXPECT_EQ((int)isUserNameEmpty, (int)getAccountInfo().username.empty(), &baseScene);
 
 	changeActiveLogicksim(activeState, activeLogic);
-	bool isActiveStateMatchExpect = (activeState ==__CurActiveState(activeLogic));
+	bool isActiveStateMatchExpect = (activeState ==__CurActiveStateksim(activeLogic));
 	PUBC_EXPECT_TRUE(isActiveStateMatchExpect , &baseScene);
 
 	unsigned long interval = __Interval(ELongLinkConnect, activeLogic);
@@ -146,7 +146,7 @@ void testFunc(TestCaseInfo* m_testCaseInfo, NetType netType, bool isUserNameEmpt
 
 ///*******************nonet   usename is empty
 
-PUBC_TEST(MMLongLinkConnectMonitor, test0)
+PUBC_TEST(MMLongLinkConnectMonitorksim, test0)
 {
 	m_testCaseInfo->m_TestCaseName = "(ENoNet, No AccountInfo, EForgroundActive)";
 	//net, accountInfo , activeState
@@ -159,7 +159,7 @@ PUBC_TEST(MMLongLinkConnectMonitor, test0)
 }
 
 
-PUBC_TEST(MMLongLinkConnectMonitor, test1)
+PUBC_TEST(MMLongLinkConnectMonitorksim, test1)
 {
 	m_testCaseInfo->m_TestCaseName = "(ENoNet, No AccountInfo, EInactive)";
 	//net, accountInfo , activeState
@@ -171,7 +171,7 @@ PUBC_TEST(MMLongLinkConnectMonitor, test1)
 	testFunc(m_testCaseInfo, kNoNet, true, EInactive, activeLogic, baseScene, expectInterval);
 }
 
-PUBC_TEST(MMLongLinkConnectMonitor, test2)
+PUBC_TEST(MMLongLinkConnectMonitorksim, test2)
 {
 	m_testCaseInfo->m_TestCaseName = "(ENoNet, No AccountInfo, EForgroundOneMinute)";
 	//net, accountInfo , activeState
@@ -184,7 +184,7 @@ PUBC_TEST(MMLongLinkConnectMonitor, test2)
 
 }
 
-PUBC_TEST(MMLongLinkConnectMonitor, test3)
+PUBC_TEST(MMLongLinkConnectMonitorksim, test3)
 {
 	m_testCaseInfo->m_TestCaseName = "(ENoNet, No AccountInfo, EForgroundTenMinute)";
 	//net, accountInfo , activeState
@@ -197,7 +197,7 @@ PUBC_TEST(MMLongLinkConnectMonitor, test3)
 
 }
 
-PUBC_TEST(MMLongLinkConnectMonitor, test4)
+PUBC_TEST(MMLongLinkConnectMonitorksim, test4)
 {
 	m_testCaseInfo->m_TestCaseName = "(ENoNet, No AccountInfo, EBackgroundActive)";
 	//net, accountInfo , activeState
@@ -211,7 +211,7 @@ PUBC_TEST(MMLongLinkConnectMonitor, test4)
 }
 
 //*********EWifi username is empty
-PUBC_TEST(MMLongLinkConnectMonitor, test5)
+PUBC_TEST(MMLongLinkConnectMonitorksim, test5)
 {
 	m_testCaseInfo->m_TestCaseName = "(EWifi, No AccountInfo, EForgroundActive)";
 	//net, accountInfo , activeState
@@ -224,7 +224,7 @@ PUBC_TEST(MMLongLinkConnectMonitor, test5)
 }
 
 
-PUBC_TEST(MMLongLinkConnectMonitor, test6)
+PUBC_TEST(MMLongLinkConnectMonitorksim, test6)
 {
 	m_testCaseInfo->m_TestCaseName = "(EWifi, No AccountInfo, EInactive)";
 	//net, accountInfo , activeState
@@ -237,7 +237,7 @@ PUBC_TEST(MMLongLinkConnectMonitor, test6)
 
 }
 
-PUBC_TEST(MMLongLinkConnectMonitor, test7)
+PUBC_TEST(MMLongLinkConnectMonitorksim, test7)
 {
 	m_testCaseInfo->m_TestCaseName = "(EWifi, No AccountInfo, EForgroundOneMinute)";
 	//net, accountInfo , activeState
@@ -250,7 +250,7 @@ PUBC_TEST(MMLongLinkConnectMonitor, test7)
 
 }
 
-PUBC_TEST(MMLongLinkConnectMonitor, test8)
+PUBC_TEST(MMLongLinkConnectMonitorksim, test8)
 {
 	m_testCaseInfo->m_TestCaseName = "(EWifi, No AccountInfo, EForgroundTenMinute)";
 	//net, accountInfo , activeState
@@ -263,7 +263,7 @@ PUBC_TEST(MMLongLinkConnectMonitor, test8)
 
 }
 
-PUBC_TEST(MMLongLinkConnectMonitor, test9)
+PUBC_TEST(MMLongLinkConnectMonitorksim, test9)
 {
 	m_testCaseInfo->m_TestCaseName = "(EWifi, No AccountInfo, EBackgroundActive)";
 	//net, accountInfo , activeState
@@ -278,7 +278,7 @@ PUBC_TEST(MMLongLinkConnectMonitor, test9)
 
 //**********EWIFI   username is not empty
 
-PUBC_TEST(MMLongLinkConnectMonitor, test10)
+PUBC_TEST(MMLongLinkConnectMonitorksim, test10)
 {
 	m_testCaseInfo->m_TestCaseName = "(EWifi, Have AccountInfo, EForgroundActive)";
 	//net, accountInfo , activeState
@@ -291,7 +291,7 @@ PUBC_TEST(MMLongLinkConnectMonitor, test10)
 }
 
 
-PUBC_TEST(MMLongLinkConnectMonitor, test11)
+PUBC_TEST(MMLongLinkConnectMonitorksim, test11)
 {
 	m_testCaseInfo->m_TestCaseName = "(EWifi, Have AccountInfo, EInactive)";
 	//net, accountInfo , activeState
@@ -304,7 +304,7 @@ PUBC_TEST(MMLongLinkConnectMonitor, test11)
 
 }
 
-PUBC_TEST(MMLongLinkConnectMonitor, test12)
+PUBC_TEST(MMLongLinkConnectMonitorksim, test12)
 {
 	m_testCaseInfo->m_TestCaseName = "(EWifi, Have AccountInfo, EForgroundOneMinute)";
 	//net, accountInfo , activeState
@@ -317,7 +317,7 @@ PUBC_TEST(MMLongLinkConnectMonitor, test12)
 
 }
 
-PUBC_TEST(MMLongLinkConnectMonitor, test13)
+PUBC_TEST(MMLongLinkConnectMonitorksim, test13)
 {
 	m_testCaseInfo->m_TestCaseName = "(EWifi, Have AccountInfo, EForgroundTenMinute)";
 	//net, accountInfo , activeState
@@ -330,7 +330,7 @@ PUBC_TEST(MMLongLinkConnectMonitor, test13)
 
 }
 
-PUBC_TEST(MMLongLinkConnectMonitor, test14)
+PUBC_TEST(MMLongLinkConnectMonitorksim, test14)
 {
 	m_testCaseInfo->m_TestCaseName = "(EWifi, Have AccountInfo, EBackgroundActive)";
 	//net, accountInfo , activeState
@@ -345,7 +345,7 @@ PUBC_TEST(MMLongLinkConnectMonitor, test14)
 
 //ENONET  username is not empty
 
-PUBC_TEST(MMLongLinkConnectMonitor, test15)
+PUBC_TEST(MMLongLinkConnectMonitorksim, test15)
 {
 	m_testCaseInfo->m_TestCaseName = "(ENoNet, Have AccountInfo, EForgroundActive)";
 	//net, accountInfo , activeState
@@ -358,7 +358,7 @@ PUBC_TEST(MMLongLinkConnectMonitor, test15)
 }
 
 
-PUBC_TEST(MMLongLinkConnectMonitor, test16)
+PUBC_TEST(MMLongLinkConnectMonitorksim, test16)
 {
 	m_testCaseInfo->m_TestCaseName = "(ENoNet, Have AccountInfo, EInactive)";
 	//net, accountInfo , activeState
@@ -371,7 +371,7 @@ PUBC_TEST(MMLongLinkConnectMonitor, test16)
 
 }
 
-PUBC_TEST(MMLongLinkConnectMonitor, test17)
+PUBC_TEST(MMLongLinkConnectMonitorksim, test17)
 {
 	m_testCaseInfo->m_TestCaseName = "(ENoNet, Have AccountInfo, EForgroundOneMinute)";
 	//net, accountInfo , activeState
@@ -384,7 +384,7 @@ PUBC_TEST(MMLongLinkConnectMonitor, test17)
 
 }
 
-PUBC_TEST(MMLongLinkConnectMonitor, test18)
+PUBC_TEST(MMLongLinkConnectMonitorksim, test18)
 {
 	m_testCaseInfo->m_TestCaseName = "(ENoNet, Have AccountInfo, EForgroundTenMinute)";
 	//net, accountInfo , activeState
@@ -397,7 +397,7 @@ PUBC_TEST(MMLongLinkConnectMonitor, test18)
 
 }
 
-PUBC_TEST(MMLongLinkConnectMonitor, test19)
+PUBC_TEST(MMLongLinkConnectMonitorksim, test19)
 {
 	m_testCaseInfo->m_TestCaseName = "(ENoNet, Have AccountInfo, EBackgroundActive)";
 	//net, accountInfo , activeState

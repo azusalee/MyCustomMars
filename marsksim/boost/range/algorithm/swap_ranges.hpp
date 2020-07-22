@@ -18,7 +18,7 @@
 #include <boost/range/iterator.hpp>
 #include <algorithm>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range_detail
     {
@@ -73,9 +73,9 @@ swap_ranges(SinglePassRange1& range1, SinglePassRange2& range2)
     BOOST_RANGE_CONCEPT_ASSERT((SinglePassRangeConcept<SinglePassRange1>));
     BOOST_RANGE_CONCEPT_ASSERT((SinglePassRangeConcept<SinglePassRange2>));
 
-    mars_boost_ksim::range_detail::swap_ranges_impl(
-        mars_boost_ksim::begin(range1), mars_boost_ksim::end(range1),
-        mars_boost_ksim::begin(range2), mars_boost_ksim::end(range2));
+    mars_boost::range_detail::swap_ranges_impl(
+        mars_boost::begin(range1), mars_boost::end(range1),
+        mars_boost::begin(range2), mars_boost::end(range2));
 
     return range2;
 }
@@ -88,9 +88,9 @@ swap_ranges(const SinglePassRange1& range1, SinglePassRange2& range2)
     BOOST_RANGE_CONCEPT_ASSERT((SinglePassRangeConcept<const SinglePassRange1>));
     BOOST_RANGE_CONCEPT_ASSERT((SinglePassRangeConcept<SinglePassRange2>));
 
-    mars_boost_ksim::range_detail::swap_ranges_impl(
-        mars_boost_ksim::begin(range1), mars_boost_ksim::end(range1),
-        mars_boost_ksim::begin(range2), mars_boost_ksim::end(range2));
+    mars_boost::range_detail::swap_ranges_impl(
+        mars_boost::begin(range1), mars_boost::end(range1),
+        mars_boost::begin(range2), mars_boost::end(range2));
 
     return range2;
 }
@@ -103,9 +103,9 @@ swap_ranges(SinglePassRange1& range1, const SinglePassRange2& range2)
     BOOST_RANGE_CONCEPT_ASSERT((SinglePassRangeConcept<SinglePassRange1>));
     BOOST_RANGE_CONCEPT_ASSERT((SinglePassRangeConcept<const SinglePassRange2>));
 
-    mars_boost_ksim::range_detail::swap_ranges_impl(
-        mars_boost_ksim::begin(range1), mars_boost_ksim::end(range1),
-        mars_boost_ksim::begin(range2), mars_boost_ksim::end(range2));
+    mars_boost::range_detail::swap_ranges_impl(
+        mars_boost::begin(range1), mars_boost::end(range1),
+        mars_boost::begin(range2), mars_boost::end(range2));
 
     return range2;
 }
@@ -118,15 +118,15 @@ swap_ranges(const SinglePassRange1& range1, const SinglePassRange2& range2)
     BOOST_RANGE_CONCEPT_ASSERT((SinglePassRangeConcept<const SinglePassRange1>));
     BOOST_RANGE_CONCEPT_ASSERT((SinglePassRangeConcept<const SinglePassRange2>));
 
-    mars_boost_ksim::range_detail::swap_ranges_impl(
-        mars_boost_ksim::begin(range1), mars_boost_ksim::end(range1),
-        mars_boost_ksim::begin(range2), mars_boost_ksim::end(range2));
+    mars_boost::range_detail::swap_ranges_impl(
+        mars_boost::begin(range1), mars_boost::end(range1),
+        mars_boost::begin(range2), mars_boost::end(range2));
 
     return range2;
 }
 
     } // namespace range
     using range::swap_ranges;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

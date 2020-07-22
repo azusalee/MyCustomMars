@@ -10,7 +10,7 @@
 #ifndef BOOST_NUMERIC_CONVERSION_SIGN_MIXTURE_ENUM_FLC_12NOV2002_HPP
 #define BOOST_NUMERIC_CONVERSION_SIGN_MIXTURE_ENUM_FLC_12NOV2002_HPP
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace numeric
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace numeric
 {
   enum sign_mixture_enum
   {
@@ -20,7 +20,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     ,unsigned_to_signed
   } ;
 
-} } // namespace mars_boost_ksim::numeric
+} } // namespace mars_boost::numeric
 
 #endif
 //

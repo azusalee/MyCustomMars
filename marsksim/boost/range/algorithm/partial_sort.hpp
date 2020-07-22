@@ -15,7 +15,7 @@
 #include <boost/range/concepts.hpp>
 #include <algorithm>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range
     {
@@ -31,7 +31,7 @@ inline RandomAccessRange& partial_sort(RandomAccessRange& rng,
     BOOST_DEDUCED_TYPENAME range_iterator<RandomAccessRange>::type middle)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( RandomAccessRangeConcept<RandomAccessRange> ));
-    std::partial_sort(mars_boost_ksim::begin(rng), middle, mars_boost_ksim::end(rng));
+    std::partial_sort(mars_boost::begin(rng), middle, mars_boost::end(rng));
     return rng;
 }
 
@@ -41,7 +41,7 @@ inline const RandomAccessRange& partial_sort(const RandomAccessRange& rng,
     BOOST_DEDUCED_TYPENAME range_iterator<const RandomAccessRange>::type middle)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( RandomAccessRangeConcept<const RandomAccessRange> ));
-    std::partial_sort(mars_boost_ksim::begin(rng), middle, mars_boost_ksim::end(rng));
+    std::partial_sort(mars_boost::begin(rng), middle, mars_boost::end(rng));
     return rng;
 }
 
@@ -52,7 +52,7 @@ inline RandomAccessRange& partial_sort(RandomAccessRange& rng,
     BinaryPredicate sort_pred)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( RandomAccessRangeConcept<RandomAccessRange> ));
-    std::partial_sort(mars_boost_ksim::begin(rng), middle, mars_boost_ksim::end(rng),
+    std::partial_sort(mars_boost::begin(rng), middle, mars_boost::end(rng),
                         sort_pred);
     return rng;
 }
@@ -64,13 +64,13 @@ inline const RandomAccessRange& partial_sort(const RandomAccessRange& rng,
     BinaryPredicate sort_pred)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( RandomAccessRangeConcept<const RandomAccessRange> ));
-    std::partial_sort(mars_boost_ksim::begin(rng), middle, mars_boost_ksim::end(rng),
+    std::partial_sort(mars_boost::begin(rng), middle, mars_boost::end(rng),
                         sort_pred);
     return rng;
 }
 
     } // namespace range
     using range::partial_sort;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

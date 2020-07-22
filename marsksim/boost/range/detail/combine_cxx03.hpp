@@ -39,7 +39,7 @@
 #include <vector>
 #include <list>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range_detail
     {
@@ -89,7 +89,7 @@ struct combined_result
 namespace range
 {
 
-#define BOOST_RANGE_combined_seq(z, n, data) mars_boost_ksim::data(BOOST_PP_CAT(r,n))
+#define BOOST_RANGE_combined_seq(z, n, data) mars_boost::data(BOOST_PP_CAT(r,n))
 
 #ifdef BOOST_NO_CXX11_RVALUE_REFERENCES
 
@@ -108,9 +108,9 @@ namespace range
 
     } // namespace range
 
-    using mars_boost_ksim::range::combine;
+    using mars_boost::range::combine;
 
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard
 

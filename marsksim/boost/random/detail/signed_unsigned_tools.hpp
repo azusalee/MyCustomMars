@@ -15,7 +15,7 @@
 #include <boost/config.hpp>
 #include <boost/random/traits.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace random {
 namespace detail {
 
@@ -37,7 +37,7 @@ struct subtract<T, /* signed */ false>
 template<class T>
 struct subtract<T, /* signed */ true>
 {
-  typedef typename mars_boost_ksim::random::traits::make_unsigned_or_unbounded<T>::type result_type;
+  typedef typename mars_boost::random::traits::make_unsigned_or_unbounded<T>::type result_type;
   result_type operator()(T x, T y)
   {
     if (y >= 0)   // because x >= y, it follows that x >= 0, too
@@ -83,7 +83,7 @@ struct add<T1, T2, /* signed */ true>
 
 } // namespace detail
 } // namespace random
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_RANDOM_DETAIL_SIGNED_UNSIGNED_TOOLS
 

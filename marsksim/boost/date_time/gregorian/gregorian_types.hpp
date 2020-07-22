@@ -27,7 +27,7 @@
 #include "boost/date_time/date_iterator.hpp"
 #include "boost/date_time/adjust_functors.hpp"
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 //! Gregorian date system based on date_time components
 /*! This date system defines a full complement of types including

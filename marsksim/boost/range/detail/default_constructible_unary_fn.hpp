@@ -14,7 +14,7 @@
 #include <boost/mpl/if.hpp>
 #include <boost/type_traits/has_trivial_constructor.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range_detail
     {
@@ -45,20 +45,20 @@ public:
         return (*m_impl)(arg);
     }
 private:
-    mars_boost_ksim::optional<F> m_impl;
+    mars_boost::optional<F> m_impl;
 };
 
 template<typename F, typename R>
 struct default_constructible_unary_fn_gen
 {
-    typedef typename mars_boost_ksim::mpl::if_<
-        mars_boost_ksim::has_trivial_default_constructor<F>,
+    typedef typename mars_boost::mpl::if_<
+        mars_boost::has_trivial_default_constructor<F>,
         F,
         default_constructible_unary_fn_wrapper<F,R>
     >::type type;
 };
 
     } // namespace range_detail
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

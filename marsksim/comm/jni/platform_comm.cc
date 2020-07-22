@@ -44,31 +44,31 @@
 DEFINE_FIND_CLASS(KPlatformCommC2Java, "com/tencent/marsksim/comm/PlatformComm$C2Java")
 
 #ifdef ANDROID
-DEFINE_FIND_STATIC_METHOD(KPlatformCommC2Java_startAlarm, KPlatformCommC2Java, "startAlarm", "(II)Z")
-bool startAlarm(int64_t id, int after) {
+DEFINE_FIND_STATIC_METHOD(KPlatformCommC2Java_startAlarmksim, KPlatformCommC2Java, "startAlarmksim", "(II)Z")
+bool startAlarmksim(int64_t id, int after) {
     xverbose_function();
     
     if (coroutine::isCoroutine())
-        return coroutine::MessageInvoke(boost_ksim::bind(&startAlarm, id, after));
+        return coroutine::MessageInvoke(boost_ksim::bind(&startAlarmksim, id, after));
     
     VarCache* cacheInstance = VarCache::Singletonksim();
     ScopeJEnv scopeJEnv(cacheInstance->GetJvm());
     JNIEnv* env = scopeJEnv.GetEnv();
-    jboolean ret = JNU_CallStaticMethodByMethodInfo(env, KPlatformCommC2Java_startAlarm, (jint)id, (jint)after).z;
+    jboolean ret = JNU_CallStaticMethodByMethodInfo(env, KPlatformCommC2Java_startAlarmksim, (jint)id, (jint)after).z;
     xdebug2(TSF"id= %0, after= %1, ret= %2", id, after, (bool)ret);
     return (bool)ret;
 }
 
-DEFINE_FIND_STATIC_METHOD(KPlatformCommC2Java_stopAlarm, KPlatformCommC2Java, "stopAlarm", "(I)Z")
-bool stopAlarm(int64_t  id) {
+DEFINE_FIND_STATIC_METHOD(KPlatformCommC2Java_stopAlarmksim, KPlatformCommC2Java, "stopAlarmksim", "(I)Z")
+bool stopAlarmksim(int64_t  id) {
     xverbose_function();
     
     if (coroutine::isCoroutine())
-        return coroutine::MessageInvoke(boost_ksim::bind(&stopAlarm, id));
+        return coroutine::MessageInvoke(boost_ksim::bind(&stopAlarmksim, id));
     
     VarCache* cacheInstance = VarCache::Singletonksim();
     ScopeJEnv scopeJEnv(cacheInstance->GetJvm());
-    jboolean ret = JNU_CallStaticMethodByMethodInfo(scopeJEnv.GetEnv(), KPlatformCommC2Java_stopAlarm, (jint)id).z;
+    jboolean ret = JNU_CallStaticMethodByMethodInfo(scopeJEnv.GetEnv(), KPlatformCommC2Java_stopAlarmksim, (jint)id).z;
     xdebug2(TSF"id= %0, ret= %1", id, (bool)ret);
     return (bool)ret;
 }

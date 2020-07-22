@@ -13,7 +13,7 @@
 #include <boost/range/end.hpp>
 #include <boost/range/iterator_range.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     enum range_return_value
     {
@@ -33,13 +33,13 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template< class SinglePassRange, range_return_value >
     struct range_return
     {
-        typedef mars_boost_ksim::iterator_range<
+        typedef mars_boost::iterator_range<
             BOOST_DEDUCED_TYPENAME range_iterator<SinglePassRange>::type > type;
 
         static type pack(BOOST_DEDUCED_TYPENAME range_iterator<SinglePassRange>::type found,
                          SinglePassRange& rng)
         {
-            return type(found, mars_boost_ksim::end(rng));
+            return type(found, mars_boost::end(rng));
         }
     };
 
@@ -61,9 +61,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         static type pack(type found, SinglePassRange& rng)
         {
-            return found == mars_boost_ksim::end(rng)
+            return found == mars_boost::end(rng)
                 ? found
-                : mars_boost_ksim::next(found);
+                : mars_boost::next(found);
         }
     };
 
@@ -74,16 +74,16 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         static type pack(type found, BidirectionalRange& rng)
         {
-            return found == mars_boost_ksim::begin(rng)
+            return found == mars_boost::begin(rng)
                 ? found
-                : mars_boost_ksim::prior(found);
+                : mars_boost::prior(found);
         }
     };
 
     template< class SinglePassRange >
     struct range_return< SinglePassRange, return_begin_found >
     {
-        typedef mars_boost_ksim::iterator_range<
+        typedef mars_boost::iterator_range<
             BOOST_DEDUCED_TYPENAME range_iterator<SinglePassRange>::type > type;
 
         static type pack(BOOST_DEDUCED_TYPENAME range_iterator<SinglePassRange>::type found,
@@ -96,82 +96,82 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template< class SinglePassRange >
     struct range_return< SinglePassRange, return_begin_next >
     {
-        typedef mars_boost_ksim::iterator_range<
+        typedef mars_boost::iterator_range<
             BOOST_DEDUCED_TYPENAME range_iterator<SinglePassRange>::type > type;
 
         static type pack(BOOST_DEDUCED_TYPENAME range_iterator<SinglePassRange>::type found,
                          SinglePassRange& rng)
         {
-            return type( mars_boost_ksim::begin(rng),
-                         found == mars_boost_ksim::end(rng) ? found : mars_boost_ksim::next(found) );
+            return type( mars_boost::begin(rng),
+                         found == mars_boost::end(rng) ? found : mars_boost::next(found) );
         }
     };
 
     template< class BidirectionalRange >
     struct range_return< BidirectionalRange, return_begin_prior >
     {
-        typedef mars_boost_ksim::iterator_range<
+        typedef mars_boost::iterator_range<
             BOOST_DEDUCED_TYPENAME range_iterator<BidirectionalRange>::type > type;
 
         static type pack(BOOST_DEDUCED_TYPENAME range_iterator<BidirectionalRange>::type found,
                          BidirectionalRange& rng)
         {
-            return type( mars_boost_ksim::begin(rng),
-                         found == mars_boost_ksim::begin(rng) ? found : mars_boost_ksim::prior(found) );
+            return type( mars_boost::begin(rng),
+                         found == mars_boost::begin(rng) ? found : mars_boost::prior(found) );
         }
     };
 
     template< class SinglePassRange >
     struct range_return< SinglePassRange, return_found_end >
     {
-        typedef mars_boost_ksim::iterator_range<
+        typedef mars_boost::iterator_range<
             BOOST_DEDUCED_TYPENAME range_iterator<SinglePassRange>::type > type;
 
         static type pack(BOOST_DEDUCED_TYPENAME range_iterator<SinglePassRange>::type found,
                          SinglePassRange& rng)
         {
-            return type(found, mars_boost_ksim::end(rng));
+            return type(found, mars_boost::end(rng));
         }
     };
 
     template< class SinglePassRange >
     struct range_return< SinglePassRange, return_next_end >
     {
-        typedef mars_boost_ksim::iterator_range<
+        typedef mars_boost::iterator_range<
             BOOST_DEDUCED_TYPENAME range_iterator<SinglePassRange>::type > type;
 
         static type pack(BOOST_DEDUCED_TYPENAME range_iterator<SinglePassRange>::type found,
                          SinglePassRange& rng)
         {
-            return type( found == mars_boost_ksim::end(rng) ? found : mars_boost_ksim::next(found),
-                         mars_boost_ksim::end(rng) );
+            return type( found == mars_boost::end(rng) ? found : mars_boost::next(found),
+                         mars_boost::end(rng) );
         }
     };
 
     template< class BidirectionalRange >
     struct range_return< BidirectionalRange, return_prior_end >
     {
-        typedef mars_boost_ksim::iterator_range<
+        typedef mars_boost::iterator_range<
             BOOST_DEDUCED_TYPENAME range_iterator<BidirectionalRange>::type > type;
 
         static type pack(BOOST_DEDUCED_TYPENAME range_iterator<BidirectionalRange>::type found,
                          BidirectionalRange& rng)
         {
-            return type( found == mars_boost_ksim::begin(rng) ? found : mars_boost_ksim::prior(found),
-                         mars_boost_ksim::end(rng) );
+            return type( found == mars_boost::begin(rng) ? found : mars_boost::prior(found),
+                         mars_boost::end(rng) );
         }
     };
 
     template< class SinglePassRange >
     struct range_return< SinglePassRange, return_begin_end >
     {
-        typedef mars_boost_ksim::iterator_range<
+        typedef mars_boost::iterator_range<
             BOOST_DEDUCED_TYPENAME range_iterator<SinglePassRange>::type > type;
 
         static type pack(BOOST_DEDUCED_TYPENAME range_iterator<SinglePassRange>::type,
                          SinglePassRange& rng)
         {
-            return type(boost_ksim::begin(rng), mars_boost_ksim::end(rng));
+            return type(boost_ksim::begin(rng), mars_boost::end(rng));
         }
     };
 

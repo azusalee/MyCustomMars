@@ -16,10 +16,10 @@
 #include <memory>
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim  {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost  {
     namespace detail {
-        typedef mars_boost_ksim::true_type  ms_is_trivial;
-        typedef mars_boost_ksim::false_type ms_no_trivial;
+        typedef mars_boost::true_type  ms_is_trivial;
+        typedef mars_boost::false_type ms_no_trivial;
 
         template<class T>
         inline void ms_destroy(T*, std::size_t, ms_is_trivial) {
@@ -34,7 +34,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         template<class T>
         inline void ms_destroy(T* memory, std::size_t size) {
-            mars_boost_ksim::has_trivial_destructor<T> trivial;
+            mars_boost::has_trivial_destructor<T> trivial;
             ms_destroy(memory, size, trivial);
         }
 
@@ -69,7 +69,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         template<class T>
         inline void ms_init(T* memory, std::size_t size) {
-            mars_boost_ksim::has_trivial_default_constructor<T> trivial;
+            mars_boost::has_trivial_default_constructor<T> trivial;
             ms_init(memory, size, trivial);
         }
 
@@ -148,7 +148,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         template<class T, class A>
         inline void as_init(const A& allocator, T* memory, std::size_t size) {
-            mars_boost_ksim::has_trivial_default_constructor<T> trivial;
+            mars_boost::has_trivial_default_constructor<T> trivial;
             as_init(allocator, memory, size, trivial);
         }
 
@@ -205,7 +205,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         template<class T>
         inline void ms_noinit(T* memory, std::size_t size) {
-            mars_boost_ksim::has_trivial_default_constructor<T> trivial;
+            mars_boost::has_trivial_default_constructor<T> trivial;
             ms_noinit(memory, size, trivial);
         }
     }

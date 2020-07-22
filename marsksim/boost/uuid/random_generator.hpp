@@ -17,7 +17,7 @@
 #include <boost/shared_ptr.hpp>
 #include <limits>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace uuids {
 
 // generate a random-based uuid
@@ -90,7 +90,7 @@ public:
                 i = 0;
             }
 
-			// static_cast gets rid of warnings of converting unsigned long to mars_boost_ksim::uint8_t
+			// static_cast gets rid of warnings of converting unsigned long to mars_boost::uint8_t
             *it = static_cast<uuid::value_type>((random_value >> (i*8)) & 0xFF);
         }
 
@@ -114,6 +114,6 @@ private:
 
 typedef basic_random_generator<mt19937> random_generator;
 
-}} // namespace mars_boost_ksim::uuids
+}} // namespace mars_boost::uuids
 
 #endif //BOOST_UUID_RANDOM_GENERATOR_HPP

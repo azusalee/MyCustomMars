@@ -48,7 +48,7 @@
 #   define BOOST_MPL_CFG_NO_APPLY_TEMPLATE
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl {
 
 // local macro, #undef-ined at the end of the header
 #   define AUX778076_APPLY_DEF_PARAMS(param, value) \

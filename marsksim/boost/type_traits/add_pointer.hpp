@@ -11,7 +11,7 @@
 
 #include <boost/type_traits/remove_reference.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 #if defined(__BORLANDC__) && (__BORLANDC__ < 0x5A0)
 //
@@ -56,6 +56,6 @@ struct add_pointer
 
 #endif
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_ADD_POINTER_HPP_INCLUDED

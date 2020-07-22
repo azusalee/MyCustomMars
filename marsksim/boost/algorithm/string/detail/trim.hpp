@@ -14,7 +14,7 @@
 #include <boost/algorithm/string/config.hpp>
 #include <boost/detail/iterator.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
     namespace algorithm {
         namespace detail {
 
@@ -80,16 +80,16 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 ForwardIteratorT InEnd, 
                 PredicateT IsSpace )
             {
-                typedef BOOST_STRING_TYPENAME mars_boost_ksim::detail::
+                typedef BOOST_STRING_TYPENAME mars_boost::detail::
                     iterator_traits<ForwardIteratorT>::iterator_category category;
 
-                return ::mars_boost_ksim::algorithm::detail::trim_end_iter_select( InBegin, InEnd, IsSpace, category() );
+                return ::mars_boost::algorithm::detail::trim_end_iter_select( InBegin, InEnd, IsSpace, category() );
             }
 
 
         } // namespace detail
     } // namespace algorithm
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 
 #endif  // BOOST_STRING_TRIM_DETAIL_HPP

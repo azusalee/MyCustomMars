@@ -32,7 +32,7 @@
 
 #define BOOST_NO_MACRO_EXPAND /**/
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
    namespace math
    { // Math functions (in roughly alphabetic order).
@@ -183,7 +183,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
          legendre_p(int l, T x);
 #if !BOOST_WORKAROUND(BOOST_MSVC, <= 1310)
    template <class T, class Policy>
-   typename mars_boost_ksim::enable_if_c<policies::is_policy<Policy>::value, typename tools::promote_args<T>::type>::type
+   typename mars_boost::enable_if_c<policies::is_policy<Policy>::value, typename tools::promote_args<T>::type>::type
          legendre_p(int l, T x, const Policy& pol);
 #endif
    template <class T>
@@ -191,7 +191,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
          legendre_q(unsigned l, T x);
 #if !BOOST_WORKAROUND(BOOST_MSVC, <= 1310)
    template <class T, class Policy>
-   typename mars_boost_ksim::enable_if_c<policies::is_policy<Policy>::value, typename tools::promote_args<T>::type>::type
+   typename mars_boost::enable_if_c<policies::is_policy<Policy>::value, typename tools::promote_args<T>::type>::type
          legendre_q(unsigned l, T x, const Policy& pol);
 #endif
    template <class T1, class T2, class T3>
@@ -1036,19 +1036,19 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                                        OutputIterator out_it);
 
     } // namespace math
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #ifdef BOOST_HAS_LONG_LONG
 #define BOOST_MATH_DETAIL_LL_FUNC(Policy)\
    \
    template <class T>\
-   inline T modf(const T& v, mars_boost_ksim::long_long_type* ipart){ using mars_boost_ksim::math::modf; return modf(v, ipart, Policy()); }\
+   inline T modf(const T& v, mars_boost::long_long_type* ipart){ using mars_boost::math::modf; return modf(v, ipart, Policy()); }\
    \
    template <class T>\
-   inline mars_boost_ksim::long_long_type lltrunc(const T& v){ using mars_boost_ksim::math::lltrunc; return lltrunc(v, Policy()); }\
+   inline mars_boost::long_long_type lltrunc(const T& v){ using mars_boost::math::lltrunc; return lltrunc(v, Policy()); }\
    \
    template <class T>\
-   inline mars_boost_ksim::long_long_type llround(const T& v){ using mars_boost_ksim::math::llround; return llround(v, Policy()); }\
+   inline mars_boost::long_long_type llround(const T& v){ using mars_boost::math::llround; return llround(v, Policy()); }\
 
 #else
 #define BOOST_MATH_DETAIL_LL_FUNC(Policy)
@@ -1059,522 +1059,522 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
    BOOST_MATH_DETAIL_LL_FUNC(Policy)\
    \
    template <class RT1, class RT2>\
-   inline typename mars_boost_ksim::math::tools::promote_args<RT1, RT2>::type \
-   beta(RT1 a, RT2 b) { return ::mars_boost_ksim::math::beta(a, b, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<RT1, RT2>::type \
+   beta(RT1 a, RT2 b) { return ::mars_boost::math::beta(a, b, Policy()); }\
 \
    template <class RT1, class RT2, class A>\
-   inline typename mars_boost_ksim::math::tools::promote_args<RT1, RT2, A>::type \
-   beta(RT1 a, RT2 b, A x){ return ::mars_boost_ksim::math::beta(a, b, x, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<RT1, RT2, A>::type \
+   beta(RT1 a, RT2 b, A x){ return ::mars_boost::math::beta(a, b, x, Policy()); }\
 \
    template <class RT1, class RT2, class RT3>\
-   inline typename mars_boost_ksim::math::tools::promote_args<RT1, RT2, RT3>::type \
-   betac(RT1 a, RT2 b, RT3 x) { return ::mars_boost_ksim::math::betac(a, b, x, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<RT1, RT2, RT3>::type \
+   betac(RT1 a, RT2 b, RT3 x) { return ::mars_boost::math::betac(a, b, x, Policy()); }\
 \
    template <class RT1, class RT2, class RT3>\
-   inline typename mars_boost_ksim::math::tools::promote_args<RT1, RT2, RT3>::type \
-   ibeta(RT1 a, RT2 b, RT3 x){ return ::mars_boost_ksim::math::ibeta(a, b, x, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<RT1, RT2, RT3>::type \
+   ibeta(RT1 a, RT2 b, RT3 x){ return ::mars_boost::math::ibeta(a, b, x, Policy()); }\
 \
    template <class RT1, class RT2, class RT3>\
-   inline typename mars_boost_ksim::math::tools::promote_args<RT1, RT2, RT3>::type \
-   ibetac(RT1 a, RT2 b, RT3 x){ return ::mars_boost_ksim::math::ibetac(a, b, x, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<RT1, RT2, RT3>::type \
+   ibetac(RT1 a, RT2 b, RT3 x){ return ::mars_boost::math::ibetac(a, b, x, Policy()); }\
 \
    template <class T1, class T2, class T3, class T4>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T1, T2, T3, T4>::type  \
-   ibeta_inv(T1 a, T2 b, T3 p, T4* py){ return ::mars_boost_ksim::math::ibeta_inv(a, b, p, py, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T1, T2, T3, T4>::type  \
+   ibeta_inv(T1 a, T2 b, T3 p, T4* py){ return ::mars_boost::math::ibeta_inv(a, b, p, py, Policy()); }\
 \
    template <class RT1, class RT2, class RT3>\
-   inline typename mars_boost_ksim::math::tools::promote_args<RT1, RT2, RT3>::type \
-   ibeta_inv(RT1 a, RT2 b, RT3 p){ return ::mars_boost_ksim::math::ibeta_inv(a, b, p, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<RT1, RT2, RT3>::type \
+   ibeta_inv(RT1 a, RT2 b, RT3 p){ return ::mars_boost::math::ibeta_inv(a, b, p, Policy()); }\
 \
    template <class T1, class T2, class T3, class T4>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T1, T2, T3, T4>::type \
-   ibetac_inv(T1 a, T2 b, T3 q, T4* py){ return ::mars_boost_ksim::math::ibetac_inv(a, b, q, py, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T1, T2, T3, T4>::type \
+   ibetac_inv(T1 a, T2 b, T3 q, T4* py){ return ::mars_boost::math::ibetac_inv(a, b, q, py, Policy()); }\
 \
    template <class RT1, class RT2, class RT3>\
-   inline typename mars_boost_ksim::math::tools::promote_args<RT1, RT2, RT3>::type \
-   ibeta_inva(RT1 a, RT2 b, RT3 p){ return ::mars_boost_ksim::math::ibeta_inva(a, b, p, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<RT1, RT2, RT3>::type \
+   ibeta_inva(RT1 a, RT2 b, RT3 p){ return ::mars_boost::math::ibeta_inva(a, b, p, Policy()); }\
 \
    template <class T1, class T2, class T3>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T1, T2, T3>::type \
-   ibetac_inva(T1 a, T2 b, T3 q){ return ::mars_boost_ksim::math::ibetac_inva(a, b, q, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T1, T2, T3>::type \
+   ibetac_inva(T1 a, T2 b, T3 q){ return ::mars_boost::math::ibetac_inva(a, b, q, Policy()); }\
 \
    template <class RT1, class RT2, class RT3>\
-   inline typename mars_boost_ksim::math::tools::promote_args<RT1, RT2, RT3>::type \
-   ibeta_invb(RT1 a, RT2 b, RT3 p){ return ::mars_boost_ksim::math::ibeta_invb(a, b, p, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<RT1, RT2, RT3>::type \
+   ibeta_invb(RT1 a, RT2 b, RT3 p){ return ::mars_boost::math::ibeta_invb(a, b, p, Policy()); }\
 \
    template <class T1, class T2, class T3>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T1, T2, T3>::type \
-   ibetac_invb(T1 a, T2 b, T3 q){ return ::mars_boost_ksim::math::ibetac_invb(a, b, q, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T1, T2, T3>::type \
+   ibetac_invb(T1 a, T2 b, T3 q){ return ::mars_boost::math::ibetac_invb(a, b, q, Policy()); }\
 \
    template <class RT1, class RT2, class RT3>\
-   inline typename mars_boost_ksim::math::tools::promote_args<RT1, RT2, RT3>::type \
-   ibetac_inv(RT1 a, RT2 b, RT3 q){ return ::mars_boost_ksim::math::ibetac_inv(a, b, q, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<RT1, RT2, RT3>::type \
+   ibetac_inv(RT1 a, RT2 b, RT3 q){ return ::mars_boost::math::ibetac_inv(a, b, q, Policy()); }\
 \
    template <class RT1, class RT2, class RT3>\
-   inline typename mars_boost_ksim::math::tools::promote_args<RT1, RT2, RT3>::type \
-   ibeta_derivative(RT1 a, RT2 b, RT3 x){ return ::mars_boost_ksim::math::ibeta_derivative(a, b, x, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<RT1, RT2, RT3>::type \
+   ibeta_derivative(RT1 a, RT2 b, RT3 x){ return ::mars_boost::math::ibeta_derivative(a, b, x, Policy()); }\
 \
-   template <class T> T binomial_coefficient(unsigned n, unsigned k){ return ::mars_boost_ksim::math::binomial_coefficient<T, Policy>(n, k, Policy()); }\
-\
-   template <class RT>\
-   inline typename mars_boost_ksim::math::tools::promote_args<RT>::type erf(RT z) { return ::mars_boost_ksim::math::erf(z, Policy()); }\
+   template <class T> T binomial_coefficient(unsigned n, unsigned k){ return ::mars_boost::math::binomial_coefficient<T, Policy>(n, k, Policy()); }\
 \
    template <class RT>\
-   inline typename mars_boost_ksim::math::tools::promote_args<RT>::type erfc(RT z){ return ::mars_boost_ksim::math::erfc(z, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<RT>::type erf(RT z) { return ::mars_boost::math::erf(z, Policy()); }\
 \
    template <class RT>\
-   inline typename mars_boost_ksim::math::tools::promote_args<RT>::type erf_inv(RT z) { return ::mars_boost_ksim::math::erf_inv(z, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<RT>::type erfc(RT z){ return ::mars_boost::math::erfc(z, Policy()); }\
 \
    template <class RT>\
-   inline typename mars_boost_ksim::math::tools::promote_args<RT>::type erfc_inv(RT z){ return ::mars_boost_ksim::math::erfc_inv(z, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<RT>::type erf_inv(RT z) { return ::mars_boost::math::erf_inv(z, Policy()); }\
 \
-   using mars_boost_ksim::math::legendre_next;\
+   template <class RT>\
+   inline typename mars_boost::math::tools::promote_args<RT>::type erfc_inv(RT z){ return ::mars_boost::math::erfc_inv(z, Policy()); }\
 \
-   template <class T>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T>::type \
-   legendre_p(int l, T x){ return ::mars_boost_ksim::math::legendre_p(l, x, Policy()); }\
-\
-   template <class T>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T>::type \
-   legendre_q(unsigned l, T x){ return ::mars_boost_ksim::math::legendre_q(l, x, Policy()); }\
-\
-   using ::mars_boost_ksim::math::legendre_next;\
+   using mars_boost::math::legendre_next;\
 \
    template <class T>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T>::type \
-   legendre_p(int l, int m, T x){ return ::mars_boost_ksim::math::legendre_p(l, m, x, Policy()); }\
-\
-   using ::mars_boost_ksim::math::laguerre_next;\
+   inline typename mars_boost::math::tools::promote_args<T>::type \
+   legendre_p(int l, T x){ return ::mars_boost::math::legendre_p(l, x, Policy()); }\
 \
    template <class T>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T>::type \
-   laguerre(unsigned n, T x){ return ::mars_boost_ksim::math::laguerre(n, x, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T>::type \
+   legendre_q(unsigned l, T x){ return ::mars_boost::math::legendre_q(l, x, Policy()); }\
+\
+   using ::mars_boost::math::legendre_next;\
+\
+   template <class T>\
+   inline typename mars_boost::math::tools::promote_args<T>::type \
+   legendre_p(int l, int m, T x){ return ::mars_boost::math::legendre_p(l, m, x, Policy()); }\
+\
+   using ::mars_boost::math::laguerre_next;\
+\
+   template <class T>\
+   inline typename mars_boost::math::tools::promote_args<T>::type \
+   laguerre(unsigned n, T x){ return ::mars_boost::math::laguerre(n, x, Policy()); }\
 \
    template <class T1, class T2>\
-   inline typename mars_boost_ksim::math::laguerre_result<T1, T2>::type \
-   laguerre(unsigned n, T1 m, T2 x) { return ::mars_boost_ksim::math::laguerre(n, m, x, Policy()); }\
+   inline typename mars_boost::math::laguerre_result<T1, T2>::type \
+   laguerre(unsigned n, T1 m, T2 x) { return ::mars_boost::math::laguerre(n, m, x, Policy()); }\
 \
    template <class T>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T>::type \
-   hermite(unsigned n, T x){ return ::mars_boost_ksim::math::hermite(n, x, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T>::type \
+   hermite(unsigned n, T x){ return ::mars_boost::math::hermite(n, x, Policy()); }\
 \
-   using mars_boost_ksim::math::hermite_next;\
-\
-   template <class T1, class T2>\
-   inline std::complex<typename mars_boost_ksim::math::tools::promote_args<T1, T2>::type> \
-   spherical_harmonic(unsigned n, int m, T1 theta, T2 phi){ return mars_boost_ksim::math::spherical_harmonic(n, m, theta, phi, Policy()); }\
+   using mars_boost::math::hermite_next;\
 \
    template <class T1, class T2>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T1, T2>::type \
-   spherical_harmonic_r(unsigned n, int m, T1 theta, T2 phi){ return ::mars_boost_ksim::math::spherical_harmonic_r(n, m, theta, phi, Policy()); }\
+   inline std::complex<typename mars_boost::math::tools::promote_args<T1, T2>::type> \
+   spherical_harmonic(unsigned n, int m, T1 theta, T2 phi){ return mars_boost::math::spherical_harmonic(n, m, theta, phi, Policy()); }\
 \
    template <class T1, class T2>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T1, T2>::type \
-   spherical_harmonic_i(unsigned n, int m, T1 theta, T2 phi){ return mars_boost_ksim::math::spherical_harmonic_i(n, m, theta, phi, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T1, T2>::type \
+   spherical_harmonic_r(unsigned n, int m, T1 theta, T2 phi){ return ::mars_boost::math::spherical_harmonic_r(n, m, theta, phi, Policy()); }\
+\
+   template <class T1, class T2>\
+   inline typename mars_boost::math::tools::promote_args<T1, T2>::type \
+   spherical_harmonic_i(unsigned n, int m, T1 theta, T2 phi){ return mars_boost::math::spherical_harmonic_i(n, m, theta, phi, Policy()); }\
 \
    template <class T1, class T2, class Policy>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T1, T2>::type \
+   inline typename mars_boost::math::tools::promote_args<T1, T2>::type \
       spherical_harmonic_i(unsigned n, int m, T1 theta, T2 phi, const Policy& pol);\
 \
    template <class T1, class T2, class T3>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T1, T2, T3>::type \
-   ellint_rf(T1 x, T2 y, T3 z){ return ::mars_boost_ksim::math::ellint_rf(x, y, z, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T1, T2, T3>::type \
+   ellint_rf(T1 x, T2 y, T3 z){ return ::mars_boost::math::ellint_rf(x, y, z, Policy()); }\
 \
    template <class T1, class T2, class T3>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T1, T2, T3>::type \
-   ellint_rd(T1 x, T2 y, T3 z){ return ::mars_boost_ksim::math::ellint_rd(x, y, z, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T1, T2, T3>::type \
+   ellint_rd(T1 x, T2 y, T3 z){ return ::mars_boost::math::ellint_rd(x, y, z, Policy()); }\
 \
    template <class T1, class T2>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T1, T2>::type \
-   ellint_rc(T1 x, T2 y){ return ::mars_boost_ksim::math::ellint_rc(x, y, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T1, T2>::type \
+   ellint_rc(T1 x, T2 y){ return ::mars_boost::math::ellint_rc(x, y, Policy()); }\
 \
    template <class T1, class T2, class T3, class T4>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T1, T2, T3, T4>::type \
-   ellint_rj(T1 x, T2 y, T3 z, T4 p){ return mars_boost_ksim::math::ellint_rj(x, y, z, p, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T1, T2, T3, T4>::type \
+   ellint_rj(T1 x, T2 y, T3 z, T4 p){ return mars_boost::math::ellint_rj(x, y, z, p, Policy()); }\
 \
    template <class T1, class T2, class T3>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T1, T2, T3>::type \
-   ellint_rg(T1 x, T2 y, T3 z){ return ::mars_boost_ksim::math::ellint_rg(x, y, z, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T1, T2, T3>::type \
+   ellint_rg(T1 x, T2 y, T3 z){ return ::mars_boost::math::ellint_rg(x, y, z, Policy()); }\
    \
    template <typename T>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T>::type ellint_2(T k){ return mars_boost_ksim::math::ellint_2(k, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T>::type ellint_2(T k){ return mars_boost::math::ellint_2(k, Policy()); }\
 \
    template <class T1, class T2>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T1, T2>::type ellint_2(T1 k, T2 phi){ return mars_boost_ksim::math::ellint_2(k, phi, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T1, T2>::type ellint_2(T1 k, T2 phi){ return mars_boost::math::ellint_2(k, phi, Policy()); }\
 \
    template <typename T>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T>::type ellint_d(T k){ return mars_boost_ksim::math::ellint_d(k, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T>::type ellint_d(T k){ return mars_boost::math::ellint_d(k, Policy()); }\
 \
    template <class T1, class T2>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T1, T2>::type ellint_d(T1 k, T2 phi){ return mars_boost_ksim::math::ellint_d(k, phi, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T1, T2>::type ellint_d(T1 k, T2 phi){ return mars_boost::math::ellint_d(k, phi, Policy()); }\
 \
    template <class T1, class T2>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T1, T2>::type jacobi_zeta(T1 k, T2 phi){ return mars_boost_ksim::math::jacobi_zeta(k, phi, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T1, T2>::type jacobi_zeta(T1 k, T2 phi){ return mars_boost::math::jacobi_zeta(k, phi, Policy()); }\
 \
    template <class T1, class T2>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T1, T2>::type heuman_lambda(T1 k, T2 phi){ return mars_boost_ksim::math::heuman_lambda(k, phi, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T1, T2>::type heuman_lambda(T1 k, T2 phi){ return mars_boost::math::heuman_lambda(k, phi, Policy()); }\
 \
    template <typename T>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T>::type ellint_1(T k){ return mars_boost_ksim::math::ellint_1(k, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T>::type ellint_1(T k){ return mars_boost::math::ellint_1(k, Policy()); }\
 \
    template <class T1, class T2>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T1, T2>::type ellint_1(T1 k, T2 phi){ return mars_boost_ksim::math::ellint_1(k, phi, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T1, T2>::type ellint_1(T1 k, T2 phi){ return mars_boost::math::ellint_1(k, phi, Policy()); }\
 \
    template <class T1, class T2, class T3>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T1, T2, T3>::type ellint_3(T1 k, T2 v, T3 phi){ return mars_boost_ksim::math::ellint_3(k, v, phi, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T1, T2, T3>::type ellint_3(T1 k, T2 v, T3 phi){ return mars_boost::math::ellint_3(k, v, phi, Policy()); }\
 \
    template <class T1, class T2>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T1, T2>::type ellint_3(T1 k, T2 v){ return mars_boost_ksim::math::ellint_3(k, v, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T1, T2>::type ellint_3(T1 k, T2 v){ return mars_boost::math::ellint_3(k, v, Policy()); }\
 \
-   using mars_boost_ksim::math::max_factorial;\
+   using mars_boost::math::max_factorial;\
    template <class RT>\
-   inline RT factorial(unsigned int i) { return mars_boost_ksim::math::factorial<RT>(i, Policy()); }\
-   using mars_boost_ksim::math::unchecked_factorial;\
+   inline RT factorial(unsigned int i) { return mars_boost::math::factorial<RT>(i, Policy()); }\
+   using mars_boost::math::unchecked_factorial;\
    template <class RT>\
-   inline RT double_factorial(unsigned i){ return mars_boost_ksim::math::double_factorial<RT>(i, Policy()); }\
+   inline RT double_factorial(unsigned i){ return mars_boost::math::double_factorial<RT>(i, Policy()); }\
    template <class RT>\
-   inline typename mars_boost_ksim::math::tools::promote_args<RT>::type falling_factorial(RT x, unsigned n){ return mars_boost_ksim::math::falling_factorial(x, n, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<RT>::type falling_factorial(RT x, unsigned n){ return mars_boost::math::falling_factorial(x, n, Policy()); }\
    template <class RT>\
-   inline typename mars_boost_ksim::math::tools::promote_args<RT>::type rising_factorial(RT x, unsigned n){ return mars_boost_ksim::math::rising_factorial(x, n, Policy()); }\
-\
-   template <class RT>\
-   inline typename mars_boost_ksim::math::tools::promote_args<RT>::type tgamma(RT z){ return mars_boost_ksim::math::tgamma(z, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<RT>::type rising_factorial(RT x, unsigned n){ return mars_boost::math::rising_factorial(x, n, Policy()); }\
 \
    template <class RT>\
-   inline typename mars_boost_ksim::math::tools::promote_args<RT>::type tgamma1pm1(RT z){ return mars_boost_ksim::math::tgamma1pm1(z, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<RT>::type tgamma(RT z){ return mars_boost::math::tgamma(z, Policy()); }\
+\
+   template <class RT>\
+   inline typename mars_boost::math::tools::promote_args<RT>::type tgamma1pm1(RT z){ return mars_boost::math::tgamma1pm1(z, Policy()); }\
 \
    template <class RT1, class RT2>\
-   inline typename mars_boost_ksim::math::tools::promote_args<RT1, RT2>::type tgamma(RT1 a, RT2 z){ return mars_boost_ksim::math::tgamma(a, z, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<RT1, RT2>::type tgamma(RT1 a, RT2 z){ return mars_boost::math::tgamma(a, z, Policy()); }\
 \
    template <class RT>\
-   inline typename mars_boost_ksim::math::tools::promote_args<RT>::type lgamma(RT z, int* sign){ return mars_boost_ksim::math::lgamma(z, sign, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<RT>::type lgamma(RT z, int* sign){ return mars_boost::math::lgamma(z, sign, Policy()); }\
 \
    template <class RT>\
-   inline typename mars_boost_ksim::math::tools::promote_args<RT>::type lgamma(RT x){ return mars_boost_ksim::math::lgamma(x, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<RT>::type lgamma(RT x){ return mars_boost::math::lgamma(x, Policy()); }\
 \
    template <class RT1, class RT2>\
-   inline typename mars_boost_ksim::math::tools::promote_args<RT1, RT2>::type tgamma_lower(RT1 a, RT2 z){ return mars_boost_ksim::math::tgamma_lower(a, z, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<RT1, RT2>::type tgamma_lower(RT1 a, RT2 z){ return mars_boost::math::tgamma_lower(a, z, Policy()); }\
 \
    template <class RT1, class RT2>\
-   inline typename mars_boost_ksim::math::tools::promote_args<RT1, RT2>::type gamma_q(RT1 a, RT2 z){ return mars_boost_ksim::math::gamma_q(a, z, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<RT1, RT2>::type gamma_q(RT1 a, RT2 z){ return mars_boost::math::gamma_q(a, z, Policy()); }\
 \
    template <class RT1, class RT2>\
-   inline typename mars_boost_ksim::math::tools::promote_args<RT1, RT2>::type gamma_p(RT1 a, RT2 z){ return mars_boost_ksim::math::gamma_p(a, z, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<RT1, RT2>::type gamma_p(RT1 a, RT2 z){ return mars_boost::math::gamma_p(a, z, Policy()); }\
 \
    template <class T1, class T2>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T1, T2>::type tgamma_delta_ratio(T1 z, T2 delta){ return mars_boost_ksim::math::tgamma_delta_ratio(z, delta, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T1, T2>::type tgamma_delta_ratio(T1 z, T2 delta){ return mars_boost::math::tgamma_delta_ratio(z, delta, Policy()); }\
 \
    template <class T1, class T2>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T1, T2>::type tgamma_ratio(T1 a, T2 b) { return mars_boost_ksim::math::tgamma_ratio(a, b, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T1, T2>::type tgamma_ratio(T1 a, T2 b) { return mars_boost::math::tgamma_ratio(a, b, Policy()); }\
 \
    template <class T1, class T2>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T1, T2>::type gamma_p_derivative(T1 a, T2 x){ return mars_boost_ksim::math::gamma_p_derivative(a, x, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T1, T2>::type gamma_p_derivative(T1 a, T2 x){ return mars_boost::math::gamma_p_derivative(a, x, Policy()); }\
 \
    template <class T1, class T2>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T1, T2>::type gamma_p_inv(T1 a, T2 p){ return mars_boost_ksim::math::gamma_p_inv(a, p, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T1, T2>::type gamma_p_inv(T1 a, T2 p){ return mars_boost::math::gamma_p_inv(a, p, Policy()); }\
 \
    template <class T1, class T2>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T1, T2>::type gamma_p_inva(T1 a, T2 p){ return mars_boost_ksim::math::gamma_p_inva(a, p, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T1, T2>::type gamma_p_inva(T1 a, T2 p){ return mars_boost::math::gamma_p_inva(a, p, Policy()); }\
 \
    template <class T1, class T2>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T1, T2>::type gamma_q_inv(T1 a, T2 q){ return mars_boost_ksim::math::gamma_q_inv(a, q, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T1, T2>::type gamma_q_inv(T1 a, T2 q){ return mars_boost::math::gamma_q_inv(a, q, Policy()); }\
 \
    template <class T1, class T2>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T1, T2>::type gamma_q_inva(T1 a, T2 q){ return mars_boost_ksim::math::gamma_q_inva(a, q, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T1, T2>::type gamma_q_inva(T1 a, T2 q){ return mars_boost::math::gamma_q_inva(a, q, Policy()); }\
 \
    template <class T>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T>::type digamma(T x){ return mars_boost_ksim::math::digamma(x, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T>::type digamma(T x){ return mars_boost::math::digamma(x, Policy()); }\
 \
    template <class T>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T>::type trigamma(T x){ return mars_boost_ksim::math::trigamma(x, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T>::type trigamma(T x){ return mars_boost::math::trigamma(x, Policy()); }\
 \
    template <class T>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T>::type polygamma(int n, T x){ return mars_boost_ksim::math::polygamma(n, x, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T>::type polygamma(int n, T x){ return mars_boost::math::polygamma(n, x, Policy()); }\
    \
    template <class T1, class T2>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T1, T2>::type \
-   hypot(T1 x, T2 y){ return mars_boost_ksim::math::hypot(x, y, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T1, T2>::type \
+   hypot(T1 x, T2 y){ return mars_boost::math::hypot(x, y, Policy()); }\
 \
    template <class RT>\
-   inline typename mars_boost_ksim::math::tools::promote_args<RT>::type cbrt(RT z){ return mars_boost_ksim::math::cbrt(z, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<RT>::type cbrt(RT z){ return mars_boost::math::cbrt(z, Policy()); }\
 \
    template <class T>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T>::type log1p(T x){ return mars_boost_ksim::math::log1p(x, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T>::type log1p(T x){ return mars_boost::math::log1p(x, Policy()); }\
 \
    template <class T>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T>::type log1pmx(T x){ return mars_boost_ksim::math::log1pmx(x, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T>::type log1pmx(T x){ return mars_boost::math::log1pmx(x, Policy()); }\
 \
    template <class T>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T>::type expm1(T x){ return mars_boost_ksim::math::expm1(x, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T>::type expm1(T x){ return mars_boost::math::expm1(x, Policy()); }\
 \
    template <class T1, class T2>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T1, T2>::type \
-   powm1(const T1 a, const T2 z){ return mars_boost_ksim::math::powm1(a, z, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T1, T2>::type \
+   powm1(const T1 a, const T2 z){ return mars_boost::math::powm1(a, z, Policy()); }\
 \
    template <class T>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T>::type sqrt1pm1(const T& val){ return mars_boost_ksim::math::sqrt1pm1(val, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T>::type sqrt1pm1(const T& val){ return mars_boost::math::sqrt1pm1(val, Policy()); }\
 \
    template <class T>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T>::type sinc_pi(T x){ return mars_boost_ksim::math::sinc_pi(x, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T>::type sinc_pi(T x){ return mars_boost::math::sinc_pi(x, Policy()); }\
 \
    template <class T>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T>::type sinhc_pi(T x){ return mars_boost_ksim::math::sinhc_pi(x, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T>::type sinhc_pi(T x){ return mars_boost::math::sinhc_pi(x, Policy()); }\
 \
    template<typename T>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T>::type asinh(const T x){ return mars_boost_ksim::math::asinh(x, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T>::type asinh(const T x){ return mars_boost::math::asinh(x, Policy()); }\
 \
    template<typename T>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T>::type acosh(const T x){ return mars_boost_ksim::math::acosh(x, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T>::type acosh(const T x){ return mars_boost::math::acosh(x, Policy()); }\
 \
    template<typename T>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T>::type atanh(const T x){ return mars_boost_ksim::math::atanh(x, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T>::type atanh(const T x){ return mars_boost::math::atanh(x, Policy()); }\
 \
    template <class T1, class T2>\
-   inline typename mars_boost_ksim::math::detail::bessel_traits<T1, T2, Policy >::result_type cyl_bessel_j(T1 v, T2 x)\
-   { return mars_boost_ksim::math::cyl_bessel_j(v, x, Policy()); }\
+   inline typename mars_boost::math::detail::bessel_traits<T1, T2, Policy >::result_type cyl_bessel_j(T1 v, T2 x)\
+   { return mars_boost::math::cyl_bessel_j(v, x, Policy()); }\
 \
    template <class T1, class T2>\
-   inline typename mars_boost_ksim::math::detail::bessel_traits<T1, T2, Policy >::result_type cyl_bessel_j_prime(T1 v, T2 x)\
-   { return mars_boost_ksim::math::cyl_bessel_j_prime(v, x, Policy()); }\
+   inline typename mars_boost::math::detail::bessel_traits<T1, T2, Policy >::result_type cyl_bessel_j_prime(T1 v, T2 x)\
+   { return mars_boost::math::cyl_bessel_j_prime(v, x, Policy()); }\
 \
    template <class T>\
-   inline typename mars_boost_ksim::math::detail::bessel_traits<T, T, Policy >::result_type sph_bessel(unsigned v, T x)\
-   { return mars_boost_ksim::math::sph_bessel(v, x, Policy()); }\
+   inline typename mars_boost::math::detail::bessel_traits<T, T, Policy >::result_type sph_bessel(unsigned v, T x)\
+   { return mars_boost::math::sph_bessel(v, x, Policy()); }\
 \
    template <class T>\
-   inline typename mars_boost_ksim::math::detail::bessel_traits<T, T, Policy >::result_type sph_bessel_prime(unsigned v, T x)\
-   { return mars_boost_ksim::math::sph_bessel_prime(v, x, Policy()); }\
+   inline typename mars_boost::math::detail::bessel_traits<T, T, Policy >::result_type sph_bessel_prime(unsigned v, T x)\
+   { return mars_boost::math::sph_bessel_prime(v, x, Policy()); }\
 \
    template <class T1, class T2>\
-   inline typename mars_boost_ksim::math::detail::bessel_traits<T1, T2, Policy >::result_type \
-   cyl_bessel_i(T1 v, T2 x) { return mars_boost_ksim::math::cyl_bessel_i(v, x, Policy()); }\
+   inline typename mars_boost::math::detail::bessel_traits<T1, T2, Policy >::result_type \
+   cyl_bessel_i(T1 v, T2 x) { return mars_boost::math::cyl_bessel_i(v, x, Policy()); }\
 \
    template <class T1, class T2>\
-   inline typename mars_boost_ksim::math::detail::bessel_traits<T1, T2, Policy >::result_type \
-   cyl_bessel_i_prime(T1 v, T2 x) { return mars_boost_ksim::math::cyl_bessel_i_prime(v, x, Policy()); }\
+   inline typename mars_boost::math::detail::bessel_traits<T1, T2, Policy >::result_type \
+   cyl_bessel_i_prime(T1 v, T2 x) { return mars_boost::math::cyl_bessel_i_prime(v, x, Policy()); }\
 \
    template <class T1, class T2>\
-   inline typename mars_boost_ksim::math::detail::bessel_traits<T1, T2, Policy >::result_type \
-   cyl_bessel_k(T1 v, T2 x) { return mars_boost_ksim::math::cyl_bessel_k(v, x, Policy()); }\
+   inline typename mars_boost::math::detail::bessel_traits<T1, T2, Policy >::result_type \
+   cyl_bessel_k(T1 v, T2 x) { return mars_boost::math::cyl_bessel_k(v, x, Policy()); }\
 \
    template <class T1, class T2>\
-   inline typename mars_boost_ksim::math::detail::bessel_traits<T1, T2, Policy >::result_type \
-   cyl_bessel_k_prime(T1 v, T2 x) { return mars_boost_ksim::math::cyl_bessel_k_prime(v, x, Policy()); }\
+   inline typename mars_boost::math::detail::bessel_traits<T1, T2, Policy >::result_type \
+   cyl_bessel_k_prime(T1 v, T2 x) { return mars_boost::math::cyl_bessel_k_prime(v, x, Policy()); }\
 \
    template <class T1, class T2>\
-   inline typename mars_boost_ksim::math::detail::bessel_traits<T1, T2, Policy >::result_type \
-   cyl_neumann(T1 v, T2 x){ return mars_boost_ksim::math::cyl_neumann(v, x, Policy()); }\
+   inline typename mars_boost::math::detail::bessel_traits<T1, T2, Policy >::result_type \
+   cyl_neumann(T1 v, T2 x){ return mars_boost::math::cyl_neumann(v, x, Policy()); }\
 \
    template <class T1, class T2>\
-   inline typename mars_boost_ksim::math::detail::bessel_traits<T1, T2, Policy >::result_type \
-   cyl_neumann_prime(T1 v, T2 x){ return mars_boost_ksim::math::cyl_neumann_prime(v, x, Policy()); }\
+   inline typename mars_boost::math::detail::bessel_traits<T1, T2, Policy >::result_type \
+   cyl_neumann_prime(T1 v, T2 x){ return mars_boost::math::cyl_neumann_prime(v, x, Policy()); }\
 \
    template <class T>\
-   inline typename mars_boost_ksim::math::detail::bessel_traits<T, T, Policy >::result_type \
-   sph_neumann(unsigned v, T x){ return mars_boost_ksim::math::sph_neumann(v, x, Policy()); }\
+   inline typename mars_boost::math::detail::bessel_traits<T, T, Policy >::result_type \
+   sph_neumann(unsigned v, T x){ return mars_boost::math::sph_neumann(v, x, Policy()); }\
 \
    template <class T>\
-   inline typename mars_boost_ksim::math::detail::bessel_traits<T, T, Policy >::result_type \
-   sph_neumann_prime(unsigned v, T x){ return mars_boost_ksim::math::sph_neumann_prime(v, x, Policy()); }\
+   inline typename mars_boost::math::detail::bessel_traits<T, T, Policy >::result_type \
+   sph_neumann_prime(unsigned v, T x){ return mars_boost::math::sph_neumann_prime(v, x, Policy()); }\
 \
    template <class T>\
-   inline typename mars_boost_ksim::math::detail::bessel_traits<T, T, Policy >::result_type cyl_bessel_j_zero(T v, int m)\
-   { return mars_boost_ksim::math::cyl_bessel_j_zero(v, m, Policy()); }\
+   inline typename mars_boost::math::detail::bessel_traits<T, T, Policy >::result_type cyl_bessel_j_zero(T v, int m)\
+   { return mars_boost::math::cyl_bessel_j_zero(v, m, Policy()); }\
 \
 template <class OutputIterator, class T>\
    inline void cyl_bessel_j_zero(T v,\
                                  int start_index,\
                                  unsigned number_of_zeros,\
                                  OutputIterator out_it)\
-   { mars_boost_ksim::math::cyl_bessel_j_zero(v, start_index, number_of_zeros, out_it, Policy()); }\
+   { mars_boost::math::cyl_bessel_j_zero(v, start_index, number_of_zeros, out_it, Policy()); }\
 \
    template <class T>\
-   inline typename mars_boost_ksim::math::detail::bessel_traits<T, T, Policy >::result_type cyl_neumann_zero(T v, int m)\
-   { return mars_boost_ksim::math::cyl_neumann_zero(v, m, Policy()); }\
+   inline typename mars_boost::math::detail::bessel_traits<T, T, Policy >::result_type cyl_neumann_zero(T v, int m)\
+   { return mars_boost::math::cyl_neumann_zero(v, m, Policy()); }\
 \
 template <class OutputIterator, class T>\
    inline void cyl_neumann_zero(T v,\
                                 int start_index,\
                                 unsigned number_of_zeros,\
                                 OutputIterator out_it)\
-   { mars_boost_ksim::math::cyl_neumann_zero(v, start_index, number_of_zeros, out_it, Policy()); }\
+   { mars_boost::math::cyl_neumann_zero(v, start_index, number_of_zeros, out_it, Policy()); }\
 \
    template <class T>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T>::type sin_pi(T x){ return mars_boost_ksim::math::sin_pi(x); }\
+   inline typename mars_boost::math::tools::promote_args<T>::type sin_pi(T x){ return mars_boost::math::sin_pi(x); }\
 \
    template <class T>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T>::type cos_pi(T x){ return mars_boost_ksim::math::cos_pi(x); }\
+   inline typename mars_boost::math::tools::promote_args<T>::type cos_pi(T x){ return mars_boost::math::cos_pi(x); }\
 \
-   using mars_boost_ksim::math::fpclassify;\
-   using mars_boost_ksim::math::isfinite;\
-   using mars_boost_ksim::math::isinf;\
-   using mars_boost_ksim::math::isnan;\
-   using mars_boost_ksim::math::isnormal;\
-   using mars_boost_ksim::math::signbit;\
-   using mars_boost_ksim::math::sign;\
-   using mars_boost_ksim::math::copysign;\
-   using mars_boost_ksim::math::changesign;\
+   using mars_boost::math::fpclassify;\
+   using mars_boost::math::isfinite;\
+   using mars_boost::math::isinf;\
+   using mars_boost::math::isnan;\
+   using mars_boost::math::isnormal;\
+   using mars_boost::math::signbit;\
+   using mars_boost::math::sign;\
+   using mars_boost::math::copysign;\
+   using mars_boost::math::changesign;\
    \
    template <class T, class U>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T,U>::type expint(T const& z, U const& u)\
-   { return mars_boost_ksim::math::expint(z, u, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T,U>::type expint(T const& z, U const& u)\
+   { return mars_boost::math::expint(z, u, Policy()); }\
    \
    template <class T>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T>::type expint(T z){ return mars_boost_ksim::math::expint(z, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T>::type expint(T z){ return mars_boost::math::expint(z, Policy()); }\
    \
    template <class T>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T>::type zeta(T s){ return mars_boost_ksim::math::zeta(s, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T>::type zeta(T s){ return mars_boost::math::zeta(s, Policy()); }\
    \
    template <class T>\
-   inline T round(const T& v){ using mars_boost_ksim::math::round; return round(v, Policy()); }\
+   inline T round(const T& v){ using mars_boost::math::round; return round(v, Policy()); }\
    \
    template <class T>\
-   inline int iround(const T& v){ using mars_boost_ksim::math::iround; return iround(v, Policy()); }\
+   inline int iround(const T& v){ using mars_boost::math::iround; return iround(v, Policy()); }\
    \
    template <class T>\
-   inline long lround(const T& v){ using mars_boost_ksim::math::lround; return lround(v, Policy()); }\
+   inline long lround(const T& v){ using mars_boost::math::lround; return lround(v, Policy()); }\
    \
    template <class T>\
-   inline T trunc(const T& v){ using mars_boost_ksim::math::trunc; return trunc(v, Policy()); }\
+   inline T trunc(const T& v){ using mars_boost::math::trunc; return trunc(v, Policy()); }\
    \
    template <class T>\
-   inline int itrunc(const T& v){ using mars_boost_ksim::math::itrunc; return itrunc(v, Policy()); }\
+   inline int itrunc(const T& v){ using mars_boost::math::itrunc; return itrunc(v, Policy()); }\
    \
    template <class T>\
-   inline long ltrunc(const T& v){ using mars_boost_ksim::math::ltrunc; return ltrunc(v, Policy()); }\
+   inline long ltrunc(const T& v){ using mars_boost::math::ltrunc; return ltrunc(v, Policy()); }\
    \
    template <class T>\
-   inline T modf(const T& v, T* ipart){ using mars_boost_ksim::math::modf; return modf(v, ipart, Policy()); }\
+   inline T modf(const T& v, T* ipart){ using mars_boost::math::modf; return modf(v, ipart, Policy()); }\
    \
    template <class T>\
-   inline T modf(const T& v, int* ipart){ using mars_boost_ksim::math::modf; return modf(v, ipart, Policy()); }\
+   inline T modf(const T& v, int* ipart){ using mars_boost::math::modf; return modf(v, ipart, Policy()); }\
    \
    template <class T>\
-   inline T modf(const T& v, long* ipart){ using mars_boost_ksim::math::modf; return modf(v, ipart, Policy()); }\
+   inline T modf(const T& v, long* ipart){ using mars_boost::math::modf; return modf(v, ipart, Policy()); }\
    \
    template <int N, class T>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T>::type pow(T v){ return mars_boost_ksim::math::pow<N>(v, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T>::type pow(T v){ return mars_boost::math::pow<N>(v, Policy()); }\
    \
-   template <class T> T nextafter(const T& a, const T& b){ return mars_boost_ksim::math::nextafter(a, b, Policy()); }\
-   template <class T> T float_next(const T& a){ return mars_boost_ksim::math::float_next(a, Policy()); }\
-   template <class T> T float_prior(const T& a){ return mars_boost_ksim::math::float_prior(a, Policy()); }\
-   template <class T> T float_distance(const T& a, const T& b){ return mars_boost_ksim::math::float_distance(a, b, Policy()); }\
-   template <class T> T ulp(const T& a){ return mars_boost_ksim::math::ulp(a, Policy()); }\
+   template <class T> T nextafter(const T& a, const T& b){ return mars_boost::math::nextafter(a, b, Policy()); }\
+   template <class T> T float_next(const T& a){ return mars_boost::math::float_next(a, Policy()); }\
+   template <class T> T float_prior(const T& a){ return mars_boost::math::float_prior(a, Policy()); }\
+   template <class T> T float_distance(const T& a, const T& b){ return mars_boost::math::float_distance(a, b, Policy()); }\
+   template <class T> T ulp(const T& a){ return mars_boost::math::ulp(a, Policy()); }\
    \
    template <class RT1, class RT2>\
-   inline typename mars_boost_ksim::math::tools::promote_args<RT1, RT2>::type owens_t(RT1 a, RT2 z){ return mars_boost_ksim::math::owens_t(a, z, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<RT1, RT2>::type owens_t(RT1 a, RT2 z){ return mars_boost::math::owens_t(a, z, Policy()); }\
    \
    template <class T1, class T2>\
-   inline std::complex<typename mars_boost_ksim::math::detail::bessel_traits<T1, T2, Policy >::result_type> cyl_hankel_1(T1 v, T2 x)\
-   {  return mars_boost_ksim::math::cyl_hankel_1(v, x, Policy()); }\
+   inline std::complex<typename mars_boost::math::detail::bessel_traits<T1, T2, Policy >::result_type> cyl_hankel_1(T1 v, T2 x)\
+   {  return mars_boost::math::cyl_hankel_1(v, x, Policy()); }\
    \
    template <class T1, class T2>\
-   inline std::complex<typename mars_boost_ksim::math::detail::bessel_traits<T1, T2, Policy >::result_type> cyl_hankel_2(T1 v, T2 x)\
-   { return mars_boost_ksim::math::cyl_hankel_2(v, x, Policy()); }\
+   inline std::complex<typename mars_boost::math::detail::bessel_traits<T1, T2, Policy >::result_type> cyl_hankel_2(T1 v, T2 x)\
+   { return mars_boost::math::cyl_hankel_2(v, x, Policy()); }\
    \
    template <class T1, class T2>\
-   inline std::complex<typename mars_boost_ksim::math::detail::bessel_traits<T1, T2, Policy >::result_type> sph_hankel_1(T1 v, T2 x)\
-   { return mars_boost_ksim::math::sph_hankel_1(v, x, Policy()); }\
+   inline std::complex<typename mars_boost::math::detail::bessel_traits<T1, T2, Policy >::result_type> sph_hankel_1(T1 v, T2 x)\
+   { return mars_boost::math::sph_hankel_1(v, x, Policy()); }\
    \
    template <class T1, class T2>\
-   inline std::complex<typename mars_boost_ksim::math::detail::bessel_traits<T1, T2, Policy >::result_type> sph_hankel_2(T1 v, T2 x)\
-   { return mars_boost_ksim::math::sph_hankel_2(v, x, Policy()); }\
+   inline std::complex<typename mars_boost::math::detail::bessel_traits<T1, T2, Policy >::result_type> sph_hankel_2(T1 v, T2 x)\
+   { return mars_boost::math::sph_hankel_2(v, x, Policy()); }\
    \
    template <class T>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T>::type jacobi_elliptic(T k, T theta, T* pcn, T* pdn)\
-   { return mars_boost_ksim::math::jacobi_elliptic(k, theta, pcn, pdn, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T>::type jacobi_elliptic(T k, T theta, T* pcn, T* pdn)\
+   { return mars_boost::math::jacobi_elliptic(k, theta, pcn, pdn, Policy()); }\
    \
    template <class U, class T>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T, U>::type jacobi_sn(U k, T theta)\
-   { return mars_boost_ksim::math::jacobi_sn(k, theta, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T, U>::type jacobi_sn(U k, T theta)\
+   { return mars_boost::math::jacobi_sn(k, theta, Policy()); }\
    \
    template <class T, class U>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T, U>::type jacobi_cn(T k, U theta)\
-   { return mars_boost_ksim::math::jacobi_cn(k, theta, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T, U>::type jacobi_cn(T k, U theta)\
+   { return mars_boost::math::jacobi_cn(k, theta, Policy()); }\
    \
    template <class T, class U>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T, U>::type jacobi_dn(T k, U theta)\
-   { return mars_boost_ksim::math::jacobi_dn(k, theta, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T, U>::type jacobi_dn(T k, U theta)\
+   { return mars_boost::math::jacobi_dn(k, theta, Policy()); }\
    \
    template <class T, class U>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T, U>::type jacobi_cd(T k, U theta)\
-   { return mars_boost_ksim::math::jacobi_cd(k, theta, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T, U>::type jacobi_cd(T k, U theta)\
+   { return mars_boost::math::jacobi_cd(k, theta, Policy()); }\
    \
    template <class T, class U>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T, U>::type jacobi_dc(T k, U theta)\
-   { return mars_boost_ksim::math::jacobi_dc(k, theta, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T, U>::type jacobi_dc(T k, U theta)\
+   { return mars_boost::math::jacobi_dc(k, theta, Policy()); }\
    \
    template <class T, class U>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T, U>::type jacobi_ns(T k, U theta)\
-   { return mars_boost_ksim::math::jacobi_ns(k, theta, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T, U>::type jacobi_ns(T k, U theta)\
+   { return mars_boost::math::jacobi_ns(k, theta, Policy()); }\
    \
    template <class T, class U>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T, U>::type jacobi_sd(T k, U theta)\
-   { return mars_boost_ksim::math::jacobi_sd(k, theta, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T, U>::type jacobi_sd(T k, U theta)\
+   { return mars_boost::math::jacobi_sd(k, theta, Policy()); }\
    \
    template <class T, class U>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T, U>::type jacobi_ds(T k, U theta)\
-   { return mars_boost_ksim::math::jacobi_ds(k, theta, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T, U>::type jacobi_ds(T k, U theta)\
+   { return mars_boost::math::jacobi_ds(k, theta, Policy()); }\
    \
    template <class T, class U>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T, U>::type jacobi_nc(T k, U theta)\
-   { return mars_boost_ksim::math::jacobi_nc(k, theta, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T, U>::type jacobi_nc(T k, U theta)\
+   { return mars_boost::math::jacobi_nc(k, theta, Policy()); }\
    \
    template <class T, class U>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T, U>::type jacobi_nd(T k, U theta)\
-   { return mars_boost_ksim::math::jacobi_nd(k, theta, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T, U>::type jacobi_nd(T k, U theta)\
+   { return mars_boost::math::jacobi_nd(k, theta, Policy()); }\
    \
    template <class T, class U>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T, U>::type jacobi_sc(T k, U theta)\
-   { return mars_boost_ksim::math::jacobi_sc(k, theta, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T, U>::type jacobi_sc(T k, U theta)\
+   { return mars_boost::math::jacobi_sc(k, theta, Policy()); }\
    \
    template <class T, class U>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T, U>::type jacobi_cs(T k, U theta)\
-   { return mars_boost_ksim::math::jacobi_cs(k, theta, Policy()); }\
+   inline typename mars_boost::math::tools::promote_args<T, U>::type jacobi_cs(T k, U theta)\
+   { return mars_boost::math::jacobi_cs(k, theta, Policy()); }\
    \
    template <class T>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T>::type airy_ai(T x)\
-   {  return mars_boost_ksim::math::airy_ai(x, Policy());  }\
+   inline typename mars_boost::math::tools::promote_args<T>::type airy_ai(T x)\
+   {  return mars_boost::math::airy_ai(x, Policy());  }\
    \
    template <class T>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T>::type airy_bi(T x)\
-   {  return mars_boost_ksim::math::airy_bi(x, Policy());  }\
+   inline typename mars_boost::math::tools::promote_args<T>::type airy_bi(T x)\
+   {  return mars_boost::math::airy_bi(x, Policy());  }\
    \
    template <class T>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T>::type airy_ai_prime(T x)\
-   {  return mars_boost_ksim::math::airy_ai_prime(x, Policy());  }\
+   inline typename mars_boost::math::tools::promote_args<T>::type airy_ai_prime(T x)\
+   {  return mars_boost::math::airy_ai_prime(x, Policy());  }\
    \
    template <class T>\
-   inline typename mars_boost_ksim::math::tools::promote_args<T>::type airy_bi_prime(T x)\
-   {  return mars_boost_ksim::math::airy_bi_prime(x, Policy());  }\
+   inline typename mars_boost::math::tools::promote_args<T>::type airy_bi_prime(T x)\
+   {  return mars_boost::math::airy_bi_prime(x, Policy());  }\
    \
    template <class T>\
    inline T airy_ai_zero(int m)\
-   { return mars_boost_ksim::math::airy_ai_zero<T>(m, Policy()); }\
+   { return mars_boost::math::airy_ai_zero<T>(m, Policy()); }\
    template <class T, class OutputIterator>\
    OutputIterator airy_ai_zero(int start_index, unsigned number_of_zeros, OutputIterator out_it)\
-   { return mars_boost_ksim::math::airy_ai_zero<T>(start_index, number_of_zeros, out_it, Policy()); }\
+   { return mars_boost::math::airy_ai_zero<T>(start_index, number_of_zeros, out_it, Policy()); }\
    \
    template <class T>\
    inline T airy_bi_zero(int m)\
-   { return mars_boost_ksim::math::airy_bi_zero<T>(m, Policy()); }\
+   { return mars_boost::math::airy_bi_zero<T>(m, Policy()); }\
    template <class T, class OutputIterator>\
    OutputIterator airy_bi_zero(int start_index, unsigned number_of_zeros, OutputIterator out_it)\
-   { return mars_boost_ksim::math::airy_bi_zero<T>(start_index, number_of_zeros, out_it, Policy()); }\
+   { return mars_boost::math::airy_bi_zero<T>(start_index, number_of_zeros, out_it, Policy()); }\
    \
    template <class T>\
    T bernoulli_b2n(const int i)\
-   { return mars_boost_ksim::math::bernoulli_b2n<T>(i, Policy()); }\
+   { return mars_boost::math::bernoulli_b2n<T>(i, Policy()); }\
    template <class T, class OutputIterator>\
    OutputIterator bernoulli_b2n(int start_index, unsigned number_of_bernoullis_b2n, OutputIterator out_it)\
-   { return mars_boost_ksim::math::bernoulli_b2n<T>(start_index, number_of_bernoullis_b2n, out_it, Policy()); }\
+   { return mars_boost::math::bernoulli_b2n<T>(start_index, number_of_bernoullis_b2n, out_it, Policy()); }\
    \
    template <class T>\
    T tangent_t2n(const int i)\
-   { return mars_boost_ksim::math::tangent_t2n<T>(i, Policy()); }\
+   { return mars_boost::math::tangent_t2n<T>(i, Policy()); }\
    template <class T, class OutputIterator>\
    OutputIterator tangent_t2n(int start_index, unsigned number_of_bernoullis_b2n, OutputIterator out_it)\
-   { return mars_boost_ksim::math::tangent_t2n<T>(start_index, number_of_bernoullis_b2n, out_it, Policy()); }\
+   { return mars_boost::math::tangent_t2n<T>(start_index, number_of_bernoullis_b2n, out_it, Policy()); }\
    \
 
 

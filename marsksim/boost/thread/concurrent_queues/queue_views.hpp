@@ -18,7 +18,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 namespace concurrent
 {
@@ -50,10 +50,10 @@ namespace concurrent
     queue_op_status nonblocking_push(const value_type& x) { return queue->nonblocking_push(x); }
     queue_op_status wait_push(const value_type& x) { return queue->wait_push(x); }
 
-    void push(BOOST_THREAD_RV_REF(value_type) x) { queue->push(mars_boost_ksim::move(x)); }
-    queue_op_status try_push(BOOST_THREAD_RV_REF(value_type) x) { return queue->try_push(mars_boost_ksim::move(x)); }
-    queue_op_status nonblocking_push(BOOST_THREAD_RV_REF(value_type) x) { return queue->nonblocking_push(mars_boost_ksim::move(x)); }
-    queue_op_status wait_push(BOOST_THREAD_RV_REF(value_type) x) { return queue->wait_push(mars_boost_ksim::move(x)); }
+    void push(BOOST_THREAD_RV_REF(value_type) x) { queue->push(mars_boost::move(x)); }
+    queue_op_status try_push(BOOST_THREAD_RV_REF(value_type) x) { return queue->try_push(mars_boost::move(x)); }
+    queue_op_status nonblocking_push(BOOST_THREAD_RV_REF(value_type) x) { return queue->nonblocking_push(mars_boost::move(x)); }
+    queue_op_status wait_push(BOOST_THREAD_RV_REF(value_type) x) { return queue->wait_push(mars_boost::move(x)); }
   };
 
   template <typename Queue>

@@ -15,11 +15,11 @@
 #include <boost/container/detail/std_fwd.hpp>
 
 //! \file
-//!   This header forward declares mars_boost_ksim::container::constructible_with_allocator_prefix,
-//!   mars_boost_ksim::container::constructible_with_allocator_suffix and
-//!   mars_boost_ksim::container::uses_allocator. Also defines the following types:
+//!   This header forward declares mars_boost::container::constructible_with_allocator_prefix,
+//!   mars_boost::container::constructible_with_allocator_suffix and
+//!   mars_boost::container::uses_allocator. Also defines the following types:
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace container {
 
 #ifndef BOOST_CONTAINER_DOXYGEN_INVOKED
@@ -68,6 +68,6 @@ struct uses_allocator;
 
 // @endcond
 
-}} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace container {
+}} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace container {
 
 #endif   //BOOST_CONTAINER_USES_ALLOCATOR_HPP

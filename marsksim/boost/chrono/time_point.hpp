@@ -45,7 +45,7 @@ time2_demo contained this comment:
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace chrono {
 
   template <class Clock, class Duration = typename Clock::duration>
@@ -155,7 +155,7 @@ namespace chrono {
     template <class Clock, class Duration>
     class time_point
     {
-        BOOST_CHRONO_STATIC_ASSERT(mars_boost_ksim::chrono::detail::is_duration<Duration>::value,
+        BOOST_CHRONO_STATIC_ASSERT(mars_boost::chrono::detail::is_duration<Duration>::value,
                 BOOST_CHRONO_SECOND_TEMPLATE_PARAMETER_OF_TIME_POINT_MUST_BE_A_BOOST_CHRONO_DURATION, (Duration));
     public:
         typedef Clock                     clock;
@@ -180,9 +180,9 @@ namespace chrono {
         template <class Duration2>
         BOOST_FORCEINLINE BOOST_CONSTEXPR
         time_point(const time_point<clock, Duration2>& t
-                , typename mars_boost_ksim::enable_if
+                , typename mars_boost::enable_if
                 <
-                    mars_boost_ksim::is_convertible<Duration2, duration>
+                    mars_boost::is_convertible<Duration2, duration>
                 >::type* = 0
         )
             : d_(t.time_since_epoch())
@@ -370,7 +370,7 @@ namespace chrono {
     }
 
 } // namespace chrono
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #ifndef BOOST_CHRONO_HEADER_ONLY
 // the suffix header occurs after all of our code:

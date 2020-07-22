@@ -16,7 +16,7 @@
 #include <boost/range/detail/range_return.hpp>
 #include <algorithm>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range
     {
@@ -30,7 +30,7 @@ template<class BidirectionalRange>
 inline BidirectionalRange& reverse(BidirectionalRange& rng)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( BidirectionalRangeConcept<BidirectionalRange> ));
-    std::reverse(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng));
+    std::reverse(mars_boost::begin(rng), mars_boost::end(rng));
     return rng;
 }
 
@@ -39,12 +39,12 @@ template<class BidirectionalRange>
 inline const BidirectionalRange& reverse(const BidirectionalRange& rng)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( BidirectionalRangeConcept<const BidirectionalRange> ));
-    std::reverse(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng));
+    std::reverse(mars_boost::begin(rng), mars_boost::end(rng));
     return rng;
 }
 
     } // namespace range
     using range::reverse;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

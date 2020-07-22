@@ -11,14 +11,14 @@
 
 #include <boost/smart_ptr/shared_ptr.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim  {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost  {
     namespace detail {
         template<class T>
         struct sp_if_array;
 
         template<class T>
         struct sp_if_array<T[]> {
-            typedef mars_boost_ksim::shared_ptr<T[]> type;
+            typedef mars_boost::shared_ptr<T[]> type;
         };
 
         template<class T>
@@ -26,7 +26,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         template<class T, std::size_t N>
         struct sp_if_size_array<T[N]> {
-            typedef mars_boost_ksim::shared_ptr<T[N]> type;
+            typedef mars_boost::shared_ptr<T[N]> type;
         };
     }
 }

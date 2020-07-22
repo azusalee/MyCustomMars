@@ -30,8 +30,8 @@ bool marsksim::MarsRuntimeComponent::Init(ICallback_Comm ^ callBackForRuntime)
 	WSAStartup(MAKEWORD(2, 2), &wsaData);
 
 	Runtime2Cs_Comm::Singletonksim()->SetCallback(callBackForRuntime);
-	app::SetCallback(new uwpAppCallback());
-	stn::SetCallback(new uwpStnCallback());
+	app::SetCallback(new uwpAppCallbackksim());
+	stn::SetCallback(new uwpStnCallbackksim());
 	return true;
 }
 

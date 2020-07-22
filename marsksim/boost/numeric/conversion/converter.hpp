@@ -15,7 +15,7 @@
 
 #include "boost/numeric/conversion/detail/converter.hpp"
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace numeric 
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace numeric 
 {
 
 template<class T,
@@ -61,7 +61,7 @@ struct make_converter_from
 
 } ;
 
-} } // namespace mars_boost_ksim::numeric
+} } // namespace mars_boost::numeric
 
 #endif
 

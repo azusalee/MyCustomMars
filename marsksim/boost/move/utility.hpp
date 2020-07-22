@@ -30,7 +30,7 @@
 
 #if defined(BOOST_NO_CXX11_RVALUE_REFERENCES) && !defined(BOOST_MOVE_DOXYGEN_INVOKED)
 
-   namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+   namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
    //////////////////////////////////////////////////////////////////////////////
    //
@@ -39,9 +39,9 @@
    //////////////////////////////////////////////////////////////////////////////
 
    template <class T>
-   inline typename ::mars_boost_ksim::move_detail::enable_if_c
+   inline typename ::mars_boost::move_detail::enable_if_c
       < enable_move_utility_emulation<T>::value && !has_move_emulation_enabled<T>::value
-      , typename ::mars_boost_ksim::move_detail::add_const<T>::type &
+      , typename ::mars_boost::move_detail::add_const<T>::type &
       >::type
          move_if_noexcept(T& x) BOOST_NOEXCEPT
    {
@@ -49,18 +49,18 @@
    }
 
    template <class T>
-   inline typename ::mars_boost_ksim::move_detail::enable_if_c
+   inline typename ::mars_boost::move_detail::enable_if_c
       < enable_move_utility_emulation<T>::value && has_move_emulation_enabled<T>::value
-            && ::mars_boost_ksim::move_detail::is_nothrow_move_constructible_or_uncopyable<T>::value, rv<T>&>::type
+            && ::mars_boost::move_detail::is_nothrow_move_constructible_or_uncopyable<T>::value, rv<T>&>::type
          move_if_noexcept(T& x) BOOST_NOEXCEPT
    {
-      return *static_cast<rv<T>* >(::mars_boost_ksim::move_detail::addressof(x));
+      return *static_cast<rv<T>* >(::mars_boost::move_detail::addressof(x));
    }
 
    template <class T>
-   inline typename ::mars_boost_ksim::move_detail::enable_if_c
+   inline typename ::mars_boost::move_detail::enable_if_c
       < enable_move_utility_emulation<T>::value && has_move_emulation_enabled<T>::value
-            && ::mars_boost_ksim::move_detail::is_nothrow_move_constructible_or_uncopyable<T>::value
+            && ::mars_boost::move_detail::is_nothrow_move_constructible_or_uncopyable<T>::value
       , rv<T>&
       >::type
          move_if_noexcept(rv<T>& x) BOOST_NOEXCEPT
@@ -69,10 +69,10 @@
    }
 
    template <class T>
-   inline typename ::mars_boost_ksim::move_detail::enable_if_c
+   inline typename ::mars_boost::move_detail::enable_if_c
       < enable_move_utility_emulation<T>::value && has_move_emulation_enabled<T>::value
-            && !::mars_boost_ksim::move_detail::is_nothrow_move_constructible_or_uncopyable<T>::value
-      , typename ::mars_boost_ksim::move_detail::add_const<T>::type &
+            && !::mars_boost::move_detail::is_nothrow_move_constructible_or_uncopyable<T>::value
+      , typename ::mars_boost::move_detail::add_const<T>::type &
       >::type
          move_if_noexcept(T& x) BOOST_NOEXCEPT
    {
@@ -80,32 +80,32 @@
    }
 
    template <class T>
-   inline typename ::mars_boost_ksim::move_detail::enable_if_c
+   inline typename ::mars_boost::move_detail::enable_if_c
       < enable_move_utility_emulation<T>::value && has_move_emulation_enabled<T>::value
-            && !::mars_boost_ksim::move_detail::is_nothrow_move_constructible_or_uncopyable<T>::value
-      , typename ::mars_boost_ksim::move_detail::add_const<T>::type &
+            && !::mars_boost::move_detail::is_nothrow_move_constructible_or_uncopyable<T>::value
+      , typename ::mars_boost::move_detail::add_const<T>::type &
       >::type
          move_if_noexcept(rv<T>& x) BOOST_NOEXCEPT
    {
       return x;
    }
 
-   }  //namespace mars_boost_ksim
+   }  //namespace mars_boost
 
 #else    //#if defined(BOOST_NO_CXX11_RVALUE_REFERENCES) && !defined(BOOST_MOVE_DOXYGEN_INVOKED)
 
    #if defined(BOOST_MOVE_USE_STANDARD_LIBRARY_MOVE)
       #include <utility>
 
-      namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim{
+      namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost{
 
       using ::std::move_if_noexcept;
 
-      }  //namespace mars_boost_ksim
+      }  //namespace mars_boost
 
    #else //!BOOST_MOVE_USE_STANDARD_LIBRARY_MOVE
 
-      namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+      namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
       //////////////////////////////////////////////////////////////////////////////
       //
@@ -115,7 +115,7 @@
       #if defined(BOOST_MOVE_DOXYGEN_INVOKED)
          //! This function provides a way to convert a reference into a rvalue reference
          //! in compilers with rvalue references. For other compilers converts T & into
-         //! <i>::mars_boost_ksim::rv<T> &</i> so that move emulation is activated. Reference
+         //! <i>::mars_boost::rv<T> &</i> so that move emulation is activated. Reference
          //! would be converted to rvalue reference only if input type is nothrow move
          //! constructible or if it has no copy constructor. In all other cases const
          //! reference would be returned
@@ -125,20 +125,20 @@
       #else //BOOST_MOVE_DOXYGEN_INVOKED
 
          template <class T>
-         typename ::mars_boost_ksim::move_detail::enable_if_c
-            < ::mars_boost_ksim::move_detail::is_nothrow_move_constructible_or_uncopyable<T>::value, T&&>::type
+         typename ::mars_boost::move_detail::enable_if_c
+            < ::mars_boost::move_detail::is_nothrow_move_constructible_or_uncopyable<T>::value, T&&>::type
                move_if_noexcept(T& x) BOOST_NOEXCEPT
-         {  return ::mars_boost_ksim::move(x);   }
+         {  return ::mars_boost::move(x);   }
 
          template <class T>
-         typename ::mars_boost_ksim::move_detail::enable_if_c
-            < !::mars_boost_ksim::move_detail::is_nothrow_move_constructible_or_uncopyable<T>::value, const T&>::type
+         typename ::mars_boost::move_detail::enable_if_c
+            < !::mars_boost::move_detail::is_nothrow_move_constructible_or_uncopyable<T>::value, const T&>::type
                move_if_noexcept(T& x) BOOST_NOEXCEPT
          {  return x;  }
 
       #endif //BOOST_MOVE_DOXYGEN_INVOKED
 
-      }  //namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+      }  //namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
    #endif   //#if defined(BOOST_MOVE_USE_STANDARD_LIBRARY_MOVE)
 

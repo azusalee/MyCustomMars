@@ -31,7 +31,7 @@
 # endif
 
 //----------------------------------------------------------------------------//
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace system
     {
@@ -67,9 +67,9 @@ namespace
 
   std::string generic_error_category::message( int ev ) const
   {
-    using namespace mars_boost_ksim::system::errc;
+    using namespace mars_boost::system::errc;
 #if defined(__PGI)
-      using mars_boost_ksim::system::errc::invalid_argument;
+      using mars_boost::system::errc::invalid_argument;
 #endif
 
     static std::string unknown_err( "Unknown error" );
@@ -165,9 +165,9 @@ namespace
 
   error_condition system_error_category::default_error_condition( int ev ) const BOOST_SYSTEM_NOEXCEPT
   {
-    using namespace mars_boost_ksim::system::errc;
+    using namespace mars_boost::system::errc;
 #if defined(__PGI)
-      using mars_boost_ksim::system::errc::invalid_argument;
+      using mars_boost::system::errc::invalid_argument;
 #endif
 
 # if defined(BOOST_WINDOWS_API)
@@ -464,4 +464,4 @@ namespace
     }
 
   } // namespace system
-} // namespace mars_boost_ksim
+} // namespace mars_boost

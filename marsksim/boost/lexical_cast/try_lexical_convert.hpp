@@ -44,32 +44,32 @@
 #include <boost/range/iterator_range_core.hpp>
 #include <boost/container/container_fwd.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
     namespace detail
     {
         template<typename T>
         struct is_stdstring
-            : mars_boost_ksim::false_type
+            : mars_boost::false_type
         {};
 
         template<typename CharT, typename Traits, typename Alloc>
         struct is_stdstring< std::basic_string<CharT, Traits, Alloc> >
-            : mars_boost_ksim::true_type
+            : mars_boost::true_type
         {};
 
         template<typename CharT, typename Traits, typename Alloc>
-        struct is_stdstring< mars_boost_ksim::container::basic_string<CharT, Traits, Alloc> >
-            : mars_boost_ksim::true_type
+        struct is_stdstring< mars_boost::container::basic_string<CharT, Traits, Alloc> >
+            : mars_boost::true_type
         {};
 
         template<typename Target, typename Source>
         struct is_arithmetic_and_not_xchars
         {
-            typedef mars_boost_ksim::mpl::bool_<
-                    !(mars_boost_ksim::detail::is_character<Target>::value) &&
-                    !(mars_boost_ksim::detail::is_character<Source>::value) &&
-                    mars_boost_ksim::is_arithmetic<Source>::value &&
-                    mars_boost_ksim::is_arithmetic<Target>::value
+            typedef mars_boost::mpl::bool_<
+                    !(mars_boost::detail::is_character<Target>::value) &&
+                    !(mars_boost::detail::is_character<Source>::value) &&
+                    mars_boost::is_arithmetic<Source>::value &&
+                    mars_boost::is_arithmetic<Target>::value
                 > type;
         
             BOOST_STATIC_CONSTANT(bool, value = (
@@ -84,11 +84,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         template<typename Target, typename Source>
         struct is_xchar_to_xchar 
         {
-            typedef mars_boost_ksim::mpl::bool_<
+            typedef mars_boost::mpl::bool_<
                      sizeof(Source) == sizeof(Target) &&
                      sizeof(Source) == sizeof(char) &&
-                     mars_boost_ksim::detail::is_character<Target>::value &&
-                     mars_boost_ksim::detail::is_character<Source>::value
+                     mars_boost::detail::is_character<Target>::value &&
+                     mars_boost::detail::is_character<Source>::value
                 > type;
                 
             BOOST_STATIC_CONSTANT(bool, value = (
@@ -98,27 +98,27 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         template<typename Target, typename Source>
         struct is_char_array_to_stdstring
-            : mars_boost_ksim::false_type
+            : mars_boost::false_type
         {};
 
         template<typename CharT, typename Traits, typename Alloc>
         struct is_char_array_to_stdstring< std::basic_string<CharT, Traits, Alloc>, CharT* >
-            : mars_boost_ksim::true_type
+            : mars_boost::true_type
         {};
 
         template<typename CharT, typename Traits, typename Alloc>
         struct is_char_array_to_stdstring< std::basic_string<CharT, Traits, Alloc>, const CharT* >
-            : mars_boost_ksim::true_type
+            : mars_boost::true_type
         {};
 
         template<typename CharT, typename Traits, typename Alloc>
-        struct is_char_array_to_stdstring< mars_boost_ksim::container::basic_string<CharT, Traits, Alloc>, CharT* >
-            : mars_boost_ksim::true_type
+        struct is_char_array_to_stdstring< mars_boost::container::basic_string<CharT, Traits, Alloc>, CharT* >
+            : mars_boost::true_type
         {};
 
         template<typename CharT, typename Traits, typename Alloc>
-        struct is_char_array_to_stdstring< mars_boost_ksim::container::basic_string<CharT, Traits, Alloc>, const CharT* >
-            : mars_boost_ksim::true_type
+        struct is_char_array_to_stdstring< mars_boost::container::basic_string<CharT, Traits, Alloc>, const CharT* >
+            : mars_boost::true_type
         {};
 
         template <typename Target, typename Source>
@@ -146,33 +146,33 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         template <typename Target, typename Source>
         inline bool try_lexical_convert(const Source& arg, Target& result)
         {
-            typedef BOOST_DEDUCED_TYPENAME mars_boost_ksim::detail::array_to_pointer_decay<Source>::type src;
+            typedef BOOST_DEDUCED_TYPENAME mars_boost::detail::array_to_pointer_decay<Source>::type src;
 
-            typedef mars_boost_ksim::mpl::bool_<
-                mars_boost_ksim::detail::is_xchar_to_xchar<Target, src >::value ||
-                mars_boost_ksim::detail::is_char_array_to_stdstring<Target, src >::value ||
+            typedef mars_boost::mpl::bool_<
+                mars_boost::detail::is_xchar_to_xchar<Target, src >::value ||
+                mars_boost::detail::is_char_array_to_stdstring<Target, src >::value ||
                 (
-                     mars_boost_ksim::is_same<Target, src >::value &&
-                     mars_boost_ksim::detail::is_stdstring<Target >::value
+                     mars_boost::is_same<Target, src >::value &&
+                     mars_boost::detail::is_stdstring<Target >::value
                 ) ||
                 (
-                     mars_boost_ksim::is_same<Target, src >::value &&
-                     mars_boost_ksim::detail::is_character<Target >::value
+                     mars_boost::is_same<Target, src >::value &&
+                     mars_boost::detail::is_character<Target >::value
                 )
             > shall_we_copy_t;
 
-            typedef mars_boost_ksim::detail::is_arithmetic_and_not_xchars<Target, src >
+            typedef mars_boost::detail::is_arithmetic_and_not_xchars<Target, src >
                 shall_we_copy_with_dynamic_check_t;
 
             // We do evaluate second `if_` lazily to avoid unnecessary instantiations
             // of `shall_we_copy_with_dynamic_check_t` and improve compilation times.
-            typedef BOOST_DEDUCED_TYPENAME mars_boost_ksim::mpl::if_c<
+            typedef BOOST_DEDUCED_TYPENAME mars_boost::mpl::if_c<
                 shall_we_copy_t::value,
-                mars_boost_ksim::mpl::identity<mars_boost_ksim::detail::copy_converter_impl<Target, src > >,
-                mars_boost_ksim::mpl::if_<
+                mars_boost::mpl::identity<mars_boost::detail::copy_converter_impl<Target, src > >,
+                mars_boost::mpl::if_<
                      shall_we_copy_with_dynamic_check_t,
-                     mars_boost_ksim::detail::dynamic_num_converter_impl<Target, src >,
-                     mars_boost_ksim::detail::lexical_converter_impl<Target, src >
+                     mars_boost::detail::dynamic_num_converter_impl<Target, src >,
+                     mars_boost::detail::lexical_converter_impl<Target, src >
                 >
             >::type caster_type_lazy;
 
@@ -185,11 +185,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         inline bool try_lexical_convert(const CharacterT* chars, std::size_t count, Target& result)
         {
             BOOST_STATIC_ASSERT_MSG(
-                mars_boost_ksim::detail::is_character<CharacterT>::value,
+                mars_boost::detail::is_character<CharacterT>::value,
                 "This overload of try_lexical_convert is meant to be used only with arrays of characters."
             );
-            return ::mars_boost_ksim::conversion::detail::try_lexical_convert(
-                ::mars_boost_ksim::iterator_range<const CharacterT*>(chars, chars + count), result
+            return ::mars_boost::conversion::detail::try_lexical_convert(
+                ::mars_boost::iterator_range<const CharacterT*>(chars, chars + count), result
             );
         }
 
@@ -197,10 +197,10 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
     namespace conversion {
         // ADL barrier
-        using ::mars_boost_ksim::conversion::detail::try_lexical_convert;
+        using ::mars_boost::conversion::detail::try_lexical_convert;
     }
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #if defined(__clang__) || (defined(__GNUC__) && \
     !(defined(__INTEL_COMPILER) || defined(__ICL) || defined(__ICC) || defined(__ECC)) && \

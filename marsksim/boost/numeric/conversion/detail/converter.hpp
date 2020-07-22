@@ -20,7 +20,7 @@
 
 #include "boost/mpl/integral_c.hpp"
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace numeric { namespace convdetail
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace numeric { namespace convdetail
 {
   // Integral Constants representing rounding modes
   typedef mpl::integral_c<std::float_round_style, std::round_toward_zero>         round2zero_c ;
@@ -595,7 +595,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     typedef typename mpl::eval_if<trivial,TrivialQ,NonTrivialQ>::type type ;
   } ;
 
-} } } // namespace mars_boost_ksim::numeric::convdetail
+} } } // namespace mars_boost::numeric::convdetail
 
 #endif
 

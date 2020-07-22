@@ -39,7 +39,7 @@
 #   include <boost/mpl/aux_/config/integral.hpp>
 #   include <boost/preprocessor/cat.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl {
 
 // MSVC workaround: implement less in terms of greater
 #if 0 AUX778076_OP_TOKEN 1 && !(1 AUX778076_OP_TOKEN 0) && !(0 AUX778076_OP_TOKEN 0)

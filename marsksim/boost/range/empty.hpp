@@ -19,13 +19,13 @@
 #include <boost/range/begin.hpp>
 #include <boost/range/end.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 { 
 
     template< class T >
     inline bool empty( const T& r )
     {
-        return mars_boost_ksim::begin( r ) == mars_boost_ksim::end( r );
+        return mars_boost::begin( r ) == mars_boost::end( r );
     }
 
 } // namespace 'boost'

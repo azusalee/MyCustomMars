@@ -25,18 +25,18 @@
 #include <boost/intrusive/detail/iterator.hpp>
 #include <boost/intrusive/detail/mpl.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace intrusive {
 
 template<class It>
 class reverse_iterator
 {
    public:
-   typedef typename mars_boost_ksim::intrusive::iterator_traits<It>::pointer             pointer;
-   typedef typename mars_boost_ksim::intrusive::iterator_traits<It>::reference           reference;
-   typedef typename mars_boost_ksim::intrusive::iterator_traits<It>::difference_type     difference_type;
-   typedef typename mars_boost_ksim::intrusive::iterator_traits<It>::iterator_category   iterator_category;
-   typedef typename mars_boost_ksim::intrusive::iterator_traits<It>::value_type          value_type;
+   typedef typename mars_boost::intrusive::iterator_traits<It>::pointer             pointer;
+   typedef typename mars_boost::intrusive::iterator_traits<It>::reference           reference;
+   typedef typename mars_boost::intrusive::iterator_traits<It>::difference_type     difference_type;
+   typedef typename mars_boost::intrusive::iterator_traits<It>::iterator_category   iterator_category;
+   typedef typename mars_boost::intrusive::iterator_traits<It>::value_type          value_type;
 
 
    typedef It iterator_type;
@@ -51,13 +51,13 @@ class reverse_iterator
 
    template<class OtherIt>
    reverse_iterator( const reverse_iterator<OtherIt>& r
-                   , typename mars_boost_ksim::intrusive::detail::enable_if_convertible<OtherIt, It>::type* =0
+                   , typename mars_boost::intrusive::detail::enable_if_convertible<OtherIt, It>::type* =0
                    )
       : m_current(r.base())
    {}
 
    template<class OtherIt>
-   typename mars_boost_ksim::intrusive::detail::enable_if_convertible<OtherIt, It, reverse_iterator &>::type
+   typename mars_boost::intrusive::detail::enable_if_convertible<OtherIt, It, reverse_iterator &>::type
          operator=( const reverse_iterator<OtherIt>& r)
    {  m_current = r.base();   return *this;  }
 
@@ -137,7 +137,7 @@ class reverse_iterator
 };
 
 } //namespace intrusive {
-} //namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+} //namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 #include <boost/intrusive/detail/config_end.hpp>
 

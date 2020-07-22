@@ -327,7 +327,7 @@
     {
 #if !defined( BOOST_NO_ARGUMENT_DEPENDENT_LOOKUP ) && !defined( __BORLANDC__ )
 
-        using mars_boost_ksim::visit_each;
+        using mars_boost::visit_each;
 
 #endif
         BOOST_BIND_VISIT_EACH(v, f_, 0);

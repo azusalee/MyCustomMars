@@ -74,7 +74,7 @@
       #define BOOST_MOVE_ATTRIBUTE_MAY_ALIAS
    #endif
 
-   namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+   namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
    //////////////////////////////////////////////////////////////////////////////
    //
@@ -83,10 +83,10 @@
    //////////////////////////////////////////////////////////////////////////////
    template <class T>
    class rv
-      : public ::mars_boost_ksim::move_detail::if_c
-         < ::mars_boost_ksim::move_detail::is_class<T>::value
+      : public ::mars_boost::move_detail::if_c
+         < ::mars_boost::move_detail::is_class<T>::value
          , T
-         , ::mars_boost_ksim::move_detail::nat
+         , ::mars_boost::move_detail::nat
          >::type
    {
       rv();
@@ -108,7 +108,7 @@
    struct is_rv
         //Derive from integral constant because some Boost code assummes it has
         //a "type" internal typedef
-      : integral_constant<bool, ::mars_boost_ksim::move_detail::is_rv_impl<T>::value >
+      : integral_constant<bool, ::mars_boost::move_detail::is_rv_impl<T>::value >
    {};
 
    template <class T>
@@ -126,31 +126,31 @@
    //////////////////////////////////////////////////////////////////////////////
    template<class T>
    struct has_move_emulation_enabled
-      : ::mars_boost_ksim::move_detail::has_move_emulation_enabled_impl<T>
+      : ::mars_boost::move_detail::has_move_emulation_enabled_impl<T>
    {};
 
    template<class T>
    struct has_move_emulation_disabled
    {
-      static const bool value = !::mars_boost_ksim::move_detail::has_move_emulation_enabled_impl<T>::value;
+      static const bool value = !::mars_boost::move_detail::has_move_emulation_enabled_impl<T>::value;
    };
 
-   }  //namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+   }  //namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
    #define BOOST_RV_REF(TYPE)\
-      ::mars_boost_ksim::rv< TYPE >& \
+      ::mars_boost::rv< TYPE >& \
    //
 
    #define BOOST_RV_REF_2_TEMPL_ARGS(TYPE, ARG1, ARG2)\
-      ::mars_boost_ksim::rv< TYPE<ARG1, ARG2> >& \
+      ::mars_boost::rv< TYPE<ARG1, ARG2> >& \
    //
 
    #define BOOST_RV_REF_3_TEMPL_ARGS(TYPE, ARG1, ARG2, ARG3)\
-      ::mars_boost_ksim::rv< TYPE<ARG1, ARG2, ARG3> >& \
+      ::mars_boost::rv< TYPE<ARG1, ARG2, ARG3> >& \
    //
 
    #define BOOST_RV_REF_BEG\
-      ::mars_boost_ksim::rv<   \
+      ::mars_boost::rv<   \
    //
 
    #define BOOST_RV_REF_END\
@@ -170,11 +170,11 @@
    //
 
    #define BOOST_COPY_ASSIGN_REF(TYPE)\
-      const ::mars_boost_ksim::rv< TYPE >& \
+      const ::mars_boost::rv< TYPE >& \
    //
 
    #define BOOST_COPY_ASSIGN_REF_BEG \
-      const ::mars_boost_ksim::rv<  \
+      const ::mars_boost::rv<  \
    //
 
    #define BOOST_COPY_ASSIGN_REF_END \
@@ -182,24 +182,24 @@
    //
 
    #define BOOST_COPY_ASSIGN_REF_2_TEMPL_ARGS(TYPE, ARG1, ARG2)\
-      const ::mars_boost_ksim::rv< TYPE<ARG1, ARG2> >& \
+      const ::mars_boost::rv< TYPE<ARG1, ARG2> >& \
    //
 
    #define BOOST_COPY_ASSIGN_REF_3_TEMPL_ARGS(TYPE, ARG1, ARG2, ARG3)\
-      const ::mars_boost_ksim::rv< TYPE<ARG1, ARG2, ARG3> >& \
+      const ::mars_boost::rv< TYPE<ARG1, ARG2, ARG3> >& \
    //
 
    #define BOOST_CATCH_CONST_RLVALUE(TYPE)\
-      const ::mars_boost_ksim::rv< TYPE >& \
+      const ::mars_boost::rv< TYPE >& \
    //
 
-   namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+   namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
    namespace move_detail {
 
    template <class Ret, class T>
-   inline typename ::mars_boost_ksim::move_detail::enable_if_c
-      <  ::mars_boost_ksim::move_detail::is_lvalue_reference<Ret>::value ||
-        !::mars_boost_ksim::has_move_emulation_enabled<T>::value
+   inline typename ::mars_boost::move_detail::enable_if_c
+      <  ::mars_boost::move_detail::is_lvalue_reference<Ret>::value ||
+        !::mars_boost::has_move_emulation_enabled<T>::value
       , T&>::type
          move_return(T& x) BOOST_NOEXCEPT
    {
@@ -207,34 +207,34 @@
    }
 
    template <class Ret, class T>
-   inline typename ::mars_boost_ksim::move_detail::enable_if_c
-      < !::mars_boost_ksim::move_detail::is_lvalue_reference<Ret>::value &&
-         ::mars_boost_ksim::has_move_emulation_enabled<T>::value
-      , ::mars_boost_ksim::rv<T>&>::type
+   inline typename ::mars_boost::move_detail::enable_if_c
+      < !::mars_boost::move_detail::is_lvalue_reference<Ret>::value &&
+         ::mars_boost::has_move_emulation_enabled<T>::value
+      , ::mars_boost::rv<T>&>::type
          move_return(T& x) BOOST_NOEXCEPT
    {
-      return *BOOST_MOVE_TO_RV_CAST(::mars_boost_ksim::rv<T>*, ::mars_boost_ksim::move_detail::addressof(x));
+      return *BOOST_MOVE_TO_RV_CAST(::mars_boost::rv<T>*, ::mars_boost::move_detail::addressof(x));
    }
 
    template <class Ret, class T>
-   inline typename ::mars_boost_ksim::move_detail::enable_if_c
-      < !::mars_boost_ksim::move_detail::is_lvalue_reference<Ret>::value &&
-         ::mars_boost_ksim::has_move_emulation_enabled<T>::value
-      , ::mars_boost_ksim::rv<T>&>::type
-         move_return(::mars_boost_ksim::rv<T>& x) BOOST_NOEXCEPT
+   inline typename ::mars_boost::move_detail::enable_if_c
+      < !::mars_boost::move_detail::is_lvalue_reference<Ret>::value &&
+         ::mars_boost::has_move_emulation_enabled<T>::value
+      , ::mars_boost::rv<T>&>::type
+         move_return(::mars_boost::rv<T>& x) BOOST_NOEXCEPT
    {
       return x;
    }
 
    }  //namespace move_detail {
-   }  //namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+   }  //namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
    #define BOOST_MOVE_RET(RET_TYPE, REF)\
-      mars_boost_ksim::move_detail::move_return< RET_TYPE >(REF)
+      mars_boost::move_detail::move_return< RET_TYPE >(REF)
    //
 
    #define BOOST_MOVE_BASE(BASE_TYPE, ARG) \
-      ::mars_boost_ksim::move((BASE_TYPE&)(ARG))
+      ::mars_boost::move((BASE_TYPE&)(ARG))
    //
 
    //////////////////////////////////////////////////////////////////////////////
@@ -245,10 +245,10 @@
    #define BOOST_MOVABLE_BUT_NOT_COPYABLE(TYPE)\
       BOOST_MOVE_IMPL_NO_COPY_CTOR_OR_ASSIGN(TYPE)\
       public:\
-      operator ::mars_boost_ksim::rv<TYPE>&() \
-      {  return *BOOST_MOVE_TO_RV_CAST(::mars_boost_ksim::rv<TYPE>*, this);  }\
-      operator const ::mars_boost_ksim::rv<TYPE>&() const \
-      {  return *BOOST_MOVE_TO_RV_CAST(const ::mars_boost_ksim::rv<TYPE>*, this);  }\
+      operator ::mars_boost::rv<TYPE>&() \
+      {  return *BOOST_MOVE_TO_RV_CAST(::mars_boost::rv<TYPE>*, this);  }\
+      operator const ::mars_boost::rv<TYPE>&() const \
+      {  return *BOOST_MOVE_TO_RV_CAST(const ::mars_boost::rv<TYPE>*, this);  }\
       private:\
    //
 
@@ -263,23 +263,23 @@
       TYPE& operator=(TYPE &t)\
       {  this->operator=(const_cast<const TYPE &>(t)); return *this;}\
       public:\
-      operator ::mars_boost_ksim::rv<TYPE>&() \
-      {  return *BOOST_MOVE_TO_RV_CAST(::mars_boost_ksim::rv<TYPE>*, this);  }\
-      operator const ::mars_boost_ksim::rv<TYPE>&() const \
-      {  return *BOOST_MOVE_TO_RV_CAST(const ::mars_boost_ksim::rv<TYPE>*, this);  }\
+      operator ::mars_boost::rv<TYPE>&() \
+      {  return *BOOST_MOVE_TO_RV_CAST(::mars_boost::rv<TYPE>*, this);  }\
+      operator const ::mars_boost::rv<TYPE>&() const \
+      {  return *BOOST_MOVE_TO_RV_CAST(const ::mars_boost::rv<TYPE>*, this);  }\
       private:\
    //
 
    #define BOOST_COPYABLE_AND_MOVABLE_ALT(TYPE)\
       public:\
-      operator ::mars_boost_ksim::rv<TYPE>&() \
-      {  return *BOOST_MOVE_TO_RV_CAST(::mars_boost_ksim::rv<TYPE>*, this);  }\
-      operator const ::mars_boost_ksim::rv<TYPE>&() const \
-      {  return *BOOST_MOVE_TO_RV_CAST(const ::mars_boost_ksim::rv<TYPE>*, this);  }\
+      operator ::mars_boost::rv<TYPE>&() \
+      {  return *BOOST_MOVE_TO_RV_CAST(::mars_boost::rv<TYPE>*, this);  }\
+      operator const ::mars_boost::rv<TYPE>&() const \
+      {  return *BOOST_MOVE_TO_RV_CAST(const ::mars_boost::rv<TYPE>*, this);  }\
       private:\
    //
 
-   namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim{
+   namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost{
    namespace move_detail{
 
    template< class T>
@@ -287,7 +287,7 @@
    { typedef const T &type; };
 
    template< class T>
-   struct forward_type< mars_boost_ksim::rv<T> >
+   struct forward_type< mars_boost::rv<T> >
    { typedef T type; };
 
    }}
@@ -314,7 +314,7 @@
    //
    #endif   //#if !defined(BOOST_MOVE_DOXYGEN_INVOKED)
 
-   namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+   namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
    //!This trait yields to a compile-time true boolean if T was marked as
    //!BOOST_MOVABLE_BUT_NOT_COPYABLE or BOOST_COPYABLE_AND_MOVABLE and
@@ -331,7 +331,7 @@
       static const bool value = true;
    };
 
-   }  //namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim{
+   }  //namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost{
 
    //!This macro is used to achieve portable syntax in move
    //!constructors and assignments for classes marked as
@@ -446,12 +446,12 @@
 
       #include <boost/move/detail/meta_utils.hpp>
 
-      namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+      namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
       namespace move_detail {
 
       template <class Ret, class T>
-      inline typename ::mars_boost_ksim::move_detail::enable_if_c
-         <  ::mars_boost_ksim::move_detail::is_lvalue_reference<Ret>::value
+      inline typename ::mars_boost::move_detail::enable_if_c
+         <  ::mars_boost::move_detail::is_lvalue_reference<Ret>::value
          , T&>::type
             move_return(T& x) BOOST_NOEXCEPT
       {
@@ -459,8 +459,8 @@
       }
 
       template <class Ret, class T>
-      inline typename ::mars_boost_ksim::move_detail::enable_if_c
-         < !::mars_boost_ksim::move_detail::is_lvalue_reference<Ret>::value
+      inline typename ::mars_boost::move_detail::enable_if_c
+         < !::mars_boost::move_detail::is_lvalue_reference<Ret>::value
          , Ret && >::type
             move_return(T&& t) BOOST_NOEXCEPT
       {
@@ -468,10 +468,10 @@
       }
 
       }  //namespace move_detail {
-      }  //namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+      }  //namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
       #define BOOST_MOVE_RET(RET_TYPE, REF)\
-         mars_boost_ksim::move_detail::move_return< RET_TYPE >(REF)
+         mars_boost::move_detail::move_return< RET_TYPE >(REF)
       //
 
    #endif   //!defined(BOOST_MOVE_MSVC_AUTO_MOVE_RETURN_BUG) || defined(BOOST_MOVE_DOXYGEN_INVOKED)
@@ -479,15 +479,15 @@
    //!This macro is used to achieve portable optimal move constructors.
    //!
    //!When implementing the move constructor, in C++03 compilers the moved-from argument must be
-   //!cast to the base type before calling `::mars_boost_ksim::move()` due to rvalue reference limitations.
+   //!cast to the base type before calling `::mars_boost::move()` due to rvalue reference limitations.
    //!
    //!In C++11 compilers the cast from a rvalue reference of a derived type to a rvalue reference of
    //!a base type is implicit.
    #define BOOST_MOVE_BASE(BASE_TYPE, ARG) \
-      ::mars_boost_ksim::move((BASE_TYPE&)(ARG))
+      ::mars_boost::move((BASE_TYPE&)(ARG))
    //
 
-   namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+   namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
    namespace move_detail {
 
    template< class T> struct forward_type { typedef T type; };

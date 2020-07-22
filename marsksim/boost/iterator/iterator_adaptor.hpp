@@ -31,7 +31,7 @@
 
 #include <boost/iterator/iterator_traits.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace iterators {
 
   // Used as a default template argument internally, merely to
@@ -92,7 +92,7 @@ namespace iterators {
   // enable_if_convertible is used to remove those overloads from the overload
   // set that cannot be instantiated. For all practical purposes only overloads
   // for constant/mutable interaction will remain. This has the advantage that
-  // meta functions like mars_boost_ksim::is_convertible do not return false positives,
+  // meta functions like mars_boost::is_convertible do not return false positives,
   // as they can only look at the signature of the conversion constructor
   // and not at the actual instantiation.
   //
@@ -100,7 +100,7 @@ namespace iterators {
   // always enabled for compilers that don't support enable_if or is_convertible.
   // There is no need for compiler specific workarounds in user code.
   //
-  // The operators implementation relies on mars_boost_ksim::is_convertible not returning
+  // The operators implementation relies on mars_boost::is_convertible not returning
   // false positives for user/library defined iterator types. See comments
   // on operator implementation for consequences.
   //
@@ -109,7 +109,7 @@ namespace iterators {
   template <class From, class To>
   struct enable_if_convertible
   {
-      typedef mars_boost_ksim::iterators::detail::enable_type type;
+      typedef mars_boost::iterators::detail::enable_type type;
   };
 
 #  elif BOOST_WORKAROUND(_MSC_FULL_VER, BOOST_TESTED_AT(13102292))
@@ -123,7 +123,7 @@ namespace iterators {
             is_same<From,To>
           , is_convertible<From, To>
         >
-      , mars_boost_ksim::iterators::detail::enable_type
+      , mars_boost::iterators::detail::enable_type
     >
   {};
 
@@ -133,7 +133,7 @@ namespace iterators {
   struct enable_if_convertible
     : iterators::enable_if<
           is_convertible<From, To>
-        , mars_boost_ksim::iterators::detail::enable_type
+        , mars_boost::iterators::detail::enable_type
       >
   {};
 
@@ -172,7 +172,7 @@ namespace iterators {
             Derived
 
 # ifdef BOOST_ITERATOR_REF_CONSTNESS_KILLS_WRITABILITY
-          , typename mars_boost_ksim::iterators::detail::ia_dflt_help<
+          , typename mars_boost::iterators::detail::ia_dflt_help<
                 Value
               , mpl::eval_if<
                     is_same<Reference,use_default>
@@ -181,17 +181,17 @@ namespace iterators {
                 >
             >::type
 # else
-          , typename mars_boost_ksim::iterators::detail::ia_dflt_help<
+          , typename mars_boost::iterators::detail::ia_dflt_help<
                 Value, iterator_value<Base>
             >::type
 # endif
 
-          , typename mars_boost_ksim::iterators::detail::ia_dflt_help<
+          , typename mars_boost::iterators::detail::ia_dflt_help<
                 Traversal
               , iterator_traversal<Base>
             >::type
 
-          , typename mars_boost_ksim::iterators::detail::ia_dflt_help<
+          , typename mars_boost::iterators::detail::ia_dflt_help<
                 Reference
               , mpl::eval_if<
                     is_same<Value,use_default>
@@ -200,7 +200,7 @@ namespace iterators {
                 >
             >::type
 
-          , typename mars_boost_ksim::iterators::detail::ia_dflt_help<
+          , typename mars_boost::iterators::detail::ia_dflt_help<
                 Difference, iterator_difference<Base>
             >::type
         >
@@ -249,14 +249,14 @@ namespace iterators {
     , class Difference   = use_default
   >
   class iterator_adaptor
-    : public mars_boost_ksim::iterators::detail::iterator_adaptor_base<
+    : public mars_boost::iterators::detail::iterator_adaptor_base<
         Derived, Base, Value, Traversal, Reference, Difference
       >::type
   {
       friend class iterator_core_access;
 
    protected:
-      typedef typename mars_boost_ksim::iterators::detail::iterator_adaptor_base<
+      typedef typename mars_boost::iterators::detail::iterator_adaptor_base<
           Derived, Base, Value, Traversal, Reference, Difference
       >::type super_t;
    public:
@@ -312,7 +312,7 @@ namespace iterators {
       >::type my_traversal;
 
 # define BOOST_ITERATOR_ADAPTOR_ASSERT_TRAVERSAL(cat) \
-      mars_boost_ksim::iterators::detail::iterator_adaptor_assert_traversal<my_traversal, cat>();
+      mars_boost::iterators::detail::iterator_adaptor_assert_traversal<my_traversal, cat>();
 
       void advance(typename super_t::difference_type n)
       {
@@ -353,7 +353,7 @@ namespace iterators {
 using iterators::iterator_adaptor;
 using iterators::enable_if_convertible;
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #include <boost/iterator/detail/config_undef.hpp>
 

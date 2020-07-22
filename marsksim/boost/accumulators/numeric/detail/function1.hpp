@@ -9,10 +9,10 @@
 # include <boost/type_traits/add_const.hpp>
 # include <boost/mpl/apply.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace detail {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace detail {
 
 // A utility for creating unary function objects that play nicely with
-// mars_boost_ksim::result_of and that handle the forwarding problem.
+// mars_boost::result_of and that handle the forwarding problem.
 //
 // mpl::apply<F, A0>::type is expected to be a stateless function
 // object that accepts an argument of type A0&.  It is also expected
@@ -52,7 +52,7 @@ struct function1
         typedef typename result<function1(A0 &)>::type type;
         typedef A0 &arg0;
         BOOST_CONCEPT_ASSERT((UnaryFunction<impl, type, arg0>));
-        //mars_boost_ksim::function_requires<UnaryFunctionConcept<impl, type, arg0> >();
+        //mars_boost::function_requires<UnaryFunctionConcept<impl, type, arg0> >();
         return impl()(a0);
     }
 
@@ -65,11 +65,11 @@ struct function1
         typedef typename result<function1(A0 const &)>::type type;
         typedef A0 const &arg0;
         BOOST_CONCEPT_ASSERT((UnaryFunction<impl, type, arg0>));
-        //mars_boost_ksim::function_requires<UnaryFunctionConcept<impl, type, arg0> >();
+        //mars_boost::function_requires<UnaryFunctionConcept<impl, type, arg0> >();
         return impl()(a0);
     }
 };
 
-}} // namespace mars_boost_ksim::detail
+}} // namespace mars_boost::detail
 
 #endif // BOOST_DETAIL_FUNCTION1_DWA200655_HPP

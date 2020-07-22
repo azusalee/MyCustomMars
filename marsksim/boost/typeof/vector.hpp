@@ -82,7 +82,7 @@
             typedef v_iter<V, mpl::int_<n + 1> > next;\
         };
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace type_of {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace type_of {
 
     template<class V, class Increase_BOOST_TYPEOF_LIMIT_SIZE> struct v_iter; // not defined
 #     define  BOOST_PP_LOCAL_MACRO  BOOST_TYPEOF_spec_iter
@@ -107,12 +107,12 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         template<BOOST_PP_ENUM_PARAMS(n, class P) BOOST_PP_EXPR_IIF(BOOST_PP_NOT(n), class T = void)>\
         struct vector ## n\
         {\
-            typedef v_iter<vector ## n<BOOST_PP_ENUM_PARAMS(n,P)>, mars_boost_ksim::mpl::int_<0> > begin;\
+            typedef v_iter<vector ## n<BOOST_PP_ENUM_PARAMS(n,P)>, mars_boost::mpl::int_<0> > begin;\
             BOOST_PP_REPEAT(n, BOOST_TYPEOF_typedef_item, ~)\
             BOOST_PP_REPEAT_FROM_TO(n, BOOST_TYPEOF_PP_NEXT_SIZE, BOOST_TYPEOF_typedef_fake_item, ~)\
         };
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace type_of {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace type_of {
 
 #     define  BOOST_PP_LOCAL_MACRO  BOOST_TYPEOF_define_vector
 #     define  BOOST_PP_LOCAL_LIMITS \
@@ -129,14 +129,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 #     define BOOST_TYPEOF_spec_push_back(n)\
         template<BOOST_PP_ENUM_PARAMS(n, class P) BOOST_PP_COMMA_IF(n) class T>\
-        struct push_back<BOOST_PP_CAT(mars_boost_ksim::type_of::vector, n)<BOOST_PP_ENUM_PARAMS(n, P)>, T>\
+        struct push_back<BOOST_PP_CAT(mars_boost::type_of::vector, n)<BOOST_PP_ENUM_PARAMS(n, P)>, T>\
         {\
-            typedef BOOST_PP_CAT(mars_boost_ksim::type_of::vector, BOOST_PP_INC(n))<\
+            typedef BOOST_PP_CAT(mars_boost::type_of::vector, BOOST_PP_INC(n))<\
                 BOOST_PP_ENUM_PARAMS(n, P) BOOST_PP_COMMA_IF(n) T\
             > type;\
         };
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace type_of {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace type_of {
 
 #   if   BOOST_TYPEOF_LIMIT_SIZE < 50
     template<class V, class T> struct push_back {

@@ -45,7 +45,7 @@
 // Must come last.
 #include <boost/iostreams/detail/config/disable_warnings.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace iostreams {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace iostreams {
 
 //----------Definitions of predicates for streams and stream buffers----------//
 
@@ -126,22 +126,22 @@ template<typename T, typename Tr>
 class linked_streambuf;
 
 BOOST_IOSTREAMS_BOOL_TRAIT_DEF( is_boost_stream,
-                                mars_boost_ksim::iostreams::stream,
+                                mars_boost::iostreams::stream,
                                 3 )
 BOOST_IOSTREAMS_BOOL_TRAIT_DEF( is_boost_stream_buffer,
-                                mars_boost_ksim::iostreams::stream_buffer,
+                                mars_boost::iostreams::stream_buffer,
                                 4 )
 BOOST_IOSTREAMS_BOOL_TRAIT_DEF( is_filtering_stream_impl,
-                                mars_boost_ksim::iostreams::filtering_stream,
+                                mars_boost::iostreams::filtering_stream,
                                 5 )
 BOOST_IOSTREAMS_BOOL_TRAIT_DEF( is_filtering_wstream_impl,
-                                mars_boost_ksim::iostreams::wfiltering_stream,
+                                mars_boost::iostreams::wfiltering_stream,
                                 5 )
 BOOST_IOSTREAMS_BOOL_TRAIT_DEF( is_filtering_streambuf_impl,
-                                mars_boost_ksim::iostreams::filtering_streambuf,
+                                mars_boost::iostreams::filtering_streambuf,
                                 5 )
 BOOST_IOSTREAMS_BOOL_TRAIT_DEF( is_filtering_wstreambuf_impl,
-                                mars_boost_ksim::iostreams::filtering_wstreambuf,
+                                mars_boost::iostreams::filtering_wstreambuf,
                                 5 )
 BOOST_IOSTREAMS_BOOL_TRAIT_DEF(is_linked, linked_streambuf, 2)
 

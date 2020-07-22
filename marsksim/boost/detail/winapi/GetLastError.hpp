@@ -18,11 +18,11 @@
 
 #if !defined( BOOST_USE_WINDOWS_H )
 extern "C" {
-BOOST_SYMBOL_IMPORT mars_boost_ksim::detail::winapi::DWORD_ WINAPI GetLastError(BOOST_DETAIL_WINAPI_VOID);
+BOOST_SYMBOL_IMPORT mars_boost::detail::winapi::DWORD_ WINAPI GetLastError(BOOST_DETAIL_WINAPI_VOID);
 }
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace detail {
 namespace winapi {
 using ::GetLastError;

@@ -9,7 +9,7 @@
 // *Preprocessed* version of the main "template_arity.hpp" header
 // -- DO NOT modify by hand!
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl { namespace aux {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl { namespace aux {
 template< int N > struct arity_tag
 {
     typedef char (&type)[N + 1];
@@ -81,7 +81,7 @@ template< typename F, int N >
 struct template_arity_impl
 {
     BOOST_STATIC_CONSTANT(int, value =
-          sizeof(::mars_boost_ksim::mpl::aux::arity_helper(type_wrapper<F>(), arity_tag<N>())) - 1
+          sizeof(::mars_boost::mpl::aux::arity_helper(type_wrapper<F>(), arity_tag<N>())) - 1
         );
 };
 

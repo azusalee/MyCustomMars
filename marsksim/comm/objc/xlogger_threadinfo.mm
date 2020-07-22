@@ -30,4 +30,4 @@ intmax_t xlogger_maintid()
     
 }
 
-void comm_export_symbols_5(){}
+void comm_export_symbolsksim_5(){}

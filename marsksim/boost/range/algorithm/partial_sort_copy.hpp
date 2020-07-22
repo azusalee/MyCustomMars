@@ -16,7 +16,7 @@
 #include <boost/range/value_type.hpp>
 #include <algorithm>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range
     {
@@ -34,8 +34,8 @@ partial_sort_copy(const SinglePassRange& rng1, RandomAccessRange& rng2)
 {
     BOOST_RANGE_CONCEPT_ASSERT((SinglePassRangeConcept<const SinglePassRange>));
 
-    return std::partial_sort_copy(mars_boost_ksim::begin(rng1), mars_boost_ksim::end(rng1),
-        mars_boost_ksim::begin(rng2), mars_boost_ksim::end(rng2));
+    return std::partial_sort_copy(mars_boost::begin(rng1), mars_boost::end(rng1),
+        mars_boost::begin(rng2), mars_boost::end(rng2));
 }
 
 /// \overload
@@ -45,8 +45,8 @@ partial_sort_copy(const SinglePassRange& rng1, const RandomAccessRange& rng2)
 {
     BOOST_RANGE_CONCEPT_ASSERT((SinglePassRangeConcept<const SinglePassRange>));
 
-    return std::partial_sort_copy(mars_boost_ksim::begin(rng1), mars_boost_ksim::end(rng1),
-        mars_boost_ksim::begin(rng2), mars_boost_ksim::end(rng2));
+    return std::partial_sort_copy(mars_boost::begin(rng1), mars_boost::end(rng1),
+        mars_boost::begin(rng2), mars_boost::end(rng2));
 }
 
 /// \overload
@@ -58,8 +58,8 @@ partial_sort_copy(const SinglePassRange& rng1, RandomAccessRange& rng2,
 {
     BOOST_RANGE_CONCEPT_ASSERT((SinglePassRangeConcept<const SinglePassRange>));
 
-    return std::partial_sort_copy(mars_boost_ksim::begin(rng1), mars_boost_ksim::end(rng1),
-        mars_boost_ksim::begin(rng2), mars_boost_ksim::end(rng2), pred);
+    return std::partial_sort_copy(mars_boost::begin(rng1), mars_boost::end(rng1),
+        mars_boost::begin(rng2), mars_boost::end(rng2), pred);
 }
 
 /// \overload
@@ -71,12 +71,12 @@ partial_sort_copy(const SinglePassRange& rng1, const RandomAccessRange& rng2,
 {
     BOOST_RANGE_CONCEPT_ASSERT((SinglePassRangeConcept<const SinglePassRange>));
 
-    return std::partial_sort_copy(mars_boost_ksim::begin(rng1), mars_boost_ksim::end(rng1),
-        mars_boost_ksim::begin(rng2), mars_boost_ksim::end(rng2), pred);
+    return std::partial_sort_copy(mars_boost::begin(rng1), mars_boost::end(rng1),
+        mars_boost::begin(rng2), mars_boost::end(rng2), pred);
 }
 
     } // namespace range
     using range::partial_sort_copy;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

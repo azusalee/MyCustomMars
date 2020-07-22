@@ -29,15 +29,15 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace detail
   {
 #if defined BOOST_THREAD_USES_DATETIME
-    inline struct timespec to_timespec(mars_boost_ksim::system_time const& abs_time)
+    inline struct timespec to_timespec(mars_boost::system_time const& abs_time)
     {
       struct timespec timeout = { 0,0};
-      mars_boost_ksim::posix_time::time_duration const time_since_epoch=abs_time-boost_ksim::posix_time::from_time_t(0);
+      mars_boost::posix_time::time_duration const time_since_epoch=abs_time-boost_ksim::posix_time::from_time_t(0);
 
       timeout.tv_sec=time_since_epoch.total_seconds();
       timeout.tv_nsec=(long)(time_since_epoch.fractional_seconds()*(1000000000l/time_since_epoch.ticks_per_second()));
@@ -55,15 +55,15 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 #endif
 
-    inline timespec to_timespec(mars_boost_ksim::intmax_t const& ns)
+    inline timespec to_timespec(mars_boost::intmax_t const& ns)
     {
-      mars_boost_ksim::intmax_t s = ns / 1000000000l;
+      mars_boost::intmax_t s = ns / 1000000000l;
       struct timespec ts;
       ts.tv_sec = static_cast<long> (s);
       ts.tv_nsec = static_cast<long> (ns - s * 1000000000l);
       return ts;
     }
-    inline mars_boost_ksim::intmax_t to_nanoseconds_int_max(timespec const& ts)
+    inline mars_boost::intmax_t to_nanoseconds_int_max(timespec const& ts)
     {
       return static_cast<boost_ksim::intmax_t>(ts.tv_sec) * 1000000000l + ts.tv_nsec;
     }

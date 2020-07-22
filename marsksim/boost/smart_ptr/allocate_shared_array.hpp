@@ -12,16 +12,16 @@
 #include <boost/smart_ptr/detail/array_count_impl.hpp>
 #include <boost/smart_ptr/detail/sp_if_array.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim  {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost  {
     template<class T, class A>
-    inline typename mars_boost_ksim::detail::sp_if_array<T>::type
+    inline typename mars_boost::detail::sp_if_array<T>::type
     allocate_shared(const A& allocator, std::size_t size) {
-        typedef typename mars_boost_ksim::detail::array_inner<T>::type T1;
-        typedef typename mars_boost_ksim::detail::array_base<T1>::type T2;
-        typedef mars_boost_ksim::detail::ms_init_tag R1;
-        typedef mars_boost_ksim::detail::as_allocator<A, T, R1> A1;
-        typedef mars_boost_ksim::detail::ms_in_allocator_tag D1;
-        std::size_t n1 = size * mars_boost_ksim::detail::array_total<T1>::size;
+        typedef typename mars_boost::detail::array_inner<T>::type T1;
+        typedef typename mars_boost::detail::array_base<T1>::type T2;
+        typedef mars_boost::detail::ms_init_tag R1;
+        typedef mars_boost::detail::as_allocator<A, T, R1> A1;
+        typedef mars_boost::detail::ms_in_allocator_tag D1;
+        std::size_t n1 = size * mars_boost::detail::array_total<T1>::size;
         T1* p1 = 0;
         T2* p2 = 0;
         D1 d1;
@@ -30,9 +30,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         A1* a2 = static_cast<A1*>(s1._internal_get_untyped_deleter());
         a2->set(0);
 #if !defined(BOOST_NO_CXX11_ALLOCATOR)
-        mars_boost_ksim::detail::as_init(allocator, p2, n1);
+        mars_boost::detail::as_init(allocator, p2, n1);
 #else
-        mars_boost_ksim::detail::ms_init(p2, n1);
+        mars_boost::detail::ms_init(p2, n1);
 #endif
         a2->set(p2);
         p1 = reinterpret_cast<T1*>(p2);
@@ -40,15 +40,15 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     }
 
     template<class T, class A>
-    inline typename mars_boost_ksim::detail::sp_if_size_array<T>::type
+    inline typename mars_boost::detail::sp_if_size_array<T>::type
     allocate_shared(const A& allocator) {
-        typedef typename mars_boost_ksim::detail::array_inner<T>::type T1;
-        typedef typename mars_boost_ksim::detail::array_base<T1>::type T2;
-        typedef mars_boost_ksim::detail::ms_init_tag R1;
-        typedef mars_boost_ksim::detail::as_allocator<A, T, R1> A1;
-        typedef mars_boost_ksim::detail::ms_in_allocator_tag D1;
+        typedef typename mars_boost::detail::array_inner<T>::type T1;
+        typedef typename mars_boost::detail::array_base<T1>::type T2;
+        typedef mars_boost::detail::ms_init_tag R1;
+        typedef mars_boost::detail::as_allocator<A, T, R1> A1;
+        typedef mars_boost::detail::ms_in_allocator_tag D1;
         enum {
-            N = mars_boost_ksim::detail::array_total<T>::size
+            N = mars_boost::detail::array_total<T>::size
         };
         T1* p1 = 0;
         T2* p2 = 0;
@@ -58,9 +58,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         A1* a2 = static_cast<A1*>(s1._internal_get_untyped_deleter());
         a2->set(0);
 #if !defined(BOOST_NO_CXX11_ALLOCATOR)
-        mars_boost_ksim::detail::as_init(allocator, p2, N);
+        mars_boost::detail::as_init(allocator, p2, N);
 #else
-        mars_boost_ksim::detail::ms_init(p2, N);
+        mars_boost::detail::ms_init(p2, N);
 #endif
         a2->set(p2);
         p1 = reinterpret_cast<T1*>(p2);
@@ -68,17 +68,17 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     }
 
     template<class T, class A>
-    inline typename mars_boost_ksim::detail::sp_if_array<T>::type
+    inline typename mars_boost::detail::sp_if_array<T>::type
     allocate_shared(const A& allocator, std::size_t size,
-        const typename mars_boost_ksim::detail::array_inner<T>::type& value) {
-        typedef typename mars_boost_ksim::detail::array_inner<T>::type T1;
-        typedef typename mars_boost_ksim::detail::array_base<T1>::type T2;
+        const typename mars_boost::detail::array_inner<T>::type& value) {
+        typedef typename mars_boost::detail::array_inner<T>::type T1;
+        typedef typename mars_boost::detail::array_base<T1>::type T2;
         typedef const T2 T3;
-        typedef mars_boost_ksim::detail::ms_init_tag R1;
-        typedef mars_boost_ksim::detail::as_allocator<A, T, R1> A1;
-        typedef mars_boost_ksim::detail::ms_in_allocator_tag D1;
+        typedef mars_boost::detail::ms_init_tag R1;
+        typedef mars_boost::detail::as_allocator<A, T, R1> A1;
+        typedef mars_boost::detail::ms_in_allocator_tag D1;
         enum {
-            M = mars_boost_ksim::detail::array_total<T1>::size
+            M = mars_boost::detail::array_total<T1>::size
         };
         std::size_t n1 = M * size;
         T1* p1 = 0;
@@ -90,9 +90,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         A1* a2 = static_cast<A1*>(s1._internal_get_untyped_deleter());
         a2->set(0);
 #if !defined(BOOST_NO_CXX11_ALLOCATOR)
-        mars_boost_ksim::detail::as_init<T2, A, M>(allocator, p2, n1, p3);
+        mars_boost::detail::as_init<T2, A, M>(allocator, p2, n1, p3);
 #else
-        mars_boost_ksim::detail::ms_init<T2, M>(p2, n1, p3);
+        mars_boost::detail::ms_init<T2, M>(p2, n1, p3);
 #endif
         a2->set(p2);
         p1 = reinterpret_cast<T1*>(p2);
@@ -100,18 +100,18 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     }
 
     template<class T, class A>
-    inline typename mars_boost_ksim::detail::sp_if_size_array<T>::type
+    inline typename mars_boost::detail::sp_if_size_array<T>::type
     allocate_shared(const A& allocator, 
-        const typename mars_boost_ksim::detail::array_inner<T>::type& value) {
-        typedef typename mars_boost_ksim::detail::array_inner<T>::type T1;
-        typedef typename mars_boost_ksim::detail::array_base<T1>::type T2;
+        const typename mars_boost::detail::array_inner<T>::type& value) {
+        typedef typename mars_boost::detail::array_inner<T>::type T1;
+        typedef typename mars_boost::detail::array_base<T1>::type T2;
         typedef const T2 T3;
-        typedef mars_boost_ksim::detail::ms_init_tag R1;
-        typedef mars_boost_ksim::detail::as_allocator<A, T, R1> A1;
-        typedef mars_boost_ksim::detail::ms_in_allocator_tag D1;
+        typedef mars_boost::detail::ms_init_tag R1;
+        typedef mars_boost::detail::as_allocator<A, T, R1> A1;
+        typedef mars_boost::detail::ms_in_allocator_tag D1;
         enum {
-            N = mars_boost_ksim::detail::array_total<T>::size,
-            M = mars_boost_ksim::detail::array_total<T1>::size
+            N = mars_boost::detail::array_total<T>::size,
+            M = mars_boost::detail::array_total<T1>::size
         };
         T1* p1 = 0;
         T2* p2 = 0;
@@ -122,9 +122,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         A1* a2 = static_cast<A1*>(s1._internal_get_untyped_deleter());
         a2->set(0);
 #if !defined(BOOST_NO_CXX11_ALLOCATOR)
-        mars_boost_ksim::detail::as_init<T2, A, M>(allocator, p2, N, p3);
+        mars_boost::detail::as_init<T2, A, M>(allocator, p2, N, p3);
 #else
-        mars_boost_ksim::detail::ms_init<T2,  M>(p2, N, p3);
+        mars_boost::detail::ms_init<T2,  M>(p2, N, p3);
 #endif
         a2->set(p2);
         p1 = reinterpret_cast<T1*>(p2);
@@ -132,14 +132,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     }
 
     template<class T, class A>
-    inline typename mars_boost_ksim::detail::sp_if_array<T>::type
+    inline typename mars_boost::detail::sp_if_array<T>::type
     allocate_shared_noinit(const A& allocator, std::size_t size) {
-        typedef typename mars_boost_ksim::detail::array_inner<T>::type T1;
-        typedef typename mars_boost_ksim::detail::array_base<T1>::type T2;
-        typedef mars_boost_ksim::detail::ms_noinit_tag R1;
-        typedef mars_boost_ksim::detail::as_allocator<A, T, R1> A1;
-        typedef mars_boost_ksim::detail::ms_in_allocator_tag D1;
-        std::size_t n1 = size * mars_boost_ksim::detail::array_total<T1>::size;
+        typedef typename mars_boost::detail::array_inner<T>::type T1;
+        typedef typename mars_boost::detail::array_base<T1>::type T2;
+        typedef mars_boost::detail::ms_noinit_tag R1;
+        typedef mars_boost::detail::as_allocator<A, T, R1> A1;
+        typedef mars_boost::detail::ms_in_allocator_tag D1;
+        std::size_t n1 = size * mars_boost::detail::array_total<T1>::size;
         T1* p1 = 0;
         T2* p2 = 0;
         D1 d1;
@@ -147,22 +147,22 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         shared_ptr<T> s1(p1, d1, a1);
         A1* a2 = static_cast<A1*>(s1._internal_get_untyped_deleter());
         a2->set(0);
-        mars_boost_ksim::detail::ms_noinit(p2, n1);
+        mars_boost::detail::ms_noinit(p2, n1);
         a2->set(p2);
         p1 = reinterpret_cast<T1*>(p2);
         return shared_ptr<T>(s1, p1);
     }
 
     template<class T, class A>
-    inline typename mars_boost_ksim::detail::sp_if_size_array<T>::type
+    inline typename mars_boost::detail::sp_if_size_array<T>::type
     allocate_shared_noinit(const A& allocator) {
-        typedef typename mars_boost_ksim::detail::array_inner<T>::type T1;
-        typedef typename mars_boost_ksim::detail::array_base<T1>::type T2;
-        typedef mars_boost_ksim::detail::ms_noinit_tag R1;
-        typedef mars_boost_ksim::detail::as_allocator<A, T, R1> A1;
-        typedef mars_boost_ksim::detail::ms_in_allocator_tag D1;
+        typedef typename mars_boost::detail::array_inner<T>::type T1;
+        typedef typename mars_boost::detail::array_base<T1>::type T2;
+        typedef mars_boost::detail::ms_noinit_tag R1;
+        typedef mars_boost::detail::as_allocator<A, T, R1> A1;
+        typedef mars_boost::detail::ms_in_allocator_tag D1;
         enum {
-            N = mars_boost_ksim::detail::array_total<T>::size
+            N = mars_boost::detail::array_total<T>::size
         };
         T1* p1 = 0;
         T2* p2 = 0;
@@ -171,7 +171,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         shared_ptr<T> s1(p1, d1, a1);
         A1* a2 = static_cast<A1*>(s1._internal_get_untyped_deleter());
         a2->set(0);
-        mars_boost_ksim::detail::ms_noinit(p2, N);
+        mars_boost::detail::ms_noinit(p2, N);
         a2->set(p2);
         p1 = reinterpret_cast<T1*>(p2);
         return shared_ptr<T>(s1, p1);

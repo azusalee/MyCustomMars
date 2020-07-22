@@ -18,7 +18,7 @@
 #include <iterator>
 #include <boost/io/ios_state.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace io
   {
@@ -135,7 +135,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           return is;
         }
         {
-          mars_boost_ksim::io::ios_flags_saver ifs(is);
+          mars_boost::io::ios_flags_saver ifs(is);
           is >> std::noskipws;
           for (;;)  
           {
@@ -185,6 +185,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     }
 
   }  // namespace io
-}  // namespace mars_boost_ksim
+}  // namespace mars_boost
 
 #endif // BOOST_IO_QUOTED_MANIP

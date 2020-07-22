@@ -62,7 +62,7 @@
 // Must come last.
 #include <boost/iostreams/detail/config/disable_warnings.hpp>  // MSVC.
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace iostreams {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace iostreams {
 
 template< typename SymmetricFilter,
           typename Alloc =
@@ -227,7 +227,7 @@ private:
         std::streamsize amt =
             static_cast<std::streamsize>(buf().ptr() - buf().data());
         std::streamsize result =
-            mars_boost_ksim::iostreams::write(snk, buf().data(), amt);
+            mars_boost::iostreams::write(snk, buf().data(), amt);
         if (result < amt && result > 0)
             traits_type::move(buf().data(), buf().data() + result, amt - result);
         buf().set(amt - result, buf().size());

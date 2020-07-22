@@ -15,7 +15,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 namespace executors
 {
@@ -38,7 +38,7 @@ namespace executors
      */
 #if ! defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES)
     template <typename ...Args>
-    executor_adaptor(BOOST_THREAD_RV_REF(Args) ... args) : ex(mars_boost_ksim::forward<Args>(args)...) {}
+    executor_adaptor(BOOST_THREAD_RV_REF(Args) ... args) : ex(mars_boost::forward<Args>(args)...) {}
 #else
     /**
      * executor_adaptor constructor
@@ -50,7 +50,7 @@ namespace executors
         BOOST_THREAD_FWD_REF(A1) a1
         ) :
       ex(
-          mars_boost_ksim::forward<A1>(a1)
+          mars_boost::forward<A1>(a1)
           ) {}
     template <typename A1, typename A2>
     executor_adaptor(
@@ -58,8 +58,8 @@ namespace executors
         BOOST_THREAD_FWD_REF(A2) a2
         ) :
       ex(
-          mars_boost_ksim::forward<A1>(a1),
-          mars_boost_ksim::forward<A2>(a2)
+          mars_boost::forward<A1>(a1),
+          mars_boost::forward<A2>(a2)
           ) {}
     template <typename A1, typename A2, typename A3>
     executor_adaptor(
@@ -68,9 +68,9 @@ namespace executors
         BOOST_THREAD_FWD_REF(A3) a3
         ) :
       ex(
-          mars_boost_ksim::forward<A1>(a1),
-          mars_boost_ksim::forward<A2>(a2),
-          mars_boost_ksim::forward<A3>(a3)
+          mars_boost::forward<A1>(a1),
+          mars_boost::forward<A2>(a2),
+          mars_boost::forward<A3>(a3)
           ) {}
 #endif
     Executor& underlying_executor() { return ex; }
@@ -96,7 +96,7 @@ namespace executors
      * Whatever exception that can be throw while storing the closure.
      */
     void submit(BOOST_THREAD_RV_REF(work) closure)  {
-      return ex.submit(mars_boost_ksim::move(closure));
+      return ex.submit(mars_boost::move(closure));
     }
 
 #if defined(BOOST_NO_CXX11_RVALUE_REFERENCES)
@@ -114,9 +114,9 @@ namespace executors
     template <typename Closure>
     void submit(BOOST_THREAD_FWD_REF(Closure) closure)
     {
-      //submit(work(mars_boost_ksim::forward<Closure>(closure)));
-      work w((mars_boost_ksim::forward<Closure>(closure)));
-      submit(mars_boost_ksim::move(w));
+      //submit(work(mars_boost::forward<Closure>(closure)));
+      work w((mars_boost::forward<Closure>(closure)));
+      submit(mars_boost::move(w));
     }
 
     /**

@@ -18,7 +18,7 @@
 #include <boost/limits.hpp>
 #include <boost/pending/integer_log2.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace random {
 namespace detail {
 
@@ -71,7 +71,7 @@ template<class T>
 BOOST_RANDOM_DETAIL_CONSTEXPR int integer_log2(T t)
 {
     return integer_log2_impl<
-        ::mars_boost_ksim::detail::max_pow2_less<
+        ::mars_boost::detail::max_pow2_less<
             ::std::numeric_limits<T>::digits, 4
         >::value
     >::apply(t, 0);
@@ -79,6 +79,6 @@ BOOST_RANDOM_DETAIL_CONSTEXPR int integer_log2(T t)
 
 } // namespace detail
 } // namespace random
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_RANDOM_DETAIL_INTEGER_LOG2_HPP

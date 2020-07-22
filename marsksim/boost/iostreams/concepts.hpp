@@ -21,7 +21,7 @@
 #include <boost/static_assert.hpp>
 #include <boost/type_traits/is_convertible.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace iostreams {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace iostreams {
 
 //--------------Definitions of helper templates for device concepts-----------//
 

@@ -23,7 +23,7 @@
 #include <boost/mpl/aux_/common_name_wknd.hpp>
 #include <boost/mpl/aux_/na_spec.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl {
 
 BOOST_MPL_AUX_COMMON_NAME_WKND(max_element)
 

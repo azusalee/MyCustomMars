@@ -15,7 +15,7 @@
 #include <boost/range/concepts.hpp>
 #include <algorithm>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range
     {
@@ -30,7 +30,7 @@ template<class RandomAccessRange>
 inline RandomAccessRange& sort(RandomAccessRange& rng)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( RandomAccessRangeConcept<RandomAccessRange> ));
-    std::sort(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng));
+    std::sort(mars_boost::begin(rng), mars_boost::end(rng));
     return rng;
 }
 
@@ -39,7 +39,7 @@ template<class RandomAccessRange>
 inline const RandomAccessRange& sort(const RandomAccessRange& rng)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( RandomAccessRangeConcept<const RandomAccessRange> ));
-    std::sort(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng));
+    std::sort(mars_boost::begin(rng), mars_boost::end(rng));
     return rng;
 }
 
@@ -48,7 +48,7 @@ template<class RandomAccessRange, class BinaryPredicate>
 inline RandomAccessRange& sort(RandomAccessRange& rng, BinaryPredicate pred)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( RandomAccessRangeConcept<RandomAccessRange> ));
-    std::sort(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), pred);
+    std::sort(mars_boost::begin(rng), mars_boost::end(rng), pred);
     return rng;
 }
 
@@ -57,12 +57,12 @@ template<class RandomAccessRange, class BinaryPredicate>
 inline const RandomAccessRange& sort(const RandomAccessRange& rng, BinaryPredicate pred)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( RandomAccessRangeConcept<const RandomAccessRange> ));
-    std::sort(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), pred);
+    std::sort(mars_boost::begin(rng), mars_boost::end(rng), pred);
     return rng;
 }
 
     } // namespace range
     using range::sort;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

@@ -12,7 +12,7 @@ http://boost.org/LICENSE_1_0.txt
 #include <boost/config.hpp>
 #include <cstddef>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace alignment {
 namespace detail {
 

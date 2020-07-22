@@ -12,7 +12,7 @@
 #pragma warning(push,1)
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace
 mars_boost
     {
     namespace
@@ -223,7 +223,7 @@ mars_boost
             }
 
 #ifdef __HP_aCC
-        //On HP aCC, this protected copy constructor prevents throwing mars_boost_ksim::exception.
+        //On HP aCC, this protected copy constructor prevents throwing mars_boost::exception.
         //On all other platforms, the same effect is achieved by the pure virtual destructor.
         exception( exception const & x ) throw():
             data_(x.data_),

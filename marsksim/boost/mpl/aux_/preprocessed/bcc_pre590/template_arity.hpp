@@ -9,7 +9,7 @@
 // *Preprocessed* version of the main "template_arity.hpp" header
 // -- DO NOT modify by hand!
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl { namespace aux {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl { namespace aux {
 
 template< bool >
 struct template_arity_impl
@@ -31,7 +31,7 @@ struct template_arity_impl<true>
 
 template< typename F >
 struct template_arity
-    : template_arity_impl< ::mars_boost_ksim::mpl::aux::has_rebind<F>::value >
+    : template_arity_impl< ::mars_boost::mpl::aux::has_rebind<F>::value >
         ::template result_<F>
 {
 };

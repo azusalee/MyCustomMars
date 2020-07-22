@@ -16,7 +16,7 @@
 #include <boost/throw_exception.hpp>
 #include <stdexcept>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
   namespace signals2 {
 
     // no_slots_error is thrown when we are unable to generate a return value
@@ -24,7 +24,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     class no_slots_error: public std::exception
     {
     public:
-      virtual const char* what() const throw() {return "mars_boost_ksim::signals2::no_slots_error";}
+      virtual const char* what() const throw() {return "mars_boost::signals2::no_slots_error";}
     };
 
     template<typename T>
@@ -37,7 +37,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       {
         if(first == last)
         {
-          mars_boost_ksim::throw_exception(no_slots_error());
+          mars_boost::throw_exception(no_slots_error());
         }
         optional<T> value;
         while (first != last)
@@ -51,7 +51,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           ++first;
         }
         if(value) return value.get();
-        mars_boost_ksim::throw_exception(no_slots_error());
+        mars_boost::throw_exception(no_slots_error());
       }
     };
 
@@ -76,5 +76,5 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       }
     };
   } // namespace signals2
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 #endif // BOOST_SIGNALS2_LAST_VALUE_HPP

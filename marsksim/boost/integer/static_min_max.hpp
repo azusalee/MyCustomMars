@@ -12,7 +12,7 @@
 
 #include <boost/integer_fwd.hpp>  // self include
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 //  Compile-time extrema class declarations  ---------------------------------//
@@ -45,7 +45,7 @@ struct static_unsigned_max
 };
 
 
-}  // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+}  // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 
 #endif  // BOOST_INTEGER_STATIC_MIN_MAX_HPP

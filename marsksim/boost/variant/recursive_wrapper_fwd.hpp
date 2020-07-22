@@ -19,7 +19,7 @@
 #include "boost/mpl/aux_/lambda_support.hpp"
 #include <boost/type_traits/integral_constant.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 //////////////////////////////////////////////////////////////////////////
 // class template recursive_wrapper
@@ -64,7 +64,7 @@ struct is_recursive_wrapper_impl< recursive_wrapper<T> >
 } // namespace detail
 
 template< typename T > struct is_recursive_wrapper
-    : public ::mars_boost_ksim::integral_constant<bool,(::mars_boost_ksim::detail::is_recursive_wrapper_impl<T>::value)>
+    : public ::mars_boost::integral_constant<bool,(::mars_boost::detail::is_recursive_wrapper_impl<T>::value)>
 {
 public:
     BOOST_MPL_AUX_LAMBDA_SUPPORT(1,is_recursive_wrapper,(T))
@@ -94,6 +94,6 @@ struct unwrap_recursive< recursive_wrapper<T> >
 };
 
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_VARIANT_RECURSIVE_WRAPPER_FWD_HPP

@@ -21,7 +21,7 @@
 #include <boost/type_traits/remove_extent.hpp>
 #include <ostream>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range_detail
     {
@@ -29,21 +29,21 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 template<typename Sep, typename Prefix, typename Postfix>
 struct formatted_holder
 {
-    typedef typename mars_boost_ksim::mpl::if_<
-        mars_boost_ksim::is_array<Sep>,
-        const typename mars_boost_ksim::remove_extent<Sep>::type*,
+    typedef typename mars_boost::mpl::if_<
+        mars_boost::is_array<Sep>,
+        const typename mars_boost::remove_extent<Sep>::type*,
         Sep
     >::type separator_t;
 
-    typedef typename mars_boost_ksim::mpl::if_<
-        mars_boost_ksim::is_array<Prefix>,
-        const typename mars_boost_ksim::remove_extent<Prefix>::type*,
+    typedef typename mars_boost::mpl::if_<
+        mars_boost::is_array<Prefix>,
+        const typename mars_boost::remove_extent<Prefix>::type*,
         Prefix
     >::type prefix_t;
 
-    typedef typename mars_boost_ksim::mpl::if_<
-        mars_boost_ksim::is_array<Postfix>,
-        const typename mars_boost_ksim::remove_extent<Postfix>::type*,
+    typedef typename mars_boost::mpl::if_<
+        mars_boost::is_array<Postfix>,
+        const typename mars_boost::remove_extent<Postfix>::type*,
         Postfix
     >::type postfix_t;
 
@@ -64,12 +64,12 @@ struct formatted_holder
 
 template<typename Iter, typename Sep, typename Prefix, typename Postfix>
 class formatted_range
-        : public mars_boost_ksim::iterator_range<Iter>
+        : public mars_boost::iterator_range<Iter>
 {
     typedef formatted_holder<Sep,Prefix,Postfix> holder_t;
 public:
     formatted_range(Iter first, Iter last, const holder_t& holder)
-        : mars_boost_ksim::iterator_range<Iter>(first, last)
+        : mars_boost::iterator_range<Iter>(first, last)
         , m_holder(holder)
     {
     }
@@ -110,7 +110,7 @@ operator|(
 {
     typedef typename range_iterator<const SinglePassRange>::type iterator;
     return range_detail::formatted_range<iterator, Sep, Prefix, Postfix>(
-        mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), holder);
+        mars_boost::begin(rng), mars_boost::end(rng), holder);
 }
 
 template<typename Char, typename Traits, typename Iter, typename Sep,
@@ -161,8 +161,8 @@ using range_detail::formatted_range;
 
 template<typename SinglePassRange, typename Sep, typename Prefix,
          typename Postfix>
-inline mars_boost_ksim::range_detail::formatted_range<
-    typename mars_boost_ksim::range_iterator<const SinglePassRange>::type,
+inline mars_boost::range_detail::formatted_range<
+    typename mars_boost::range_iterator<const SinglePassRange>::type,
     Sep, Prefix, Postfix
 >
 format(
@@ -172,22 +172,22 @@ format(
     const Postfix& postfix
 )
 {
-    typedef typename mars_boost_ksim::range_iterator<const SinglePassRange>::type
+    typedef typename mars_boost::range_iterator<const SinglePassRange>::type
                 iterator_t;
 
-    typedef mars_boost_ksim::range_detail::formatted_range<
+    typedef mars_boost::range_detail::formatted_range<
                 iterator_t, Sep, Prefix, Postfix>       result_t;
 
-    typedef mars_boost_ksim::range_detail::formatted_holder<Sep, Prefix, Postfix>
+    typedef mars_boost::range_detail::formatted_holder<Sep, Prefix, Postfix>
                 holder_t;
 
-    return result_t(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng),
+    return result_t(mars_boost::begin(rng), mars_boost::end(rng),
                     holder_t(sep, prefix, postfix));
 }
 
 template<typename SinglePassRange, typename Sep, typename Prefix>
-inline mars_boost_ksim::range_detail::formatted_range<
-    typename mars_boost_ksim::range_iterator<const SinglePassRange>::type,
+inline mars_boost::range_detail::formatted_range<
+    typename mars_boost::range_iterator<const SinglePassRange>::type,
     Sep, Prefix, char
 >
 format(
@@ -199,8 +199,8 @@ format(
 }
 
 template<typename SinglePassRange, typename Sep>
-inline mars_boost_ksim::range_detail::formatted_range<
-    typename mars_boost_ksim::range_iterator<const SinglePassRange>::type,
+inline mars_boost::range_detail::formatted_range<
+    typename mars_boost::range_iterator<const SinglePassRange>::type,
     Sep, char, char
 >
 format(const SinglePassRange& rng, const Sep& sep)
@@ -209,8 +209,8 @@ format(const SinglePassRange& rng, const Sep& sep)
 }
 
 template<typename SinglePassRange>
-inline mars_boost_ksim::range_detail::formatted_range<
-    typename mars_boost_ksim::range_iterator<const SinglePassRange>::type,
+inline mars_boost::range_detail::formatted_range<
+    typename mars_boost::range_iterator<const SinglePassRange>::type,
     char, char, char
 >
 format(const SinglePassRange& rng)
@@ -222,8 +222,8 @@ format(const SinglePassRange& rng)
 
     namespace range
     {
-        using mars_boost_ksim::range_detail::formatted_range;
+        using mars_boost::range_detail::formatted_range;
     } // namespace range
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

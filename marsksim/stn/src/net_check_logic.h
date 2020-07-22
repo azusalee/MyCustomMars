@@ -26,17 +26,17 @@
 
 #include "net_source.h"
 
-class CommFrequencyLimit;
+class CommFrequencyLimitksim;
 
 namespace marsksim {
     namespace stn {
     
 class NetSourceksim;
 
-class NetCheckLogic {
+class NetCheckLogicksim {
   public:
-    NetCheckLogic();
-    ~NetCheckLogic();
+    NetCheckLogicksim();
+    ~NetCheckLogicksim();
 
     void UpdateLongLinkInfo(unsigned int _continues_fail_count, bool _task_succ);
     void UpdateShortLinkInfo(unsigned int _continue_fail_count, bool _task_succ);
@@ -54,7 +54,7 @@ class NetCheckLogic {
 
   private:
 
-    CommFrequencyLimit* frequency_limit_;
+    CommFrequencyLimitksim* frequency_limit_;
     NetSourceksim::DnsUtil dns_util_;
 
     unsigned long long last_netcheck_time_;

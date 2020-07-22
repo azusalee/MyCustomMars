@@ -15,7 +15,7 @@
 #include <boost/range/concepts.hpp>
 #include <algorithm>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range
     {
@@ -33,11 +33,11 @@ copy_backward(const BidirectionalRange& rng,
               BidirectionalTraversalWriteableIterator out)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( BidirectionalRangeConcept<const BidirectionalRange> ));
-    return std::copy_backward(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), out);
+    return std::copy_backward(mars_boost::begin(rng), mars_boost::end(rng), out);
 }
 
     } // namespace range
     using range::copy_backward;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

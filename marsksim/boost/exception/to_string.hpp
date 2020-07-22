@@ -16,7 +16,7 @@
 #include <boost/exception/detail/is_output_streamable.hpp>
 #include <sstream>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace
 mars_boost
     {
     template <class T,class U>
@@ -28,7 +28,7 @@ mars_boost
         {
         template <class T>
         typename disable_if<is_output_streamable<T>,char>::type to_string( T const & );
-        using mars_boost_ksim::to_string;
+        using mars_boost::to_string;
 
         template <class,bool IsOutputStreamable>
         struct has_to_string_impl;

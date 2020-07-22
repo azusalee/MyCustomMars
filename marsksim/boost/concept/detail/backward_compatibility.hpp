@@ -4,13 +4,13 @@
 #ifndef BOOST_CONCEPT_BACKWARD_COMPATIBILITY_DWA200968_HPP
 # define BOOST_CONCEPT_BACKWARD_COMPATIBILITY_DWA200968_HPP
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace concepts {}
 
 # if defined(BOOST_HAS_CONCEPTS) && !defined(BOOST_CONCEPT_NO_BACKWARD_KEYWORD)
   namespace concept = concepts;
 # endif 
-} // namespace mars_boost_ksim::concept
+} // namespace mars_boost::concept
 
 #endif // BOOST_CONCEPT_BACKWARD_COMPATIBILITY_DWA200968_HPP

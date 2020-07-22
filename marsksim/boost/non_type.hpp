@@ -12,7 +12,7 @@
 #define BOOST_NON_TYPE_HPP_GP_20030417
 
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
   // Just a simple "envelope" for non-type template parameters. Useful
   // to work around some MSVC deficiencies.

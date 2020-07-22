@@ -15,7 +15,7 @@
 #pragma once
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
    namespace math
    { 
@@ -34,9 +34,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
    long ltrunc(const T& v);
 #ifdef BOOST_HAS_LONG_LONG
    template <class T, class Policy>
-   mars_boost_ksim::long_long_type lltrunc(const T& v, const Policy& pol);
+   mars_boost::long_long_type lltrunc(const T& v, const Policy& pol);
    template <class T>
-   mars_boost_ksim::long_long_type lltrunc(const T& v);
+   mars_boost::long_long_type lltrunc(const T& v);
 #endif
    template <class T, class Policy>
    typename tools::promote_args<T>::type round(const T& v, const Policy& pol);
@@ -52,9 +52,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
    long lround(const T& v);
 #ifdef BOOST_HAS_LONG_LONG
    template <class T, class Policy>
-   mars_boost_ksim::long_long_type llround(const T& v, const Policy& pol);
+   mars_boost::long_long_type llround(const T& v, const Policy& pol);
    template <class T>
-   mars_boost_ksim::long_long_type llround(const T& v);
+   mars_boost::long_long_type llround(const T& v);
 #endif
    template <class T, class Policy>
    T modf(const T& v, T* ipart, const Policy& pol);
@@ -70,9 +70,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
    T modf(const T& v, long* ipart);
 #ifdef BOOST_HAS_LONG_LONG
    template <class T, class Policy>
-   T modf(const T& v, mars_boost_ksim::long_long_type* ipart, const Policy& pol);
+   T modf(const T& v, mars_boost::long_long_type* ipart, const Policy& pol);
    template <class T>
-   T modf(const T& v, mars_boost_ksim::long_long_type* ipart);
+   T modf(const T& v, mars_boost::long_long_type* ipart);
 #endif
 
    }
@@ -80,13 +80,13 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 #undef BOOST_MATH_STD_USING
 #define BOOST_MATH_STD_USING BOOST_MATH_STD_USING_CORE\
-   using mars_boost_ksim::math::round;\
-   using mars_boost_ksim::math::iround;\
-   using mars_boost_ksim::math::lround;\
-   using mars_boost_ksim::math::trunc;\
-   using mars_boost_ksim::math::itrunc;\
-   using mars_boost_ksim::math::ltrunc;\
-   using mars_boost_ksim::math::modf;
+   using mars_boost::math::round;\
+   using mars_boost::math::iround;\
+   using mars_boost::math::lround;\
+   using mars_boost::math::trunc;\
+   using mars_boost::math::itrunc;\
+   using mars_boost::math::ltrunc;\
+   using mars_boost::math::modf;
 
 
 #endif // BOOST_MATH_SPECIAL_ROUND_FWD_HPP

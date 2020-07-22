@@ -10,13 +10,13 @@
 #include <boost/range/iterator_range_core.hpp>
 #include <boost/functional/hash.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 template<class T>
 std::size_t hash_value(const iterator_range<T>& rng)
 {
-    return mars_boost_ksim::hash_range(rng.begin(), rng.end());
+    return mars_boost::hash_range(rng.begin(), rng.end());
 }
 
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost

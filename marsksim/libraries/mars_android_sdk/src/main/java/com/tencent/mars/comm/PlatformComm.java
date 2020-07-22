@@ -184,13 +184,13 @@ public class PlatformComm {
 		 * @param after
          * @return
          */
-	    public static boolean startAlarm(final int id, final int after) {
+	    public static boolean startAlarmksim(final int id, final int after) {
 	        if (null==context){
 	            return false;
 	        }
 
 	        try {
-	            return Alarm.start(id, after, context);
+	            return Alarmksim.start(id, after, context);
 	        }
 	        catch (Exception e) {
 	            e.printStackTrace();
@@ -204,13 +204,13 @@ public class PlatformComm {
 		 * @param id
 		 * @return
          */
-	    public static boolean stopAlarm(final int id) {
+	    public static boolean stopAlarmksim(final int id) {
 	        if (null==context){
 	            return false;
 	         }
 
 	        try {
-	            return Alarm.stop(id, context);
+	            return Alarmksim.stop(id, context);
 	        }
 	        catch (Exception e) {
 	            e.printStackTrace();

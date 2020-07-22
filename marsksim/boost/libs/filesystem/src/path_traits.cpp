@@ -25,9 +25,9 @@
 #include <cstring>  // for strlen
 #include <cwchar>   // for wcslen
 
-namespace pt = mars_boost_ksim::filesystem::path_traits;
-namespace fs = mars_boost_ksim::filesystem;
-namespace bs = mars_boost_ksim::system;
+namespace pt = mars_boost::filesystem::path_traits;
+namespace fs = mars_boost::filesystem;
+namespace bs = mars_boost::system;
 
 //--------------------------------------------------------------------------------------//
 //                                  configuration                                       //
@@ -78,7 +78,7 @@ namespace {
     {
       //std::cout << " result is " << static_cast<int>(res) << std::endl;
       BOOST_FILESYSTEM_THROW(bs::system_error(res, fs::codecvt_error_category(),
-        "mars_boost_ksim::filesystem::path codecvt to wstring"));
+        "mars_boost::filesystem::path codecvt to wstring"));
     }
     target.append(to, to_next); 
   }
@@ -112,7 +112,7 @@ namespace {
     {
       //std::cout << " result is " << static_cast<int>(res) << std::endl;
       BOOST_FILESYSTEM_THROW(bs::system_error(res, fs::codecvt_error_category(),
-        "mars_boost_ksim::filesystem::path codecvt to string"));
+        "mars_boost::filesystem::path codecvt to string"));
     }
     target.append(to, to_next); 
   }
@@ -123,7 +123,7 @@ namespace {
 //                                   path_traits                                        //
 //--------------------------------------------------------------------------------------//
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace filesystem { namespace path_traits {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace filesystem { namespace path_traits {
 
 //--------------------------------------------------------------------------------------//
 //                          convert const char* to wstring                              //
@@ -149,7 +149,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     //  dynamically allocate a buffer only if source is unusually large
     if (buf_size > default_codecvt_buf_size)
     {
-      mars_boost_ksim::scoped_array< wchar_t > buf(new wchar_t [buf_size]);
+      mars_boost::scoped_array< wchar_t > buf(new wchar_t [buf_size]);
       convert_aux(from, from_end, buf.get(), buf.get()+buf_size, to, cvt);
     }
     else
@@ -188,7 +188,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     //  dynamically allocate a buffer only if source is unusually large
     if (buf_size > default_codecvt_buf_size)
     {
-      mars_boost_ksim::scoped_array< char > buf(new char [buf_size]);
+      mars_boost::scoped_array< char > buf(new char [buf_size]);
       convert_aux(from, from_end, buf.get(), buf.get()+buf_size, to, cvt);
     }
     else
@@ -197,4 +197,4 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       convert_aux(from, from_end, buf, buf+default_codecvt_buf_size, to, cvt);
     }
   }
-}}} // namespace mars_boost_ksim::filesystem::path_traits
+}}} // namespace mars_boost::filesystem::path_traits

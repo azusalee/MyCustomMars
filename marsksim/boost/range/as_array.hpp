@@ -18,23 +18,23 @@
 #include <boost/range/iterator_range.hpp>
 #include <boost/range/detail/str_types.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
     template< class R >
     inline iterator_range< BOOST_DEDUCED_TYPENAME range_iterator<R>::type > 
     as_array( R& r )
     {
-        return mars_boost_ksim::make_iterator_range( r );
+        return mars_boost::make_iterator_range( r );
     }
 
 #ifndef BOOST_NO_FUNCTION_TEMPLATE_ORDERING
 
     template< class Range >
-    inline mars_boost_ksim::iterator_range< BOOST_DEDUCED_TYPENAME range_iterator<const Range>::type >
+    inline mars_boost::iterator_range< BOOST_DEDUCED_TYPENAME range_iterator<const Range>::type >
     as_array( const Range& r )
     {
-        return mars_boost_ksim::make_iterator_range( r );
+        return mars_boost::make_iterator_range( r );
     }
     
 #endif

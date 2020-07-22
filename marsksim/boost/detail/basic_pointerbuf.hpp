@@ -21,7 +21,7 @@
 #include "boost/config.hpp"
 #include <streambuf>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace detail {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace detail {
 
 //
 // class basic_pointerbuf:
@@ -76,7 +76,7 @@ template<class charT, class BufferT>
 typename basic_pointerbuf<charT, BufferT>::pos_type
 basic_pointerbuf<charT, BufferT>::seekoff(off_type off, ::std::ios_base::seekdir way, ::std::ios_base::openmode which)
 {
-   typedef typename mars_boost_ksim::int_t<sizeof(way) * CHAR_BIT>::least cast_type;
+   typedef typename mars_boost::int_t<sizeof(way) * CHAR_BIT>::least cast_type;
 
    if(which & ::std::ios_base::out)
       return pos_type(off_type(-1));
@@ -133,7 +133,7 @@ basic_pointerbuf<charT, BufferT>::seekpos(pos_type sp, ::std::ios_base::openmode
    return pos_type(off_type(-1));
 }
 
-}} // namespace mars_boost_ksim::detail
+}} // namespace mars_boost::detail
 
 #endif // BOOST_DETAIL_BASIC_POINTERBUF_HPP
 

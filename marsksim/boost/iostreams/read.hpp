@@ -30,7 +30,7 @@
 # include <boost/iostreams/detail/vc6/read.hpp>
 #else // #if BOOST_WORKAROUND(BOOST_MSVC, < 1300) //--------------------------//
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace iostreams {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace iostreams {
 
 namespace detail {
 

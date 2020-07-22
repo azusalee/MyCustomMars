@@ -13,7 +13,7 @@
 #include <boost/type_traits/is_same.hpp>
 #include <boost/type_traits/is_class.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
    namespace detail{
       template <class B, class D>
@@ -22,18 +22,18 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           typedef typename remove_cv<B>::type ncvB;
           typedef typename remove_cv<D>::type ncvD;
           BOOST_STATIC_CONSTANT(bool, value = (
-            (::mars_boost_ksim::detail::is_base_and_derived_impl<ncvB,ncvD>::value) ||
-            (::mars_boost_ksim::is_same<ncvB,ncvD>::value && ::mars_boost_ksim::is_class<ncvB>::value)));
+            (::mars_boost::detail::is_base_and_derived_impl<ncvB,ncvD>::value) ||
+            (::mars_boost::is_same<ncvB,ncvD>::value && ::mars_boost::is_class<ncvB>::value)));
       };
    }
 
    template <class Base, class Derived> struct is_base_of
-      : public integral_constant<bool, (::mars_boost_ksim::detail::is_base_of_imp<Base, Derived>::value)> {};
+      : public integral_constant<bool, (::mars_boost::detail::is_base_of_imp<Base, Derived>::value)> {};
 
    template <class Base, class Derived> struct is_base_of<Base, Derived&> : false_type{};
    template <class Base, class Derived> struct is_base_of<Base&, Derived&> : false_type{};
    template <class Base, class Derived> struct is_base_of<Base&, Derived> : false_type{};
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_IS_BASE_AND_DERIVED_HPP_INCLUDED

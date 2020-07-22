@@ -20,23 +20,23 @@
 
 #include <boost/random/detail/disable_warnings.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace random {
 namespace detail {
 
 struct div_t {
-    mars_boost_ksim::uintmax_t quotient;
-    mars_boost_ksim::uintmax_t remainder;
+    mars_boost::uintmax_t quotient;
+    mars_boost::uintmax_t remainder;
 };
 
-inline div_t muldivmod(mars_boost_ksim::uintmax_t a, mars_boost_ksim::uintmax_t b, mars_boost_ksim::uintmax_t m)
+inline div_t muldivmod(mars_boost::uintmax_t a, mars_boost::uintmax_t b, mars_boost::uintmax_t m)
 {
     const int bits =
-        ::std::numeric_limits< ::mars_boost_ksim::uintmax_t>::digits / 2;
-    const ::mars_boost_ksim::uintmax_t mask = (::mars_boost_ksim::uintmax_t(1) << bits) - 1;
-    typedef ::mars_boost_ksim::uint_t<bits>::fast digit_t;
+        ::std::numeric_limits< ::mars_boost::uintmax_t>::digits / 2;
+    const ::mars_boost::uintmax_t mask = (::mars_boost::uintmax_t(1) << bits) - 1;
+    typedef ::mars_boost::uint_t<bits>::fast digit_t;
 
-    int shift = std::numeric_limits< ::mars_boost_ksim::uintmax_t>::digits - 1
+    int shift = std::numeric_limits< ::mars_boost::uintmax_t>::digits - 1
         - detail::integer_log2(m);
 
     a <<= shift;
@@ -51,7 +51,7 @@ inline div_t muldivmod(mars_boost_ksim::uintmax_t a, mars_boost_ksim::uintmax_t 
     for(int i = 0; i < 2; ++i) {
         digit_t carry = 0;
         for(int j = 0; j < 2; ++j) {
-            ::mars_boost_ksim::uint64_t temp = ::mars_boost_ksim::uintmax_t(a_[i]) * b_[j] +
+            ::mars_boost::uint64_t temp = ::mars_boost::uintmax_t(a_[i]) * b_[j] +
                 carry + product[i + j];
             product[i + j] = digit_t(temp & mask);
             carry = digit_t(temp >> bits);
@@ -65,23 +65,23 @@ inline div_t muldivmod(mars_boost_ksim::uintmax_t a, mars_boost_ksim::uintmax_t 
 
     if(m == 0) {
         div_t result = {
-            ((::mars_boost_ksim::uintmax_t(product[3]) << bits) | product[2]),
-            ((::mars_boost_ksim::uintmax_t(product[1]) << bits) | product[0]) >> shift,
+            ((::mars_boost::uintmax_t(product[3]) << bits) | product[2]),
+            ((::mars_boost::uintmax_t(product[1]) << bits) | product[0]) >> shift,
         };
         return result;
     }
 
     // divide product / m
     for(int i = 3; i >= 2; --i) {
-        ::mars_boost_ksim::uintmax_t temp =
-            ::mars_boost_ksim::uintmax_t(product[i]) << bits | product[i - 1];
+        ::mars_boost::uintmax_t temp =
+            ::mars_boost::uintmax_t(product[i]) << bits | product[i - 1];
 
         digit_t q = digit_t((product[i] == m_[1]) ? mask : temp / m_[1]);
 
-        ::mars_boost_ksim::uintmax_t rem =
-            ((temp - ::mars_boost_ksim::uintmax_t(q) * m_[1]) << bits) + product[i - 2];
+        ::mars_boost::uintmax_t rem =
+            ((temp - ::mars_boost::uintmax_t(q) * m_[1]) << bits) + product[i - 2];
 
-        ::mars_boost_ksim::uintmax_t diff = m_[0] * ::mars_boost_ksim::uintmax_t(q);
+        ::mars_boost::uintmax_t diff = m_[0] * ::mars_boost::uintmax_t(q);
 
         int error = 0;
         if(diff > rem) {
@@ -101,21 +101,21 @@ inline div_t muldivmod(mars_boost_ksim::uintmax_t a, mars_boost_ksim::uintmax_t 
     }
 
     div_t result = {
-        ((::mars_boost_ksim::uintmax_t(quotient[1]) << bits) | quotient[0]),
-        ((::mars_boost_ksim::uintmax_t(product[1]) << bits) | product[0]) >> shift,
+        ((::mars_boost::uintmax_t(quotient[1]) << bits) | quotient[0]),
+        ((::mars_boost::uintmax_t(product[1]) << bits) | product[0]) >> shift,
     };
     return result;
 }
 
-inline mars_boost_ksim::uintmax_t muldiv(mars_boost_ksim::uintmax_t a, mars_boost_ksim::uintmax_t b, mars_boost_ksim::uintmax_t m)
+inline mars_boost::uintmax_t muldiv(mars_boost::uintmax_t a, mars_boost::uintmax_t b, mars_boost::uintmax_t m)
 { return detail::muldivmod(a, b, m).quotient; }
 
-inline mars_boost_ksim::uintmax_t mulmod(mars_boost_ksim::uintmax_t a, mars_boost_ksim::uintmax_t b, mars_boost_ksim::uintmax_t m)
+inline mars_boost::uintmax_t mulmod(mars_boost::uintmax_t a, mars_boost::uintmax_t b, mars_boost::uintmax_t m)
 { return detail::muldivmod(a, b, m).remainder; }
 
 } // namespace detail
 } // namespace random
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #include <boost/random/detail/enable_warnings.hpp>
 

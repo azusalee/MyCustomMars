@@ -34,7 +34,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
   /**
@@ -52,7 +52,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
   protected:
 
     // this should be a strict_lock, but unique_lock is needed to be able to return it.
-    mars_boost_ksim::unique_lock<mutex_type> lk_;
+    mars_boost::unique_lock<mutex_type> lk_;
     T const& value_;
 
   public:
@@ -76,7 +76,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
      * @effects takes ownership of the mutex owned by @c other, stores a reference to the mutex and the value type of @c other.
      */
     const_strict_lock_ptr(BOOST_THREAD_RV_REF(const_strict_lock_ptr) other) BOOST_NOEXCEPT
-    : lk_(mars_boost_ksim::move(BOOST_THREAD_RV(other).lk_)),value_(BOOST_THREAD_RV(other).value_)
+    : lk_(mars_boost::move(BOOST_THREAD_RV(other).lk_)),value_(BOOST_THREAD_RV(other).value_)
     {
     }
 
@@ -134,7 +134,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
      * @effects takes ownership of the mutex owned by @c other, stores a reference to the mutex and the value type of @c other.
      */
     strict_lock_ptr(BOOST_THREAD_RV_REF(strict_lock_ptr) other)
-    : base_type(mars_boost_ksim::move(static_cast<base_type&>(other)))
+    : base_type(mars_boost::move(static_cast<base_type&>(other)))
     {
     }
 
@@ -252,7 +252,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
      * @effects takes ownership of the mutex owned by @c other, stores a reference to the mutex and the value type of @c other.
      */
     const_unique_lock_ptr(BOOST_THREAD_RV_REF(const_unique_lock_ptr) other) BOOST_NOEXCEPT
-    : base_type(mars_boost_ksim::move(static_cast<base_type&>(other))), value_(BOOST_THREAD_RV(other).value_)
+    : base_type(mars_boost::move(static_cast<base_type&>(other))), value_(BOOST_THREAD_RV(other).value_)
     {
     }
 
@@ -343,7 +343,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
      * @effects takes ownership of the mutex owned by @c other, stores a reference to the mutex and the value type of @c other.
      */
     unique_lock_ptr(BOOST_THREAD_RV_REF(unique_lock_ptr) other) BOOST_NOEXCEPT
-    : base_type(mars_boost_ksim::move(static_cast<base_type&>(other)))
+    : base_type(mars_boost::move(static_cast<base_type&>(other)))
     {
     }
 
@@ -450,7 +450,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
      */
     synchronized_value(BOOST_THREAD_RV_REF(T) other)
     //BOOST_NOEXCEPT_IF(is_nothrow_move_constructible<T>::value)
-    : value_(mars_boost_ksim::move(other))
+    : value_(mars_boost::move(other))
     {
     }
 
@@ -473,7 +473,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     synchronized_value(BOOST_THREAD_RV_REF(synchronized_value) other)
     {
       strict_lock<mutex_type> lk(BOOST_THREAD_RV(other).mtx_);
-      value_= mars_boost_ksim::move(BOOST_THREAD_RV(other).value_);
+      value_= mars_boost::move(BOOST_THREAD_RV(other).value_);
     }
 
     // mutation
@@ -582,7 +582,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       unique_lock<mutex_type> lk1(mtx_, defer_lock);
       unique_lock<mutex_type> lk2(rhs.mtx_, defer_lock);
       lock(lk1,lk2);
-      mars_boost_ksim::swap(value_, rhs.value_);
+      mars_boost::swap(value_, rhs.value_);
     }
     /**
      * Swap with the underlying value type
@@ -592,7 +592,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     void swap(value_type & rhs)
     {
       strict_lock<mutex_type> lk(mtx_);
-      mars_boost_ksim::swap(value_, rhs);
+      mars_boost::swap(value_, rhs);
     }
 
     /**
@@ -629,7 +629,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
      */
     template <typename F>
     inline
-    typename mars_boost_ksim::result_of<F(value_type&)>::type
+    typename mars_boost::result_of<F(value_type&)>::type
     operator()(BOOST_THREAD_RV_REF(F) fct)
     {
       strict_lock<mutex_type> lk(mtx_);
@@ -637,7 +637,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     }
     template <typename F>
     inline
-    typename mars_boost_ksim::result_of<F(value_type const&)>::type
+    typename mars_boost::result_of<F(value_type const&)>::type
     operator()(BOOST_THREAD_RV_REF(F) fct) const
     {
       strict_lock<mutex_type> lk(mtx_);
@@ -648,7 +648,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #if defined  BOOST_NO_CXX11_RVALUE_REFERENCES
     template <typename F>
     inline
-    typename mars_boost_ksim::result_of<F(value_type&)>::type
+    typename mars_boost::result_of<F(value_type&)>::type
     operator()(F const & fct)
     {
       strict_lock<mutex_type> lk(mtx_);
@@ -656,7 +656,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     }
     template <typename F>
     inline
-    typename mars_boost_ksim::result_of<F(value_type const&)>::type
+    typename mars_boost::result_of<F(value_type const&)>::type
     operator()(F const & fct) const
     {
       strict_lock<mutex_type> lk(mtx_);
@@ -751,7 +751,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     private:
       friend class synchronized_value;
 
-      mars_boost_ksim::unique_lock<mutex_type> lk_;
+      mars_boost::unique_lock<mutex_type> lk_;
       T& value_;
 
       explicit deref_value(synchronized_value& outer):
@@ -762,7 +762,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       BOOST_THREAD_MOVABLE_ONLY(deref_value)
 
       deref_value(BOOST_THREAD_RV_REF(deref_value) other):
-      lk_(mars_boost_ksim::move(BOOST_THREAD_RV(other).lk_)),value_(BOOST_THREAD_RV(other).value_)
+      lk_(mars_boost::move(BOOST_THREAD_RV(other).lk_)),value_(BOOST_THREAD_RV(other).value_)
       {}
       operator T&()
       {
@@ -780,7 +780,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     private:
       friend class synchronized_value;
 
-      mars_boost_ksim::unique_lock<mutex_type> lk_;
+      mars_boost::unique_lock<mutex_type> lk_;
       const T& value_;
 
       explicit const_deref_value(synchronized_value const& outer):
@@ -791,7 +791,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       BOOST_THREAD_MOVABLE_ONLY(const_deref_value)
 
       const_deref_value(BOOST_THREAD_RV_REF(const_deref_value) other):
-      lk_(mars_boost_ksim::move(BOOST_THREAD_RV(other).lk_)), value_(BOOST_THREAD_RV(other).value_)
+      lk_(mars_boost::move(BOOST_THREAD_RV(other).lk_)), value_(BOOST_THREAD_RV(other).value_)
       {}
 
       operator const T&()
@@ -1011,7 +1011,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
   template <typename ...SV>
   std::tuple<typename synchronized_value_strict_lock_ptr<SV>::type ...> synchronize(SV& ...sv)
   {
-    mars_boost_ksim::lock(sv.mtx_ ...);
+    mars_boost::lock(sv.mtx_ ...);
     typedef std::tuple<typename synchronized_value_strict_lock_ptr<SV>::type ...> t_type;
 
     return t_type(typename synchronized_value_strict_lock_ptr<SV>::type(sv.value_, sv.mtx_, adopt_lock) ...);
@@ -1025,7 +1025,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
   >
   synchronize(SV1& sv1, SV2& sv2)
   {
-    mars_boost_ksim::lock(sv1.mtx_, sv2.mtx_);
+    mars_boost::lock(sv1.mtx_, sv2.mtx_);
     typedef std::tuple<
         typename synchronized_value_strict_lock_ptr<SV1>::type,
         typename synchronized_value_strict_lock_ptr<SV2>::type
@@ -1045,7 +1045,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
   >
   synchronize(SV1& sv1, SV2& sv2, SV3& sv3)
   {
-    mars_boost_ksim::lock(sv1.mtx_, sv2.mtx_);
+    mars_boost::lock(sv1.mtx_, sv2.mtx_);
     typedef std::tuple<
         typename synchronized_value_strict_lock_ptr<SV1>::type,
         typename synchronized_value_strict_lock_ptr<SV2>::type,

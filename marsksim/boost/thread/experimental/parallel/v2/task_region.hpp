@@ -24,7 +24,7 @@
 
 #define BOOST_THREAD_TASK_REGION_HAS_SHARED_CANCELED
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 namespace experimental
 {
@@ -61,7 +61,7 @@ BOOST_THREAD_INLINE_NAMESPACE(v2)
       {
         for (exception_list::const_iterator it = el.begin(); it != el.end(); ++it)
         {
-          mars_boost_ksim::exception_ptr const& e = *it;
+          mars_boost::exception_ptr const& e = *it;
           try {
             rethrow_exception(e);
           }
@@ -73,7 +73,7 @@ BOOST_THREAD_INLINE_NAMESPACE(v2)
       }
       catch (...)
       {
-        errors.add(mars_boost_ksim::current_exception());
+        errors.add(mars_boost::current_exception());
       }
     }
 
@@ -131,7 +131,7 @@ BOOST_THREAD_INLINE_NAMESPACE(v2)
         {
           try
           {
-            mars_boost_ksim::rethrow_exception(f.get_exception_ptr());
+            mars_boost::rethrow_exception(f.get_exception_ptr());
           }
           catch (...)
           {
@@ -141,7 +141,7 @@ BOOST_THREAD_INLINE_NAMESPACE(v2)
       }
       if (exs.size() != 0)
       {
-        mars_boost_ksim::throw_exception(exs);
+        mars_boost::throw_exception(exs);
       }
     }
 protected:
@@ -207,7 +207,7 @@ protected:
       {
         lock_guard<mutex> lk(mtx);
         if (canceled) {
-          mars_boost_ksim::throw_exception(task_canceled_exception());
+          mars_boost::throw_exception(task_canceled_exception());
         }
       }
 #if defined BOOST_THREAD_PROVIDES_EXECUTORS
@@ -230,7 +230,7 @@ protected:
       {
         lock_guard<mutex> lk(mtx);
         if (canceled) {
-          mars_boost_ksim::throw_exception(task_canceled_exception());
+          mars_boost::throw_exception(task_canceled_exception());
         }
       }
 #endif

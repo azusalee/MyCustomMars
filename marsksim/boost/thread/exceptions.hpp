@@ -25,7 +25,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 #if defined BOOST_THREAD_PROVIDES_INTERRUPTIONS
@@ -218,7 +218,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
     };
 
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #include <boost/config/abi_suffix.hpp>
 

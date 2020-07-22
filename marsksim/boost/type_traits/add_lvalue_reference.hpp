@@ -8,11 +8,11 @@
 
 #include <boost/type_traits/add_reference.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim{
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost{
 
 template <class T> struct add_lvalue_reference
 {
-   typedef typename mars_boost_ksim::add_reference<T>::type type; 
+   typedef typename mars_boost::add_reference<T>::type type; 
 };
 
 #ifndef BOOST_NO_CXX11_RVALUE_REFERENCES

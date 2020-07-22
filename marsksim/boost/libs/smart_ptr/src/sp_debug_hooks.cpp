@@ -106,7 +106,7 @@ void * operator new[](size_t n, nothrow_t const &) throw()
 
 // debug hooks
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 void sp_scalar_constructor_hook(void * p)
@@ -184,7 +184,7 @@ void sp_array_destructor_hook(void * /* p */)
 */
 }
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 // operator delete
 

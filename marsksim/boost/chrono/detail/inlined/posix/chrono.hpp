@@ -12,7 +12,7 @@
 
 #include <time.h>  // for clock_gettime
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 namespace chrono
 {
@@ -37,7 +37,7 @@ namespace chrono
     {
         if (BOOST_CHRONO_IS_THROWS(ec))
         {
-            mars_boost_ksim::throw_exception(
+            mars_boost::throw_exception(
                     system::system_error( 
                             errno, 
                             BOOST_CHRONO_SYSTEM_CATEGORY, 
@@ -91,7 +91,7 @@ namespace chrono
     {
         if (BOOST_CHRONO_IS_THROWS(ec))
         {
-            mars_boost_ksim::throw_exception(
+            mars_boost::throw_exception(
                     system::system_error( 
                             errno, 
                             BOOST_CHRONO_SYSTEM_CATEGORY, 
@@ -115,6 +115,6 @@ namespace chrono
 #endif
 
 }  // namespace chrono
-}  // namespace mars_boost_ksim
+}  // namespace mars_boost
 
 

@@ -34,7 +34,7 @@ namespace std
 }
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   struct once_flag;
   namespace detail
@@ -81,7 +81,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #define BOOST_THREAD_INVOKE_RET_VOID detail::invoke<void>
 #define BOOST_THREAD_INVOKE_RET_VOID_CALL
 #else
-#define BOOST_THREAD_INVOKE_RET_VOID mars_boost_ksim::bind
+#define BOOST_THREAD_INVOKE_RET_VOID mars_boost::bind
 #define BOOST_THREAD_INVOKE_RET_VOID_CALL ()
 #endif
 
@@ -326,9 +326,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 BOOST_TRY
                 {
                   BOOST_THREAD_INVOKE_RET_VOID(
-                        thread_detail::decay_copy(mars_boost_ksim::forward<Function>(f)),
-                        thread_detail::decay_copy(mars_boost_ksim::forward<A>(a)),
-                        thread_detail::decay_copy(mars_boost_ksim::forward<ArgTypes>(args))...
+                        thread_detail::decay_copy(mars_boost::forward<Function>(f)),
+                        thread_detail::decay_copy(mars_boost::forward<A>(a)),
+                        thread_detail::decay_copy(mars_boost::forward<ArgTypes>(args))...
                   ) BOOST_THREAD_INVOKE_RET_VOID_CALL;
                 }
                 BOOST_CATCH(...)
@@ -766,7 +766,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                     BOOST_TRY
                     {
                        f(
-                           thread_detail::decay_copy(mars_boost_ksim::forward<T1>(p1))
+                           thread_detail::decay_copy(mars_boost::forward<T1>(p1))
                        );
                     }
                     BOOST_CATCH(...)
@@ -811,8 +811,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                     BOOST_TRY
                     {
                       f(
-                          thread_detail::decay_copy(mars_boost_ksim::forward<T1>(p1)),
-                          thread_detail::decay_copy(mars_boost_ksim::forward<T2>(p2))
+                          thread_detail::decay_copy(mars_boost::forward<T1>(p1)),
+                          thread_detail::decay_copy(mars_boost::forward<T2>(p2))
                       );
                     }
                     BOOST_CATCH(...)
@@ -857,9 +857,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                     BOOST_TRY
                     {
                       f(
-                          thread_detail::decay_copy(mars_boost_ksim::forward<T1>(p1)),
-                          thread_detail::decay_copy(mars_boost_ksim::forward<T2>(p2)),
-                          thread_detail::decay_copy(mars_boost_ksim::forward<T3>(p3))
+                          thread_detail::decay_copy(mars_boost::forward<T1>(p1)),
+                          thread_detail::decay_copy(mars_boost::forward<T2>(p2)),
+                          thread_detail::decay_copy(mars_boost::forward<T3>(p3))
                       );
                     }
                     BOOST_CATCH(...)
@@ -949,8 +949,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 BOOST_TRY
                 {
                   BOOST_THREAD_INVOKE_RET_VOID(
-                      thread_detail::decay_copy(mars_boost_ksim::forward<Function>(f)),
-                      thread_detail::decay_copy(mars_boost_ksim::forward<T1>(p1))
+                      thread_detail::decay_copy(mars_boost::forward<Function>(f)),
+                      thread_detail::decay_copy(mars_boost::forward<T1>(p1))
                   ) BOOST_THREAD_INVOKE_RET_VOID_CALL;
                 }
                 BOOST_CATCH(...)
@@ -995,9 +995,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 BOOST_TRY
                 {
                   BOOST_THREAD_INVOKE_RET_VOID(
-                      thread_detail::decay_copy(mars_boost_ksim::forward<Function>(f)),
-                      thread_detail::decay_copy(mars_boost_ksim::forward<T1>(p1)),
-                      thread_detail::decay_copy(mars_boost_ksim::forward<T2>(p2))
+                      thread_detail::decay_copy(mars_boost::forward<Function>(f)),
+                      thread_detail::decay_copy(mars_boost::forward<T1>(p1)),
+                      thread_detail::decay_copy(mars_boost::forward<T2>(p2))
                   ) BOOST_THREAD_INVOKE_RET_VOID_CALL;
                 }
                 BOOST_CATCH(...)
@@ -1042,10 +1042,10 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 BOOST_TRY
                 {
                   BOOST_THREAD_INVOKE_RET_VOID(
-                      thread_detail::decay_copy(mars_boost_ksim::forward<Function>(f)),
-                      thread_detail::decay_copy(mars_boost_ksim::forward<T1>(p1)),
-                      thread_detail::decay_copy(mars_boost_ksim::forward<T2>(p2)),
-                      thread_detail::decay_copy(mars_boost_ksim::forward<T3>(p3))
+                      thread_detail::decay_copy(mars_boost::forward<Function>(f)),
+                      thread_detail::decay_copy(mars_boost::forward<T1>(p1)),
+                      thread_detail::decay_copy(mars_boost::forward<T2>(p2)),
+                      thread_detail::decay_copy(mars_boost::forward<T3>(p3))
                   ) BOOST_THREAD_INVOKE_RET_VOID_CALL;
 
                 }

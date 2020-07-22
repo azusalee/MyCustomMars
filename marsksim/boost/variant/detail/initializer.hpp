@@ -37,7 +37,7 @@
 #   include "boost/preprocessor/repeat.hpp"
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace detail { namespace variant {
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -82,15 +82,15 @@ struct make_initializer_node
                 public_T;
 
 #ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
-            typedef mars_boost_ksim::is_reference<public_T> 
+            typedef mars_boost::is_reference<public_T> 
                 is_reference_content_t;
 
-            typedef typename mars_boost_ksim::mpl::if_<is_reference_content_t, public_T, const public_T& >::type 
+            typedef typename mars_boost::mpl::if_<is_reference_content_t, public_T, const public_T& >::type 
                 param_T;
 
             template <class T> struct disable_overload{};
 
-            typedef typename mars_boost_ksim::mpl::if_<is_reference_content_t, disable_overload<public_T>, public_T&& >::type 
+            typedef typename mars_boost::mpl::if_<is_reference_content_t, disable_overload<public_T>, public_T&& >::type 
                 param2_T;
 #else
             typedef typename call_traits<public_T>::param_type
@@ -103,7 +103,7 @@ struct make_initializer_node
 
             static int initialize(void* dest, param_T operand)
             {
-                typedef typename mars_boost_ksim::detail::make_reference_content<
+                typedef typename mars_boost::detail::make_reference_content<
                       recursive_enabled_T
                     >::type internal_T;
 
@@ -118,8 +118,8 @@ struct make_initializer_node
                 // handled by the initilize(void* dest, param_T operand) function above
                 BOOST_ASSERT(!is_reference_content_t::value);
 
-                typedef typename mars_boost_ksim::mpl::if_<is_reference_content_t, param2_T, recursive_enabled_T>::type value_T;
-                new(dest) value_T( mars_boost_ksim::detail::variant::move(operand) );
+                typedef typename mars_boost::mpl::if_<is_reference_content_t, param2_T, recursive_enabled_T>::type value_T;
+                new(dest) value_T( mars_boost::detail::variant::move(operand) );
                 return BOOST_MPL_AUX_VALUE_WKND(index)::value; // which
             }
 #endif
@@ -184,7 +184,7 @@ public: // static functions
             , BOOST_PP_CAT(param_T,N) operand \
             ) \
         { \
-            typedef typename mars_boost_ksim::detail::make_reference_content< \
+            typedef typename mars_boost::detail::make_reference_content< \
                   BOOST_PP_CAT(recursive_enabled_T,N) \
                 >::type internal_T; \
             \
@@ -206,7 +206,7 @@ public: // static functions
 #endif // BOOST_NO_USING_DECLARATION_OVERLOADS_FROM_TYPENAME_BASE workaround
 
 }} // namespace detail::variant
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 ///////////////////////////////////////////////////////////////////////////////
 // macro BOOST_VARIANT_AUX_INITIALIZER_T
@@ -219,14 +219,14 @@ public: // static functions
 #if !defined(BOOST_NO_USING_DECLARATION_OVERLOADS_FROM_TYPENAME_BASE)
 
 #define BOOST_VARIANT_AUX_INITIALIZER_T( mpl_seq, typename_base ) \
-    ::mars_boost_ksim::mpl::iter_fold< \
+    ::mars_boost::mpl::iter_fold< \
           mpl_seq \
-        , ::mars_boost_ksim::mpl::pair< \
-              ::mars_boost_ksim::detail::variant::initializer_root \
-            , ::mars_boost_ksim::mpl::int_<0> \
+        , ::mars_boost::mpl::pair< \
+              ::mars_boost::detail::variant::initializer_root \
+            , ::mars_boost::mpl::int_<0> \
             > \
-        , ::mars_boost_ksim::mpl::protect< \
-              ::mars_boost_ksim::detail::variant::make_initializer_node \
+        , ::mars_boost::mpl::protect< \
+              ::mars_boost::detail::variant::make_initializer_node \
             > \
         >::type::first \
     /**/
@@ -239,7 +239,7 @@ public: // static functions
         /**/
 
 #define BOOST_VARIANT_AUX_INITIALIZER_T( mpl_seq, typename_base ) \
-    ::mars_boost_ksim::detail::variant::preprocessor_list_initializer< \
+    ::mars_boost::detail::variant::preprocessor_list_initializer< \
           BOOST_VARIANT_ENUM_PARAMS(typename_base) \
         > \
     /**/

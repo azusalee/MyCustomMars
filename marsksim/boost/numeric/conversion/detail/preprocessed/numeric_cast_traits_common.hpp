@@ -9,7 +9,7 @@
 	
 	
 	
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace numeric {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace numeric {
     
     template <>
     struct numeric_cast_traits

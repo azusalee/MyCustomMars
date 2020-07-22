@@ -23,13 +23,13 @@
 
 #include <boost/intrusive/detail/algorithm.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace container {
 
-using mars_boost_ksim::intrusive::algo_equal;
-using mars_boost_ksim::intrusive::algo_lexicographical_compare;
+using mars_boost::intrusive::algo_equal;
+using mars_boost::intrusive::algo_lexicographical_compare;
 
 }  //namespace container {
-}  //namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+}  //namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 #endif   //#ifndef BOOST_CONTAINER_DETAIL_ALGORITHM_HPP

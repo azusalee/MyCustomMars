@@ -15,7 +15,7 @@
 #include <boost/detail/workaround.hpp>
 #include <cstddef>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
    //  convert a type T to a non-cv-qualified type - remove_volatile<T>
    template <class T> struct remove_volatile{ typedef T type; };
@@ -29,6 +29,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #endif
 
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_REMOVE_VOLATILE_HPP_INCLUDED

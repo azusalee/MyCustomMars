@@ -16,7 +16,7 @@
 #include <boost/range/detail/range_return.hpp>
 #include <algorithm>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range
     {
@@ -34,7 +34,7 @@ inline BOOST_DEDUCED_TYPENAME disable_if<
 lower_bound( ForwardRange& rng, Value val )
 {
     BOOST_RANGE_CONCEPT_ASSERT(( ForwardRangeConcept<ForwardRange> ));
-    return std::lower_bound(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), val);
+    return std::lower_bound(mars_boost::begin(rng), mars_boost::end(rng), val);
 }
 
 /// \overload
@@ -43,7 +43,7 @@ inline BOOST_DEDUCED_TYPENAME range_iterator<const ForwardRange>::type
 lower_bound( const ForwardRange& rng, Value val )
 {
     BOOST_RANGE_CONCEPT_ASSERT(( ForwardRangeConcept<const ForwardRange> ));
-    return std::lower_bound(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), val);
+    return std::lower_bound(mars_boost::begin(rng), mars_boost::end(rng), val);
 }
 
 /// \overload
@@ -55,7 +55,7 @@ inline BOOST_DEDUCED_TYPENAME disable_if<
 lower_bound( ForwardRange& rng, Value val, SortPredicate pred )
 {
     BOOST_RANGE_CONCEPT_ASSERT(( ForwardRangeConcept<ForwardRange> ));
-    return std::lower_bound(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), val, pred);
+    return std::lower_bound(mars_boost::begin(rng), mars_boost::end(rng), val, pred);
 }
 
 /// \overload
@@ -64,7 +64,7 @@ inline BOOST_DEDUCED_TYPENAME range_iterator<const ForwardRange>::type
 lower_bound( const ForwardRange& rng, Value val, SortPredicate pred )
 {
     BOOST_RANGE_CONCEPT_ASSERT(( ForwardRangeConcept<const ForwardRange> ));
-    return std::lower_bound(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), val, pred);
+    return std::lower_bound(mars_boost::begin(rng), mars_boost::end(rng), val, pred);
 }
 
 /// \overload
@@ -77,7 +77,7 @@ lower_bound( ForwardRange& rng, Value val )
 {
     BOOST_RANGE_CONCEPT_ASSERT(( ForwardRangeConcept<ForwardRange> ));
     return range_return<ForwardRange,re>::
-        pack(std::lower_bound(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), val),
+        pack(std::lower_bound(mars_boost::begin(rng), mars_boost::end(rng), val),
              rng);
 }
 
@@ -88,7 +88,7 @@ lower_bound( const ForwardRange& rng, Value val )
 {
     BOOST_RANGE_CONCEPT_ASSERT(( ForwardRangeConcept<const ForwardRange> ));
     return range_return<const ForwardRange,re>::
-        pack(std::lower_bound(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), val),
+        pack(std::lower_bound(mars_boost::begin(rng), mars_boost::end(rng), val),
              rng);
 }
 
@@ -102,7 +102,7 @@ lower_bound( ForwardRange& rng, Value val, SortPredicate pred )
 {
     BOOST_RANGE_CONCEPT_ASSERT(( ForwardRangeConcept<ForwardRange> ));
     return range_return<ForwardRange,re>::
-        pack(std::lower_bound(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), val, pred),
+        pack(std::lower_bound(mars_boost::begin(rng), mars_boost::end(rng), val, pred),
              rng);
 }
 
@@ -113,12 +113,12 @@ lower_bound( const ForwardRange& rng, Value val, SortPredicate pred )
 {
     BOOST_RANGE_CONCEPT_ASSERT(( ForwardRangeConcept<const ForwardRange> ));
     return range_return<const ForwardRange,re>::
-        pack(std::lower_bound(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), val, pred),
+        pack(std::lower_bound(mars_boost::begin(rng), mars_boost::end(rng), val, pred),
              rng);
 }
 
     } // namespace range
     using range::lower_bound;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

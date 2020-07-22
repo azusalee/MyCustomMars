@@ -35,7 +35,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     class thread_attributes {
     public:
@@ -88,32 +88,32 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         struct thread_exit_callback_node;
         struct tss_data_node
         {
-            mars_boost_ksim::shared_ptr<boost_ksim::detail::tss_cleanup_function> func;
+            mars_boost::shared_ptr<boost_ksim::detail::tss_cleanup_function> func;
             void* value;
 
-            tss_data_node(mars_boost_ksim::shared_ptr<boost_ksim::detail::tss_cleanup_function> func_,
+            tss_data_node(mars_boost::shared_ptr<boost_ksim::detail::tss_cleanup_function> func_,
                           void* value_):
                 func(func_),value(value_)
             {}
         };
 
         struct thread_data_base;
-        typedef mars_boost_ksim::shared_ptr<thread_data_base> thread_data_ptr;
+        typedef mars_boost::shared_ptr<thread_data_base> thread_data_ptr;
 
         struct BOOST_THREAD_DECL thread_data_base:
             enable_shared_from_this<thread_data_base>
         {
             thread_data_ptr self;
             pthread_t thread_handle;
-            mars_boost_ksim::mutex data_mutex;
-            mars_boost_ksim::condition_variable done_condition;
-            mars_boost_ksim::mutex sleep_mutex;
-            mars_boost_ksim::condition_variable sleep_condition;
+            mars_boost::mutex data_mutex;
+            mars_boost::condition_variable done_condition;
+            mars_boost::mutex sleep_mutex;
+            mars_boost::condition_variable sleep_condition;
             bool done;
             bool join_started;
             bool joined;
-            mars_boost_ksim::detail::thread_exit_callback_node* thread_exit_callbacks;
-            std::map<void const*,mars_boost_ksim::detail::tss_data_node> tss_data;
+            mars_boost::detail::thread_exit_callback_node* thread_exit_callbacks;
+            std::map<void const*,mars_boost::detail::tss_data_node> tss_data;
 
 //#if defined BOOST_THREAD_PROVIDES_INTERRUPTIONS
             // These data must be at the end so that the access to the other fields doesn't change
@@ -240,7 +240,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         inline
         void BOOST_SYMBOL_VISIBLE sleep_for(const chrono::nanoseconds& ns)
         {
-            return mars_boost_ksim::this_thread::hiden::sleep_for(mars_boost_ksim::detail::to_timespec(ns));
+            return mars_boost::this_thread::hiden::sleep_for(mars_boost::detail::to_timespec(ns));
         }
 #endif
 #endif // BOOST_THREAD_USES_CHRONO
@@ -259,7 +259,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           inline
           void BOOST_SYMBOL_VISIBLE sleep_for(const chrono::nanoseconds& ns)
           {
-              return mars_boost_ksim::this_thread::no_interruption_point::hiden::sleep_for(mars_boost_ksim::detail::to_timespec(ns));
+              return mars_boost::this_thread::no_interruption_point::hiden::sleep_for(mars_boost::detail::to_timespec(ns));
           }
     #endif
     #endif // BOOST_THREAD_USES_CHRONO
@@ -275,7 +275,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #endif
         inline void sleep(system_time const& abs_time)
         {
-          return mars_boost_ksim::this_thread::hiden::sleep_until(mars_boost_ksim::detail::to_timespec(abs_time));
+          return mars_boost::this_thread::hiden::sleep_until(mars_boost::detail::to_timespec(abs_time));
         }
 
         template<typename TimeDuration>

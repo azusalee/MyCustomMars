@@ -17,7 +17,7 @@
 #include <boost/mpl/has_xxx.hpp>
 #include <boost/mpl/aux_/config/has_apply.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl { namespace aux {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl { namespace aux {
 #if !defined(BOOST_MPL_CFG_NO_HAS_APPLY)
 BOOST_MPL_HAS_XXX_TRAIT_NAMED_DEF(has_apply, apply, false)
 #else

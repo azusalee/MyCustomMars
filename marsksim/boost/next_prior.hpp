@@ -25,15 +25,15 @@
 #include <boost/type_traits/has_minus.hpp>
 #include <boost/type_traits/has_minus_assign.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 //  Helper functions for classes like bidirectional iterators not supporting
 //  operator+ and operator-
 //
 //  Usage:
 //    const std::list<T>::iterator p = get_some_iterator();
-//    const std::list<T>::iterator prev = mars_boost_ksim::prior(p);
-//    const std::list<T>::iterator next = mars_boost_ksim::next(prev, 2);
+//    const std::list<T>::iterator prev = mars_boost::prior(p);
+//    const std::list<T>::iterator next = mars_boost::next(prev, 2);
 
 //  Contributed by Dave Abrahams
 
@@ -160,6 +160,6 @@ inline T prior(T x, Distance n)
     return next_prior_detail::prior_impl1< T, Distance >::call(x, n);
 }
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif  // BOOST_NEXT_PRIOR_HPP_INCLUDED

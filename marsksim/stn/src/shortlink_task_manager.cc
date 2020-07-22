@@ -43,7 +43,7 @@ using namespace marsksim::stn;
 using namespace marsksim::app;
 
 #define AYNC_HANDLER asyncreg_.Get()
-#define RETURN_SHORTLINK_SYNC2ASYNC_FUNC_TITLE(func, title) RETURN_SYNC2ASYNC_FUNC_TITLE(func, title, )
+#define RETURN_SHORTLINK_SYNC2ASYNC_FUNCksim_TITLE(func, title) RETURN_SYNC2ASYNC_FUNCksim_TITLE(func, title, )
 
 ShortLinkTaskManager::ShortLinkTaskManager(NetSourceksim& _netsource, DynamicTimeout& _dynamictimeout, MessageQueueksim::MessageQueueksim_t _messagequeueid)
     : asyncreg_(MessageQueueksim::InstallAsyncHandler(_messagequeueid))

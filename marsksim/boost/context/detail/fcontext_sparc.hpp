@@ -17,7 +17,7 @@
 # include BOOST_ABI_PREFIX
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace context {
 
 extern "C" {
@@ -41,11 +41,11 @@ struct stack_t
 struct fp_t
 {
 #ifdef _LP64
-    mars_boost_ksim::uint64_t     fp_freg[32];
-    mars_boost_ksim::uint64_t	fp_fprs, fp_fsr;
+    mars_boost::uint64_t     fp_freg[32];
+    mars_boost::uint64_t	fp_fprs, fp_fsr;
 #else
-    mars_boost_ksim::uint64_t     fp_freg[16];
-    mars_boost_ksim::uint32_t	fp_fsr;
+    mars_boost::uint64_t     fp_freg[16];
+    mars_boost::uint32_t	fp_fsr;
 #endif
 
     fp_t() :
@@ -65,9 +65,9 @@ struct fcontext_t
 {
     fp_t                fc_fp;	// fpu stuff first, for easier alignement
 #ifdef _LP64
-    mars_boost_ksim::uint64_t
+    mars_boost::uint64_t
 #else
-    mars_boost_ksim::uint32_t
+    mars_boost::uint32_t
 #endif
 			fc_greg[8];
     stack_t             fc_stack;

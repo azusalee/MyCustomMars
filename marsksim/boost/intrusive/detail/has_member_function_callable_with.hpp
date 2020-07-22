@@ -22,7 +22,7 @@
 #include <boost/move/utility_core.hpp>
 #include <boost/move/detail/fwd_macros.hpp>
 
-namespace mars_boost_ksim_intrusive_hmfcw {
+namespace mars_boost_intrusive_hmfcw {
 
 typedef char yes_type;
 struct no_type{ char dummy[2]; };
@@ -65,7 +65,7 @@ template<typename T> struct remove_cv<volatile T>        {  typedef T type;   };
 
 #endif
 
-}  //namespace mars_boost_ksim_intrusive_hmfcw {
+}  //namespace mars_boost_intrusive_hmfcw {
 
 #endif  //BOOST_INTRUSIVE_HAS_MEMBER_FUNCTION_CALLABLE_WITH_CALLABLE_WITH_HPP
 
@@ -107,8 +107,8 @@ BOOST_INTRUSIVE_HAS_MEMBER_FUNCTION_CALLABLE_WITH_NS_BEG
    struct BOOST_MOVE_CAT(has_member_function_callable_with_,BOOST_INTRUSIVE_HAS_MEMBER_FUNCTION_CALLABLE_WITH_FUNCNAME)
    {
       template<class U>
-      static decltype(mars_boost_ksim::move_detail::declval<U>().
-         BOOST_INTRUSIVE_HAS_MEMBER_FUNCTION_CALLABLE_WITH_FUNCNAME(::mars_boost_ksim::move_detail::declval<Args>()...)
+      static decltype(mars_boost::move_detail::declval<U>().
+         BOOST_INTRUSIVE_HAS_MEMBER_FUNCTION_CALLABLE_WITH_FUNCNAME(::mars_boost::move_detail::declval<Args>()...)
             , mars_boost_intrusive_hmfcw::yes_type()) Test(U* f);
       template<class U>
       static mars_boost_intrusive_hmfcw::no_type Test(...);
@@ -150,8 +150,8 @@ BOOST_INTRUSIVE_HAS_MEMBER_FUNCTION_CALLABLE_WITH_NS_BEG
 
          static bool const value = (sizeof(mars_boost_intrusive_hmfcw::no_type) ==
                                     sizeof(mars_boost_intrusive_hmfcw::is_private_type
-                                             ( (::mars_boost_ksim::move_detail::declval< FunWrap<Fun> >().
-                                                   BOOST_INTRUSIVE_HAS_MEMBER_FUNCTION_CALLABLE_WITH_FUNCNAME(::mars_boost_ksim::move_detail::declval<Args>()...), 0) )
+                                             ( (::mars_boost::move_detail::declval< FunWrap<Fun> >().
+                                                   BOOST_INTRUSIVE_HAS_MEMBER_FUNCTION_CALLABLE_WITH_FUNCNAME(::mars_boost::move_detail::declval<Args>()...), 0) )
                                           )
                                     );
       };
@@ -209,7 +209,7 @@ BOOST_INTRUSIVE_HAS_MEMBER_FUNCTION_CALLABLE_WITH_NS_BEG
             struct BOOST_MOVE_CAT(has_member_function_callable_with_impl_, BOOST_INTRUSIVE_HAS_MEMBER_FUNCTION_CALLABLE_WITH_FUNCNAME)<Fun, true>
             {
                template<class U>
-               static decltype(mars_boost_ksim::move_detail::declval<U>().BOOST_INTRUSIVE_HAS_MEMBER_FUNCTION_CALLABLE_WITH_FUNCNAME()
+               static decltype(mars_boost::move_detail::declval<U>().BOOST_INTRUSIVE_HAS_MEMBER_FUNCTION_CALLABLE_WITH_FUNCNAME()
                   , mars_boost_intrusive_hmfcw::yes_type()) Test(U* f);
 
                template<class U>
@@ -221,7 +221,7 @@ BOOST_INTRUSIVE_HAS_MEMBER_FUNCTION_CALLABLE_WITH_NS_BEG
 
             #if !defined(BOOST_INTRUSIVE_DETAIL_HAS_MEMBER_FUNCTION_CALLABLE_WITH_0_ARGS_UNSUPPORTED)
 
-            template<class F, std::size_t N = sizeof(mars_boost_ksim::move_detail::declval<F>().BOOST_INTRUSIVE_HAS_MEMBER_FUNCTION_CALLABLE_WITH_FUNCNAME(), 0)>
+            template<class F, std::size_t N = sizeof(mars_boost::move_detail::declval<F>().BOOST_INTRUSIVE_HAS_MEMBER_FUNCTION_CALLABLE_WITH_FUNCNAME(), 0)>
             struct BOOST_MOVE_CAT(zeroarg_checker_, BOOST_INTRUSIVE_HAS_MEMBER_FUNCTION_CALLABLE_WITH_FUNCNAME)
             {  mars_boost_intrusive_hmfcw::yes_type dummy[N ? 1 : 2];   };
 
@@ -266,7 +266,7 @@ BOOST_INTRUSIVE_HAS_MEMBER_FUNCTION_CALLABLE_WITH_NS_BEG
             struct BOOST_MOVE_CAT(has_member_function_callable_with_impl_, BOOST_INTRUSIVE_HAS_MEMBER_FUNCTION_CALLABLE_WITH_FUNCNAME)<Fun, true, BOOST_MOVE_TARG##N>\
             {\
                static bool const value = (sizeof(mars_boost_intrusive_hmfcw::no_type) == sizeof(mars_boost_intrusive_hmfcw::is_private_type\
-                                                   ( (::mars_boost_ksim::move_detail::declval\
+                                                   ( (::mars_boost::move_detail::declval\
                                                          < BOOST_MOVE_CAT(FunWrap##N, BOOST_INTRUSIVE_HAS_MEMBER_FUNCTION_CALLABLE_WITH_FUNCNAME)<Fun> >().\
                                                       BOOST_INTRUSIVE_HAS_MEMBER_FUNCTION_CALLABLE_WITH_FUNCNAME(BOOST_MOVE_DECLVAL##N), 0) )\
                                                 )\
@@ -280,7 +280,7 @@ BOOST_INTRUSIVE_HAS_MEMBER_FUNCTION_CALLABLE_WITH_NS_BEG
                <Fun, true, BOOST_MOVE_TARG##N>\
             {\
                template<class U>\
-               static decltype(mars_boost_ksim::move_detail::declval<U>().\
+               static decltype(mars_boost::move_detail::declval<U>().\
                   BOOST_INTRUSIVE_HAS_MEMBER_FUNCTION_CALLABLE_WITH_FUNCNAME(BOOST_MOVE_DECLVAL##N)\
                      , mars_boost_intrusive_hmfcw::yes_type()) Test(U* f);\
                template<class U>\

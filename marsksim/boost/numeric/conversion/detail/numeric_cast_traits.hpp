@@ -56,12 +56,12 @@
     #define BOOST_NUMERIC_CONVERSION_SEQ_A() BOOST_NUMERIC_CONVERSION_BASE_BUILTIN_TYPES()
 	#define BOOST_NUMERIC_CONVERSION_SEQ_B() BOOST_NUMERIC_CONVERSION_BASE_BUILTIN_TYPES()
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace numeric {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace numeric {
 
     #define BOOST_PP_ITERATION_PARAMS_1 (3, (0, BOOST_PP_DEC(BOOST_PP_SEQ_SIZE(BOOST_NUMERIC_CONVERSION_SEQ_A())), <boost/numeric/conversion/detail/numeric_cast_traits.hpp>))
     #include BOOST_PP_ITERATE()    
 
-}}//namespace mars_boost_ksim::numeric;
+}}//namespace mars_boost::numeric;
 
     #if defined(__WAVE__) && defined(BOOST_NUMERIC_CONVERSION_CREATE_PREPROCESSED_FILES)
         #pragma wave option(output: null)
@@ -88,15 +88,15 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             #pragma wave option(preserve: 1)
         #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace numeric {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace numeric {
 
-    #define BOOST_NUMERIC_CONVERSION_SEQ_A() BOOST_NUMERIC_CONVERSION_BASE_BUILTIN_TYPES()(mars_boost_ksim::long_long_type)(mars_boost_ksim::ulong_long_type)
-	#define BOOST_NUMERIC_CONVERSION_SEQ_B() (mars_boost_ksim::long_long_type)(mars_boost_ksim::ulong_long_type)
+    #define BOOST_NUMERIC_CONVERSION_SEQ_A() BOOST_NUMERIC_CONVERSION_BASE_BUILTIN_TYPES()(mars_boost::long_long_type)(mars_boost::ulong_long_type)
+	#define BOOST_NUMERIC_CONVERSION_SEQ_B() (mars_boost::long_long_type)(mars_boost::ulong_long_type)
     
     #define BOOST_PP_ITERATION_PARAMS_1 (3, (0, BOOST_PP_DEC(BOOST_PP_SEQ_SIZE(BOOST_NUMERIC_CONVERSION_SEQ_A())), <boost/numeric/conversion/detail/numeric_cast_traits.hpp>))
     #include BOOST_PP_ITERATE()    
 
-}}//namespace mars_boost_ksim::numeric;
+}}//namespace mars_boost::numeric;
 
         #if defined(__WAVE__) && defined(BOOST_NUMERIC_CONVERSION_CREATE_PREPROCESSED_FILES)
             #pragma wave option(output: null)

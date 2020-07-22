@@ -22,7 +22,7 @@
 #include <boost/utility/enable_if.hpp>
 #include <boost/type_traits/is_same.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {  namespace algorithm {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {  namespace algorithm {
 
 /// \cond DOXYGEN_HIDE
 namespace detail {
@@ -72,7 +72,7 @@ namespace detail {
             ++first2;
             }
         if ( first1 != last1 && first2 != last2 )
-            return mars_boost_ksim::algorithm::detail::is_permutation_inner ( first1, last1, first2, last2,
+            return mars_boost::algorithm::detail::is_permutation_inner ( first1, last1, first2, last2,
                 std::equal_to<typename std::iterator_traits<ForwardIterator1>::value_type> ());
         return first1 == last1 && first2 == last2;
         }
@@ -127,7 +127,7 @@ bool is_permutation ( ForwardIterator1 first1, ForwardIterator1 last1,
     //  Create last2
         ForwardIterator2 last2 = first2;
         std::advance ( last2, std::distance (first1, last1));
-        return mars_boost_ksim::algorithm::detail::is_permutation_inner ( first1, last1, first2, last2, p );
+        return mars_boost::algorithm::detail::is_permutation_inner ( first1, last1, first2, last2, p );
         }
 
     return true;
@@ -155,7 +155,7 @@ bool is_permutation ( ForwardIterator1 first1, ForwardIterator1 last1, ForwardIt
     //  Create last2
         ForwardIterator2 last2 = first2;
         std::advance ( last2, std::distance (first1, last1));
-        return mars_boost_ksim::algorithm::detail::is_permutation_inner ( first1, last1, first2, last2,
+        return mars_boost::algorithm::detail::is_permutation_inner ( first1, last1, first2, last2,
             std::equal_to<typename std::iterator_traits<ForwardIterator1>::value_type> ());
         }
     return true;
@@ -172,7 +172,7 @@ bool is_permutation ( ForwardIterator1 first1, ForwardIterator1 last1, ForwardIt
 template <typename Range, typename ForwardIterator>
 bool is_permutation ( const Range &r, ForwardIterator first2 )
 {
-    return mars_boost_ksim::algorithm::is_permutation (mars_boost_ksim::begin (r), mars_boost_ksim::end (r), first2 );
+    return mars_boost::algorithm::is_permutation (mars_boost::begin (r), mars_boost::end (r), first2 );
 }
 
 /// \fn is_permutation ( const Range &r, ForwardIterator first2, BinaryPredicate pred )
@@ -185,10 +185,10 @@ bool is_permutation ( const Range &r, ForwardIterator first2 )
 //  Disable this template when the first two parameters are the same type
 //  That way the non-range version will be chosen.
 template <typename Range, typename ForwardIterator, typename BinaryPredicate>
-typename mars_boost_ksim::disable_if_c<boost_ksim::is_same<Range, ForwardIterator>::value, bool>::type
+typename mars_boost::disable_if_c<boost_ksim::is_same<Range, ForwardIterator>::value, bool>::type
 is_permutation ( const Range &r, ForwardIterator first2, BinaryPredicate pred )
 {
-    return mars_boost_ksim::algorithm::is_permutation (mars_boost_ksim::begin (r), mars_boost_ksim::end (r), first2, pred );
+    return mars_boost::algorithm::is_permutation (mars_boost::begin (r), mars_boost::end (r), first2, pred );
 }
 
 }}

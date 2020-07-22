@@ -15,7 +15,7 @@
 #include <boost/range/concepts.hpp>
 #include <algorithm>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range
     {
@@ -30,7 +30,7 @@ template<class RandomAccessRange>
 inline RandomAccessRange& random_shuffle(RandomAccessRange& rng)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( RandomAccessRangeConcept<RandomAccessRange> ));
-    std::random_shuffle(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng));
+    std::random_shuffle(mars_boost::begin(rng), mars_boost::end(rng));
     return rng;
 }
 
@@ -39,7 +39,7 @@ template<class RandomAccessRange>
 inline const RandomAccessRange& random_shuffle(const RandomAccessRange& rng)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( RandomAccessRangeConcept<const RandomAccessRange> ));
-    std::random_shuffle(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng));
+    std::random_shuffle(mars_boost::begin(rng), mars_boost::end(rng));
     return rng;
 }
 
@@ -48,7 +48,7 @@ template<class RandomAccessRange, class Generator>
 inline RandomAccessRange& random_shuffle(RandomAccessRange& rng, Generator& gen)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( RandomAccessRangeConcept<RandomAccessRange> ));
-    std::random_shuffle(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), gen);
+    std::random_shuffle(mars_boost::begin(rng), mars_boost::end(rng), gen);
     return rng;
 }
 
@@ -57,12 +57,12 @@ template<class RandomAccessRange, class Generator>
 inline const RandomAccessRange& random_shuffle(const RandomAccessRange& rng, Generator& gen)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( RandomAccessRangeConcept<const RandomAccessRange> ));
-    std::random_shuffle(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), gen);
+    std::random_shuffle(mars_boost::begin(rng), mars_boost::end(rng), gen);
     return rng;
 }
 
     } // namespace range
     using range::random_shuffle;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

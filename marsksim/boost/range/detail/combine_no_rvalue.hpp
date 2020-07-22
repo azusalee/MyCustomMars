@@ -56,7 +56,7 @@ BOOST_PP_MOD(BOOST_PP_TUPLE_ELEM(2, 0, \
 #define BOOST_RANGE_combine_impl(z, i, n)\
     template<BOOST_PP_ENUM_PARAMS(n, typename R)> \
     inline range::combined_range< \
-        mars_boost_ksim::tuple<BOOST_PP_ENUM(n, BOOST_RANGE_combined_range_iterator, i)> \
+        mars_boost::tuple<BOOST_PP_ENUM(n, BOOST_RANGE_combined_range_iterator, i)> \
     > \
     combine(BOOST_PP_ENUM(n, BOOST_RANGE_combined_args, i)) \
     { \

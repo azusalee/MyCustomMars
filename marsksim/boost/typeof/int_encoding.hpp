@@ -9,7 +9,7 @@
 #include <boost/mpl/size_t.hpp>
 #include <boost/config.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace type_of {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace type_of {
 
     template<class T> struct get_unsigned
     {
@@ -56,15 +56,15 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template<class V, std::size_t n, bool overflow = (n >= 0x3fffffff)>
     struct encode_size_t : push_back<
         V,
-        mars_boost_ksim::mpl::size_t<pack<n, false>::value>
+        mars_boost::mpl::size_t<pack<n, false>::value>
     >
     {};
 
     template<class V, std::size_t n>
     struct encode_size_t<V, n, true> : push_back<typename push_back<
         V,
-        mars_boost_ksim::mpl::size_t<pack<n % 0x3ffffffe, true>::value> >::type,
-        mars_boost_ksim::mpl::size_t<n / 0x3ffffffe>
+        mars_boost::mpl::size_t<pack<n % 0x3ffffffe, true>::value> >::type,
+        mars_boost::mpl::size_t<n / 0x3ffffffe>
     >
     {};
 

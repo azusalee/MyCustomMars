@@ -101,7 +101,7 @@ MapViewOfFileEx(
 # include <unistd.h>        // sysconf.
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace iostreams {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace iostreams {
 
 namespace detail {
 
@@ -156,7 +156,7 @@ mapped_file_impl::~mapped_file_impl()
 void mapped_file_impl::open(param_type p)
 {
     if (is_open()) {
-        mars_boost_ksim::throw_exception(BOOST_IOSTREAMS_FAILURE("file already open"));
+        mars_boost::throw_exception(BOOST_IOSTREAMS_FAILURE("file already open"));
         return;
     }
     p.normalize();
@@ -193,23 +193,23 @@ void mapped_file_impl::close()
 void mapped_file_impl::resize(stream_offset new_size)
 {
     if (!is_open()) {
-        mars_boost_ksim::throw_exception(BOOST_IOSTREAMS_FAILURE("file is closed"));
+        mars_boost::throw_exception(BOOST_IOSTREAMS_FAILURE("file is closed"));
         return;
     }
     if (flags() & mapped_file::priv) {
-        mars_boost_ksim::throw_exception(
+        mars_boost::throw_exception(
             BOOST_IOSTREAMS_FAILURE("can't resize private mapped file")
         );
         return;
     }
     if (!(flags() & mapped_file::readwrite)) {
-        mars_boost_ksim::throw_exception(
+        mars_boost::throw_exception(
             BOOST_IOSTREAMS_FAILURE("can't resize readonly mapped file")
         );
         return;
     }
     if (params_.offset >= new_size) {
-        mars_boost_ksim::throw_exception(
+        mars_boost::throw_exception(
             BOOST_IOSTREAMS_FAILURE("can't resize below mapped offset")
         );
         return;
@@ -322,13 +322,13 @@ void mapped_file_impl::open_file(param_type p)
     if (get_size) {
         LARGE_INTEGER info;
         if (get_size(handle_, &info)) {
-            mars_boost_ksim::intmax_t size =
-                ( (static_cast<mars_boost_ksim::intmax_t>(info.HighPart) << 32) |
+            mars_boost::intmax_t size =
+                ( (static_cast<mars_boost::intmax_t>(info.HighPart) << 32) |
                   info.LowPart );
             size_ =
                 static_cast<std::size_t>(
                     p.length != max_length ?
-                        std::min<mars_boost_ksim::intmax_t>(p.length, size) :
+                        std::min<mars_boost::intmax_t>(p.length, size) :
                         size
                 );
         } else {
@@ -342,12 +342,12 @@ void mapped_file_impl::open_file(param_type p)
                  !=
              INVALID_FILE_SIZE )
         {
-            mars_boost_ksim::intmax_t size =
-                (static_cast<mars_boost_ksim::intmax_t>(hi) << 32) | low;
+            mars_boost::intmax_t size =
+                (static_cast<mars_boost::intmax_t>(hi) << 32) | low;
             size_ =
                 static_cast<std::size_t>(
                     p.length != max_length ?
-                        std::min<mars_boost_ksim::intmax_t>(p.length, size) :
+                        std::min<mars_boost::intmax_t>(p.length, size) :
                         size
                 );
         } else {
@@ -517,7 +517,7 @@ void mapped_file_impl::cleanup_and_throw(const char* msg)
 #endif
     clear(true);
     BOOST_TRY {
-    	mars_boost_ksim::iostreams::detail::throw_system_failure(msg);
+    	mars_boost::iostreams::detail::throw_system_failure(msg);
     } BOOST_CATCH(...) {
     } BOOST_CATCH_END
 }
@@ -527,7 +527,7 @@ void mapped_file_impl::cleanup_and_throw(const char* msg)
 void mapped_file_params_base::normalize()
 {
     if (mode && flags)
-        mars_boost_ksim::throw_exception(BOOST_IOSTREAMS_FAILURE(
+        mars_boost::throw_exception(BOOST_IOSTREAMS_FAILURE(
             "at most one of 'mode' and 'flags' may be specified"
         ));
     if (flags) {
@@ -537,7 +537,7 @@ void mapped_file_params_base::normalize()
         case mapped_file::priv:
             break;
         default:
-            mars_boost_ksim::throw_exception(BOOST_IOSTREAMS_FAILURE("invalid flags"));
+            mars_boost::throw_exception(BOOST_IOSTREAMS_FAILURE("invalid flags"));
         }
     } else {
         flags = (mode & BOOST_IOS::out) ? 
@@ -546,9 +546,9 @@ void mapped_file_params_base::normalize()
         mode = BOOST_IOS::openmode();
     }
     if (offset < 0)
-        mars_boost_ksim::throw_exception(BOOST_IOSTREAMS_FAILURE("invalid offset"));
+        mars_boost::throw_exception(BOOST_IOSTREAMS_FAILURE("invalid offset"));
     if (new_file_size < 0)
-        mars_boost_ksim::throw_exception(
+        mars_boost::throw_exception(
             BOOST_IOSTREAMS_FAILURE("invalid new file size")
         );
 }

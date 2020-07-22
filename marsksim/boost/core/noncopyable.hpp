@@ -11,7 +11,7 @@
 
 #include <boost/config.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 //  Private copy constructor and copy assignment ensure classes derived from
 //  class noncopyable cannot be copied.
@@ -43,6 +43,6 @@ namespace noncopyable_  // protection from unintended ADL
 
 typedef noncopyable_::noncopyable noncopyable;
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif  // BOOST_CORE_NONCOPYABLE_HPP

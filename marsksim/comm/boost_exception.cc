@@ -21,7 +21,7 @@
 #include "comm/xlogger/xlogger.h"
 
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
     void throw_exception( std::exception const & e ) {
         xfatal2(TSF"boost exception:%_", e.what());

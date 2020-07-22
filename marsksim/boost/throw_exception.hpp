@@ -44,12 +44,12 @@
 # include <boost/current_function.hpp>
 # define BOOST_THROW_EXCEPTION_CURRENT_FUNCTION BOOST_CURRENT_FUNCTION
 #endif
-# define BOOST_THROW_EXCEPTION(x) ::mars_boost_ksim::exception_detail::throw_exception_(x,BOOST_THROW_EXCEPTION_CURRENT_FUNCTION,__FILE__,__LINE__)
+# define BOOST_THROW_EXCEPTION(x) ::mars_boost::exception_detail::throw_exception_(x,BOOST_THROW_EXCEPTION_CURRENT_FUNCTION,__FILE__,__LINE__)
 #else
-# define BOOST_THROW_EXCEPTION(x) ::mars_boost_ksim::throw_exception(x)
+# define BOOST_THROW_EXCEPTION(x) ::mars_boost::throw_exception(x)
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 #ifdef BOOST_NO_EXCEPTIONS
 
@@ -83,7 +83,7 @@ template<class E> BOOST_NORETURN inline void throw_exception( E const & e )
         void
         throw_exception_( E const & x, char const * current_function, char const * file, int line )
         {
-            mars_boost_ksim::throw_exception(
+            mars_boost::throw_exception(
                 set_info(
                     set_info(
                         set_info(
@@ -94,7 +94,7 @@ template<class E> BOOST_NORETURN inline void throw_exception( E const & e )
         }
     }
 #endif
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #if defined(_MSC_VER) && !defined(BOOST_EXCEPTION_ENABLE_WARNINGS)
 #pragma warning(pop)

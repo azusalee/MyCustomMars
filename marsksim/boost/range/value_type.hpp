@@ -20,7 +20,7 @@
 
 #include <boost/iterator/iterator_traits.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     template< class T >
     struct range_value : iterator_value< typename range_iterator<T>::type >

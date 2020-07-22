@@ -17,28 +17,28 @@
 #include <boost/type_traits/detail/yes_no_type.hpp>
 #include <boost/type_traits/declval.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim{
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost{
 
    namespace detail{
 
       struct is_destructible_imp
       {
-         template<typename T, typename = decltype(mars_boost_ksim::declval<T&>().~T())>
-         static mars_boost_ksim::type_traits::yes_type test(int);
+         template<typename T, typename = decltype(mars_boost::declval<T&>().~T())>
+         static mars_boost::type_traits::yes_type test(int);
          template<typename>
-         static mars_boost_ksim::type_traits::no_type test(...);
+         static mars_boost::type_traits::no_type test(...);
       };
 
    }
 
-   template <class T> struct is_destructible : public integral_constant<bool, sizeof(detail::is_destructible_imp::test<T>(0)) == sizeof(mars_boost_ksim::type_traits::yes_type)>{};
+   template <class T> struct is_destructible : public integral_constant<bool, sizeof(detail::is_destructible_imp::test<T>(0)) == sizeof(mars_boost::type_traits::yes_type)>{};
 
 #else
 
 #include <boost/type_traits/is_pod.hpp>
 #include <boost/type_traits/is_class.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim{
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost{
 
    // We don't know how to implement this:
    template <class T> struct is_destructible : public integral_constant<bool, is_pod<T>::value || is_class<T>::value>{};
@@ -55,6 +55,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
    template <class T, std::size_t N> struct is_destructible<T[N]> : public is_destructible<T>{};
    template <class T> struct is_destructible<T[]> : public is_destructible<T>{};
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_IS_DESTRUCTIBLE_HPP_INCLUDED

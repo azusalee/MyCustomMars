@@ -19,7 +19,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 namespace executors
 {
@@ -139,7 +139,7 @@ namespace executors
      * Whatever exception that can be throw while storing the closure.
      */
     void submit(BOOST_THREAD_RV_REF(work) closure)  {
-      work_queue.push(mars_boost_ksim::move(closure));
+      work_queue.push(mars_boost::move(closure));
     }
 
 #if defined(BOOST_NO_CXX11_RVALUE_REFERENCES)
@@ -158,9 +158,9 @@ namespace executors
     template <typename Closure>
     void submit(BOOST_THREAD_FWD_REF(Closure) closure)
     {
-      //work_queue.push(work(mars_boost_ksim::forward<Closure>(closure)));
-      work w((mars_boost_ksim::forward<Closure>(closure)));
-      submit(mars_boost_ksim::move(w));
+      //work_queue.push(work(mars_boost::forward<Closure>(closure)));
+      work w((mars_boost::forward<Closure>(closure)));
+      submit(mars_boost::move(w));
     }
 
     /**

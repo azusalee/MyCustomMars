@@ -30,7 +30,7 @@
     match depending on the iterator used.
 */
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
     namespace algorithm { 
 
 //  find_iterator -----------------------------------------------//
@@ -56,7 +56,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
         private:
             // facade support
-            friend class ::mars_boost_ksim::iterator_core_access;
+            friend class ::mars_boost::iterator_core_access;
 
         private:
         // typedefs
@@ -113,9 +113,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                     FinderT Finder ) :
                 detail::find_iterator_base<IteratorT>(Finder,0)
             {
-                iterator_range<BOOST_STRING_TYPENAME range_iterator<RangeT>::type> lit_col(::mars_boost_ksim::as_literal(Col));
-                m_Match=::mars_boost_ksim::make_iterator_range(::mars_boost_ksim::begin(lit_col), ::mars_boost_ksim::begin(lit_col));
-                m_End=::mars_boost_ksim::end(lit_col);
+                iterator_range<BOOST_STRING_TYPENAME range_iterator<RangeT>::type> lit_col(::mars_boost::as_literal(Col));
+                m_Match=::mars_boost::make_iterator_range(::mars_boost::begin(lit_col), ::mars_boost::begin(lit_col));
+                m_End=::mars_boost::end(lit_col);
 
                 increment();
             }
@@ -212,7 +212,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
         private:
             // facade support
-            friend class ::mars_boost_ksim::iterator_core_access;
+            friend class ::mars_boost::iterator_core_access;
 
         private:
         // typedefs
@@ -282,10 +282,10 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 detail::find_iterator_base<IteratorT>(Finder,0),
                 m_bEof(false)
             {
-                iterator_range<BOOST_STRING_TYPENAME range_iterator<RangeT>::type> lit_col(::mars_boost_ksim::as_literal(Col));
-                m_Match=make_iterator_range(::mars_boost_ksim::begin(lit_col), ::mars_boost_ksim::begin(lit_col));
-                m_Next=::mars_boost_ksim::begin(lit_col);
-                m_End=::mars_boost_ksim::end(lit_col);
+                iterator_range<BOOST_STRING_TYPENAME range_iterator<RangeT>::type> lit_col(::mars_boost::as_literal(Col));
+                m_Match=make_iterator_range(::mars_boost::begin(lit_col), ::mars_boost::begin(lit_col));
+                m_Next=::mars_boost::begin(lit_col);
+                m_End=::mars_boost::end(lit_col);
 
                 // force the correct behavior for empty sequences and yield at least one token
                 if(m_Next!=m_End)
@@ -382,7 +382,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     using algorithm::split_iterator;
     using algorithm::make_split_iterator;
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 
 #endif  // BOOST_STRING_FIND_ITERATOR_HPP

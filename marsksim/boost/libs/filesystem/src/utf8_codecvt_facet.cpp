@@ -15,7 +15,7 @@
 #include <boost/filesystem/config.hpp>
 
 #define BOOST_UTF8_BEGIN_NAMESPACE \
-     namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace filesystem { namespace detail {
+     namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace filesystem { namespace detail {
 
 #define BOOST_UTF8_END_NAMESPACE }}}
 #define BOOST_UTF8_DECL BOOST_FILESYSTEM_DECL

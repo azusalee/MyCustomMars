@@ -10,7 +10,7 @@
 
 #include <boost/type_traits/integral_constant.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 //* is a type T a floating-point type described in the standard (3.9.1p8)
    template <class T> struct is_floating_point : public false_type{};
@@ -25,6 +25,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
    template<> struct is_floating_point<__float128> : public true_type{};
 #endif
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TYPE_TRAITS_IS_FLOAT_HPP_INCLUDED

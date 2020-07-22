@@ -30,7 +30,7 @@ struct void_ { typedef void_ type; };
 
 BOOST_MPL_AUX_ADL_BARRIER_NAMESPACE_CLOSE
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl {
 
 template< typename T >
 struct is_void_

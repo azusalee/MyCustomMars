@@ -15,7 +15,7 @@
 #include <cstddef>
 #include <boost/detail/workaround.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
    //  convert a type T to a non-cv-qualified type - remove_const<T>
    template <class T> struct remove_const{ typedef T type; };
@@ -28,6 +28,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #endif
 #endif
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_REMOVE_CONST_HPP_INCLUDED

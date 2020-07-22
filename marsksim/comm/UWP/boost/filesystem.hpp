@@ -8,7 +8,7 @@
 #  define BOOST_FILESYSTEM_STRICMP strcmp
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 	namespace filesystem
 	{
@@ -209,22 +209,22 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 		}
 
 		inline
-			mars_boost_ksim::uintmax_t file_size(const path& p)
+			mars_boost::uintmax_t file_size(const path& p)
 		{
 			std::wstring ws = p.wstring();
 			WIN32_FILE_ATTRIBUTE_DATA fad;
 			BOOL ret = GetFileAttributesExW(ws.c_str(), GetFileExInfoStandard, &fad);
 			if (ret != TRUE)
 			{
-				return static_cast<mars_boost_ksim::uintmax_t>(-1);
+				return static_cast<mars_boost::uintmax_t>(-1);
 			}
 
 			if (fad.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
 			{
-				return static_cast<mars_boost_ksim::uintmax_t>(-1);
+				return static_cast<mars_boost::uintmax_t>(-1);
 			}
 
-			return (static_cast<mars_boost_ksim::uintmax_t>(fad.nFileSizeHigh)
+			return (static_cast<mars_boost::uintmax_t>(fad.nFileSizeHigh)
 				<< (sizeof(fad.nFileSizeLow) * 8)) + fad.nFileSizeLow;
 		}
 
@@ -367,10 +367,10 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 			directory_entry() {}
 
-			explicit directory_entry(const mars_boost_ksim::filesystem::path& p)
+			explicit directory_entry(const mars_boost::filesystem::path& p)
 				: m_path(p), m_status(file_status()), m_symlink_status(file_status()) {}
 
-			directory_entry(const mars_boost_ksim::filesystem::path& p,
+			directory_entry(const mars_boost::filesystem::path& p,
 				file_status st, file_status symlink_st = file_status())
 				: m_path(p), m_status(st), m_symlink_status(symlink_st) {}
 
@@ -385,13 +385,13 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 				return *this;
 			}
 
-			void assign(const mars_boost_ksim::filesystem::path& p,
+			void assign(const mars_boost::filesystem::path& p,
 				file_status st = file_status(), file_status symlink_st = file_status())
 			{
 				m_path = p; m_status = st; m_symlink_status = symlink_st;
 			}
 
-			void replace_filename(const mars_boost_ksim::filesystem::path& p,
+			void replace_filename(const mars_boost::filesystem::path& p,
 				file_status st = file_status(), file_status symlink_st = file_status())
 			{
 				m_path.remove_filename();
@@ -400,16 +400,16 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 				m_symlink_status = symlink_st;
 			}
 
-			const mars_boost_ksim::filesystem::path&  path() const { return m_path; }
-			operator const mars_boost_ksim::filesystem::path&() const { return m_path; }
-			file_status   status() const { m_status = mars_boost_ksim::filesystem::status(m_path); return m_status; }
+			const mars_boost::filesystem::path&  path() const { return m_path; }
+			operator const mars_boost::filesystem::path&() const { return m_path; }
+			file_status   status() const { m_status = mars_boost::filesystem::status(m_path); return m_status; }
 			file_status   symlink_status() const { return m_symlink_status; }
 
 			bool operator==(const directory_entry& rhs) const { return m_path.string().compare(rhs.path().string()) == 0; }
 			bool operator!=(const directory_entry& rhs) const { return m_path.string().compare(rhs.path().string()) != 0; }
 
 		private:
-			mars_boost_ksim::filesystem::path   m_path;
+			mars_boost::filesystem::path   m_path;
 			mutable file_status       m_status; 
 			mutable file_status       m_symlink_status;
 		};
@@ -430,7 +430,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 		class directory_iterator
 		{
 		private:
-			mars_boost_ksim::shared_ptr< dir_itr_imp >  m_imp;
+			mars_boost::shared_ptr< dir_itr_imp >  m_imp;
 			
 			bool dir_itr_first(void *& handle, const path& dir, std::string & target, file_status & sf, file_status & symlink_sf)
 			{
@@ -523,7 +523,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 					it.m_imp.reset(); // eof, so make end iterator
 				else // not eof
 				{
-					mars_boost_ksim::filesystem::path np(p);
+					mars_boost::filesystem::path np(p);
 					np /= filename;
 					it.m_imp->dir_entry.assign(np, file_stat, symlink_file_stat);
 					if (filename[0] == '.' // dot or dot-dot
@@ -557,7 +557,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 					if (!result)  // happens if filesystem is corrupt, such as on a damaged optical disc
 					{
-						mars_boost_ksim::filesystem::path error_path(it.m_imp->dir_entry.path().parent_path());  // fix ticket #5900
+						mars_boost::filesystem::path error_path(it.m_imp->dir_entry.path().parent_path());  // fix ticket #5900
 						it.m_imp.reset();
 						return;
 					}
@@ -637,7 +637,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 			path path()
 			{
-				return m_imp.get() ? m_imp->dir_entry.path() : mars_boost_ksim::filesystem::path();
+				return m_imp.get() ? m_imp->dir_entry.path() : mars_boost::filesystem::path();
 			}
 
 			file_status status()

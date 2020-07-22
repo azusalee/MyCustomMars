@@ -19,7 +19,7 @@
 #include <boost/typeof/std/complex.hpp>
 #include <boost/accumulators/numeric/functional_fwd.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace numeric { namespace operators
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace numeric { namespace operators
 {
     // So that the stats compile when Sample type is std::complex
     template<typename T, typename U>
@@ -46,9 +46,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         return ri /= static_cast<T>(u);
     }
 
-}}} // namespace mars_boost_ksim::numeric::operators
+}}} // namespace mars_boost::numeric::operators
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace numeric
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace numeric
 {
     namespace detail
     {
@@ -77,6 +77,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         }
     };
 
-}} // namespace mars_boost_ksim::numeric
+}} // namespace mars_boost::numeric
 
 #endif

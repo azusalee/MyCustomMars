@@ -49,34 +49,34 @@ DEFINE_FIND_CLASS(KNetJava2C, "com/tencent/marsksim/stn/StnLogic")
 extern "C" {
 
 /*
- * Class:     com_tencent_mars_stn_StnLogic
+ * Class:     com_tencent_marsksim_stn_StnLogic
  * Method:    getLoadLibraries
  * Signature: ()jobject
  */
-JNIEXPORT jobject JNICALL Java_com_tencent_mars_stn_StnLogic_getLoadLibraries
+JNIEXPORT jobject JNICALL Java_com_tencent_marsksim_stn_StnLogic_getLoadLibraries
   (JNIEnv *_env, jclass clz) {
 
 	return marsksim::baseevent::getLoadLibraries(_env);
 }
 
 /*
- * Class:     com_tencent_mars_stn_StnLogic_Java2C
+ * Class:     com_tencent_marsksim_stn_StnLogic_Java2C
  * Method:    reset
  * Signature: ()V
  */
 DEFINE_FIND_STATIC_METHOD(KJava2C_reset, KNetJava2C, "reset", "()V")
-JNIEXPORT void JNICALL Java_com_tencent_mars_stn_StnLogic_reset
+JNIEXPORT void JNICALL Java_com_tencent_marsksim_stn_StnLogic_reset
   (JNIEnv *_env, jclass clz) {
 	Reset();
 }
 
 /*
- * Class:     com_tencent_mars_stn_StnLogic_Java2C
+ * Class:     com_tencent_marsksim_stn_StnLogic_Java2C
  * Method:    setLonglinkSvrAddr
  * Signature: (Ljava/lang/String;[ILjava/lang/String;)V
  */
 DEFINE_FIND_STATIC_METHOD(KJava2C_setLonglinkSvrAddr, KNetJava2C, "setLonglinkSvrAddr", "(Ljava/lang/String;[ILjava/lang/String;)V")
-JNIEXPORT void JNICALL Java_com_tencent_mars_stn_StnLogic_setLonglinkSvrAddr
+JNIEXPORT void JNICALL Java_com_tencent_marsksim_stn_StnLogic_setLonglinkSvrAddr
   (JNIEnv *_env, jclass, jstring _host, jintArray _ports, jstring _debug_ip) {
 
 	std::string host = (NULL == _host ? "" : ScopedJstring(_env, _host).GetChar());
@@ -98,12 +98,12 @@ JNIEXPORT void JNICALL Java_com_tencent_mars_stn_StnLogic_setLonglinkSvrAddr
 }
 
 /*
- * Class:     com_tencent_mars_stn_StnLogic_Java2C
+ * Class:     com_tencent_marsksim_stn_StnLogic_Java2C
  * Method:    setShortlinkSvrAddr
  * Signature: (ILjava/lang/String;)V
  */
 DEFINE_FIND_STATIC_METHOD(KJava2C_setShortlinkSvrAddr, KNetJava2C, "setShortlinkSvrAddr", "(ILjava/lang/String;)V")
-JNIEXPORT void JNICALL Java_com_tencent_mars_stn_StnLogic_setShortlinkSvrAddr
+JNIEXPORT void JNICALL Java_com_tencent_marsksim_stn_StnLogic_setShortlinkSvrAddr
   (JNIEnv *_env, jclass, jint _port, jstring _debug_ip) {
 
 	std::string debug_ip = (NULL == _debug_ip ? "" : ScopedJstring(_env, _debug_ip).GetChar());
@@ -112,12 +112,12 @@ JNIEXPORT void JNICALL Java_com_tencent_mars_stn_StnLogic_setShortlinkSvrAddr
 }
 
 /*
- * Class:     com_tencent_mars_stn_StnLogic_Java2C
+ * Class:     com_tencent_marsksim_stn_StnLogic_Java2C
  * Method:    setDebugIP
  * Signature: (Ljava/lang/String;Ljava/lang/String;)V
  */
 DEFINE_FIND_STATIC_METHOD(KJava2C_setDebugIP, KNetJava2C, "setDebugIP", "(Ljava/lang/String;Ljava/lang/String;)V")
-JNIEXPORT void JNICALL Java_com_tencent_mars_stn_StnLogic_setDebugIP
+JNIEXPORT void JNICALL Java_com_tencent_marsksim_stn_StnLogic_setDebugIP
   (JNIEnv *_env, jclass, jstring _host, jstring _debug_ip) {
 
 	std::string host = (NULL == _host ? "" : ScopedJstring(_env, _host).GetChar());
@@ -126,12 +126,12 @@ JNIEXPORT void JNICALL Java_com_tencent_mars_stn_StnLogic_setDebugIP
 }
 
 /*
- * Class:     com_tencent_mars_stn_StnLogic_Java2C
+ * Class:     com_tencent_marsksim_stn_StnLogic_Java2C
  * Method:    setBackupIPs
  * Signature: (Ljava/lang/String;[Ljava/lang/String;)V
  */
 DEFINE_FIND_STATIC_METHOD(KJava2C_setBackupIPs, KNetJava2C, "setBackupIPs", "(Ljava/lang/String;[Ljava/lang/String;)V")
-JNIEXPORT void JNICALL Java_com_tencent_mars_stn_StnLogic_setBackupIPs
+JNIEXPORT void JNICALL Java_com_tencent_marsksim_stn_StnLogic_setBackupIPs
   (JNIEnv *_env, jclass, jstring _host, jobjectArray _objarray) {
 	std::string host = (NULL == _host ? "" : ScopedJstring(_env, _host).GetChar());
 	std::vector<std::string> backupip_list;
@@ -149,12 +149,12 @@ JNIEXPORT void JNICALL Java_com_tencent_mars_stn_StnLogic_setBackupIPs
 }
 
 /*
- * Class:     com_tencent_mars_stn_StnLogic_Java2C
+ * Class:     com_tencent_marsksim_stn_StnLogic_Java2C
  * Method:    startTask
  * Signature: (Lcom/tencent/marsksim/stn/StnLogic$Task;)V
  */
 DEFINE_FIND_STATIC_METHOD(KJava2C_startTask, KNetJava2C, "startTask", "(Lcom/tencent/marsksim/stn/StnLogic$Task;)V")
-JNIEXPORT void JNICALL Java_com_tencent_mars_stn_StnLogic_startTask
+JNIEXPORT void JNICALL Java_com_tencent_marsksim_stn_StnLogic_startTask
   (JNIEnv *_env, jclass, jobject _task) {
 	xverbose_function();
 
@@ -232,12 +232,12 @@ JNIEXPORT void JNICALL Java_com_tencent_mars_stn_StnLogic_startTask
 }
 
 /*
- * Class:     com_tencent_mars_stn_StnLogic_Java2C
+ * Class:     com_tencent_marsksim_stn_StnLogic_Java2C
  * Method:    stopTask
  * Signature: (I)V
  */
 DEFINE_FIND_STATIC_METHOD(KJava2C_stopTask, KNetJava2C, "stopTask", "(I)V")
-JNIEXPORT void JNICALL Java_com_tencent_mars_stn_StnLogic_stopTask
+JNIEXPORT void JNICALL Java_com_tencent_marsksim_stn_StnLogic_stopTask
   (JNIEnv *_env, jclass, jint _taskid) {
 	xverbose_function();
 
@@ -245,7 +245,7 @@ JNIEXPORT void JNICALL Java_com_tencent_mars_stn_StnLogic_stopTask
 }
 
 DEFINE_FIND_STATIC_METHOD(KJava2C_hasTask, KNetJava2C, "hasTask", "(I)Z")
-JNIEXPORT jboolean JNICALL Java_com_tencent_mars_stn_StnLogic_hasTask
+JNIEXPORT jboolean JNICALL Java_com_tencent_marsksim_stn_StnLogic_hasTask
   (JNIEnv *_env, jclass, jint _taskid) {
 	xverbose_function();
 
@@ -253,12 +253,12 @@ JNIEXPORT jboolean JNICALL Java_com_tencent_mars_stn_StnLogic_hasTask
 }
 
 /*
- * Class:     com_tencent_mars_stn_StnLogic_Java2C
+ * Class:     com_tencent_marsksim_stn_StnLogic_Java2C
  * Method:    redoTask
  * Signature: ()V
  */
 DEFINE_FIND_STATIC_METHOD(KJava2C_redoTask, KNetJava2C, "redoTask", "()V")
-JNIEXPORT void JNICALL Java_com_tencent_mars_stn_StnLogic_redoTask
+JNIEXPORT void JNICALL Java_com_tencent_marsksim_stn_StnLogic_redoTask
   (JNIEnv *_env, jclass)
 {
 	xverbose_function();
@@ -266,12 +266,12 @@ JNIEXPORT void JNICALL Java_com_tencent_mars_stn_StnLogic_redoTask
     RedoTasks();
 }
 /*
- * Class:     com_tencent_mars_stn_StnLogic_Java2C
+ * Class:     com_tencent_marsksim_stn_StnLogic_Java2C
  * Method:    clearTask
  * Signature: ()V
  */
 DEFINE_FIND_STATIC_METHOD(KJava2C_clearTask, KNetJava2C, "clearTask", "()V")
-JNIEXPORT void JNICALL Java_com_tencent_mars_stn_StnLogic_clearTask
+JNIEXPORT void JNICALL Java_com_tencent_marsksim_stn_StnLogic_clearTask
   (JNIEnv *_env, jclass) {
 	xverbose_function();
 
@@ -279,11 +279,11 @@ JNIEXPORT void JNICALL Java_com_tencent_mars_stn_StnLogic_clearTask
 }
 
 /*
- * Class:     com_tencent_mars_stn_StnLogic_Java2C
+ * Class:     com_tencent_marsksim_stn_StnLogic_Java2C
  * Method:    makesureLongLinkConnected
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_com_tencent_mars_stn_StnLogic_makesureLongLinkConnected
+JNIEXPORT void JNICALL Java_com_tencent_marsksim_stn_StnLogic_makesureLongLinkConnected
   (JNIEnv *_env, jclass) {
 	xverbose_function();
 
@@ -291,11 +291,11 @@ JNIEXPORT void JNICALL Java_com_tencent_mars_stn_StnLogic_makesureLongLinkConnec
 }
 
 /*
- * Class:     com_tencent_mars_stn_StnLogic_Java2C
+ * Class:     com_tencent_marsksim_stn_StnLogic_Java2C
  * Method:    setSignallingStrategy
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_tencent_mars_stn_StnLogic_setSignallingStrategy
+JNIEXPORT void JNICALL Java_com_tencent_marsksim_stn_StnLogic_setSignallingStrategy
   (JNIEnv *_env, jclass, jlong _period, jlong _keep_time) {
 	xverbose_function();
 
@@ -303,11 +303,11 @@ JNIEXPORT void JNICALL Java_com_tencent_mars_stn_StnLogic_setSignallingStrategy
 }
 
 /*
- * Class:     com_tencent_mars_stn_StnLogic_Java2C
+ * Class:     com_tencent_marsksim_stn_StnLogic_Java2C
  * Method:    keepSignalling
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_com_tencent_mars_stn_StnLogic_keepSignalling
+JNIEXPORT void JNICALL Java_com_tencent_marsksim_stn_StnLogic_keepSignalling
   (JNIEnv *_env, jclass) {
 	xverbose_function();
 
@@ -315,18 +315,18 @@ JNIEXPORT void JNICALL Java_com_tencent_mars_stn_StnLogic_keepSignalling
 }
 
 /*
- * Class:     com_tencent_mars_stn_StnLogic_Java2C
+ * Class:     com_tencent_marsksim_stn_StnLogic_Java2C
  * Method:    stopSignalling
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_com_tencent_mars_stn_StnLogic_stopSignalling
+JNIEXPORT void JNICALL Java_com_tencent_marsksim_stn_StnLogic_stopSignalling
   (JNIEnv *_env, jclass) {
 	xverbose_function();
 
 	StopSignalling();
 }
 
-JNIEXPORT void JNICALL Java_com_tencent_mars_stn_StnLogic_setClientVersion
+JNIEXPORT void JNICALL Java_com_tencent_marsksim_stn_StnLogic_setClientVersion
   (JNIEnv *_env, jclass, jint _client_version) {
 	marsksim::stn::SetClientVersion(_client_version);
 }

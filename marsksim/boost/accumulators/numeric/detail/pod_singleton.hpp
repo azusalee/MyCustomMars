@@ -4,7 +4,7 @@
 #ifndef BOOST_DETAIL_POD_SINGLETON_DWA200655_HPP
 # define BOOST_DETAIL_POD_SINGLETON_DWA200655_HPP
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace detail {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace detail {
 
 template<typename T>
 struct pod_singleton
@@ -15,6 +15,6 @@ struct pod_singleton
 template<typename T>
 T pod_singleton<T>::instance;
 
-}} // namespace mars_boost_ksim::detail
+}} // namespace mars_boost::detail
 
 #endif // BOOST_DETAIL_POD_SINGLETON_DWA200655_HPP

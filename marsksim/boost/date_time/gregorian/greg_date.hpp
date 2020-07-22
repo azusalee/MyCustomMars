@@ -15,7 +15,7 @@
 #include <boost/date_time/gregorian/greg_calendar.hpp>
 #include <boost/date_time/gregorian/greg_duration.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace gregorian {
 
   //bring special enum values into the namespace
@@ -56,7 +56,7 @@ namespace gregorian {
       : date_time::date<date, gregorian_calendar, date_duration>(y, m, d)
     {
       if (gregorian_calendar::end_of_month_day(y, m) < d) {
-        mars_boost_ksim::throw_exception(bad_day_of_month(std::string("Day of month is not valid for year")));
+        mars_boost::throw_exception(bad_day_of_month(std::string("Day of month is not valid for year")));
       }
     }
     //! Constructor from a ymd_type structure

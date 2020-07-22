@@ -23,7 +23,7 @@
 
 #include <boost/type_traits/integral_constant.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 #if defined( __CODEGEARC__ )
 
@@ -40,7 +40,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 #endif
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_IS_CONST_HPP_INCLUDED
 

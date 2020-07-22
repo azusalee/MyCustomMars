@@ -34,7 +34,7 @@ namespace std { using ::strlen; }
 # include <string.h>
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace iostreams { namespace detail {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace iostreams { namespace detail {
 
 inline BOOST_IOSTREAMS_FAILURE system_failure(const char* msg)
 {
@@ -94,10 +94,10 @@ inline BOOST_IOSTREAMS_FAILURE system_failure(const std::string& msg)
 { return system_failure(msg.c_str()); }
 
 inline void throw_system_failure(const char* msg)
-{ mars_boost_ksim::throw_exception(system_failure(msg)); }
+{ mars_boost::throw_exception(system_failure(msg)); }
 
 inline void throw_system_failure(const std::string& msg)
-{ mars_boost_ksim::throw_exception(system_failure(msg)); }
+{ mars_boost::throw_exception(system_failure(msg)); }
 
 } } } // End namespaces detail, iostreams, boost.
 

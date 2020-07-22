@@ -18,7 +18,7 @@
 #  pragma once
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace container {
 namespace container_detail {
 
@@ -32,6 +32,6 @@ const T &min_value(const T &a, const T &b)
 
 }  //namespace container_detail {
 }  //namespace container {
-}  //namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+}  //namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 #endif   //#ifndef BOOST_CONTAINER_DETAIL_MIN_MAX_HPP

@@ -29,7 +29,7 @@
 #include "marsksim/comm/autobuffer.h"
 #include "marsksim/comm/socket/socketselect.h"
 
-class NetCheckTrafficMonitor;
+class NetCheckTrafficMonitorksim;
 
 namespace marsksim {
 namespace sdt {
@@ -45,7 +45,7 @@ class TcpQuery {
     };
 
   public:
-    TcpQuery(const char* _ip, uint16_t _port, unsigned int connTimeout, NetCheckTrafficMonitor* trafficMonitor = NULL);
+    TcpQuery(const char* _ip, uint16_t _port, unsigned int connTimeout, NetCheckTrafficMonitorksim* trafficMonitor = NULL);
     virtual ~TcpQuery();
 
   public:

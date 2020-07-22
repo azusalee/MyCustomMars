@@ -13,7 +13,7 @@
 #ifndef BOOST_SIGNALS2_DUMMY_MUTEX_HPP
 #define BOOST_SIGNALS2_DUMMY_MUTEX_HPP
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
   namespace signals2 {
     class dummy_mutex
     {
@@ -23,6 +23,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       void unlock() {}
     };
   } // end namespace signals2
-} // end namespace mars_boost_ksim
+} // end namespace mars_boost
 
 #endif // BOOST_SIGNALS2_DUMMY_MUTEX_HPP

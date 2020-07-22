@@ -16,7 +16,7 @@
 #include <boost/detail/no_exceptions_support.hpp>
 #include <boost/mpl/if.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim{
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost{
 
 namespace multi_index{
 
@@ -120,7 +120,7 @@ struct null_guard : public scope_guard_impl_base
 template< bool cond, class T >
 struct null_guard_return
 {
-    typedef typename mars_boost_ksim::mpl::if_c<cond,T,null_guard>::type type;
+    typedef typename mars_boost::mpl::if_c<cond,T,null_guard>::type type;
 };
 
 template<typename F>
@@ -448,6 +448,6 @@ make_obj_guard_if(Obj& obj,MemFun mem_fun,P1 p1,P2 p2,P3 p3)
 
 } /* namespace multi_index */
 
-} /* namespace mars_boost_ksim */
+} /* namespace mars_boost */
 
 #endif

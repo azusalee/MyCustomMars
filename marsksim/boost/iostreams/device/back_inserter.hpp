@@ -15,7 +15,7 @@
 #include <boost/iostreams/detail/ios.hpp> // streamsize.
 #include <boost/iostreams/categories.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace iostreams {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace iostreams {
 
 template<typename Container>
 class back_insert_device {

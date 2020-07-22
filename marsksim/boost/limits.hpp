@@ -26,8 +26,8 @@
 #  define BOOST_LLT __int64
 #  define BOOST_ULLT unsigned __int64
 #else
-#  define BOOST_LLT  ::mars_boost_ksim::long_long_type
-#  define BOOST_ULLT  ::mars_boost_ksim::ulong_long_type
+#  define BOOST_LLT  ::mars_boost::long_long_type
+#  define BOOST_ULLT  ::mars_boost::ulong_long_type
 #endif
 
 #include <climits>  // for CHAR_BIT

@@ -16,7 +16,7 @@
 #include <boost/iterator/iterator_facade.hpp>
 #include <iterator>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range_detail
     {
@@ -147,7 +147,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             typedef typename super_t::difference_type difference_type;
             typedef typename super_t::reference reference;
             typedef BaseIterator base_iterator;
-            typedef typename mars_boost_ksim::make_unsigned<difference_type>::type
+            typedef typename mars_boost::make_unsigned<difference_type>::type
                         size_type;
             typedef std::bidirectional_iterator_tag iterator_category;
 
@@ -417,7 +417,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             return strided_iterator<
                 typename range_iterator<Rng>::type,
                 forward_traversal_tag
-            >(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), stride);
+            >(mars_boost::begin(rng), mars_boost::end(rng), stride);
         }
 
         template<class Rng, class Difference> inline
@@ -433,7 +433,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             return strided_iterator<
                 typename range_iterator<const Rng>::type,
                 forward_traversal_tag
-            >(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), stride);
+            >(mars_boost::begin(rng), mars_boost::end(rng), stride);
         }
 
         template<class Rng, class Difference> inline
@@ -449,7 +449,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             return strided_iterator<
                 typename range_iterator<Rng>::type,
                 forward_traversal_tag
-            >(mars_boost_ksim::end(rng), mars_boost_ksim::end(rng), stride);
+            >(mars_boost::end(rng), mars_boost::end(rng), stride);
         }
 
         template<class Rng, class Difference> inline
@@ -465,7 +465,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             return strided_iterator<
                 typename range_iterator<const Rng>::type,
                 forward_traversal_tag
-            >(mars_boost_ksim::end(rng), mars_boost_ksim::end(rng), stride);
+            >(mars_boost::end(rng), mars_boost::end(rng), stride);
         }
 
         template<class Rng, class Difference> inline
@@ -483,7 +483,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             return strided_iterator<
                 typename range_iterator<Rng>::type,
                 bidirectional_traversal_tag
-            >(mars_boost_ksim::begin(rng), difference_type(), stride);
+            >(mars_boost::begin(rng), difference_type(), stride);
         }
 
         template<class Rng, class Difference> inline
@@ -501,7 +501,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             return strided_iterator<
                 typename range_iterator<const Rng>::type,
                 bidirectional_traversal_tag
-            >(mars_boost_ksim::begin(rng), difference_type(), stride);
+            >(mars_boost::begin(rng), difference_type(), stride);
         }
 
         template<class Rng, class Difference> inline
@@ -517,7 +517,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             return strided_iterator<
                 typename range_iterator<Rng>::type,
                 bidirectional_traversal_tag
-            >(mars_boost_ksim::end(rng), mars_boost_ksim::size(rng), stride);
+            >(mars_boost::end(rng), mars_boost::size(rng), stride);
         }
 
         template<class Rng, class Difference> inline
@@ -533,7 +533,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             return strided_iterator<
                 typename range_iterator<const Rng>::type,
                 bidirectional_traversal_tag
-            >(mars_boost_ksim::end(rng), mars_boost_ksim::size(rng), stride);
+            >(mars_boost::end(rng), mars_boost::size(rng), stride);
         }
 
         template<class Rng, class Difference> inline
@@ -549,7 +549,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             return strided_iterator<
                 typename range_iterator<Rng>::type,
                 random_access_traversal_tag
-            >(mars_boost_ksim::begin(rng), mars_boost_ksim::begin(rng), stride);
+            >(mars_boost::begin(rng), mars_boost::begin(rng), stride);
         }
 
         template<class Rng, class Difference> inline
@@ -565,7 +565,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             return strided_iterator<
                 typename range_iterator<const Rng>::type,
                 random_access_traversal_tag
-            >(mars_boost_ksim::begin(rng), mars_boost_ksim::begin(rng), stride);
+            >(mars_boost::begin(rng), mars_boost::begin(rng), stride);
         }
 
         template<class Rng, class Difference> inline
@@ -581,7 +581,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             return strided_iterator<
                 typename range_iterator<Rng>::type,
                 random_access_traversal_tag
-            >(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), stride);
+            >(mars_boost::begin(rng), mars_boost::end(rng), stride);
         }
 
         template<class Rng, class Difference> inline
@@ -597,7 +597,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             return strided_iterator<
                 typename range_iterator<const Rng>::type,
                 random_access_traversal_tag
-            >(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), stride);
+            >(mars_boost::begin(rng), mars_boost::end(rng), stride);
         }
 
         template<

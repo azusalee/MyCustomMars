@@ -20,7 +20,7 @@
     Defines concepts used in string_algo library
 */
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
     namespace algorithm {
 
         //! Finder concept
@@ -65,8 +65,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             void constraints()
             {
                 // Operation
-                ::mars_boost_ksim::begin((*pFo)( (*pF)(i,i) ));
-                ::mars_boost_ksim::end((*pFo)( (*pF)(i,i) ));
+                ::mars_boost::begin((*pFo)( (*pF)(i,i) ));
+                ::mars_boost::end((*pFo)( (*pF)(i,i) ));
             }
         private:
             IteratorT i;
@@ -75,7 +75,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         }; // FormatterConcept;
 
     } // namespace algorithm
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 
 

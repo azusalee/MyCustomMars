@@ -37,7 +37,7 @@
 #   include <boost/mpl/aux_/config/static_constant.hpp>
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl { namespace aux {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl { namespace aux {
 
 #if BOOST_WORKAROUND(__EDG_VERSION__, <= 244) && !defined(BOOST_INTEL_CXX_VERSION)
 

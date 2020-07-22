@@ -16,7 +16,7 @@
 #include <boost/range/difference_type.hpp>
 #include <algorithm>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range
     {
@@ -31,7 +31,7 @@ inline BOOST_DEDUCED_TYPENAME range_difference<SinglePassRange>::type
 count(SinglePassRange& rng, const Value& val)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<SinglePassRange> ));
-    return std::count(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), val);
+    return std::count(mars_boost::begin(rng), mars_boost::end(rng), val);
 }
 
 /// \overload
@@ -40,11 +40,11 @@ inline BOOST_DEDUCED_TYPENAME range_difference<SinglePassRange const>::type
 count(const SinglePassRange& rng, const Value& val)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange> ));
-    return std::count(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), val);
+    return std::count(mars_boost::begin(rng), mars_boost::end(rng), val);
 }
 
     } // namespace range
     using range::count;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

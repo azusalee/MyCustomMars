@@ -34,7 +34,7 @@
 
 #include <boost/thread/detail/variadic_header.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace detail
   {
@@ -58,11 +58,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       template <class F, class ... As>
       BOOST_SYMBOL_VISIBLE
       explicit invoker(BOOST_THREAD_FWD_REF(F) f, BOOST_THREAD_FWD_REF(As)... args)
-      : f_(mars_boost_ksim::forward<F>(f), mars_boost_ksim::forward<As>(args)...)
+      : f_(mars_boost::forward<F>(f), mars_boost::forward<As>(args)...)
       {}
 
       BOOST_SYMBOL_VISIBLE
-      invoker(BOOST_THREAD_RV_REF(invoker) f) : f_(mars_boost_ksim::move(BOOST_THREAD_RV(f).f_))
+      invoker(BOOST_THREAD_RV_REF(invoker) f) : f_(mars_boost::move(BOOST_THREAD_RV(f).f_))
       {}
 
       BOOST_SYMBOL_VISIBLE
@@ -74,7 +74,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       {
         if (this != &f)
         {
-          f_ = mars_boost_ksim::move(BOOST_THREAD_RV(f).f_);
+          f_ = mars_boost::move(BOOST_THREAD_RV(f).f_);
         }
         return *this;
       }
@@ -99,7 +99,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       result_type
       execute(tuple_indices<Indices...>)
       {
-        return detail::invoke(mars_boost_ksim::move(csbl::get<0>(f_)), mars_boost_ksim::move(csbl::get<Indices>(f_))...);
+        return detail::invoke(mars_boost::move(csbl::get<0>(f_)), mars_boost::move(csbl::get<Indices>(f_))...);
       }
     };
 
@@ -119,11 +119,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       template <class F, class ... As>
       BOOST_SYMBOL_VISIBLE
       explicit invoker_ret(BOOST_THREAD_FWD_REF(F) f, BOOST_THREAD_FWD_REF(As)... args)
-      : f_(mars_boost_ksim::forward<F>(f), mars_boost_ksim::forward<As>(args)...)
+      : f_(mars_boost::forward<F>(f), mars_boost::forward<As>(args)...)
       {}
 
       BOOST_SYMBOL_VISIBLE
-      invoker_ret(BOOST_THREAD_RV_REF(invoker_ret) f) : f_(mars_boost_ksim::move(BOOST_THREAD_RV(f).f_))
+      invoker_ret(BOOST_THREAD_RV_REF(invoker_ret) f) : f_(mars_boost::move(BOOST_THREAD_RV(f).f_))
       {}
 
       result_type operator()()
@@ -136,7 +136,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       result_type
       execute(tuple_indices<Indices...>)
       {
-        return detail::invoke<R>(mars_boost_ksim::move(csbl::get<0>(f_)), mars_boost_ksim::move(csbl::get<Indices>(f_))...);
+        return detail::invoke<R>(mars_boost::move(csbl::get<0>(f_)), mars_boost::move(csbl::get<Indices>(f_))...);
       }
     };
   //BOOST_THREAD_DCL_MOVABLE_BEG(X) invoker<Fp> BOOST_THREAD_DCL_MOVABLE_END
@@ -149,14 +149,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #define BOOST_THREAD_RV_REF_ARG(z, n, unused) , BOOST_THREAD_RV_REF(Arg##n) arg##n
 #define BOOST_THREAD_FWD_REF_A(z, n, unused)   , BOOST_THREAD_FWD_REF(A##n) arg##n
 #define BOOST_THREAD_FWD_REF_ARG(z, n, unused) , BOOST_THREAD_FWD_REF(Arg##n) arg##n
-#define BOOST_THREAD_FWD_PARAM(z, n, unused) , mars_boost_ksim::forward<Arg##n>(arg##n)
-#define BOOST_THREAD_FWD_PARAM_A(z, n, unused) , mars_boost_ksim::forward<A##n>(arg##n)
+#define BOOST_THREAD_FWD_PARAM(z, n, unused) , mars_boost::forward<Arg##n>(arg##n)
+#define BOOST_THREAD_FWD_PARAM_A(z, n, unused) , mars_boost::forward<A##n>(arg##n)
 #define BOOST_THREAD_DCL(z, n, unused) Arg##n v##n;
-#define BOOST_THREAD_MOVE_PARAM(z, n, unused) , v##n(mars_boost_ksim::move(arg##n))
-#define BOOST_THREAD_FORWARD_PARAM_A(z, n, unused) , v##n(mars_boost_ksim::forward<A##n>(arg##n))
-#define BOOST_THREAD_MOVE_RHS_PARAM(z, n, unused) , v##n(mars_boost_ksim::move(x.v##n))
-#define BOOST_THREAD_MOVE_DCL(z, n, unused) , mars_boost_ksim::move(v##n)
-#define BOOST_THREAD_MOVE_DCL_T(z, n, unused) BOOST_PP_COMMA_IF(n) mars_boost_ksim::move(v##n)
+#define BOOST_THREAD_MOVE_PARAM(z, n, unused) , v##n(mars_boost::move(arg##n))
+#define BOOST_THREAD_FORWARD_PARAM_A(z, n, unused) , v##n(mars_boost::forward<A##n>(arg##n))
+#define BOOST_THREAD_MOVE_RHS_PARAM(z, n, unused) , v##n(mars_boost::move(x.v##n))
+#define BOOST_THREAD_MOVE_DCL(z, n, unused) , mars_boost::move(v##n)
+#define BOOST_THREAD_MOVE_DCL_T(z, n, unused) BOOST_PP_COMMA_IF(n) mars_boost::move(v##n)
 #define BOOST_THREAD_ARG_DEF(z, n, unused) , class Arg##n = tuples::null_type
 
   template  <class Fp, class Arg = tuples::null_type
@@ -179,18 +179,18 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       explicit invoker(BOOST_THREAD_FWD_REF(F) f \
           BOOST_PP_REPEAT(n, BOOST_THREAD_FWD_REF_A, ~) \
       ) \
-      : fp_(mars_boost_ksim::forward<F>(f)) \
+      : fp_(mars_boost::forward<F>(f)) \
       BOOST_PP_REPEAT(n, BOOST_THREAD_FORWARD_PARAM_A, ~) \
       {} \
       \
       BOOST_SYMBOL_VISIBLE \
       invoker(BOOST_THREAD_RV_REF(invoker) x) \
-      : fp_(mars_boost_ksim::move(x.fp_)) \
+      : fp_(mars_boost::move(x.fp_)) \
       BOOST_PP_REPEAT(n, BOOST_THREAD_MOVE_RHS_PARAM, ~) \
       {} \
       \
       result_type operator()() { \
-        return detail::invoke(mars_boost_ksim::move(fp_) \
+        return detail::invoke(mars_boost::move(fp_) \
             BOOST_PP_REPEAT(n, BOOST_THREAD_MOVE_DCL, ~) \
         ); \
       } \
@@ -287,44 +287,44 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           , BOOST_THREAD_RV_REF(T7) a7
           , BOOST_THREAD_RV_REF(T8) a8
       )
-      : fp_(mars_boost_ksim::move(f))
-      , v0_(mars_boost_ksim::move(a0))
-      , v1_(mars_boost_ksim::move(a1))
-      , v2_(mars_boost_ksim::move(a2))
-      , v3_(mars_boost_ksim::move(a3))
-      , v4_(mars_boost_ksim::move(a4))
-      , v5_(mars_boost_ksim::move(a5))
-      , v6_(mars_boost_ksim::move(a6))
-      , v7_(mars_boost_ksim::move(a7))
-      , v8_(mars_boost_ksim::move(a8))
+      : fp_(mars_boost::move(f))
+      , v0_(mars_boost::move(a0))
+      , v1_(mars_boost::move(a1))
+      , v2_(mars_boost::move(a2))
+      , v3_(mars_boost::move(a3))
+      , v4_(mars_boost::move(a4))
+      , v5_(mars_boost::move(a5))
+      , v6_(mars_boost::move(a6))
+      , v7_(mars_boost::move(a7))
+      , v8_(mars_boost::move(a8))
       {}
 
       BOOST_SYMBOL_VISIBLE
       invoker(BOOST_THREAD_RV_REF(invoker) f)
-      : fp_(mars_boost_ksim::move(BOOST_THREAD_RV(f).fp))
-      , v0_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v0_))
-      , v1_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v1_))
-      , v2_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v2_))
-      , v3_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v3_))
-      , v4_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v4_))
-      , v5_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v5_))
-      , v6_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v6_))
-      , v7_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v7_))
-      , v8_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v8_))
+      : fp_(mars_boost::move(BOOST_THREAD_RV(f).fp))
+      , v0_(mars_boost::move(BOOST_THREAD_RV(f).v0_))
+      , v1_(mars_boost::move(BOOST_THREAD_RV(f).v1_))
+      , v2_(mars_boost::move(BOOST_THREAD_RV(f).v2_))
+      , v3_(mars_boost::move(BOOST_THREAD_RV(f).v3_))
+      , v4_(mars_boost::move(BOOST_THREAD_RV(f).v4_))
+      , v5_(mars_boost::move(BOOST_THREAD_RV(f).v5_))
+      , v6_(mars_boost::move(BOOST_THREAD_RV(f).v6_))
+      , v7_(mars_boost::move(BOOST_THREAD_RV(f).v7_))
+      , v8_(mars_boost::move(BOOST_THREAD_RV(f).v8_))
       {}
 
       result_type operator()()
       {
-        return detail::invoke(mars_boost_ksim::move(fp_)
-            , mars_boost_ksim::move(v0_)
-            , mars_boost_ksim::move(v1_)
-            , mars_boost_ksim::move(v2_)
-            , mars_boost_ksim::move(v3_)
-            , mars_boost_ksim::move(v4_)
-            , mars_boost_ksim::move(v5_)
-            , mars_boost_ksim::move(v6_)
-            , mars_boost_ksim::move(v7_)
-            , mars_boost_ksim::move(v8_)
+        return detail::invoke(mars_boost::move(fp_)
+            , mars_boost::move(v0_)
+            , mars_boost::move(v1_)
+            , mars_boost::move(v2_)
+            , mars_boost::move(v3_)
+            , mars_boost::move(v4_)
+            , mars_boost::move(v5_)
+            , mars_boost::move(v6_)
+            , mars_boost::move(v7_)
+            , mars_boost::move(v8_)
         );
       }
     };
@@ -355,41 +355,41 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           , BOOST_THREAD_RV_REF(T6) a6
           , BOOST_THREAD_RV_REF(T7) a7
       )
-      : fp_(mars_boost_ksim::move(f))
-      , v0_(mars_boost_ksim::move(a0))
-      , v1_(mars_boost_ksim::move(a1))
-      , v2_(mars_boost_ksim::move(a2))
-      , v3_(mars_boost_ksim::move(a3))
-      , v4_(mars_boost_ksim::move(a4))
-      , v5_(mars_boost_ksim::move(a5))
-      , v6_(mars_boost_ksim::move(a6))
-      , v7_(mars_boost_ksim::move(a7))
+      : fp_(mars_boost::move(f))
+      , v0_(mars_boost::move(a0))
+      , v1_(mars_boost::move(a1))
+      , v2_(mars_boost::move(a2))
+      , v3_(mars_boost::move(a3))
+      , v4_(mars_boost::move(a4))
+      , v5_(mars_boost::move(a5))
+      , v6_(mars_boost::move(a6))
+      , v7_(mars_boost::move(a7))
       {}
 
       BOOST_SYMBOL_VISIBLE
       invoker(BOOST_THREAD_RV_REF(invoker) f)
-      : fp_(mars_boost_ksim::move(BOOST_THREAD_RV(f).fp))
-      , v0_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v0_))
-      , v1_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v1_))
-      , v2_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v2_))
-      , v3_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v3_))
-      , v4_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v4_))
-      , v5_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v5_))
-      , v6_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v6_))
-      , v7_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v7_))
+      : fp_(mars_boost::move(BOOST_THREAD_RV(f).fp))
+      , v0_(mars_boost::move(BOOST_THREAD_RV(f).v0_))
+      , v1_(mars_boost::move(BOOST_THREAD_RV(f).v1_))
+      , v2_(mars_boost::move(BOOST_THREAD_RV(f).v2_))
+      , v3_(mars_boost::move(BOOST_THREAD_RV(f).v3_))
+      , v4_(mars_boost::move(BOOST_THREAD_RV(f).v4_))
+      , v5_(mars_boost::move(BOOST_THREAD_RV(f).v5_))
+      , v6_(mars_boost::move(BOOST_THREAD_RV(f).v6_))
+      , v7_(mars_boost::move(BOOST_THREAD_RV(f).v7_))
       {}
 
       result_type operator()()
       {
-        return detail::invoke(mars_boost_ksim::move(fp_)
-            , mars_boost_ksim::move(v0_)
-            , mars_boost_ksim::move(v1_)
-            , mars_boost_ksim::move(v2_)
-            , mars_boost_ksim::move(v3_)
-            , mars_boost_ksim::move(v4_)
-            , mars_boost_ksim::move(v5_)
-            , mars_boost_ksim::move(v6_)
-            , mars_boost_ksim::move(v7_)
+        return detail::invoke(mars_boost::move(fp_)
+            , mars_boost::move(v0_)
+            , mars_boost::move(v1_)
+            , mars_boost::move(v2_)
+            , mars_boost::move(v3_)
+            , mars_boost::move(v4_)
+            , mars_boost::move(v5_)
+            , mars_boost::move(v6_)
+            , mars_boost::move(v7_)
         );
       }
     };
@@ -418,38 +418,38 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           , BOOST_THREAD_RV_REF(T5) a5
           , BOOST_THREAD_RV_REF(T6) a6
       )
-      : fp_(mars_boost_ksim::move(f))
-      , v0_(mars_boost_ksim::move(a0))
-      , v1_(mars_boost_ksim::move(a1))
-      , v2_(mars_boost_ksim::move(a2))
-      , v3_(mars_boost_ksim::move(a3))
-      , v4_(mars_boost_ksim::move(a4))
-      , v5_(mars_boost_ksim::move(a5))
-      , v6_(mars_boost_ksim::move(a6))
+      : fp_(mars_boost::move(f))
+      , v0_(mars_boost::move(a0))
+      , v1_(mars_boost::move(a1))
+      , v2_(mars_boost::move(a2))
+      , v3_(mars_boost::move(a3))
+      , v4_(mars_boost::move(a4))
+      , v5_(mars_boost::move(a5))
+      , v6_(mars_boost::move(a6))
       {}
 
       BOOST_SYMBOL_VISIBLE
       invoker(BOOST_THREAD_RV_REF(invoker) f)
-      : fp_(mars_boost_ksim::move(BOOST_THREAD_RV(f).fp))
-      , v0_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v0_))
-      , v1_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v1_))
-      , v2_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v2_))
-      , v3_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v3_))
-      , v4_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v4_))
-      , v5_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v5_))
-      , v6_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v6_))
+      : fp_(mars_boost::move(BOOST_THREAD_RV(f).fp))
+      , v0_(mars_boost::move(BOOST_THREAD_RV(f).v0_))
+      , v1_(mars_boost::move(BOOST_THREAD_RV(f).v1_))
+      , v2_(mars_boost::move(BOOST_THREAD_RV(f).v2_))
+      , v3_(mars_boost::move(BOOST_THREAD_RV(f).v3_))
+      , v4_(mars_boost::move(BOOST_THREAD_RV(f).v4_))
+      , v5_(mars_boost::move(BOOST_THREAD_RV(f).v5_))
+      , v6_(mars_boost::move(BOOST_THREAD_RV(f).v6_))
       {}
 
       result_type operator()()
       {
-        return detail::invoke(mars_boost_ksim::move(fp_)
-            , mars_boost_ksim::move(v0_)
-            , mars_boost_ksim::move(v1_)
-            , mars_boost_ksim::move(v2_)
-            , mars_boost_ksim::move(v3_)
-            , mars_boost_ksim::move(v4_)
-            , mars_boost_ksim::move(v5_)
-            , mars_boost_ksim::move(v6_)
+        return detail::invoke(mars_boost::move(fp_)
+            , mars_boost::move(v0_)
+            , mars_boost::move(v1_)
+            , mars_boost::move(v2_)
+            , mars_boost::move(v3_)
+            , mars_boost::move(v4_)
+            , mars_boost::move(v5_)
+            , mars_boost::move(v6_)
         );
       }
     };
@@ -476,35 +476,35 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           , BOOST_THREAD_RV_REF(T4) a4
           , BOOST_THREAD_RV_REF(T5) a5
       )
-      : fp_(mars_boost_ksim::move(f))
-      , v0_(mars_boost_ksim::move(a0))
-      , v1_(mars_boost_ksim::move(a1))
-      , v2_(mars_boost_ksim::move(a2))
-      , v3_(mars_boost_ksim::move(a3))
-      , v4_(mars_boost_ksim::move(a4))
-      , v5_(mars_boost_ksim::move(a5))
+      : fp_(mars_boost::move(f))
+      , v0_(mars_boost::move(a0))
+      , v1_(mars_boost::move(a1))
+      , v2_(mars_boost::move(a2))
+      , v3_(mars_boost::move(a3))
+      , v4_(mars_boost::move(a4))
+      , v5_(mars_boost::move(a5))
       {}
 
       BOOST_SYMBOL_VISIBLE
       invoker(BOOST_THREAD_RV_REF(invoker) f)
-      : fp_(mars_boost_ksim::move(BOOST_THREAD_RV(f).fp))
-      , v0_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v0_))
-      , v1_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v1_))
-      , v2_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v2_))
-      , v3_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v3_))
-      , v4_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v4_))
-      , v5_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v5_))
+      : fp_(mars_boost::move(BOOST_THREAD_RV(f).fp))
+      , v0_(mars_boost::move(BOOST_THREAD_RV(f).v0_))
+      , v1_(mars_boost::move(BOOST_THREAD_RV(f).v1_))
+      , v2_(mars_boost::move(BOOST_THREAD_RV(f).v2_))
+      , v3_(mars_boost::move(BOOST_THREAD_RV(f).v3_))
+      , v4_(mars_boost::move(BOOST_THREAD_RV(f).v4_))
+      , v5_(mars_boost::move(BOOST_THREAD_RV(f).v5_))
       {}
 
       result_type operator()()
       {
-        return detail::invoke(mars_boost_ksim::move(fp_)
-            , mars_boost_ksim::move(v0_)
-            , mars_boost_ksim::move(v1_)
-            , mars_boost_ksim::move(v2_)
-            , mars_boost_ksim::move(v3_)
-            , mars_boost_ksim::move(v4_)
-            , mars_boost_ksim::move(v5_)
+        return detail::invoke(mars_boost::move(fp_)
+            , mars_boost::move(v0_)
+            , mars_boost::move(v1_)
+            , mars_boost::move(v2_)
+            , mars_boost::move(v3_)
+            , mars_boost::move(v4_)
+            , mars_boost::move(v5_)
         );
       }
     };
@@ -529,32 +529,32 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           , BOOST_THREAD_RV_REF(T3) a3
           , BOOST_THREAD_RV_REF(T4) a4
       )
-      : fp_(mars_boost_ksim::move(f))
-      , v0_(mars_boost_ksim::move(a0))
-      , v1_(mars_boost_ksim::move(a1))
-      , v2_(mars_boost_ksim::move(a2))
-      , v3_(mars_boost_ksim::move(a3))
-      , v4_(mars_boost_ksim::move(a4))
+      : fp_(mars_boost::move(f))
+      , v0_(mars_boost::move(a0))
+      , v1_(mars_boost::move(a1))
+      , v2_(mars_boost::move(a2))
+      , v3_(mars_boost::move(a3))
+      , v4_(mars_boost::move(a4))
       {}
 
       BOOST_SYMBOL_VISIBLE
       invoker(BOOST_THREAD_RV_REF(invoker) f)
-      : fp_(mars_boost_ksim::move(BOOST_THREAD_RV(f).fp))
-      , v0_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v0_))
-      , v1_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v1_))
-      , v2_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v2_))
-      , v3_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v3_))
-      , v4_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v4_))
+      : fp_(mars_boost::move(BOOST_THREAD_RV(f).fp))
+      , v0_(mars_boost::move(BOOST_THREAD_RV(f).v0_))
+      , v1_(mars_boost::move(BOOST_THREAD_RV(f).v1_))
+      , v2_(mars_boost::move(BOOST_THREAD_RV(f).v2_))
+      , v3_(mars_boost::move(BOOST_THREAD_RV(f).v3_))
+      , v4_(mars_boost::move(BOOST_THREAD_RV(f).v4_))
       {}
 
       result_type operator()()
       {
-        return detail::invoke(mars_boost_ksim::move(fp_)
-            , mars_boost_ksim::move(v0_)
-            , mars_boost_ksim::move(v1_)
-            , mars_boost_ksim::move(v2_)
-            , mars_boost_ksim::move(v3_)
-            , mars_boost_ksim::move(v4_)
+        return detail::invoke(mars_boost::move(fp_)
+            , mars_boost::move(v0_)
+            , mars_boost::move(v1_)
+            , mars_boost::move(v2_)
+            , mars_boost::move(v3_)
+            , mars_boost::move(v4_)
         );
       }
     };
@@ -577,29 +577,29 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           , BOOST_THREAD_RV_REF(T2) a2
           , BOOST_THREAD_RV_REF(T3) a3
       )
-      : fp_(mars_boost_ksim::move(f))
-      , v0_(mars_boost_ksim::move(a0))
-      , v1_(mars_boost_ksim::move(a1))
-      , v2_(mars_boost_ksim::move(a2))
-      , v3_(mars_boost_ksim::move(a3))
+      : fp_(mars_boost::move(f))
+      , v0_(mars_boost::move(a0))
+      , v1_(mars_boost::move(a1))
+      , v2_(mars_boost::move(a2))
+      , v3_(mars_boost::move(a3))
       {}
 
       BOOST_SYMBOL_VISIBLE
       invoker(BOOST_THREAD_RV_REF(invoker) f)
-      : fp_(mars_boost_ksim::move(BOOST_THREAD_RV(f).fp))
-      , v0_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v0_))
-      , v1_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v1_))
-      , v2_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v2_))
-      , v3_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v3_))
+      : fp_(mars_boost::move(BOOST_THREAD_RV(f).fp))
+      , v0_(mars_boost::move(BOOST_THREAD_RV(f).v0_))
+      , v1_(mars_boost::move(BOOST_THREAD_RV(f).v1_))
+      , v2_(mars_boost::move(BOOST_THREAD_RV(f).v2_))
+      , v3_(mars_boost::move(BOOST_THREAD_RV(f).v3_))
       {}
 
       result_type operator()()
       {
-        return detail::invoke(mars_boost_ksim::move(fp_)
-            , mars_boost_ksim::move(v0_)
-            , mars_boost_ksim::move(v1_)
-            , mars_boost_ksim::move(v2_)
-            , mars_boost_ksim::move(v3_)
+        return detail::invoke(mars_boost::move(fp_)
+            , mars_boost::move(v0_)
+            , mars_boost::move(v1_)
+            , mars_boost::move(v2_)
+            , mars_boost::move(v3_)
         );
       }
     };
@@ -620,26 +620,26 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           , BOOST_THREAD_RV_REF(T1) a1
           , BOOST_THREAD_RV_REF(T2) a2
       )
-      : fp_(mars_boost_ksim::move(f))
-      , v0_(mars_boost_ksim::move(a0))
-      , v1_(mars_boost_ksim::move(a1))
-      , v2_(mars_boost_ksim::move(a2))
+      : fp_(mars_boost::move(f))
+      , v0_(mars_boost::move(a0))
+      , v1_(mars_boost::move(a1))
+      , v2_(mars_boost::move(a2))
       {}
 
       BOOST_SYMBOL_VISIBLE
       invoker(BOOST_THREAD_RV_REF(invoker) f)
-      : fp_(mars_boost_ksim::move(BOOST_THREAD_RV(f).fp))
-      , v0_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v0_))
-      , v1_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v1_))
-      , v2_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v2_))
+      : fp_(mars_boost::move(BOOST_THREAD_RV(f).fp))
+      , v0_(mars_boost::move(BOOST_THREAD_RV(f).v0_))
+      , v1_(mars_boost::move(BOOST_THREAD_RV(f).v1_))
+      , v2_(mars_boost::move(BOOST_THREAD_RV(f).v2_))
       {}
 
       result_type operator()()
       {
-        return detail::invoke(mars_boost_ksim::move(fp_)
-            , mars_boost_ksim::move(v0_)
-            , mars_boost_ksim::move(v1_)
-            , mars_boost_ksim::move(v2_)
+        return detail::invoke(mars_boost::move(fp_)
+            , mars_boost::move(v0_)
+            , mars_boost::move(v1_)
+            , mars_boost::move(v2_)
         );
       }
     };
@@ -658,23 +658,23 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           , BOOST_THREAD_RV_REF(T0) a0
           , BOOST_THREAD_RV_REF(T1) a1
       )
-      : fp_(mars_boost_ksim::move(f))
-      , v0_(mars_boost_ksim::move(a0))
-      , v1_(mars_boost_ksim::move(a1))
+      : fp_(mars_boost::move(f))
+      , v0_(mars_boost::move(a0))
+      , v1_(mars_boost::move(a1))
       {}
 
       BOOST_SYMBOL_VISIBLE
       invoker(BOOST_THREAD_RV_REF(invoker) f)
-      : fp_(mars_boost_ksim::move(BOOST_THREAD_RV(f).fp))
-      , v0_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v0_))
-      , v1_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v1_))
+      : fp_(mars_boost::move(BOOST_THREAD_RV(f).fp))
+      , v0_(mars_boost::move(BOOST_THREAD_RV(f).v0_))
+      , v1_(mars_boost::move(BOOST_THREAD_RV(f).v1_))
       {}
 
       result_type operator()()
       {
-        return detail::invoke(mars_boost_ksim::move(fp_)
-            , mars_boost_ksim::move(v0_)
-            , mars_boost_ksim::move(v1_)
+        return detail::invoke(mars_boost::move(fp_)
+            , mars_boost::move(v0_)
+            , mars_boost::move(v1_)
         );
       }
     };
@@ -691,20 +691,20 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       explicit invoker(BOOST_THREAD_FWD_REF(Fp) f
           , BOOST_THREAD_RV_REF(T0) a0
       )
-      : fp_(mars_boost_ksim::move(f))
-      , v0_(mars_boost_ksim::move(a0))
+      : fp_(mars_boost::move(f))
+      , v0_(mars_boost::move(a0))
       {}
 
       BOOST_SYMBOL_VISIBLE
       invoker(BOOST_THREAD_RV_REF(invoker) f)
-      : fp_(mars_boost_ksim::move(BOOST_THREAD_RV(f).fp))
-      , v0_(mars_boost_ksim::move(BOOST_THREAD_RV(f).v0_))
+      : fp_(mars_boost::move(BOOST_THREAD_RV(f).fp))
+      , v0_(mars_boost::move(BOOST_THREAD_RV(f).v0_))
       {}
 
       result_type operator()()
       {
-        return detail::invoke(mars_boost_ksim::move(fp_)
-            , mars_boost_ksim::move(v0_)
+        return detail::invoke(mars_boost::move(fp_)
+            , mars_boost::move(v0_)
         );
       }
     };
@@ -717,12 +717,12 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       typedef typename result_of<Fp()>::type result_type;
       BOOST_SYMBOL_VISIBLE
       explicit invoker(BOOST_THREAD_FWD_REF(Fp) f)
-      : fp_(mars_boost_ksim::move(f))
+      : fp_(mars_boost::move(f))
       {}
 
       BOOST_SYMBOL_VISIBLE
       invoker(BOOST_THREAD_RV_REF(invoker) f)
-      : fp_(mars_boost_ksim::move(f.fp_))
+      : fp_(mars_boost::move(f.fp_))
       {}
       result_type operator()()
       {

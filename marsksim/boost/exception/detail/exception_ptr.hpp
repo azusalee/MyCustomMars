@@ -30,7 +30,7 @@
 #include <ios>
 #include <stdlib.h>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
     {
         class exception_ptr {
         public:
@@ -83,7 +83,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     class
     exception_ptr
         {
-        typedef mars_boost_ksim::shared_ptr<exception_detail::clone_base const> impl;
+        typedef mars_boost::shared_ptr<exception_detail::clone_base const> impl;
         impl ptr_;
         friend void rethrow_exception( exception_ptr const & );
         typedef exception_detail::clone_base const * (impl::*unspecified_bool_type)() const;
@@ -144,7 +144,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
         struct
         bad_alloc_:
-            mars_boost_ksim::exception,
+            mars_boost::exception,
             std::bad_alloc
                 {
                 ~bad_alloc_() throw() { }
@@ -152,7 +152,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         struct
         bad_exception_:
-            mars_boost_ksim::exception,
+            mars_boost::exception,
             std::bad_exception
                 {
                 ~bad_exception_() throw() { }
@@ -194,7 +194,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #endif
     class
     unknown_exception:
-        public mars_boost_ksim::exception,
+        public mars_boost::exception,
         public std::exception
         {
         public:
@@ -210,8 +210,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             }
 
         explicit
-        unknown_exception( mars_boost_ksim::exception const & e ):
-            mars_boost_ksim::exception(e)
+        unknown_exception( mars_boost::exception const & e ):
+            mars_boost::exception(e)
             {
             add_original_type(e);
             }
@@ -244,7 +244,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         class
         current_exception_std_exception_wrapper:
             public T,
-            public mars_boost_ksim::exception
+            public mars_boost::exception
             {
             public:
 
@@ -255,9 +255,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 add_original_type(e1);
                 }
 
-            current_exception_std_exception_wrapper( T const & e1, mars_boost_ksim::exception const & e2 ):
+            current_exception_std_exception_wrapper( T const & e1, mars_boost::exception const & e2 ):
                 T(e1),
-                mars_boost_ksim::exception(e2)
+                mars_boost::exception(e2)
                 {
                 add_original_type(e1);
                 }
@@ -280,7 +280,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 #ifdef BOOST_NO_RTTI
         template <class T>
-        mars_boost_ksim::exception const *
+        mars_boost::exception const *
         get_boost_exception( T const * )
             {
             try
@@ -288,7 +288,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 throw;
                 }
             catch(
-            mars_boost_ksim::exception & x )
+            mars_boost::exception & x )
                 {
                 return &x;
                 }
@@ -299,10 +299,10 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             }
 #else
         template <class T>
-        mars_boost_ksim::exception const *
+        mars_boost::exception const *
         get_boost_exception( T const * x )
             {
-            return dynamic_cast<mars_boost_ksim::exception const *>(x);
+            return dynamic_cast<mars_boost::exception const *>(x);
             }
 #endif
 
@@ -311,34 +311,34 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         exception_ptr
         current_exception_std_exception( T const & e1 )
             {
-            if( mars_boost_ksim::exception const * e2 = get_boost_exception(&e1) )
-                return mars_boost_ksim::copy_exception(current_exception_std_exception_wrapper<T>(e1,*e2));
+            if( mars_boost::exception const * e2 = get_boost_exception(&e1) )
+                return mars_boost::copy_exception(current_exception_std_exception_wrapper<T>(e1,*e2));
             else
-                return mars_boost_ksim::copy_exception(current_exception_std_exception_wrapper<T>(e1));
+                return mars_boost::copy_exception(current_exception_std_exception_wrapper<T>(e1));
             }
 
         inline
         exception_ptr
         current_exception_unknown_exception()
             {
-            return mars_boost_ksim::copy_exception(unknown_exception());
+            return mars_boost::copy_exception(unknown_exception());
             }
 
         inline
         exception_ptr
-        current_exception_unknown_boost_exception( mars_boost_ksim::exception const & e )
+        current_exception_unknown_boost_exception( mars_boost::exception const & e )
             {
-            return mars_boost_ksim::copy_exception(unknown_exception(e));
+            return mars_boost::copy_exception(unknown_exception(e));
             }
 
         inline
         exception_ptr
         current_exception_unknown_std_exception( std::exception const & e )
             {
-            if( mars_boost_ksim::exception const * be = get_boost_exception(&e) )
+            if( mars_boost::exception const * be = get_boost_exception(&e) )
                 return current_exception_unknown_boost_exception(*be);
             else
-                return mars_boost_ksim::copy_exception(unknown_exception(e));
+                return mars_boost::copy_exception(unknown_exception(e));
             }
 
         inline
@@ -460,7 +460,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                         return exception_detail::current_exception_unknown_std_exception(e);
                         }
                     catch(
-                    mars_boost_ksim::exception & e )
+                    mars_boost::exception & e )
                         {
                         return exception_detail::current_exception_unknown_boost_exception(e);
                         }

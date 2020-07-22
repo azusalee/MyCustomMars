@@ -26,28 +26,28 @@
 #include <boost/next_prior.hpp>
 
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range_detail
     {
         template< class Iter, class Pred, bool default_pass >
         class skip_iterator
-          : public mars_boost_ksim::iterator_adaptor<
+          : public mars_boost::iterator_adaptor<
                     skip_iterator<Iter,Pred,default_pass>,
                     Iter,
                     BOOST_DEDUCED_TYPENAME std::iterator_traits<Iter>::value_type,
-                    mars_boost_ksim::forward_traversal_tag,
+                    mars_boost::forward_traversal_tag,
                     BOOST_DEDUCED_TYPENAME std::iterator_traits<Iter>::reference,
                     BOOST_DEDUCED_TYPENAME std::iterator_traits<Iter>::difference_type
                 >
           , private Pred
         {
         private:
-            typedef mars_boost_ksim::iterator_adaptor<
+            typedef mars_boost::iterator_adaptor<
                         skip_iterator<Iter,Pred,default_pass>,
                         Iter,
                         BOOST_DEDUCED_TYPENAME std::iterator_traits<Iter>::value_type,
-                        mars_boost_ksim::forward_traversal_tag,
+                        mars_boost::forward_traversal_tag,
                         BOOST_DEDUCED_TYPENAME std::iterator_traits<Iter>::reference,
                         BOOST_DEDUCED_TYPENAME std::iterator_traits<Iter>::difference_type
                     > base_t;
@@ -130,8 +130,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         public:
             adjacent_filtered_range( const P& p, R& r )
-            : base_range(skip_iter(mars_boost_ksim::begin(r), mars_boost_ksim::end(r), p),
-                         skip_iter(mars_boost_ksim::end(r), mars_boost_ksim::end(r), p))
+            : base_range(skip_iter(mars_boost::begin(r), mars_boost::end(r), p),
+                         skip_iter(mars_boost::end(r), mars_boost::end(r), p))
             {
             }
         };

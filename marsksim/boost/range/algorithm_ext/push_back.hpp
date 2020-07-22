@@ -18,7 +18,7 @@
 #include <boost/range/detail/implementation_help.hpp>
 #include <boost/assert.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range
     {
@@ -30,12 +30,12 @@ inline Container& push_back( Container& on, const Range& from )
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const Range> ));
     BOOST_ASSERT_MSG(!range_detail::is_same_object(on, from),
         "cannot copy from a container to itself");
-    on.insert( on.end(), mars_boost_ksim::begin(from), mars_boost_ksim::end(from) );
+    on.insert( on.end(), mars_boost::begin(from), mars_boost::end(from) );
     return on;
 }
 
     } // namespace range
     using range::push_back;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

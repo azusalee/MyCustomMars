@@ -18,31 +18,31 @@
 #include <boost/detail/sp_typeinfo.hpp>
 #include <boost/cstdint.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 namespace detail
 {
 
-typedef _Atomic( mars_boost_ksim::int_least32_t ) atomic_int_least32_t;
+typedef _Atomic( mars_boost::int_least32_t ) atomic_int_least32_t;
 
 inline void atomic_increment( atomic_int_least32_t * pw )
 {
     __c11_atomic_fetch_add( pw, 1, __ATOMIC_RELAXED );
 }
 
-inline mars_boost_ksim::int_least32_t atomic_decrement( atomic_int_least32_t * pw )
+inline mars_boost::int_least32_t atomic_decrement( atomic_int_least32_t * pw )
 {
     return __c11_atomic_fetch_sub( pw, 1, __ATOMIC_ACQ_REL );
 }
 
-inline mars_boost_ksim::int_least32_t atomic_conditional_increment( atomic_int_least32_t * pw )
+inline mars_boost::int_least32_t atomic_conditional_increment( atomic_int_least32_t * pw )
 {
     // long r = *pw;
     // if( r != 0 ) ++*pw;
     // return r;
 
-    mars_boost_ksim::int_least32_t r = __c11_atomic_load( pw, __ATOMIC_RELAXED );
+    mars_boost::int_least32_t r = __c11_atomic_load( pw, __ATOMIC_RELAXED );
 
     for( ;; )
     {
@@ -135,6 +135,6 @@ public:
 
 } // namespace detail
 
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif  // #ifndef BOOST_SMART_PTR_DETAIL_SP_COUNTED_BASE_CLANG_HPP_INCLUDED

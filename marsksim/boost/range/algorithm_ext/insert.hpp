@@ -17,7 +17,7 @@
 #include <boost/range/end.hpp>
 #include <boost/assert.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range
     {
@@ -29,7 +29,7 @@ inline Container& insert( Container& on,
 {
     BOOST_RANGE_CONCEPT_ASSERT(( ForwardRangeConcept<Container> ));
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<Range> ));
-    on.insert( before, mars_boost_ksim::begin(from), mars_boost_ksim::end(from) );
+    on.insert( before, mars_boost::begin(from), mars_boost::end(from) );
     return on;
 }
 
@@ -38,11 +38,11 @@ inline Container& insert( Container& on, const Range& from )
 {
     BOOST_RANGE_CONCEPT_ASSERT(( ForwardRangeConcept<Container> ));
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<Range> ));
-    on.insert(mars_boost_ksim::begin(from), mars_boost_ksim::end(from));
+    on.insert(mars_boost::begin(from), mars_boost::end(from));
 }
 
     } // namespace range
     using range::insert;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

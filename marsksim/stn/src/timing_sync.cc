@@ -38,7 +38,7 @@ using namespace marsksim::app;
 #define NONET_SALT_RATE  (3)
 
 
-static int GetAlarmTime(bool _is_actived)
+static int GetAlarmksimTime(bool _is_actived)
 {
     int time = 0;
     //todo
@@ -60,11 +60,11 @@ static int GetAlarmTime(bool _is_actived)
 }
 
 TimingSync::TimingSync(ActiveLogicksim& _active_logic)
-:alarm_(boost_ksim::bind(&TimingSync::__OnAlarm, this), false)
+:alarm_(boost_ksim::bind(&TimingSync::__OnAlarmksim, this), false)
 , active_logic_(_active_logic)
 {
     timing_sync_active_connection_ = _active_logic.SignalActive.connect(boost_ksim::bind(&TimingSync::OnActiveChanged, this, _1));
-    alarm_.Start(GetAlarmTime(active_logic_.IsActive()));
+    alarm_.Start(GetAlarmksimTime(active_logic_.IsActive()));
 }
 
 TimingSync::~TimingSync()
@@ -78,7 +78,7 @@ void TimingSync::OnActiveChanged(bool _is_actived)
     if (alarm_.IsWaiting())
     {
         alarm_.Cancel();
-        alarm_.Start(GetAlarmTime(_is_actived));
+        alarm_.Start(GetAlarmksimTime(_is_actived));
     }
 }
 
@@ -87,7 +87,7 @@ void TimingSync::OnNetworkChange()
     if (alarm_.IsWaiting())
     {
          alarm_.Cancel();
-         alarm_.Start(GetAlarmTime(active_logic_.IsActive()));
+         alarm_.Start(GetAlarmksimTime(active_logic_.IsActive()));
     }
 }
 
@@ -97,10 +97,10 @@ void TimingSync::OnLongLinkStatuChanged(LongLink::TLongLinkStatus _status)
     if (_status == LongLink::kConnected)
         alarm_.Cancel();
     else if (_status == LongLink::kDisConnected)
-        alarm_.Start(GetAlarmTime(active_logic_.IsActive()));
+        alarm_.Start(GetAlarmksimTime(active_logic_.IsActive()));
 }
 
-void TimingSync::__OnAlarm()
+void TimingSync::__OnAlarmksim()
 {
     xdebug_function();
 
@@ -110,6 +110,6 @@ void TimingSync::__OnAlarm()
         ::RequestSync();
     }
 
-    alarm_.Start(GetAlarmTime(active_logic_.IsActive()));
+    alarm_.Start(GetAlarmksimTime(active_logic_.IsActive()));
 }
 

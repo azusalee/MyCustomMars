@@ -65,7 +65,7 @@ int ComplexConnectksim::__ConnectTimeout(unsigned int _index) const {
 
 namespace {
 
-class ConnectCheckFSM : public TcpClientFSM {
+class ConnectCheckFSM : public TcpClientksimFSM {
   public:
     enum TCheckStatus {
         ECheckInit,
@@ -86,7 +86,7 @@ class ConnectCheckFSM : public TcpClientFSM {
     };
 
     ConnectCheckFSM(const socket_address& _addr, unsigned int _connect_timeout, unsigned int _index, MComplexConnectksim* _observer)
-        : TcpClientFSM(_addr.address()), connect_timeout_(_connect_timeout), index_(_index), observer_(_observer), checkfintime_(0) {
+        : TcpClientksimFSM(_addr.address()), connect_timeout_(_connect_timeout), index_(_index), observer_(_observer), checkfintime_(0) {
         check_status_ = (_observer && _observer->OnShouldVerify(_index, addr_)) ? ECheckInit : ECheckOK;
     }
 
@@ -556,7 +556,7 @@ SOCKET ComplexConnectksim::ConnectImpatient(const std::vector<socket_address>& _
             vecsocketfsm[i]->AfterSelect(sel, group);
             xgroup2_if(!group.Empty(), TSF"index:%_, @%_, ", i, this) << group;
 
-            if (TcpClientFSM::EEnd == vecsocketfsm[i]->Status()) {
+            if (TcpClientksimFSM::EEnd == vecsocketfsm[i]->Status()) {
                 if (_observer) _observer->OnFinished(i, socket_address(&vecsocketfsm[i]->Address()), vecsocketfsm[i]->Socket(), vecsocketfsm[i]->Error(),
                                                          vecsocketfsm[i]->Rtt(), vecsocketfsm[i]->TotalRtt(), (int)(gettickcount() - starttime));
 
@@ -568,7 +568,7 @@ SOCKET ComplexConnectksim::ConnectImpatient(const std::vector<socket_address>& _
                 continue;
             }
 
-            if (TcpClientFSM::EReadWrite == vecsocketfsm[i]->Status() && ConnectCheckFSM::ECheckFail == vecsocketfsm[i]->CheckStatus()) {
+            if (TcpClientksimFSM::EReadWrite == vecsocketfsm[i]->Status() && ConnectCheckFSM::ECheckFail == vecsocketfsm[i]->CheckStatus()) {
                 if (_observer) _observer->OnFinished(i, socket_address(&vecsocketfsm[i]->Address()), vecsocketfsm[i]->Socket(), vecsocketfsm[i]->Error(),
                                                          vecsocketfsm[i]->Rtt(), vecsocketfsm[i]->TotalRtt(), (int)(gettickcount() - starttime));
 
@@ -580,7 +580,7 @@ SOCKET ComplexConnectksim::ConnectImpatient(const std::vector<socket_address>& _
                 continue;
             }
 
-            if (TcpClientFSM::EReadWrite == vecsocketfsm[i]->Status() && ConnectCheckFSM::ECheckOK == vecsocketfsm[i]->CheckStatus()) {
+            if (TcpClientksimFSM::EReadWrite == vecsocketfsm[i]->Status() && ConnectCheckFSM::ECheckOK == vecsocketfsm[i]->CheckStatus()) {
                 if (_observer) _observer->OnFinished(i, socket_address(&vecsocketfsm[i]->Address()), vecsocketfsm[i]->Socket(), vecsocketfsm[i]->Error(),
                                                          vecsocketfsm[i]->Rtt(), vecsocketfsm[i]->TotalRtt(), (int)(gettickcount() - starttime));
 

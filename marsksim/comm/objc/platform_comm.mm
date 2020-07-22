@@ -57,13 +57,13 @@ static MarsNetworkStatus __GetNetworkStatus()
 #if TARGET_OS_WATCH
     return ReachableViaWiFi;
 #else
-    return [MarsReachability getCacheReachabilityStatus:NO];
+    return [MarsksimReachability getCacheReachabilityStatus:NO];
 #endif
 }
 
 void FlushReachability() {
 #if !TARGET_OS_WATCH
-   [MarsReachability getCacheReachabilityStatus:YES];
+   [MarsksimReachability getCacheReachabilityStatus:YES];
 #endif
 }
 
@@ -407,5 +407,5 @@ bool getCurRadioAccessNetworkInfo(RadioAccessNetworkInfo& _raninfo)
 }
 #endif
 
-void comm_export_symbols_1(){}
+void comm_export_symbolsksim_1(){}
 

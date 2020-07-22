@@ -34,11 +34,11 @@
 // see class template common_type (20.9.7.6). -end example ]
 //----------------------------------------------------------------------------//
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
     template <typename T>
     typename add_rvalue_reference<T>::type declval() BOOST_NOEXCEPT; // as unevaluated operand
 
-}  // namespace mars_boost_ksim
+}  // namespace mars_boost
 
 #endif  // BOOST_TYPE_TRAITS_DECLVAL_HPP_INCLUDED

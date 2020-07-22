@@ -12,9 +12,9 @@
 
 #if defined(__sgi) && defined(_COMPILER_VERSION) && _COMPILER_VERSION <= 730 && !defined(BOOST_STRICT_CONFIG)
 // Work around a compiler bug.
-// mars_boost_ksim::python::objects::function has to be seen by the compiler before the
-// mars_boost_ksim::function class template.
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace python { namespace objects {
+// mars_boost::python::objects::function has to be seen by the compiler before the
+// mars_boost::function class template.
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace python { namespace objects {
   class function;
 }}}
 #endif
@@ -24,7 +24,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #  define BOOST_FUNCTION_NO_FUNCTION_TYPE_SYNTAX
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
   class bad_function_call;
 
 #if !defined(BOOST_FUNCTION_NO_FUNCTION_TYPE_SYNTAX)

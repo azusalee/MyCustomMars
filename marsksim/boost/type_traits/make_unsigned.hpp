@@ -22,27 +22,27 @@
 #include <boost/type_traits/add_volatile.hpp>
 #include <boost/static_assert.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 template <class T>
 struct make_unsigned
 {
 private:
-   BOOST_STATIC_ASSERT_MSG((::mars_boost_ksim::is_integral<T>::value || ::mars_boost_ksim::is_enum<T>::value), "The template argument to make_unsigned must be an integer or enum type.");
-   BOOST_STATIC_ASSERT_MSG((! ::mars_boost_ksim::is_same<typename remove_cv<T>::type, bool>::value), "The template argument to make_unsigned must not be the type bool");
+   BOOST_STATIC_ASSERT_MSG((::mars_boost::is_integral<T>::value || ::mars_boost::is_enum<T>::value), "The template argument to make_unsigned must be an integer or enum type.");
+   BOOST_STATIC_ASSERT_MSG((! ::mars_boost::is_same<typename remove_cv<T>::type, bool>::value), "The template argument to make_unsigned must not be the type bool");
 
    typedef typename remove_cv<T>::type t_no_cv;
    typedef typename conditional<
-      (::mars_boost_ksim::is_unsigned<T>::value && ::mars_boost_ksim::is_integral<T>::value 
-      && ! ::mars_boost_ksim::is_same<t_no_cv, char>::value
-      && ! ::mars_boost_ksim::is_same<t_no_cv, wchar_t>::value
-      && ! ::mars_boost_ksim::is_same<t_no_cv, bool>::value),
+      (::mars_boost::is_unsigned<T>::value && ::mars_boost::is_integral<T>::value 
+      && ! ::mars_boost::is_same<t_no_cv, char>::value
+      && ! ::mars_boost::is_same<t_no_cv, wchar_t>::value
+      && ! ::mars_boost::is_same<t_no_cv, bool>::value),
       T,
       typename conditional<
-         (::mars_boost_ksim::is_integral<T>::value 
-         && ! ::mars_boost_ksim::is_same<t_no_cv, char>::value
-         && ! ::mars_boost_ksim::is_same<t_no_cv, wchar_t>::value
-         && ! ::mars_boost_ksim::is_same<t_no_cv, bool>::value),
+         (::mars_boost::is_integral<T>::value 
+         && ! ::mars_boost::is_same<t_no_cv, char>::value
+         && ! ::mars_boost::is_same<t_no_cv, wchar_t>::value
+         && ! ::mars_boost::is_same<t_no_cv, bool>::value),
          typename conditional<
             is_same<t_no_cv, signed char>::value,
             unsigned char,
@@ -58,12 +58,12 @@ private:
 #if defined(BOOST_HAS_LONG_LONG)
 #ifdef BOOST_HAS_INT128
                      typename conditional<
-                        sizeof(t_no_cv) == sizeof(mars_boost_ksim::ulong_long_type), 
-                        mars_boost_ksim::ulong_long_type, 
-                        mars_boost_ksim::uint128_type
+                        sizeof(t_no_cv) == sizeof(mars_boost::ulong_long_type), 
+                        mars_boost::ulong_long_type, 
+                        mars_boost::uint128_type
                      >::type
 #else
-                     mars_boost_ksim::ulong_long_type
+                     mars_boost::ulong_long_type
 #endif
 #elif defined(BOOST_HAS_MS_INT64)
                      unsigned __int64
@@ -90,12 +90,12 @@ private:
 #if defined(BOOST_HAS_LONG_LONG)
 #ifdef BOOST_HAS_INT128
                      typename conditional<
-                        sizeof(t_no_cv) == sizeof(mars_boost_ksim::ulong_long_type), 
-                        mars_boost_ksim::ulong_long_type, 
-                        mars_boost_ksim::uint128_type
+                        sizeof(t_no_cv) == sizeof(mars_boost::ulong_long_type), 
+                        mars_boost::ulong_long_type, 
+                        mars_boost::uint128_type
                      >::type
 #else
-                     mars_boost_ksim::ulong_long_type
+                     mars_boost::ulong_long_type
 #endif
 #elif defined(BOOST_HAS_MS_INT64)
                      unsigned __int64
@@ -124,7 +124,7 @@ public:
    >::type type;
 };
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_ADD_REFERENCE_HPP_INCLUDED
 

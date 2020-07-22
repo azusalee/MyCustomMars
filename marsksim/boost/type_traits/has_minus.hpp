@@ -15,38 +15,38 @@
    (\
       /* Lhs==pointer and Rhs==fundamental and Rhs!=integral */\
       (\
-         ::mars_boost_ksim::is_pointer< Lhs_noref >::value && \
-         ::mars_boost_ksim::is_fundamental< Rhs_nocv >::value && \
-         (!  ::mars_boost_ksim::is_integral< Rhs_noref >::value )\
+         ::mars_boost::is_pointer< Lhs_noref >::value && \
+         ::mars_boost::is_fundamental< Rhs_nocv >::value && \
+         (!  ::mars_boost::is_integral< Rhs_noref >::value )\
       ) || \
       /* Lhs==void* and (Rhs==fundamental or Rhs==pointer) */\
       (\
-         ::mars_boost_ksim::is_pointer< Lhs_noref >::value && \
-         ::mars_boost_ksim::is_void< Lhs_noptr >::value && \
+         ::mars_boost::is_pointer< Lhs_noref >::value && \
+         ::mars_boost::is_void< Lhs_noptr >::value && \
          ( \
-            ::mars_boost_ksim::is_fundamental< Rhs_nocv >::value || \
-            ::mars_boost_ksim::is_pointer< Rhs_noref >::value\
+            ::mars_boost::is_fundamental< Rhs_nocv >::value || \
+            ::mars_boost::is_pointer< Rhs_noref >::value\
           )\
       ) || \
       /* Rhs==void* and (Lhs==fundamental or Lhs==pointer) */\
       (\
-         ::mars_boost_ksim::is_pointer< Rhs_noref >::value && \
-         ::mars_boost_ksim::is_void< Rhs_noptr >::value && \
+         ::mars_boost::is_pointer< Rhs_noref >::value && \
+         ::mars_boost::is_void< Rhs_noptr >::value && \
          (\
-            ::mars_boost_ksim::is_fundamental< Lhs_nocv >::value || \
-            ::mars_boost_ksim::is_pointer< Lhs_noref >::value\
+            ::mars_boost::is_fundamental< Lhs_nocv >::value || \
+            ::mars_boost::is_pointer< Lhs_noref >::value\
           )\
       ) ||\
       /* Lhs=fundamental and Rhs=pointer */\
       (\
-         ::mars_boost_ksim::is_fundamental< Lhs_nocv >::value && \
-         ::mars_boost_ksim::is_pointer< Rhs_noref >::value\
+         ::mars_boost::is_fundamental< Lhs_nocv >::value && \
+         ::mars_boost::is_pointer< Rhs_noref >::value\
       ) ||\
       /* two different pointers */\
       (\
-         ::mars_boost_ksim::is_pointer< Lhs_noref >::value && \
-         ::mars_boost_ksim::is_pointer< Rhs_noref >::value && \
-         (!  ::mars_boost_ksim::is_same< Lhs_nocv, Rhs_nocv >::value )\
+         ::mars_boost::is_pointer< Lhs_noref >::value && \
+         ::mars_boost::is_pointer< Rhs_noref >::value && \
+         (!  ::mars_boost::is_same< Lhs_nocv, Rhs_nocv >::value )\
       )\
       )
 

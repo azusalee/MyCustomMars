@@ -10,7 +10,7 @@
  */
 
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace date_time {
 
 //! A wrapping integer used to support time durations (WARNING: only instantiate with a signed type)

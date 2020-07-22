@@ -19,7 +19,7 @@
 #include <memory>
 #include <functional>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace detail
   {
@@ -32,7 +32,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
         }
       };
-      typedef mars_boost_ksim::csbl::unique_ptr<impl_base> impl_base_type;
+      typedef mars_boost::csbl::unique_ptr<impl_base> impl_base_type;
       impl_base_type impl;
       template <typename F>
       struct impl_type: impl_base
@@ -42,7 +42,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           : f(f_)
         {}
         impl_type(BOOST_THREAD_RV_REF(F) f_)
-          : f(mars_boost_ksim::move(f_))
+          : f(mars_boost::move(f_))
         {}
 
         void call()
@@ -61,7 +61,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 //#endif
       template<typename F>
       function_wrapper(BOOST_THREAD_RV_REF(F) f):
-      impl(new impl_type<F>(mars_boost_ksim::forward<F>(f)))
+      impl(new impl_type<F>(mars_boost::forward<F>(f)))
       {}
       function_wrapper(BOOST_THREAD_RV_REF(function_wrapper) other) BOOST_NOEXCEPT :
       impl(other.impl)

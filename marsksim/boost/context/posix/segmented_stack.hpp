@@ -34,7 +34,7 @@ void __splitstack_block_signals_context( void * [BOOST_CONTEXT_SEGMENTS],
                                          int * new_value, int * old_value);
 }
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace context {
 
 template< typename traitsT >

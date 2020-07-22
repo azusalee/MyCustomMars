@@ -8,7 +8,7 @@
 # include <boost/detail/iterator.hpp>
 # include <boost/detail/workaround.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace iterators {
 
 // Macro for supporting old compilers, no longer needed but kept
@@ -19,32 +19,32 @@ namespace iterators {
 template <class Iterator>
 struct iterator_value
 {
-    typedef typename mars_boost_ksim::detail::iterator_traits<Iterator>::value_type type;
+    typedef typename mars_boost::detail::iterator_traits<Iterator>::value_type type;
 };
 
 template <class Iterator>
 struct iterator_reference
 {
-    typedef typename mars_boost_ksim::detail::iterator_traits<Iterator>::reference type;
+    typedef typename mars_boost::detail::iterator_traits<Iterator>::reference type;
 };
 
 
 template <class Iterator>
 struct iterator_pointer
 {
-    typedef typename mars_boost_ksim::detail::iterator_traits<Iterator>::pointer type;
+    typedef typename mars_boost::detail::iterator_traits<Iterator>::pointer type;
 };
 
 template <class Iterator>
 struct iterator_difference
 {
-    typedef typename mars_boost_ksim::detail::iterator_traits<Iterator>::difference_type type;
+    typedef typename mars_boost::detail::iterator_traits<Iterator>::difference_type type;
 };
 
 template <class Iterator>
 struct iterator_category
 {
-    typedef typename mars_boost_ksim::detail::iterator_traits<Iterator>::iterator_category type;
+    typedef typename mars_boost::detail::iterator_traits<Iterator>::iterator_category type;
 };
 
 } // namespace iterators
@@ -55,6 +55,6 @@ using iterators::iterator_pointer;
 using iterators::iterator_difference;
 using iterators::iterator_category;
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // ITERATOR_TRAITS_DWA200347_HPP

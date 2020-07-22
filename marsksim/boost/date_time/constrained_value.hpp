@@ -16,7 +16,7 @@
 #include <boost/mpl/if.hpp>
 #include <boost/type_traits/is_base_of.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 //! Namespace containing constrained_value template and types
 namespace CV {
@@ -107,7 +107,7 @@ namespace CV {
     static rep_type max BOOST_PREVENT_MACRO_SUBSTITUTION () { return max_value; }
     static void on_error(rep_type, rep_type, violation_enum)
     {
-      mars_boost_ksim::throw_exception(actual_exception_type());
+      mars_boost::throw_exception(actual_exception_type());
     }
   };
 

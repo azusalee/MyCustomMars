@@ -13,19 +13,19 @@
 #include <boost/date_time/int_adapter.hpp>
 #include <boost/date_time/special_defs.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace gregorian {
 
   //!An internal date representation that includes infinities, not a date
-  typedef mars_boost_ksim::date_time::duration_traits_adapted date_duration_rep;
+  typedef mars_boost::date_time::duration_traits_adapted date_duration_rep;
 
   //! Durations in days for gregorian system
   /*! \ingroup date_basics
    */
   class date_duration :
-    public mars_boost_ksim::date_time::date_duration< date_duration_rep >
+    public mars_boost::date_time::date_duration< date_duration_rep >
   {
-    typedef mars_boost_ksim::date_time::date_duration< date_duration_rep > base_type;
+    typedef mars_boost::date_time::date_duration< date_duration_rep > base_type;
 
   public:
     typedef base_type::duration_rep duration_rep;

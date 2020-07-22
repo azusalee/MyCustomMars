@@ -18,7 +18,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 namespace executors
 {
@@ -47,12 +47,12 @@ namespace detail
 
     void submit_at(work w, const time_point& tp)
     {
-      this->_workq.push(mars_boost_ksim::move(w), tp);
+      this->_workq.push(mars_boost::move(w), tp);
     }
 
     void submit_after(work w, const duration& dura)
     {
-      this->_workq.push(mars_boost_ksim::move(w), dura+clock::now());
+      this->_workq.push(mars_boost::move(w), dura+clock::now());
     }
 
   }; //end class

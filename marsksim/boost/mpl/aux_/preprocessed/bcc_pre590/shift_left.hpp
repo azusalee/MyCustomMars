@@ -10,7 +10,7 @@
 // *Preprocessed* version of the main "shift_left.hpp" header
 // -- DO NOT modify by hand!
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl {
 
 template<
       typename Tag1
@@ -80,7 +80,7 @@ BOOST_MPL_AUX_NA_SPEC2(2, 2, shift_left)
 
 }}
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl {
 template<>
 struct shift_left_impl< integral_c_tag,integral_c_tag >
 {

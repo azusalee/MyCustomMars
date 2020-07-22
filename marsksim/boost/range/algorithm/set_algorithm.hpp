@@ -15,7 +15,7 @@
 #include <boost/range/concepts.hpp>
 #include <algorithm>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range
     {
@@ -33,8 +33,8 @@ inline bool includes(const SinglePassRange1& rng1,
 {
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange1> ));
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange2> ));
-    return std::includes(mars_boost_ksim::begin(rng1),mars_boost_ksim::end(rng1),
-                         mars_boost_ksim::begin(rng2),mars_boost_ksim::end(rng2));
+    return std::includes(mars_boost::begin(rng1),mars_boost::end(rng1),
+                         mars_boost::begin(rng2),mars_boost::end(rng2));
 }
 
 /// \overload
@@ -46,8 +46,8 @@ inline bool includes(const SinglePassRange1& rng1,
 {
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange1> ));
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange2> ));
-    return std::includes(mars_boost_ksim::begin(rng1), mars_boost_ksim::end(rng1),
-                         mars_boost_ksim::begin(rng2), mars_boost_ksim::end(rng2), pred);
+    return std::includes(mars_boost::begin(rng1), mars_boost::end(rng1),
+                         mars_boost::begin(rng2), mars_boost::end(rng2), pred);
 }
 
 /// \brief template function set_union
@@ -65,8 +65,8 @@ inline OutputIterator set_union(const SinglePassRange1& rng1,
 {
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange1> ));
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange2> ));
-    return std::set_union(mars_boost_ksim::begin(rng1), mars_boost_ksim::end(rng1),
-                          mars_boost_ksim::begin(rng2), mars_boost_ksim::end(rng2), out);
+    return std::set_union(mars_boost::begin(rng1), mars_boost::end(rng1),
+                          mars_boost::begin(rng2), mars_boost::end(rng2), out);
 }
 
 /// \overload
@@ -79,8 +79,8 @@ inline OutputIterator set_union(const SinglePassRange1& rng1,
 {
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange1> ));
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange2> ));
-    return std::set_union(mars_boost_ksim::begin(rng1), mars_boost_ksim::end(rng1),
-                          mars_boost_ksim::begin(rng2), mars_boost_ksim::end(rng2), out, pred);
+    return std::set_union(mars_boost::begin(rng1), mars_boost::end(rng1),
+                          mars_boost::begin(rng2), mars_boost::end(rng2), out, pred);
 }
 
 /// \brief template function set_intersection
@@ -98,8 +98,8 @@ inline OutputIterator set_intersection(const SinglePassRange1& rng1,
 {
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange1> ));
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange2> ));
-    return std::set_intersection(mars_boost_ksim::begin(rng1), mars_boost_ksim::end(rng1),
-                                 mars_boost_ksim::begin(rng2), mars_boost_ksim::end(rng2), out);
+    return std::set_intersection(mars_boost::begin(rng1), mars_boost::end(rng1),
+                                 mars_boost::begin(rng2), mars_boost::end(rng2), out);
 }
 
 /// \overload
@@ -112,8 +112,8 @@ inline OutputIterator set_intersection(const SinglePassRange1& rng1,
 {
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange1> ));
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange2> ));
-    return std::set_intersection(mars_boost_ksim::begin(rng1), mars_boost_ksim::end(rng1),
-                                 mars_boost_ksim::begin(rng2), mars_boost_ksim::end(rng2),
+    return std::set_intersection(mars_boost::begin(rng1), mars_boost::end(rng1),
+                                 mars_boost::begin(rng2), mars_boost::end(rng2),
                                  out, pred);
 }
 
@@ -132,8 +132,8 @@ inline OutputIterator set_difference(const SinglePassRange1& rng1,
 {
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange1> ));
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange2> ));
-    return std::set_difference(mars_boost_ksim::begin(rng1), mars_boost_ksim::end(rng1),
-                               mars_boost_ksim::begin(rng2), mars_boost_ksim::end(rng2), out);
+    return std::set_difference(mars_boost::begin(rng1), mars_boost::end(rng1),
+                               mars_boost::begin(rng2), mars_boost::end(rng2), out);
 }
 
 /// \overload
@@ -147,8 +147,8 @@ inline OutputIterator set_difference(const SinglePassRange1& rng1,
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange1> ));
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange2> ));
     return std::set_difference(
-        mars_boost_ksim::begin(rng1), mars_boost_ksim::end(rng1),
-        mars_boost_ksim::begin(rng2), mars_boost_ksim::end(rng2), out, pred);
+        mars_boost::begin(rng1), mars_boost::end(rng1),
+        mars_boost::begin(rng2), mars_boost::end(rng2), out, pred);
 }
 
 /// \brief template function set_symmetric_difference
@@ -167,8 +167,8 @@ set_symmetric_difference(const SinglePassRange1& rng1,
 {
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange1> ));
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange2> ));
-    return std::set_symmetric_difference(mars_boost_ksim::begin(rng1), mars_boost_ksim::end(rng1),
-                                         mars_boost_ksim::begin(rng2), mars_boost_ksim::end(rng2), out);
+    return std::set_symmetric_difference(mars_boost::begin(rng1), mars_boost::end(rng1),
+                                         mars_boost::begin(rng2), mars_boost::end(rng2), out);
 }
 
 /// \overload
@@ -183,8 +183,8 @@ set_symmetric_difference(const SinglePassRange1& rng1,
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange1> ));
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange2> ));
     return std::set_symmetric_difference(
-        mars_boost_ksim::begin(rng1), mars_boost_ksim::end(rng1),
-        mars_boost_ksim::begin(rng2), mars_boost_ksim::end(rng2), out, pred);
+        mars_boost::begin(rng1), mars_boost::end(rng1),
+        mars_boost::begin(rng2), mars_boost::end(rng2), out, pred);
 }
 
     } // namespace range
@@ -193,6 +193,6 @@ set_symmetric_difference(const SinglePassRange1& rng1,
     using range::set_intersection;
     using range::set_difference;
     using range::set_symmetric_difference;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

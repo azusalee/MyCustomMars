@@ -22,7 +22,7 @@
 #include <boost/container/detail/config_begin.hpp>
 #include <boost/container/detail/workaround.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace container {
 
 #ifndef BOOST_CONTAINER_DOXYGEN_INVOKED
@@ -51,7 +51,7 @@ static const allocation_type nothrow_allocation = (allocation_type)nothrow_alloc
 static const allocation_type zero_memory        = (allocation_type)zero_memory_v;
 
 }  //namespace container {
-}  //namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+}  //namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 #include <boost/container/detail/config_end.hpp>
 

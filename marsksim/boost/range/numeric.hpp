@@ -33,7 +33,7 @@
 #include <numeric>
 
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     template<class SinglePassRange, class Value>
     inline Value accumulate(const SinglePassRange& rng, Value init)
@@ -41,7 +41,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         BOOST_RANGE_CONCEPT_ASSERT((
             SinglePassRangeConcept<const SinglePassRange>));
 
-        return std::accumulate(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), init);
+        return std::accumulate(mars_boost::begin(rng), mars_boost::end(rng), init);
     }
 
     template<class SinglePassRange, class Value, class BinaryOperation>
@@ -51,7 +51,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         BOOST_RANGE_CONCEPT_ASSERT((
                 SinglePassRangeConcept<const SinglePassRange> ));
 
-        return std::accumulate(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), init, op);
+        return std::accumulate(mars_boost::begin(rng), mars_boost::end(rng), init, op);
     }
 
     namespace range_detail
@@ -73,7 +73,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             std::forward_iterator_tag,
             std::forward_iterator_tag)
         {
-            return mars_boost_ksim::size(rng2) >= mars_boost_ksim::size(rng1);
+            return mars_boost::size(rng2) >= mars_boost::size(rng1);
         }
 
     } // namespace range_detail
@@ -101,8 +101,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                     typename range_category<const SinglePassRange2>::type()));
 
         return std::inner_product(
-            mars_boost_ksim::begin(rng1), mars_boost_ksim::end(rng1),
-            mars_boost_ksim::begin(rng2), init);
+            mars_boost::begin(rng1), mars_boost::end(rng1),
+            mars_boost::begin(rng2), init);
     }
 
     template<
@@ -132,8 +132,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 typename range_category<const SinglePassRange2>::type()));
 
         return std::inner_product(
-            mars_boost_ksim::begin(rng1), mars_boost_ksim::end(rng1),
-            mars_boost_ksim::begin(rng2), init, op1, op2);
+            mars_boost::begin(rng1), mars_boost::end(rng1),
+            mars_boost::begin(rng2), init, op1, op2);
     }
 
     template<class SinglePassRange, class OutputIterator>
@@ -143,7 +143,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         BOOST_RANGE_CONCEPT_ASSERT((
                 SinglePassRangeConcept<const SinglePassRange>));
 
-        return std::partial_sum(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), result);
+        return std::partial_sum(mars_boost::begin(rng), mars_boost::end(rng), result);
     }
 
     template<class SinglePassRange, class OutputIterator, class BinaryOperation>
@@ -155,7 +155,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         BOOST_RANGE_CONCEPT_ASSERT((
                 SinglePassRangeConcept<const SinglePassRange>));
 
-        return std::partial_sum(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), result, op);
+        return std::partial_sum(mars_boost::begin(rng), mars_boost::end(rng), result, op);
     }
 
     template<class SinglePassRange, class OutputIterator>
@@ -166,7 +166,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         BOOST_RANGE_CONCEPT_ASSERT((
                 SinglePassRangeConcept<const SinglePassRange>));
 
-        return std::adjacent_difference(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng),
+        return std::adjacent_difference(mars_boost::begin(rng), mars_boost::end(rng),
                                         result);
     }
 
@@ -179,10 +179,10 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         BOOST_RANGE_CONCEPT_ASSERT((
                 SinglePassRangeConcept<const SinglePassRange>));
 
-        return std::adjacent_difference(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng),
+        return std::adjacent_difference(mars_boost::begin(rng), mars_boost::end(rng),
                                         result, op);
     }
 
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif

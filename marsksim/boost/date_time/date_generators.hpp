@@ -19,7 +19,7 @@
 #include <boost/date_time/date.hpp>
 #include <boost/date_time/compiler_config.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace date_time {
 
   //! Base class for all generators that take a year and produce a date.
@@ -103,7 +103,7 @@ namespace date_time {
      if((day_ == 29) && (month_ == 2) && !(calendar_type::is_leap_year(y))) {
        std::ostringstream ss;
        ss << "No Feb 29th in given year of " << y << ".";
-       mars_boost_ksim::throw_exception(std::invalid_argument(ss.str()));
+       mars_boost::throw_exception(std::invalid_argument(ss.str()));
      }
      return date_type(y, month_, day_);
    }
@@ -366,7 +366,7 @@ namespace date_time {
   //! Calculate something like "First Sunday after Jan 1,2002
   /*! Date generator that takes a date and finds kday after
    *@code
-     typedef mars_boost_ksim::date_time::first_kday_after<date> firstkdayafter;
+     typedef mars_boost::date_time::first_kday_after<date> firstkdayafter;
      firstkdayafter fkaf(Monday);
      fkaf.get_date(date(2002,Feb,1));
    @endcode
@@ -404,7 +404,7 @@ namespace date_time {
   //! Calculate something like "First Sunday before Jan 1,2002
   /*! Date generator that takes a date and finds kday after
    *@code
-     typedef mars_boost_ksim::date_time::first_kday_before<date> firstkdaybefore;
+     typedef mars_boost::date_time::first_kday_before<date> firstkdaybefore;
      firstkdaybefore fkbf(Monday);
      fkbf.get_date(date(2002,Feb,1));
    @endcode

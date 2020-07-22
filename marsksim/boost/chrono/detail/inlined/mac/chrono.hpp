@@ -14,7 +14,7 @@
 #include <sys/time.h> //for gettimeofday and timeval
 #include <mach/mach_time.h>  // mach_absolute_time, mach_timebase_info_data_t
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 namespace chrono
 {
@@ -132,7 +132,7 @@ steady_full_ec(system::error_code & ec)
     {
         if (BOOST_CHRONO_IS_THROWS(ec))
         {
-            mars_boost_ksim::throw_exception(
+            mars_boost::throw_exception(
                     system::system_error(
                             err,
                             BOOST_CHRONO_SYSTEM_CATEGORY,
@@ -218,7 +218,7 @@ steady_clock::now(system::error_code & ec)
     {
         if (BOOST_CHRONO_IS_THROWS(ec))
         {
-            mars_boost_ksim::throw_exception(
+            mars_boost::throw_exception(
                     system::system_error(
                             err,
                             BOOST_CHRONO_SYSTEM_CATEGORY,
@@ -238,4 +238,4 @@ steady_clock::now(system::error_code & ec)
 }
 #endif
 }  // namespace chrono
-}  // namespace mars_boost_ksim
+}  // namespace mars_boost

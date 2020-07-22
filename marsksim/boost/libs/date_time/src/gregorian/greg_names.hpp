@@ -13,7 +13,7 @@
 
 #include "boost/date_time/gregorian/greg_month.hpp"
 #include "boost/date_time/special_defs.hpp"
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace gregorian {
 
 
@@ -39,5 +39,5 @@ namespace gregorian {
                                            L"Wednesday", L"Thursday",
                                            L"Friday", L"Saturday"};
 #endif // BOOST_NO_STD_WSTRING
-} } // mars_boost_ksim::gregorian
+} } // mars_boost::gregorian
 #endif // DATE_TIME_SRC_GREG_NAMES_HPP___

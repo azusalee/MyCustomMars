@@ -13,7 +13,7 @@
 
 #include <boost/config.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 // * convert a type T to a const volatile type - add_cv<T>
 // this is not required since the result is always
@@ -36,6 +36,6 @@ template <class T> struct add_cv{ typedef T const volatile type; };
 
 template <class T> struct add_cv<T&>{ typedef T& type; };
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_ADD_CV_HPP_INCLUDED

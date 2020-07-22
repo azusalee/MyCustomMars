@@ -1,7 +1,7 @@
 /*
   A meta function which supports using named template type parameters
   via Boost.Parameter to specify the template type parameters for
-  the mars_boost_ksim::signals2::signal class.
+  the mars_boost::signals2::signal class.
 
   Author: Frank Mori Hess <fmhess@users.sourceforge.net>
   Begin: 2009-01-22
@@ -33,7 +33,7 @@
 
 #include <boost/type_traits/is_function.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace signals2
   {
@@ -67,7 +67,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     {
       typedef parameter::parameters<
 #ifdef BOOST_SIGNALS2_NAMED_SIGNATURE_PARAMETER
-          parameter::required<keywords::tag::signature_type, is_function<mars_boost_ksim::mpl::_> >,
+          parameter::required<keywords::tag::signature_type, is_function<mars_boost::mpl::_> >,
 #endif
           parameter::optional<keywords::tag::combiner_type>,
           parameter::optional<keywords::tag::group_type>,
@@ -100,7 +100,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           keywords::tag::combiner_type,
           optional_last_value
             <
-              typename mars_boost_ksim::function_traits<signature_type>::result_type
+              typename mars_boost::function_traits<signature_type>::result_type
             >
         >::type combiner_type;
 
@@ -139,6 +139,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         > type;
     };
   } // namespace signals2
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_SIGNALS2_SIGNAL_TYPE_HPP

@@ -26,7 +26,7 @@
     into generic functors. 
 */
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
     namespace algorithm {
 
 //  classification functor generator -------------------------------------//
@@ -202,7 +202,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             BOOST_STRING_TYPENAME range_value<RangeT>::type> 
         is_any_of( const RangeT& Set )
         {
-            iterator_range<BOOST_STRING_TYPENAME range_const_iterator<RangeT>::type> lit_set(mars_boost_ksim::as_literal(Set));
+            iterator_range<BOOST_STRING_TYPENAME range_const_iterator<RangeT>::type> lit_set(mars_boost::as_literal(Set));
             return detail::is_any_ofF<BOOST_STRING_TYPENAME range_value<RangeT>::type>(lit_set); 
         }
 
@@ -307,6 +307,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     using algorithm::is_any_of;
     using algorithm::is_from_range;
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif  // BOOST_STRING_PREDICATE_HPP

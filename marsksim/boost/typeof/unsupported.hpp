@@ -5,11 +5,11 @@
 #ifndef BOOST_TYPEOF_UNSUPPORTED_HPP_INCLUDED
 #define BOOST_TYPEOF_UNSUPPORTED_HPP_INCLUDED
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace type_of {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace type_of {
     struct typeof_emulation_is_unsupported_on_this_compiler {};
 }}
 
-#define BOOST_TYPEOF(expr) mars_boost_ksim::type_of::typeof_emulation_is_unsupported_on_this_compiler
+#define BOOST_TYPEOF(expr) mars_boost::type_of::typeof_emulation_is_unsupported_on_this_compiler
 #define BOOST_TYPEOF_TPL BOOST_TYPEOF
 
 #define BOOST_TYPEOF_NESTED_TYPEDEF_TPL(name,expr) \

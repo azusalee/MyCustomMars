@@ -20,7 +20,7 @@
 #include <boost/mpl/aux_/na_spec.hpp>
 #include <boost/mpl/aux_/lambda_support.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl {
 
 // agurt, 13/sep/02: switched from inheritance to typedef; MSVC is more
 // happy this way (less ETI-related errors), and it doesn't affect 

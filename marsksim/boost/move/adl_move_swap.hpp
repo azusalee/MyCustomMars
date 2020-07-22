@@ -49,12 +49,12 @@
    #include <algorithm>  //Fallback for C++98/03
 #endif
 
-#include <boost/move/utility_core.hpp> //for mars_boost_ksim::move
+#include <boost/move/utility_core.hpp> //for mars_boost::move
 
 #if !defined(BOOST_MOVE_DOXYGEN_INVOKED)
 
 #if defined(BOOST_NO_CXX11_RVALUE_REFERENCES)
-namespace mars_boost_ksim_move_member_swap {
+namespace mars_boost_move_member_swap {
 
 struct dont_care
 {
@@ -123,9 +123,9 @@ struct has_member_swap : public has_member_swap_impl
       <Fun, has_member_function_named_swap<Fun>::value>
 {};
 
-}  //namespace mars_boost_ksim_move_member_swap
+}  //namespace mars_boost_move_member_swap
 
-namespace mars_boost_ksim_move_adl_swap{
+namespace mars_boost_move_adl_swap{
 
 template<class P1, class P2, bool = P1::value>
 struct and_op_impl
@@ -156,7 +156,7 @@ struct and_op_not
 {};
 
 template<class T>
-void swap_proxy(T& x, T& y, typename mars_boost_ksim::move_detail::enable_if_c<!mars_boost_ksim::move_detail::has_move_emulation_enabled_impl<T>::value>::type* = 0)
+void swap_proxy(T& x, T& y, typename mars_boost::move_detail::enable_if_c<!mars_boost::move_detail::has_move_emulation_enabled_impl<T>::value>::type* = 0)
 {
    //use std::swap if argument dependent lookup fails
    //Use using directive ("using namespace xxx;") instead as some older compilers
@@ -167,23 +167,23 @@ void swap_proxy(T& x, T& y, typename mars_boost_ksim::move_detail::enable_if_c<!
 
 template<class T>
 void swap_proxy(T& x, T& y
-               , typename mars_boost_ksim::move_detail::enable_if< and_op_not_impl<mars_boost_ksim::move_detail::has_move_emulation_enabled_impl<T>
-                                                                        , mars_boost_ksim_move_member_swap::has_member_swap<T> >
+               , typename mars_boost::move_detail::enable_if< and_op_not_impl<mars_boost::move_detail::has_move_emulation_enabled_impl<T>
+                                                                        , mars_boost_move_member_swap::has_member_swap<T> >
                                                        >::type* = 0)
-{  T t(::mars_boost_ksim::move(x)); x = ::mars_boost_ksim::move(y); y = ::mars_boost_ksim::move(t);  }
+{  T t(::mars_boost::move(x)); x = ::mars_boost::move(y); y = ::mars_boost::move(t);  }
 
 template<class T>
 void swap_proxy(T& x, T& y
-               , typename mars_boost_ksim::move_detail::enable_if< and_op_impl< mars_boost_ksim::move_detail::has_move_emulation_enabled_impl<T>
-                                                                    , mars_boost_ksim_move_member_swap::has_member_swap<T> >
+               , typename mars_boost::move_detail::enable_if< and_op_impl< mars_boost::move_detail::has_move_emulation_enabled_impl<T>
+                                                                    , mars_boost_move_member_swap::has_member_swap<T> >
                                                        >::type* = 0)
 {  x.swap(y);  }
 
-}  //namespace mars_boost_ksim_move_adl_swap{
+}  //namespace mars_boost_move_adl_swap{
 
 #else
 
-namespace mars_boost_ksim_move_adl_swap{
+namespace mars_boost_move_adl_swap{
 
 template<class T>
 void swap_proxy(T& x, T& y)
@@ -192,25 +192,25 @@ void swap_proxy(T& x, T& y)
    swap(x, y);
 }
 
-}  //namespace mars_boost_ksim_move_adl_swap{
+}  //namespace mars_boost_move_adl_swap{
 
 #endif   //#if defined(BOOST_NO_CXX11_RVALUE_REFERENCES)
 
-namespace mars_boost_ksim_move_adl_swap{
+namespace mars_boost_move_adl_swap{
 
 template<class T, std::size_t N>
 void swap_proxy(T (& x)[N], T (& y)[N])
 {
    for (std::size_t i = 0; i < N; ++i){
-      ::mars_boost_ksim_move_adl_swap::swap_proxy(x[i], y[i]);
+      ::mars_boost_move_adl_swap::swap_proxy(x[i], y[i]);
    }
 }
 
-}  //namespace mars_boost_ksim_move_adl_swap {
+}  //namespace mars_boost_move_adl_swap {
 
 #endif   //!defined(BOOST_MOVE_DOXYGEN_INVOKED)
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim{
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost{
 
 //! Exchanges the values of a and b, using Argument Dependent Lookup (ADL) to select a
 //! specialized swap function if available. If no specialized swap function is available,
@@ -221,13 +221,13 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 //!
 //!   -  If T has a <code>T::swap(T&)</code> member, that member is called.
 //!   -  Otherwise a move-based swap is called, equivalent to: 
-//!      <code>T t(::mars_boost_ksim::move(x)); x = ::mars_boost_ksim::move(y); y = ::mars_boost_ksim::move(t);</code>.
+//!      <code>T t(::mars_boost::move(x)); x = ::mars_boost::move(y); y = ::mars_boost::move(t);</code>.
 template<class T>
 void adl_move_swap(T& x, T& y)
 {
-   ::mars_boost_ksim_move_adl_swap::swap_proxy(x, y);
+   ::mars_boost_move_adl_swap::swap_proxy(x, y);
 }
 
-}  //namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim{
+}  //namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost{
 
 #endif   //#ifndef BOOST_MOVE_ADL_MOVE_SWAP_HPP

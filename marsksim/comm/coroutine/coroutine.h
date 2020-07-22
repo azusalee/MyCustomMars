@@ -26,14 +26,14 @@ class Wrapper: public boost_ksim::intrusive_ref_counter<Wrapper> {
     
 friend class Coroutine;
 friend void Yield();
-friend mq::MessagePost_t Resume(const boost_ksim::intrusive_ptr<Wrapper>&, int64_t);
+friend mqksim::MessagePost_t Resume(const boost_ksim::intrusive_ptr<Wrapper>&, int64_t);
     
 typedef boost_ksim::coroutines::asymmetric_coroutine<void>::pull_type pull_coro_t;
 typedef boost_ksim::coroutines::asymmetric_coroutine<void>::push_type push_coro_t;
     
 public:
     template <typename F>
-    Wrapper(const F& _func, const mq::MessageHandler_t& _handler)
+    Wrapper(const F& _func, const mqksim::MessageHandler_tksim& _handler)
     :handler_(_handler)
     , pull_obj_ptr_(NULL)
     , push_obj_([_func, this](pull_coro_t& sink){
@@ -54,21 +54,21 @@ private:
     Wrapper(const Wrapper& rhs);
 
 private:
-    mq::MessageHandler_t  handler_;
+    mqksim::MessageHandler_tksim  handler_;
     pull_coro_t*                    pull_obj_ptr_;
     push_coro_t                     push_obj_;
 };
     
 /////////static function//////////////
 inline boost_ksim::intrusive_ptr<Wrapper> RunningCoroutine() {
-    const mq::Message& running_msg = mq::RunningMessage();
+    const mqksim::Message& running_msg = mqksim::RunningMessage();
     ASSERT(running_msg.body2.type() == boost_ksim::typeindex::type_id<boost_ksim::intrusive_ptr<Wrapper> >());
     return (boost_ksim::any_cast<boost_ksim::intrusive_ptr<Wrapper> >(running_msg.body2));
 }
     
 inline bool isCoroutine() {
-    const mq::Message& running_msg = mq::RunningMessage();
-    if (running_msg == mq::KNullMessage) return false;
+    const mqksim::Message& running_msg = mqksim::RunningMessage();
+    if (running_msg == mqksim::KNullMessage) return false;
     return running_msg.body2.type() == boost_ksim::typeindex::type_id<boost_ksim::intrusive_ptr<Wrapper> >();
 }
     
@@ -76,14 +76,14 @@ inline void Yield() {
     RunningCoroutine()->_Yield();
 }
 
-inline mq::MessagePost_t Resume(const boost_ksim::intrusive_ptr<Wrapper>& _wrapper, int64_t _after=0) {
+inline mqksim::MessagePost_t Resume(const boost_ksim::intrusive_ptr<Wrapper>& _wrapper, int64_t _after=0) {
     
-    mq::Message message;
-    message.body1 = boost_ksim::make_shared<mq::AsyncInvokeFunction>([_wrapper](){ _wrapper->push_obj_(); });
+    mqksim::Message message;
+    message.body1 = boost_ksim::make_shared<mqksim::AsyncInvokeFunction>([_wrapper](){ _wrapper->push_obj_(); });
     message.body2 = _wrapper;
     message.title = _wrapper.get();
     
-    return mq::PostMessage(_wrapper->handler_, message, _after);
+    return mqksim::PostMessage(_wrapper->handler_, message, _after);
 }
     
 inline void Wait(int64_t _after = std::numeric_limits<int64_t>::max()) {
@@ -96,20 +96,20 @@ inline void Wait(int64_t _after = std::numeric_limits<int64_t>::max()) {
 class Coroutine {
 public:
     template <typename F>
-    Coroutine(const F& _func, const mq::MessageHandler_t& _handler):wrapper_(new Wrapper(_func, _handler)) {}
+    Coroutine(const F& _func, const mqksim::MessageHandler_tksim& _handler):wrapper_(new Wrapper(_func, _handler)) {}
     
     void Start() { Resume(wrapper_); }
     
     void Join() {
-        mq::WaitInvoke([this](){
-            mq::RunLoop([this](){ return !this->wrapper_->push_obj_;}).Run();
+        mqksim::WaitInvoke([this](){
+            mqksim::RunLoop([this](){ return !this->wrapper_->push_obj_;}).Run();
             ASSERT(!(this->wrapper_->push_obj_));
-            mq::CancelMessage(this->wrapper_->handler_, this->wrapper_.get());
+            mqksim::CancelMessage(this->wrapper_->handler_, this->wrapper_.get());
         }, wrapper_->handler_);
     }
 
     void Notify() {
-        mq::CancelMessage(wrapper_->handler_, wrapper_.get());
+        mqksim::CancelMessage(wrapper_->handler_, wrapper_.get());
         Resume(wrapper_);
     }
     
@@ -131,9 +131,9 @@ private:
     
     
 template <typename F>
-typename boost_ksim::result_of< F()>::type  WaitInvoke(const F& _func, const mq::MessageHandler_t& _handler) {
+typename boost_ksim::result_of< F()>::type  WaitInvoke(const F& _func, const mqksim::MessageHandler_tksim& _handler) {
     typedef typename boost_ksim::result_of<F()>::type R;
-    mq::AsyncResult<R> result(_func);
+    mqksim::AsyncResult<R> result(_func);
     Coroutine coro(result, _handler);
     coro.Start();
     coro.Join();
@@ -141,7 +141,7 @@ typename boost_ksim::result_of< F()>::type  WaitInvoke(const F& _func, const mq:
 }
     
 template <typename R>
-R& WaitInvoke(mq::AsyncResult<R>& _func, const mq::MessageHandler_t& _handler) {
+R& WaitInvoke(mqksim::AsyncResult<R>& _func, const mqksim::MessageHandler_tksim& _handler) {
     Coroutine coro(_func, _handler);
     coro.Start();
     coro.Join();

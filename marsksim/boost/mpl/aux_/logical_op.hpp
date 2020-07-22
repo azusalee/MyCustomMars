@@ -33,7 +33,7 @@
 #include <boost/preprocessor/inc.hpp>
 #include <boost/preprocessor/cat.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl {
 
 #   define AUX778076_PARAMS(param, sub) \
     BOOST_MPL_PP_PARAMS( \

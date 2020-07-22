@@ -13,7 +13,7 @@
 #ifndef BOOST_NONE_T_17SEP2003_HPP
 #define BOOST_NONE_T_17SEP2003_HPP
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 #ifdef BOOST_OPTIONAL_USE_OLD_DEFINITION_OF_NONE
 
@@ -34,7 +34,7 @@ struct none_t
 
 #endif // old implementation workarounds
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // header guard
 

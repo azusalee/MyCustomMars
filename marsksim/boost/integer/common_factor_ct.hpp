@@ -13,7 +13,7 @@
 #include <boost/integer_fwd.hpp>  // self include
 #include <boost/config.hpp>  // for BOOST_STATIC_CONSTANT, etc.
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 namespace integer
 {
@@ -78,7 +78,7 @@ namespace detail
 template < static_gcd_type Value1, static_gcd_type Value2 > struct static_gcd
 {
     BOOST_STATIC_CONSTANT( static_gcd_type, value = (detail::static_gcd_helper_t<Value1, Value2>::value) );
-};  // mars_boost_ksim::integer::static_gcd
+};  // mars_boost::integer::static_gcd
 
 #if !defined(BOOST_NO_INCLASS_MEMBER_INITIALIZATION)
 template< static_gcd_type Value1, static_gcd_type Value2 > static_gcd_type const static_gcd< Value1, Value2 >::value;
@@ -89,14 +89,14 @@ template< static_gcd_type Value1, static_gcd_type Value2 > static_gcd_type const
 template < static_gcd_type Value1, static_gcd_type Value2 > struct static_lcm
 {
     BOOST_STATIC_CONSTANT( static_gcd_type, value = (detail::static_lcm_helper_t<Value1, Value2>::value) );
-};  // mars_boost_ksim::integer::static_lcm
+};  // mars_boost::integer::static_lcm
 
 #if !defined(BOOST_NO_INCLASS_MEMBER_INITIALIZATION)
 template< static_gcd_type Value1, static_gcd_type Value2 > static_gcd_type const static_lcm< Value1, Value2 >::value;
 #endif
 
 }  // namespace integer
-}  // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+}  // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 
 #endif  // BOOST_INTEGER_COMMON_FACTOR_CT_HPP

@@ -20,7 +20,7 @@
 #include <boost/range/value_type.hpp>
 #include <boost/range/iterator_range_core.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range_detail
     {
@@ -28,7 +28,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         // return T.
         //
         // This is an implementation artifact used to pick intelligent default
-        // values when the user specified mars_boost_ksim::use_default as a template
+        // values when the user specified mars_boost::use_default as a template
         // parameter.
         template<
             class T,
@@ -119,15 +119,15 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
             template<class WrappedRange>
             any_range(WrappedRange& wrapped_range)
-            : base_type(mars_boost_ksim::begin(wrapped_range),
-                        mars_boost_ksim::end(wrapped_range))
+            : base_type(mars_boost::begin(wrapped_range),
+                        mars_boost::end(wrapped_range))
             {
             }
 
             template<class WrappedRange>
             any_range(const WrappedRange& wrapped_range)
-            : base_type(mars_boost_ksim::begin(wrapped_range),
-                        mars_boost_ksim::end(wrapped_range))
+            : base_type(mars_boost::begin(wrapped_range),
+                        mars_boost::end(wrapped_range))
             {
             }
 
@@ -144,7 +144,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                               , OtherDifference
                               , Buffer
                             >& other)
-            : base_type(mars_boost_ksim::begin(other), mars_boost_ksim::end(other))
+            : base_type(mars_boost::begin(other), mars_boost::end(other))
             {
             }
 
@@ -199,6 +199,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
     using range_detail::any_range;
     using range_detail::any_range_type_generator;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

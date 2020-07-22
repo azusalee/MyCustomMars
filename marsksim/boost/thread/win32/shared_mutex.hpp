@@ -22,7 +22,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     class shared_mutex
     {
@@ -92,14 +92,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             if (!semaphores[exclusive_sem])
             {
               detail::win32::release_semaphore(semaphores[unlock_sem],LONG_MAX);
-              mars_boost_ksim::throw_exception(thread_resource_error());
+              mars_boost::throw_exception(thread_resource_error());
             }
             upgrade_sem=detail::win32::create_anonymous_semaphore_nothrow(0,LONG_MAX);
             if (!upgrade_sem)
             {
               detail::win32::release_semaphore(semaphores[unlock_sem],LONG_MAX);
               detail::win32::release_semaphore(semaphores[exclusive_sem],LONG_MAX);
-              mars_boost_ksim::throw_exception(thread_resource_error());
+              mars_boost::throw_exception(thread_resource_error());
             }
             state_data state_={0,0,0,0,0,0};
             state=state_;
@@ -153,7 +153,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
             return timed_lock_shared(get_system_time()+relative_time);
         }
-        bool timed_lock_shared(mars_boost_ksim::system_time const& wait_until)
+        bool timed_lock_shared(mars_boost::system_time const& wait_until)
         {
             for(;;)
             {
@@ -166,7 +166,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                         ++new_state.shared_waiting;
                         if(!new_state.shared_waiting)
                         {
-                            mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error());
+                            mars_boost::throw_exception(mars_boost::lock_error());
                         }
                     }
                     else
@@ -174,7 +174,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                         ++new_state.shared_count;
                         if(!new_state.shared_count)
                         {
-                            mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error());
+                            mars_boost::throw_exception(mars_boost::lock_error());
                         }
                     }
 
@@ -267,7 +267,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                   ++new_state.shared_waiting;
                   if(!new_state.shared_waiting)
                   {
-                      mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error());
+                      mars_boost::throw_exception(mars_boost::lock_error());
                   }
               }
               else
@@ -275,7 +275,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                   ++new_state.shared_count;
                   if(!new_state.shared_count)
                   {
-                      mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error());
+                      mars_boost::throw_exception(mars_boost::lock_error());
                   }
               }
 
@@ -433,7 +433,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 
 #if defined BOOST_THREAD_USES_DATETIME
-        bool timed_lock(mars_boost_ksim::system_time const& wait_until)
+        bool timed_lock(mars_boost::system_time const& wait_until)
         {
             for(;;)
             {
@@ -447,7 +447,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                         ++new_state.exclusive_waiting;
                         if(!new_state.exclusive_waiting)
                         {
-                            mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error());
+                            mars_boost::throw_exception(mars_boost::lock_error());
                         }
 
                         new_state.exclusive_waiting_blocked=true;
@@ -554,7 +554,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 ++new_state.exclusive_waiting;
                 if(!new_state.exclusive_waiting)
                 {
-                    mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error());
+                    mars_boost::throw_exception(mars_boost::lock_error());
                 }
 
                 new_state.exclusive_waiting_blocked=true;
@@ -672,7 +672,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                         ++new_state.shared_waiting;
                         if(!new_state.shared_waiting)
                         {
-                            mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error());
+                            mars_boost::throw_exception(mars_boost::lock_error());
                         }
                     }
                     else
@@ -680,7 +680,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                         ++new_state.shared_count;
                         if(!new_state.shared_count)
                         {
-                            mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error());
+                            mars_boost::throw_exception(mars_boost::lock_error());
                         }
                         new_state.upgrade=true;
                     }

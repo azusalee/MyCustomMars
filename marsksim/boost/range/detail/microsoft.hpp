@@ -69,7 +69,7 @@
 #endif
 
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace range_detail_microsoft {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace range_detail_microsoft {
 
 
     // customization point
@@ -186,7 +186,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     typename size_type_of<T>::type
     size_of(T const& x)
     {
-        return std::distance(mars_boost_ksim::begin(x), mars_boost_ksim::end(x));
+        return std::distance(mars_boost::begin(x), mars_boost::end(x));
     }
 
 #endif
@@ -198,7 +198,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     { };
 
 
-} } // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim::range_detail_microsoft
+} } // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost::range_detail_microsoft
 
 
 #define BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_namespace_open(NamespaceList) \
@@ -225,11 +225,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 
 #define BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TYPE(Tag, NamespaceList, Name) \
-    namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace range_detail_microsoft { \
+    namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace range_detail_microsoft { \
         BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TYPE_tag(Tag, BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TYPE_fullname(NamespaceList, Name)) \
     } } \
     \
-    namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { \
+    namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { \
         BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TYPE_mutable_iterator(BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TYPE_fullname(NamespaceList, Name)) \
         BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TYPE_const_iterator(BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TYPE_fullname(NamespaceList, Name)) \
         BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TYPE_size_type(BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TYPE_fullname(NamespaceList, Name)) \
@@ -290,40 +290,40 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
     #define BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TYPE_begin(Fullname) \
         inline \
-        mars_boost_ksim::range_detail_microsoft::mutable_iterator_of< Fullname >::type \
+        mars_boost::range_detail_microsoft::mutable_iterator_of< Fullname >::type \
         BOOST_RANGE_DETAIL_MICROSOFT_range_begin(Fullname& x) \
         { \
-            return mars_boost_ksim::range_detail_microsoft::begin_of(x); \
+            return mars_boost::range_detail_microsoft::begin_of(x); \
         } \
     /**/
 
 
     #define BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TYPE_begin_const(Fullname) \
         inline \
-        mars_boost_ksim::range_detail_microsoft::const_iterator_of< Fullname >::type \
+        mars_boost::range_detail_microsoft::const_iterator_of< Fullname >::type \
         BOOST_RANGE_DETAIL_MICROSOFT_range_begin(Fullname const& x) \
         { \
-            return mars_boost_ksim::range_detail_microsoft::begin_of(x); \
+            return mars_boost::range_detail_microsoft::begin_of(x); \
         } \
     /**/
 
 
     #define BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TYPE_end(Fullname) \
         inline \
-        mars_boost_ksim::range_detail_microsoft::mutable_iterator_of< Fullname >::type \
+        mars_boost::range_detail_microsoft::mutable_iterator_of< Fullname >::type \
         BOOST_RANGE_DETAIL_MICROSOFT_range_end(Fullname& x) \
         { \
-            return mars_boost_ksim::range_detail_microsoft::end_of(x); \
+            return mars_boost::range_detail_microsoft::end_of(x); \
         } \
     /**/
 
 
     #define BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TYPE_end_const(Fullname) \
         inline \
-        mars_boost_ksim::range_detail_microsoft::const_iterator_of< Fullname >::type \
+        mars_boost::range_detail_microsoft::const_iterator_of< Fullname >::type \
         BOOST_RANGE_DETAIL_MICROSOFT_range_end(Fullname const& x) \
         { \
-            return mars_boost_ksim::range_detail_microsoft::end_of(x); \
+            return mars_boost::range_detail_microsoft::end_of(x); \
         } \
     /**/
 
@@ -337,10 +337,10 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         #define BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TYPE_size(Fullname) \
             inline \
-            mars_boost_ksim::range_detail_microsoft::size_type_of< Fullname >::type \
+            mars_boost::range_detail_microsoft::size_type_of< Fullname >::type \
             boost_range_size(Fullname const& x) \
             { \
-                return mars_boost_ksim::range_detail_microsoft::size_of(x); \
+                return mars_boost::range_detail_microsoft::size_of(x); \
             } \
         /**/
 
@@ -367,7 +367,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 
 #define BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TEMPLATE_impl(Tag, NamespaceList, Name, ParamSeq) \
-    namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace range_detail_microsoft { \
+    namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace range_detail_microsoft { \
             BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TEMPLATE_tag( \
             Tag, \
             BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TEMPLATE_params(ParamSeq), \
@@ -375,7 +375,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         ) \
     } } \
     \
-    namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { \
+    namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { \
         BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TEMPLATE_mutable_iterator( \
             BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TEMPLATE_params(ParamSeq), \
             BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TEMPLATE_fullname(NamespaceList, Name, ParamSeq) \
@@ -471,40 +471,40 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
     #define BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TEMPLATE_begin(Params, Fullname) \
         template< Params > inline \
-        typename mars_boost_ksim::range_detail_microsoft::mutable_iterator_of< Fullname >::type \
+        typename mars_boost::range_detail_microsoft::mutable_iterator_of< Fullname >::type \
         BOOST_RANGE_DETAIL_MICROSOFT_range_begin(Fullname& x) \
         { \
-            return mars_boost_ksim::range_detail_microsoft::begin_of(x); \
+            return mars_boost::range_detail_microsoft::begin_of(x); \
         } \
     /**/
 
 
     #define BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TEMPLATE_begin_const(Params, Fullname) \
         template< Params > inline \
-        typename mars_boost_ksim::range_detail_microsoft::const_iterator_of< Fullname >::type \
+        typename mars_boost::range_detail_microsoft::const_iterator_of< Fullname >::type \
         BOOST_RANGE_DETAIL_MICROSOFT_range_begin(Fullname const& x) \
         { \
-            return mars_boost_ksim::range_detail_microsoft::begin_of(x); \
+            return mars_boost::range_detail_microsoft::begin_of(x); \
         } \
     /**/
 
 
     #define BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TEMPLATE_end(Params, Fullname) \
         template< Params > inline \
-        typename mars_boost_ksim::range_detail_microsoft::mutable_iterator_of< Fullname >::type \
+        typename mars_boost::range_detail_microsoft::mutable_iterator_of< Fullname >::type \
         BOOST_RANGE_DETAIL_MICROSOFT_range_end(Fullname& x) \
         { \
-            return mars_boost_ksim::range_detail_microsoft::end_of(x); \
+            return mars_boost::range_detail_microsoft::end_of(x); \
         } \
     /**/
 
 
     #define BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TEMPLATE_end_const(Params, Fullname) \
         template< Params > inline \
-        typename mars_boost_ksim::range_detail_microsoft::const_iterator_of< Fullname >::type \
+        typename mars_boost::range_detail_microsoft::const_iterator_of< Fullname >::type \
         BOOST_RANGE_DETAIL_MICROSOFT_range_end(Fullname const& x) \
         { \
-            return mars_boost_ksim::range_detail_microsoft::end_of(x); \
+            return mars_boost::range_detail_microsoft::end_of(x); \
         } \
     /**/
 
@@ -518,10 +518,10 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         #define BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TEMPLATE_size(Params, Fullname) \
             template< Params > inline \
-            typename mars_boost_ksim::range_detail_microsoft::size_type_of< Fullname >::type \
+            typename mars_boost::range_detail_microsoft::size_type_of< Fullname >::type \
             boost_range_size(Fullname const& x) \
             { \
-                return mars_boost_ksim::range_detail_microsoft::size_of(x); \
+                return mars_boost::range_detail_microsoft::size_of(x); \
             } \
         /**/
 
@@ -547,7 +547,7 @@ struct __POSITION; // incomplete, but used as just a pointer.
 typedef __POSITION *POSITION;
 
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace range_detail_microsoft {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace range_detail_microsoft {
 
 
     template<
@@ -605,7 +605,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         { }
 
         explicit list_iterator(ListT& lst, POSITION pos) :
-            m_plst(mars_boost_ksim::addressof(lst)), m_pos(pos)
+            m_plst(mars_boost::addressof(lst)), m_pos(pos)
         { }
 
     template< class, class, class, class > friend struct list_iterator;
@@ -687,7 +687,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     };
 
 
-} } // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim::range_detail_microsoft
+} } // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost::range_detail_microsoft
 
 
 
@@ -718,15 +718,15 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #include <boost/type_traits/is_same.hpp>
 
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace range_detail_microsoft {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace range_detail_microsoft {
 
 
     template< class Range1, class Range2 >
     bool test_equals(Range1 const& rng1, Range2 const& rng2)
     {
         return
-            mars_boost_ksim::distance(rng1) == mars_boost_ksim::distance(rng2) &&
-            std::equal(mars_boost_ksim::begin(rng1), mars_boost_ksim::end(rng1), mars_boost_ksim::begin(rng2))
+            mars_boost::distance(rng1) == mars_boost::distance(rng2) &&
+            std::equal(mars_boost::begin(rng1), mars_boost::end(rng1), mars_boost::begin(rng2))
         ;
     }
 
@@ -734,8 +734,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template< class AssocContainer, class PairT >
     bool test_find_key_and_mapped(AssocContainer const& ac, PairT const& pa)
     {
-        typedef typename mars_boost_ksim::range_const_iterator<AssocContainer>::type iter_t;
-        for (iter_t it = mars_boost_ksim::const_begin(ac), last = mars_boost_ksim::const_end(ac); it != last; ++it) {
+        typedef typename mars_boost::range_const_iterator<AssocContainer>::type iter_t;
+        for (iter_t it = mars_boost::const_begin(ac), last = mars_boost::const_end(ac); it != last; ++it) {
             if (it->first == pa.first && it->second == pa.second)
                 return true;
         }
@@ -753,7 +753,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         bool result = true;
 
         Range emptyRng;
-        result = result && mars_boost_ksim::empty(emptyRng);
+        result = result && mars_boost::empty(emptyRng);
 
         return result;
     }
@@ -766,7 +766,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         // convertibility check
         typedef typename range_const_iterator<Range>::type citer_t;
-        citer_t cit = mars_boost_ksim::begin(rng);
+        citer_t cit = mars_boost::begin(rng);
         (void)cit; // unused
 
         // mutability check
@@ -782,17 +782,17 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template< class Range >
     bool test_forward(Range& rng)
     {
-        mars_boost_ksim::function_requires< ForwardRangeConcept<Range> >();
+        mars_boost::function_requires< ForwardRangeConcept<Range> >();
 
         bool result = (test_trivial)(rng);
 
         typedef typename range_value<Range>::type val_t;
 
         std::vector<val_t> saved;
-        std::copy(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), std::back_inserter(saved));
-        std::rotate(mars_boost_ksim::begin(saved), mars_boost_ksim::next(mars_boost_ksim::begin(saved)), mars_boost_ksim::end(saved));
+        std::copy(mars_boost::begin(rng), mars_boost::end(rng), std::back_inserter(saved));
+        std::rotate(mars_boost::begin(saved), mars_boost::next(mars_boost::begin(saved)), mars_boost::end(saved));
 
-        std::rotate(mars_boost_ksim::begin(rng), mars_boost_ksim::next(mars_boost_ksim::begin(rng)), mars_boost_ksim::end(rng));
+        std::rotate(mars_boost::begin(rng), mars_boost::next(mars_boost::begin(rng)), mars_boost::end(rng));
 
         return result && (test_equals)(saved, rng);
     };
@@ -801,18 +801,18 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template< class Range >
     bool test_bidirectional(Range& rng)
     {
-        mars_boost_ksim::function_requires< BidirectionalRangeConcept<Range> >();
+        mars_boost::function_requires< BidirectionalRangeConcept<Range> >();
 
         bool result = (test_forward)(rng);
 
         typedef typename range_value<Range>::type val_t;
 
         std::vector<val_t> saved;
-        std::copy(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), std::back_inserter(saved));
+        std::copy(mars_boost::begin(rng), mars_boost::end(rng), std::back_inserter(saved));
 
         result = result && (test_equals)(
-            mars_boost_ksim::make_iterator_range(mars_boost_ksim::rbegin(saved), mars_boost_ksim::rend(saved)),
-            mars_boost_ksim::make_iterator_range(mars_boost_ksim::rbegin(rng), mars_boost_ksim::rend(rng))
+            mars_boost::make_iterator_range(mars_boost::rbegin(saved), mars_boost::rend(saved)),
+            mars_boost::make_iterator_range(mars_boost::rbegin(rng), mars_boost::rend(rng))
         );
 
         return result;
@@ -822,26 +822,26 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template< class Range >
     bool test_random_access(Range& rng)
     {
-        mars_boost_ksim::function_requires< RandomAccessRangeConcept<Range> >();
+        mars_boost::function_requires< RandomAccessRangeConcept<Range> >();
 
         bool result = (test_bidirectional)(rng);
 
         typedef typename range_value<Range>::type val_t;
 
         std::vector<val_t> saved;
-        std::copy(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), std::back_inserter(saved));
-        std::sort(mars_boost_ksim::begin(saved), mars_boost_ksim::end(saved));
+        std::copy(mars_boost::begin(rng), mars_boost::end(rng), std::back_inserter(saved));
+        std::sort(mars_boost::begin(saved), mars_boost::end(saved));
 
-        std::random_shuffle(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng));
-        std::sort(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng));
+        std::random_shuffle(mars_boost::begin(rng), mars_boost::end(rng));
+        std::sort(mars_boost::begin(rng), mars_boost::end(rng));
         result = result && (test_equals)(rng, saved);
 
-        std::random_shuffle(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng));
-        std::stable_sort(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng));
+        std::random_shuffle(mars_boost::begin(rng), mars_boost::end(rng));
+        std::stable_sort(mars_boost::begin(rng), mars_boost::end(rng));
         result = result && (test_equals)(rng, saved);
 
-        std::random_shuffle(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng));
-        std::partial_sort(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), mars_boost_ksim::end(rng));
+        std::random_shuffle(mars_boost::begin(rng), mars_boost::end(rng));
+        std::partial_sort(mars_boost::begin(rng), mars_boost::end(rng), mars_boost::end(rng));
         result = result && (test_equals)(rng, saved);
 
         return result;
@@ -857,7 +857,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         typedef typename range_const_iterator<SampleRange>::type iter_t;
         typedef typename range_value<SampleRange>::type val_t;
 
-        for (iter_t it = mars_boost_ksim::const_begin(sample), last = mars_boost_ksim::const_end(sample); it != last; ++it) {
+        for (iter_t it = mars_boost::const_begin(sample), last = mars_boost::const_end(sample); it != last; ++it) {
             val_t v = *it; // works around ATL3 CSimpleArray
             arr.Add(v);
         }
@@ -871,7 +871,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     {
         typedef typename range_const_iterator<SampleRange>::type iter_t;
 
-        for (iter_t it = mars_boost_ksim::const_begin(sample), last = mars_boost_ksim::const_end(sample); it != last; ++it) {
+        for (iter_t it = mars_boost::const_begin(sample), last = mars_boost::const_end(sample); it != last; ++it) {
             lst.AddTail(*it);
         }
 
@@ -885,7 +885,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         typedef typename range_const_iterator<SampleRange>::type iter_t;
         typedef typename range_value<SampleRange>::type val_t;
 
-        for (iter_t it = mars_boost_ksim::const_begin(sample), last = mars_boost_ksim::const_end(sample); it != last; ++it) {
+        for (iter_t it = mars_boost::const_begin(sample), last = mars_boost::const_end(sample); it != last; ++it) {
             str += *it;
         }
 
@@ -898,11 +898,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     {
         typedef typename range_const_iterator<SampleMap>::type iter_t;
 
-        for (iter_t it = mars_boost_ksim::const_begin(sample), last = mars_boost_ksim::const_end(sample); it != last; ++it) {
+        for (iter_t it = mars_boost::const_begin(sample), last = mars_boost::const_end(sample); it != last; ++it) {
             map.SetAt(it->first, it->second);
         }
 
-        return mars_boost_ksim::distance(map) == mars_boost_ksim::distance(sample);
+        return mars_boost::distance(map) == mars_boost::distance(sample);
     }
 
 
@@ -911,17 +911,17 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
     template< class Range, class Iter >
     struct test_mutable_iter :
-        mars_boost_ksim::is_same< typename mars_boost_ksim::BOOST_RANGE_DETAIL_MICROSOFT_range_mutable_iterator<Range>::type, Iter >
+        mars_boost::is_same< typename mars_boost::BOOST_RANGE_DETAIL_MICROSOFT_range_mutable_iterator<Range>::type, Iter >
     { };
 
 
     template< class Range, class Iter >
     struct test_const_iter :
-        mars_boost_ksim::is_same< typename mars_boost_ksim::range_const_iterator<Range>::type, Iter >
+        mars_boost::is_same< typename mars_boost::range_const_iterator<Range>::type, Iter >
     { };
 
 
-} } // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim::range_detail_microsoft
+} } // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost::range_detail_microsoft
 
 
 #endif // defined(BOOST_RANGE_DETAIL_MICROSOFT_TEST)

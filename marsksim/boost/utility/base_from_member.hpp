@@ -55,7 +55,7 @@
     /**/
 
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 namespace detail
@@ -72,10 +72,10 @@ namespace detail
 template < typename T >
 struct remove_cv_ref
 {
-    typedef typename ::mars_boost_ksim::remove_cv<typename
-     ::mars_boost_ksim::remove_reference<T>::type>::type  type;
+    typedef typename ::mars_boost::remove_cv<typename
+     ::mars_boost::remove_reference<T>::type>::type  type;
 
-};  // mars_boost_ksim::detail::remove_cv_ref
+};  // mars_boost::detail::remove_cv_ref
 
 //  Unmarked-type comparison class template  ---------------------------------//
 
@@ -85,9 +85,9 @@ struct remove_cv_ref
 
 template < typename T, typename U >
 struct is_related
-    : public ::mars_boost_ksim::is_same<
-     typename ::mars_boost_ksim::detail::remove_cv_ref<T>::type,
-     typename ::mars_boost_ksim::detail::remove_cv_ref<U>::type >
+    : public ::mars_boost::is_same<
+     typename ::mars_boost::detail::remove_cv_ref<T>::type,
+     typename ::mars_boost::detail::remove_cv_ref<U>::type >
 {};
 
 //  Enable-if-on-unidentical-unmarked-type class template  -------------------//
@@ -99,16 +99,16 @@ struct is_related
 #ifndef BOOST_NO_CXX11_VARIADIC_TEMPLATES
 template<typename ...T>
 struct enable_if_unrelated
-    : public ::mars_boost_ksim::enable_if_c<true>
+    : public ::mars_boost::enable_if_c<true>
 {};
 
 template<typename T, typename U, typename ...U2>
 struct enable_if_unrelated<T, U, U2...>
-    : public ::mars_boost_ksim::disable_if< ::mars_boost_ksim::detail::is_related<T, U> >
+    : public ::mars_boost::disable_if< ::mars_boost::detail::is_related<T, U> >
 {};
 #endif
 
-}  // namespace mars_boost_ksim::detail
+}  // namespace mars_boost::detail
 
 
 //  Base-from-member class template  -----------------------------------------//
@@ -131,7 +131,7 @@ protected:
     !defined(BOOST_NO_CXX11_FUNCTION_TEMPLATE_DEFAULT_ARGS) && \
     !(defined(__GNUC__) && (__GNUC__ == 4) && (__GNUC_MINOR__ < 4))
     template <typename ...T, typename EnableIf = typename
-     ::mars_boost_ksim::detail::enable_if_unrelated<base_from_member, T...>::type>
+     ::mars_boost::detail::enable_if_unrelated<base_from_member, T...>::type>
     explicit BOOST_CONSTEXPR base_from_member( T&& ...x )
         BOOST_NOEXCEPT_IF( BOOST_NOEXCEPT_EXPR(::new ((void*) 0) MemberType(
          static_cast<T&&>(x)... )) )  // no std::is_nothrow_constructible...
@@ -146,7 +146,7 @@ protected:
      BOOST_PRIVATE_CTR_DEF, _ )
 #endif
 
-};  // mars_boost_ksim::base_from_member
+};  // mars_boost::base_from_member
 
 template < typename MemberType, int UniqueID >
 class base_from_member<MemberType&, UniqueID>
@@ -159,9 +159,9 @@ protected:
         : member( x )
         {}
 
-};  // mars_boost_ksim::base_from_member
+};  // mars_boost::base_from_member
 
-}  // namespace mars_boost_ksim
+}  // namespace mars_boost
 
 
 // Undo any private macros

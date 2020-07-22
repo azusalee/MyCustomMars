@@ -10,7 +10,7 @@
 #define BOOST_TYPE_INDEX_STL_REGISTER_CLASS_HPP
 
 /// \file stl_register_class.hpp
-/// \brief Contains BOOST_TYPE_INDEX_REGISTER_CLASS macro implementation that uses mars_boost_ksim::typeindex::stl_type_index.
+/// \brief Contains BOOST_TYPE_INDEX_REGISTER_CLASS macro implementation that uses mars_boost::typeindex::stl_type_index.
 /// Not intended for inclusion from user's code.
 
 #include <boost/type_index/stl_type_index.hpp>
@@ -19,19 +19,19 @@
 # pragma once
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace typeindex { namespace detail {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace typeindex { namespace detail {
 
 template <class T>
 inline const stl_type_index::type_info_t& stl_construct_typeid_ref(const T*) BOOST_NOEXCEPT {
     return typeid(T);
 }
 
-}}} // namespace mars_boost_ksim::typeindex::detail
+}}} // namespace mars_boost::typeindex::detail
 
 /// @cond
 #define BOOST_TYPE_INDEX_REGISTER_CLASS                                                                                     \
-    virtual const mars_boost_ksim::typeindex::stl_type_index::type_info_t& boost_type_index_type_id_runtime_() const BOOST_NOEXCEPT { \
-        return mars_boost_ksim::typeindex::detail::stl_construct_typeid_ref(this);                                                    \
+    virtual const mars_boost::typeindex::stl_type_index::type_info_t& boost_type_index_type_id_runtime_() const BOOST_NOEXCEPT { \
+        return mars_boost::typeindex::detail::stl_construct_typeid_ref(this);                                                    \
     }                                                                                                                       \
 /**/
 /// @endcond

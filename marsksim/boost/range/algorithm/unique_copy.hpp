@@ -15,7 +15,7 @@
 #include <boost/range/concepts.hpp>
 #include <algorithm>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range
     {
@@ -32,7 +32,7 @@ inline OutputIterator
 unique_copy( const SinglePassRange& rng, OutputIterator out_it )
 {
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange> ));
-    return std::unique_copy(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), out_it);
+    return std::unique_copy(mars_boost::begin(rng), mars_boost::end(rng), out_it);
 }
 /// \overload
 template< class SinglePassRange, class OutputIterator, class BinaryPredicate >
@@ -41,11 +41,11 @@ unique_copy( const SinglePassRange& rng, OutputIterator out_it,
              BinaryPredicate pred )
 {
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange> ));
-    return std::unique_copy(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), out_it, pred);
+    return std::unique_copy(mars_boost::begin(rng), mars_boost::end(rng), out_it, pred);
 }
 
     } // namespace range
     using range::unique_copy;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

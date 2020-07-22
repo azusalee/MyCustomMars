@@ -20,7 +20,7 @@
 #include "boost/operators.hpp"
 
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace date_time {
   //!Provides generalized period type useful in date-time systems
   /*!This template uses a class to represent a time point within the period
@@ -49,8 +49,8 @@ namespace date_time {
    */
   template<class point_rep, class duration_rep>
   class period : private
-      mars_boost_ksim::less_than_comparable<period<point_rep, duration_rep> 
-    , mars_boost_ksim::equality_comparable< period<point_rep, duration_rep> 
+      mars_boost::less_than_comparable<period<point_rep, duration_rep> 
+    , mars_boost::equality_comparable< period<point_rep, duration_rep> 
     > >
   {
   public:

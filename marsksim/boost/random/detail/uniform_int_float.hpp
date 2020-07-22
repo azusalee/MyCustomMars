@@ -23,7 +23,7 @@
 
 #include <boost/random/detail/disable_warnings.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace random {
 namespace detail {
 
@@ -34,10 +34,10 @@ public:
     typedef URNG base_type;
     typedef typename base_type::result_type base_result;
 
-    typedef typename mars_boost_ksim::uint_t<
-        (std::numeric_limits<mars_boost_ksim::uintmax_t>::digits <
+    typedef typename mars_boost::uint_t<
+        (std::numeric_limits<mars_boost::uintmax_t>::digits <
             std::numeric_limits<base_result>::digits)?
-        std::numeric_limits<mars_boost_ksim::uintmax_t>::digits :
+        std::numeric_limits<mars_boost::uintmax_t>::digits :
         std::numeric_limits<base_result>::digits
     >::fast result_type;
 
@@ -69,7 +69,7 @@ private:
 
 } // namespace detail
 } // namespace random
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #include <boost/random/detail/enable_warnings.hpp>
 

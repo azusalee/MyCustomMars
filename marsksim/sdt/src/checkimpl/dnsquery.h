@@ -49,8 +49,8 @@ int socket_gethostbyname(const char* _host, struct socket_ipinfo_t* _ipinfo, int
 
 
 ////////
-class NetCheckTrafficMonitor;
-int socket_gethostbyname(const char* _host, struct socket_ipinfo_t* _ipinfo, int _timeout /*ms*/, const char* _dnsserver, NetCheckTrafficMonitor* _traffic_monitor);
+class NetCheckTrafficMonitorksim;
+int socket_gethostbyname(const char* _host, struct socket_ipinfo_t* _ipinfo, int _timeout /*ms*/, const char* _dnsserver, NetCheckTrafficMonitorksim* _traffic_monitor);
 #endif
 
 #endif //SDT_SRC_CHECKIMPL_DNSQUERY_H_

@@ -14,7 +14,7 @@
 #include <boost/range/adaptor/adjacent_filtered.hpp>
 #include <boost/range/concepts.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
     namespace range_detail

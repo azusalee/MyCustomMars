@@ -28,7 +28,7 @@
 #include <boost/type_traits/is_pointer.hpp>
 #include <boost/detail/workaround.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim{
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost{
 
 namespace detail{
 
@@ -83,11 +83,11 @@ public:
    // however compiler bugs prevent this - instead pass three bool's to
    // ct_imp<T,bool,bool,bool> and add an extra partial specialisation
    // of ct_imp to handle the logic. (JM)
-   typedef typename mars_boost_ksim::detail::ct_imp<
+   typedef typename mars_boost::detail::ct_imp<
       T,
-      ::mars_boost_ksim::is_pointer<T>::value,
-      ::mars_boost_ksim::is_arithmetic<T>::value,
-      ::mars_boost_ksim::is_enum<T>::value
+      ::mars_boost::is_pointer<T>::value,
+      ::mars_boost::is_arithmetic<T>::value,
+      ::mars_boost::is_enum<T>::value
    >::param_type param_type;
 };
 

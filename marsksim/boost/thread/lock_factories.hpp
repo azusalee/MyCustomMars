@@ -13,7 +13,7 @@
 #endif
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
   template <typename Lockable>
@@ -45,14 +45,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
   template <typename ...Lockable>
   std::tuple<unique_lock<Lockable> ...> make_unique_locks(Lockable& ...mtx)
   {
-    mars_boost_ksim::lock(mtx...);
+    mars_boost::lock(mtx...);
     return std::tuple<unique_lock<Lockable> ...>(unique_lock<Lockable>(mtx, adopt_lock)...);
   }
 #else
   template <typename L1, typename L2>
   std::tuple<unique_lock<L1>, unique_lock<L2> > make_unique_locks(L1& m1, L2& m2)
   {
-    mars_boost_ksim::lock(m1, m2);
+    mars_boost::lock(m1, m2);
     return std::tuple<unique_lock<L1>,unique_lock<L2> >(
         unique_lock<L1>(m1, adopt_lock),
         unique_lock<L2>(m2, adopt_lock)
@@ -61,7 +61,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
   template <typename L1, typename L2, typename L3>
   std::tuple<unique_lock<L1>, unique_lock<L2>, unique_lock<L3> > make_unique_locks(L1& m1, L2& m2, L3& m3)
   {
-    mars_boost_ksim::lock(m1, m2, m3);
+    mars_boost::lock(m1, m2, m3);
     return std::tuple<unique_lock<L1>,unique_lock<L2>,unique_lock<L3> >(
         unique_lock<L1>(m1, adopt_lock),
         unique_lock<L2>(m2, adopt_lock),

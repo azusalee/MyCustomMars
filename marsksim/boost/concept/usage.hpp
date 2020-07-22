@@ -8,7 +8,7 @@
 # include <boost/detail/workaround.hpp>
 # include <boost/concept/detail/backward_compatibility.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace concepts { 
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace concepts { 
 
 template <class Model>
 struct usage_requirements
@@ -20,17 +20,17 @@ struct usage_requirements
 
 #   define BOOST_CONCEPT_USAGE(model)                                    \
       model(); /* at least 2.96 and 3.4.3 both need this :( */           \
-      BOOST_CONCEPT_ASSERT((mars_boost_ksim::concepts::usage_requirements<model>)); \
+      BOOST_CONCEPT_ASSERT((mars_boost::concepts::usage_requirements<model>)); \
       ~model()
 
 #  else
 
 #   define BOOST_CONCEPT_USAGE(model)                                    \
-      BOOST_CONCEPT_ASSERT((mars_boost_ksim::concepts::usage_requirements<model>)); \
+      BOOST_CONCEPT_ASSERT((mars_boost::concepts::usage_requirements<model>)); \
       ~model()
 
 #  endif
 
-}} // namespace mars_boost_ksim::concepts
+}} // namespace mars_boost::concepts
 
 #endif // BOOST_CONCEPT_USAGE_DWA2006919_HPP

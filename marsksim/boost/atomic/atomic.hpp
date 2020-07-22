@@ -26,7 +26,7 @@
 #pragma once
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 using atomics::atomic;
 
@@ -88,6 +88,6 @@ using atomics::atomic_intptr_t;
 using atomics::atomic_uintptr_t;
 #endif
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_ATOMIC_ATOMIC_HPP_INCLUDED_

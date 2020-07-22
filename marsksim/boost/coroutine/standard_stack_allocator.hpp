@@ -26,7 +26,7 @@
 #  include BOOST_ABI_PREFIX
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace coroutines {
 
 template< typename traitsT >
@@ -40,7 +40,7 @@ struct basic_standard_stack_allocator
         BOOST_ASSERT( traits_type::is_unbounded() || ( traits_type::maximum_size() >= size) );
 
         void * limit = std::malloc( size);
-        if ( ! limit) mars_boost_ksim::throw_exception(std::bad_alloc());//throw std::bad_alloc();
+        if ( ! limit) mars_boost::throw_exception(std::bad_alloc());//throw std::bad_alloc();
 
         ctx.size = size;
         ctx.sp = static_cast< char * >( limit) + ctx.size;

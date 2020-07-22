@@ -27,7 +27,7 @@
 #include <exception>
 #include <boost/throw_exception.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     // exception used to indicate runtime lexical_cast failure
     class BOOST_SYMBOL_VISIBLE bad_lexical_cast :
@@ -84,18 +84,18 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #ifdef BOOST_NO_TYPEID
         template <class S, class T>
         inline void throw_bad_cast() {
-            mars_boost_ksim::throw_exception(bad_lexical_cast());
+            mars_boost::throw_exception(bad_lexical_cast());
         }
 #else
         template <class S, class T>
         inline void throw_bad_cast() {
-            mars_boost_ksim::throw_exception(bad_lexical_cast(typeid(S), typeid(T)));
+            mars_boost::throw_exception(bad_lexical_cast(typeid(S), typeid(T)));
         }
 #endif
     }} // namespace conversion::detail
 
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_LEXICAL_CAST_BAD_LEXICAL_CAST_HPP
 

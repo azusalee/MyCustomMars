@@ -25,7 +25,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 namespace concurrent
 {
@@ -79,14 +79,14 @@ namespace concurrent
 
     inline void pull_front(value_type& elem, unique_lock<mutex>& )
     {
-      elem = mars_boost_ksim::move(super::data_.front());
+      elem = mars_boost::move(super::data_.front());
       super::data_.pop_front();
     }
     inline value_type pull_front(unique_lock<mutex>& )
     {
-      value_type e = mars_boost_ksim::move(super::data_.front());
+      value_type e = mars_boost::move(super::data_.front());
       super::data_.pop_front();
-      return mars_boost_ksim::move(e);
+      return mars_boost::move(e);
     }
 
     inline void push_back(const value_type& elem, unique_lock<mutex>& lk)
@@ -97,7 +97,7 @@ namespace concurrent
 
     inline void push_back(BOOST_THREAD_RV_REF(value_type) elem, unique_lock<mutex>& lk)
     {
-      super::data_.push_back(mars_boost_ksim::move(elem));
+      super::data_.push_back(mars_boost::move(elem));
       super::notify_not_empty_if_needed(lk);
     }
   };
@@ -116,11 +116,11 @@ namespace concurrent
 //    try
 //    {
 //      typedef typename Range::iterator iterator_t;
-//      iterator_t first = mars_boost_ksim::begin(range);
-//      iterator_t end = mars_boost_ksim::end(range);
+//      iterator_t first = mars_boost::begin(range);
+//      iterator_t end = mars_boost::end(range);
 //      for (iterator_t cur = first; cur != end; ++cur)
 //      {
-//        data_.push(mars_boost_ksim::move(*cur));;
+//        data_.push(mars_boost::move(*cur));;
 //      }
 //      notify_not_empty_if_needed(lk);
 //    }
@@ -251,7 +251,7 @@ namespace concurrent
   queue_op_status sync_deque<ValueType, Container>::try_push_back(BOOST_THREAD_RV_REF(ValueType) elem, unique_lock<mutex>& lk)
   {
     if (super::closed(lk)) return queue_op_status::closed;
-    push_back(mars_boost_ksim::move(elem), lk);
+    push_back(mars_boost::move(elem), lk);
     return queue_op_status::success;
   }
 
@@ -259,14 +259,14 @@ namespace concurrent
   queue_op_status sync_deque<ValueType, Container>::try_push_back(BOOST_THREAD_RV_REF(ValueType) elem)
   {
     unique_lock<mutex> lk(super::mtx_);
-    return try_push_back(mars_boost_ksim::move(elem), lk);
+    return try_push_back(mars_boost::move(elem), lk);
   }
 
   template <class ValueType, class Container>
   queue_op_status sync_deque<ValueType, Container>::wait_push_back(BOOST_THREAD_RV_REF(ValueType) elem, unique_lock<mutex>& lk)
   {
     if (super::closed(lk)) return queue_op_status::closed;
-    push_back(mars_boost_ksim::move(elem), lk);
+    push_back(mars_boost::move(elem), lk);
     return queue_op_status::success;
   }
 
@@ -274,7 +274,7 @@ namespace concurrent
   queue_op_status sync_deque<ValueType, Container>::wait_push_back(BOOST_THREAD_RV_REF(ValueType) elem)
   {
     unique_lock<mutex> lk(super::mtx_);
-    return wait_push_back(mars_boost_ksim::move(elem), lk);
+    return wait_push_back(mars_boost::move(elem), lk);
   }
 
   template <class ValueType, class Container>
@@ -285,7 +285,7 @@ namespace concurrent
     {
       return queue_op_status::busy;
     }
-    return try_push_back(mars_boost_ksim::move(elem), lk);
+    return try_push_back(mars_boost::move(elem), lk);
   }
 
   template <class ValueType, class Container>
@@ -293,13 +293,13 @@ namespace concurrent
   {
       unique_lock<mutex> lk(super::mtx_);
       super::throw_if_closed(lk);
-      push_back(mars_boost_ksim::move(elem), lk);
+      push_back(mars_boost::move(elem), lk);
   }
 
   template <class ValueType, class Container>
   sync_deque<ValueType, Container>& operator<<(sync_deque<ValueType, Container>& sbq, BOOST_THREAD_RV_REF(ValueType) elem)
   {
-    sbq.push_back(mars_boost_ksim::move(elem));
+    sbq.push_back(mars_boost::move(elem));
     return sbq;
   }
 

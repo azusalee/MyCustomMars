@@ -36,7 +36,7 @@
 #include <memory>
 #include <stdexcept>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 namespace signals2
 {
@@ -148,9 +148,9 @@ namespace detail
         typedef const T&                                 const_reference;
         typedef pointer                                  iterator;
         typedef const_pointer                            const_iterator;
-        typedef mars_boost_ksim::reverse_iterator<iterator>        reverse_iterator;
-        typedef mars_boost_ksim::reverse_iterator<const_iterator>  const_reverse_iterator;
-        typedef typename mars_boost_ksim::mpl::if_c< mars_boost_ksim::has_trivial_assign<T>::value
+        typedef mars_boost::reverse_iterator<iterator>        reverse_iterator;
+        typedef mars_boost::reverse_iterator<const_iterator>  const_reverse_iterator;
+        typedef typename mars_boost::mpl::if_c< mars_boost::has_trivial_assign<T>::value
                                            && sizeof(T) <= sizeof(long double),
                                           const value_type,
                                           const_reference >::type
@@ -175,18 +175,18 @@ namespace detail
         template< class I >
         static void copy_impl( I begin, I end, pointer where, std::random_access_iterator_tag )
         {
-            copy_rai( begin, end, where, mars_boost_ksim::has_trivial_assign<T>() );
+            copy_rai( begin, end, where, mars_boost::has_trivial_assign<T>() );
         }
 
         static void copy_rai( const T* begin, const T* end,
-                              pointer where, const mars_boost_ksim::true_type& )
+                              pointer where, const mars_boost::true_type& )
         {
             std::memcpy( where, begin, sizeof(T) * std::distance(begin,end) );
         }
 
         template< class I, bool b >
         static void copy_rai( I begin, I end,
-                              pointer where, const mars_boost_ksim::integral_constant<bool, b>& )
+                              pointer where, const mars_boost::integral_constant<bool, b>& )
         {
             std::uninitialized_copy( begin, end, where );
         }
@@ -207,48 +207,48 @@ namespace detail
         template< class I, class I2 >
         static void assign_impl( I begin, I end, I2 where )
         {
-            assign_impl( begin, end, where, mars_boost_ksim::has_trivial_assign<T>() );
+            assign_impl( begin, end, where, mars_boost::has_trivial_assign<T>() );
         }
 
         template< class I, class I2 >
-        static void assign_impl( I begin, I end, I2 where, const mars_boost_ksim::true_type& )
+        static void assign_impl( I begin, I end, I2 where, const mars_boost::true_type& )
         {
             std::memcpy( where, begin, sizeof(T) * std::distance(begin,end) );
         }
 
         template< class I, class I2 >
-        static void assign_impl( I begin, I end, I2 where, const mars_boost_ksim::false_type& )
+        static void assign_impl( I begin, I end, I2 where, const mars_boost::false_type& )
         {
             for( ; begin != end; ++begin, ++where )
                 *where = *begin;
         }
 
-        void unchecked_push_back_n( size_type n, const mars_boost_ksim::true_type& )
+        void unchecked_push_back_n( size_type n, const mars_boost::true_type& )
         {
             std::uninitialized_fill( end(), end() + n, T() );
             size_ += n;
         }
 
-        void unchecked_push_back_n( size_type n, const mars_boost_ksim::false_type& )
+        void unchecked_push_back_n( size_type n, const mars_boost::false_type& )
         {
             for( size_type i = 0u; i < n; ++i )
                 unchecked_push_back();
         }
 
-        void auto_buffer_destroy( pointer where, const mars_boost_ksim::false_type& )
+        void auto_buffer_destroy( pointer where, const mars_boost::false_type& )
         {
             (*where).~T();
         }
 
-        void auto_buffer_destroy( pointer, const mars_boost_ksim::true_type& )
+        void auto_buffer_destroy( pointer, const mars_boost::true_type& )
         { }
 
         void auto_buffer_destroy( pointer where )
         {
-            auto_buffer_destroy( where, mars_boost_ksim::has_trivial_destructor<T>() );
+            auto_buffer_destroy( where, mars_boost::has_trivial_destructor<T>() );
         }
 
-        void destroy_back_n( size_type n, const mars_boost_ksim::false_type& )
+        void destroy_back_n( size_type n, const mars_boost::false_type& )
         {
             BOOST_ASSERT( n > 0 );
             pointer buffer  = buffer_ + size_ - 1u;
@@ -257,31 +257,31 @@ namespace detail
                 auto_buffer_destroy( buffer );
         }
 
-        void destroy_back_n( size_type, const mars_boost_ksim::true_type& )
+        void destroy_back_n( size_type, const mars_boost::true_type& )
         { }
 
         void destroy_back_n( size_type n )
         {
-            destroy_back_n( n, mars_boost_ksim::has_trivial_destructor<T>() );
+            destroy_back_n( n, mars_boost::has_trivial_destructor<T>() );
         }
 
-        void auto_buffer_destroy( const mars_boost_ksim::false_type& x )
+        void auto_buffer_destroy( const mars_boost::false_type& x )
         {
             if( size_ )
                 destroy_back_n( size_, x );
             deallocate( buffer_, members_.capacity_ );
         }
 
-        void auto_buffer_destroy( const mars_boost_ksim::true_type& )
+        void auto_buffer_destroy( const mars_boost::true_type& )
         {
             deallocate( buffer_, members_.capacity_ );
         }
 
-        pointer move_to_new_buffer( size_type new_capacity, const mars_boost_ksim::false_type& )
+        pointer move_to_new_buffer( size_type new_capacity, const mars_boost::false_type& )
         {
             pointer new_buffer = allocate( new_capacity ); // strong
-            mars_boost_ksim::multi_index::detail::scope_guard guard =
-                mars_boost_ksim::multi_index::detail::make_obj_guard( *this,
+            mars_boost::multi_index::detail::scope_guard guard =
+                mars_boost::multi_index::detail::make_obj_guard( *this,
                                                             &auto_buffer::deallocate,
                                                             new_buffer,
                                                             new_capacity );
@@ -290,7 +290,7 @@ namespace detail
             return new_buffer;
         }
 
-        pointer move_to_new_buffer( size_type new_capacity, const mars_boost_ksim::true_type& )
+        pointer move_to_new_buffer( size_type new_capacity, const mars_boost::true_type& )
         {
             pointer new_buffer = allocate( new_capacity ); // strong
             copy_impl( begin(), end(), new_buffer );       // nothrow
@@ -300,7 +300,7 @@ namespace detail
         void reserve_impl( size_type new_capacity )
         {
             pointer new_buffer = move_to_new_buffer( new_capacity,
-                                                 mars_boost_ksim::has_nothrow_copy<T>() );
+                                                 mars_boost::has_nothrow_copy<T>() );
             (*this).~auto_buffer();
             buffer_   = new_buffer;
             members_.capacity_ = new_capacity;
@@ -316,19 +316,19 @@ namespace detail
         }
 
         static void swap_helper( auto_buffer& l, auto_buffer& r,
-                                 const mars_boost_ksim::true_type& )
+                                 const mars_boost::true_type& )
         {
             BOOST_ASSERT( l.is_on_stack() && r.is_on_stack() );
 
             auto_buffer temp( l.begin(), l.end() );
             assign_impl( r.begin(), r.end(), l.begin() );
             assign_impl( temp.begin(), temp.end(), r.begin() );
-            mars_boost_ksim::swap( l.size_, r.size_ );
-            mars_boost_ksim::swap( l.members_.capacity_, r.members_.capacity_ );
+            mars_boost::swap( l.size_, r.size_ );
+            mars_boost::swap( l.members_.capacity_, r.members_.capacity_ );
         }
 
         static void swap_helper( auto_buffer& l, auto_buffer& r,
-                                 const mars_boost_ksim::false_type& )
+                                 const mars_boost::false_type& )
         {
             BOOST_ASSERT( l.is_on_stack() && r.is_on_stack() );
             size_type min_size    = (std::min)(l.size_,r.size_);
@@ -343,13 +343,13 @@ namespace detail
 
             size_type i = 0u;
             for(  ; i < min_size; ++i )
-                mars_boost_ksim::swap( (*smallest)[i], (*largest)[i] );
+                mars_boost::swap( (*smallest)[i], (*largest)[i] );
 
             for( ; i < max_size; ++i )
                 smallest->unchecked_push_back( (*largest)[i] );
 
             largest->pop_back_n( diff );
-            mars_boost_ksim::swap( l.members_.capacity_, r.members_.capacity_ );
+            mars_boost::swap( l.members_.capacity_, r.members_.capacity_ );
         }
 
         void one_sided_swap( auto_buffer& temp ) // nothrow
@@ -377,36 +377,36 @@ namespace detail
             }
         }
 
-        void grow_back( size_type n, const mars_boost_ksim::true_type& )
+        void grow_back( size_type n, const mars_boost::true_type& )
         {
             BOOST_ASSERT( size_ + n <= members_.capacity_ );
             size_ += n;
         }
 
-        void grow_back( size_type n, const mars_boost_ksim::false_type& )
+        void grow_back( size_type n, const mars_boost::false_type& )
         {
             unchecked_push_back_n(n);
         }
 
         void grow_back( size_type n )
         {
-            grow_back( n, mars_boost_ksim::has_trivial_constructor<T>() );
+            grow_back( n, mars_boost::has_trivial_constructor<T>() );
         }
 
-        void grow_back_one( const mars_boost_ksim::true_type& )
+        void grow_back_one( const mars_boost::true_type& )
         {
             BOOST_ASSERT( size_ + 1 <= members_.capacity_ );
             size_ += 1;
         }
 
-        void grow_back_one( const mars_boost_ksim::false_type& )
+        void grow_back_one( const mars_boost::false_type& )
         {
             unchecked_push_back();
         }
 
         void grow_back_one()
         {
-            grow_back_one( mars_boost_ksim::has_trivial_constructor<T>() );
+            grow_back_one( mars_boost::has_trivial_constructor<T>() );
         }
 
         template< class I >
@@ -509,8 +509,8 @@ namespace detail
                     (*this).~auto_buffer();
                     buffer_ = 0;
                     pointer new_buffer = allocate( r.size() );
-                    mars_boost_ksim::multi_index::detail::scope_guard guard =
-                        mars_boost_ksim::multi_index::detail::make_obj_guard( *this,
+                    mars_boost::multi_index::detail::scope_guard guard =
+                        mars_boost::multi_index::detail::make_obj_guard( *this,
                                                                     &auto_buffer::deallocate,
                                                                     new_buffer,
                                                                     r.size() );
@@ -600,7 +600,7 @@ namespace detail
             BOOST_ASSERT( is_valid() );
             if( buffer_ ) // do we need this check? Yes, but only
                 // for N = 0u + local instances in one_sided_swap()
-                auto_buffer_destroy( mars_boost_ksim::has_trivial_destructor<T>() );
+                auto_buffer_destroy( mars_boost::has_trivial_destructor<T>() );
         }
 
     public:
@@ -754,7 +754,7 @@ namespace detail
         void unchecked_push_back_n( size_type n )
         {
             BOOST_ASSERT( size_ + n <= members_.capacity_ );
-            unchecked_push_back_n( n, mars_boost_ksim::has_trivial_assign<T>() );
+            unchecked_push_back_n( n, mars_boost::has_trivial_assign<T>() );
         }
 
         void unchecked_push_back( optimized_const_reference x ) // non-growing
@@ -896,7 +896,7 @@ namespace detail
         void pop_back()
         {
             BOOST_ASSERT( !empty() );
-            auto_buffer_destroy( buffer_ + size_ - 1, mars_boost_ksim::has_trivial_destructor<T>() );
+            auto_buffer_destroy( buffer_ + size_ - 1, mars_boost::has_trivial_destructor<T>() );
             --size_;
         }
 
@@ -1009,10 +1009,10 @@ namespace detail
             bool both_on_heap  = !on_stack && !r_on_stack;
             if( both_on_heap )
             {
-                mars_boost_ksim::swap( get_allocator(), r.get_allocator() );
-                mars_boost_ksim::swap( members_.capacity_, r.members_.capacity_ );
-                mars_boost_ksim::swap( buffer_, r.buffer_ );
-                mars_boost_ksim::swap( size_, r.size_ );
+                mars_boost::swap( get_allocator(), r.get_allocator() );
+                mars_boost::swap( members_.capacity_, r.members_.capacity_ );
+                mars_boost::swap( buffer_, r.buffer_ );
+                mars_boost::swap( size_, r.size_ );
                 BOOST_ASSERT( is_valid() );
                 BOOST_ASSERT( r.is_valid() );
                 return;
@@ -1034,9 +1034,9 @@ namespace detail
                 copy_impl( one_on_stack->begin(), one_on_stack->end(),
                            new_buffer );                            // strong
                 one_on_stack->~auto_buffer();                       // nothrow
-                mars_boost_ksim::swap( get_allocator(), r.get_allocator() );  // assume nothrow
-                mars_boost_ksim::swap( members_.capacity_, r.members_.capacity_ );
-                mars_boost_ksim::swap( size_, r.size_ );
+                mars_boost::swap( get_allocator(), r.get_allocator() );  // assume nothrow
+                mars_boost::swap( members_.capacity_, r.members_.capacity_ );
+                mars_boost::swap( size_, r.size_ );
                 one_on_stack->buffer_ = other->buffer_;
                 other->buffer_        = new_buffer;
                 BOOST_ASSERT( other->is_on_stack() );
@@ -1047,14 +1047,14 @@ namespace detail
             }
 
             BOOST_ASSERT( on_stack && r_on_stack );
-            swap_helper( *this, r, mars_boost_ksim::has_trivial_assign<T>() );
+            swap_helper( *this, r, mars_boost::has_trivial_assign<T>() );
             BOOST_ASSERT( is_valid() );
             BOOST_ASSERT( r.is_valid() );
         }
 
     private:
-        typedef mars_boost_ksim::aligned_storage< N * sizeof(T),
-                                        mars_boost_ksim::alignment_of<T>::value >
+        typedef mars_boost::aligned_storage< N * sizeof(T),
+                                        mars_boost::alignment_of<T>::value >
                                storage;
 
         struct members_type : storage /* to enable EBO */

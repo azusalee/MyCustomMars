@@ -17,7 +17,7 @@
 #include <boost/range/begin.hpp>
 #include <boost/range/end.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {  namespace algorithm {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {  namespace algorithm {
 
 #if __cplusplus >= 201103L
 //  Use the C++11 versions of iota if it is available
@@ -49,7 +49,7 @@ void iota ( ForwardIterator first, ForwardIterator last, T value )
 template <typename Range, typename T>
 void iota ( Range &r, T value )
 {
-    mars_boost_ksim::algorithm::iota (mars_boost_ksim::begin(r), mars_boost_ksim::end(r), value);
+    mars_boost::algorithm::iota (mars_boost::begin(r), mars_boost::end(r), value);
 }
 
 

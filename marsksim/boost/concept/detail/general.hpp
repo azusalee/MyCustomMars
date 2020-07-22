@@ -15,7 +15,7 @@
 
 // This implementation works on Comeau and GCC, all the way back to
 // 2.95
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace concepts {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace concepts {
 
 template <class ModelFn>
 struct requirement_;
@@ -67,8 +67,8 @@ struct requirement_<void(*)(Model)>
 # endif
 
 #  define BOOST_CONCEPT_ASSERT_FN( ModelFnPtr )             \
-    typedef ::mars_boost_ksim::concepts::detail::instantiate<          \
-    &::mars_boost_ksim::concepts::requirement_<ModelFnPtr>::failed>    \
+    typedef ::mars_boost::concepts::detail::instantiate<          \
+    &::mars_boost::concepts::requirement_<ModelFnPtr>::failed>    \
       BOOST_PP_CAT(boost_concept_check,__LINE__)             \
       BOOST_ATTRIBUTE_UNUSED
 

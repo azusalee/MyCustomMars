@@ -16,7 +16,7 @@
 
 #include <boost/iterator/iterator_categories.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range_detail
     {
@@ -79,13 +79,13 @@ BOOST_DEMOTE_TRAVERSAL_TAG( random_access_traversal_tag, random_access_traversal
 template<class IteratorTraversalTag1, class IteratorTraversalTag2>
 struct demote_iterator_traversal_tag
     : inner_demote_iterator_traversal_tag<
-        typename mars_boost_ksim::iterators::pure_traversal_tag< IteratorTraversalTag1 >::type,
-        typename mars_boost_ksim::iterators::pure_traversal_tag< IteratorTraversalTag2 >::type
+        typename mars_boost::iterators::pure_traversal_tag< IteratorTraversalTag1 >::type,
+        typename mars_boost::iterators::pure_traversal_tag< IteratorTraversalTag2 >::type
       >
 {
 };
 
     } // namespace range_detail
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

@@ -14,7 +14,7 @@
 #include <boost/smart_ptr/detail/array_utility.hpp>
 #include <boost/type_traits/alignment_of.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim  {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost  {
     namespace detail {
         struct ms_init_tag   { };
         struct ms_noinit_tag { };
@@ -127,7 +127,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
             pointer allocate(size_type count, const_void_pointer = 0) {
                 enum {
-                    M = mars_boost_ksim::alignment_of<type>::value
+                    M = mars_boost::alignment_of<type>::value
                 };
                 std::size_t n1 = count * sizeof(value_type);
                 std::size_t n2 = data.size * sizeof(type);
@@ -142,7 +142,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
             void deallocate(pointer memory, size_type count) {
                 enum {
-                    M = mars_boost_ksim::alignment_of<type>::value
+                    M = mars_boost::alignment_of<type>::value
                 };
                 std::size_t n1 = count * sizeof(value_type);
                 std::size_t n2 = data.size * sizeof(type) + M;
@@ -237,7 +237,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
             pointer allocate(size_type count, const void* = 0) {
                 enum {
-                    M = mars_boost_ksim::alignment_of<type>::value
+                    M = mars_boost::alignment_of<type>::value
                 };
                 std::size_t n1 = count * sizeof(Y);
                 std::size_t n2 = data.size * sizeof(type);

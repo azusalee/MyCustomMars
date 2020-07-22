@@ -10,7 +10,7 @@
  * Author:      Jonathan Turkanis
  * Contact:     turkanis at coderage dot com
  *
- * Defines the type mars_boost_ksim::iostreams::detail::file_handle, representing an
+ * Defines the type mars_boost::iostreams::detail::file_handle, representing an
  * operating system file handle.
  */
 
@@ -19,7 +19,7 @@
 
 #include <boost/iostreams/detail/config/windows_posix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace iostreams { namespace detail {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace iostreams { namespace detail {
 
 #ifdef BOOST_IOSTREAMS_WINDOWS
     typedef void*  file_handle;  // A.k.a. HANDLE

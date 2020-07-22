@@ -13,18 +13,18 @@
 #include <boost/operators.hpp>
 #include <boost/date_time/special_defs.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace date_time {
 
 
   //! Duration type with date level resolution
   template<class duration_rep_traits>
   class date_duration : private
-              mars_boost_ksim::less_than_comparable1< date_duration< duration_rep_traits >
-            , mars_boost_ksim::equality_comparable1< date_duration< duration_rep_traits >
-            , mars_boost_ksim::addable1< date_duration< duration_rep_traits >
-            , mars_boost_ksim::subtractable1< date_duration< duration_rep_traits >
-            , mars_boost_ksim::dividable2< date_duration< duration_rep_traits >, int
+              mars_boost::less_than_comparable1< date_duration< duration_rep_traits >
+            , mars_boost::equality_comparable1< date_duration< duration_rep_traits >
+            , mars_boost::addable1< date_duration< duration_rep_traits >
+            , mars_boost::subtractable1< date_duration< duration_rep_traits >
+            , mars_boost::dividable2< date_duration< duration_rep_traits >, int
             > > > > >
   {
   public:
@@ -134,7 +134,7 @@ namespace date_time {
   struct duration_traits_adapted
   {
     typedef long int_type;
-    typedef mars_boost_ksim::date_time::int_adapter<long> impl_type;
+    typedef mars_boost::date_time::int_adapter<long> impl_type;
     static int_type as_number(impl_type i) { return i.as_number(); }
   };
 

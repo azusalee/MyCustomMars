@@ -11,7 +11,7 @@
 
 #if defined BOOST_THREAD_PROVIDES_INTERRUPTIONS
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace this_thread
     {

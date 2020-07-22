@@ -26,9 +26,9 @@
 
 //Small meta-typetraits to support move
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
-//Forward declare mars_boost_ksim::rv
+//Forward declare mars_boost::rv
 template <class T> class rv;
 
 namespace move_detail {
@@ -268,8 +268,8 @@ struct addressof_impl
 template<class T>
 inline T * addressof( T & v )
 {
-   return ::mars_boost_ksim::move_detail::addressof_impl<T>::f
-      ( ::mars_boost_ksim::move_detail::addr_impl_ref<T>( v ), 0 );
+   return ::mars_boost::move_detail::addressof_impl<T>::f
+      ( ::mars_boost::move_detail::addr_impl_ref<T>( v ), 0 );
 }
 
 //////////////////////////////////////
@@ -445,7 +445,7 @@ struct disable_if_or
 //////////////////////////////////////////////////////////////////////////////
 template<class T>
 struct has_move_emulation_enabled_impl
-   : is_convertible< T, ::mars_boost_ksim::rv<T>& >
+   : is_convertible< T, ::mars_boost::rv<T>& >
 {};
 
 template<class T>
@@ -453,7 +453,7 @@ struct has_move_emulation_enabled_impl<T&>
 {  static const bool value = false;  };
 
 template<class T>
-struct has_move_emulation_enabled_impl< ::mars_boost_ksim::rv<T> >
+struct has_move_emulation_enabled_impl< ::mars_boost::rv<T> >
 {  static const bool value = false;  };
 
 //////////////////////////////////////////////////////////////////////////////
@@ -489,11 +489,11 @@ struct is_rvalue_reference< T&& >
 #else // #ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
 
 template< class T >
-struct is_rvalue_reference< mars_boost_ksim::rv<T>& >
+struct is_rvalue_reference< mars_boost::rv<T>& >
 {  static const bool value = true;  };
 
 template< class T >
-struct is_rvalue_reference< const mars_boost_ksim::rv<T>& >
+struct is_rvalue_reference< const mars_boost::rv<T>& >
 {  static const bool value = true;  };
 
 #endif // #ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
@@ -517,7 +517,7 @@ namespace detail_add_rvalue_reference
    struct add_rvalue_reference_impl< T, emulation, true > { typedef T & type; };
 
    template< class T, bool rv >
-   struct add_rvalue_reference_impl< T, true, rv > { typedef ::mars_boost_ksim::rv<T>& type; };
+   struct add_rvalue_reference_impl< T, true, rv > { typedef ::mars_boost::rv<T>& type; };
 } // namespace detail_add_rvalue_reference
 
 template< class T >
@@ -559,6 +559,6 @@ template< class T > struct remove_rvalue_reference { typedef T type; };
 //  rvalue references in C++03.  This may be necessary to prevent "accidental moves".
 
 }  //namespace move_detail {
-}  //namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+}  //namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 #endif //#ifndef BOOST_MOVE_DETAIL_META_UTILS_HPP

@@ -18,16 +18,16 @@
 
 #if !BOOST_WORKAROUND(BOOST_MSVC, <= 1800)
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
-template <class T> struct is_copy_constructible : public mars_boost_ksim::is_constructible<T, const T&>{};
+template <class T> struct is_copy_constructible : public mars_boost::is_constructible<T, const T&>{};
 
 template <> struct is_copy_constructible<void> : public false_type{};
 template <> struct is_copy_constructible<void const> : public false_type{};
 template <> struct is_copy_constructible<void const volatile> : public false_type{};
 template <> struct is_copy_constructible<void volatile> : public false_type{};
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #else
 //
@@ -35,29 +35,29 @@ template <> struct is_copy_constructible<void volatile> : public false_type{};
 // copy constructor.  In this case the compiler thinks there really is a copy-constructor and tries to
 // instantiate the deleted member.  std::is_copy_constructible has the same issue (or at least returns
 // an incorrect value, which just defers the issue into the users code) as well.  We can at least fix
-// mars_boost_ksim::non_copyable as a base class as a special case:
+// mars_boost::non_copyable as a base class as a special case:
 //
 #include <boost/type_traits/is_base_and_derived.hpp>
 #include <boost/noncopyable.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
    namespace detail
    {
 
-      template <class T, bool b> struct is_copy_constructible_imp : public mars_boost_ksim::is_constructible<T, const T&>{};
+      template <class T, bool b> struct is_copy_constructible_imp : public mars_boost::is_constructible<T, const T&>{};
       template <class T> struct is_copy_constructible_imp<T, true> : public false_type{};
 
    }
 
-   template <class T> struct is_copy_constructible : public detail::is_copy_constructible_imp<T, is_base_and_derived<mars_boost_ksim::noncopyable, T>::value>{};
+   template <class T> struct is_copy_constructible : public detail::is_copy_constructible_imp<T, is_base_and_derived<mars_boost::noncopyable, T>::value>{};
 
    template <> struct is_copy_constructible<void> : public false_type{};
    template <> struct is_copy_constructible<void const> : public false_type{};
    template <> struct is_copy_constructible<void const volatile> : public false_type{};
    template <> struct is_copy_constructible<void volatile> : public false_type{};
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif
 
@@ -77,7 +77,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #pragma warning(disable:4181)
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
    namespace detail{
 
@@ -87,7 +87,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
          // Intel compiler has problems with SFINAE for copy constructors and deleted functions:
          //
          // error: function *function_name* cannot be referenced -- it is a deleted function
-         // static mars_boost_ksim::type_traits::yes_type test(T1&, decltype(T1(mars_boost_ksim::declval<T1&>()))* = 0);
+         // static mars_boost::type_traits::yes_type test(T1&, decltype(T1(mars_boost::declval<T1&>()))* = 0);
          //                                                        ^ 
          //
          // MSVC 12.0 (Visual 2013) has problems when the copy constructor has been deleted. See:
@@ -96,17 +96,17 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 #ifdef BOOST_NO_CXX11_DECLTYPE
          template <class T1>
-         static mars_boost_ksim::type_traits::yes_type test(const T1&, mars_boost_ksim::mpl::int_<sizeof(T1(mars_boost_ksim::declval<const T1&>()))>* = 0);
+         static mars_boost::type_traits::yes_type test(const T1&, mars_boost::mpl::int_<sizeof(T1(mars_boost::declval<const T1&>()))>* = 0);
 #else
          template <class T1>
-         static mars_boost_ksim::type_traits::yes_type test(const T1&, decltype(T1(mars_boost_ksim::declval<const T1&>()))* = 0);
+         static mars_boost::type_traits::yes_type test(const T1&, decltype(T1(mars_boost::declval<const T1&>()))* = 0);
 #endif
 
-         static mars_boost_ksim::type_traits::no_type test(...);
+         static mars_boost::type_traits::no_type test(...);
 #else
          template <class T1>
-         static mars_boost_ksim::type_traits::no_type test(const T1&, typename T1::boost_move_no_copy_constructor_or_assign* = 0);
-         static mars_boost_ksim::type_traits::yes_type test(...);
+         static mars_boost::type_traits::no_type test(const T1&, typename T1::boost_move_no_copy_constructor_or_assign* = 0);
+         static mars_boost::type_traits::yes_type test(...);
 #endif
 
          // If you see errors like this:
@@ -126,7 +126,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
          // To fix that you must modify your structure:
          //
          //      // C++03 and C++11 version
-         //      struct T: private mars_boost_ksim::noncopyable {
+         //      struct T: private mars_boost::noncopyable {
          //          ...
          //      private:
          //          T(const T &);
@@ -142,11 +142,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
          //      };
          BOOST_STATIC_CONSTANT(bool, value = (
             sizeof(test(
-            mars_boost_ksim::declval<BOOST_DEDUCED_TYPENAME mars_boost_ksim::add_reference<T const>::type>()
-            )) == sizeof(mars_boost_ksim::type_traits::yes_type)
+            mars_boost::declval<BOOST_DEDUCED_TYPENAME mars_boost::add_reference<T const>::type>()
+            )) == sizeof(mars_boost::type_traits::yes_type)
             &&
-            !mars_boost_ksim::is_rvalue_reference<T>::value
-            && !mars_boost_ksim::is_array<T>::value
+            !mars_boost::is_rvalue_reference<T>::value
+            && !mars_boost::is_array<T>::value
             ));
       };
 
@@ -159,8 +159,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       struct is_copy_constructible_impl {
 
          BOOST_STATIC_CONSTANT(bool, value = (
-            mars_boost_ksim::detail::is_copy_constructible_impl2<
-            mars_boost_ksim::is_base_and_derived<mars_boost_ksim::noncopyable, T>::value,
+            mars_boost::detail::is_copy_constructible_impl2<
+            mars_boost::is_base_and_derived<mars_boost::noncopyable, T>::value,
             T
             >::value
             ));
@@ -168,7 +168,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
    } // namespace detail
 
-   template <class T> struct is_copy_constructible : public integral_constant<bool, ::mars_boost_ksim::detail::is_copy_constructible_impl<T>::value>{};
+   template <class T> struct is_copy_constructible : public integral_constant<bool, ::mars_boost::detail::is_copy_constructible_impl<T>::value>{};
    template <> struct is_copy_constructible<void> : public false_type{};
 #ifndef BOOST_NO_CV_VOID_SPECIALIZATIONS
    template <> struct is_copy_constructible<void const> : public false_type{};
@@ -176,7 +176,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
    template <> struct is_copy_constructible<void const volatile> : public false_type{};
 #endif
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #ifdef BOOST_MSVC
 #pragma warning(pop)

@@ -13,7 +13,7 @@
 #endif
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 #if ! defined BOOST_THREAD_NO_CXX11_HDR_INITIALIZER_LIST

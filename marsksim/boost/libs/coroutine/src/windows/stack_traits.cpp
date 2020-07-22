@@ -50,8 +50,8 @@ void system_info_( SYSTEM_INFO * si)
 SYSTEM_INFO system_info()
 {
     static SYSTEM_INFO si;
-    static mars_boost_ksim::once_flag flag;
-    mars_boost_ksim::call_once( flag, static_cast< void(*)( SYSTEM_INFO *) >( system_info_), & si);
+    static mars_boost::once_flag flag;
+    mars_boost::call_once( flag, static_cast< void(*)( SYSTEM_INFO *) >( system_info_), & si);
     return si;
 }
 
@@ -67,7 +67,7 @@ std::size_t page_count( std::size_t stacksize)
 
 }
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace coroutines {
 
 // Windows seams not to provide a limit for the stacksize

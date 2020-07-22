@@ -15,21 +15,21 @@
 #include <boost/range/concepts.hpp>
 #include <boost/iterator/indirect_iterator.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range_detail
     {
         template< class R >
         struct indirected_range :
-            public mars_boost_ksim::iterator_range<
-                        mars_boost_ksim::indirect_iterator<
+            public mars_boost::iterator_range<
+                        mars_boost::indirect_iterator<
                             BOOST_DEDUCED_TYPENAME range_iterator<R>::type
                         >
                     >
         {
         private:
-            typedef mars_boost_ksim::iterator_range<
-                        mars_boost_ksim::indirect_iterator<
+            typedef mars_boost::iterator_range<
+                        mars_boost::indirect_iterator<
                             BOOST_DEDUCED_TYPENAME range_iterator<R>::type
                         >
                     >

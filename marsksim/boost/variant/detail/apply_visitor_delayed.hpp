@@ -23,7 +23,7 @@
 #include "boost/variant/detail/has_result_type.hpp"
 #include <boost/core/enable_if.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 //////////////////////////////////////////////////////////////////////////
 // function template apply_visitor(visitor)
@@ -97,8 +97,8 @@ private:
 };
 
 template <typename Visitor>
-inline typename mars_boost_ksim::enable_if<
-        mars_boost_ksim::detail::variant::has_result_type<Visitor>,
+inline typename mars_boost::enable_if<
+        mars_boost::detail::variant::has_result_type<Visitor>,
         apply_visitor_delayed_t<Visitor>
     >::type apply_visitor(Visitor& visitor)
 {
@@ -134,8 +134,8 @@ private:
 };
 
 template <typename Visitor>
-inline  typename mars_boost_ksim::disable_if<
-        mars_boost_ksim::detail::variant::has_result_type<Visitor>,
+inline  typename mars_boost::disable_if<
+        mars_boost::detail::variant::has_result_type<Visitor>,
         apply_visitor_delayed_cpp14_t<Visitor>
     >::type apply_visitor(Visitor& visitor)
 {
@@ -146,6 +146,6 @@ inline  typename mars_boost_ksim::disable_if<
             // && !defined(BOOST_VARIANT_DO_NOT_USE_VARIADIC_TEMPLATES)
 
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_VARIANT_DETAIL_APPLY_VISITOR_DELAYED_HPP

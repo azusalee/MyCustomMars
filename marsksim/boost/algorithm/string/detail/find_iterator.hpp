@@ -17,7 +17,7 @@
 #include <boost/iterator/iterator_categories.hpp>
 #include <boost/function.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
     namespace algorithm { 
         namespace detail {
 
@@ -81,7 +81,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
        } // namespace detail
     } // namespace algorithm
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 
 #endif  // BOOST_STRING_FIND_ITERATOR_DETAIL_HPP

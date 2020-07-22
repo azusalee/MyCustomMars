@@ -24,7 +24,7 @@
 #endif
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace detail
     {
@@ -161,7 +161,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 return timed_lock(get_system_time()+timeout);
             }
 
-            bool timed_lock(mars_boost_ksim::xtime const& timeout)
+            bool timed_lock(mars_boost::xtime const& timeout)
             {
                 return timed_lock(system_time(timeout));
             }

@@ -14,7 +14,7 @@
 
 #include <algorithm>    // for std::copy_n, if available
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {  namespace algorithm {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {  namespace algorithm {
 
 #if __cplusplus >= 201103L
 //  Use the C++11 versions of copy_n if it is available

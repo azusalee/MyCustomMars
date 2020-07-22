@@ -31,8 +31,8 @@ namespace stn {
 namespace ShortLinkChannelFactory {
 
     
-ShortLinkInterface* (*Create)(const mq::MessageQueueksim_t& _messagequeueid, NetSourceksim& _netsource, const Task& _task, bool _use_proxy)
-= [](const mq::MessageQueueksim_t& _messagequeueid, NetSourceksim& _netsource, const Task& _task, bool _use_proxy) -> ShortLinkInterface* {
+ShortLinkInterface* (*Create)(const mqksim::MessageQueueksim_t& _messagequeueid, NetSourceksim& _netsource, const Task& _task, bool _use_proxy)
+= [](const mqksim::MessageQueueksim_t& _messagequeueid, NetSourceksim& _netsource, const Task& _task, bool _use_proxy) -> ShortLinkInterface* {
 	xdebug2(TSF"use weak func Create");
 	return new ShortLink(_messagequeueid, _netsource, _task, _use_proxy);
 };
@@ -47,8 +47,8 @@ void (*Destory)(ShortLinkInterface* _short_link_channel)
 
 namespace LongLinkChannelFactory {
 
-LongLink* (*Create)(const mq::MessageQueueksim_t& _messagequeueid, NetSourceksim& _netsource)
-= [](const mq::MessageQueueksim_t& _messagequeueid, NetSourceksim& _netsource) {
+LongLink* (*Create)(const mqksim::MessageQueueksim_t& _messagequeueid, NetSourceksim& _netsource)
+= [](const mqksim::MessageQueueksim_t& _messagequeueid, NetSourceksim& _netsource) {
 	return new LongLink(_messagequeueid, _netsource);
 };
 

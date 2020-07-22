@@ -30,7 +30,7 @@
 #   define BOOST_FUNCTION_ARGS BOOST_PP_ENUM_PARAMS(BOOST_FUNCTION_NUM_ARGS, a)
 #else
 #   include <boost/move/utility_core.hpp>
-#   define BOOST_FUNCTION_ARG(J,I,D) ::mars_boost_ksim::forward< BOOST_PP_CAT(T,I) >(BOOST_PP_CAT(a,I))
+#   define BOOST_FUNCTION_ARG(J,I,D) ::mars_boost::forward< BOOST_PP_CAT(T,I) >(BOOST_PP_CAT(a,I))
 #   define BOOST_FUNCTION_ARGS BOOST_PP_ENUM(BOOST_FUNCTION_NUM_ARGS,BOOST_FUNCTION_ARG,BOOST_PP_EMPTY)
 #endif
 
@@ -80,11 +80,11 @@
 #  define BOOST_FUNCTION_VOID_RETURN_TYPE void
 #  define BOOST_FUNCTION_RETURN(X) X
 #else
-#  define BOOST_FUNCTION_VOID_RETURN_TYPE mars_boost_ksim::detail::function::unusable
+#  define BOOST_FUNCTION_VOID_RETURN_TYPE mars_boost::detail::function::unusable
 #  define BOOST_FUNCTION_RETURN(X) X; return BOOST_FUNCTION_VOID_RETURN_TYPE ()
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
   namespace detail {
     namespace function {
       template<
@@ -210,7 +210,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
           MemberPtr* f = 
             reinterpret_cast<MemberPtr*>(&function_obj_ptr.data);
-          return mars_boost_ksim::mem_fn(*f)(BOOST_FUNCTION_ARGS);
+          return mars_boost::mem_fn(*f)(BOOST_FUNCTION_ARGS);
         }
       };
 
@@ -228,7 +228,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
           MemberPtr* f = 
             reinterpret_cast<MemberPtr*>(&function_obj_ptr.data);
-          BOOST_FUNCTION_RETURN(mars_boost_ksim::mem_fn(*f)(BOOST_FUNCTION_ARGS));
+          BOOST_FUNCTION_RETURN(mars_boost::mem_fn(*f)(BOOST_FUNCTION_ARGS));
         }
       };
 #endif
@@ -472,9 +472,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 
       /**
-       * vtable for a specific mars_boost_ksim::function instance. This
+       * vtable for a specific mars_boost::function instance. This
        * structure must be an aggregate so that we can use static
-       * initialization in mars_boost_ksim::function's assign_to and assign_to_a
+       * initialization in mars_boost::function's assign_to and assign_to_a
        * members. It therefore cannot have any constructors,
        * destructors, base classes, etc.
        */
@@ -542,7 +542,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           // objects, so we invoke through mem_fn() but we retain the
           // right target_type() values.
           if (f) {
-            this->assign_to(mars_boost_ksim::mem_fn(f), functor);
+            this->assign_to(mars_boost::mem_fn(f), functor);
             return true;
           } else {
             return false;
@@ -555,7 +555,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           // objects, so we invoke through mem_fn() but we retain the
           // right target_type() values.
           if (f) {
-            this->assign_to_a(mars_boost_ksim::mem_fn(f), functor, a);
+            this->assign_to_a(mars_boost::mem_fn(f), functor, a);
             return true;
           } else {
             return false;
@@ -604,7 +604,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         bool 
         assign_to(FunctionObj f, function_buffer& functor, function_obj_tag) const
         {
-          if (!mars_boost_ksim::detail::function::has_empty_target(mars_boost_ksim::addressof(f))) {
+          if (!mars_boost::detail::function::has_empty_target(mars_boost::addressof(f))) {
             assign_functor(f, functor, 
                            mpl::bool_<(function_allows_small_object_optimization<FunctionObj>::value)>());
             return true;
@@ -616,7 +616,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         bool 
         assign_to_a(FunctionObj f, function_buffer& functor, Allocator a, function_obj_tag) const
         {
-          if (!mars_boost_ksim::detail::function::has_empty_target(mars_boost_ksim::addressof(f))) {
+          if (!mars_boost::detail::function::has_empty_target(mars_boost::addressof(f))) {
             assign_functor_a(f, functor, a,
                            mpl::bool_<(function_allows_small_object_optimization<FunctionObj>::value)>());
             return true;
@@ -672,12 +672,12 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #ifndef BOOST_NO_VOID_RETURNS
     typedef R         result_type;
 #else
-    typedef  typename mars_boost_ksim::detail::function::function_return_type<R>::type
+    typedef  typename mars_boost::detail::function::function_return_type<R>::type
       result_type;
 #endif // BOOST_NO_VOID_RETURNS
 
   private:
-    typedef mars_boost_ksim::detail::function::BOOST_FUNCTION_VTABLE<
+    typedef mars_boost::detail::function::BOOST_FUNCTION_VTABLE<
               R BOOST_FUNCTION_COMMA BOOST_FUNCTION_TEMPLATE_ARGS>
       vtable_type;
 
@@ -691,7 +691,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
   public:
     BOOST_STATIC_CONSTANT(int, args = BOOST_FUNCTION_NUM_ARGS);
 
-    // add signature for mars_boost_ksim::lambda
+    // add signature for mars_boost::lambda
     template<typename Args>
     struct sig
     {
@@ -717,7 +717,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template<typename Functor>
     BOOST_FUNCTION_FUNCTION(Functor BOOST_FUNCTION_TARGET_FIX(const &) f
 #ifndef BOOST_NO_SFINAE
-                            ,typename mars_boost_ksim::enable_if_c<
+                            ,typename mars_boost::enable_if_c<
                              !(is_integral<Functor>::value),
                                         int>::type = 0
 #endif // BOOST_NO_SFINAE
@@ -729,7 +729,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template<typename Functor,typename Allocator>
     BOOST_FUNCTION_FUNCTION(Functor BOOST_FUNCTION_TARGET_FIX(const &) f, Allocator a
 #ifndef BOOST_NO_SFINAE
-                            ,typename mars_boost_ksim::enable_if_c<
+                            ,typename mars_boost::enable_if_c<
                               !(is_integral<Functor>::value),
                                         int>::type = 0
 #endif // BOOST_NO_SFINAE
@@ -765,7 +765,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     result_type operator()(BOOST_FUNCTION_PARMS) const
     {
       if (this->empty())
-        mars_boost_ksim::throw_exception(bad_function_call());
+        mars_boost::throw_exception(bad_function_call());
 
       return get_vtable()->invoker
                (this->functor BOOST_FUNCTION_COMMA BOOST_FUNCTION_ARGS);
@@ -778,7 +778,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     // construct.
     template<typename Functor>
 #ifndef BOOST_NO_SFINAE
-    typename mars_boost_ksim::enable_if_c<
+    typename mars_boost::enable_if_c<
                   !(is_integral<Functor>::value),
                BOOST_FUNCTION_FUNCTION&>::type
 #else
@@ -910,17 +910,17 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           this->functor = f.functor;
         else
           get_vtable()->base.manager(f.functor, this->functor,
-                                     mars_boost_ksim::detail::function::clone_functor_tag);
+                                     mars_boost::detail::function::clone_functor_tag);
       }
     }
 
     template<typename Functor>
     void assign_to(Functor f)
     {
-      using mars_boost_ksim::detail::function::vtable_base;
+      using mars_boost::detail::function::vtable_base;
 
-      typedef typename mars_boost_ksim::detail::function::get_function_tag<Functor>::type tag;
-      typedef mars_boost_ksim::detail::function::BOOST_FUNCTION_GET_INVOKER<tag> get_invoker;
+      typedef typename mars_boost::detail::function::get_function_tag<Functor>::type tag;
+      typedef mars_boost::detail::function::BOOST_FUNCTION_GET_INVOKER<tag> get_invoker;
       typedef typename get_invoker::
                          template apply<Functor, R BOOST_FUNCTION_COMMA 
                         BOOST_FUNCTION_TEMPLATE_ARGS>
@@ -939,11 +939,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       if (stored_vtable.assign_to(f, functor)) {
         std::size_t value = reinterpret_cast<std::size_t>(&stored_vtable.base);
         // coverity[pointless_expression]: suppress coverity warnings on apparant if(const).
-        if (mars_boost_ksim::has_trivial_copy_constructor<Functor>::value &&
-            mars_boost_ksim::has_trivial_destructor<Functor>::value &&
-            mars_boost_ksim::detail::function::function_allows_small_object_optimization<Functor>::value)
+        if (mars_boost::has_trivial_copy_constructor<Functor>::value &&
+            mars_boost::has_trivial_destructor<Functor>::value &&
+            mars_boost::detail::function::function_allows_small_object_optimization<Functor>::value)
           value |= static_cast<std::size_t>(0x01);
-        vtable = reinterpret_cast<mars_boost_ksim::detail::function::vtable_base *>(value);
+        vtable = reinterpret_cast<mars_boost::detail::function::vtable_base *>(value);
       } else 
         vtable = 0;
     }
@@ -951,10 +951,10 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template<typename Functor,typename Allocator>
     void assign_to_a(Functor f,Allocator a)
     {
-      using mars_boost_ksim::detail::function::vtable_base;
+      using mars_boost::detail::function::vtable_base;
 
-      typedef typename mars_boost_ksim::detail::function::get_function_tag<Functor>::type tag;
-      typedef mars_boost_ksim::detail::function::BOOST_FUNCTION_GET_INVOKER<tag> get_invoker;
+      typedef typename mars_boost::detail::function::get_function_tag<Functor>::type tag;
+      typedef mars_boost::detail::function::BOOST_FUNCTION_GET_INVOKER<tag> get_invoker;
       typedef typename get_invoker::
                          template apply_a<Functor, R BOOST_FUNCTION_COMMA 
                          BOOST_FUNCTION_TEMPLATE_ARGS,
@@ -974,11 +974,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       if (stored_vtable.assign_to_a(f, functor, a)) { 
         std::size_t value = reinterpret_cast<std::size_t>(&stored_vtable.base);
         // coverity[pointless_expression]: suppress coverity warnings on apparant if(const).
-        if (mars_boost_ksim::has_trivial_copy_constructor<Functor>::value &&
-            mars_boost_ksim::has_trivial_destructor<Functor>::value &&
-            mars_boost_ksim::detail::function::function_allows_small_object_optimization<Functor>::value)
+        if (mars_boost::has_trivial_copy_constructor<Functor>::value &&
+            mars_boost::has_trivial_destructor<Functor>::value &&
+            mars_boost::detail::function::function_allows_small_object_optimization<Functor>::value)
           value |= static_cast<std::size_t>(0x01);
-        vtable = reinterpret_cast<mars_boost_ksim::detail::function::vtable_base *>(value);
+        vtable = reinterpret_cast<mars_boost::detail::function::vtable_base *>(value);
       } else 
         vtable = 0;
     }
@@ -998,7 +998,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             this->functor = f.functor;
           else
             get_vtable()->base.manager(f.functor, this->functor,
-                                     mars_boost_ksim::detail::function::move_functor_tag);
+                                     mars_boost::detail::function::move_functor_tag);
           f.vtable = 0;
         } else {
           clear();
@@ -1024,7 +1024,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     f1.swap(f2);
   }
 
-// Poison comparisons between mars_boost_ksim::function objects of the same type.
+// Poison comparisons between mars_boost::function objects of the same type.
 template<typename R BOOST_FUNCTION_COMMA BOOST_FUNCTION_TEMPLATE_PARMS>
   void operator==(const BOOST_FUNCTION_FUNCTION<
                           R BOOST_FUNCTION_COMMA
@@ -1065,7 +1065,7 @@ public:
   template<typename Functor>
   function(Functor f
 #ifndef BOOST_NO_SFINAE
-           ,typename mars_boost_ksim::enable_if_c<
+           ,typename mars_boost::enable_if_c<
                           !(is_integral<Functor>::value),
                        int>::type = 0
 #endif
@@ -1076,7 +1076,7 @@ public:
   template<typename Functor,typename Allocator>
   function(Functor f, Allocator a
 #ifndef BOOST_NO_SFINAE
-           ,typename mars_boost_ksim::enable_if_c<
+           ,typename mars_boost::enable_if_c<
                            !(is_integral<Functor>::value),
                        int>::type = 0
 #endif
@@ -1115,7 +1115,7 @@ public:
 
   template<typename Functor>
 #ifndef BOOST_NO_SFINAE
-  typename mars_boost_ksim::enable_if_c<
+  typename mars_boost::enable_if_c<
                          !(is_integral<Functor>::value),
                       self_type&>::type
 #else
@@ -1153,7 +1153,7 @@ public:
 #undef BOOST_FUNCTION_PARTIAL_SPEC
 #endif // have partial specialization
 
-} // end namespace mars_boost_ksim
+} // end namespace mars_boost
 
 // Cleanup after ourselves...
 #undef BOOST_FUNCTION_VTABLE

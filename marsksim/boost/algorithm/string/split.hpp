@@ -28,10 +28,10 @@
     of the matches (in a compatible structure like std::string) or
     a reference to it (e.g. using the iterator range class).
     Examples of such a container are \c std::vector<std::string>
-    or \c std::list<mars_boost_ksim::iterator_range<std::string::iterator>>
+    or \c std::list<mars_boost::iterator_range<std::string::iterator>>
 */
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
     namespace algorithm {
 
 //  find_all  ------------------------------------------------------------//
@@ -47,7 +47,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             of the matches (in a compatible structure like std::string) or
             a reference to it (e.g. using the iterator range class).
             Examples of such a container are \c std::vector<std::string>
-            or \c std::list<mars_boost_ksim::iterator_range<std::string::iterator>>
+            or \c std::list<mars_boost::iterator_range<std::string::iterator>>
 
             \param Result A container that can hold copies of references to the substrings
             \param Input A container which will be searched.
@@ -64,10 +64,10 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             Range1T& Input,
             const Range2T& Search)
         {
-            return ::mars_boost_ksim::algorithm::iter_find(
+            return ::mars_boost::algorithm::iter_find(
                 Result,
                 Input,
-                ::mars_boost_ksim::algorithm::first_finder(Search) );        
+                ::mars_boost::algorithm::first_finder(Search) );        
         }
 
         //! Find all algorithm ( case insensitive ) 
@@ -79,7 +79,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             of the matches (in a compatible structure like std::string) or
             a reference to it (e.g. using the iterator range class).
             Examples of such a container are \c std::vector<std::string>
-            or \c std::list<mars_boost_ksim::iterator_range<std::string::iterator>>
+            or \c std::list<mars_boost::iterator_range<std::string::iterator>>
 
             Searching is case insensitive.
 
@@ -100,10 +100,10 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             const Range2T& Search,
             const std::locale& Loc=std::locale() )
         {
-            return ::mars_boost_ksim::algorithm::iter_find(
+            return ::mars_boost::algorithm::iter_find(
                 Result,
                 Input,
-                ::mars_boost_ksim::algorithm::first_finder(Search, is_iequal(Loc) ) );        
+                ::mars_boost::algorithm::first_finder(Search, is_iequal(Loc) ) );        
         }
 
 
@@ -121,7 +121,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             of the matches (in a compatible structure like std::string) or
             a reference to it (e.g. using the iterator range class).
             Examples of such a container are \c std::vector<std::string>
-            or \c std::list<mars_boost_ksim::iterator_range<std::string::iterator>>
+            or \c std::list<mars_boost::iterator_range<std::string::iterator>>
     
             \param Result A container that can hold copies of references to the substrings          
             \param Input A container which will be searched.
@@ -143,10 +143,10 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             PredicateT Pred,
             token_compress_mode_type eCompress=token_compress_off )
         {
-            return ::mars_boost_ksim::algorithm::iter_split(
+            return ::mars_boost::algorithm::iter_split(
                 Result,
                 Input,
-                ::mars_boost_ksim::algorithm::token_finder( Pred, eCompress ) );         
+                ::mars_boost::algorithm::token_finder( Pred, eCompress ) );         
         }
 
     } // namespace algorithm
@@ -156,7 +156,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     using algorithm::ifind_all;
     using algorithm::split;    
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 
 #endif  // BOOST_STRING_SPLIT_HPP

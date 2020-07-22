@@ -36,7 +36,7 @@
 
 #include <boost/lexical_cast/detail/lcast_char_constants.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
     namespace detail
     {
         template <class CharT>
@@ -79,7 +79,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 }
 
                 if( !has_minus ) value = std::numeric_limits<T>::quiet_NaN();
-                else value = (mars_boost_ksim::math::changesign) (std::numeric_limits<T>::quiet_NaN());
+                else value = (mars_boost::math::changesign) (std::numeric_limits<T>::quiet_NaN());
                 return true;
             } else if (
                 ( /* 'INF' or 'inf' */
@@ -94,7 +94,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
              )
             {
                 if( !has_minus ) value = std::numeric_limits<T>::infinity();
-                else value = (mars_boost_ksim::math::changesign) (std::numeric_limits<T>::infinity());
+                else value = (mars_boost::math::changesign) (std::numeric_limits<T>::infinity());
                 return true;
             }
 
@@ -108,8 +108,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
             using namespace std;
             const CharT minus = lcast_char_constants<CharT>::minus;
-            if ((mars_boost_ksim::math::isnan)(value)) {
-                if ((mars_boost_ksim::math::signbit)(value)) {
+            if ((mars_boost::math::isnan)(value)) {
+                if ((mars_boost::math::signbit)(value)) {
                     *begin = minus;
                     ++ begin;
                 }
@@ -117,8 +117,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 memcpy(begin, lc_nan, 3 * sizeof(CharT));
                 end = begin + 3;
                 return true;
-            } else if ((mars_boost_ksim::math::isinf)(value)) {
-                if ((mars_boost_ksim::math::signbit)(value)) {
+            } else if ((mars_boost::math::isinf)(value)) {
+                if ((mars_boost::math::signbit)(value)) {
                     *begin = minus;
                     ++ begin;
                 }
@@ -189,7 +189,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             return put_inf_nan_impl(begin, end, value, "nan", "infinity");
         }
     }
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #undef BOOST_LCAST_NO_WCHAR_T
 

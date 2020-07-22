@@ -36,7 +36,7 @@
 
 using namespace marsksim::sdt;
 
-#define RETURN_NETCHECKER_SYNC2ASYNC_FUNC(func) RETURN_SYNC2ASYNC_FUNC(func, async_reg_.Get(), )
+#define RETURN_NETCHECKER_SYNC2ASYNC_FUNCksim(func) RETURN_SYNC2ASYNC_FUNCksim(func, async_reg_.Get(), )
 
 SdtCore::SdtCore()
     : thread_(boost_ksim::bind(&SdtCore::__RunOn, this))
@@ -93,7 +93,7 @@ void SdtCore::__InitCheckReq(CheckIPPorts& _longlink_items, CheckIPPorts& _short
     }
 
     if (MODE_LONG(_mode)) {
-        TcpChecker* tcp_checker = new TcpChecker();
+        TcpCheckerksim* tcp_checker = new TcpCheckerksim();
         check_list_.push_back(tcp_checker);
     }
 }

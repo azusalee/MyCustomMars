@@ -23,7 +23,7 @@
 
 #include <boost/type_traits/integral_constant.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 #if defined( __CODEGEARC__ )
 template <class T> struct is_pointer : public integral_constant<bool, __is_pointer(T)>{};
@@ -42,6 +42,6 @@ template <class T> struct is_pointer<T volatile> : public is_pointer<T>{};
 
 #endif
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_IS_POINTER_HPP_INCLUDED

@@ -28,39 +28,39 @@
 
 #include <cstddef>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace container {
 namespace container_detail {
 
-using mars_boost_ksim::move_detail::integral_constant;
-using mars_boost_ksim::move_detail::true_type;
-using mars_boost_ksim::move_detail::false_type;
-using mars_boost_ksim::move_detail::enable_if_c;
-using mars_boost_ksim::move_detail::enable_if;
-using mars_boost_ksim::move_detail::enable_if_convertible;
-using mars_boost_ksim::move_detail::disable_if_c;
-using mars_boost_ksim::move_detail::disable_if;
-using mars_boost_ksim::move_detail::disable_if_convertible;
-using mars_boost_ksim::move_detail::is_convertible;
-using mars_boost_ksim::move_detail::if_c;
-using mars_boost_ksim::move_detail::if_;
-using mars_boost_ksim::move_detail::identity;
-using mars_boost_ksim::move_detail::bool_;
-using mars_boost_ksim::move_detail::true_;
-using mars_boost_ksim::move_detail::false_;
-using mars_boost_ksim::move_detail::yes_type;
-using mars_boost_ksim::move_detail::no_type;
-using mars_boost_ksim::move_detail::bool_;
-using mars_boost_ksim::move_detail::true_;
-using mars_boost_ksim::move_detail::false_;
-using mars_boost_ksim::move_detail::unvoid_ref;
-using mars_boost_ksim::move_detail::and_;
-using mars_boost_ksim::move_detail::or_;
-using mars_boost_ksim::move_detail::not_;
-using mars_boost_ksim::move_detail::enable_if_and;
-using mars_boost_ksim::move_detail::disable_if_and;
-using mars_boost_ksim::move_detail::enable_if_or;
-using mars_boost_ksim::move_detail::disable_if_or;
+using mars_boost::move_detail::integral_constant;
+using mars_boost::move_detail::true_type;
+using mars_boost::move_detail::false_type;
+using mars_boost::move_detail::enable_if_c;
+using mars_boost::move_detail::enable_if;
+using mars_boost::move_detail::enable_if_convertible;
+using mars_boost::move_detail::disable_if_c;
+using mars_boost::move_detail::disable_if;
+using mars_boost::move_detail::disable_if_convertible;
+using mars_boost::move_detail::is_convertible;
+using mars_boost::move_detail::if_c;
+using mars_boost::move_detail::if_;
+using mars_boost::move_detail::identity;
+using mars_boost::move_detail::bool_;
+using mars_boost::move_detail::true_;
+using mars_boost::move_detail::false_;
+using mars_boost::move_detail::yes_type;
+using mars_boost::move_detail::no_type;
+using mars_boost::move_detail::bool_;
+using mars_boost::move_detail::true_;
+using mars_boost::move_detail::false_;
+using mars_boost::move_detail::unvoid_ref;
+using mars_boost::move_detail::and_;
+using mars_boost::move_detail::or_;
+using mars_boost::move_detail::not_;
+using mars_boost::move_detail::enable_if_and;
+using mars_boost::move_detail::disable_if_and;
+using mars_boost::move_detail::enable_if_or;
+using mars_boost::move_detail::disable_if_or;
 
 
 template <class Pair>
@@ -79,7 +79,7 @@ struct select1st
 
 }  //namespace container_detail {
 }  //namespace container {
-}  //namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+}  //namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 #include <boost/container/detail/config_end.hpp>
 

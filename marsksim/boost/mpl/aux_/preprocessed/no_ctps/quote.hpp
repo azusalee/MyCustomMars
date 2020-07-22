@@ -9,7 +9,7 @@
 // Preprocessed version of "boost/mpl/quote.hpp" header
 // -- DO NOT modify by hand!
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl {
 template< bool > struct quote_impl
 {
     template< typename T > struct result_

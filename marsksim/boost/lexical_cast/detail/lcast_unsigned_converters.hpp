@@ -43,7 +43,7 @@
         // but beware: lexical_cast will understand only 'C' locale delimeters and thousands
         // separators.
 #       error "Unable to use <locale> header. Define BOOST_LEXICAL_CAST_ASSUME_C_LOCALE to force "
-#       error "mars_boost_ksim::lexical_cast to use only 'C' locale during conversions."
+#       error "mars_boost::lexical_cast to use only 'C' locale during conversions."
 #   endif
 #endif
 
@@ -52,14 +52,14 @@
 #include <boost/type_traits/is_signed.hpp>
 #include <boost/noncopyable.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim 
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost 
 {
     namespace detail // lcast_to_unsigned
     {
         template<class T>
         inline
-        BOOST_DEDUCED_TYPENAME mars_boost_ksim::make_unsigned<T>::type lcast_to_unsigned(const T value) BOOST_NOEXCEPT {
-            typedef BOOST_DEDUCED_TYPENAME mars_boost_ksim::make_unsigned<T>::type result_type;
+        BOOST_DEDUCED_TYPENAME mars_boost::make_unsigned<T>::type lcast_to_unsigned(const T value) BOOST_NOEXCEPT {
+            typedef BOOST_DEDUCED_TYPENAME mars_boost::make_unsigned<T>::type result_type;
             return value < 0 
                 ? static_cast<result_type>(0u - static_cast<result_type>(value)) 
                 : static_cast<result_type>(value);
@@ -69,9 +69,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     namespace detail // lcast_put_unsigned
     {
         template <class Traits, class T, class CharT>
-        class lcast_put_unsigned: mars_boost_ksim::noncopyable {
+        class lcast_put_unsigned: mars_boost::noncopyable {
             typedef BOOST_DEDUCED_TYPENAME Traits::int_type int_type;
-            BOOST_DEDUCED_TYPENAME mars_boost_ksim::mpl::if_c<
+            BOOST_DEDUCED_TYPENAME mars_boost::mpl::if_c<
                     (sizeof(int_type) > sizeof(T))
                     , int_type
                     , T
@@ -156,7 +156,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     namespace detail // lcast_ret_unsigned
     {
         template <class Traits, class T, class CharT>
-        class lcast_ret_unsigned: mars_boost_ksim::noncopyable {
+        class lcast_ret_unsigned: mars_boost::noncopyable {
             bool m_multiplier_overflowed;
             T m_multiplier;
             T& m_value;
@@ -176,7 +176,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 //
                 // http://gcc.gnu.org/bugzilla/show_bug.cgi?id=40856
                 BOOST_STATIC_ASSERT_MSG(std::numeric_limits<T>::is_specialized,
-                    "std::numeric_limits are not specialized for integral type passed to mars_boost_ksim::lexical_cast"
+                    "std::numeric_limits are not specialized for integral type passed to mars_boost::lexical_cast"
                 );
 #endif
             }
@@ -288,7 +288,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             }
         };
     }
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_LEXICAL_CAST_DETAIL_LCAST_UNSIGNED_CONVERTERS_HPP
 

@@ -20,7 +20,7 @@
 
 #if !defined( BOOST_NO_CXX11_NULLPTR )
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 namespace detail
@@ -38,7 +38,7 @@ namespace detail
 
 } // namespace detail
 
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // !defined( BOOST_NO_CXX11_NULLPTR )
 

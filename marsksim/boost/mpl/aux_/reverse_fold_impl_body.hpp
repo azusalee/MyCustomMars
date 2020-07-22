@@ -64,7 +64,7 @@
     BOOST_PP_CAT(AUX778076_FOLD_IMPL_NAME_PREFIX,_chunk) \
     /**/
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl { namespace aux {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl { namespace aux {
 
 /// forward declaration
 template<

@@ -19,7 +19,7 @@
 #include <boost/range/iterator_range.hpp>
 #include <algorithm>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range
     {
@@ -48,6 +48,6 @@ inline OutputIterator copy_n(const SinglePassRange& rng, Size n, OutputIterator 
 
     } // namespace range
     using ::boost_ksim::range::copy_n;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

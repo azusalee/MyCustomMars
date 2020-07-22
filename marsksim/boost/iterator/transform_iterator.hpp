@@ -30,7 +30,7 @@
 #include <boost/iterator/detail/config_def.hpp>
 
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace iterators {
 
   template <class UnaryFunction, class Iterator, class Reference = use_default, class Value = use_default>
@@ -73,10 +73,10 @@ namespace iterators {
 
   template <class UnaryFunc, class Iterator, class Reference, class Value>
   class transform_iterator
-    : public mars_boost_ksim::iterators::detail::transform_iterator_base<UnaryFunc, Iterator, Reference, Value>::type
+    : public mars_boost::iterators::detail::transform_iterator_base<UnaryFunc, Iterator, Reference, Value>::type
   {
     typedef typename
-    mars_boost_ksim::iterators::detail::transform_iterator_base<UnaryFunc, Iterator, Reference, Value>::type
+    mars_boost::iterators::detail::transform_iterator_base<UnaryFunc, Iterator, Reference, Value>::type
     super_t;
 
     friend class iterator_core_access;
@@ -164,7 +164,7 @@ namespace iterators {
 using iterators::transform_iterator;
 using iterators::make_transform_iterator;
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #include <boost/iterator/detail/config_undef.hpp>
 

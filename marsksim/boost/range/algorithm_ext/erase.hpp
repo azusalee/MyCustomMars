@@ -18,7 +18,7 @@
 #include <boost/range/end.hpp>
 #include <boost/assert.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range
     {
@@ -28,7 +28,7 @@ inline Container& erase( Container& on,
       iterator_range<BOOST_DEDUCED_TYPENAME Container::iterator> to_erase )
 {
     BOOST_RANGE_CONCEPT_ASSERT(( ForwardRangeConcept<Container> ));
-    on.erase( mars_boost_ksim::begin(to_erase), mars_boost_ksim::end(to_erase) );
+    on.erase( mars_boost::begin(to_erase), mars_boost::end(to_erase) );
     return on;
 }
 
@@ -37,8 +37,8 @@ inline Container& remove_erase( Container& on, const T& val )
 {
     BOOST_RANGE_CONCEPT_ASSERT(( ForwardRangeConcept<Container> ));
     on.erase(
-        std::remove(mars_boost_ksim::begin(on), mars_boost_ksim::end(on), val),
-        mars_boost_ksim::end(on));
+        std::remove(mars_boost::begin(on), mars_boost::end(on), val),
+        mars_boost::end(on));
     return on;
 }
 
@@ -47,8 +47,8 @@ inline Container& remove_erase_if( Container& on, Pred pred )
 {
     BOOST_RANGE_CONCEPT_ASSERT(( ForwardRangeConcept<Container> ));
     on.erase(
-        std::remove_if(mars_boost_ksim::begin(on), mars_boost_ksim::end(on), pred),
-        mars_boost_ksim::end(on));
+        std::remove_if(mars_boost::begin(on), mars_boost::end(on), pred),
+        mars_boost::end(on));
     return on;
 }
 
@@ -56,6 +56,6 @@ inline Container& remove_erase_if( Container& on, Pred pred )
     using range::erase;
     using range::remove_erase;
     using range::remove_erase_if;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

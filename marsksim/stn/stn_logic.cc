@@ -97,7 +97,7 @@ static void onDestroy() {
     NetCoreksim::Singletonksim::Release();
     SINGLETON_RELEASE_ksim_ALL();
     
-    // others use activelogic may crash after activelogic release. eg: LongLinkConnectMonitor
+    // others use activelogic may crash after activelogic release. eg: LongLinkConnectMonitorksim
     // ActiveLogicksim::Singletonksim::Release();
 }
 

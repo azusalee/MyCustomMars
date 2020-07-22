@@ -24,7 +24,7 @@
 #include <boost/config/abi_prefix.hpp> // must be the last #include
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace chrono {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace chrono {
 
 class BOOST_CHRONO_DECL thread_clock {
 public:
@@ -61,7 +61,7 @@ struct clock_string<thread_clock, CharT>
 };
 
 } // namespace chrono
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 
 #ifndef BOOST_CHRONO_HEADER_ONLY

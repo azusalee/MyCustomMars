@@ -22,7 +22,7 @@
 #endif
 
 #if !defined( BOOST_USE_WINDOWS_H )
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace detail { namespace winapi {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace detail { namespace winapi {
 typedef ULONG_PTR_ HCRYPTPROV_;
 }}}
 
@@ -34,78 +34,78 @@ typedef ULONG_PTR_ HCRYPTPROV_;
 extern "C" {
 #if !defined( BOOST_NO_ANSI_APIS )
 #if !defined( BOOST_WINAPI_IS_MINGW ) || !defined( UNICODE )
-BOOST_SYMBOL_IMPORT mars_boost_ksim::detail::winapi::BOOL_ WINAPI
+BOOST_SYMBOL_IMPORT mars_boost::detail::winapi::BOOL_ WINAPI
 CryptEnumProvidersA(
-    mars_boost_ksim::detail::winapi::DWORD_ dwIndex,
-    mars_boost_ksim::detail::winapi::DWORD_ *pdwReserved,
-    mars_boost_ksim::detail::winapi::DWORD_ dwFlags,
-    mars_boost_ksim::detail::winapi::DWORD_ *pdwProvType,
-    mars_boost_ksim::detail::winapi::LPSTR_ szProvName,
-    mars_boost_ksim::detail::winapi::DWORD_ *pcbProvName);
+    mars_boost::detail::winapi::DWORD_ dwIndex,
+    mars_boost::detail::winapi::DWORD_ *pdwReserved,
+    mars_boost::detail::winapi::DWORD_ dwFlags,
+    mars_boost::detail::winapi::DWORD_ *pdwProvType,
+    mars_boost::detail::winapi::LPSTR_ szProvName,
+    mars_boost::detail::winapi::DWORD_ *pcbProvName);
 #else
 // Broken declaration in MinGW
-BOOST_SYMBOL_IMPORT mars_boost_ksim::detail::winapi::BOOL_ WINAPI
+BOOST_SYMBOL_IMPORT mars_boost::detail::winapi::BOOL_ WINAPI
 CryptEnumProvidersA(
-    mars_boost_ksim::detail::winapi::DWORD_ dwIndex,
-    mars_boost_ksim::detail::winapi::DWORD_ *pdwReserved,
-    mars_boost_ksim::detail::winapi::DWORD_ dwFlags,
-    mars_boost_ksim::detail::winapi::DWORD_ *pdwProvType,
-    mars_boost_ksim::detail::winapi::LPWSTR_ szProvName,
-    mars_boost_ksim::detail::winapi::DWORD_ *pcbProvName);
+    mars_boost::detail::winapi::DWORD_ dwIndex,
+    mars_boost::detail::winapi::DWORD_ *pdwReserved,
+    mars_boost::detail::winapi::DWORD_ dwFlags,
+    mars_boost::detail::winapi::DWORD_ *pdwProvType,
+    mars_boost::detail::winapi::LPWSTR_ szProvName,
+    mars_boost::detail::winapi::DWORD_ *pcbProvName);
 #endif
 
-BOOST_SYMBOL_IMPORT mars_boost_ksim::detail::winapi::BOOL_ WINAPI
+BOOST_SYMBOL_IMPORT mars_boost::detail::winapi::BOOL_ WINAPI
 CryptAcquireContextA(
-    mars_boost_ksim::detail::winapi::HCRYPTPROV_ *phProv,
-    mars_boost_ksim::detail::winapi::LPCSTR_ pszContainer,
-    mars_boost_ksim::detail::winapi::LPCSTR_ pszProvider,
-    mars_boost_ksim::detail::winapi::DWORD_ dwProvType,
-    mars_boost_ksim::detail::winapi::DWORD_ dwFlags);
+    mars_boost::detail::winapi::HCRYPTPROV_ *phProv,
+    mars_boost::detail::winapi::LPCSTR_ pszContainer,
+    mars_boost::detail::winapi::LPCSTR_ pszProvider,
+    mars_boost::detail::winapi::DWORD_ dwProvType,
+    mars_boost::detail::winapi::DWORD_ dwFlags);
 #endif // !defined( BOOST_NO_ANSI_APIS )
 
 #if !defined( BOOST_WINAPI_IS_MINGW ) || defined( UNICODE )
-BOOST_SYMBOL_IMPORT mars_boost_ksim::detail::winapi::BOOL_ WINAPI
+BOOST_SYMBOL_IMPORT mars_boost::detail::winapi::BOOL_ WINAPI
 CryptEnumProvidersW(
-    mars_boost_ksim::detail::winapi::DWORD_ dwIndex,
-    mars_boost_ksim::detail::winapi::DWORD_ *pdwReserved,
-    mars_boost_ksim::detail::winapi::DWORD_ dwFlags,
-    mars_boost_ksim::detail::winapi::DWORD_ *pdwProvType,
-    mars_boost_ksim::detail::winapi::LPWSTR_ szProvName,
-    mars_boost_ksim::detail::winapi::DWORD_ *pcbProvName);
+    mars_boost::detail::winapi::DWORD_ dwIndex,
+    mars_boost::detail::winapi::DWORD_ *pdwReserved,
+    mars_boost::detail::winapi::DWORD_ dwFlags,
+    mars_boost::detail::winapi::DWORD_ *pdwProvType,
+    mars_boost::detail::winapi::LPWSTR_ szProvName,
+    mars_boost::detail::winapi::DWORD_ *pcbProvName);
 #else
 // Broken declaration in MinGW
-BOOST_SYMBOL_IMPORT mars_boost_ksim::detail::winapi::BOOL_ WINAPI
+BOOST_SYMBOL_IMPORT mars_boost::detail::winapi::BOOL_ WINAPI
 CryptEnumProvidersW(
-    mars_boost_ksim::detail::winapi::DWORD_ dwIndex,
-    mars_boost_ksim::detail::winapi::DWORD_ *pdwReserved,
-    mars_boost_ksim::detail::winapi::DWORD_ dwFlags,
-    mars_boost_ksim::detail::winapi::DWORD_ *pdwProvType,
-    mars_boost_ksim::detail::winapi::LPSTR_ szProvName,
-    mars_boost_ksim::detail::winapi::DWORD_ *pcbProvName);
+    mars_boost::detail::winapi::DWORD_ dwIndex,
+    mars_boost::detail::winapi::DWORD_ *pdwReserved,
+    mars_boost::detail::winapi::DWORD_ dwFlags,
+    mars_boost::detail::winapi::DWORD_ *pdwProvType,
+    mars_boost::detail::winapi::LPSTR_ szProvName,
+    mars_boost::detail::winapi::DWORD_ *pcbProvName);
 #endif
 
-BOOST_SYMBOL_IMPORT mars_boost_ksim::detail::winapi::BOOL_ WINAPI
+BOOST_SYMBOL_IMPORT mars_boost::detail::winapi::BOOL_ WINAPI
 CryptAcquireContextW(
-    mars_boost_ksim::detail::winapi::HCRYPTPROV_ *phProv,
-    mars_boost_ksim::detail::winapi::LPCWSTR_ szContainer,
-    mars_boost_ksim::detail::winapi::LPCWSTR_ szProvider,
-    mars_boost_ksim::detail::winapi::DWORD_ dwProvType,
-    mars_boost_ksim::detail::winapi::DWORD_ dwFlags);
+    mars_boost::detail::winapi::HCRYPTPROV_ *phProv,
+    mars_boost::detail::winapi::LPCWSTR_ szContainer,
+    mars_boost::detail::winapi::LPCWSTR_ szProvider,
+    mars_boost::detail::winapi::DWORD_ dwProvType,
+    mars_boost::detail::winapi::DWORD_ dwFlags);
 
-BOOST_SYMBOL_IMPORT mars_boost_ksim::detail::winapi::BOOL_ WINAPI
+BOOST_SYMBOL_IMPORT mars_boost::detail::winapi::BOOL_ WINAPI
 CryptGenRandom(
-    mars_boost_ksim::detail::winapi::HCRYPTPROV_ hProv,
-    mars_boost_ksim::detail::winapi::DWORD_ dwLen,
-    mars_boost_ksim::detail::winapi::BYTE_ *pbBuffer);
+    mars_boost::detail::winapi::HCRYPTPROV_ hProv,
+    mars_boost::detail::winapi::DWORD_ dwLen,
+    mars_boost::detail::winapi::BYTE_ *pbBuffer);
 
-BOOST_SYMBOL_IMPORT mars_boost_ksim::detail::winapi::BOOL_ WINAPI
+BOOST_SYMBOL_IMPORT mars_boost::detail::winapi::BOOL_ WINAPI
 CryptReleaseContext(
-    mars_boost_ksim::detail::winapi::HCRYPTPROV_ hProv,
-    mars_boost_ksim::detail::winapi::DWORD_ dwFlags);
+    mars_boost::detail::winapi::HCRYPTPROV_ hProv,
+    mars_boost::detail::winapi::DWORD_ dwFlags);
 }
 #endif // !defined( BOOST_USE_WINDOWS_H )
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace detail {
 namespace winapi {
 

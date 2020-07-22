@@ -13,10 +13,10 @@
 #ifndef BOOST_BLANK_FWD_HPP
 #define BOOST_BLANK_FWD_HPP
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 struct blank;
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_BLANK_FWD_HPP

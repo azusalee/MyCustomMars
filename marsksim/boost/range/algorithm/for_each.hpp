@@ -21,7 +21,7 @@
 #include <xutility>
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range
     {
@@ -75,12 +75,12 @@ inline UnaryFunction for_each(SinglePassRange & rng, UnaryFunction fun)
         return for_each_detail::for_each_impl<
                 typename range_iterator<SinglePassRange>::type,
                 UnaryFunction
-        >(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), fun);
+        >(mars_boost::begin(rng), mars_boost::end(rng), fun);
 #else
     return std::for_each<
         BOOST_DEDUCED_TYPENAME range_iterator<SinglePassRange>::type,
         UnaryFunction
-    >(mars_boost_ksim::begin(rng),mars_boost_ksim::end(rng),fun);
+    >(mars_boost::begin(rng),mars_boost::end(rng),fun);
 #endif    
 }
 
@@ -94,17 +94,17 @@ inline UnaryFunction for_each(const SinglePassRange& rng, UnaryFunction fun)
         return for_each_detail::for_each_impl<
                 typename range_iterator<const SinglePassRange>::type,
                 UnaryFunction
-        >(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), fun);
+        >(mars_boost::begin(rng), mars_boost::end(rng), fun);
 #else    
     return std::for_each<
         BOOST_DEDUCED_TYPENAME range_iterator<const SinglePassRange>::type,
         UnaryFunction
-    >(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), fun);
+    >(mars_boost::begin(rng), mars_boost::end(rng), fun);
 #endif    
 }
 
     } // namespace range
     using range::for_each;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

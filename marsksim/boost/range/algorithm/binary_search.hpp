@@ -15,7 +15,7 @@
 #include <boost/range/concepts.hpp>
 #include <algorithm>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range
     {
@@ -30,7 +30,7 @@ template<class ForwardRange, class Value>
 inline bool binary_search(const ForwardRange& rng, const Value& val)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( ForwardRangeConcept<const ForwardRange> ));
-    return std::binary_search(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), val);
+    return std::binary_search(mars_boost::begin(rng), mars_boost::end(rng), val);
 }
 
 /// \overload
@@ -39,11 +39,11 @@ inline bool binary_search(const ForwardRange& rng, const Value& val,
                           BinaryPredicate pred)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( ForwardRangeConcept<const ForwardRange> ));
-    return std::binary_search(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), val, pred);
+    return std::binary_search(mars_boost::begin(rng), mars_boost::end(rng), val, pred);
 }
 
     } // namespace range
     using range::binary_search;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

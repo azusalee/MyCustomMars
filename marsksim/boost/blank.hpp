@@ -25,7 +25,7 @@
 #include "boost/type_traits/is_pod.hpp"
 #include "boost/type_traits/is_stateless.hpp"
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 struct blank
 {
@@ -101,6 +101,6 @@ inline BOOST_TEMPLATED_STREAM(ostream, E,T)& operator<<(
 
 #endif // BOOST_NO_IOSTREAM
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_BLANK_HPP

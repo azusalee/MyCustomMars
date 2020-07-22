@@ -13,7 +13,7 @@
 #include <boost/date_time/special_defs.hpp>
 #include <boost/date_time/date_duration.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace date_time {
 
 
@@ -264,6 +264,6 @@ namespace date_time {
       int_rep _y;
   };
 
-}} // namespace mars_boost_ksim::date_time
+}} // namespace mars_boost::date_time
 
 #endif // DATE_DURATION_TYPES_HPP___

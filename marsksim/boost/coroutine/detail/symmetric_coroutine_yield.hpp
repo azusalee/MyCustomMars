@@ -24,7 +24,7 @@
 #  include BOOST_ABI_PREFIX
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace coroutines {
 namespace detail {
 
@@ -65,7 +65,7 @@ public:
 
     symmetric_coroutine_yield & operator=( BOOST_RV_REF( symmetric_coroutine_yield) other) BOOST_NOEXCEPT
     {
-        symmetric_coroutine_yield tmp( mars_boost_ksim::move( other) );
+        symmetric_coroutine_yield tmp( mars_boost::move( other) );
         swap( tmp);
         return * this;
     }
@@ -116,7 +116,7 @@ public:
     R get() const
     {
         if ( 0 == result_)
-            mars_boost_ksim::throw_exception(
+            mars_boost::throw_exception(
                 invalid_result() );
 
         return * result_; 
@@ -160,7 +160,7 @@ public:
 
     symmetric_coroutine_yield & operator=( BOOST_RV_REF( symmetric_coroutine_yield) other) BOOST_NOEXCEPT
     {
-        symmetric_coroutine_yield tmp( mars_boost_ksim::move( other) );
+        symmetric_coroutine_yield tmp( mars_boost::move( other) );
         swap( tmp);
         return * this;
     }
@@ -211,7 +211,7 @@ public:
     R & get() const
     {
         if ( 0 == result_)
-            mars_boost_ksim::throw_exception(
+            mars_boost::throw_exception(
                 invalid_result() );
 
         return * result_; 
@@ -248,7 +248,7 @@ public:
 
     symmetric_coroutine_yield & operator=( BOOST_RV_REF( symmetric_coroutine_yield) other) BOOST_NOEXCEPT
     {
-        symmetric_coroutine_yield tmp( mars_boost_ksim::move( other) );
+        symmetric_coroutine_yield tmp( mars_boost::move( other) );
         swap( tmp);
         return * this;
     }

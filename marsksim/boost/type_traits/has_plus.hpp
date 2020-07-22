@@ -15,32 +15,32 @@
    (\
       /* Lhs==pointer and Rhs==pointer */\
       (\
-         ::mars_boost_ksim::is_pointer< Lhs_noref >::value && \
-         ::mars_boost_ksim::is_pointer< Rhs_noref >::value\
+         ::mars_boost::is_pointer< Lhs_noref >::value && \
+         ::mars_boost::is_pointer< Rhs_noref >::value\
       ) || \
       /* Lhs==void* and Rhs==fundamental */\
       (\
-         ::mars_boost_ksim::is_pointer< Lhs_noref >::value && \
-         ::mars_boost_ksim::is_void< Lhs_noptr >::value && \
-         ::mars_boost_ksim::is_fundamental< Rhs_nocv >::value\
+         ::mars_boost::is_pointer< Lhs_noref >::value && \
+         ::mars_boost::is_void< Lhs_noptr >::value && \
+         ::mars_boost::is_fundamental< Rhs_nocv >::value\
       ) || \
       /* Rhs==void* and Lhs==fundamental */\
       (\
-         ::mars_boost_ksim::is_pointer< Rhs_noref >::value && \
-         ::mars_boost_ksim::is_void< Rhs_noptr >::value && \
-         ::mars_boost_ksim::is_fundamental< Lhs_nocv >::value\
+         ::mars_boost::is_pointer< Rhs_noref >::value && \
+         ::mars_boost::is_void< Rhs_noptr >::value && \
+         ::mars_boost::is_fundamental< Lhs_nocv >::value\
       ) || \
       /* Lhs==pointer and Rhs==fundamental and Rhs!=integral */\
       (\
-         ::mars_boost_ksim::is_pointer< Lhs_noref >::value && \
-         ::mars_boost_ksim::is_fundamental< Rhs_nocv >::value && \
-         (!  ::mars_boost_ksim::is_integral< Rhs_noref >::value )\
+         ::mars_boost::is_pointer< Lhs_noref >::value && \
+         ::mars_boost::is_fundamental< Rhs_nocv >::value && \
+         (!  ::mars_boost::is_integral< Rhs_noref >::value )\
       ) || \
       /* Rhs==pointer and Lhs==fundamental and Lhs!=integral */\
       (\
-         ::mars_boost_ksim::is_pointer< Rhs_noref >::value && \
-         ::mars_boost_ksim::is_fundamental< Lhs_nocv >::value && \
-         (!  ::mars_boost_ksim::is_integral< Lhs_noref >::value )\
+         ::mars_boost::is_pointer< Rhs_noref >::value && \
+         ::mars_boost::is_fundamental< Lhs_nocv >::value && \
+         (!  ::mars_boost::is_integral< Lhs_noref >::value )\
       )\
    )
 

@@ -43,7 +43,7 @@
 #   endif
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace detail {
 
 // This namespace ensures that argument-dependent name lookup does not mess things up.
@@ -90,9 +90,9 @@ template < typename Lhs, typename Rhs >
 struct operator_returns_void {
    // overloads of function returns_void make the difference
    // yes_type and no_type have different size by construction
-   static ::mars_boost_ksim::type_traits::yes_type returns_void(returns_void_t);
-   static ::mars_boost_ksim::type_traits::no_type returns_void(int);
-   BOOST_STATIC_CONSTANT(bool, value = (sizeof(::mars_boost_ksim::type_traits::yes_type)==sizeof(returns_void((make<Lhs>() BOOST_TT_TRAIT_OP make<Rhs>(),returns_void_t())))));
+   static ::mars_boost::type_traits::yes_type returns_void(returns_void_t);
+   static ::mars_boost::type_traits::no_type returns_void(int);
+   BOOST_STATIC_CONSTANT(bool, value = (sizeof(::mars_boost::type_traits::yes_type)==sizeof(returns_void((make<Lhs>() BOOST_TT_TRAIT_OP make<Rhs>(),returns_void_t())))));
 };
 
 
@@ -134,10 +134,10 @@ struct operator_returns_Ret < Lhs, Rhs, Ret, true > {
 // condition: Ret!=void and Ret!=dont_care and the operator does not return void
 template < typename Lhs, typename Rhs, typename Ret >
 struct operator_returns_Ret < Lhs, Rhs, Ret, false > {
-   static ::mars_boost_ksim::type_traits::yes_type is_convertible_to_Ret(Ret); // this version is preferred for types convertible to Ret
-   static ::mars_boost_ksim::type_traits::no_type is_convertible_to_Ret(...); // this version is used otherwise
+   static ::mars_boost::type_traits::yes_type is_convertible_to_Ret(Ret); // this version is preferred for types convertible to Ret
+   static ::mars_boost::type_traits::no_type is_convertible_to_Ret(...); // this version is used otherwise
 
-   BOOST_STATIC_CONSTANT(bool, value = (sizeof(is_convertible_to_Ret(make<Lhs>() BOOST_TT_TRAIT_OP make<Rhs>()))==sizeof(::mars_boost_ksim::type_traits::yes_type)));
+   BOOST_STATIC_CONSTANT(bool, value = (sizeof(is_convertible_to_Ret(make<Lhs>() BOOST_TT_TRAIT_OP make<Rhs>()))==sizeof(::mars_boost::type_traits::yes_type)));
 };
 
 
@@ -152,10 +152,10 @@ no_operator operator,(no_operator, has_operator);
 
 template < typename Lhs, typename Rhs >
 struct operator_exists {
-   static ::mars_boost_ksim::type_traits::yes_type s_check(has_operator); // this version is preferred when operator exists
-   static ::mars_boost_ksim::type_traits::no_type s_check(no_operator); // this version is used otherwise
+   static ::mars_boost::type_traits::yes_type s_check(has_operator); // this version is preferred when operator exists
+   static ::mars_boost::type_traits::no_type s_check(no_operator); // this version is used otherwise
 
-   BOOST_STATIC_CONSTANT(bool, value = (sizeof(s_check(((make<Lhs>() BOOST_TT_TRAIT_OP make<Rhs>()),make<has_operator>())))==sizeof(::mars_boost_ksim::type_traits::yes_type)));
+   BOOST_STATIC_CONSTANT(bool, value = (sizeof(s_check(((make<Lhs>() BOOST_TT_TRAIT_OP make<Rhs>()),make<has_operator>())))==sizeof(::mars_boost::type_traits::yes_type)));
 };
 
 
@@ -199,12 +199,12 @@ struct trait_impl1 < void, void, Ret, false > {
 // defines some typedef for convenience
 template < typename Lhs, typename Rhs, typename Ret >
 struct trait_impl {
-   typedef typename ::mars_boost_ksim::remove_reference<Lhs>::type Lhs_noref;
-   typedef typename ::mars_boost_ksim::remove_reference<Rhs>::type Rhs_noref;
-   typedef typename ::mars_boost_ksim::remove_cv<Lhs_noref>::type Lhs_nocv;
-   typedef typename ::mars_boost_ksim::remove_cv<Rhs_noref>::type Rhs_nocv;
-   typedef typename ::mars_boost_ksim::remove_cv< typename ::mars_boost_ksim::remove_reference< typename ::mars_boost_ksim::remove_pointer<Lhs_noref>::type >::type >::type Lhs_noptr;
-   typedef typename ::mars_boost_ksim::remove_cv< typename ::mars_boost_ksim::remove_reference< typename ::mars_boost_ksim::remove_pointer<Rhs_noref>::type >::type >::type Rhs_noptr;
+   typedef typename ::mars_boost::remove_reference<Lhs>::type Lhs_noref;
+   typedef typename ::mars_boost::remove_reference<Rhs>::type Rhs_noref;
+   typedef typename ::mars_boost::remove_cv<Lhs_noref>::type Lhs_nocv;
+   typedef typename ::mars_boost::remove_cv<Rhs_noref>::type Rhs_nocv;
+   typedef typename ::mars_boost::remove_cv< typename ::mars_boost::remove_reference< typename ::mars_boost::remove_pointer<Lhs_noref>::type >::type >::type Lhs_noptr;
+   typedef typename ::mars_boost::remove_cv< typename ::mars_boost::remove_reference< typename ::mars_boost::remove_pointer<Rhs_noref>::type >::type >::type Rhs_noptr;
    BOOST_STATIC_CONSTANT(bool, value = (trait_impl1 < Lhs_noref, Rhs_noref, Ret, BOOST_TT_FORBIDDEN_IF >::value));
 };
 
@@ -212,10 +212,10 @@ struct trait_impl {
 } // namespace detail
 
 // this is the accessible definition of the trait to end user
-template <class Lhs, class Rhs=Lhs, class Ret=::mars_boost_ksim::detail::BOOST_JOIN(BOOST_TT_TRAIT_NAME,_impl)::dont_care>
-struct BOOST_TT_TRAIT_NAME : public integral_constant<bool, (::mars_boost_ksim::detail::BOOST_JOIN(BOOST_TT_TRAIT_NAME, _impl)::trait_impl < Lhs, Rhs, Ret >::value)>{};
+template <class Lhs, class Rhs=Lhs, class Ret=::mars_boost::detail::BOOST_JOIN(BOOST_TT_TRAIT_NAME,_impl)::dont_care>
+struct BOOST_TT_TRAIT_NAME : public integral_constant<bool, (::mars_boost::detail::BOOST_JOIN(BOOST_TT_TRAIT_NAME, _impl)::trait_impl < Lhs, Rhs, Ret >::value)>{};
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #if defined(BOOST_MSVC)
 #   pragma warning ( pop )

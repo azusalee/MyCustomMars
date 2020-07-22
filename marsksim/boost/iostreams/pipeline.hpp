@@ -27,23 +27,23 @@
 #define BOOST_IOSTREAMS_PIPABLE(filter, arity) \
     template< BOOST_PP_ENUM_PARAMS(arity, typename T) \
               BOOST_PP_COMMA_IF(arity) typename Component> \
-    ::mars_boost_ksim::iostreams::pipeline< \
-        ::mars_boost_ksim::iostreams::detail::pipeline_segment< \
+    ::mars_boost::iostreams::pipeline< \
+        ::mars_boost::iostreams::detail::pipeline_segment< \
             filter BOOST_IOSTREAMS_TEMPLATE_ARGS(arity, T) \
         >, \
         Component \
     > operator|( const filter BOOST_IOSTREAMS_TEMPLATE_ARGS(arity, T)& f, \
                  const Component& c ) \
     { \
-        typedef ::mars_boost_ksim::iostreams::detail::pipeline_segment< \
+        typedef ::mars_boost::iostreams::detail::pipeline_segment< \
                     filter BOOST_IOSTREAMS_TEMPLATE_ARGS(arity, T) \
                 > segment; \
-        return ::mars_boost_ksim::iostreams::pipeline<segment, Component> \
+        return ::mars_boost::iostreams::pipeline<segment, Component> \
                    (segment(f), c); \
     } \
     /**/
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace iostreams {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace iostreams {
 
 template<typename Pipeline, typename Component>
 struct pipeline;

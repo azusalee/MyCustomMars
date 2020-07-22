@@ -14,12 +14,12 @@
 #include "boost/date_time/compiler_config.hpp"
 #include "boost/date_time/special_defs.hpp"
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace date_time {
 
   //! An unadjusted time system implementation.
 #if (defined(BOOST_DATE_TIME_NO_MEMBER_INIT))  
-  template<typename config, mars_boost_ksim::int32_t ticks_per_second>
+  template<typename config, mars_boost::int32_t ticks_per_second>
 #else
   template<typename config>
 #endif

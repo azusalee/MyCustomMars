@@ -24,22 +24,22 @@
 #   define BOOST_MPL_AUX_ADL_BARRIER_NAMESPACE_OPEN namespace mpl_ {
 #   define BOOST_MPL_AUX_ADL_BARRIER_NAMESPACE_CLOSE }
 #   define BOOST_MPL_AUX_ADL_BARRIER_DECL(type) \
-    namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl { \
+    namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl { \
     using ::BOOST_MPL_AUX_ADL_BARRIER_NAMESPACE::type; \
     } } \
 /**/
 
 #if !defined(BOOST_MPL_PREPROCESSING_MODE)
 namespace BOOST_MPL_AUX_ADL_BARRIER_NAMESPACE { namespace aux {} }
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl { using namespace BOOST_MPL_AUX_ADL_BARRIER_NAMESPACE; 
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl { using namespace BOOST_MPL_AUX_ADL_BARRIER_NAMESPACE; 
 namespace aux { using namespace BOOST_MPL_AUX_ADL_BARRIER_NAMESPACE::aux; }
 }}
 #endif
 
 #else // BOOST_MPL_CFG_NO_ADL_BARRIER_NAMESPACE
 
-#   define BOOST_MPL_AUX_ADL_BARRIER_namespace mars_boost_ksim::mpl
-#   define BOOST_MPL_AUX_ADL_BARRIER_NAMESPACE_OPEN namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl {
+#   define BOOST_MPL_AUX_ADL_BARRIER_namespace mars_boost::mpl
+#   define BOOST_MPL_AUX_ADL_BARRIER_NAMESPACE_OPEN namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl {
 #   define BOOST_MPL_AUX_ADL_BARRIER_NAMESPACE_CLOSE }}
 #   define BOOST_MPL_AUX_ADL_BARRIER_DECL(type) /**/
 

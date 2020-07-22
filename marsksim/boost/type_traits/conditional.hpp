@@ -9,12 +9,12 @@
 #ifndef BOOST_TT_CONDITIONAL_HPP_INCLUDED
 #define BOOST_TT_CONDITIONAL_HPP_INCLUDED
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 template <bool b, class T, class U> struct conditional { typedef T type; };
 template <class T, class U> struct conditional<false, T, U> { typedef U type; };
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 
 #endif // BOOST_TT_CONDITIONAL_HPP_INCLUDED

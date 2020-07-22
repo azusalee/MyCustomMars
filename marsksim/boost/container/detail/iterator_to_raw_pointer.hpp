@@ -22,7 +22,7 @@
 #include <boost/container/detail/to_raw_pointer.hpp>
 #include <boost/intrusive/pointer_traits.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace container {
 namespace container_detail {
 
@@ -31,15 +31,15 @@ inline T* iterator_to_pointer(T* i)
 {  return i; }
 
 template <class Iterator>
-inline typename mars_boost_ksim::container::iterator_traits<Iterator>::pointer
+inline typename mars_boost::container::iterator_traits<Iterator>::pointer
    iterator_to_pointer(const Iterator &i)
 {  return i.operator->();  }
 
 template <class Iterator>
 struct iterator_to_element_ptr
 {
-   typedef typename mars_boost_ksim::container::iterator_traits<Iterator>::pointer      pointer;
-   typedef typename mars_boost_ksim::intrusive::pointer_traits<pointer>::element_type   element_type;
+   typedef typename mars_boost::container::iterator_traits<Iterator>::pointer      pointer;
+   typedef typename mars_boost::intrusive::pointer_traits<pointer>::element_type   element_type;
    typedef element_type* type;
 };
 
@@ -47,12 +47,12 @@ template <class Iterator>
 inline typename iterator_to_element_ptr<Iterator>::type
    iterator_to_raw_pointer(const Iterator &i)
 {
-   return ::mars_boost_ksim::intrusive::detail::to_raw_pointer
-      (  ::mars_boost_ksim::container::container_detail::iterator_to_pointer(i)   );
+   return ::mars_boost::intrusive::detail::to_raw_pointer
+      (  ::mars_boost::container::container_detail::iterator_to_pointer(i)   );
 }
 
 }  //namespace container_detail {
 }  //namespace container {
-}  //namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+}  //namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 #endif   //#ifndef BOOST_CONTAINER_DETAIL_ITERATOR_TO_RAW_POINTER_HPP

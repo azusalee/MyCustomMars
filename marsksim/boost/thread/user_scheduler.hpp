@@ -17,7 +17,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
   class user_scheduler
@@ -144,14 +144,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     void submit(Closure & closure)
     {
       work w ((closure));
-      work_queue.push(mars_boost_ksim::move(w));
+      work_queue.push(mars_boost::move(w));
       //work_queue.push(work(closure)); // todo check why this doesn't work
     }
 #endif
     void submit(void (*closure)())
     {
       work w ((closure));
-      work_queue.push(mars_boost_ksim::move(w));
+      work_queue.push(mars_boost::move(w));
       //work_queue.push(work(closure)); // todo check why this doesn't work
     }
 
@@ -159,8 +159,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     void submit(BOOST_THREAD_RV_REF(Closure) closure)
     {
       work w =boost_ksim::move(closure);
-      work_queue.push(mars_boost_ksim::move(w));
-      //work_queue.push(work(mars_boost_ksim::move(closure))); // todo check why this doesn't work
+      work_queue.push(mars_boost::move(w));
+      //work_queue.push(work(mars_boost::move(closure))); // todo check why this doesn't work
     }
 
     /**

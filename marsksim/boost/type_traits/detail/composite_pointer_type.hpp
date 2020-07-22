@@ -17,7 +17,7 @@
 #include <boost/config.hpp>
 #include <cstddef>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 namespace type_traits_detail
@@ -81,33 +81,33 @@ template<class T, class U> struct has_common_pointee
 {
 private:
 
-    typedef typename mars_boost_ksim::remove_cv<T>::type T2;
-    typedef typename mars_boost_ksim::remove_cv<U>::type U2;
+    typedef typename mars_boost::remove_cv<T>::type T2;
+    typedef typename mars_boost::remove_cv<U>::type U2;
 
 public:
 
     BOOST_STATIC_CONSTANT( bool, value =
-        (mars_boost_ksim::is_same<T2, U2>::value)
-        || mars_boost_ksim::is_void<T2>::value
-        || mars_boost_ksim::is_void<U2>::value
-        || (mars_boost_ksim::is_base_of<T2, U2>::value)
-        || (mars_boost_ksim::is_base_of<U2, T2>::value) );
+        (mars_boost::is_same<T2, U2>::value)
+        || mars_boost::is_void<T2>::value
+        || mars_boost::is_void<U2>::value
+        || (mars_boost::is_base_of<T2, U2>::value)
+        || (mars_boost::is_base_of<U2, T2>::value) );
 };
 
 template<class T, class U> struct common_pointee
 {
 private:
 
-    typedef typename mars_boost_ksim::remove_cv<T>::type T2;
-    typedef typename mars_boost_ksim::remove_cv<U>::type U2;
+    typedef typename mars_boost::remove_cv<T>::type T2;
+    typedef typename mars_boost::remove_cv<U>::type U2;
 
 public:
 
-    typedef typename mars_boost_ksim::conditional<
+    typedef typename mars_boost::conditional<
 
-        mars_boost_ksim::is_same<T2, U2>::value || mars_boost_ksim::is_void<T2>::value || mars_boost_ksim::is_base_of<T2, U2>::value,
-        typename mars_boost_ksim::copy_cv<T, U>::type,
-        typename mars_boost_ksim::copy_cv<U, T>::type
+        mars_boost::is_same<T2, U2>::value || mars_boost::is_void<T2>::value || mars_boost::is_base_of<T2, U2>::value,
+        typename mars_boost::copy_cv<T, U>::type,
+        typename mars_boost::copy_cv<U, T>::type
 
     >::type type;
 };
@@ -116,15 +116,15 @@ template<class T, class U> struct composite_pointer_impl
 {
 private:
 
-    typedef typename mars_boost_ksim::remove_cv<T>::type T2;
-    typedef typename mars_boost_ksim::remove_cv<U>::type U2;
+    typedef typename mars_boost::remove_cv<T>::type T2;
+    typedef typename mars_boost::remove_cv<U>::type U2;
 
 public:
 
-    typedef typename mars_boost_ksim::copy_cv<typename mars_boost_ksim::copy_cv<typename composite_pointer_type<T2, U2>::type const, T>::type, U>::type type;
+    typedef typename mars_boost::copy_cv<typename mars_boost::copy_cv<typename composite_pointer_type<T2, U2>::type const, T>::type, U>::type type;
 };
 
-//Old compilers like MSVC-7.1 have problems using mars_boost_ksim::conditional in
+//Old compilers like MSVC-7.1 have problems using mars_boost::conditional in
 //composite_pointer_type. Partially specializing on has_common_pointee<T, U>::value
 //seems to make their life easier
 template<class T, class U, bool = has_common_pointee<T, U>::value >
@@ -148,6 +148,6 @@ template<class T, class U> struct composite_pointer_type<T*, U*>
 
 } // namespace type_traits_detail
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // #ifndef BOOST_TYPE_TRAITS_DETAIL_COMPOSITE_POINTER_TYPE_HPP_INCLUDED

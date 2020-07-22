@@ -25,7 +25,7 @@
 #include <boost/detail/winapi/GetProcessTimes.hpp>
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 namespace chrono
 {
@@ -50,7 +50,7 @@ process_real_cpu_clock::time_point process_real_cpu_clock::now(
     clock_t c = ::clock();
     if ( c == clock_t(-1) ) // error
     {
-            mars_boost_ksim::throw_exception(
+            mars_boost::throw_exception(
                     system::system_error(
                             errno,
                             BOOST_CHRONO_SYSTEM_CATEGORY,
@@ -72,10 +72,10 @@ process_user_cpu_clock::time_point process_user_cpu_clock::now() BOOST_NOEXCEPT
 {
 
     //  note that Windows uses 100 nanosecond ticks for FILETIME
-    mars_boost_ksim::detail::winapi::FILETIME_ creation, exit, user_time, system_time;
+    mars_boost::detail::winapi::FILETIME_ creation, exit, user_time, system_time;
 
-    if ( mars_boost_ksim::detail::winapi::GetProcessTimes(
-            mars_boost_ksim::detail::winapi::GetCurrentProcess(), &creation, &exit,
+    if ( mars_boost::detail::winapi::GetProcessTimes(
+            mars_boost::detail::winapi::GetCurrentProcess(), &creation, &exit,
             &system_time, &user_time ) )
     {
         return time_point(duration(
@@ -97,10 +97,10 @@ process_user_cpu_clock::time_point process_user_cpu_clock::now(
 {
 
     //  note that Windows uses 100 nanosecond ticks for FILETIME
-    mars_boost_ksim::detail::winapi::FILETIME_ creation, exit, user_time, system_time;
+    mars_boost::detail::winapi::FILETIME_ creation, exit, user_time, system_time;
 
-    if ( mars_boost_ksim::detail::winapi::GetProcessTimes(
-            mars_boost_ksim::detail::winapi::GetCurrentProcess(), &creation, &exit,
+    if ( mars_boost::detail::winapi::GetProcessTimes(
+            mars_boost::detail::winapi::GetCurrentProcess(), &creation, &exit,
             &system_time, &user_time ) )
     {
         if (!BOOST_CHRONO_IS_THROWS(ec))
@@ -114,10 +114,10 @@ process_user_cpu_clock::time_point process_user_cpu_clock::now(
     }
     else
     {
-        mars_boost_ksim::detail::winapi::DWORD_ cause = mars_boost_ksim::detail::winapi::GetLastError();
+        mars_boost::detail::winapi::DWORD_ cause = mars_boost::detail::winapi::GetLastError();
         if (BOOST_CHRONO_IS_THROWS(ec))
         {
-            mars_boost_ksim::throw_exception(
+            mars_boost::throw_exception(
                     system::system_error(
                             cause,
                             BOOST_CHRONO_SYSTEM_CATEGORY,
@@ -137,10 +137,10 @@ process_system_cpu_clock::time_point process_system_cpu_clock::now() BOOST_NOEXC
 {
 
     //  note that Windows uses 100 nanosecond ticks for FILETIME
-    mars_boost_ksim::detail::winapi::FILETIME_ creation, exit, user_time, system_time;
+    mars_boost::detail::winapi::FILETIME_ creation, exit, user_time, system_time;
 
-    if ( mars_boost_ksim::detail::winapi::GetProcessTimes(
-            mars_boost_ksim::detail::winapi::GetCurrentProcess(), &creation, &exit,
+    if ( mars_boost::detail::winapi::GetProcessTimes(
+            mars_boost::detail::winapi::GetCurrentProcess(), &creation, &exit,
             &system_time, &user_time ) )
     {
         return time_point(duration(
@@ -162,10 +162,10 @@ process_system_cpu_clock::time_point process_system_cpu_clock::now(
 {
 
     //  note that Windows uses 100 nanosecond ticks for FILETIME
-    mars_boost_ksim::detail::winapi::FILETIME_ creation, exit, user_time, system_time;
+    mars_boost::detail::winapi::FILETIME_ creation, exit, user_time, system_time;
 
-    if ( mars_boost_ksim::detail::winapi::GetProcessTimes(
-            mars_boost_ksim::detail::winapi::GetCurrentProcess(), &creation, &exit,
+    if ( mars_boost::detail::winapi::GetProcessTimes(
+            mars_boost::detail::winapi::GetCurrentProcess(), &creation, &exit,
             &system_time, &user_time ) )
     {
         if (!BOOST_CHRONO_IS_THROWS(ec))
@@ -179,10 +179,10 @@ process_system_cpu_clock::time_point process_system_cpu_clock::now(
     }
     else
     {
-        mars_boost_ksim::detail::winapi::DWORD_ cause = mars_boost_ksim::detail::winapi::GetLastError();
+        mars_boost::detail::winapi::DWORD_ cause = mars_boost::detail::winapi::GetLastError();
         if (BOOST_CHRONO_IS_THROWS(ec))
         {
-            mars_boost_ksim::throw_exception(
+            mars_boost::throw_exception(
                     system::system_error(
                             cause,
                             BOOST_CHRONO_SYSTEM_CATEGORY,
@@ -202,10 +202,10 @@ process_cpu_clock::time_point process_cpu_clock::now()  BOOST_NOEXCEPT
 {
 
     //  note that Windows uses 100 nanosecond ticks for FILETIME
-    mars_boost_ksim::detail::winapi::FILETIME_ creation, exit, user_time, system_time;
+    mars_boost::detail::winapi::FILETIME_ creation, exit, user_time, system_time;
 
-    if ( mars_boost_ksim::detail::winapi::GetProcessTimes(
-            mars_boost_ksim::detail::winapi::GetCurrentProcess(), &creation, &exit,
+    if ( mars_boost::detail::winapi::GetProcessTimes(
+            mars_boost::detail::winapi::GetCurrentProcess(), &creation, &exit,
             &system_time, &user_time ) )
     {
         time_point::rep r(process_real_cpu_clock::now().time_since_epoch().count()
@@ -233,10 +233,10 @@ process_cpu_clock::time_point process_cpu_clock::now(
 {
 
     //  note that Windows uses 100 nanosecond ticks for FILETIME
-    mars_boost_ksim::detail::winapi::FILETIME_ creation, exit, user_time, system_time;
+    mars_boost::detail::winapi::FILETIME_ creation, exit, user_time, system_time;
 
-    if ( mars_boost_ksim::detail::winapi::GetProcessTimes(
-            mars_boost_ksim::detail::winapi::GetCurrentProcess(), &creation, &exit,
+    if ( mars_boost::detail::winapi::GetProcessTimes(
+            mars_boost::detail::winapi::GetCurrentProcess(), &creation, &exit,
             &system_time, &user_time ) )
     {
         if (!BOOST_CHRONO_IS_THROWS(ec))
@@ -256,10 +256,10 @@ process_cpu_clock::time_point process_cpu_clock::now(
     }
     else
     {
-        mars_boost_ksim::detail::winapi::DWORD_ cause = mars_boost_ksim::detail::winapi::GetLastError();
+        mars_boost::detail::winapi::DWORD_ cause = mars_boost::detail::winapi::GetLastError();
         if (BOOST_CHRONO_IS_THROWS(ec))
         {
-            mars_boost_ksim::throw_exception(
+            mars_boost::throw_exception(
                     system::system_error(
                             cause,
                             BOOST_CHRONO_SYSTEM_CATEGORY,
@@ -276,6 +276,6 @@ process_cpu_clock::time_point process_cpu_clock::now(
 #endif
 #endif
 } // namespace chrono
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif

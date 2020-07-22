@@ -24,7 +24,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     class shared_mutex
     {
@@ -157,10 +157,10 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 
         state_data state;
-        mars_boost_ksim::mutex state_change;
-        mars_boost_ksim::condition_variable shared_cond;
-        mars_boost_ksim::condition_variable exclusive_cond;
-        mars_boost_ksim::condition_variable upgrade_cond;
+        mars_boost::mutex state_change;
+        mars_boost::condition_variable shared_cond;
+        mars_boost::condition_variable exclusive_cond;
+        mars_boost::condition_variable upgrade_cond;
 
         void release_waiters()
         {
@@ -183,9 +183,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         void lock_shared()
         {
 #if defined BOOST_THREAD_PROVIDES_INTERRUPTIONS
-            mars_boost_ksim::this_thread::disable_interruption do_not_disturb;
+            mars_boost::this_thread::disable_interruption do_not_disturb;
 #endif
-            mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(state_change);
+            mars_boost::unique_lock<boost_ksim::mutex> lk(state_change);
             while(!state.can_lock_shared())
             {
                 shared_cond.wait(lk);
@@ -195,7 +195,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         bool try_lock_shared()
         {
-            mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(state_change);
+            mars_boost::unique_lock<boost_ksim::mutex> lk(state_change);
 
             if(!state.can_lock_shared())
             {
@@ -209,9 +209,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         bool timed_lock_shared(system_time const& timeout)
         {
 #if defined BOOST_THREAD_PROVIDES_INTERRUPTIONS
-            mars_boost_ksim::this_thread::disable_interruption do_not_disturb;
+            mars_boost::this_thread::disable_interruption do_not_disturb;
 #endif
-            mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(state_change);
+            mars_boost::unique_lock<boost_ksim::mutex> lk(state_change);
 
             while(!state.can_lock_shared())
             {
@@ -240,9 +240,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         bool try_lock_shared_until(const chrono::time_point<Clock, Duration>& abs_time)
         {
 #if defined BOOST_THREAD_PROVIDES_INTERRUPTIONS
-          mars_boost_ksim::this_thread::disable_interruption do_not_disturb;
+          mars_boost::this_thread::disable_interruption do_not_disturb;
 #endif
-          mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(state_change);
+          mars_boost::unique_lock<boost_ksim::mutex> lk(state_change);
 
           while(!state.can_lock_shared())
           //while(state.exclusive || state.exclusive_waiting_blocked)
@@ -258,7 +258,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #endif
         void unlock_shared()
         {
-            mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(state_change);
+            mars_boost::unique_lock<boost_ksim::mutex> lk(state_change);
             state.assert_lock_shared();
             state.unlock_shared();
             if (! state.more_shared())
@@ -284,9 +284,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         void lock()
         {
 #if defined BOOST_THREAD_PROVIDES_INTERRUPTIONS
-            mars_boost_ksim::this_thread::disable_interruption do_not_disturb;
+            mars_boost::this_thread::disable_interruption do_not_disturb;
 #endif
-            mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(state_change);
+            mars_boost::unique_lock<boost_ksim::mutex> lk(state_change);
 
             while (state.shared_count || state.exclusive)
             {
@@ -300,9 +300,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         bool timed_lock(system_time const& timeout)
         {
 #if defined BOOST_THREAD_PROVIDES_INTERRUPTIONS
-            mars_boost_ksim::this_thread::disable_interruption do_not_disturb;
+            mars_boost::this_thread::disable_interruption do_not_disturb;
 #endif
-            mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(state_change);
+            mars_boost::unique_lock<boost_ksim::mutex> lk(state_change);
 
             while(state.shared_count || state.exclusive)
             {
@@ -338,9 +338,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         bool try_lock_until(const chrono::time_point<Clock, Duration>& abs_time)
         {
 #if defined BOOST_THREAD_PROVIDES_INTERRUPTIONS
-          mars_boost_ksim::this_thread::disable_interruption do_not_disturb;
+          mars_boost::this_thread::disable_interruption do_not_disturb;
 #endif
-          mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(state_change);
+          mars_boost::unique_lock<boost_ksim::mutex> lk(state_change);
 
           while(state.shared_count || state.exclusive)
           {
@@ -363,7 +363,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         bool try_lock()
         {
-            mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(state_change);
+            mars_boost::unique_lock<boost_ksim::mutex> lk(state_change);
 
             if(state.shared_count || state.exclusive)
             {
@@ -379,7 +379,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         void unlock()
         {
-            mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(state_change);
+            mars_boost::unique_lock<boost_ksim::mutex> lk(state_change);
             state.assert_locked();
             state.exclusive=false;
             state.exclusive_waiting_blocked=false;
@@ -390,9 +390,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         void lock_upgrade()
         {
 #if defined BOOST_THREAD_PROVIDES_INTERRUPTIONS
-            mars_boost_ksim::this_thread::disable_interruption do_not_disturb;
+            mars_boost::this_thread::disable_interruption do_not_disturb;
 #endif
-            mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(state_change);
+            mars_boost::unique_lock<boost_ksim::mutex> lk(state_change);
             while(state.exclusive || state.exclusive_waiting_blocked || state.upgrade)
             {
                 shared_cond.wait(lk);
@@ -405,9 +405,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         bool timed_lock_upgrade(system_time const& timeout)
         {
 #if defined BOOST_THREAD_PROVIDES_INTERRUPTIONS
-            mars_boost_ksim::this_thread::disable_interruption do_not_disturb;
+            mars_boost::this_thread::disable_interruption do_not_disturb;
 #endif
-            mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(state_change);
+            mars_boost::unique_lock<boost_ksim::mutex> lk(state_change);
             while(state.exclusive || state.exclusive_waiting_blocked || state.upgrade)
             {
                 if(!shared_cond.timed_wait(lk,timeout))
@@ -440,9 +440,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         bool try_lock_upgrade_until(const chrono::time_point<Clock, Duration>& abs_time)
         {
 #if defined BOOST_THREAD_PROVIDES_INTERRUPTIONS
-          mars_boost_ksim::this_thread::disable_interruption do_not_disturb;
+          mars_boost::this_thread::disable_interruption do_not_disturb;
 #endif
-          mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(state_change);
+          mars_boost::unique_lock<boost_ksim::mutex> lk(state_change);
           while(state.exclusive || state.exclusive_waiting_blocked || state.upgrade)
           {
               if(cv_status::timeout == shared_cond.wait_until(lk,abs_time))
@@ -461,7 +461,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #endif
         bool try_lock_upgrade()
         {
-            mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(state_change);
+            mars_boost::unique_lock<boost_ksim::mutex> lk(state_change);
             if(state.exclusive || state.exclusive_waiting_blocked || state.upgrade)
             {
                 return false;
@@ -477,7 +477,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         void unlock_upgrade()
         {
-            mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(state_change);
+            mars_boost::unique_lock<boost_ksim::mutex> lk(state_change);
             //state.upgrade=false;
             state.unlock_upgrade();
             if(! state.more_shared() )
@@ -493,9 +493,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         void unlock_upgrade_and_lock()
         {
 #if defined BOOST_THREAD_PROVIDES_INTERRUPTIONS
-            mars_boost_ksim::this_thread::disable_interruption do_not_disturb;
+            mars_boost::this_thread::disable_interruption do_not_disturb;
 #endif
-            mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(state_change);
+            mars_boost::unique_lock<boost_ksim::mutex> lk(state_change);
             state.assert_lock_upgraded();
             state.unlock_shared();
             while (state.more_shared())
@@ -509,7 +509,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         void unlock_and_lock_upgrade()
         {
-            mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(state_change);
+            mars_boost::unique_lock<boost_ksim::mutex> lk(state_change);
             state.assert_locked();
             state.exclusive=false;
             state.upgrade=true;
@@ -521,7 +521,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         bool try_unlock_upgrade_and_lock()
         {
-          mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(state_change);
+          mars_boost::unique_lock<boost_ksim::mutex> lk(state_change);
           state.assert_lock_upgraded();
           if(    !state.exclusive
               && !state.exclusive_waiting_blocked
@@ -551,9 +551,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                           const chrono::time_point<Clock, Duration>& abs_time)
         {
 #if defined BOOST_THREAD_PROVIDES_INTERRUPTIONS
-          mars_boost_ksim::this_thread::disable_interruption do_not_disturb;
+          mars_boost::this_thread::disable_interruption do_not_disturb;
 #endif
-          mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(state_change);
+          mars_boost::unique_lock<boost_ksim::mutex> lk(state_change);
           state.assert_lock_upgraded();
           if (state.shared_count != 1)
           {
@@ -577,7 +577,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         // Shared <-> Exclusive
         void unlock_and_lock_shared()
         {
-            mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(state_change);
+            mars_boost::unique_lock<boost_ksim::mutex> lk(state_change);
             state.assert_locked();
             state.exclusive=false;
             state.lock_shared();
@@ -588,7 +588,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #ifdef BOOST_THREAD_PROVIDES_SHARED_MUTEX_UPWARDS_CONVERSIONS
         bool try_unlock_shared_and_lock()
         {
-          mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(state_change);
+          mars_boost::unique_lock<boost_ksim::mutex> lk(state_change);
           state.assert_lock_shared();
           if(    !state.exclusive
               && !state.exclusive_waiting_blocked
@@ -616,9 +616,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                           const chrono::time_point<Clock, Duration>& abs_time)
         {
 #if defined BOOST_THREAD_PROVIDES_INTERRUPTIONS
-          mars_boost_ksim::this_thread::disable_interruption do_not_disturb;
+          mars_boost::this_thread::disable_interruption do_not_disturb;
 #endif
-          mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(state_change);
+          mars_boost::unique_lock<boost_ksim::mutex> lk(state_change);
           state.assert_lock_shared();
           if (state.shared_count != 1)
           {
@@ -643,7 +643,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         // Shared <-> Upgrade
         void unlock_upgrade_and_lock_shared()
         {
-            mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(state_change);
+            mars_boost::unique_lock<boost_ksim::mutex> lk(state_change);
             state.assert_lock_upgraded();
             state.upgrade=false;
             state.exclusive_waiting_blocked=false;
@@ -653,7 +653,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #ifdef BOOST_THREAD_PROVIDES_SHARED_MUTEX_UPWARDS_CONVERSIONS
         bool try_unlock_shared_and_lock_upgrade()
         {
-          mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(state_change);
+          mars_boost::unique_lock<boost_ksim::mutex> lk(state_change);
           state.assert_lock_shared();
           if(    !state.exclusive
               && !state.exclusive_waiting_blocked
@@ -680,9 +680,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                           const chrono::time_point<Clock, Duration>& abs_time)
         {
 #if defined BOOST_THREAD_PROVIDES_INTERRUPTIONS
-          mars_boost_ksim::this_thread::disable_interruption do_not_disturb;
+          mars_boost::this_thread::disable_interruption do_not_disturb;
 #endif
-          mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(state_change);
+          mars_boost::unique_lock<boost_ksim::mutex> lk(state_change);
           state.assert_lock_shared();
           if(    state.exclusive
               || state.exclusive_waiting_blocked

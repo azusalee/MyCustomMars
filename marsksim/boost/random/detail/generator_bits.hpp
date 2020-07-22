@@ -16,7 +16,7 @@
 
 #include <boost/limits.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace random {
 namespace detail {
 
@@ -31,6 +31,6 @@ struct generator_bits {
 
 } // namespace detail
 } // namespace random
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_RANDOM_DETAIL_GENERATOR_BITS_HPP

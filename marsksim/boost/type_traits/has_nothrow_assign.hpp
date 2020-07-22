@@ -34,14 +34,14 @@
 #endif
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 #if !defined(BOOST_HAS_NOTHROW_ASSIGN) && !defined(BOOST_NO_CXX11_NOEXCEPT) && !defined(BOOST_NO_CXX11_RVALUE_REFERENCES)
 
    namespace detail
    {
       template <class T, bool b1, bool b2> struct has_nothrow_assign_imp{ static const bool value = false; };
-      template <class T>          struct has_nothrow_assign_imp<T, false, true>{ static const bool value = noexcept(mars_boost_ksim::declval<typename add_reference<T>::type>() = mars_boost_ksim::declval<typename add_reference<T const>::type>()); };
+      template <class T>          struct has_nothrow_assign_imp<T, false, true>{ static const bool value = noexcept(mars_boost::declval<typename add_reference<T>::type>() = mars_boost::declval<typename add_reference<T const>::type>()); };
       template <class T, std::size_t N> struct has_nothrow_assign_imp<T[N], false, true>{ static const bool value = has_nothrow_assign_imp<T, false, true>::value; };
       template <class T>          struct has_nothrow_assign_imp<T[], false, true>{ static const bool value = has_nothrow_assign_imp<T, false, true>::value; };
    }
@@ -58,7 +58,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       is_assignable<typename add_reference<T>::type, typename add_reference<const T>::type>::value
       >::value
 #else
-      ::mars_boost_ksim::has_trivial_assign<T>::value
+      ::mars_boost::has_trivial_assign<T>::value
 #endif
 #else
       BOOST_HAS_NOTHROW_ASSIGN(T)
@@ -78,6 +78,6 @@ template <> struct has_nothrow_assign<void const volatile> : public false_type{}
 template <> struct has_nothrow_assign<void volatile> : public false_type{};
 #endif
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_HAS_NOTHROW_ASSIGN_HPP_INCLUDED

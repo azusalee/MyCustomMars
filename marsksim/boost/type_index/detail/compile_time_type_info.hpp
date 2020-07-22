@@ -10,7 +10,7 @@
 #define BOOST_TYPE_INDEX_DETAIL_COMPILE_TIME_TYPE_INFO_HPP
 
 /// \file compile_time_type_info.hpp
-/// \brief Contains helper macros and implementation details of mars_boost_ksim::typeindex::ctti_type_index.
+/// \brief Contains helper macros and implementation details of mars_boost::typeindex::ctti_type_index.
 /// Not intended for inclusion from user's code. 
 
 #include <boost/config.hpp>
@@ -24,12 +24,12 @@
 
 /// @cond
 #define BOOST_TYPE_INDEX_REGISTER_CTTI_PARSING_PARAMS(begin_skip, end_skip, runtime_skip, runtime_skip_until)   \
-    namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace typeindex { namespace detail {                                                  \
+    namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace typeindex { namespace detail {                                                  \
         BOOST_STATIC_CONSTEXPR std::size_t ctti_skip_size_at_begin  = begin_skip;                               \
         BOOST_STATIC_CONSTEXPR std::size_t ctti_skip_size_at_end    = end_skip;                                 \
         BOOST_STATIC_CONSTEXPR bool ctti_skip_more_at_runtime       = runtime_skip;                             \
         BOOST_STATIC_CONSTEXPR char ctti_skip_until_runtime[]       = runtime_skip_until;                       \
-    }}} /* namespace mars_boost_ksim::typeindex::detail */                                                                \
+    }}} /* namespace mars_boost::typeindex::detail */                                                                \
     /**/  
 /// @endcond
 
@@ -41,25 +41,25 @@
     BOOST_PP_EXPAND( BOOST_TYPE_INDEX_REGISTER_CTTI_PARSING_PARAMS BOOST_TYPE_INDEX_CTTI_USER_DEFINED_PARSING )
 
 #elif defined(_MSC_VER)
-    // sizeof("const char *__cdecl mars_boost_ksim::detail::ctti<") - 1, sizeof(">::n(void)") - 1
+    // sizeof("const char *__cdecl mars_boost::detail::ctti<") - 1, sizeof(">::n(void)") - 1
     BOOST_TYPE_INDEX_REGISTER_CTTI_PARSING_PARAMS(40, 10, false, "")
 #elif defined(__clang__) && defined(__APPLE__)
     // Someone made __clang_major__ equal to LLVM version rather than compiler version
     // on APPLE platform.
     //
     // Using less efficient solution because there is no good way to detect real version of Clang.
-    // sizeof("static const char *mars_boost_ksim::detail::ctti<") - 1, sizeof("]") - 1, true, "???????????>::n() [T = int"
+    // sizeof("static const char *mars_boost::detail::ctti<") - 1, sizeof("]") - 1, true, "???????????>::n() [T = int"
     BOOST_TYPE_INDEX_REGISTER_CTTI_PARSING_PARAMS(39, 1, true, "T = ")
 #elif defined(__clang__) && (__clang_major__ < 3 || (__clang_major__ == 3 && __clang_minor__ == 0))
-    // sizeof("static const char *mars_boost_ksim::detail::ctti<") - 1, sizeof(">::n()") - 1
+    // sizeof("static const char *mars_boost::detail::ctti<") - 1, sizeof(">::n()") - 1
     // note: checked on 3.0
     BOOST_TYPE_INDEX_REGISTER_CTTI_PARSING_PARAMS(39, 6, false, "")
 #elif defined(__clang__) && __clang_major__ == 3 && __clang_minor__ > 0
-    // sizeof("static const char *mars_boost_ksim::detail::ctti<") - 1, sizeof("]") - 1, true, "int>::n() [T = int"
+    // sizeof("static const char *mars_boost::detail::ctti<") - 1, sizeof("]") - 1, true, "int>::n() [T = int"
     // note: checked on 3.1, 3.4
     BOOST_TYPE_INDEX_REGISTER_CTTI_PARSING_PARAMS(39, 1, true, "T = ")
 #elif defined(__GNUC__)
-    // sizeof("static const char* mars_boost_ksim::detail::ctti<T>::n() [with T = ") - 1, sizeof("]") - 1
+    // sizeof("static const char* mars_boost::detail::ctti<T>::n() [with T = ") - 1, sizeof("]") - 1
     BOOST_TYPE_INDEX_REGISTER_CTTI_PARSING_PARAMS(57, 1, false, "")
 #else
     // Deafult code for other platforms... Just skip nothing!
@@ -68,7 +68,7 @@
 
 #undef BOOST_TYPE_INDEX_REGISTER_CTTI_PARSING_PARAMS
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace typeindex { namespace detail { 
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace typeindex { namespace detail { 
     template <bool Condition>
     inline void assert_compile_time_legths() BOOST_NOEXCEPT {
         BOOST_STATIC_ASSERT_MSG(
@@ -80,12 +80,12 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     }
     
     template <std::size_t ArrayLength>
-    inline const char* skip_begining_runtime(const char* begin, mars_boost_ksim::mpl::false_) BOOST_NOEXCEPT {
+    inline const char* skip_begining_runtime(const char* begin, mars_boost::mpl::false_) BOOST_NOEXCEPT {
         return begin;
     }
 
     template <std::size_t ArrayLength>
-    inline const char* skip_begining_runtime(const char* begin, mars_boost_ksim::mpl::true_) BOOST_NOEXCEPT {
+    inline const char* skip_begining_runtime(const char* begin, mars_boost::mpl::true_) BOOST_NOEXCEPT {
         const char* const it = std::search(
             begin, begin + ArrayLength,
             ctti_skip_until_runtime, ctti_skip_until_runtime + sizeof(ctti_skip_until_runtime) - 1
@@ -98,12 +98,12 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         assert_compile_time_legths<(ArrayLength > ctti_skip_size_at_begin + ctti_skip_size_at_end)>();
         return skip_begining_runtime<ArrayLength - ctti_skip_size_at_begin>(
             begin + ctti_skip_size_at_begin, 
-            mars_boost_ksim::mpl::bool_<ctti_skip_more_at_runtime>()
+            mars_boost::mpl::bool_<ctti_skip_more_at_runtime>()
         );
     }
-}}} // namespace mars_boost_ksim::typeindex::detail
+}}} // namespace mars_boost::typeindex::detail
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace detail {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace detail {
 
 /// Noncopyable type_info that does not require RTTI.
 /// CTTI == Compile Time Type Info.
@@ -114,9 +114,9 @@ struct ctti {
     /// Returns raw name. Must be as short, as possible, to avoid code bloat
     static const char* n() BOOST_NOEXCEPT {
     #if defined(BOOST_TYPE_INDEX_FUNCTION_SIGNATURE)
-        return mars_boost_ksim::typeindex::detail::skip_begining< sizeof(BOOST_TYPE_INDEX_FUNCTION_SIGNATURE >(BOOST_TYPE_INDEX_FUNCTION_SIGNATURE);
+        return mars_boost::typeindex::detail::skip_begining< sizeof(BOOST_TYPE_INDEX_FUNCTION_SIGNATURE >(BOOST_TYPE_INDEX_FUNCTION_SIGNATURE);
     #elif defined(__FUNCSIG__)
-        return mars_boost_ksim::typeindex::detail::skip_begining< sizeof(__FUNCSIG__) >(__FUNCSIG__);
+        return mars_boost::typeindex::detail::skip_begining< sizeof(__FUNCSIG__) >(__FUNCSIG__);
     #elif defined(__PRETTY_FUNCTION__) \
                 || defined(__GNUC__) \
                 || (defined(__SUNPRO_CC) && (__SUNPRO_CC >= 0x5130)) \
@@ -125,7 +125,7 @@ struct ctti {
                 || defined(__ghs__) \
                 || defined(__DMC__)
 
-        return mars_boost_ksim::typeindex::detail::skip_begining< sizeof(__PRETTY_FUNCTION__) >(__PRETTY_FUNCTION__);
+        return mars_boost::typeindex::detail::skip_begining< sizeof(__PRETTY_FUNCTION__) >(__PRETTY_FUNCTION__);
     #else
         BOOST_STATIC_ASSERT_MSG(
             sizeof(T) && false,
@@ -138,7 +138,7 @@ struct ctti {
     }
 };
 
-}} // namespace mars_boost_ksim::detail
+}} // namespace mars_boost::detail
 
 #endif // BOOST_TYPE_INDEX_DETAIL_COMPILE_TIME_TYPE_INFO_HPP
 

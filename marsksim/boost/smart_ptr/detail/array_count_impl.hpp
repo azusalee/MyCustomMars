@@ -12,7 +12,7 @@
 #include <boost/smart_ptr/detail/array_allocator.hpp>
 #include <boost/smart_ptr/detail/sp_counted_impl.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim  {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost  {
     namespace detail {
         template<class P, class A>
         class sp_counted_impl_pda<P, ms_in_allocator_tag, A>

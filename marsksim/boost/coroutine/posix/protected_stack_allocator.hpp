@@ -33,7 +33,7 @@ extern "C" {
 #  include BOOST_ABI_PREFIX
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace coroutines {
 
 template< typename traitsT >
@@ -62,7 +62,7 @@ struct basic_protected_stack_allocator
 #else
         void * limit = ::mmap( 0, size_, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
 #endif
-        if ( MAP_FAILED == limit) mars_boost_ksim::throw_exception(std::bad_alloc());
+        if ( MAP_FAILED == limit) mars_boost::throw_exception(std::bad_alloc());
 
         // conforming to POSIX.1-2001
 #if defined(BOOST_DISABLE_ASSERTS)

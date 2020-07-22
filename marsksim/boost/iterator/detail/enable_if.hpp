@@ -18,7 +18,7 @@
 // 23/02/03 thw
 //
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
   namespace iterators
@@ -76,7 +76,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
   } // namespace iterators
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #include <boost/iterator/detail/config_undef.hpp>
 

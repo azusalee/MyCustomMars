@@ -13,7 +13,7 @@
 
 #include <boost/smart_ptr/bad_weak_ptr.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace signals2
   {
@@ -22,10 +22,10 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     public:
       virtual char const * what() const throw()
       {
-        return "mars_boost_ksim::signals2::expired_slot";
+        return "mars_boost::signals2::expired_slot";
       }
     };
   }
-} // end namespace mars_boost_ksim
+} // end namespace mars_boost
 
 #endif // BOOST_SIGNALS2_EXPIRED_SLOT_HPP

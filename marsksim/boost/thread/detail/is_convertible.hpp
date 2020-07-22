@@ -15,12 +15,12 @@
 #include <boost/type_traits/is_convertible.hpp>
 #include <boost/thread/detail/move.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace thread_detail
   {
     template <typename T1, typename T2>
-    struct is_convertible : mars_boost_ksim::is_convertible<T1,T2> {};
+    struct is_convertible : mars_boost::is_convertible<T1,T2> {};
 
 #if defined  BOOST_NO_CXX11_RVALUE_REFERENCES
 
@@ -37,13 +37,13 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #elif defined __GNUC__ && (__GNUC__ < 4 || ( __GNUC__ == 4 && __GNUC_MINOR__ <= 4 ))
 
     template <typename T1, typename T2>
-    struct is_convertible<T1&, T2&> : mars_boost_ksim::is_convertible<T1, T2> {};
+    struct is_convertible<T1&, T2&> : mars_boost::is_convertible<T1, T2> {};
 #endif
 
 #endif
   }
 
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 
 #endif //  BOOST_THREAD_DETAIL_MEMORY_HPP

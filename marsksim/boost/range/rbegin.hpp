@@ -18,7 +18,7 @@
 #include <boost/range/end.hpp>
 #include <boost/range/reverse_iterator.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 #ifdef BOOST_NO_FUNCTION_TEMPLATE_ORDERING
@@ -27,7 +27,7 @@ template< class C >
 inline BOOST_DEDUCED_TYPENAME range_reverse_iterator<C>::type
 rbegin( C& c )
 {
-    return BOOST_DEDUCED_TYPENAME range_reverse_iterator<C>::type( mars_boost_ksim::end( c ) );
+    return BOOST_DEDUCED_TYPENAME range_reverse_iterator<C>::type( mars_boost::end( c ) );
 }
 
 #else
@@ -38,7 +38,7 @@ rbegin( C& c )
 {
     typedef BOOST_DEDUCED_TYPENAME range_reverse_iterator<C>::type
         iter_type;
-    return iter_type( mars_boost_ksim::end( c ) );
+    return iter_type( mars_boost::end( c ) );
 }
 
 template< class C >
@@ -47,7 +47,7 @@ rbegin( const C& c )
 {
     typedef BOOST_DEDUCED_TYPENAME range_reverse_iterator<const C>::type
         iter_type;
-    return iter_type( mars_boost_ksim::end( c ) );
+    return iter_type( mars_boost::end( c ) );
 }
 
 #endif // BOOST_NO_FUNCTION_TEMPLATE_ORDERING
@@ -56,7 +56,7 @@ template< class T >
 inline BOOST_DEDUCED_TYPENAME range_reverse_iterator<const T>::type
 const_rbegin( const T& r )
 {
-    return mars_boost_ksim::rbegin( r );
+    return mars_boost::rbegin( r );
 }
 
 } // namespace 'boost'

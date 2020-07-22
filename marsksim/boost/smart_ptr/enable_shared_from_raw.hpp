@@ -18,14 +18,14 @@
 #include <boost/assert.hpp>
 #include <boost/detail/workaround.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
-template<typename T> mars_boost_ksim::shared_ptr<T> shared_from_raw(T *);
-template<typename T> mars_boost_ksim::weak_ptr<T> weak_from_raw(T *);
+template<typename T> mars_boost::shared_ptr<T> shared_from_raw(T *);
+template<typename T> mars_boost::weak_ptr<T> weak_from_raw(T *);
 
 namespace detail
 {
-template< class X, class Y > inline void sp_enable_shared_from_this( mars_boost_ksim::shared_ptr<X> * ppx, Y const * py, mars_boost_ksim::enable_shared_from_raw const * pe );
+template< class X, class Y > inline void sp_enable_shared_from_this( mars_boost::shared_ptr<X> * ppx, Y const * py, mars_boost::enable_shared_from_raw const * pe );
 
 } // namespace detail
 
@@ -76,9 +76,9 @@ public:
 #else
 private:
     template<class Y> friend class shared_ptr;
-    template<typename T> friend mars_boost_ksim::shared_ptr<T> shared_from_raw(T *);
-    template<typename T> friend mars_boost_ksim::weak_ptr<T> weak_from_raw(T *);
-    template< class X, class Y > friend inline void detail::sp_enable_shared_from_this( mars_boost_ksim::shared_ptr<X> * ppx, Y const * py, mars_boost_ksim::enable_shared_from_raw const * pe );
+    template<typename T> friend mars_boost::shared_ptr<T> shared_from_raw(T *);
+    template<typename T> friend mars_boost::weak_ptr<T> weak_from_raw(T *);
+    template< class X, class Y > friend inline void detail::sp_enable_shared_from_this( mars_boost::shared_ptr<X> * ppx, Y const * py, mars_boost::enable_shared_from_raw const * pe );
 #endif
 
     shared_ptr<void const volatile> shared_from_this() const
@@ -116,7 +116,7 @@ private:
         {
             BOOST_ASSERT( ppx->unique() ); // no weak_ptrs should exist either, but there's no way to check that
 
-            detail::esft2_deleter_wrapper * pd = mars_boost_ksim::get_deleter<detail::esft2_deleter_wrapper>( shared_this_ );
+            detail::esft2_deleter_wrapper * pd = mars_boost::get_deleter<detail::esft2_deleter_wrapper>( shared_this_ );
             BOOST_ASSERT( pd != 0 );
 
             pd->set_deleter( *ppx );
@@ -137,21 +137,21 @@ template<typename T>
 boost_ksim::shared_ptr<T> shared_from_raw(T *p)
 {
     BOOST_ASSERT(p != 0);
-    return mars_boost_ksim::shared_ptr<T>(p->enable_shared_from_raw::shared_from_this(), p);
+    return mars_boost::shared_ptr<T>(p->enable_shared_from_raw::shared_from_this(), p);
 }
 
 template<typename T>
 boost_ksim::weak_ptr<T> weak_from_raw(T *p)
 {
     BOOST_ASSERT(p != 0);
-    mars_boost_ksim::weak_ptr<T> result;
+    mars_boost::weak_ptr<T> result;
     result._internal_aliasing_assign(p->enable_shared_from_raw::weak_from_this(), p);
     return result;
 }
 
 namespace detail
 {
-    template< class X, class Y > inline void sp_enable_shared_from_this( mars_boost_ksim::shared_ptr<X> * ppx, Y const * py, mars_boost_ksim::enable_shared_from_raw const * pe )
+    template< class X, class Y > inline void sp_enable_shared_from_this( mars_boost::shared_ptr<X> * ppx, Y const * py, mars_boost::enable_shared_from_raw const * pe )
     {
         if( pe != 0 )
         {
@@ -160,6 +160,6 @@ namespace detail
     }
 } // namepsace detail
 
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif  // #ifndef BOOST_ENABLE_SHARED_FROM_RAW_HPP_INCLUDED

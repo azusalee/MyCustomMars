@@ -16,7 +16,7 @@
 #include <boost/concept_check.hpp>
 #include <boost/static_assert.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
   /**
@@ -39,7 +39,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       Lk l2(mtx, defer_lock);
       Lk l3(mtx, adopt_lock);
       Lk l4(( Lk()));
-      Lk l5(( mars_boost_ksim::move(l2)));
+      Lk l5(( mars_boost::move(l2)));
       cvt_mutex_ptr(l1.mutex());
       if (l1.owns_lock()) return;
       if (l1) return;
@@ -99,8 +99,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
   private:
     TimedLock operator=(TimedLock const&);
     mutex_type& mtx;
-    mars_boost_ksim::chrono::system_clock::time_point t;
-    mars_boost_ksim::chrono::system_clock::duration d;
+    mars_boost::chrono::system_clock::time_point t;
+    mars_boost::chrono::system_clock::duration d;
   };
 
   template <typename Lk>

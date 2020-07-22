@@ -17,7 +17,7 @@
 #include <boost/exception/detail/type_info.hpp>
 #include <boost/shared_ptr.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace
 mars_boost
     {
     namespace
@@ -99,14 +99,14 @@ mars_boost
     template <class ErrorInfo>
     inline
     typename ErrorInfo::value_type const *
-    get_error_info( mars_boost_ksim::exception const & x )
+    get_error_info( mars_boost::exception const & x )
         {
         return exception_detail::get_info<ErrorInfo>::get(x);
         }
     template <class ErrorInfo>
     inline
     typename ErrorInfo::value_type *
-    get_error_info( mars_boost_ksim::exception & x )
+    get_error_info( mars_boost::exception & x )
         {
         return exception_detail::get_info<ErrorInfo>::get(x);
         }

@@ -6,7 +6,7 @@
 #ifndef BOOST_PARAMETER_VOID_050329_HPP
 #define BOOST_PARAMETER_VOID_050329_HPP
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace parameter { 
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace parameter { 
 
 // A placemarker for "no argument passed."
 // MAINTAINER NOTE: Do not make this into a metafunction
@@ -23,7 +23,7 @@ namespace aux
 
 } // namespace aux
 
-}} // namespace mars_boost_ksim::parameter
+}} // namespace mars_boost::parameter
 
 #endif // BOOST_PARAMETER_VOID_050329_HPP
 

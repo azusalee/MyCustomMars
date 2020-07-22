@@ -33,7 +33,7 @@
 #include "marsksim/comm/socket/socketselect.h"
 #endif
 
-class NetCheckTrafficMonitor;
+class NetCheckTrafficMonitorksim;
 
 #define DISALLOW_COPY_AND_ASSIGN(cls)    \
     private:\
@@ -54,7 +54,7 @@ struct PingStatus {
 
 class PingQuery {
   public:
-    PingQuery(NetCheckTrafficMonitor* trafficMonitor = NULL): pingresult_("")
+    PingQuery(NetCheckTrafficMonitorksim* trafficMonitor = NULL): pingresult_("")
 #ifdef __APPLE__
         , nsent_(0),
         sockfd_(-1),
@@ -63,7 +63,7 @@ class PingQuery {
         readcount_(0),
         interval_(0),
         timeout_(0),
-        alarm_(boost_ksim::bind(&PingQuery::__onAlarm, this), false),
+        alarm_(boost_ksim::bind(&PingQuery::__onAlarmksim, this), false),
         readwrite_breaker_()
 #endif
         , traffic_monitor_(trafficMonitor)
@@ -93,7 +93,7 @@ class PingQuery {
     void proc_v4(char* ptr, ssize_t len, struct msghdr* msg, struct timeval* tvrecv);
     int  __prepareSendAddr(const char* dest);
     int  __runReadWrite(int& errCode);
-    void __onAlarm();
+    void __onAlarmksim();
     void __preparePacket(char* sendbuffer, int& len);
     int  __send();
     int  __recv();
@@ -117,10 +117,10 @@ class PingQuery {
     int                     timeout_;
     struct sockaddr          sendaddr_;
     struct sockaddr            recvaddr_;
-    Alarm                   alarm_;
+    Alarmksim                   alarm_;
     SocketBreaker     readwrite_breaker_;
 #endif
-    NetCheckTrafficMonitor* traffic_monitor_;
+    NetCheckTrafficMonitorksim* traffic_monitor_;
 };
 
 }}

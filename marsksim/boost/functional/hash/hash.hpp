@@ -58,7 +58,7 @@
 #   define BOOST_FUNCTIONAL_HASH_ROTL32(x, r) (x << r) | (x >> (32 - r))
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace hash_detail
     {
@@ -70,29 +70,29 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         template <typename T> struct float_numbers {};
 
         template <> struct basic_numbers<bool> :
-            mars_boost_ksim::hash_detail::enable_hash_value {};
+            mars_boost::hash_detail::enable_hash_value {};
         template <> struct basic_numbers<char> :
-            mars_boost_ksim::hash_detail::enable_hash_value {};
+            mars_boost::hash_detail::enable_hash_value {};
         template <> struct basic_numbers<unsigned char> :
-            mars_boost_ksim::hash_detail::enable_hash_value {};
+            mars_boost::hash_detail::enable_hash_value {};
         template <> struct basic_numbers<signed char> :
-            mars_boost_ksim::hash_detail::enable_hash_value {};
+            mars_boost::hash_detail::enable_hash_value {};
         template <> struct basic_numbers<short> :
-            mars_boost_ksim::hash_detail::enable_hash_value {};
+            mars_boost::hash_detail::enable_hash_value {};
         template <> struct basic_numbers<unsigned short> :
-            mars_boost_ksim::hash_detail::enable_hash_value {};
+            mars_boost::hash_detail::enable_hash_value {};
         template <> struct basic_numbers<int> :
-            mars_boost_ksim::hash_detail::enable_hash_value {};
+            mars_boost::hash_detail::enable_hash_value {};
         template <> struct basic_numbers<unsigned int> :
-            mars_boost_ksim::hash_detail::enable_hash_value {};
+            mars_boost::hash_detail::enable_hash_value {};
         template <> struct basic_numbers<long> :
-            mars_boost_ksim::hash_detail::enable_hash_value {};
+            mars_boost::hash_detail::enable_hash_value {};
         template <> struct basic_numbers<unsigned long> :
-            mars_boost_ksim::hash_detail::enable_hash_value {};
+            mars_boost::hash_detail::enable_hash_value {};
 
 #if !defined(BOOST_NO_INTRINSIC_WCHAR_T)
         template <> struct basic_numbers<wchar_t> :
-            mars_boost_ksim::hash_detail::enable_hash_value {};
+            mars_boost::hash_detail::enable_hash_value {};
 #endif
 
         // long_numbers is defined like this to allow for separate
@@ -104,36 +104,36 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         template <typename T> struct ulong_numbers : ulong_numbers2<T> {};
 
 #if !defined(BOOST_NO_LONG_LONG)
-        template <> struct long_numbers<mars_boost_ksim::long_long_type> :
-            mars_boost_ksim::hash_detail::enable_hash_value {};
-        template <> struct ulong_numbers<mars_boost_ksim::ulong_long_type> :
-            mars_boost_ksim::hash_detail::enable_hash_value {};
+        template <> struct long_numbers<mars_boost::long_long_type> :
+            mars_boost::hash_detail::enable_hash_value {};
+        template <> struct ulong_numbers<mars_boost::ulong_long_type> :
+            mars_boost::hash_detail::enable_hash_value {};
 #endif
 
 #if defined(BOOST_HAS_INT128)
-        template <> struct long_numbers2<mars_boost_ksim::int128_type> :
-            mars_boost_ksim::hash_detail::enable_hash_value {};
-        template <> struct ulong_numbers2<mars_boost_ksim::uint128_type> :
-            mars_boost_ksim::hash_detail::enable_hash_value {};
+        template <> struct long_numbers2<mars_boost::int128_type> :
+            mars_boost::hash_detail::enable_hash_value {};
+        template <> struct ulong_numbers2<mars_boost::uint128_type> :
+            mars_boost::hash_detail::enable_hash_value {};
 #endif
 
         template <> struct float_numbers<float> :
-            mars_boost_ksim::hash_detail::enable_hash_value {};
+            mars_boost::hash_detail::enable_hash_value {};
         template <> struct float_numbers<double> :
-            mars_boost_ksim::hash_detail::enable_hash_value {};
+            mars_boost::hash_detail::enable_hash_value {};
         template <> struct float_numbers<long double> :
-            mars_boost_ksim::hash_detail::enable_hash_value {};
+            mars_boost::hash_detail::enable_hash_value {};
     }
 
     template <typename T>
-    typename mars_boost_ksim::hash_detail::basic_numbers<T>::type hash_value(T);
+    typename mars_boost::hash_detail::basic_numbers<T>::type hash_value(T);
     template <typename T>
-    typename mars_boost_ksim::hash_detail::long_numbers<T>::type hash_value(T);
+    typename mars_boost::hash_detail::long_numbers<T>::type hash_value(T);
     template <typename T>
-    typename mars_boost_ksim::hash_detail::ulong_numbers<T>::type hash_value(T);
+    typename mars_boost::hash_detail::ulong_numbers<T>::type hash_value(T);
 
     template <typename T>
-    typename mars_boost_ksim::enable_if<mars_boost_ksim::is_enum<T>, std::size_t>::type
+    typename mars_boost::enable_if<mars_boost::is_enum<T>, std::size_t>::type
         hash_value(T);
 
 #if !BOOST_WORKAROUND(__DMC__, <= 0x848)
@@ -155,7 +155,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         std::basic_string<Ch, std::BOOST_HASH_CHAR_TRAITS<Ch>, A> const&);
 
     template <typename T>
-    typename mars_boost_ksim::hash_detail::float_numbers<T>::type hash_value(T);
+    typename mars_boost::hash_detail::float_numbers<T>::type hash_value(T);
 
 #if !defined(BOOST_NO_CXX11_HDR_TYPEINDEX)
     std::size_t hash_value(std::type_index);
@@ -213,8 +213,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         }
 
         template <typename SizeT>
-        inline void hash_combine_impl(mars_boost_ksim::uint32_t& h1,
-                mars_boost_ksim::uint32_t k1)
+        inline void hash_combine_impl(mars_boost::uint32_t& h1,
+                mars_boost::uint32_t k1)
         {
             const uint32_t c1 = 0xcc9e2d51;
             const uint32_t c2 = 0x1b873593;
@@ -235,8 +235,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         !(defined(__GNUC__) && ULONG_MAX == 0xffffffff)
 
         template <typename SizeT>
-        inline void hash_combine_impl(mars_boost_ksim::uint64_t& h,
-                mars_boost_ksim::uint64_t k)
+        inline void hash_combine_impl(mars_boost::uint64_t& h,
+                mars_boost::uint64_t k)
         {
             const uint64_t m = UINT64_C(0xc6a4a7935bd1e995);
             const int r = 47;
@@ -253,25 +253,25 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     }
 
     template <typename T>
-    typename mars_boost_ksim::hash_detail::basic_numbers<T>::type hash_value(T v)
+    typename mars_boost::hash_detail::basic_numbers<T>::type hash_value(T v)
     {
         return static_cast<std::size_t>(v);
     }
 
     template <typename T>
-    typename mars_boost_ksim::hash_detail::long_numbers<T>::type hash_value(T v)
+    typename mars_boost::hash_detail::long_numbers<T>::type hash_value(T v)
     {
         return hash_detail::hash_value_signed(v);
     }
 
     template <typename T>
-    typename mars_boost_ksim::hash_detail::ulong_numbers<T>::type hash_value(T v)
+    typename mars_boost::hash_detail::ulong_numbers<T>::type hash_value(T v)
     {
         return hash_detail::hash_value_unsigned(v);
     }
 
     template <typename T>
-    typename mars_boost_ksim::enable_if<mars_boost_ksim::is_enum<T>, std::size_t>::type
+    typename mars_boost::enable_if<mars_boost::is_enum<T>, std::size_t>::type
         hash_value(T v)
     {
         return static_cast<std::size_t>(v);
@@ -309,8 +309,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template <class T>
     inline void hash_combine(std::size_t& seed, T const& v)
     {
-        mars_boost_ksim::hash<T> hasher;
-        return mars_boost_ksim::hash_detail::hash_combine_impl(seed, hasher(v));
+        mars_boost::hash<T> hasher;
+        return mars_boost::hash_detail::hash_combine_impl(seed, hasher(v));
     }
 
 #if defined(BOOST_MSVC)
@@ -347,7 +347,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         for(; first != last; ++first)
         {
-            mars_boost_ksim::hash<T> hasher;
+            mars_boost::hash<T> hasher;
             seed ^= hasher(*first) + 0x9e3779b9 + (seed<<6) + (seed>>2);
         }
 
@@ -359,7 +359,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     {
         for(; first != last; ++first)
         {
-            mars_boost_ksim::hash<T> hasher;
+            mars_boost::hash<T> hasher;
             seed ^= hasher(*first) + 0x9e3779b9 + (seed<<6) + (seed>>2);
         }
     }
@@ -387,9 +387,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     }
 
     template <typename T>
-    typename mars_boost_ksim::hash_detail::float_numbers<T>::type hash_value(T v)
+    typename mars_boost::hash_detail::float_numbers<T>::type hash_value(T v)
     {
-        return mars_boost_ksim::hash_detail::float_hash_value(v);
+        return mars_boost::hash_detail::float_hash_value(v);
     }
 
 #if !defined(BOOST_NO_CXX11_HDR_TYPEINDEX)
@@ -400,11 +400,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #endif
 
     //
-    // mars_boost_ksim::hash
+    // mars_boost::hash
     //
     
     // Define the specializations required by the standard. The general purpose
-    // mars_boost_ksim::hash is defined later in extensions.hpp if
+    // mars_boost::hash is defined later in extensions.hpp if
     // BOOST_HASH_NO_EXTENSIONS is not defined.
     
     // BOOST_HASH_SPECIALIZE - define a specialization for a type which is
@@ -421,7 +421,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     { \
         std::size_t operator()(type v) const \
         { \
-            return mars_boost_ksim::hash_value(v); \
+            return mars_boost::hash_value(v); \
         } \
     };
 
@@ -431,7 +431,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     { \
         std::size_t operator()(type const& v) const \
         { \
-            return mars_boost_ksim::hash_value(v); \
+            return mars_boost::hash_value(v); \
         } \
     };
 
@@ -459,13 +459,13 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #endif
 
 #if !defined(BOOST_NO_LONG_LONG)
-    BOOST_HASH_SPECIALIZE(mars_boost_ksim::long_long_type)
-    BOOST_HASH_SPECIALIZE(mars_boost_ksim::ulong_long_type)
+    BOOST_HASH_SPECIALIZE(mars_boost::long_long_type)
+    BOOST_HASH_SPECIALIZE(mars_boost::ulong_long_type)
 #endif
 
 #if defined(BOOST_HAS_INT128)
-    BOOST_HASH_SPECIALIZE(mars_boost_ksim::int128_type)
-    BOOST_HASH_SPECIALIZE(mars_boost_ksim::uint128_type)
+    BOOST_HASH_SPECIALIZE(mars_boost::int128_type)
+    BOOST_HASH_SPECIALIZE(mars_boost::uint128_type)
 #endif
 
 #if !defined(BOOST_NO_CXX11_HDR_TYPEINDEX)
@@ -475,7 +475,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #undef BOOST_HASH_SPECIALIZE
 #undef BOOST_HASH_SPECIALIZE_REF
 
-// Specializing mars_boost_ksim::hash for pointers.
+// Specializing mars_boost::hash for pointers.
 
 #if !defined(BOOST_NO_TEMPLATE_PARTIAL_SPECIALIZATION)
 
@@ -486,7 +486,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         std::size_t operator()(T* v) const
         {
 #if !BOOST_WORKAROUND(__SUNPRO_CC, <= 0x590)
-            return mars_boost_ksim::hash_value(v);
+            return mars_boost::hash_value(v);
 #else
             std::size_t x = static_cast<std::size_t>(
                 reinterpret_cast<std::ptrdiff_t>(v));
@@ -499,7 +499,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #else
 
     // For compilers without partial specialization, we define a
-    // mars_boost_ksim::hash for all remaining types. But hash_impl is only defined
+    // mars_boost::hash for all remaining types. But hash_impl is only defined
     // for pointers in 'extensions.hpp' - so when BOOST_HASH_NO_EXTENSIONS
     // is defined there will still be a compile error for types not supported
     // in the standard.
@@ -519,7 +519,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 std::size_t operator()(T val) const
                 {
 #if !BOOST_WORKAROUND(__SUNPRO_CC, <= 590)
-                    return mars_boost_ksim::hash_value(val);
+                    return mars_boost::hash_value(val);
 #else
                     std::size_t x = static_cast<std::size_t>(
                         reinterpret_cast<std::ptrdiff_t>(val));
@@ -532,7 +532,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     }
 
     template <class T> struct hash
-        : public mars_boost_ksim::hash_detail::hash_impl<mars_boost_ksim::is_pointer<T>::value>
+        : public mars_boost::hash_detail::hash_impl<mars_boost::is_pointer<T>::value>
             ::BOOST_NESTED_TEMPLATE inner<T>
     {
     };

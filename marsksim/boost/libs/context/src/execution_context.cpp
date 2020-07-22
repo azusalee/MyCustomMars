@@ -14,7 +14,7 @@
 
 #if ! defined(BOOST_CONTEXT_NO_CXX11)
 # if (defined(BOOST_EXECUTION_CONTEXT) && (BOOST_EXECUTION_CONTEXT == 1))
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace context {
 namespace detail {
 

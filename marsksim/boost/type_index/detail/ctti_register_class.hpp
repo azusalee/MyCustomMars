@@ -10,7 +10,7 @@
 #define BOOST_TYPE_INDEX_CTTI_REGISTER_CLASS_HPP
 
 /// \file ctti_register_class.hpp
-/// \brief Contains BOOST_TYPE_INDEX_REGISTER_CLASS macro implementation that uses mars_boost_ksim::typeindex::ctti_type_index.
+/// \brief Contains BOOST_TYPE_INDEX_REGISTER_CLASS macro implementation that uses mars_boost::typeindex::ctti_type_index.
 /// Not intended for inclusion from user's code.
 
 #include <boost/type_index/ctti_type_index.hpp>
@@ -19,19 +19,19 @@
 # pragma once
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace typeindex { namespace detail {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace typeindex { namespace detail {
 
 template <class T>
 inline const ctti_data& ctti_construct_typeid_ref(const T*) BOOST_NOEXCEPT {
     return ctti_construct<T>();
 }
 
-}}} // namespace mars_boost_ksim::typeindex::detail
+}}} // namespace mars_boost::typeindex::detail
 
 /// @cond
 #define BOOST_TYPE_INDEX_REGISTER_CLASS                                                                             \
-    virtual const mars_boost_ksim::typeindex::detail::ctti_data& boost_type_index_type_id_runtime_() const BOOST_NOEXCEPT {   \
-        return mars_boost_ksim::typeindex::detail::ctti_construct_typeid_ref(this);                                           \
+    virtual const mars_boost::typeindex::detail::ctti_data& boost_type_index_type_id_runtime_() const BOOST_NOEXCEPT {   \
+        return mars_boost::typeindex::detail::ctti_construct_typeid_ref(this);                                           \
     }                                                                                                               \
 /**/
 /// @endcond

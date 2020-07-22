@@ -24,7 +24,7 @@
 #include <boost/type_traits/is_same.hpp>
 #include <boost/mpl/identity.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {  namespace algorithm {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {  namespace algorithm {
 
 #if __cplusplus >= 201103L
 //  Use the C++11 versions of is_sorted/is_sorted_until if they are available
@@ -63,7 +63,7 @@ using std::is_sorted;       // Section 25.4.1.5
     ForwardIterator is_sorted_until ( ForwardIterator first, ForwardIterator last )
     {
         typedef typename std::iterator_traits<ForwardIterator>::value_type value_type;
-        return mars_boost_ksim::algorithm::is_sorted_until ( first, last, std::less<value_type>());
+        return mars_boost::algorithm::is_sorted_until ( first, last, std::less<value_type>());
     }
 
 
@@ -77,7 +77,7 @@ using std::is_sorted;       // Section 25.4.1.5
     template <typename ForwardIterator, typename Pred>
     bool is_sorted ( ForwardIterator first, ForwardIterator last, Pred p )
     {
-        return mars_boost_ksim::algorithm::is_sorted_until (first, last, p) == last;
+        return mars_boost::algorithm::is_sorted_until (first, last, p) == last;
     }
 
 /// \fn is_sorted ( ForwardIterator first, ForwardIterator last )
@@ -89,7 +89,7 @@ using std::is_sorted;       // Section 25.4.1.5
     template <typename ForwardIterator>
     bool is_sorted ( ForwardIterator first, ForwardIterator last )
     {
-        return mars_boost_ksim::algorithm::is_sorted_until (first, last) == last;
+        return mars_boost::algorithm::is_sorted_until (first, last) == last;
     }
 #endif
 
@@ -105,12 +105,12 @@ using std::is_sorted;       // Section 25.4.1.5
 /// \param p     A binary predicate that returns true if two elements are ordered.
 ///
     template <typename R, typename Pred>
-    typename mars_boost_ksim::lazy_disable_if_c<
-        mars_boost_ksim::is_same<R, Pred>::value,
-        typename mars_boost_ksim::range_iterator<const R>
+    typename mars_boost::lazy_disable_if_c<
+        mars_boost::is_same<R, Pred>::value,
+        typename mars_boost::range_iterator<const R>
     >::type is_sorted_until ( const R &range, Pred p )
     {
-        return mars_boost_ksim::algorithm::is_sorted_until ( mars_boost_ksim::begin ( range ), mars_boost_ksim::end ( range ), p );
+        return mars_boost::algorithm::is_sorted_until ( mars_boost::begin ( range ), mars_boost::end ( range ), p );
     }
 
 
@@ -120,9 +120,9 @@ using std::is_sorted;       // Section 25.4.1.5
 /// \param range The range to be tested.
 ///
     template <typename R>
-    typename mars_boost_ksim::range_iterator<const R>::type is_sorted_until ( const R &range )
+    typename mars_boost::range_iterator<const R>::type is_sorted_until ( const R &range )
     {
-        return mars_boost_ksim::algorithm::is_sorted_until ( mars_boost_ksim::begin ( range ), mars_boost_ksim::end ( range ));
+        return mars_boost::algorithm::is_sorted_until ( mars_boost::begin ( range ), mars_boost::end ( range ));
     }
 
 /// \fn is_sorted ( const R &range, Pred p )
@@ -133,10 +133,10 @@ using std::is_sorted;       // Section 25.4.1.5
 /// \param p     A binary predicate that returns true if two elements are ordered.
 ///
     template <typename R, typename Pred>
-    typename mars_boost_ksim::lazy_disable_if_c< mars_boost_ksim::is_same<R, Pred>::value, mars_boost_ksim::mpl::identity<bool> >::type
+    typename mars_boost::lazy_disable_if_c< mars_boost::is_same<R, Pred>::value, mars_boost::mpl::identity<bool> >::type
     is_sorted ( const R &range, Pred p )
     {
-        return mars_boost_ksim::algorithm::is_sorted ( mars_boost_ksim::begin ( range ), mars_boost_ksim::end ( range ), p );
+        return mars_boost::algorithm::is_sorted ( mars_boost::begin ( range ), mars_boost::end ( range ), p );
     }
 
 
@@ -148,7 +148,7 @@ using std::is_sorted;       // Section 25.4.1.5
     template <typename R>
     bool is_sorted ( const R &range )
     {
-        return mars_boost_ksim::algorithm::is_sorted ( mars_boost_ksim::begin ( range ), mars_boost_ksim::end ( range ));
+        return mars_boost::algorithm::is_sorted ( mars_boost::begin ( range ), mars_boost::end ( range ));
     }
 
 
@@ -169,7 +169,7 @@ using std::is_sorted;       // Section 25.4.1.5
     bool is_increasing ( ForwardIterator first, ForwardIterator last )
     {
         typedef typename std::iterator_traits<ForwardIterator>::value_type value_type;
-        return mars_boost_ksim::algorithm::is_sorted (first, last, std::less<value_type>());
+        return mars_boost::algorithm::is_sorted (first, last, std::less<value_type>());
     }
 
 
@@ -184,7 +184,7 @@ using std::is_sorted;       // Section 25.4.1.5
     template <typename R>
     bool is_increasing ( const R &range )
     {
-        return is_increasing ( mars_boost_ksim::begin ( range ), mars_boost_ksim::end ( range ));
+        return is_increasing ( mars_boost::begin ( range ), mars_boost::end ( range ));
     }
 
 
@@ -202,7 +202,7 @@ using std::is_sorted;       // Section 25.4.1.5
     bool is_decreasing ( ForwardIterator first, ForwardIterator last )
     {
         typedef typename std::iterator_traits<ForwardIterator>::value_type value_type;
-        return mars_boost_ksim::algorithm::is_sorted (first, last, std::greater<value_type>());
+        return mars_boost::algorithm::is_sorted (first, last, std::greater<value_type>());
     }
 
 /// \fn is_decreasing ( const R &range )
@@ -216,7 +216,7 @@ using std::is_sorted;       // Section 25.4.1.5
     template <typename R>
     bool is_decreasing ( const R &range )
     {
-        return is_decreasing ( mars_boost_ksim::begin ( range ), mars_boost_ksim::end ( range ));
+        return is_decreasing ( mars_boost::begin ( range ), mars_boost::end ( range ));
     }
 
 
@@ -234,7 +234,7 @@ using std::is_sorted;       // Section 25.4.1.5
     bool is_strictly_increasing ( ForwardIterator first, ForwardIterator last )
     {
         typedef typename std::iterator_traits<ForwardIterator>::value_type value_type;
-        return mars_boost_ksim::algorithm::is_sorted (first, last, std::less_equal<value_type>());
+        return mars_boost::algorithm::is_sorted (first, last, std::less_equal<value_type>());
     }
 
 /// \fn is_strictly_increasing ( const R &range )
@@ -248,7 +248,7 @@ using std::is_sorted;       // Section 25.4.1.5
     template <typename R>
     bool is_strictly_increasing ( const R &range )
     {
-        return is_strictly_increasing ( mars_boost_ksim::begin ( range ), mars_boost_ksim::end ( range ));
+        return is_strictly_increasing ( mars_boost::begin ( range ), mars_boost::end ( range ));
     }
 
 
@@ -265,7 +265,7 @@ using std::is_sorted;       // Section 25.4.1.5
     bool is_strictly_decreasing ( ForwardIterator first, ForwardIterator last )
     {
         typedef typename std::iterator_traits<ForwardIterator>::value_type value_type;
-        return mars_boost_ksim::algorithm::is_sorted (first, last, std::greater_equal<value_type>());
+        return mars_boost::algorithm::is_sorted (first, last, std::greater_equal<value_type>());
     }
 
 /// \fn is_strictly_decreasing ( const R &range )
@@ -279,7 +279,7 @@ using std::is_sorted;       // Section 25.4.1.5
     template <typename R>
     bool is_strictly_decreasing ( const R &range )
     {
-        return is_strictly_decreasing ( mars_boost_ksim::begin ( range ), mars_boost_ksim::end ( range ));
+        return is_strictly_decreasing ( mars_boost::begin ( range ), mars_boost::end ( range ));
     }
 
 }} // namespace boost

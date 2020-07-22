@@ -18,7 +18,7 @@
 #include <boost/range/begin.hpp>
 #include <boost/range/end.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {  namespace algorithm {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {  namespace algorithm {
 
 /// \fn one_of ( InputIterator first, InputIterator last, Predicate p )
 /// \return true if the predicate 'p' is true for exactly one item in [first, last).
@@ -33,7 +33,7 @@ bool one_of ( InputIterator first, InputIterator last, Predicate p )
     InputIterator i = std::find_if (first, last, p);
     if (i == last)
         return false;    // Didn't occur at all
-    return mars_boost_ksim::algorithm::none_of (++i, last, p);
+    return mars_boost::algorithm::none_of (++i, last, p);
 }
 
 /// \fn one_of ( const Range &r, Predicate p )
@@ -45,7 +45,7 @@ bool one_of ( InputIterator first, InputIterator last, Predicate p )
 template<typename Range, typename Predicate> 
 bool one_of ( const Range &r, Predicate p ) 
 {
-    return mars_boost_ksim::algorithm::one_of ( mars_boost_ksim::begin (r), mars_boost_ksim::end (r), p );
+    return mars_boost::algorithm::one_of ( mars_boost::begin (r), mars_boost::end (r), p );
 }
 
 
@@ -62,7 +62,7 @@ bool one_of_equal ( InputIterator first, InputIterator last, const V &val )
     InputIterator i = std::find (first, last, val); // find first occurrence of 'val'
     if (i == last)
         return false;                    // Didn't occur at all
-    return mars_boost_ksim::algorithm::none_of_equal (++i, last, val);
+    return mars_boost::algorithm::none_of_equal (++i, last, val);
 }
 
 /// \fn one_of_equal ( const Range &r, const V &val )
@@ -74,7 +74,7 @@ bool one_of_equal ( InputIterator first, InputIterator last, const V &val )
 template<typename Range, typename V> 
 bool one_of_equal ( const Range &r, const V &val )
 {
-    return mars_boost_ksim::algorithm::one_of_equal ( mars_boost_ksim::begin (r), mars_boost_ksim::end (r), val );
+    return mars_boost::algorithm::one_of_equal ( mars_boost::begin (r), mars_boost::end (r), val );
 } 
 
 }} // namespace boost and algorithm

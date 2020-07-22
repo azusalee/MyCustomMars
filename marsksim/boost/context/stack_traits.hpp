@@ -17,7 +17,7 @@
 #  include BOOST_ABI_PREFIX
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace context {
 
 struct BOOST_CONTEXT_DECL stack_traits

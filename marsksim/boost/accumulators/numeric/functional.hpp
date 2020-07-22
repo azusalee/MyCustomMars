@@ -57,7 +57,7 @@ namespace std
 }
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace numeric
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace numeric
 {
     namespace functional
     {
@@ -93,7 +93,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {                                                                                       \
             BOOST_TYPEOF_NESTED_TYPEDEF_TPL(                                                    \
                 nested                                                                          \
-              , Op mars_boost_ksim::numeric::functional::detail::lvalue_of<Arg>()                         \
+              , Op mars_boost::numeric::functional::detail::lvalue_of<Arg>()                         \
             )                                                                                   \
             typedef typename nested::type type;                                                 \
         };                                                                                      \
@@ -117,12 +117,12 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     namespace op                                                                                \
     {                                                                                           \
         struct Name                                                                             \
-          : mars_boost_ksim::detail::function1<functional::Name<_, functional::tag<_> > >                 \
+          : mars_boost::detail::function1<functional::Name<_, functional::tag<_> > >                 \
         {};                                                                                     \
     }                                                                                           \
     namespace                                                                                   \
     {                                                                                           \
-        op::Name const &Name = mars_boost_ksim::detail::pod_singleton<op::Name>::instance;                \
+        op::Name const &Name = mars_boost::detail::pod_singleton<op::Name>::instance;                \
     }                                                                                           \
     /**/
 
@@ -158,14 +158,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     namespace op                                                                                \
     {                                                                                           \
         struct Name                                                                             \
-          : mars_boost_ksim::detail::function2<                                                           \
+          : mars_boost::detail::function2<                                                           \
                 functional::Name<_1, _2, functional::tag<_1>, functional::tag<_2> >             \
             >                                                                                   \
         {};                                                                                     \
     }                                                                                           \
     namespace                                                                                   \
     {                                                                                           \
-        op::Name const &Name = mars_boost_ksim::detail::pod_singleton<op::Name>::instance;                \
+        op::Name const &Name = mars_boost::detail::pod_singleton<op::Name>::instance;                \
     }                                                                                           \
     BOOST_ACCUMULATORS_IGNORE_GLOBAL(Name)                                                      \
     /**/
@@ -175,8 +175,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #define BOOST_NUMERIC_FUNCTIONAL_DEDUCED(Left, Op, Right)                                       \
     BOOST_TYPEOF_NESTED_TYPEDEF_TPL(                                                            \
         nested                                                                                  \
-      , mars_boost_ksim::numeric::functional::detail::lvalue_of<Left>() Op                                \
-        mars_boost_ksim::numeric::functional::detail::lvalue_of<Right>()                                  \
+      , mars_boost::numeric::functional::detail::lvalue_of<Left>() Op                                \
+        mars_boost::numeric::functional::detail::lvalue_of<Right>()                                  \
     )                                                                                           \
     typedef typename nested::type type;                                                         \
     /**/
@@ -384,53 +384,53 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     {
         template<typename To>
         struct promote
-          : mars_boost_ksim::detail::function1<functional::promote<To, _, typename functional::tag<To>::type, functional::tag<_> > >
+          : mars_boost::detail::function1<functional::promote<To, _, typename functional::tag<To>::type, functional::tag<_> > >
         {};
 
         struct min_assign
-          : mars_boost_ksim::detail::function2<functional::min_assign<_1, _2, functional::tag<_1>, functional::tag<_2> > >
+          : mars_boost::detail::function2<functional::min_assign<_1, _2, functional::tag<_1>, functional::tag<_2> > >
         {};
 
         struct max_assign
-          : mars_boost_ksim::detail::function2<functional::max_assign<_1, _2, functional::tag<_1>, functional::tag<_2> > >
+          : mars_boost::detail::function2<functional::max_assign<_1, _2, functional::tag<_1>, functional::tag<_2> > >
         {};
 
         struct fdiv
-          : mars_boost_ksim::detail::function2<functional::fdiv<_1, _2, functional::tag<_1>, functional::tag<_2> > >
+          : mars_boost::detail::function2<functional::fdiv<_1, _2, functional::tag<_1>, functional::tag<_2> > >
         {};
 
         /// INTERNAL ONLY
         struct average
-          : mars_boost_ksim::detail::function2<functional::fdiv<_1, _2, functional::tag<_1>, functional::tag<_2> > >
+          : mars_boost::detail::function2<functional::fdiv<_1, _2, functional::tag<_1>, functional::tag<_2> > >
         {};
 
         struct as_min
-          : mars_boost_ksim::detail::function1<functional::as_min<_, functional::tag<_> > >
+          : mars_boost::detail::function1<functional::as_min<_, functional::tag<_> > >
         {};
 
         struct as_max
-          : mars_boost_ksim::detail::function1<functional::as_max<_, functional::tag<_> > >
+          : mars_boost::detail::function1<functional::as_max<_, functional::tag<_> > >
         {};
 
         struct as_zero
-          : mars_boost_ksim::detail::function1<functional::as_zero<_, functional::tag<_> > >
+          : mars_boost::detail::function1<functional::as_zero<_, functional::tag<_> > >
         {};
 
         struct as_one
-          : mars_boost_ksim::detail::function1<functional::as_one<_, functional::tag<_> > >
+          : mars_boost::detail::function1<functional::as_one<_, functional::tag<_> > >
         {};
     }
 
     namespace
     {
-        op::min_assign const &min_assign = mars_boost_ksim::detail::pod_singleton<op::min_assign>::instance;
-        op::max_assign const &max_assign = mars_boost_ksim::detail::pod_singleton<op::max_assign>::instance;
-        op::fdiv const &fdiv = mars_boost_ksim::detail::pod_singleton<op::fdiv>::instance;
-        op::fdiv const &average = mars_boost_ksim::detail::pod_singleton<op::fdiv>::instance; ///< INTERNAL ONLY
-        op::as_min const &as_min = mars_boost_ksim::detail::pod_singleton<op::as_min>::instance;
-        op::as_max const &as_max = mars_boost_ksim::detail::pod_singleton<op::as_max>::instance;
-        op::as_zero const &as_zero = mars_boost_ksim::detail::pod_singleton<op::as_zero>::instance;
-        op::as_one const &as_one = mars_boost_ksim::detail::pod_singleton<op::as_one>::instance;
+        op::min_assign const &min_assign = mars_boost::detail::pod_singleton<op::min_assign>::instance;
+        op::max_assign const &max_assign = mars_boost::detail::pod_singleton<op::max_assign>::instance;
+        op::fdiv const &fdiv = mars_boost::detail::pod_singleton<op::fdiv>::instance;
+        op::fdiv const &average = mars_boost::detail::pod_singleton<op::fdiv>::instance; ///< INTERNAL ONLY
+        op::as_min const &as_min = mars_boost::detail::pod_singleton<op::as_min>::instance;
+        op::as_max const &as_max = mars_boost::detail::pod_singleton<op::as_max>::instance;
+        op::as_zero const &as_zero = mars_boost::detail::pod_singleton<op::as_zero>::instance;
+        op::as_one const &as_one = mars_boost::detail::pod_singleton<op::as_one>::instance;
 
         BOOST_ACCUMULATORS_IGNORE_GLOBAL(min_assign)
         BOOST_ACCUMULATORS_IGNORE_GLOBAL(max_assign)
@@ -516,6 +516,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       : mpl::if_<is_empty<T>, default_<T>, zero<T> >::type
     {};
 
-}} // namespace mars_boost_ksim::numeric
+}} // namespace mars_boost::numeric
 
 #endif

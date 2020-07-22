@@ -22,7 +22,7 @@
 #include <boost/move/adl_move_swap.hpp>
 #include <boost/move/utility_core.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace container {
 namespace container_detail {
 
@@ -33,7 +33,7 @@ inline void swap_alloc(AllocatorType &, AllocatorType &, container_detail::false
 
 template<class AllocatorType>
 inline void swap_alloc(AllocatorType &l, AllocatorType &r, container_detail::true_type)
-{  mars_boost_ksim::adl_move_swap(l, r);   }
+{  mars_boost::adl_move_swap(l, r);   }
 
 template<class AllocatorType>
 inline void assign_alloc(AllocatorType &, const AllocatorType &, container_detail::false_type)
@@ -51,10 +51,10 @@ inline void move_alloc(AllocatorType &, AllocatorType &, container_detail::false
 
 template<class AllocatorType>
 inline void move_alloc(AllocatorType &l, AllocatorType &r, container_detail::true_type)
-{  l = ::mars_boost_ksim::move(r);   }
+{  l = ::mars_boost::move(r);   }
 
 }  //namespace container_detail {
 }  //namespace container {
-}  //namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+}  //namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 #endif   //#ifndef BOOST_CONTAINER_DETAIL_ALLOC_TRAITS_HPP

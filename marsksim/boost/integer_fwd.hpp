@@ -17,7 +17,7 @@
 #include <boost/cstdint.hpp>  // For intmax_t
 
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 #ifdef BOOST_NO_INTEGRAL_INT64_T
@@ -26,9 +26,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
      typedef long          static_min_max_signed_type;
      typedef unsigned long static_min_max_unsigned_type;
 #else
-     typedef mars_boost_ksim::uintmax_t static_min_max_unsigned_type;
-     typedef mars_boost_ksim::intmax_t  static_min_max_signed_type;
-     typedef mars_boost_ksim::uintmax_t static_log2_argument_type;
+     typedef mars_boost::uintmax_t static_min_max_unsigned_type;
+     typedef mars_boost::intmax_t  static_min_max_signed_type;
+     typedef mars_boost::uintmax_t static_log2_argument_type;
      typedef int              static_log2_result_type;
 #endif
 
@@ -79,10 +79,10 @@ template <  >
 
 #if !defined(BOOST_NO_INTEGRAL_INT64_T) && !defined(BOOST_NO_INT64_T) && defined(BOOST_HAS_LONG_LONG)
 template <  >
-class integer_traits<  ::mars_boost_ksim::long_long_type>;
+class integer_traits<  ::mars_boost::long_long_type>;
 
 template <  >
-class integer_traits<  ::mars_boost_ksim::ulong_long_type >;
+class integer_traits<  ::mars_boost::ulong_long_type >;
 #elif !defined(BOOST_NO_INTEGRAL_INT64_T) && !defined(BOOST_NO_INT64_T) && defined(BOOST_HAS_MS_INT64)
 template <  >
 class integer_traits<__int64>;
@@ -104,21 +104,21 @@ template< int Bits >
     struct uint_t;
 
 #if !defined(BOOST_NO_INTEGRAL_INT64_T) && defined(BOOST_HAS_LONG_LONG)
-    template< mars_boost_ksim::long_long_type MaxValue >   // maximum value to require support
+    template< mars_boost::long_long_type MaxValue >   // maximum value to require support
 #else
   template< long MaxValue >   // maximum value to require support
 #endif
     struct int_max_value_t;
 
 #if !defined(BOOST_NO_INTEGRAL_INT64_T) && defined(BOOST_HAS_LONG_LONG)
-  template< mars_boost_ksim::long_long_type MinValue >   // minimum value to require support
+  template< mars_boost::long_long_type MinValue >   // minimum value to require support
 #else
   template< long MinValue >   // minimum value to require support
 #endif
     struct int_min_value_t;
 
 #if !defined(BOOST_NO_INTEGRAL_INT64_T) && defined(BOOST_HAS_LONG_LONG)
-  template< mars_boost_ksim::ulong_long_type MaxValue >   // maximum value to require support
+  template< mars_boost::ulong_long_type MaxValue >   // maximum value to require support
 #else
   template< unsigned long MaxValue >   // maximum value to require support
 #endif
@@ -164,7 +164,7 @@ template <static_min_max_unsigned_type Value1, static_min_max_unsigned_type Valu
 #ifdef BOOST_NO_INTEGRAL_INT64_T
      typedef unsigned long static_gcd_type;
 #else
-     typedef mars_boost_ksim::uintmax_t static_gcd_type;
+     typedef mars_boost::uintmax_t static_gcd_type;
 #endif
 
 template < static_gcd_type Value1, static_gcd_type Value2 >
@@ -181,7 +181,7 @@ template < typename IntegerType >
     class lcm_evaluator;
 
 
-}  // namespace mars_boost_ksim
+}  // namespace mars_boost
 
 
 #endif  // BOOST_INTEGER_FWD_HPP

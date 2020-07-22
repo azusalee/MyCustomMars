@@ -21,7 +21,7 @@
     of the algorithms.
 */
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
     namespace algorithm {
 
         //  is_equal functor  -----------------------------------------------//
@@ -193,7 +193,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     using algorithm::is_not_greater;
     using algorithm::is_not_igreater;
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 
 #endif  // BOOST_STRING_COMPARE_HPP

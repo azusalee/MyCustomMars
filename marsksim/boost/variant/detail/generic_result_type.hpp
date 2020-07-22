@@ -41,7 +41,7 @@
 
 #else // defined(BOOST_NO_VOID_RETURNS)
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace detail { namespace variant {
 
 struct fake_return_void
@@ -69,19 +69,19 @@ struct no_void_returns_helper<void>
 };
 
 }} // namespace detail::variant
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #define BOOST_VARIANT_AUX_GENERIC_RESULT_TYPE(T) \
     BOOST_DEDUCED_TYPENAME                                           \
-        ::mars_boost_ksim::detail::variant::no_void_returns_helper< T >::type  \
+        ::mars_boost::detail::variant::no_void_returns_helper< T >::type  \
     /**/
 
 #define BOOST_VARIANT_AUX_RETURN_VOID  \
-    return ::mars_boost_ksim::detail::variant::fake_return_void()     \
+    return ::mars_boost::detail::variant::fake_return_void()     \
     /**/
 
 #define BOOST_VARIANT_AUX_RETURN_VOID_TYPE  \
-    ::mars_boost_ksim::detail::variant::fake_return_void
+    ::mars_boost::detail::variant::fake_return_void
 
 #endif // BOOST_NO_VOID_RETURNS workaround
 

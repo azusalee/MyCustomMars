@@ -63,7 +63,7 @@
 #  endif
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 template<typename F> struct result_of;
 template<typename F> struct tr1_result_of; // a TR1-style implementation of result_of

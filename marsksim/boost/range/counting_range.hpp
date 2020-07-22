@@ -20,7 +20,7 @@
 #include <boost/range/iterator.hpp>
 #include <boost/iterator/counting_iterator.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     template<class Value>
     inline iterator_range<counting_iterator<Value> >
@@ -46,8 +46,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         typedef iterator_range<counting_iterator_t> result_t;
 
-        return result_t(counting_iterator_t(mars_boost_ksim::begin(rng)),
-                        counting_iterator_t(mars_boost_ksim::end(rng)));
+        return result_t(counting_iterator_t(mars_boost::begin(rng)),
+                        counting_iterator_t(mars_boost::end(rng)));
     }
 
     template<class Range>
@@ -64,10 +64,10 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         typedef iterator_range<counting_iterator_t> result_t;
 
-        return result_t(counting_iterator_t(mars_boost_ksim::begin(rng)),
-                        counting_iterator_t(mars_boost_ksim::end(rng)));
+        return result_t(counting_iterator_t(mars_boost::begin(rng)),
+                        counting_iterator_t(mars_boost::end(rng)));
     }
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #if BOOST_MSVC >= 1400
 #pragma warning(pop)

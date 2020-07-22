@@ -19,7 +19,7 @@
 #include <boost/utility/enable_if.hpp>
 #include <boost/type_traits/declval.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 #ifdef BOOST_IS_NOTHROW_MOVE_ASSIGN
 
@@ -38,33 +38,33 @@ template <class T> struct is_nothrow_move_assignable<T&&> : public false_type{};
 namespace detail{
 
 template <class T, class Enable = void>
-struct false_or_cpp11_noexcept_move_assignable: public ::mars_boost_ksim::false_type {};
+struct false_or_cpp11_noexcept_move_assignable: public ::mars_boost::false_type {};
 
 template <class T>
 struct false_or_cpp11_noexcept_move_assignable <
         T,
-        typename ::mars_boost_ksim::enable_if_c<sizeof(T) && BOOST_NOEXCEPT_EXPR(::mars_boost_ksim::declval<T&>() = ::mars_boost_ksim::declval<T>())>::type
-    > : public ::mars_boost_ksim::integral_constant<bool, BOOST_NOEXCEPT_EXPR(::mars_boost_ksim::declval<T&>() = ::mars_boost_ksim::declval<T>())>
+        typename ::mars_boost::enable_if_c<sizeof(T) && BOOST_NOEXCEPT_EXPR(::mars_boost::declval<T&>() = ::mars_boost::declval<T>())>::type
+    > : public ::mars_boost::integral_constant<bool, BOOST_NOEXCEPT_EXPR(::mars_boost::declval<T&>() = ::mars_boost::declval<T>())>
 {};
 
 }
 
 template <class T>
-struct is_nothrow_move_assignable : public integral_constant<bool, ::mars_boost_ksim::detail::false_or_cpp11_noexcept_move_assignable<T>::value>{};
+struct is_nothrow_move_assignable : public integral_constant<bool, ::mars_boost::detail::false_or_cpp11_noexcept_move_assignable<T>::value>{};
 
-template <class T> struct is_nothrow_move_assignable<T const> : public ::mars_boost_ksim::false_type {};
-template <class T> struct is_nothrow_move_assignable<T const volatile> : public ::mars_boost_ksim::false_type{};
-template <class T> struct is_nothrow_move_assignable<T volatile> : public ::mars_boost_ksim::false_type{};
-template <class T> struct is_nothrow_move_assignable<T&> : public ::mars_boost_ksim::false_type{};
+template <class T> struct is_nothrow_move_assignable<T const> : public ::mars_boost::false_type {};
+template <class T> struct is_nothrow_move_assignable<T const volatile> : public ::mars_boost::false_type{};
+template <class T> struct is_nothrow_move_assignable<T volatile> : public ::mars_boost::false_type{};
+template <class T> struct is_nothrow_move_assignable<T&> : public ::mars_boost::false_type{};
 #ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
-template <class T> struct is_nothrow_move_assignable<T&&> : public ::mars_boost_ksim::false_type{};
+template <class T> struct is_nothrow_move_assignable<T&&> : public ::mars_boost::false_type{};
 #endif
 
 #else
 
 template <class T>
 struct is_nothrow_move_assignable : public integral_constant<bool,
-   (::mars_boost_ksim::has_trivial_move_assign<T>::value || ::mars_boost_ksim::has_nothrow_assign<T>::value) &&  ! ::mars_boost_ksim::is_array<T>::value>{};
+   (::mars_boost::has_trivial_move_assign<T>::value || ::mars_boost::has_nothrow_assign<T>::value) &&  ! ::mars_boost::is_array<T>::value>{};
 
 #endif
 
@@ -76,6 +76,6 @@ template <> struct is_nothrow_move_assignable<void const volatile> : public fals
 template <> struct is_nothrow_move_assignable<void volatile> : public false_type{};
 #endif
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_IS_NOTHROW_MOVE_ASSIGNABLE_HPP_INCLUDED

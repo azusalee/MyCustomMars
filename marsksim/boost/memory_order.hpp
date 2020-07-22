@@ -9,7 +9,7 @@
 
 //  boost/memory_order.hpp
 //
-//  Defines enum mars_boost_ksim::memory_order per the C++0x working draft
+//  Defines enum mars_boost::memory_order per the C++0x working draft
 //
 //  Copyright (c) 2008, 2009 Peter Dimov
 //
@@ -18,7 +18,7 @@
 //  http://www.boost.org/LICENSE_1_0.txt)
 
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 //
@@ -52,6 +52,6 @@ enum memory_order
     memory_order_seq_cst = 14 // acq_rel | 8
 };
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // #ifndef BOOST_MEMORY_ORDER_HPP_INCLUDED

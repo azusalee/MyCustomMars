@@ -29,7 +29,7 @@
 
 using namespace marsksim::sdt;
 
-TcpQuery::TcpQuery(const char* _ip, uint16_t _port, unsigned int _conn_timeout, NetCheckTrafficMonitor* _traffic_monitor)
+TcpQuery::TcpQuery(const char* _ip, uint16_t _port, unsigned int _conn_timeout, NetCheckTrafficMonitorksim* _traffic_monitor)
     : ip_(strdup(_ip))
     , port_(_port)
     , select_(pipe_)

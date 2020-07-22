@@ -16,9 +16,9 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 //
-//  typedef <unspecified> mars_boost_ksim::detail::lightweight_mutex;
+//  typedef <unspecified> mars_boost::detail::lightweight_mutex;
 //
-//  mars_boost_ksim::detail::lightweight_mutex is a header-only implementation of
+//  mars_boost::detail::lightweight_mutex is a header-only implementation of
 //  a subset of the Mutex concept requirements:
 //
 //  http://www.boost.org/doc/html/threads/concepts.html#threads.concepts.Mutex

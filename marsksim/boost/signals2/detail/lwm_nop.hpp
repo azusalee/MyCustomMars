@@ -21,7 +21,7 @@
 
 #include <boost/signals2/dummy_mutex.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 namespace signals2
@@ -33,6 +33,6 @@ class mutex: public dummy_mutex
 
 } // namespace signals2
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // #ifndef BOOST_SIGNALS2_LWM_NOP_HPP

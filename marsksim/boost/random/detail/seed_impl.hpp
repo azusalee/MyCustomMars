@@ -30,7 +30,7 @@
 
 #include <boost/random/detail/disable_warnings.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace random {
 namespace detail {
 
@@ -41,9 +41,9 @@ namespace detail {
 template<class T>
 struct seed_type
 {
-    typedef typename mars_boost_ksim::mpl::if_<mars_boost_ksim::is_integral<T>,
+    typedef typename mars_boost::mpl::if_<mars_boost::is_integral<T>,
         T,
-        mars_boost_ksim::uint32_t
+        mars_boost::uint32_t
     >::type type;
 };
 
@@ -89,7 +89,7 @@ void generate_from_real(Engine& eng, Iter begin, Iter end)
     typedef typename Engine::result_type RealType;
     const int Bits = detail::generator_bits<Engine>::value();
     int remaining_bits = 0;
-    mars_boost_ksim::uint_least32_t saved_bits = 0;
+    mars_boost::uint_least32_t saved_bits = 0;
     RealType multiplier = pow2<RealType>( Bits);
     RealType mult32 = RealType(4294967296.0); // 2^32
     while(true) {
@@ -98,16 +98,16 @@ void generate_from_real(Engine& eng, Iter begin, Iter end)
         // Make sure the compiler can optimize this out
         // if it isn't possible.
         if(Bits < 32 && available_bits < 32 - remaining_bits) {
-            saved_bits |= mars_boost_ksim::uint_least32_t(val) << remaining_bits;
+            saved_bits |= mars_boost::uint_least32_t(val) << remaining_bits;
             remaining_bits += Bits;
         } else {
             // If Bits < 32, then remaining_bits != 0, since
             // if remaining_bits == 0, available_bits < 32 - 0,
             // and we won't get here to begin with.
             if(Bits < 32 || remaining_bits != 0) {
-                mars_boost_ksim::uint_least32_t divisor =
-                    (mars_boost_ksim::uint_least32_t(1) << (32 - remaining_bits));
-                mars_boost_ksim::uint_least32_t extra_bits = mars_boost_ksim::uint_least32_t(fmod(val, mult32)) & (divisor - 1);
+                mars_boost::uint_least32_t divisor =
+                    (mars_boost::uint_least32_t(1) << (32 - remaining_bits));
+                mars_boost::uint_least32_t extra_bits = mars_boost::uint_least32_t(fmod(val, mult32)) & (divisor - 1);
                 val = val / divisor;
                 *begin++ = saved_bits | (extra_bits << remaining_bits);
                 if(begin == end) return;
@@ -117,14 +117,14 @@ void generate_from_real(Engine& eng, Iter begin, Iter end)
             // If Bits < 32 we should never enter this loop
             if(Bits >= 32) {
                 for(; available_bits >= 32; available_bits -= 32) {
-                    mars_boost_ksim::uint_least32_t word = mars_boost_ksim::uint_least32_t(fmod(val, mult32));
+                    mars_boost::uint_least32_t word = mars_boost::uint_least32_t(fmod(val, mult32));
                     val /= mult32;
                     *begin++ = word;
                     if(begin == end) return;
                 }
             }
             remaining_bits = available_bits;
-            saved_bits = static_cast<mars_boost_ksim::uint_least32_t>(val);
+            saved_bits = static_cast<mars_boost::uint_least32_t>(val);
         }
     }
 }
@@ -133,10 +133,10 @@ template<class Engine, class Iter>
 void generate_from_int(Engine& eng, Iter begin, Iter end)
 {
     typedef typename Engine::result_type IntType;
-    typedef typename mars_boost_ksim::random::traits::make_unsigned<IntType>::type unsigned_type;
+    typedef typename mars_boost::random::traits::make_unsigned<IntType>::type unsigned_type;
     int remaining_bits = 0;
-    mars_boost_ksim::uint_least32_t saved_bits = 0;
-    unsigned_type range = mars_boost_ksim::random::detail::subtract<IntType>()((eng.max)(), (eng.min)());
+    mars_boost::uint_least32_t saved_bits = 0;
+    unsigned_type range = mars_boost::random::detail::subtract<IntType>()((eng.max)(), (eng.min)());
 
     int bits =
         (range == (std::numeric_limits<unsigned_type>::max)()) ?
@@ -158,16 +158,16 @@ void generate_from_int(Engine& eng, Iter begin, Iter end)
     while(true) {
         unsigned_type val;
         do {
-            val = mars_boost_ksim::random::detail::subtract<IntType>()(eng(), (eng.min)());
+            val = mars_boost::random::detail::subtract<IntType>()(eng(), (eng.min)());
         } while(limit != range && val > limit);
         val &= mask;
         int available_bits = bits;
         if(available_bits == 32) {
-            *begin++ = static_cast<mars_boost_ksim::uint_least32_t>(val) & 0xFFFFFFFFu;
+            *begin++ = static_cast<mars_boost::uint_least32_t>(val) & 0xFFFFFFFFu;
             if(begin == end) return;
         } else if(available_bits % 32 == 0) {
             for(int i = 0; i < available_bits / 32; ++i) {
-                mars_boost_ksim::uint_least32_t word = mars_boost_ksim::uint_least32_t(val) & 0xFFFFFFFFu;
+                mars_boost::uint_least32_t word = mars_boost::uint_least32_t(val) & 0xFFFFFFFFu;
                 int suppress_warning = (bits >= 32);
                 BOOST_ASSERT(suppress_warning == 1);
                 val >>= (32 * suppress_warning);
@@ -175,11 +175,11 @@ void generate_from_int(Engine& eng, Iter begin, Iter end)
                 if(begin == end) return;
             }
         } else if(bits < 32 && available_bits < 32 - remaining_bits) {
-            saved_bits |= mars_boost_ksim::uint_least32_t(val) << remaining_bits;
+            saved_bits |= mars_boost::uint_least32_t(val) << remaining_bits;
             remaining_bits += bits;
         } else {
             if(bits < 32 || remaining_bits != 0) {
-                mars_boost_ksim::uint_least32_t extra_bits = mars_boost_ksim::uint_least32_t(val) & ((mars_boost_ksim::uint_least32_t(1) << (32 - remaining_bits)) - 1);
+                mars_boost::uint_least32_t extra_bits = mars_boost::uint_least32_t(val) & ((mars_boost::uint_least32_t(1) << (32 - remaining_bits)) - 1);
                 val >>= 32 - remaining_bits;
                 *begin++ = saved_bits | (extra_bits << remaining_bits);
                 if(begin == end) return;
@@ -188,7 +188,7 @@ void generate_from_int(Engine& eng, Iter begin, Iter end)
             }
             if(bits >= 32) {
                 for(; available_bits >= 32; available_bits -= 32) {
-                    mars_boost_ksim::uint_least32_t word = mars_boost_ksim::uint_least32_t(val) & 0xFFFFFFFFu;
+                    mars_boost::uint_least32_t word = mars_boost::uint_least32_t(val) & 0xFFFFFFFFu;
                     int suppress_warning = (bits >= 32);
                     BOOST_ASSERT(suppress_warning == 1);
                     val >>= (32 * suppress_warning);
@@ -197,19 +197,19 @@ void generate_from_int(Engine& eng, Iter begin, Iter end)
                 }
             }
             remaining_bits = available_bits;
-            saved_bits = static_cast<mars_boost_ksim::uint_least32_t>(val);
+            saved_bits = static_cast<mars_boost::uint_least32_t>(val);
         }
     }
 }
 
 template<class Engine, class Iter>
-void generate_impl(Engine& eng, Iter first, Iter last, mars_boost_ksim::mpl::true_)
+void generate_impl(Engine& eng, Iter first, Iter last, mars_boost::mpl::true_)
 {
     return detail::generate_from_int(eng, first, last);
 }
 
 template<class Engine, class Iter>
-void generate_impl(Engine& eng, Iter first, Iter last, mars_boost_ksim::mpl::false_)
+void generate_impl(Engine& eng, Iter first, Iter last, mars_boost::mpl::false_)
 {
     return detail::generate_from_real(eng, first, last);
 }
@@ -217,7 +217,7 @@ void generate_impl(Engine& eng, Iter first, Iter last, mars_boost_ksim::mpl::fal
 template<class Engine, class Iter>
 void generate(Engine& eng, Iter first, Iter last)
 {
-    return detail::generate_impl(eng, first, last, mars_boost_ksim::random::traits::is_integral<typename Engine::result_type>());
+    return detail::generate_impl(eng, first, last, mars_boost::random::traits::is_integral<typename Engine::result_type>());
 }
 
 
@@ -225,12 +225,12 @@ void generate(Engine& eng, Iter first, Iter last)
 template<class IntType, IntType m, class SeedSeq>
 IntType seed_one_int(SeedSeq& seq)
 {
-    static const int log = ::mars_boost_ksim::mpl::if_c<(m == 0),
-        ::mars_boost_ksim::mpl::int_<(::std::numeric_limits<IntType>::digits)>,
-        ::mars_boost_ksim::static_log2<m> >::type::value;
+    static const int log = ::mars_boost::mpl::if_c<(m == 0),
+        ::mars_boost::mpl::int_<(::std::numeric_limits<IntType>::digits)>,
+        ::mars_boost::static_log2<m> >::type::value;
     static const int k =
         (log + ((~(static_cast<IntType>(2) << (log - 1)) & m)? 32 : 31)) / 32;
-    ::mars_boost_ksim::uint_least32_t array[log / 32 + 4];
+    ::mars_boost::uint_least32_t array[log / 32 + 4];
     seq.generate(&array[0], &array[0] + k + 3);
     IntType s = 0;
     for(int j = 0; j < k; ++j) {
@@ -244,15 +244,15 @@ IntType seed_one_int(SeedSeq& seq)
 template<class IntType, IntType m, class Iter>
 IntType get_one_int(Iter& first, Iter last)
 {
-    static const int log = ::mars_boost_ksim::mpl::if_c<(m == 0),
-        ::mars_boost_ksim::mpl::int_<(::std::numeric_limits<IntType>::digits)>,
-        ::mars_boost_ksim::static_log2<m> >::type::value;
+    static const int log = ::mars_boost::mpl::if_c<(m == 0),
+        ::mars_boost::mpl::int_<(::std::numeric_limits<IntType>::digits)>,
+        ::mars_boost::static_log2<m> >::type::value;
     static const int k =
         (log + ((~(static_cast<IntType>(2) << (log - 1)) & m)? 32 : 31)) / 32;
     IntType s = 0;
     for(int j = 0; j < k; ++j) {
         if(first == last) {
-            mars_boost_ksim::throw_exception(::std::invalid_argument("Not enough elements in call to seed."));
+            mars_boost::throw_exception(::std::invalid_argument("Not enough elements in call to seed."));
         }
         IntType digit = const_mod<IntType, m>::apply(IntType(*first++));
         IntType mult = IntType(1) << 32*j;
@@ -265,27 +265,27 @@ IntType get_one_int(Iter& first, Iter last)
 template<int w, std::size_t n, class SeedSeq, class UIntType>
 void seed_array_int_impl(SeedSeq& seq, UIntType (&x)[n])
 {
-    mars_boost_ksim::uint_least32_t storage[((w+31)/32) * n];
+    mars_boost::uint_least32_t storage[((w+31)/32) * n];
     seq.generate(&storage[0], &storage[0] + ((w+31)/32) * n);
     for(std::size_t j = 0; j < n; j++) {
         UIntType val = 0;
         for(std::size_t k = 0; k < (w+31)/32; ++k) {
             val += static_cast<UIntType>(storage[(w+31)/32*j + k]) << 32*k;
         }
-        x[j] = val & ::mars_boost_ksim::low_bits_mask_t<w>::sig_bits;
+        x[j] = val & ::mars_boost::low_bits_mask_t<w>::sig_bits;
     }
 }
 
 template<int w, std::size_t n, class SeedSeq, class IntType>
-inline void seed_array_int_impl(SeedSeq& seq, IntType (&x)[n], mars_boost_ksim::mpl::true_)
+inline void seed_array_int_impl(SeedSeq& seq, IntType (&x)[n], mars_boost::mpl::true_)
 {
-    BOOST_STATIC_ASSERT_MSG(mars_boost_ksim::is_integral<IntType>::value, "Sorry but this routine has not been ported to non built-in integers as it relies on a reinterpret_cast.");
-    typedef typename mars_boost_ksim::make_unsigned<IntType>::type unsigned_array[n];
+    BOOST_STATIC_ASSERT_MSG(mars_boost::is_integral<IntType>::value, "Sorry but this routine has not been ported to non built-in integers as it relies on a reinterpret_cast.");
+    typedef typename mars_boost::make_unsigned<IntType>::type unsigned_array[n];
     seed_array_int_impl<w>(seq, reinterpret_cast<unsigned_array&>(x));
 }
 
 template<int w, std::size_t n, class SeedSeq, class IntType>
-inline void seed_array_int_impl(SeedSeq& seq, IntType (&x)[n], mars_boost_ksim::mpl::false_)
+inline void seed_array_int_impl(SeedSeq& seq, IntType (&x)[n], mars_boost::mpl::false_)
 {
     seed_array_int_impl<w>(seq, x);
 }
@@ -293,7 +293,7 @@ inline void seed_array_int_impl(SeedSeq& seq, IntType (&x)[n], mars_boost_ksim::
 template<int w, std::size_t n, class SeedSeq, class IntType>
 inline void seed_array_int(SeedSeq& seq, IntType (&x)[n])
 {
-    seed_array_int_impl<w>(seq, x, mars_boost_ksim::random::traits::is_signed<IntType>());
+    seed_array_int_impl<w>(seq, x, mars_boost::random::traits::is_signed<IntType>());
 }
 
 template<int w, std::size_t n, class Iter, class UIntType>
@@ -303,24 +303,24 @@ void fill_array_int_impl(Iter& first, Iter last, UIntType (&x)[n])
         UIntType val = 0;
         for(std::size_t k = 0; k < (w+31)/32; ++k) {
             if(first == last) {
-                mars_boost_ksim::throw_exception(std::invalid_argument("Not enough elements in call to seed."));
+                mars_boost::throw_exception(std::invalid_argument("Not enough elements in call to seed."));
             }
             val += static_cast<UIntType>(*first++) << 32*k;
         }
-        x[j] = val & ::mars_boost_ksim::low_bits_mask_t<w>::sig_bits;
+        x[j] = val & ::mars_boost::low_bits_mask_t<w>::sig_bits;
     }
 }
 
 template<int w, std::size_t n, class Iter, class IntType>
-inline void fill_array_int_impl(Iter& first, Iter last, IntType (&x)[n], mars_boost_ksim::mpl::true_)
+inline void fill_array_int_impl(Iter& first, Iter last, IntType (&x)[n], mars_boost::mpl::true_)
 {
-    BOOST_STATIC_ASSERT_MSG(mars_boost_ksim::is_integral<IntType>::value, "Sorry but this routine has not been ported to non built-in integers as it relies on a reinterpret_cast.");
-    typedef typename mars_boost_ksim::make_unsigned<IntType>::type unsigned_array[n];
+    BOOST_STATIC_ASSERT_MSG(mars_boost::is_integral<IntType>::value, "Sorry but this routine has not been ported to non built-in integers as it relies on a reinterpret_cast.");
+    typedef typename mars_boost::make_unsigned<IntType>::type unsigned_array[n];
     fill_array_int_impl<w>(first, last, reinterpret_cast<unsigned_array&>(x));
 }
 
 template<int w, std::size_t n, class Iter, class IntType>
-inline void fill_array_int_impl(Iter& first, Iter last, IntType (&x)[n], mars_boost_ksim::mpl::false_)
+inline void fill_array_int_impl(Iter& first, Iter last, IntType (&x)[n], mars_boost::mpl::false_)
 {
     fill_array_int_impl<w>(first, last, x);
 }
@@ -328,13 +328,13 @@ inline void fill_array_int_impl(Iter& first, Iter last, IntType (&x)[n], mars_bo
 template<int w, std::size_t n, class Iter, class IntType>
 inline void fill_array_int(Iter& first, Iter last, IntType (&x)[n])
 {
-    fill_array_int_impl<w>(first, last, x, mars_boost_ksim::random::traits::is_signed<IntType>());
+    fill_array_int_impl<w>(first, last, x, mars_boost::random::traits::is_signed<IntType>());
 }
 
 template<int w, std::size_t n, class RealType>
-void seed_array_real_impl(const mars_boost_ksim::uint_least32_t* storage, RealType (&x)[n])
+void seed_array_real_impl(const mars_boost::uint_least32_t* storage, RealType (&x)[n])
 {
-    mars_boost_ksim::uint_least32_t mask = ~((~mars_boost_ksim::uint_least32_t(0)) << (w%32));
+    mars_boost::uint_least32_t mask = ~((~mars_boost::uint_least32_t(0)) << (w%32));
     RealType two32 = 4294967296.0;
     const RealType divisor = RealType(1)/detail::pow2<RealType>(w);
     unsigned int j;
@@ -358,7 +358,7 @@ template<int w, std::size_t n, class SeedSeq, class RealType>
 void seed_array_real(SeedSeq& seq, RealType (&x)[n])
 {
     using std::pow;
-    mars_boost_ksim::uint_least32_t storage[((w+31)/32) * n];
+    mars_boost::uint_least32_t storage[((w+31)/32) * n];
     seq.generate(&storage[0], &storage[0] + ((w+31)/32) * n);
     seed_array_real_impl<w>(storage, x);
 }
@@ -366,7 +366,7 @@ void seed_array_real(SeedSeq& seq, RealType (&x)[n])
 template<int w, std::size_t n, class Iter, class RealType>
 void fill_array_real(Iter& first, Iter last, RealType (&x)[n])
 {
-    mars_boost_ksim::uint_least32_t mask = ~((~mars_boost_ksim::uint_least32_t(0)) << (w%32));
+    mars_boost::uint_least32_t mask = ~((~mars_boost::uint_least32_t(0)) << (w%32));
     RealType two32 = 4294967296.0;
     const RealType divisor = RealType(1)/detail::pow2<RealType>(w);
     unsigned int j;
@@ -374,12 +374,12 @@ void fill_array_real(Iter& first, Iter last, RealType (&x)[n])
         RealType val = RealType(0);
         RealType mult = divisor;
         for(int k = 0; k < w/32; ++k, ++first) {
-            if(first == last) mars_boost_ksim::throw_exception(std::invalid_argument("Not enough elements in call to seed."));
+            if(first == last) mars_boost::throw_exception(std::invalid_argument("Not enough elements in call to seed."));
             val += *first * mult;
             mult *= two32;
         }
         if(mask != 0) {
-            if(first == last) mars_boost_ksim::throw_exception(std::invalid_argument("Not enough elements in call to seed."));
+            if(first == last) mars_boost::throw_exception(std::invalid_argument("Not enough elements in call to seed."));
             val += (*first & mask) * mult;
             ++first;
         }

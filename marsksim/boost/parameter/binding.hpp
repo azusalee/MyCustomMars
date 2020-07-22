@@ -11,7 +11,7 @@
 # include <boost/parameter/aux_/void.hpp>
 # include <boost/type_traits/is_same.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace parameter { 
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace parameter { 
 
 // A metafunction that, given an argument pack, returns the type of
 // the parameter identified by the given keyword.  If no such
@@ -75,6 +75,6 @@ struct lazy_binding
 };
 
 
-}} // namespace mars_boost_ksim::parameter
+}} // namespace mars_boost::parameter
 
 #endif // BOOST_PARAMETER_BINDING_DWA200558_HPP

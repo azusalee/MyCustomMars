@@ -39,7 +39,7 @@
 #   include <boost/preprocessor/cat.hpp>
 
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl {
 
 #if defined(BOOST_MPL_CFG_NO_NESTED_VALUE_ARITHMETIC)
 namespace aux {

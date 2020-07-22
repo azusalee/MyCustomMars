@@ -15,31 +15,31 @@
 #include <boost/range/concepts.hpp>
 #include <boost/iterator/reverse_iterator.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range_detail
     {
         template< class R >
         struct reversed_range : 
-            public mars_boost_ksim::iterator_range<
-                      mars_boost_ksim::reverse_iterator<
+            public mars_boost::iterator_range<
+                      mars_boost::reverse_iterator<
                         BOOST_DEDUCED_TYPENAME range_iterator<R>::type 
                                               >
                                          >
         {
         private:
-            typedef mars_boost_ksim::iterator_range<
-                      mars_boost_ksim::reverse_iterator<
+            typedef mars_boost::iterator_range<
+                      mars_boost::reverse_iterator<
                         BOOST_DEDUCED_TYPENAME range_iterator<R>::type 
                                               >
                                          >
                 base;
             
         public:
-            typedef mars_boost_ksim::reverse_iterator<BOOST_DEDUCED_TYPENAME range_iterator<R>::type> iterator;
+            typedef mars_boost::reverse_iterator<BOOST_DEDUCED_TYPENAME range_iterator<R>::type> iterator;
 
             explicit reversed_range( R& r ) 
-                : base( iterator(mars_boost_ksim::end(r)), iterator(mars_boost_ksim::begin(r)) )
+                : base( iterator(mars_boost::end(r)), iterator(mars_boost::begin(r)) )
             { }
         };
 

@@ -46,14 +46,14 @@
 # include <iomanip>
 #endif
 
-namespace fs = mars_boost_ksim::filesystem;
+namespace fs = mars_boost::filesystem;
 
-using mars_boost_ksim::filesystem::path;
+using mars_boost::filesystem::path;
 
 using std::string;
 using std::wstring;
 
-using mars_boost_ksim::system::error_code;
+using mars_boost::system::error_code;
 
 //--------------------------------------------------------------------------------------//
 //                                                                                      //
@@ -134,7 +134,7 @@ namespace
 //                                                                                      //
 //--------------------------------------------------------------------------------------//
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 namespace filesystem
 {
@@ -497,7 +497,7 @@ namespace filesystem
   }
 
 }  // namespace filesystem
-}  // namespace mars_boost_ksim
+}  // namespace mars_boost
   
 //--------------------------------------------------------------------------------------//
 //                                                                                      //
@@ -682,7 +682,7 @@ namespace
 }  // unnamed namespace
 
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 namespace filesystem
 {
@@ -849,7 +849,7 @@ namespace filesystem
   }
 
 }  // namespace filesystem
-}  // namespace mars_boost_ksim
+}  // namespace mars_boost
 
 namespace
 {
@@ -901,7 +901,7 @@ namespace
     // Many thanks to Peter Dimov for digging out the above references!
 
     std::locale global_loc = std::locale();
-    return std::locale(global_loc, new mars_boost_ksim::filesystem::detail::utf8_codecvt_facet);
+    return std::locale(global_loc, new mars_boost::filesystem::detail::utf8_codecvt_facet);
 # else  // Other POSIX
     // ISO C calls std::locale("") "the locale-specific native environment", and this
     // locale is the default for many POSIX-based operating systems such as Linux.
@@ -934,7 +934,7 @@ namespace
 //              path::codecvt() and path::imbue() implementation                        //
 //--------------------------------------------------------------------------------------//
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 namespace filesystem
 {
@@ -945,7 +945,7 @@ namespace filesystem
 #ifdef BOOST_FILESYSTEM_DEBUG
     std::cout << "***** path::codecvt() called" << std::endl;
 #endif
-    BOOST_ASSERT_MSG(&path_locale(), "mars_boost_ksim::filesystem::path locale initialization error");
+    BOOST_ASSERT_MSG(&path_locale(), "mars_boost::filesystem::path locale initialization error");
 
     return std::use_facet<std::codecvt<wchar_t, char, std::mbstate_t> >(path_locale());
   }
@@ -961,4 +961,4 @@ namespace filesystem
   }
 
 }  // namespace filesystem
-}  // namespace mars_boost_ksim
+}  // namespace mars_boost

@@ -36,7 +36,7 @@
 #  include BOOST_ABI_PREFIX
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace coroutines {
 
 template< typename R >
@@ -123,7 +123,7 @@ public:
 
     push_coroutine & operator=( BOOST_RV_REF( push_coroutine) other) BOOST_NOEXCEPT
     {
-        push_coroutine tmp( mars_boost_ksim::move( other) );
+        push_coroutine tmp( mars_boost::move( other) );
         swap( tmp);
         return * this;
     }
@@ -262,7 +262,7 @@ public:
 
     push_coroutine & operator=( BOOST_RV_REF( push_coroutine) other) BOOST_NOEXCEPT
     {
-        push_coroutine tmp( mars_boost_ksim::move( other) );
+        push_coroutine tmp( mars_boost::move( other) );
         swap( tmp);
         return * this;
     }
@@ -401,7 +401,7 @@ public:
 
     inline push_coroutine & operator=( BOOST_RV_REF( push_coroutine) other) BOOST_NOEXCEPT
     {
-        push_coroutine tmp( mars_boost_ksim::move( other) );
+        push_coroutine tmp( mars_boost::move( other) );
         swap( tmp);
         return * this;
     }
@@ -479,7 +479,7 @@ public:
         BOOST_ASSERT( 0 != sp);
         // placement new for internal coroutine
         impl_ = new ( sp) object_t(
-                mars_boost_ksim::forward< coroutine_fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
+                mars_boost::forward< coroutine_fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
         BOOST_ASSERT( impl_);
         impl_->pull();
     }
@@ -506,7 +506,7 @@ public:
         BOOST_ASSERT( 0 != sp);
         // placement new for internal coroutine
         impl_ = new ( sp) object_t(
-                mars_boost_ksim::forward< coroutine_fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
+                mars_boost::forward< coroutine_fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
         BOOST_ASSERT( impl_);
         impl_->pull();
     }
@@ -533,7 +533,7 @@ public:
         BOOST_ASSERT( 0 != sp);
         // placement new for internal coroutine
         impl_ = new ( sp) object_t(
-                mars_boost_ksim::forward< Fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
+                mars_boost::forward< Fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
         BOOST_ASSERT( impl_);
         impl_->pull();
     }
@@ -560,7 +560,7 @@ public:
         BOOST_ASSERT( 0 != sp);
         // placement new for internal coroutine
         impl_ = new ( sp) object_t(
-                mars_boost_ksim::forward< Fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
+                mars_boost::forward< Fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
         BOOST_ASSERT( impl_);
         impl_->pull();
     }
@@ -689,7 +689,7 @@ public:
 
     pull_coroutine & operator=( BOOST_RV_REF( pull_coroutine) other) BOOST_NOEXCEPT
     {
-        pull_coroutine tmp( mars_boost_ksim::move( other) );
+        pull_coroutine tmp( mars_boost::move( other) );
         swap( tmp);
         return * this;
     }
@@ -786,7 +786,7 @@ public:
         reference_t operator*() const
         {
             if ( ! val_)
-                mars_boost_ksim::throw_exception(
+                mars_boost::throw_exception(
                     invalid_result() );
             return * val_;
         }
@@ -794,7 +794,7 @@ public:
         pointer_t operator->() const
         {
             if ( ! val_)
-                mars_boost_ksim::throw_exception(
+                mars_boost::throw_exception(
                     invalid_result() );
             return val_;
         }
@@ -870,7 +870,7 @@ public:
         reference_t operator*() const
         {
             if ( ! val_)
-                mars_boost_ksim::throw_exception(
+                mars_boost::throw_exception(
                     invalid_result() );
             return * val_;
         }
@@ -878,7 +878,7 @@ public:
         pointer_t operator->() const
         {
             if ( ! val_)
-                mars_boost_ksim::throw_exception(
+                mars_boost::throw_exception(
                     invalid_result() );
             return val_;
         }
@@ -939,7 +939,7 @@ public:
         BOOST_ASSERT( 0 != sp);
         // placement new for internal coroutine
         impl_ = new ( sp) object_t(
-                mars_boost_ksim::forward< coroutine_fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
+                mars_boost::forward< coroutine_fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
         BOOST_ASSERT( impl_);
         impl_->pull();
     }
@@ -966,7 +966,7 @@ public:
         BOOST_ASSERT( 0 != sp);
         // placement new for internal coroutine
         impl_ = new ( sp) object_t(
-                mars_boost_ksim::forward< coroutine_fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
+                mars_boost::forward< coroutine_fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
         BOOST_ASSERT( impl_);
         impl_->pull();
     }
@@ -993,7 +993,7 @@ public:
         BOOST_ASSERT( 0 != sp);
         // placement new for internal coroutine
         impl_ = new ( sp) object_t(
-                mars_boost_ksim::forward< Fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
+                mars_boost::forward< Fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
         BOOST_ASSERT( impl_);
         impl_->pull();
     }
@@ -1020,7 +1020,7 @@ public:
         BOOST_ASSERT( 0 != sp);
         // placement new for internal coroutine
         impl_ = new ( sp) object_t(
-                mars_boost_ksim::forward< Fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
+                mars_boost::forward< Fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
         BOOST_ASSERT( impl_);
         impl_->pull();
     }
@@ -1149,7 +1149,7 @@ public:
 
     pull_coroutine & operator=( BOOST_RV_REF( pull_coroutine) other) BOOST_NOEXCEPT
     {
-        pull_coroutine tmp( mars_boost_ksim::move( other) );
+        pull_coroutine tmp( mars_boost::move( other) );
         swap( tmp);
         return * this;
     }
@@ -1242,7 +1242,7 @@ public:
         reference_t operator*() const
         {
             if ( ! val_)
-                mars_boost_ksim::throw_exception(
+                mars_boost::throw_exception(
                     invalid_result() );
             return * val_;
         }
@@ -1250,7 +1250,7 @@ public:
         pointer_t operator->() const
         {
             if ( ! val_)
-                mars_boost_ksim::throw_exception(
+                mars_boost::throw_exception(
                     invalid_result() );
             return val_;
         }
@@ -1326,7 +1326,7 @@ public:
         reference_t operator*() const
         {
             if ( ! val_)
-                mars_boost_ksim::throw_exception(
+                mars_boost::throw_exception(
                     invalid_result() );
             return * val_;
         }
@@ -1334,7 +1334,7 @@ public:
         pointer_t operator->() const
         {
             if ( ! val_)
-                mars_boost_ksim::throw_exception(
+                mars_boost::throw_exception(
                     invalid_result() );
             return val_;
         }
@@ -1395,7 +1395,7 @@ public:
         BOOST_ASSERT( 0 != sp);
         // placement new for internal coroutine
         impl_ = new ( sp) object_t(
-                mars_boost_ksim::forward< coroutine_fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
+                mars_boost::forward< coroutine_fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
         BOOST_ASSERT( impl_);
         impl_->pull();
     }
@@ -1422,7 +1422,7 @@ public:
         BOOST_ASSERT( 0 != sp);
         // placement new for internal coroutine
         impl_ = new ( sp) object_t(
-                mars_boost_ksim::forward< coroutine_fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
+                mars_boost::forward< coroutine_fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
         BOOST_ASSERT( impl_);
         impl_->pull();
     }
@@ -1449,7 +1449,7 @@ public:
         BOOST_ASSERT( 0 != sp);
         // placement new for internal coroutine
         impl_ = new ( sp) object_t(
-                mars_boost_ksim::forward< Fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
+                mars_boost::forward< Fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
         BOOST_ASSERT( impl_);
         impl_->pull();
     }
@@ -1476,7 +1476,7 @@ public:
         BOOST_ASSERT( 0 != sp);
         // placement new for internal coroutine
         impl_ = new ( sp) object_t(
-                mars_boost_ksim::forward< Fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
+                mars_boost::forward< Fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
         BOOST_ASSERT( impl_);
         impl_->pull();
     }
@@ -1605,7 +1605,7 @@ public:
 
     inline pull_coroutine & operator=( BOOST_RV_REF( pull_coroutine) other) BOOST_NOEXCEPT
     {
-        pull_coroutine tmp( mars_boost_ksim::move( other) );
+        pull_coroutine tmp( mars_boost::move( other) );
         swap( tmp);
         return * this;
     }
@@ -1654,7 +1654,7 @@ push_coroutine< Arg >::push_coroutine( coroutine_fn fn,
     BOOST_ASSERT( 0 != sp);
     // placement new for internal coroutine
     impl_ = new ( sp) object_t(
-            mars_boost_ksim::forward< coroutine_fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
+            mars_boost::forward< coroutine_fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
     BOOST_ASSERT( impl_);
 }
 
@@ -1681,7 +1681,7 @@ push_coroutine< Arg >::push_coroutine( coroutine_fn fn,
     BOOST_ASSERT( 0 != sp);
     // placement new for internal coroutine
     impl_ = new ( sp) object_t(
-            mars_boost_ksim::forward< coroutine_fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
+            mars_boost::forward< coroutine_fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
     BOOST_ASSERT( impl_);
 }
 
@@ -1707,7 +1707,7 @@ push_coroutine< Arg & >::push_coroutine( coroutine_fn fn,
     BOOST_ASSERT( 0 != sp);
     // placement new for internal coroutine
     impl_ = new ( sp) object_t(
-            mars_boost_ksim::forward< coroutine_fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
+            mars_boost::forward< coroutine_fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
     BOOST_ASSERT( impl_);
 }
 
@@ -1734,7 +1734,7 @@ push_coroutine< Arg & >::push_coroutine( coroutine_fn fn,
     BOOST_ASSERT( 0 != sp);
     // placement new for internal coroutine
     impl_ = new ( sp) object_t(
-            mars_boost_ksim::forward< coroutine_fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
+            mars_boost::forward< coroutine_fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
     BOOST_ASSERT( impl_);
 }
 
@@ -1759,7 +1759,7 @@ inline push_coroutine< void >::push_coroutine( coroutine_fn fn,
     BOOST_ASSERT( 0 != sp);
     // placement new for internal coroutine
     impl_ = new ( sp) object_t(
-            mars_boost_ksim::forward< coroutine_fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
+            mars_boost::forward< coroutine_fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
     BOOST_ASSERT( impl_);
 }
 
@@ -1785,7 +1785,7 @@ push_coroutine< void >::push_coroutine( coroutine_fn fn,
     BOOST_ASSERT( 0 != sp);
     // placement new for internal coroutine
     impl_ = new ( sp) object_t(
-            mars_boost_ksim::forward< coroutine_fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
+            mars_boost::forward< coroutine_fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
     BOOST_ASSERT( impl_);
 }
 # endif
@@ -1812,7 +1812,7 @@ push_coroutine< Arg >::push_coroutine( BOOST_RV_REF( Fn) fn,
     BOOST_ASSERT( 0 != sp);
     // placement new for internal coroutine
     impl_ = new ( sp) object_t(
-            mars_boost_ksim::forward< Fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
+            mars_boost::forward< Fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
     BOOST_ASSERT( impl_);
 }
 
@@ -1839,7 +1839,7 @@ push_coroutine< Arg >::push_coroutine( BOOST_RV_REF( Fn) fn,
     BOOST_ASSERT( 0 != sp);
     // placement new for internal coroutine
     impl_ = new ( sp) object_t(
-            mars_boost_ksim::forward< Fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
+            mars_boost::forward< Fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
     BOOST_ASSERT( impl_);
 }
 
@@ -1866,7 +1866,7 @@ push_coroutine< Arg & >::push_coroutine( BOOST_RV_REF( Fn) fn,
     BOOST_ASSERT( 0 != sp);
     // placement new for internal coroutine
     impl_ = new ( sp) object_t(
-            mars_boost_ksim::forward< Fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
+            mars_boost::forward< Fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
     BOOST_ASSERT( impl_);
 }
 
@@ -1893,7 +1893,7 @@ push_coroutine< Arg & >::push_coroutine( BOOST_RV_REF( Fn) fn,
     BOOST_ASSERT( 0 != sp);
     // placement new for internal coroutine
     impl_ = new ( sp) object_t(
-            mars_boost_ksim::forward< Fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
+            mars_boost::forward< Fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
     BOOST_ASSERT( impl_);
 }
 
@@ -1919,7 +1919,7 @@ push_coroutine< void >::push_coroutine( BOOST_RV_REF( Fn) fn,
     BOOST_ASSERT( 0 != sp);
     // placement new for internal coroutine
     impl_ = new ( sp) object_t(
-            mars_boost_ksim::forward< Fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
+            mars_boost::forward< Fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
     BOOST_ASSERT( impl_);
 }
 
@@ -1945,7 +1945,7 @@ push_coroutine< void >::push_coroutine( BOOST_RV_REF( Fn) fn,
     BOOST_ASSERT( 0 != sp);
     // placement new for internal coroutine
     impl_ = new ( sp) object_t(
-            mars_boost_ksim::forward< Fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
+            mars_boost::forward< Fn >( fn), attrs, detail::preallocated( sp, size, stack_ctx), stack_alloc);
     BOOST_ASSERT( impl_);
 }
 #else
@@ -2326,32 +2326,32 @@ struct coroutine
 template< typename R >
 typename pull_coroutine< R >::iterator
 begin( pull_coroutine< R > & c)
-{ return mars_boost_ksim::begin( c); }
+{ return mars_boost::begin( c); }
 
 template< typename R >
 typename pull_coroutine< R >::const_iterator
 begin( pull_coroutine< R > const& c)
-{ return mars_boost_ksim::begin( c); }
+{ return mars_boost::begin( c); }
 
 template< typename R >
 typename pull_coroutine< R >::iterator
 end( pull_coroutine< R > & c)
-{ return mars_boost_ksim::end( c); }
+{ return mars_boost::end( c); }
 
 template< typename R >
 typename pull_coroutine< R >::const_iterator
 end( pull_coroutine< R > const& c)
-{ return mars_boost_ksim::end( c); }
+{ return mars_boost::end( c); }
 
 template< typename R >
 typename push_coroutine< R >::iterator
 begin( push_coroutine< R > & c)
-{ return mars_boost_ksim::begin( c); }
+{ return mars_boost::begin( c); }
 
 template< typename R >
 typename push_coroutine< R >::iterator
 end( push_coroutine< R > & c)
-{ return mars_boost_ksim::end( c); }
+{ return mars_boost::end( c); }
 
 }
 

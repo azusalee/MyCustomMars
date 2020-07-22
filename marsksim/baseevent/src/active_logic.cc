@@ -65,7 +65,7 @@ void ActiveLogicksim::OnForeground(bool _isforeground)
 {
 	if (MessageQueueksim::GetDefMessageQueueksim()!=MessageQueueksim::CurrentThreadMessageQueueksim())
 	{
-        MessageQueueksim::AsyncInvoke(boost_ksim::bind(&ActiveLogicksim::OnForeground, this, _isforeground), (MessageQueueksim::MessageTitle_t)this, mq::DefAsyncInvokeHandler(mq::GetDefMessageQueueksim()), "ActiveLogicksim::OnForeground");
+        MessageQueueksim::AsyncInvoke(boost_ksim::bind(&ActiveLogicksim::OnForeground, this, _isforeground), (MessageQueueksim::MessageTitle_t)this, mqksim::DefAsyncInvokeHandler(mqksim::GetDefMessageQueueksim()), "ActiveLogicksim::OnForeground");
 		return;
 	}
 

@@ -72,18 +72,18 @@
 #endif // __ICL etc
 
 #  define BOOST_FUNCTION_ENABLE_IF_NOT_INTEGRAL(Functor,Type)              \
-      typename ::mars_boost_ksim::enable_if_c<          \
-                           !(::mars_boost_ksim::is_integral<Functor>::value), \
+      typename ::mars_boost::enable_if_c<          \
+                           !(::mars_boost::is_integral<Functor>::value), \
                            Type>::type
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
   namespace detail {
     namespace function {
       class X;
 
       /**
        * A buffer used to store small function objects in
-       * mars_boost_ksim::function. It is a union containing function pointers,
+       * mars_boost::function. It is a union containing function pointers,
        * object pointers, and a structure that resembles a bound
        * member function pointer.
        */
@@ -233,7 +233,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       };
 
       /**
-       * Determine if mars_boost_ksim::function can use the small-object
+       * Determine if mars_boost::function can use the small-object
        * optimization with the function object type F.
        */
       template<typename F>
@@ -284,7 +284,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           } else if (op == destroy_functor_tag)
             out_buffer.func_ptr = 0;
           else if (op == check_functor_type_tag) {
-            const mars_boost_ksim::detail::sp_typeinfo& check_type
+            const mars_boost::detail::sp_typeinfo& check_type
               = *out_buffer.type.type;
             if (BOOST_FUNCTION_COMPARE_TYPE_ID(check_type, BOOST_SP_TYPEID(Functor)))
               out_buffer.obj_ptr = &in_buffer.func_ptr;
@@ -600,7 +600,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
       /**
        * Stores the "manager" portion of the vtable for a
-       * mars_boost_ksim::function object.
+       * mars_boost::function object.
        */
       struct vtable_base
       {
@@ -715,13 +715,13 @@ public: // should be protected, but GCC 2.95.3 will fail to allow access
 };
 
 /**
- * The bad_function_call exception class is thrown when a mars_boost_ksim::function
+ * The bad_function_call exception class is thrown when a mars_boost::function
  * object is invoked
  */
 class bad_function_call : public std::runtime_error
 {
 public:
-  bad_function_call() : std::runtime_error("call to empty mars_boost_ksim::function") {}
+  bad_function_call() : std::runtime_error("call to empty mars_boost::function") {}
 };
 
 #ifndef BOOST_NO_SFINAE
@@ -751,7 +751,7 @@ inline bool operator!=(detail::function::useless_clear_type*,
 #endif
 
 #ifdef BOOST_NO_SFINAE
-// Comparisons between mars_boost_ksim::function objects and arbitrary function objects
+// Comparisons between mars_boost::function objects and arbitrary function objects
 template<typename Functor>
   inline bool operator==(const function_base& f, Functor g)
   {
@@ -782,7 +782,7 @@ template<typename Functor>
 #else
 
 #  if !(defined(__GNUC__) && __GNUC__ == 3 && __GNUC_MINOR__ <= 3)
-// Comparisons between mars_boost_ksim::function objects and arbitrary function
+// Comparisons between mars_boost::function objects and arbitrary function
 // objects. GCC 3.3 and before has an obnoxious bug that prevents this
 // from working.
 template<typename Functor>
@@ -880,7 +880,7 @@ namespace detail {
 #endif
   } // end namespace function
 } // end namespace detail
-} // end namespace mars_boost_ksim
+} // end namespace mars_boost
 
 #undef BOOST_FUNCTION_ENABLE_IF_NOT_INTEGRAL
 #undef BOOST_FUNCTION_COMPARE_TYPE_ID

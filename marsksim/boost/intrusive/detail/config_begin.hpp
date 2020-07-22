@@ -43,8 +43,8 @@
    #pragma warning (disable : 4267) //conversion from 'X' to 'Y', possible loss of data
    #pragma warning (disable : 4127) //conditional expression is constant
    #pragma warning (disable : 4706) //assignment within conditional expression
-   #pragma warning (disable : 4541) //'typeid' used on polymorphic type 'mars_boost_ksim::exception' with /GR-
-   #pragma warning (disable : 4512) //'typeid' used on polymorphic type 'mars_boost_ksim::exception' with /GR-
+   #pragma warning (disable : 4541) //'typeid' used on polymorphic type 'mars_boost::exception' with /GR-
+   #pragma warning (disable : 4512) //'typeid' used on polymorphic type 'mars_boost::exception' with /GR-
 #endif
 
 //#define BOOST_INTRUSIVE_USE_ITERATOR_FACADE

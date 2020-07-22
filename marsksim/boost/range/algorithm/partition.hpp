@@ -16,7 +16,7 @@
 #include <boost/range/detail/range_return.hpp>
 #include <algorithm>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range
     {
@@ -31,7 +31,7 @@ inline BOOST_DEDUCED_TYPENAME range_iterator<ForwardRange>::type
 partition(ForwardRange& rng, UnaryPredicate pred)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( ForwardRangeConcept<ForwardRange> ));
-    return std::partition(mars_boost_ksim::begin(rng),mars_boost_ksim::end(rng),pred);
+    return std::partition(mars_boost::begin(rng),mars_boost::end(rng),pred);
 }
 
 /// \overload
@@ -40,7 +40,7 @@ inline BOOST_DEDUCED_TYPENAME range_iterator<ForwardRange>::type
 partition(const ForwardRange& rng, UnaryPredicate pred)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( ForwardRangeConcept<const ForwardRange> ));
-    return std::partition(mars_boost_ksim::begin(rng),mars_boost_ksim::end(rng),pred);
+    return std::partition(mars_boost::begin(rng),mars_boost::end(rng),pred);
 }
 
 // range_return overloads
@@ -52,8 +52,8 @@ inline BOOST_DEDUCED_TYPENAME range_return<ForwardRange,re>::type
 partition(ForwardRange& rng, UnaryPredicate pred)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( ForwardRangeConcept<ForwardRange> ));
-    return mars_boost_ksim::range_return<ForwardRange,re>::
-        pack(std::partition(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), pred), rng);
+    return mars_boost::range_return<ForwardRange,re>::
+        pack(std::partition(mars_boost::begin(rng), mars_boost::end(rng), pred), rng);
 }
 
 /// \overload
@@ -63,12 +63,12 @@ inline BOOST_DEDUCED_TYPENAME range_return<const ForwardRange,re>::type
 partition(const ForwardRange& rng, UnaryPredicate pred)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( ForwardRangeConcept<const ForwardRange> ));
-    return mars_boost_ksim::range_return<const ForwardRange,re>::
-        pack(std::partition(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), pred), rng);
+    return mars_boost::range_return<const ForwardRange,re>::
+        pack(std::partition(mars_boost::begin(rng), mars_boost::end(rng), pred), rng);
 }
 
     } // namespace range
     using range::partition;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

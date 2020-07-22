@@ -55,31 +55,31 @@ namespace baseevent {
 
 extern "C" {
 
-JNIEXPORT void JNICALL Java_com_tencent_mars_BaseEvent_onCreate(JNIEnv* env, jclass)
+JNIEXPORT void JNICALL Java_com_tencent_marsksim_BaseEvent_onCreate(JNIEnv* env, jclass)
 {
     marsksim::baseevent::OnCreate();
 }
 
-JNIEXPORT void JNICALL Java_com_tencent_mars_BaseEvent_onDestroy(JNIEnv* env, jclass)
+JNIEXPORT void JNICALL Java_com_tencent_marsksim_BaseEvent_onDestroy(JNIEnv* env, jclass)
 {
     marsksim::baseevent::OnDestroy();
 }
 
-JNIEXPORT void JNICALL Java_com_tencent_mars_BaseEvent_onForeground (JNIEnv *, jclass, jboolean _isforeground)
+JNIEXPORT void JNICALL Java_com_tencent_marsksim_BaseEvent_onForeground (JNIEnv *, jclass, jboolean _isforeground)
 {
     marsksim::baseevent::OnForeground(_isforeground);
 }
 
-JNIEXPORT void JNICALL Java_com_tencent_mars_BaseEvent_onNetworkChange (JNIEnv *, jclass)
+JNIEXPORT void JNICALL Java_com_tencent_marsksim_BaseEvent_onNetworkChange (JNIEnv *, jclass)
 {
 	marsksim::baseevent::OnNetworkChange();
 }
 
-JNIEXPORT void JNICALL Java_com_tencent_mars_BaseEvent_onSingalCrash(JNIEnv *, jclass, jint _sig){
+JNIEXPORT void JNICALL Java_com_tencent_marsksim_BaseEvent_onSingalCrash(JNIEnv *, jclass, jint _sig){
     marsksim::baseevent::OnSingalCrash((int)_sig);
 }
 
-JNIEXPORT void JNICALL Java_com_tencent_mars_BaseEvent_onExceptionCrash(JNIEnv*, jclass){
+JNIEXPORT void JNICALL Java_com_tencent_marsksim_BaseEvent_onExceptionCrash(JNIEnv*, jclass){
     marsksim::baseevent::OnExceptionCrash();
 }
 

@@ -12,7 +12,7 @@
 #ifndef BOOST_SYSTEM_LOCAL_FREE_ON_EXIT_HPP
 #define BOOST_SYSTEM_LOCAL_FREE_ON_EXIT_HPP
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace system {
 namespace detail {
 
@@ -35,6 +35,6 @@ private:
 
 } // namespace detail
 } // namespace system
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif  // BOOST_SYSTEM_LOCAL_FREE_ON_EXIT_HPP

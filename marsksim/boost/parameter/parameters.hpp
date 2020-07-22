@@ -53,12 +53,12 @@ namespace parameter_
   template <class T>
   struct unmatched_argument
   {
-      BOOST_MPL_ASSERT((mars_boost_ksim::is_same<T,void>));
+      BOOST_MPL_ASSERT((mars_boost::is_same<T,void>));
       typedef int type;
   }; 
 } // namespace parameter_
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 template<class T> class reference_wrapper;
 
@@ -925,7 +925,7 @@ struct parameters
 
 } // namespace parameter
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_PARAMETERS_031014_HPP
 

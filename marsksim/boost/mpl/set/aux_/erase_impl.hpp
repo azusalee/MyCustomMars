@@ -19,7 +19,7 @@
 #include <boost/mpl/set/aux_/erase_key_impl.hpp>
 #include <boost/mpl/set/aux_/tag.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl {
 
 template<>
 struct erase_impl< aux::set_tag >

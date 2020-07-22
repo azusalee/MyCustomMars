@@ -20,7 +20,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 namespace executors
 {
@@ -138,7 +138,7 @@ namespace executors
         {
 #if 1
           thread th (&basic_thread_pool::worker_thread, this);
-          threads.push_back(thread_t(mars_boost_ksim::move(th)));
+          threads.push_back(thread_t(mars_boost::move(th)));
 #else
           threads.push_back(thread_t(&basic_thread_pool::worker_thread, this)); // do not compile
 #endif
@@ -166,7 +166,7 @@ namespace executors
         for (unsigned i = 0; i < thread_count; ++i)
         {
           thread th (&basic_thread_pool::worker_thread1<AtThreadEntry>, this, at_thread_entry);
-          threads.push_back(thread_t(mars_boost_ksim::move(th)));
+          threads.push_back(thread_t(mars_boost::move(th)));
           //threads.push_back(thread_t(&basic_thread_pool::worker_thread, this)); // do not compile
         }
       }
@@ -185,7 +185,7 @@ namespace executors
         for (unsigned i = 0; i < thread_count; ++i)
         {
           thread th (&basic_thread_pool::worker_thread2, this, at_thread_entry);
-          threads.push_back(thread_t(mars_boost_ksim::move(th)));
+          threads.push_back(thread_t(mars_boost::move(th)));
           //threads.push_back(thread_t(&basic_thread_pool::worker_thread, this)); // do not compile
         }
       }
@@ -203,8 +203,8 @@ namespace executors
         threads.reserve(thread_count);
         for (unsigned i = 0; i < thread_count; ++i)
         {
-          thread th (&basic_thread_pool::worker_thread3<AtThreadEntry>, this, mars_boost_ksim::forward<AtThreadEntry>(at_thread_entry));
-          threads.push_back(thread_t(mars_boost_ksim::move(th)));
+          thread th (&basic_thread_pool::worker_thread3<AtThreadEntry>, this, mars_boost::forward<AtThreadEntry>(at_thread_entry));
+          threads.push_back(thread_t(mars_boost::move(th)));
           //threads.push_back(thread_t(&basic_thread_pool::worker_thread, this)); // do not compile
         }
       }
@@ -267,7 +267,7 @@ namespace executors
      * Whatever exception that can be throw while storing the closure.
      */
     void submit(BOOST_THREAD_RV_REF(work) closure)  {
-      work_queue.push(mars_boost_ksim::move(closure));
+      work_queue.push(mars_boost::move(closure));
     }
 
 #if defined(BOOST_NO_CXX11_RVALUE_REFERENCES)
@@ -285,9 +285,9 @@ namespace executors
     template <typename Closure>
     void submit(BOOST_THREAD_FWD_REF(Closure) closure)
     {
-      //submit(work(mars_boost_ksim::forward<Closure>(closure)));
-      work w((mars_boost_ksim::forward<Closure>(closure)));
-      submit(mars_boost_ksim::move(w));
+      //submit(work(mars_boost::forward<Closure>(closure)));
+      work w((mars_boost::forward<Closure>(closure)));
+      submit(mars_boost::move(w));
     }
 
     /**

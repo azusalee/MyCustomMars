@@ -17,22 +17,22 @@
 #include <boost/range/concepts.hpp>
 #include <boost/iterator/filter_iterator.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range_detail
     {
         template< class P, class R >
         struct filtered_range :
-            mars_boost_ksim::iterator_range<
-                mars_boost_ksim::filter_iterator<
+            mars_boost::iterator_range<
+                mars_boost::filter_iterator<
                     typename default_constructible_unary_fn_gen<P, bool>::type,
                     typename range_iterator<R>::type
                 >
             >
         {
         private:
-            typedef mars_boost_ksim::iterator_range<
-                mars_boost_ksim::filter_iterator<
+            typedef mars_boost::iterator_range<
+                mars_boost::filter_iterator<
                     typename default_constructible_unary_fn_gen<P, bool>::type,
                     typename range_iterator<R>::type
                 >
@@ -43,9 +43,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
             filtered_range(P p, R& r)
             : base(make_filter_iterator(pred_t(p),
-                                        mars_boost_ksim::begin(r), mars_boost_ksim::end(r)),
+                                        mars_boost::begin(r), mars_boost::end(r)),
                    make_filter_iterator(pred_t(p),
-                                        mars_boost_ksim::end(r), mars_boost_ksim::end(r)))
+                                        mars_boost::end(r), mars_boost::end(r)))
             { }
         };
 

@@ -13,7 +13,7 @@
 #include <cstddef>
 #include <boost/detail/workaround.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 template <class T> struct remove_all_extents{ typedef T type; };
 
@@ -30,6 +30,6 @@ template <class T> struct remove_all_extents<T const volatile[]> : public remove
 #endif
 #endif
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_REMOVE_BOUNDS_HPP_INCLUDED

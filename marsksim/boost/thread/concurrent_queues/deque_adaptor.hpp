@@ -18,7 +18,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 namespace concurrent
 {
@@ -27,7 +27,7 @@ namespace detail
 
   template <typename Queue>
   class deque_adaptor_copyable_only :
-    public mars_boost_ksim::deque_base<typename Queue::value_type, typename Queue::size_type>
+    public mars_boost::deque_base<typename Queue::value_type, typename Queue::size_type>
   {
       Queue queue;
   public:
@@ -63,7 +63,7 @@ namespace detail
   };
   template <typename Queue>
   class deque_adaptor_movable_only :
-    public mars_boost_ksim::deque_base<typename Queue::value_type, typename Queue::size_type>
+    public mars_boost::deque_base<typename Queue::value_type, typename Queue::size_type>
   {
       Queue queue;
   public:
@@ -94,15 +94,15 @@ namespace detail
 
     queue_op_status wait_pull_front(value_type& x) { return queue.wait_pull_front(x); }
 
-    void push_back(BOOST_THREAD_RV_REF(value_type) x) { queue.push_back(mars_boost_ksim::move(x)); }
-    queue_op_status try_push_back(BOOST_THREAD_RV_REF(value_type) x) { return queue.try_push_back(mars_boost_ksim::move(x)); }
-    queue_op_status nonblocking_push_back(BOOST_THREAD_RV_REF(value_type) x) { return queue.nonblocking_push_back(mars_boost_ksim::move(x)); }
-    queue_op_status wait_push_back(BOOST_THREAD_RV_REF(value_type) x) { return queue.wait_push_back(mars_boost_ksim::move(x)); }
+    void push_back(BOOST_THREAD_RV_REF(value_type) x) { queue.push_back(mars_boost::move(x)); }
+    queue_op_status try_push_back(BOOST_THREAD_RV_REF(value_type) x) { return queue.try_push_back(mars_boost::move(x)); }
+    queue_op_status nonblocking_push_back(BOOST_THREAD_RV_REF(value_type) x) { return queue.nonblocking_push_back(mars_boost::move(x)); }
+    queue_op_status wait_push_back(BOOST_THREAD_RV_REF(value_type) x) { return queue.wait_push_back(mars_boost::move(x)); }
   };
 
   template <typename Queue>
   class deque_adaptor_copyable_and_movable :
-    public mars_boost_ksim::deque_base<typename Queue::value_type, typename Queue::size_type>
+    public mars_boost::deque_base<typename Queue::value_type, typename Queue::size_type>
   {
       Queue queue;
   public:
@@ -138,10 +138,10 @@ namespace detail
     queue_op_status wait_push_back(const value_type& x) { return queue.wait_push_back(x); }
     queue_op_status wait_pull_front(value_type& x) { return queue.wait_pull_front(x); }
 
-    void push_back(BOOST_THREAD_RV_REF(value_type) x) { queue.push_back(mars_boost_ksim::move(x)); }
-    queue_op_status try_push_back(BOOST_THREAD_RV_REF(value_type) x) { return queue.try_push_back(mars_boost_ksim::move(x)); }
-    queue_op_status nonblocking_push_back(BOOST_THREAD_RV_REF(value_type) x) { return queue.nonblocking_push_back(mars_boost_ksim::move(x)); }
-    queue_op_status wait_push_back(BOOST_THREAD_RV_REF(value_type) x) { return queue.wait_push_back(mars_boost_ksim::move(x)); }
+    void push_back(BOOST_THREAD_RV_REF(value_type) x) { queue.push_back(mars_boost::move(x)); }
+    queue_op_status try_push_back(BOOST_THREAD_RV_REF(value_type) x) { return queue.try_push_back(mars_boost::move(x)); }
+    queue_op_status nonblocking_push_back(BOOST_THREAD_RV_REF(value_type) x) { return queue.nonblocking_push_back(mars_boost::move(x)); }
+    queue_op_status wait_push_back(BOOST_THREAD_RV_REF(value_type) x) { return queue.wait_push_back(mars_boost::move(x)); }
   };
 
 

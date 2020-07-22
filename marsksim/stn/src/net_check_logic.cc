@@ -100,19 +100,19 @@ static const uint32_t kCheckifAboveCount = 5;
 	}\
 	while(false)
 
-NetCheckLogic::NetCheckLogic()
-    : frequency_limit_(new CommFrequencyLimit(kLimitCount, kLimitTimeSpan))
+NetCheckLogicksim::NetCheckLogicksim()
+    : frequency_limit_(new CommFrequencyLimitksim(kLimitCount, kLimitTimeSpan))
 	, last_netcheck_time_(0) {
     xinfo_function();
 }
 
-NetCheckLogic::~NetCheckLogic() {
+NetCheckLogicksim::~NetCheckLogicksim() {
     xinfo_function();
 
     delete frequency_limit_;
 }
 
-void NetCheckLogic::UpdateLongLinkInfo(unsigned int _continues_fail_count, bool _task_succ) {
+void NetCheckLogicksim::UpdateLongLinkInfo(unsigned int _continues_fail_count, bool _task_succ) {
 	if (!_task_succ ) longlink_taskstatus_item_.last_failedtime = ::gettickcount();
 	SET_BIT(_task_succ, longlink_taskstatus_item_.records, kValidBitsFilter);
 	xdebug2("shortlink:_continueFailCount=%d, _isTaskSucc=%d, records=0x%x", _continues_fail_count, _task_succ, longlink_taskstatus_item_.records);
@@ -122,7 +122,7 @@ void NetCheckLogic::UpdateLongLinkInfo(unsigned int _continues_fail_count, bool 
     }
 }
 
-void NetCheckLogic::UpdateShortLinkInfo(unsigned int _continues_fail_count, bool _task_succ) {
+void NetCheckLogicksim::UpdateShortLinkInfo(unsigned int _continues_fail_count, bool _task_succ) {
 
 	if (!_task_succ ) shortlink_taskstatus_item_.last_failedtime = ::gettickcount();
 	SET_BIT(_task_succ, shortlink_taskstatus_item_.records, kValidBitsFilter);
@@ -133,7 +133,7 @@ void NetCheckLogic::UpdateShortLinkInfo(unsigned int _continues_fail_count, bool
     }
 }
 
-bool NetCheckLogic::__ShouldNetCheck() {
+bool NetCheckLogicksim::__ShouldNetCheck() {
 
     bool ret = false;
 
@@ -205,7 +205,7 @@ bool NetCheckLogic::__ShouldNetCheck() {
     return ret;
 }
 
-void NetCheckLogic::__StartNetCheck() {
+void NetCheckLogicksim::__StartNetCheck() {
 
 	//get longlink check map
 	CheckIPPorts longlink_check_items;

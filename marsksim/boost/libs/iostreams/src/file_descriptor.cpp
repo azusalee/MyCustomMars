@@ -40,7 +40,7 @@
 # include <unistd.h>     // low-level file i/o.
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace iostreams {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace iostreams {
 
 //------------------Definition of file_descriptor_impl------------------------//
 
@@ -122,7 +122,7 @@ void file_descriptor_impl::open(const detail::path& p, BOOST_IOS::openmode mode)
          (BOOST_IOS::in | BOOST_IOS::out) )
     {
         if (mode & BOOST_IOS::app)
-            mars_boost_ksim::throw_exception(BOOST_IOSTREAMS_FAILURE("bad open mode"));
+            mars_boost::throw_exception(BOOST_IOSTREAMS_FAILURE("bad open mode"));
         dwDesiredAccess = GENERIC_READ | GENERIC_WRITE;
         dwCreationDisposition =
             (mode & BOOST_IOS::trunc) ?
@@ -130,14 +130,14 @@ void file_descriptor_impl::open(const detail::path& p, BOOST_IOS::openmode mode)
                 OPEN_EXISTING;
     } else if (mode & BOOST_IOS::in) {
         if (mode & (BOOST_IOS::app | BOOST_IOS::trunc))
-            mars_boost_ksim::throw_exception(BOOST_IOSTREAMS_FAILURE("bad open mode"));
+            mars_boost::throw_exception(BOOST_IOSTREAMS_FAILURE("bad open mode"));
         dwDesiredAccess = GENERIC_READ;
         dwCreationDisposition = OPEN_EXISTING;
     } else if (mode & BOOST_IOS::out) {
         if ( (mode & (BOOST_IOS::app | BOOST_IOS::trunc))
                  ==
               (BOOST_IOS::app | BOOST_IOS::trunc) )
-            mars_boost_ksim::throw_exception(BOOST_IOSTREAMS_FAILURE("bad open mode"));
+            mars_boost::throw_exception(BOOST_IOSTREAMS_FAILURE("bad open mode"));
         if (mode & BOOST_IOS::app) {
             dwCreationDisposition = OPEN_ALWAYS;
             dwDesiredAccess = 
@@ -151,7 +151,7 @@ void file_descriptor_impl::open(const detail::path& p, BOOST_IOS::openmode mode)
             dwCreationDisposition = CREATE_ALWAYS;
         }
     } else {
-        mars_boost_ksim::throw_exception(BOOST_IOSTREAMS_FAILURE("bad open mode"));
+        mars_boost::throw_exception(BOOST_IOSTREAMS_FAILURE("bad open mode"));
     }
 
     HANDLE handle = p.is_wide() ?
@@ -186,7 +186,7 @@ void file_descriptor_impl::open(const detail::path& p, BOOST_IOS::openmode mode)
          (BOOST_IOS::in | BOOST_IOS::out) )
     {
         if( mode & BOOST_IOS::app )
-            mars_boost_ksim::throw_exception(BOOST_IOSTREAMS_FAILURE("bad open mode"));
+            mars_boost::throw_exception(BOOST_IOSTREAMS_FAILURE("bad open mode"));
         oflag |= O_RDWR;
         if( mode & BOOST_IOS::trunc ) {
             oflag |= O_TRUNC;
@@ -194,13 +194,13 @@ void file_descriptor_impl::open(const detail::path& p, BOOST_IOS::openmode mode)
         }
     } else if (mode & BOOST_IOS::in) {
         if( mode & (BOOST_IOS::app | BOOST_IOS::trunc) )
-            mars_boost_ksim::throw_exception(BOOST_IOSTREAMS_FAILURE("bad open mode"));
+            mars_boost::throw_exception(BOOST_IOSTREAMS_FAILURE("bad open mode"));
         oflag |= O_RDONLY;
     } else if (mode & BOOST_IOS::out) {
         if( (mode & (BOOST_IOS::app | BOOST_IOS::trunc))
                ==
             (BOOST_IOS::app | BOOST_IOS::trunc) )
-            mars_boost_ksim::throw_exception(BOOST_IOSTREAMS_FAILURE("bad open mode"));
+            mars_boost::throw_exception(BOOST_IOSTREAMS_FAILURE("bad open mode"));
         oflag |= O_WRONLY;
         if (mode & BOOST_IOS::app)
             oflag |= O_APPEND;
@@ -209,7 +209,7 @@ void file_descriptor_impl::open(const detail::path& p, BOOST_IOS::openmode mode)
             oflag |= O_TRUNC; 
         }
     } else {
-        mars_boost_ksim::throw_exception(BOOST_IOSTREAMS_FAILURE("bad open mode"));
+        mars_boost::throw_exception(BOOST_IOSTREAMS_FAILURE("bad open mode"));
     }
     #ifdef _LARGEFILE64_SOURCE
         oflag |= O_LARGEFILE;
@@ -225,7 +225,7 @@ void file_descriptor_impl::open(const detail::path& p, BOOST_IOS::openmode mode)
 
     int fd = BOOST_IOSTREAMS_FD_OPEN(p.c_str(), oflag, pmode);
     if (fd == -1) {
-        mars_boost_ksim::throw_exception(system_failure("failed opening file"));
+        mars_boost::throw_exception(system_failure("failed opening file"));
     } else {
         handle_ = fd;
         flags_ = close_always;
@@ -315,7 +315,7 @@ std::streampos file_descriptor_impl::seek
     if ( dwResultLow == INVALID_SET_FILE_POINTER &&
          ::GetLastError() != NO_ERROR )
     {
-        mars_boost_ksim::throw_exception(system_failure("failed seeking"));
+        mars_boost::throw_exception(system_failure("failed seeking"));
     } else {
        return offset_to_position(
                   (stream_offset(lDistanceToMoveHigh) << 32) + dwResultLow
@@ -325,7 +325,7 @@ std::streampos file_descriptor_impl::seek
     if ( off > integer_traits<BOOST_IOSTREAMS_FD_OFFSET>::const_max ||
          off < integer_traits<BOOST_IOSTREAMS_FD_OFFSET>::const_min )
     {
-        mars_boost_ksim::throw_exception(BOOST_IOSTREAMS_FAILURE("bad offset"));
+        mars_boost::throw_exception(BOOST_IOSTREAMS_FAILURE("bad offset"));
     }
     stream_offset result =
         BOOST_IOSTREAMS_FD_SEEK(
@@ -338,7 +338,7 @@ std::streampos file_descriptor_impl::seek
                       SEEK_END ) 
         );
     if (result == -1)
-        mars_boost_ksim::throw_exception(system_failure("failed seeking"));
+        mars_boost::throw_exception(system_failure("failed seeking"));
     return offset_to_position(result);
 #endif // #ifdef BOOST_IOSTREAMS_WINDOWS
 }
@@ -522,7 +522,7 @@ void file_descriptor_source::open(
     const detail::path& path, BOOST_IOS::openmode mode)
 { 
     if (mode & (BOOST_IOS::out | BOOST_IOS::app | BOOST_IOS::trunc))
-        mars_boost_ksim::throw_exception(BOOST_IOSTREAMS_FAILURE("invalid mode"));
+        mars_boost::throw_exception(BOOST_IOSTREAMS_FAILURE("invalid mode"));
     file_descriptor::open(path, mode, BOOST_IOS::in); 
 }
                     
@@ -594,7 +594,7 @@ void file_descriptor_sink::open(
     const detail::path& path, BOOST_IOS::openmode mode)
 { 
     if (mode & BOOST_IOS::in)
-        mars_boost_ksim::throw_exception(BOOST_IOSTREAMS_FAILURE("invalid mode"));
+        mars_boost::throw_exception(BOOST_IOSTREAMS_FAILURE("invalid mode"));
     file_descriptor::open(path, mode, BOOST_IOS::out); 
 }
 

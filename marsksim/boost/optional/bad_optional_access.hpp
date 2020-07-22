@@ -17,7 +17,7 @@
 #include <string> // to make converting-ctor std::string(char const*) visible
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 class bad_optional_access : public std::logic_error
 {
@@ -27,6 +27,6 @@ public:
     {}
 };
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif

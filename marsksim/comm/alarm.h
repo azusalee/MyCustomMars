@@ -29,26 +29,26 @@
 #include "android/wakeuplock.h"
 #endif
 
-class Alarm {
+class Alarmksim {
   public:
     enum {
         kInit,
         kStart,
         kCancel,
-        kOnAlarm,
+        kOnAlarmksim,
     };
 
   public:
     template<class T>
-    explicit Alarm(const T& _op, bool _inthread = true)
+    explicit Alarmksim(const T& _op, bool _inthread = true)
         : target_(detail::transform(_op))
         , reg_async_(MessageQueueksim::InstallAsyncHandler(MessageQueueksim::GetDefMessageQueueksim()))
         , broadcast_msg_id_(MessageQueueksim::KNullPost)
-        , runthread_(boost_ksim::bind(&Alarm::__Run, this), "alarm")
+        , runthread_(boost_ksim::bind(&Alarmksim::__Run, this), "alarm")
         , inthread_(_inthread)
         , seq_(0), status_(kInit)
         , after_(0) , starttime_(0) , endtime_(0)
-        , reg_(MessageQueueksim::InstallMessageHandler(boost_ksim::bind(&Alarm::OnAlarm, this, _1, _2), true))
+        , reg_(MessageQueueksim::InstallMessageHandler(boost_ksim::bind(&Alarmksim::OnAlarmksim, this, _1, _2), true))
 #ifdef ANDROID
         , wakelock_(NULL)
 #endif
@@ -57,15 +57,15 @@ class Alarm {
     }
 
     template<class T>
-    explicit Alarm(const T& _op, const MessageQueueksim::MessageQueueksim_t& _id)
+    explicit Alarmksim(const T& _op, const MessageQueueksim::MessageQueueksim_t& _id)
         : target_(detail::transform(_op))
         , reg_async_(MessageQueueksim::InstallAsyncHandler(_id))
         , broadcast_msg_id_(MessageQueueksim::KNullPost)
-        , runthread_(boost_ksim::bind(&Alarm::__Run, this), "alarm")
+        , runthread_(boost_ksim::bind(&Alarmksim::__Run, this), "alarm")
         , inthread_(false)
         , seq_(0), status_(kInit)
         , after_(0) , starttime_(0) , endtime_(0)
-        , reg_(MessageQueueksim::InstallMessageHandler(boost_ksim::bind(&Alarm::OnAlarm, this, _1, _2), true))
+        , reg_(MessageQueueksim::InstallMessageHandler(boost_ksim::bind(&Alarmksim::OnAlarmksim, this, _1, _2), true))
 #ifdef ANDROID
         , wakelock_(NULL)
 #endif
@@ -73,7 +73,7 @@ class Alarm {
         xinfo2(TSF"handler:(%_,%_)", reg_async_.Get().queue, reg_async_.Get().seq);
     }
 
-    virtual ~Alarm() {
+    virtual ~Alarmksim() {
         Cancel();
         reg_.CancelAndWait();
         reg_async_.CancelAndWait();
@@ -95,15 +95,15 @@ class Alarm {
     const Thread& RunThread() const;
 
   private:
-    Alarm(const Alarm&);
-    Alarm& operator=(const Alarm&);
+    Alarmksim(const Alarmksim&);
+    Alarmksim& operator=(const Alarmksim&);
 
-    void OnAlarm(const MessageQueueksim::MessagePost_t& _id, MessageQueueksim::Message& _message);
+    void OnAlarmksim(const MessageQueueksim::MessagePost_t& _id, MessageQueueksim::Message& _message);
     virtual void    __Run();
 
   private:
     Runnable*                   target_;
-    MessageQueueksim::ScopeRegister reg_async_;
+    MessageQueueksim::ScopeRegisterksim reg_async_;
     MessageQueueksim::MessagePost_t broadcast_msg_id_;
     Thread                      runthread_;
     bool                        inthread_;
@@ -115,7 +115,7 @@ class Alarm {
     uint64_t          			starttime_;
     uint64_t          			endtime_;
 
-    MessageQueueksim::ScopeRegister reg_;
+    MessageQueueksim::ScopeRegisterksim reg_;
 #ifdef ANDROID
     WakeUpLock*                 wakelock_;
 #endif

@@ -1,8 +1,8 @@
 // DEPRECATED in favor of adl_predestruct with deconstruct<T>().
 // A simple framework for creating objects with predestructors.
-// The objects must inherit from mars_boost_ksim::signals2::predestructible, and
+// The objects must inherit from mars_boost::signals2::predestructible, and
 // have their lifetimes managed by
-// mars_boost_ksim::shared_ptr created with the mars_boost_ksim::signals2::deconstruct_ptr()
+// mars_boost::shared_ptr created with the mars_boost::signals2::deconstruct_ptr()
 // function.
 //
 // Copyright Frank Mori Hess 2007-2008.
@@ -15,7 +15,7 @@
 #ifndef BOOST_SIGNALS2_PREDESTRUCTIBLE_HPP
 #define BOOST_SIGNALS2_PREDESTRUCTIBLE_HPP
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace signals2
   {

@@ -32,7 +32,7 @@
 #include <cstddef>
 #include <new>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   template<typename T> class enable_shared_from_this;
 
@@ -57,7 +57,7 @@ public:
     {
         if(!_postconstructed)
         {
-            adl_postconstruct(_sp, const_cast<typename mars_boost_ksim::remove_const<T>::type *>(_sp.get()));
+            adl_postconstruct(_sp, const_cast<typename mars_boost::remove_const<T>::type *>(_sp.get()));
             _postconstructed = true;
         }
         return _sp;
@@ -68,7 +68,7 @@ public:
     {
         if(!_postconstructed)
         {
-            adl_postconstruct(_sp, const_cast<typename mars_boost_ksim::remove_const<T>::type *>(_sp.get()),
+            adl_postconstruct(_sp, const_cast<typename mars_boost::remove_const<T>::type *>(_sp.get()),
                 std::forward<Args>(args)...);
             _postconstructed = true;
         }
@@ -80,7 +80,7 @@ public:
     {
         if(!_postconstructed)
         {
-            adl_postconstruct(_sp, const_cast<typename mars_boost_ksim::remove_const<T>::type *>(_sp.get()),
+            adl_postconstruct(_sp, const_cast<typename mars_boost::remove_const<T>::type *>(_sp.get()),
                 a1);
             _postconstructed = true;
         }
@@ -91,7 +91,7 @@ public:
     {
         if(!_postconstructed)
         {
-            adl_postconstruct(_sp, const_cast<typename mars_boost_ksim::remove_const<T>::type *>(_sp.get()),
+            adl_postconstruct(_sp, const_cast<typename mars_boost::remove_const<T>::type *>(_sp.get()),
                 a1, a2);
             _postconstructed = true;
         }
@@ -102,7 +102,7 @@ public:
     {
         if(!_postconstructed)
         {
-            adl_postconstruct(_sp, const_cast<typename mars_boost_ksim::remove_const<T>::type *>(_sp.get()),
+            adl_postconstruct(_sp, const_cast<typename mars_boost::remove_const<T>::type *>(_sp.get()),
                 a1, a2, a3);
             _postconstructed = true;
         }
@@ -113,7 +113,7 @@ public:
     {
         if(!_postconstructed)
         {
-            adl_postconstruct(_sp, const_cast<typename mars_boost_ksim::remove_const<T>::type *>(_sp.get()),
+            adl_postconstruct(_sp, const_cast<typename mars_boost::remove_const<T>::type *>(_sp.get()),
                 a1, a2, a3, a4);
             _postconstructed = true;
         }
@@ -124,7 +124,7 @@ public:
     {
         if(!_postconstructed)
         {
-            adl_postconstruct(_sp, const_cast<typename mars_boost_ksim::remove_const<T>::type *>(_sp.get()),
+            adl_postconstruct(_sp, const_cast<typename mars_boost::remove_const<T>::type *>(_sp.get()),
                 a1, a2, a3, a4, a5);
             _postconstructed = true;
         }
@@ -137,7 +137,7 @@ public:
     {
         if(!_postconstructed)
         {
-            adl_postconstruct(_sp, const_cast<typename mars_boost_ksim::remove_const<T>::type *>(_sp.get()),
+            adl_postconstruct(_sp, const_cast<typename mars_boost::remove_const<T>::type *>(_sp.get()),
                 a1, a2, a3, a4, a5, a6);
             _postconstructed = true;
         }
@@ -150,7 +150,7 @@ public:
     {
         if(!_postconstructed)
         {
-            adl_postconstruct(_sp, const_cast<typename mars_boost_ksim::remove_const<T>::type *>(_sp.get()),
+            adl_postconstruct(_sp, const_cast<typename mars_boost::remove_const<T>::type *>(_sp.get()),
                 a1, a2, a3, a4, a5, a6, a7);
             _postconstructed = true;
         }
@@ -163,7 +163,7 @@ public:
     {
         if(!_postconstructed)
         {
-            adl_postconstruct(_sp, const_cast<typename mars_boost_ksim::remove_const<T>::type *>(_sp.get()),
+            adl_postconstruct(_sp, const_cast<typename mars_boost::remove_const<T>::type *>(_sp.get()),
                 a1, a2, a3, a4, a5, a6, a7, a8);
             _postconstructed = true;
         }
@@ -176,7 +176,7 @@ public:
     {
         if(!_postconstructed)
         {
-            adl_postconstruct(_sp, const_cast<typename mars_boost_ksim::remove_const<T>::type *>(_sp.get()),
+            adl_postconstruct(_sp, const_cast<typename mars_boost::remove_const<T>::type *>(_sp.get()),
                 a1, a2, a3, a4, a5, a6, a7, a8, a9);
             _postconstructed = true;
         }
@@ -184,7 +184,7 @@ public:
     }
 #endif // !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES) && !defined(BOOST_NO_CXX11_RVALUE_REFERENCES)
 private:
-    friend class mars_boost_ksim::signals2::deconstruct_access;
+    friend class mars_boost::signals2::deconstruct_access;
     postconstructor_invoker(const shared_ptr<T> & sp):
         _sp(sp), _postconstructed(false)
     {}
@@ -200,7 +200,7 @@ template< std::size_t N, std::size_t A > struct sp_aligned_storage
     union type
     {
         char data_[ N ];
-        typename mars_boost_ksim::type_with_alignment< A >::type align_;
+        typename mars_boost::type_with_alignment< A >::type align_;
     };
 };
 
@@ -208,7 +208,7 @@ template< class T > class deconstruct_deleter
 {
 private:
 
-    typedef typename sp_aligned_storage< sizeof( T ), ::mars_boost_ksim::alignment_of< T >::value >::type storage_type;
+    typedef typename sp_aligned_storage< sizeof( T ), ::mars_boost::alignment_of< T >::value >::type storage_type;
 
     bool initialized_;
     storage_type storage_;
@@ -220,8 +220,8 @@ private:
         if( initialized_ )
         {
             T* p = reinterpret_cast< T* >( storage_.data_ );
-            using mars_boost_ksim::signals2::detail::adl_predestruct;
-            adl_predestruct(const_cast<typename mars_boost_ksim::remove_const<T>::type *>(p));
+            using mars_boost::signals2::detail::adl_predestruct;
+            adl_predestruct(const_cast<typename mars_boost::remove_const<T>::type *>(p));
             p->~T();
             initialized_ = false;
         }
@@ -268,17 +268,17 @@ public:
     template< class T >
     static postconstructor_invoker<T> deconstruct()
     {
-        mars_boost_ksim::shared_ptr< T > pt( static_cast< T* >( 0 ), detail::deconstruct_deleter< T >() );
+        mars_boost::shared_ptr< T > pt( static_cast< T* >( 0 ), detail::deconstruct_deleter< T >() );
 
-        detail::deconstruct_deleter< T > * pd = mars_boost_ksim::get_deleter< detail::deconstruct_deleter< T > >( pt );
+        detail::deconstruct_deleter< T > * pd = mars_boost::get_deleter< detail::deconstruct_deleter< T > >( pt );
 
         void * pv = pd->address();
 
         new( pv ) T();
         pd->set_initialized();
 
-        mars_boost_ksim::shared_ptr< T > retval( pt, static_cast< T* >( pv ) );
-        mars_boost_ksim::detail::sp_enable_shared_from_this(&retval, retval.get(), retval.get());
+        mars_boost::shared_ptr< T > retval( pt, static_cast< T* >( pv ) );
+        mars_boost::detail::sp_enable_shared_from_this(&retval, retval.get(), retval.get());
         return retval;
 
     }
@@ -290,17 +290,17 @@ public:
     template< class T, class... Args >
     static postconstructor_invoker<T> deconstruct( Args && ... args )
     {
-        mars_boost_ksim::shared_ptr< T > pt( static_cast< T* >( 0 ), detail::deconstruct_deleter< T >() );
+        mars_boost::shared_ptr< T > pt( static_cast< T* >( 0 ), detail::deconstruct_deleter< T >() );
 
-        detail::deconstruct_deleter< T > * pd = mars_boost_ksim::get_deleter< detail::deconstruct_deleter< T > >( pt );
+        detail::deconstruct_deleter< T > * pd = mars_boost::get_deleter< detail::deconstruct_deleter< T > >( pt );
 
         void * pv = pd->address();
 
         new( pv ) T( std::forward<Args>( args )... );
         pd->set_initialized();
 
-        mars_boost_ksim::shared_ptr< T > retval( pt, static_cast< T* >( pv ) );
-        mars_boost_ksim::detail::sp_enable_shared_from_this(&retval, retval.get(), retval.get());
+        mars_boost::shared_ptr< T > retval( pt, static_cast< T* >( pv ) );
+        mars_boost::detail::sp_enable_shared_from_this(&retval, retval.get(), retval.get());
         return retval;
     }
 
@@ -309,153 +309,153 @@ public:
     template< class T, class A1 >
     static postconstructor_invoker<T> deconstruct( A1 const & a1 )
     {
-        mars_boost_ksim::shared_ptr< T > pt( static_cast< T* >( 0 ), detail::deconstruct_deleter< T >() );
+        mars_boost::shared_ptr< T > pt( static_cast< T* >( 0 ), detail::deconstruct_deleter< T >() );
 
-        detail::deconstruct_deleter< T > * pd = mars_boost_ksim::get_deleter< detail::deconstruct_deleter< T > >( pt );
+        detail::deconstruct_deleter< T > * pd = mars_boost::get_deleter< detail::deconstruct_deleter< T > >( pt );
 
         void * pv = pd->address();
 
         new( pv ) T( a1 );
         pd->set_initialized();
 
-        mars_boost_ksim::shared_ptr< T > retval( pt, static_cast< T* >( pv ) );
-        mars_boost_ksim::detail::sp_enable_shared_from_this(&retval, retval.get(), retval.get());
+        mars_boost::shared_ptr< T > retval( pt, static_cast< T* >( pv ) );
+        mars_boost::detail::sp_enable_shared_from_this(&retval, retval.get(), retval.get());
         return retval;
     }
 
     template< class T, class A1, class A2 >
     static postconstructor_invoker<T> deconstruct( A1 const & a1, A2 const & a2 )
     {
-        mars_boost_ksim::shared_ptr< T > pt( static_cast< T* >( 0 ), detail::deconstruct_deleter< T >() );
+        mars_boost::shared_ptr< T > pt( static_cast< T* >( 0 ), detail::deconstruct_deleter< T >() );
 
-        detail::deconstruct_deleter< T > * pd = mars_boost_ksim::get_deleter< detail::deconstruct_deleter< T > >( pt );
+        detail::deconstruct_deleter< T > * pd = mars_boost::get_deleter< detail::deconstruct_deleter< T > >( pt );
 
         void * pv = pd->address();
 
         new( pv ) T( a1, a2 );
         pd->set_initialized();
 
-        mars_boost_ksim::shared_ptr< T > retval( pt, static_cast< T* >( pv ) );
-        mars_boost_ksim::detail::sp_enable_shared_from_this(&retval, retval.get(), retval.get());
+        mars_boost::shared_ptr< T > retval( pt, static_cast< T* >( pv ) );
+        mars_boost::detail::sp_enable_shared_from_this(&retval, retval.get(), retval.get());
         return retval;
     }
 
     template< class T, class A1, class A2, class A3 >
     static postconstructor_invoker<T> deconstruct( A1 const & a1, A2 const & a2, A3 const & a3 )
     {
-        mars_boost_ksim::shared_ptr< T > pt( static_cast< T* >( 0 ), detail::deconstruct_deleter< T >() );
+        mars_boost::shared_ptr< T > pt( static_cast< T* >( 0 ), detail::deconstruct_deleter< T >() );
 
-        detail::deconstruct_deleter< T > * pd = mars_boost_ksim::get_deleter< detail::deconstruct_deleter< T > >( pt );
+        detail::deconstruct_deleter< T > * pd = mars_boost::get_deleter< detail::deconstruct_deleter< T > >( pt );
 
         void * pv = pd->address();
 
         new( pv ) T( a1, a2, a3 );
         pd->set_initialized();
 
-        mars_boost_ksim::shared_ptr< T > retval( pt, static_cast< T* >( pv ) );
-        mars_boost_ksim::detail::sp_enable_shared_from_this(&retval, retval.get(), retval.get());
+        mars_boost::shared_ptr< T > retval( pt, static_cast< T* >( pv ) );
+        mars_boost::detail::sp_enable_shared_from_this(&retval, retval.get(), retval.get());
         return retval;
     }
 
     template< class T, class A1, class A2, class A3, class A4 >
     static postconstructor_invoker<T> deconstruct( A1 const & a1, A2 const & a2, A3 const & a3, A4 const & a4 )
     {
-        mars_boost_ksim::shared_ptr< T > pt( static_cast< T* >( 0 ), detail::deconstruct_deleter< T >() );
+        mars_boost::shared_ptr< T > pt( static_cast< T* >( 0 ), detail::deconstruct_deleter< T >() );
 
-        detail::deconstruct_deleter< T > * pd = mars_boost_ksim::get_deleter< detail::deconstruct_deleter< T > >( pt );
+        detail::deconstruct_deleter< T > * pd = mars_boost::get_deleter< detail::deconstruct_deleter< T > >( pt );
 
         void * pv = pd->address();
 
         new( pv ) T( a1, a2, a3, a4 );
         pd->set_initialized();
 
-        mars_boost_ksim::shared_ptr< T > retval( pt, static_cast< T* >( pv ) );
-        mars_boost_ksim::detail::sp_enable_shared_from_this(&retval, retval.get(), retval.get());
+        mars_boost::shared_ptr< T > retval( pt, static_cast< T* >( pv ) );
+        mars_boost::detail::sp_enable_shared_from_this(&retval, retval.get(), retval.get());
         return retval;
     }
 
     template< class T, class A1, class A2, class A3, class A4, class A5 >
     static postconstructor_invoker<T> deconstruct( A1 const & a1, A2 const & a2, A3 const & a3, A4 const & a4, A5 const & a5 )
     {
-        mars_boost_ksim::shared_ptr< T > pt( static_cast< T* >( 0 ), detail::deconstruct_deleter< T >() );
+        mars_boost::shared_ptr< T > pt( static_cast< T* >( 0 ), detail::deconstruct_deleter< T >() );
 
-        detail::deconstruct_deleter< T > * pd = mars_boost_ksim::get_deleter< detail::deconstruct_deleter< T > >( pt );
+        detail::deconstruct_deleter< T > * pd = mars_boost::get_deleter< detail::deconstruct_deleter< T > >( pt );
 
         void * pv = pd->address();
 
         new( pv ) T( a1, a2, a3, a4, a5 );
         pd->set_initialized();
 
-        mars_boost_ksim::shared_ptr< T > retval( pt, static_cast< T* >( pv ) );
-        mars_boost_ksim::detail::sp_enable_shared_from_this(&retval, retval.get(), retval.get());
+        mars_boost::shared_ptr< T > retval( pt, static_cast< T* >( pv ) );
+        mars_boost::detail::sp_enable_shared_from_this(&retval, retval.get(), retval.get());
         return retval;
     }
 
     template< class T, class A1, class A2, class A3, class A4, class A5, class A6 >
     static postconstructor_invoker<T> deconstruct( A1 const & a1, A2 const & a2, A3 const & a3, A4 const & a4, A5 const & a5, A6 const & a6 )
     {
-        mars_boost_ksim::shared_ptr< T > pt( static_cast< T* >( 0 ), detail::deconstruct_deleter< T >() );
+        mars_boost::shared_ptr< T > pt( static_cast< T* >( 0 ), detail::deconstruct_deleter< T >() );
 
-        detail::deconstruct_deleter< T > * pd = mars_boost_ksim::get_deleter< detail::deconstruct_deleter< T > >( pt );
+        detail::deconstruct_deleter< T > * pd = mars_boost::get_deleter< detail::deconstruct_deleter< T > >( pt );
 
         void * pv = pd->address();
 
         new( pv ) T( a1, a2, a3, a4, a5, a6 );
         pd->set_initialized();
 
-        mars_boost_ksim::shared_ptr< T > retval( pt, static_cast< T* >( pv ) );
-        mars_boost_ksim::detail::sp_enable_shared_from_this(&retval, retval.get(), retval.get());
+        mars_boost::shared_ptr< T > retval( pt, static_cast< T* >( pv ) );
+        mars_boost::detail::sp_enable_shared_from_this(&retval, retval.get(), retval.get());
         return retval;
     }
 
     template< class T, class A1, class A2, class A3, class A4, class A5, class A6, class A7 >
     static postconstructor_invoker<T> deconstruct( A1 const & a1, A2 const & a2, A3 const & a3, A4 const & a4, A5 const & a5, A6 const & a6, A7 const & a7 )
     {
-        mars_boost_ksim::shared_ptr< T > pt( static_cast< T* >( 0 ), detail::deconstruct_deleter< T >() );
+        mars_boost::shared_ptr< T > pt( static_cast< T* >( 0 ), detail::deconstruct_deleter< T >() );
 
-        detail::deconstruct_deleter< T > * pd = mars_boost_ksim::get_deleter< detail::deconstruct_deleter< T > >( pt );
+        detail::deconstruct_deleter< T > * pd = mars_boost::get_deleter< detail::deconstruct_deleter< T > >( pt );
 
         void * pv = pd->address();
 
         new( pv ) T( a1, a2, a3, a4, a5, a6, a7 );
         pd->set_initialized();
 
-        mars_boost_ksim::shared_ptr< T > retval( pt, static_cast< T* >( pv ) );
-        mars_boost_ksim::detail::sp_enable_shared_from_this(&retval, retval.get(), retval.get());
+        mars_boost::shared_ptr< T > retval( pt, static_cast< T* >( pv ) );
+        mars_boost::detail::sp_enable_shared_from_this(&retval, retval.get(), retval.get());
         return retval;
     }
 
     template< class T, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8 >
     static postconstructor_invoker<T> deconstruct( A1 const & a1, A2 const & a2, A3 const & a3, A4 const & a4, A5 const & a5, A6 const & a6, A7 const & a7, A8 const & a8 )
     {
-        mars_boost_ksim::shared_ptr< T > pt( static_cast< T* >( 0 ), detail::deconstruct_deleter< T >() );
+        mars_boost::shared_ptr< T > pt( static_cast< T* >( 0 ), detail::deconstruct_deleter< T >() );
 
-        detail::deconstruct_deleter< T > * pd = mars_boost_ksim::get_deleter< detail::deconstruct_deleter< T > >( pt );
+        detail::deconstruct_deleter< T > * pd = mars_boost::get_deleter< detail::deconstruct_deleter< T > >( pt );
 
         void * pv = pd->address();
 
         new( pv ) T( a1, a2, a3, a4, a5, a6, a7, a8 );
         pd->set_initialized();
 
-        mars_boost_ksim::shared_ptr< T > retval( pt, static_cast< T* >( pv ) );
-        mars_boost_ksim::detail::sp_enable_shared_from_this(&retval, retval.get(), retval.get());
+        mars_boost::shared_ptr< T > retval( pt, static_cast< T* >( pv ) );
+        mars_boost::detail::sp_enable_shared_from_this(&retval, retval.get(), retval.get());
         return retval;
     }
 
     template< class T, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9 >
     static postconstructor_invoker<T> deconstruct( A1 const & a1, A2 const & a2, A3 const & a3, A4 const & a4, A5 const & a5, A6 const & a6, A7 const & a7, A8 const & a8, A9 const & a9 )
     {
-        mars_boost_ksim::shared_ptr< T > pt( static_cast< T* >( 0 ), detail::deconstruct_deleter< T >() );
+        mars_boost::shared_ptr< T > pt( static_cast< T* >( 0 ), detail::deconstruct_deleter< T >() );
 
-        detail::deconstruct_deleter< T > * pd = mars_boost_ksim::get_deleter< detail::deconstruct_deleter< T > >( pt );
+        detail::deconstruct_deleter< T > * pd = mars_boost::get_deleter< detail::deconstruct_deleter< T > >( pt );
 
         void * pv = pd->address();
 
         new( pv ) T( a1, a2, a3, a4, a5, a6, a7, a8, a9 );
         pd->set_initialized();
 
-        mars_boost_ksim::shared_ptr< T > retval( pt, static_cast< T* >( pv ) );
-        mars_boost_ksim::detail::sp_enable_shared_from_this(&retval, retval.get(), retval.get());
+        mars_boost::shared_ptr< T > retval( pt, static_cast< T* >( pv ) );
+        mars_boost::detail::sp_enable_shared_from_this(&retval, retval.get(), retval.get());
         return retval;
     }
 
@@ -541,6 +541,6 @@ postconstructor_invoker<T> deconstruct( A1 const & a1, A2 const & a2, A3 const &
 #endif
 
 } // namespace signals2
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // #ifndef BOOST_SIGNALS2_DECONSTRUCT_HPP

@@ -44,7 +44,7 @@
 # include <boost/utility/enable_if.hpp>
 # include <boost/type_traits/is_const.hpp>
 # define BOOST_ACCUMULATORS_PROTO_DISABLE_IF_IS_CONST(T)\
-    , typename mars_boost_ksim::disable_if<mars_boost_ksim::is_const<T> >::type * = 0
+    , typename mars_boost::disable_if<mars_boost::is_const<T> >::type * = 0
 #else
 # define BOOST_ACCUMULATORS_PROTO_DISABLE_IF_IS_CONST(T)
 #endif
@@ -52,7 +52,7 @@
 #define BOOST_ACCUMULATORS_GCC_VERSION                                                              \
   (__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__)
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace accumulators
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace accumulators
 {
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -193,16 +193,16 @@ namespace detail
         {                                                               \
             void ignore()                                               \
             {                                                           \
-                mars_boost_ksim::accumulators::detail::ignore_variable(&X);       \
+                mars_boost::accumulators::detail::ignore_variable(&X);       \
             }                                                           \
         };                                                              \
     }                                                                   \
     /**/
 }
 
-}} // namespace mars_boost_ksim::accumulators
+}} // namespace mars_boost::accumulators
 
-// For defining mars_boost_ksim::parameter keywords that can be inherited from to
+// For defining mars_boost::parameter keywords that can be inherited from to
 // get a nested, class-scoped keyword with the requested alias
 #define BOOST_PARAMETER_NESTED_KEYWORD(tag_namespace, name, alias)                                  \
     namespace tag_namespace                                                                         \
@@ -214,17 +214,17 @@ namespace detail
             {                                                                                       \
                 return #name;                                                                       \
             }                                                                                       \
-            static ::mars_boost_ksim::parameter::keyword<name ## _<Dummy> > &alias;                           \
+            static ::mars_boost::parameter::keyword<name ## _<Dummy> > &alias;                           \
         };                                                                                          \
         template<int Dummy>                                                                         \
-        ::mars_boost_ksim::parameter::keyword<name ## _<Dummy> > &name ## _<Dummy>::alias =                   \
-        ::mars_boost_ksim::parameter::keyword<name ## _<Dummy> >::get();                                      \
+        ::mars_boost::parameter::keyword<name ## _<Dummy> > &name ## _<Dummy>::alias =                   \
+        ::mars_boost::parameter::keyword<name ## _<Dummy> >::get();                                      \
         typedef name ## _ <> name;                                                                  \
     }                                                                                               \
     namespace                                                                                       \
     {                                                                                               \
-        ::mars_boost_ksim::parameter::keyword<tag_namespace::name> &name =                                    \
-        ::mars_boost_ksim::parameter::keyword<tag_namespace::name>::get();                                    \
+        ::mars_boost::parameter::keyword<tag_namespace::name> &name =                                    \
+        ::mars_boost::parameter::keyword<tag_namespace::name>::get();                                    \
     }
 
 #endif

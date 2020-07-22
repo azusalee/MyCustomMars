@@ -38,7 +38,7 @@
 #include <boost/signals2/variadic_signal.hpp>
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace signals2
   {

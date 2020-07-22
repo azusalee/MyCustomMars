@@ -74,7 +74,7 @@
 
 #if !defined(BOOST_NO_UNSPECIFIED_BOOL)
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 namespace detail {
 
@@ -107,24 +107,24 @@ namespace detail {
 
 } // namespace detail
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #define BOOST_EXPLICIT_OPERATOR_BOOL()\
-    BOOST_FORCEINLINE operator mars_boost_ksim::detail::unspecified_bool_type () const\
+    BOOST_FORCEINLINE operator mars_boost::detail::unspecified_bool_type () const\
     {\
-        return (!this->operator! () ? &mars_boost_ksim::detail::unspecified_bool::true_value : (mars_boost_ksim::detail::unspecified_bool_type)0);\
+        return (!this->operator! () ? &mars_boost::detail::unspecified_bool::true_value : (mars_boost::detail::unspecified_bool_type)0);\
     }
 
 #define BOOST_EXPLICIT_OPERATOR_BOOL_NOEXCEPT()\
-    BOOST_FORCEINLINE operator mars_boost_ksim::detail::unspecified_bool_type () const BOOST_NOEXCEPT\
+    BOOST_FORCEINLINE operator mars_boost::detail::unspecified_bool_type () const BOOST_NOEXCEPT\
     {\
-        return (!this->operator! () ? &mars_boost_ksim::detail::unspecified_bool::true_value : (mars_boost_ksim::detail::unspecified_bool_type)0);\
+        return (!this->operator! () ? &mars_boost::detail::unspecified_bool::true_value : (mars_boost::detail::unspecified_bool_type)0);\
     }
 
 #define BOOST_CONSTEXPR_EXPLICIT_OPERATOR_BOOL()\
-    BOOST_FORCEINLINE BOOST_CONSTEXPR operator mars_boost_ksim::detail::unspecified_bool_type () const BOOST_NOEXCEPT\
+    BOOST_FORCEINLINE BOOST_CONSTEXPR operator mars_boost::detail::unspecified_bool_type () const BOOST_NOEXCEPT\
     {\
-        return (!this->operator! () ? &mars_boost_ksim::detail::unspecified_bool::true_value : (mars_boost_ksim::detail::unspecified_bool_type)0);\
+        return (!this->operator! () ? &mars_boost::detail::unspecified_bool::true_value : (mars_boost::detail::unspecified_bool_type)0);\
     }
 
 #else // !defined(BOOST_NO_UNSPECIFIED_BOOL)

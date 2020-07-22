@@ -32,7 +32,7 @@
 
 #include <boost/config/abi_prefix.hpp> // must be the last #include
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace filesystem {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace filesystem {
 
   BOOST_FILESYSTEM_DECL const system::error_category& codecvt_error_category();
   //  uses std::codecvt_base::result used for error codes:
@@ -73,7 +73,7 @@ namespace path_traits {
   template <class Container> inline
     // disable_if aids broken compilers (IBM, old GCC, etc.) and is harmless for
     // conforming compilers. Replace by plain "bool" at some future date (2012?) 
-    typename mars_boost_ksim::disable_if<mars_boost_ksim::is_array<Container>, bool>::type
+    typename mars_boost::disable_if<mars_boost::is_array<Container>, bool>::type
       empty(const Container & c)
         { return c.begin() == c.end(); }
 
@@ -278,7 +278,7 @@ namespace path_traits {
   template <class Container, class U> inline
     // disable_if aids broken compilers (IBM, old GCC, etc.) and is harmless for
     // conforming compilers. Replace by plain "void" at some future date (2012?) 
-    typename mars_boost_ksim::disable_if<mars_boost_ksim::is_array<Container>, void>::type
+    typename mars_boost::disable_if<mars_boost::is_array<Container>, void>::type
     dispatch(const Container & c, U& to, const codecvt_type& cvt)
   {
     if (c.size())
@@ -313,7 +313,7 @@ namespace path_traits {
   template <class Container, class U> inline
     // disable_if aids broken compilers (IBM, old GCC, etc.) and is harmless for
     // conforming compilers. Replace by plain "void" at some future date (2012?) 
-    typename mars_boost_ksim::disable_if<mars_boost_ksim::is_array<Container>, void>::type
+    typename mars_boost::disable_if<mars_boost::is_array<Container>, void>::type
     dispatch(const Container & c, U& to)
   {
     if (c.size())
@@ -345,7 +345,7 @@ namespace path_traits {
     );
 
 
-}}} // namespace mars_boost_ksim::filesystem::path_traits
+}}} // namespace mars_boost::filesystem::path_traits
 
 #include <boost/config/abi_suffix.hpp> // pops abi_prefix.hpp pragmas
 

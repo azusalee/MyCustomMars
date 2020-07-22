@@ -25,7 +25,7 @@
 #pragma warning(disable : 4996) // Disable deprecated std::ctype<char>::widen, std::copy
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 	namespace uuids {
 
 template <typename ch, typename char_traits>

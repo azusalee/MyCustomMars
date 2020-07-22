@@ -7,7 +7,7 @@
 # include <boost/preprocessor/cat.hpp>
 # include <boost/concept/detail/backward_compatibility.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace concepts {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace concepts {
 
 template <class ModelFnPtr>
 struct require;
@@ -22,9 +22,9 @@ struct require<void(*)(Model)>
   enum                                                  \
   {                                                     \
       BOOST_PP_CAT(boost_concept_check,__LINE__) =      \
-      mars_boost_ksim::concepts::require<ModelFnPtr>::instantiate  \
+      mars_boost::concepts::require<ModelFnPtr>::instantiate  \
   }
 
-}} // namespace mars_boost_ksim::concept
+}} // namespace mars_boost::concept
 
 #endif // BOOST_CONCEPT_DETAIL_BORLAND_DWA2006429_HPP

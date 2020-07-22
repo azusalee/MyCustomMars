@@ -40,14 +40,14 @@
 #define SOLARIS_EXTRA_CHECK
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim{
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost{
 
 template <typename T>
 struct has_trivial_move_assign : public integral_constant<bool,
 #ifdef BOOST_HAS_TRIVIAL_MOVE_ASSIGN
    BOOST_HAS_TRIVIAL_MOVE_ASSIGN(T)
 #else
-   ::mars_boost_ksim::is_pod<T>::value && !::mars_boost_ksim::is_const<T>::value && !::mars_boost_ksim::is_volatile<T>::value SOLARIS_EXTRA_CHECK
+   ::mars_boost::is_pod<T>::value && !::mars_boost::is_const<T>::value && !::mars_boost::is_volatile<T>::value SOLARIS_EXTRA_CHECK
 #endif
    > {};
 
@@ -65,7 +65,7 @@ template <class T> struct has_trivial_move_assign<T&&> : public false_type{};
 template <class T, std::size_t N> struct has_trivial_move_assign<T[N]> : public false_type{};
 template <class T> struct has_trivial_move_assign<T[]> : public false_type{};
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #undef SOLARIS_EXTRA_CHECK
 

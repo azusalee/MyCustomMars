@@ -13,7 +13,7 @@
 
 #include <iterator>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace iterators {
 
   template <class UnaryFunction>
@@ -57,6 +57,6 @@ namespace iterators {
 using iterators::function_output_iterator;
 using iterators::make_function_output_iterator;
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_FUNCTION_OUTPUT_ITERATOR_HPP

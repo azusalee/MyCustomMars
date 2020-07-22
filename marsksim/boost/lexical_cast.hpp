@@ -31,15 +31,15 @@
 #include <boost/lexical_cast/bad_lexical_cast.hpp>
 #include <boost/lexical_cast/try_lexical_convert.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim 
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost 
 {
     template <typename Target, typename Source>
     inline Target lexical_cast(const Source &arg)
     {
         Target result;
 
-        if (!mars_boost_ksim::conversion::detail::try_lexical_convert(arg, result)) {
-            mars_boost_ksim::conversion::detail::throw_bad_cast<Source, Target>();
+        if (!mars_boost::conversion::detail::try_lexical_convert(arg, result)) {
+            mars_boost::conversion::detail::throw_bad_cast<Source, Target>();
         }
 
         return result;
@@ -48,24 +48,24 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template <typename Target>
     inline Target lexical_cast(const char* chars, std::size_t count)
     {
-        return ::mars_boost_ksim::lexical_cast<Target>(
-            ::mars_boost_ksim::iterator_range<const char*>(chars, chars + count)
+        return ::mars_boost::lexical_cast<Target>(
+            ::mars_boost::iterator_range<const char*>(chars, chars + count)
         );
     }
 
     template <typename Target>
     inline Target lexical_cast(const unsigned char* chars, std::size_t count)
     {
-        return ::mars_boost_ksim::lexical_cast<Target>(
-            ::mars_boost_ksim::iterator_range<const unsigned char*>(chars, chars + count)
+        return ::mars_boost::lexical_cast<Target>(
+            ::mars_boost::iterator_range<const unsigned char*>(chars, chars + count)
         );
     }
 
     template <typename Target>
     inline Target lexical_cast(const signed char* chars, std::size_t count)
     {
-        return ::mars_boost_ksim::lexical_cast<Target>(
-            ::mars_boost_ksim::iterator_range<const signed char*>(chars, chars + count)
+        return ::mars_boost::lexical_cast<Target>(
+            ::mars_boost::iterator_range<const signed char*>(chars, chars + count)
         );
     }
 
@@ -73,8 +73,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template <typename Target>
     inline Target lexical_cast(const wchar_t* chars, std::size_t count)
     {
-        return ::mars_boost_ksim::lexical_cast<Target>(
-            ::mars_boost_ksim::iterator_range<const wchar_t*>(chars, chars + count)
+        return ::mars_boost::lexical_cast<Target>(
+            ::mars_boost::iterator_range<const wchar_t*>(chars, chars + count)
         );
     }
 #endif
@@ -82,8 +82,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template <typename Target>
     inline Target lexical_cast(const char16_t* chars, std::size_t count)
     {
-        return ::mars_boost_ksim::lexical_cast<Target>(
-            ::mars_boost_ksim::iterator_range<const char16_t*>(chars, chars + count)
+        return ::mars_boost::lexical_cast<Target>(
+            ::mars_boost::iterator_range<const char16_t*>(chars, chars + count)
         );
     }
 #endif
@@ -91,13 +91,13 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template <typename Target>
     inline Target lexical_cast(const char32_t* chars, std::size_t count)
     {
-        return ::mars_boost_ksim::lexical_cast<Target>(
-            ::mars_boost_ksim::iterator_range<const char32_t*>(chars, chars + count)
+        return ::mars_boost::lexical_cast<Target>(
+            ::mars_boost::iterator_range<const char32_t*>(chars, chars + count)
         );
     }
 #endif
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #undef BOOST_LCAST_NO_WCHAR_T
 

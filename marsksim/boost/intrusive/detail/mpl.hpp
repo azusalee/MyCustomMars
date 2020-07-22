@@ -26,45 +26,45 @@
 #include <boost/move/detail/type_traits.hpp>
 #include <cstddef>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace intrusive {
 namespace detail {
    
-using mars_boost_ksim::move_detail::is_same;
-using mars_boost_ksim::move_detail::add_const;
-using mars_boost_ksim::move_detail::remove_const;
-using mars_boost_ksim::move_detail::remove_cv;
-using mars_boost_ksim::move_detail::remove_reference;
-using mars_boost_ksim::move_detail::add_reference;
-using mars_boost_ksim::move_detail::remove_pointer;
-using mars_boost_ksim::move_detail::add_pointer;
-using mars_boost_ksim::move_detail::true_type;
-using mars_boost_ksim::move_detail::false_type;
-using mars_boost_ksim::move_detail::enable_if_c;
-using mars_boost_ksim::move_detail::enable_if;
-using mars_boost_ksim::move_detail::disable_if_c;
-using mars_boost_ksim::move_detail::disable_if;
-using mars_boost_ksim::move_detail::is_convertible;
-using mars_boost_ksim::move_detail::if_c;
-using mars_boost_ksim::move_detail::if_;
-using mars_boost_ksim::move_detail::is_const;
-using mars_boost_ksim::move_detail::identity;
-using mars_boost_ksim::move_detail::alignment_of;
-using mars_boost_ksim::move_detail::is_empty;
-using mars_boost_ksim::move_detail::addressof;
-using mars_boost_ksim::move_detail::integral_constant;
-using mars_boost_ksim::move_detail::enable_if_convertible;
-using mars_boost_ksim::move_detail::disable_if_convertible;
-using mars_boost_ksim::move_detail::bool_;
-using mars_boost_ksim::move_detail::true_;
-using mars_boost_ksim::move_detail::false_;
-using mars_boost_ksim::move_detail::yes_type;
-using mars_boost_ksim::move_detail::no_type;
-using mars_boost_ksim::move_detail::apply;
-using mars_boost_ksim::move_detail::eval_if_c;
-using mars_boost_ksim::move_detail::eval_if;
-using mars_boost_ksim::move_detail::unvoid_ref;
-using mars_boost_ksim::move_detail::add_const_if_c;
+using mars_boost::move_detail::is_same;
+using mars_boost::move_detail::add_const;
+using mars_boost::move_detail::remove_const;
+using mars_boost::move_detail::remove_cv;
+using mars_boost::move_detail::remove_reference;
+using mars_boost::move_detail::add_reference;
+using mars_boost::move_detail::remove_pointer;
+using mars_boost::move_detail::add_pointer;
+using mars_boost::move_detail::true_type;
+using mars_boost::move_detail::false_type;
+using mars_boost::move_detail::enable_if_c;
+using mars_boost::move_detail::enable_if;
+using mars_boost::move_detail::disable_if_c;
+using mars_boost::move_detail::disable_if;
+using mars_boost::move_detail::is_convertible;
+using mars_boost::move_detail::if_c;
+using mars_boost::move_detail::if_;
+using mars_boost::move_detail::is_const;
+using mars_boost::move_detail::identity;
+using mars_boost::move_detail::alignment_of;
+using mars_boost::move_detail::is_empty;
+using mars_boost::move_detail::addressof;
+using mars_boost::move_detail::integral_constant;
+using mars_boost::move_detail::enable_if_convertible;
+using mars_boost::move_detail::disable_if_convertible;
+using mars_boost::move_detail::bool_;
+using mars_boost::move_detail::true_;
+using mars_boost::move_detail::false_;
+using mars_boost::move_detail::yes_type;
+using mars_boost::move_detail::no_type;
+using mars_boost::move_detail::apply;
+using mars_boost::move_detail::eval_if_c;
+using mars_boost::move_detail::eval_if;
+using mars_boost::move_detail::unvoid_ref;
+using mars_boost::move_detail::add_const_if_c;
 
 template<std::size_t S>
 struct ls_zeros
@@ -100,7 +100,7 @@ struct ls_zeros<1>
       static const bool value = (1 == sizeof(test<T>(0, 0)));     \
                                                                   \
       typedef typename                                            \
-         ::mars_boost_ksim::intrusive::detail::if_c                         \
+         ::mars_boost::intrusive::detail::if_c                         \
             <value, T, DefaultWrap>::type::TNAME type;            \
    };                                                             \
    //
@@ -126,10 +126,10 @@ struct ls_zeros<1>
       static const bool value = (1 == sizeof(test<T>(0, 0)));     \
                                                                   \
       typedef typename                                            \
-         ::mars_boost_ksim::intrusive::detail::eval_if_c                    \
+         ::mars_boost::intrusive::detail::eval_if_c                    \
             < value                                               \
-            , ::mars_boost_ksim::intrusive::detail::identity<T>             \
-            , ::mars_boost_ksim::intrusive::detail::identity<DefaultWrap>   \
+            , ::mars_boost::intrusive::detail::identity<T>             \
+            , ::mars_boost::intrusive::detail::identity<DefaultWrap>   \
             >::type::TNAME type;                                  \
    };                                                             \
 //
@@ -164,10 +164,10 @@ struct TRAITS_PREFIX##_bool_is_true\
   private: \
   template<Signature> struct helper;\
   template<typename T> \
-  static ::mars_boost_ksim::intrusive::detail::yes_type test(helper<&T::FUNC_NAME>*); \
-  template<typename T> static ::mars_boost_ksim::intrusive::detail::no_type test(...); \
+  static ::mars_boost::intrusive::detail::yes_type test(helper<&T::FUNC_NAME>*); \
+  template<typename T> static ::mars_boost::intrusive::detail::no_type test(...); \
   public: \
-  static const bool value = sizeof(test<U>(0)) == sizeof(::mars_boost_ksim::intrusive::detail::yes_type); \
+  static const bool value = sizeof(test<U>(0)) == sizeof(::mars_boost::intrusive::detail::yes_type); \
   }; \
 //
 
@@ -182,9 +182,9 @@ struct TRAITS_NAME \
    struct Base : public Type, public BaseMixin { Base(); }; \
    template <typename T, T t> class Helper{}; \
    template <typename U> \
-   static ::mars_boost_ksim::intrusive::detail::no_type  test(U*, Helper<void (BaseMixin::*)(), &U::FUNC_NAME>* = 0); \
-   static ::mars_boost_ksim::intrusive::detail::yes_type test(...); \
-   static const bool value = sizeof(::mars_boost_ksim::intrusive::detail::yes_type) == sizeof(test((Base*)(0))); \
+   static ::mars_boost::intrusive::detail::no_type  test(U*, Helper<void (BaseMixin::*)(), &U::FUNC_NAME>* = 0); \
+   static ::mars_boost::intrusive::detail::yes_type test(...); \
+   static const bool value = sizeof(::mars_boost::intrusive::detail::yes_type) == sizeof(test((Base*)(0))); \
 };\
 //
 
@@ -199,7 +199,7 @@ struct TRAITS_NAME \
 
 } //namespace detail
 } //namespace intrusive
-} //namespace mars_boost_ksim
+} //namespace mars_boost
 
 #include <boost/intrusive/detail/config_end.hpp>
 

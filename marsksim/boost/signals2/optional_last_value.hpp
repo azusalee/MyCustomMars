@@ -14,7 +14,7 @@
 #include <boost/optional.hpp>
 #include <boost/signals2/expired_slot.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
   namespace signals2 {
 
     template<typename T>
@@ -64,5 +64,5 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       }
     };
   } // namespace signals2
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 #endif // BOOST_SIGNALS2_OPTIONAL_LAST_VALUE_HPP

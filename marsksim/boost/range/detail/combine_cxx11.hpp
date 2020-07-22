@@ -17,24 +17,24 @@
 
 #include <fstream>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range
     {
 
 template<typename... Ranges>
 auto combine(Ranges&&... rngs) ->
-    combined_range<decltype(mars_boost_ksim::make_tuple(mars_boost_ksim::begin(rngs)...))>
+    combined_range<decltype(mars_boost::make_tuple(mars_boost::begin(rngs)...))>
 {
-    return combined_range<decltype(mars_boost_ksim::make_tuple(mars_boost_ksim::begin(rngs)...))>(
-                mars_boost_ksim::make_tuple(mars_boost_ksim::begin(rngs)...),
-                mars_boost_ksim::make_tuple(mars_boost_ksim::end(rngs)...));
+    return combined_range<decltype(mars_boost::make_tuple(mars_boost::begin(rngs)...))>(
+                mars_boost::make_tuple(mars_boost::begin(rngs)...),
+                mars_boost::make_tuple(mars_boost::end(rngs)...));
 }
 
     } // namespace range
 
 using range::combine;
 
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

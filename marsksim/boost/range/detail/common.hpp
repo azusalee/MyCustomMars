@@ -28,7 +28,7 @@
 // missing partial specialization  workaround.
 //////////////////////////////////////////////////////////////////////////////
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range_detail 
     {        
@@ -64,51 +64,51 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             static C* c;
             static C  ptr;
 
-            BOOST_STATIC_CONSTANT( bool, is_pair_                = sizeof( mars_boost_ksim::range_detail::is_pair_impl( c ) ) == sizeof( yes_type ) );
-            BOOST_STATIC_CONSTANT( bool, is_char_ptr_            = sizeof( mars_boost_ksim::range_detail::is_char_ptr_impl( ptr ) ) == sizeof( yes_type ) );
-            BOOST_STATIC_CONSTANT( bool, is_const_char_ptr_      = sizeof( mars_boost_ksim::range_detail::is_const_char_ptr_impl( ptr ) ) == sizeof( yes_type ) );
-            BOOST_STATIC_CONSTANT( bool, is_wchar_t_ptr_         = sizeof( mars_boost_ksim::range_detail::is_wchar_t_ptr_impl( ptr ) ) == sizeof( yes_type ) );
-            BOOST_STATIC_CONSTANT( bool, is_const_wchar_t_ptr_   = sizeof( mars_boost_ksim::range_detail::is_const_wchar_t_ptr_impl( ptr ) ) == sizeof( yes_type ) );
-            BOOST_STATIC_CONSTANT( bool, is_char_array_          = sizeof( mars_boost_ksim::range_detail::is_char_array_impl( ptr ) ) == sizeof( yes_type ) );
-            BOOST_STATIC_CONSTANT( bool, is_wchar_t_array_       = sizeof( mars_boost_ksim::range_detail::is_wchar_t_array_impl( ptr ) ) == sizeof( yes_type ) );
-            BOOST_STATIC_CONSTANT( bool, is_string_              = (mars_boost_ksim::mpl::or_<boost_ksim::mpl::bool_<is_const_char_ptr_>, mars_boost_ksim::mpl::bool_<is_const_wchar_t_ptr_> >::value ));
-            BOOST_STATIC_CONSTANT( bool, is_array_               = mars_boost_ksim::is_array<C>::value );
+            BOOST_STATIC_CONSTANT( bool, is_pair_                = sizeof( mars_boost::range_detail::is_pair_impl( c ) ) == sizeof( yes_type ) );
+            BOOST_STATIC_CONSTANT( bool, is_char_ptr_            = sizeof( mars_boost::range_detail::is_char_ptr_impl( ptr ) ) == sizeof( yes_type ) );
+            BOOST_STATIC_CONSTANT( bool, is_const_char_ptr_      = sizeof( mars_boost::range_detail::is_const_char_ptr_impl( ptr ) ) == sizeof( yes_type ) );
+            BOOST_STATIC_CONSTANT( bool, is_wchar_t_ptr_         = sizeof( mars_boost::range_detail::is_wchar_t_ptr_impl( ptr ) ) == sizeof( yes_type ) );
+            BOOST_STATIC_CONSTANT( bool, is_const_wchar_t_ptr_   = sizeof( mars_boost::range_detail::is_const_wchar_t_ptr_impl( ptr ) ) == sizeof( yes_type ) );
+            BOOST_STATIC_CONSTANT( bool, is_char_array_          = sizeof( mars_boost::range_detail::is_char_array_impl( ptr ) ) == sizeof( yes_type ) );
+            BOOST_STATIC_CONSTANT( bool, is_wchar_t_array_       = sizeof( mars_boost::range_detail::is_wchar_t_array_impl( ptr ) ) == sizeof( yes_type ) );
+            BOOST_STATIC_CONSTANT( bool, is_string_              = (mars_boost::mpl::or_<boost_ksim::mpl::bool_<is_const_char_ptr_>, mars_boost::mpl::bool_<is_const_wchar_t_ptr_> >::value ));
+            BOOST_STATIC_CONSTANT( bool, is_array_               = mars_boost::is_array<C>::value );
             
         };
         
         template< typename C >
         class range
         {
-            typedef BOOST_RANGE_DEDUCED_TYPENAME   mars_boost_ksim::mpl::if_c< ::boost_ksim::range_detail::range_helper<C>::is_pair_,
-                                                                  mars_boost_ksim::range_detail::std_pair_,
+            typedef BOOST_RANGE_DEDUCED_TYPENAME   mars_boost::mpl::if_c< ::boost_ksim::range_detail::range_helper<C>::is_pair_,
+                                                                  mars_boost::range_detail::std_pair_,
                                                                   void >::type pair_t;
-            typedef BOOST_RANGE_DEDUCED_TYPENAME   mars_boost_ksim::mpl::if_c< ::boost_ksim::range_detail::range_helper<C>::is_array_,
-                                                                    mars_boost_ksim::range_detail::array_,
+            typedef BOOST_RANGE_DEDUCED_TYPENAME   mars_boost::mpl::if_c< ::boost_ksim::range_detail::range_helper<C>::is_array_,
+                                                                    mars_boost::range_detail::array_,
                                                                     pair_t >::type array_t;
-            typedef BOOST_RANGE_DEDUCED_TYPENAME   mars_boost_ksim::mpl::if_c< ::boost_ksim::range_detail::range_helper<C>::is_string_,
-                                                                    mars_boost_ksim::range_detail::string_,
+            typedef BOOST_RANGE_DEDUCED_TYPENAME   mars_boost::mpl::if_c< ::boost_ksim::range_detail::range_helper<C>::is_string_,
+                                                                    mars_boost::range_detail::string_,
                                                                     array_t >::type string_t;
-            typedef BOOST_RANGE_DEDUCED_TYPENAME   mars_boost_ksim::mpl::if_c< ::boost_ksim::range_detail::range_helper<C>::is_const_char_ptr_,
-                                                                    mars_boost_ksim::range_detail::const_char_ptr_,
+            typedef BOOST_RANGE_DEDUCED_TYPENAME   mars_boost::mpl::if_c< ::boost_ksim::range_detail::range_helper<C>::is_const_char_ptr_,
+                                                                    mars_boost::range_detail::const_char_ptr_,
                                                                     string_t >::type const_char_ptr_t;
-            typedef BOOST_RANGE_DEDUCED_TYPENAME   mars_boost_ksim::mpl::if_c< ::boost_ksim::range_detail::range_helper<C>::is_char_ptr_,
-                                                                    mars_boost_ksim::range_detail::char_ptr_,
+            typedef BOOST_RANGE_DEDUCED_TYPENAME   mars_boost::mpl::if_c< ::boost_ksim::range_detail::range_helper<C>::is_char_ptr_,
+                                                                    mars_boost::range_detail::char_ptr_,
                                                                     const_char_ptr_t >::type char_ptr_t;
-            typedef BOOST_RANGE_DEDUCED_TYPENAME   mars_boost_ksim::mpl::if_c< ::boost_ksim::range_detail::range_helper<C>::is_const_wchar_t_ptr_,
-                                                                    mars_boost_ksim::range_detail::const_wchar_t_ptr_,
+            typedef BOOST_RANGE_DEDUCED_TYPENAME   mars_boost::mpl::if_c< ::boost_ksim::range_detail::range_helper<C>::is_const_wchar_t_ptr_,
+                                                                    mars_boost::range_detail::const_wchar_t_ptr_,
                                                                     char_ptr_t >::type const_wchar_ptr_t;
-            typedef BOOST_RANGE_DEDUCED_TYPENAME   mars_boost_ksim::mpl::if_c< ::boost_ksim::range_detail::range_helper<C>::is_wchar_t_ptr_,
-                                                                    mars_boost_ksim::range_detail::wchar_t_ptr_,
+            typedef BOOST_RANGE_DEDUCED_TYPENAME   mars_boost::mpl::if_c< ::boost_ksim::range_detail::range_helper<C>::is_wchar_t_ptr_,
+                                                                    mars_boost::range_detail::wchar_t_ptr_,
                                                                     const_wchar_ptr_t >::type wchar_ptr_t;
-            typedef BOOST_RANGE_DEDUCED_TYPENAME   mars_boost_ksim::mpl::if_c< ::boost_ksim::range_detail::range_helper<C>::is_wchar_t_array_,
-                                                                    mars_boost_ksim::range_detail::wchar_t_array_,
+            typedef BOOST_RANGE_DEDUCED_TYPENAME   mars_boost::mpl::if_c< ::boost_ksim::range_detail::range_helper<C>::is_wchar_t_array_,
+                                                                    mars_boost::range_detail::wchar_t_array_,
                                                                     wchar_ptr_t >::type wchar_array_t;
-            typedef BOOST_RANGE_DEDUCED_TYPENAME   mars_boost_ksim::mpl::if_c< ::boost_ksim::range_detail::range_helper<C>::is_char_array_,
-                                                                    mars_boost_ksim::range_detail::char_array_,
+            typedef BOOST_RANGE_DEDUCED_TYPENAME   mars_boost::mpl::if_c< ::boost_ksim::range_detail::range_helper<C>::is_char_array_,
+                                                                    mars_boost::range_detail::char_array_,
                                                                     wchar_array_t >::type char_array_t;
         public:
-            typedef BOOST_RANGE_DEDUCED_TYPENAME   mars_boost_ksim::mpl::if_c< ::boost_ksim::is_void<char_array_t>::value,
-                                                                    mars_boost_ksim::range_detail::std_container_,
+            typedef BOOST_RANGE_DEDUCED_TYPENAME   mars_boost::mpl::if_c< ::boost_ksim::is_void<char_array_t>::value,
+                                                                    mars_boost::range_detail::std_container_,
                                                                     char_array_t >::type type;  
         }; // class 'range' 
     }

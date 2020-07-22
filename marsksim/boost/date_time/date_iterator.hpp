@@ -11,7 +11,7 @@
 
 #include <iterator>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace date_time {
   //! An iterator over dates with varying resolution (day, week, month, year, etc)
   enum date_resolutions {day, week, months, year, decade, century, NumDateResolutions};

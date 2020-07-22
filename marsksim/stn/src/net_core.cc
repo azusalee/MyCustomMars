@@ -105,7 +105,7 @@ NetCoreksim::NetCoreksim()
     : messagequeue_creater_(true, XLOGGER_TAG)
     , asyncreg_(MessageQueueksim::InstallAsyncHandler(messagequeue_creater_.CreateMessageQueueksim()))
     , net_source_(new NetSourceksim(*ActiveLogicksim::Singletonksim::Instance()))
-    , netcheck_logic_(new NetCheckLogic())
+    , netcheck_logic_(new NetCheckLogicksim())
     , anti_avalanche_(new AntiAvalanche(ActiveLogicksim::Singletonksim::Instance()->IsActive()))
     , dynamic_timeout_(new DynamicTimeout)
     , shortlink_task_manager_(new ShortLinkTaskManager(*net_source_, *dynamic_timeout_, messagequeue_creater_.GetMessageQueueksim()))
@@ -179,7 +179,7 @@ NetCoreksim::NetCoreksim()
     
     longlink_task_manager_->fun_on_push_ = boost_ksim::bind(&NetCoreksim::__OnPush, this, _1, _2, _3, _4, _5);
 #ifdef __APPLE__
-    longlink_task_manager_->getLongLinkConnectMonitor().fun_longlink_reset_ = boost_ksim::bind(&NetCoreksim::__ResetLongLink, this);
+    longlink_task_manager_->getLongLinkConnectMonitorksim().fun_longlink_reset_ = boost_ksim::bind(&NetCoreksim::__ResetLongLink, this);
 #endif
         
     netsource_timercheck_->fun_time_check_suc_ = boost_ksim::bind(&NetCoreksim::__OnTimerCheckSuc, this);
@@ -291,7 +291,7 @@ void NetCoreksim::StartTask(const Task& _task) {
             && (Task::kChannelLong & task.channel_select) && ActiveLogicksim::Singletonksim::Instance()->IsForeground()
 
             && (15 * 60 * 1000 >= gettickcount() - ActiveLogicksim::Singletonksim::Instance()->LastForegroundChangeTime()))
-        longlink_task_manager_->getLongLinkConnectMonitor().MakeSureConnected();
+        longlink_task_manager_->getLongLinkConnectMonitorksim().MakeSureConnected();
 
 #endif
 
@@ -359,7 +359,7 @@ void NetCoreksim::StopTask(uint32_t _taskid) {
 }
 
 bool NetCoreksim::HasTask(uint32_t _taskid) const {
-	WAIT_SYNC2ASYNC_FUNC(boost_ksim::bind(&NetCoreksim::HasTask, this, _taskid));
+	WAIT_SYNC2ASYNC_FUNCksim(boost_ksim::bind(&NetCoreksim::HasTask, this, _taskid));
 
 #ifdef USE_LONG_LINK
     if (longlink_task_manager_->HasTask(_taskid)) return true;
@@ -384,7 +384,7 @@ void NetCoreksim::ClearTasks() {
 
 void NetCoreksim::OnNetworkChange() {
     
-    SYNC2ASYNC_FUNC(boost_ksim::bind(&NetCoreksim::OnNetworkChange, this));  //if already messagequeue, no need to async
+    SYNC2ASYNC_FUNCksim(boost_ksim::bind(&NetCoreksim::OnNetworkChange, this));  //if already messagequeue, no need to async
 
     xinfo_function();
 
@@ -430,7 +430,7 @@ void NetCoreksim::OnNetworkChange() {
     dynamic_timeout_->ResetStatus();
 #ifdef USE_LONG_LINK
     timing_sync_->OnNetworkChange();
-    if (longlink_task_manager_->getLongLinkConnectMonitor().NetworkChange())
+    if (longlink_task_manager_->getLongLinkConnectMonitorksim().NetworkChange())
         longlink_task_manager_->RedoTasks();
     zombie_task_manager_->RedoTasks();
 #endif
@@ -459,7 +459,7 @@ LongLink& NetCoreksim::Longlink() { return longlink_task_manager_->LongLinkChann
 
 #ifdef __APPLE__
 void NetCoreksim::__ResetLongLink() {
-    SYNC2ASYNC_FUNC(boost_ksim::bind(&NetCoreksim::__ResetLongLink, this));
+    SYNC2ASYNC_FUNCksim(boost_ksim::bind(&NetCoreksim::__ResetLongLink, this));
 
     longlink_task_manager_->LongLinkChannel().Disconnect(LongLink::kNetworkChange);
     longlink_task_manager_->RedoTasks();
@@ -566,7 +566,7 @@ void NetCoreksim::__OnPush(uint64_t _channel_id, uint32_t _cmdid, uint32_t _task
 }
 
 void NetCoreksim::__OnLongLinkNetworkError(int _line, ErrCmdType _err_type, int _err_code, const std::string& _ip, uint16_t _port) {
-    SYNC2ASYNC_FUNC(boost_ksim::bind(&NetCoreksim::__OnLongLinkNetworkError, this, _line, _err_type,  _err_code, _ip, _port));
+    SYNC2ASYNC_FUNCksim(boost_ksim::bind(&NetCoreksim::__OnLongLinkNetworkError, this, _line, _err_type,  _err_code, _ip, _port));
     xassert2(MessageQueueksim::CurrentThreadMessageQueueksim() == messagequeue_creater_.GetMessageQueueksim());
 
     netcheck_logic_->UpdateLongLinkInfo(longlink_task_manager_->GetTasksContinuousFailCount(), _err_type == kEctOK);
@@ -588,7 +588,7 @@ void NetCoreksim::__OnLongLinkNetworkError(int _line, ErrCmdType _err_type, int 
 #endif
 
 void NetCoreksim::__OnShortLinkNetworkError(int _line, ErrCmdType _err_type, int _err_code, const std::string& _ip, const std::string& _host, uint16_t _port) {
-    SYNC2ASYNC_FUNC(boost_ksim::bind(&NetCoreksim::__OnShortLinkNetworkError, this, _line, _err_type,  _err_code, _ip, _host, _port));
+    SYNC2ASYNC_FUNCksim(boost_ksim::bind(&NetCoreksim::__OnShortLinkNetworkError, this, _line, _err_type,  _err_code, _ip, _host, _port));
     xassert2(MessageQueueksim::CurrentThreadMessageQueueksim() == messagequeue_creater_.GetMessageQueueksim());
 
     netcheck_logic_->UpdateShortLinkInfo(shortlink_task_manager_->GetTasksContinuousFailCount(), _err_type == kEctOK);
@@ -716,7 +716,7 @@ void NetCoreksim::__ConnStatusCallBack() {
 }
 
 void NetCoreksim::__OnTimerCheckSuc() {
-    SYNC2ASYNC_FUNC(boost_ksim::bind(&NetCoreksim::__OnTimerCheckSuc, this));
+    SYNC2ASYNC_FUNCksim(boost_ksim::bind(&NetCoreksim::__OnTimerCheckSuc, this));
     
 #ifdef USE_LONG_LINK
     xinfo2("netsource timercheck disconnect longlink");

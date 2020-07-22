@@ -20,7 +20,7 @@
 #include "boost/detail/templated_streams.hpp"
 #include "boost/variant/static_visitor.hpp"
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 ///////////////////////////////////////////////////////////////////////////////
 // function template operator<<
@@ -43,7 +43,7 @@ namespace detail { namespace variant {
 
 template <typename OStream>
 class printer
-    : public mars_boost_ksim::static_visitor<>
+    : public mars_boost::static_visitor<>
 {
 private: // representation
 
@@ -90,6 +90,6 @@ inline BOOST_TEMPLATED_STREAM(ostream, E,T)& operator<<(
     return out;
 }
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_VARIANT_DETAIL_VARIANT_IO_HPP

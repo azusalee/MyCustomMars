@@ -16,7 +16,7 @@
 //#    error This header requires exception handling to be enabled.
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace
 mars_boost
     {
     namespace

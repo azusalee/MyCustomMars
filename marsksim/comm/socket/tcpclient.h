@@ -12,7 +12,7 @@
 
 
 /*
- * TcpClient.c
+ * TcpClientksim.c
  *
  *  Created on: 2013-5-7
  *      Author: yerungui && jiahong
@@ -20,8 +20,8 @@
 
 
 
-#ifndef __TcpClient__
-#define __TcpClient__
+#ifndef __TcpClientksim__
+#define __TcpClientksim__
 
 #include "comm/socket/socketselect.h"
 #include <list>
@@ -31,9 +31,9 @@
 
 class AutoBuffer;
 
-class MTcpEvent {
+class MTcpEventksim {
   public:
-    virtual ~MTcpEvent() {}
+    virtual ~MTcpEventksim() {}
 
     virtual void OnConnect() = 0;
     virtual void OnDisConnect(bool _isremote) = 0;
@@ -45,7 +45,7 @@ class MTcpEvent {
     virtual void OnRead() = 0;
 };
 
-class TcpClient {
+class TcpClientksim {
   public:
     enum TTcpStatus {
         kTcpInit = 0,
@@ -63,8 +63,8 @@ class TcpClient {
     };
 
   public:
-    TcpClient(const char* _ip, uint16_t _port, MTcpEvent& _event, int _timeout = 6 * 1000);
-    ~TcpClient();
+    TcpClientksim(const char* _ip, uint16_t _port, MTcpEventksim& _event, int _timeout = 6 * 1000);
+    ~TcpClientksim();
 
   public:
     bool Connect();
@@ -91,7 +91,7 @@ class TcpClient {
   private:
     char* ip_;
     uint16_t port_;
-    MTcpEvent& event_;
+    MTcpEventksim& event_;
 
     SOCKET socket_;
     bool have_read_data_;

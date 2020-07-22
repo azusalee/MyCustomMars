@@ -48,7 +48,7 @@ public ref class Cs2Runtime_Comm sealed {
     static void OnForeground(bool _isforeground);
 
 
-    static void OnAlarm(int id);
+    static void OnAlarmksim(int id);
 };
 
 public ref struct ProxyInfo sealed {
@@ -75,8 +75,8 @@ public ref struct RuntimeNewNetInterfaceInfo sealed {
 
 
 public interface class ICallback_Comm {
-    bool startAlarm(int id, int after);
-    bool stopAlarm(int id);
+    bool startAlarmksim(int id, int after);
+    bool stopAlarmksim(int id);
 
     int getNetInfo();
     int getStatisticsNetType();
@@ -96,8 +96,8 @@ public ref class Runtime2Cs_Comm sealed {
 
     void SetCallback(ICallback_Comm^ _callback);
 
-    bool startAlarm(int id, int after);
-    bool stopAlarm(int id);
+    bool startAlarmksim(int id, int after);
+    bool stopAlarmksim(int id);
 
     int getNetInfo();
     int getStatisticsNetType();

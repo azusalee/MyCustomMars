@@ -23,7 +23,7 @@
 # pragma warn -8026     // Functions with excep. spec. are not expanded inline
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 // The standard library that comes with Borland C++ 5.5.1, 5.6.4
@@ -50,7 +50,7 @@ public:
 # pragma option pop
 #endif
 
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #ifdef __BORLANDC__
 # pragma warn .8026     // Functions with excep. spec. are not expanded inline

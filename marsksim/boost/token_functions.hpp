@@ -75,7 +75,7 @@ namespace std{
 }
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim{
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost{
   //===========================================================================
   // The escaped_list_separator class. Which is a model of TokenizerFunction
   // An escaped list is a super-set of what is commonly known as a comma
@@ -646,6 +646,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
   };
 
 
-} //namespace mars_boost_ksim
+} //namespace mars_boost
 
 #endif

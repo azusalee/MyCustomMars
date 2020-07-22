@@ -37,14 +37,14 @@ const std::string& getAppPrivateFilePath() {
     return sAppPrivateFilePath;
 }
 
-/*bool startAlarm(int64_t id, int after)
+/*bool startAlarmksim(int64_t id, int after)
 {
-    return Runtime2Cs_Comm::Singletonksim()->startAlarm(id, after);
+    return Runtime2Cs_Comm::Singletonksim()->startAlarmksim(id, after);
 }
 
-bool stopAlarm(int64_t id)
+bool stopAlarmksim(int64_t id)
 {
-    return Runtime2Cs_Comm::Singletonksim()->stopAlarm(id);
+    return Runtime2Cs_Comm::Singletonksim()->stopAlarmksim(id);
 }*/
 
 void restartProcess() {

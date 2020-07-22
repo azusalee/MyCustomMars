@@ -9,7 +9,7 @@
 
 #ifdef BOOST_NO_SFINAE
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace type_of {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace type_of {
 
     template<class T> 
         T& ensure_obj(const T&);
@@ -21,7 +21,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #include <boost/type_traits/is_function.hpp> 
 #include <boost/utility/enable_if.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace type_of {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace type_of {
 # ifdef BOOST_NO_SFINAE
     template<class T> 
     T& ensure_obj(const T&);
@@ -38,7 +38,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 #endif//BOOST_NO_SFINAE
 
-#define BOOST_TYPEOF(expr) BOOST_TYPEOF_KEYWORD(mars_boost_ksim::type_of::ensure_obj(expr))
+#define BOOST_TYPEOF(expr) BOOST_TYPEOF_KEYWORD(mars_boost::type_of::ensure_obj(expr))
 #define BOOST_TYPEOF_TPL BOOST_TYPEOF
 
 #define BOOST_TYPEOF_NESTED_TYPEDEF_TPL(name,expr) \

@@ -11,7 +11,7 @@
 
 #include <boost/numeric/conversion/converter_policies.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace numeric {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace numeric {
 
     template <typename Target, typename Source, typename EnableIf = void>
     struct numeric_cast_traits
@@ -21,7 +21,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         typedef Trunc<Source>           rounding_policy;
     };
 
-}}//namespace mars_boost_ksim::numeric;
+}}//namespace mars_boost::numeric;
 
 #if !defined( BOOST_NUMERIC_CONVERSION_RELAX_BUILT_IN_CAST_TRAITS )
 #include <boost/cstdint.hpp>

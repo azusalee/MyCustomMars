@@ -19,7 +19,7 @@
 #define BOOST_PP_FILENAME_1 <boost/signals2/detail/preprocessed_arg_type_template.hpp>
 #include BOOST_PP_ITERATE()
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace signals2
   {
@@ -29,6 +29,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       {};
     } // namespace detail
   } // namespace signals2
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_SIGNALS2_PREPROCESSED_ARG_TYPE_HPP

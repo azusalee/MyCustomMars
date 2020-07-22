@@ -27,7 +27,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 namespace detail {
 
@@ -66,7 +66,7 @@ namespace detail {
       }
       void push(BOOST_RV_REF(Type) element)
       {
-          _elements.push_back(mars_boost_ksim::move(element));
+          _elements.push_back(mars_boost::move(element));
           std::push_heap(_elements.begin(), _elements.end(), _compare);
       }
 
@@ -77,9 +77,9 @@ namespace detail {
       }
       Type pull()
       {
-          Type result = mars_boost_ksim::move(_elements.front());
+          Type result = mars_boost::move(_elements.front());
           pop();
-          return mars_boost_ksim::move(result);
+          return mars_boost::move(result);
       }
 
       Type const& top()
@@ -95,9 +95,9 @@ namespace concurrent
             class Container = csbl::vector<ValueType>,
             class Compare = std::less<typename Container::value_type> >
   class sync_priority_queue
-    : public detail::sync_queue_base<ValueType, mars_boost_ksim::detail::priority_queue<ValueType,Container,Compare> >
+    : public detail::sync_queue_base<ValueType, mars_boost::detail::priority_queue<ValueType,Container,Compare> >
   {
-    typedef detail::sync_queue_base<ValueType, mars_boost_ksim::detail::priority_queue<ValueType,Container,Compare> >  super;
+    typedef detail::sync_queue_base<ValueType, mars_boost::detail::priority_queue<ValueType,Container,Compare> >  super;
 
   public:
     typedef ValueType value_type;
@@ -193,21 +193,21 @@ namespace concurrent
   void sync_priority_queue<T,Container,Cmp>::push(unique_lock<mutex>& lk, BOOST_THREAD_RV_REF(T) elem)
   {
     super::throw_if_closed(lk);
-    super::data_.push(mars_boost_ksim::move(elem));
+    super::data_.push(mars_boost::move(elem));
     super::notify_not_empty_if_needed(lk);
   }
   template <class T, class Container,class Cmp>
   void sync_priority_queue<T,Container,Cmp>::push(lock_guard<mutex>& lk, BOOST_THREAD_RV_REF(T) elem)
   {
     super::throw_if_closed(lk);
-    super::data_.push(mars_boost_ksim::move(elem));
+    super::data_.push(mars_boost::move(elem));
     super::notify_not_empty_if_needed(lk);
   }
   template <class T, class Container,class Cmp>
   void sync_priority_queue<T,Container,Cmp>::push(BOOST_THREAD_RV_REF(T) elem)
   {
     lock_guard<mutex> lk(super::mtx_);
-    push(lk, mars_boost_ksim::move(elem));
+    push(lk, mars_boost::move(elem));
   }
 
   //////////////////////
@@ -226,7 +226,7 @@ namespace concurrent
   {
     lock_guard<mutex> lk(super::mtx_);
     if (super::closed(lk)) return queue_op_status::closed;
-    push(lk, mars_boost_ksim::move(elem));
+    push(lk, mars_boost::move(elem));
 
     return queue_op_status::success;
   }

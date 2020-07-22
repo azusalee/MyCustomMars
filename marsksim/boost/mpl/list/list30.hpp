@@ -30,7 +30,7 @@
 
 #   include <boost/preprocessor/iterate.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl {
 
 #   define BOOST_PP_ITERATION_PARAMS_1 \
     (3,(21, 30, <boost/mpl/list/aux_/numbered.hpp>))

@@ -83,7 +83,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Alarm.cs" />
+    <Compile Include="Alarmksim.cs" />
     <Compile Include="CallbackImpl_Comm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

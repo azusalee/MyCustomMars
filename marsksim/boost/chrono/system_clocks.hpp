@@ -74,9 +74,9 @@ TODO:
 
 #ifdef BOOST_CHRONO_WINDOWS_API
 // The system_clock tick is 100 nanoseconds
-# define BOOST_SYSTEM_CLOCK_DURATION mars_boost_ksim::chrono::duration<mars_boost_ksim::int_least64_t, ratio<BOOST_RATIO_INTMAX_C(1), BOOST_RATIO_INTMAX_C(10000000)> >
+# define BOOST_SYSTEM_CLOCK_DURATION mars_boost::chrono::duration<mars_boost::int_least64_t, ratio<BOOST_RATIO_INTMAX_C(1), BOOST_RATIO_INTMAX_C(10000000)> >
 #else
-# define BOOST_SYSTEM_CLOCK_DURATION mars_boost_ksim::chrono::nanoseconds
+# define BOOST_SYSTEM_CLOCK_DURATION mars_boost::chrono::nanoseconds
 #endif
 
 // this must occur after all of the includes and before any code appears:
@@ -92,7 +92,7 @@ TODO:
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace chrono {
 
   // Clocks
@@ -221,7 +221,7 @@ namespace chrono {
 #endif
 
 } // namespace chrono
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #ifndef BOOST_CHRONO_HEADER_ONLY
 // the suffix header occurs after all of our code:

@@ -49,7 +49,7 @@ private:
 private:
     bool   isforeground_;
     bool   isactive_;
-    Alarm  alarm_;
+    Alarmksim  alarm_;
     uint64_t lastforegroundchangetime_;
 };
 

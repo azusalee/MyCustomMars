@@ -7,7 +7,7 @@
 /*!
  * \file   uuid/detail/uuid_x86.hpp
  *
- * \brief  This header contains optimized SSE implementation of \c mars_boost_ksim::uuid operations.
+ * \brief  This header contains optimized SSE implementation of \c mars_boost::uuid operations.
  */
 
 #ifndef BOOST_UUID_DETAIL_UUID_X86_HPP_INCLUDED_
@@ -39,7 +39,7 @@ extern "C" void _ReadWriteBarrier(void);
 #endif
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace uuids {
 namespace detail {
 
@@ -130,6 +130,6 @@ inline bool operator< (uuid const& lhs, uuid const& rhs) BOOST_NOEXCEPT
 }
 
 } // namespace uuids
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_UUID_DETAIL_UUID_X86_HPP_INCLUDED_

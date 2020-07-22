@@ -15,7 +15,7 @@
 
 #include <stdexcept>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   class BOOST_SYMBOL_VISIBLE future_error
       : public std::logic_error

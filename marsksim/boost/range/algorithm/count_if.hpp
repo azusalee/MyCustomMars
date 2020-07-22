@@ -16,7 +16,7 @@
 #include <boost/range/difference_type.hpp>
 #include <algorithm>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range
     {
@@ -28,24 +28,24 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 /// \pre SinglePassRange is a model of the SinglePassRangeConcept
 /// \pre UnaryPredicate is a model of the UnaryPredicateConcept
 template< class SinglePassRange, class UnaryPredicate >
-inline BOOST_DEDUCED_TYPENAME mars_boost_ksim::range_difference<SinglePassRange>::type
+inline BOOST_DEDUCED_TYPENAME mars_boost::range_difference<SinglePassRange>::type
 count_if(SinglePassRange& rng, UnaryPredicate pred)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<SinglePassRange> ));
-    return std::count_if(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), pred);
+    return std::count_if(mars_boost::begin(rng), mars_boost::end(rng), pred);
 }
 
 /// \overload
 template< class SinglePassRange, class UnaryPredicate >
-inline BOOST_DEDUCED_TYPENAME mars_boost_ksim::range_difference<const SinglePassRange>::type
+inline BOOST_DEDUCED_TYPENAME mars_boost::range_difference<const SinglePassRange>::type
 count_if(const SinglePassRange& rng, UnaryPredicate pred)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange> ));
-    return std::count_if(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), pred);
+    return std::count_if(mars_boost::begin(rng), mars_boost::end(rng), pred);
 }
 
     } // namespace range
     using range::count_if;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

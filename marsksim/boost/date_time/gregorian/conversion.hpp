@@ -17,7 +17,7 @@
 #include <boost/date_time/special_defs.hpp>
 #include <boost/date_time/gregorian/gregorian_types.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 namespace gregorian {
 
@@ -39,12 +39,12 @@ namespace gregorian {
         default:
             s += "a special date value"; break;
         }
-        mars_boost_ksim::throw_exception(std::out_of_range(s));
+        mars_boost::throw_exception(std::out_of_range(s));
     }
 
     std::tm datetm;
     std::memset(&datetm, 0, sizeof(datetm));
-    mars_boost_ksim::gregorian::date::ymd_type ymd = d.year_month_day();
+    mars_boost::gregorian::date::ymd_type ymd = d.year_month_day();
     datetm.tm_year = ymd.year - 1900;
     datetm.tm_mon = ymd.month - 1;
     datetm.tm_mday = ymd.day;
@@ -63,6 +63,6 @@ namespace gregorian {
                 static_cast<unsigned short>(datetm.tm_mday));
   }
 
-} } //namespace mars_boost_ksim::gregorian
+} } //namespace mars_boost::gregorian
 
 #endif

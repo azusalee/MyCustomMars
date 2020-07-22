@@ -14,7 +14,7 @@
 #include <boost/type_traits/is_same.hpp>
 #include <boost/type_traits/is_const.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace numeric
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace numeric
 {
     // For using directives -- this namespace may be re-opened elsewhere
     namespace operators
@@ -216,6 +216,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template<typename T>
     struct zero_or_default;
 
-}} // namespace mars_boost_ksim::numeric
+}} // namespace mars_boost::numeric
 
 #endif

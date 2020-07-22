@@ -14,7 +14,7 @@
 #include <boost/thread/condition_variable.hpp>
 #include <boost/thread/lock_types.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace this_thread
   {

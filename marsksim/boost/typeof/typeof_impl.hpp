@@ -13,12 +13,12 @@
 #include <boost/type_traits/is_function.hpp>
 #include <boost/utility/enable_if.hpp>
 
-#define BOOST_TYPEOF_VECTOR(n) BOOST_PP_CAT(mars_boost_ksim::type_of::vector, n)
+#define BOOST_TYPEOF_VECTOR(n) BOOST_PP_CAT(mars_boost::type_of::vector, n)
 
 #define BOOST_TYPEOF_sizer_item(z, n, _)\
     char item ## n[V::item ## n ::value];
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace type_of {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace type_of {
     template<class V>
     struct sizer
     {
@@ -33,7 +33,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #undef BOOST_TYPEOF_sizer_item
 
 //
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace type_of {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace type_of {
 # ifdef BOOST_NO_SFINAE
     template<class V, class T>
     sizer<typename encode_type<V, T>::type> encode(const T&);
@@ -50,7 +50,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 # endif
 }}
 //
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace type_of {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace type_of {
 
     template<class V>
     struct decode_begin
@@ -60,7 +60,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 }}
 
 #define BOOST_TYPEOF_TYPEITEM(z, n, expr)\
-    mars_boost_ksim::mpl::size_t<sizeof(mars_boost_ksim::type_of::encode<BOOST_TYPEOF_VECTOR(0)<> >(expr).item ## n)>
+    mars_boost::mpl::size_t<sizeof(mars_boost::type_of::encode<BOOST_TYPEOF_VECTOR(0)<> >(expr).item ## n)>
 
 #define BOOST_TYPEOF_ENCODED_VECTOR(Expr)                                   \
     BOOST_TYPEOF_VECTOR(BOOST_TYPEOF_LIMIT_SIZE)<                           \
@@ -68,31 +68,31 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     >
 
 #define BOOST_TYPEOF(Expr)\
-    mars_boost_ksim::type_of::decode_begin<BOOST_TYPEOF_ENCODED_VECTOR(Expr) >::type
+    mars_boost::type_of::decode_begin<BOOST_TYPEOF_ENCODED_VECTOR(Expr) >::type
 
 #define BOOST_TYPEOF_TPL typename BOOST_TYPEOF
 
 //offset_vector is used to delay the insertion of data into the vector in order to allow
 //encoding to be done in many steps
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace type_of {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace type_of {
     template<typename V,typename Offset>
     struct offset_vector {
     };
 
     template<class V,class Offset,class T>
-    struct push_back<mars_boost_ksim::type_of::offset_vector<V,Offset>,T> {
+    struct push_back<mars_boost::type_of::offset_vector<V,Offset>,T> {
         typedef offset_vector<V,typename Offset::prior> type;
     };
 
     template<class V,class T>
-    struct push_back<mars_boost_ksim::type_of::offset_vector<V,mpl::size_t<0> >,T> {
+    struct push_back<mars_boost::type_of::offset_vector<V,mpl::size_t<0> >,T> {
         typedef typename push_back<V,T>::type type;
     };
 }}
 
 #define BOOST_TYPEOF_NESTED_TYPEITEM(z, n, expr)\
-    BOOST_STATIC_CONSTANT(int,BOOST_PP_CAT(value,n) = sizeof(mars_boost_ksim::type_of::encode<_typeof_start_vector>(expr).item ## n));\
-    typedef mars_boost_ksim::mpl::size_t<BOOST_PP_CAT(self_t::value,n)> BOOST_PP_CAT(item,n);
+    BOOST_STATIC_CONSTANT(int,BOOST_PP_CAT(value,n) = sizeof(mars_boost::type_of::encode<_typeof_start_vector>(expr).item ## n));\
+    typedef mars_boost::mpl::size_t<BOOST_PP_CAT(self_t::value,n)> BOOST_PP_CAT(item,n);
 
 #ifdef __DMC__
 #define BOOST_TYPEOF_NESTED_TYPEITEM_2(z,n,expr)\
@@ -107,7 +107,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #endif
 
 #ifdef __BORLANDC__
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace type_of {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace type_of {
     template<typename Pos,typename Iter>
     struct generic_typeof_fraction_iter {
         typedef generic_typeof_fraction_iter<Pos,Iter> self_t;
@@ -124,7 +124,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         struct _typeof_encode_fraction {\
             typedef _typeof_encode_fraction<_Typeof_Iteration> self_t;\
             BOOST_STATIC_CONSTANT(int,_typeof_encode_offset = (_Typeof_Iteration*BOOST_TYPEOF_LIMIT_SIZE));\
-            typedef mars_boost_ksim::type_of::offset_vector<BOOST_TYPEOF_VECTOR(0)<>,mars_boost_ksim::mpl::size_t<self_t::_typeof_encode_offset> > _typeof_start_vector;\
+            typedef mars_boost::type_of::offset_vector<BOOST_TYPEOF_VECTOR(0)<>,mars_boost::mpl::size_t<self_t::_typeof_encode_offset> > _typeof_start_vector;\
             BOOST_PP_REPEAT(BOOST_TYPEOF_LIMIT_SIZE,BOOST_TYPEOF_NESTED_TYPEITEM,expr)\
             template<int Next>\
             struct _apply_next {\
@@ -133,7 +133,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         };\
         template<typename Pos>\
         struct _typeof_fraction_iter {\
-            typedef mars_boost_ksim::type_of::generic_typeof_fraction_iter<Pos,_typeof_encode_fraction<0> > self_t;\
+            typedef mars_boost::type_of::generic_typeof_fraction_iter<Pos,_typeof_encode_fraction<0> > self_t;\
             typedef typename self_t::next next;\
             typedef typename self_t::type type;\
         };
@@ -143,7 +143,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         struct _typeof_encode_fraction {\
             typedef _typeof_encode_fraction<_Typeof_Iteration> self_t;\
             BOOST_STATIC_CONSTANT(int,_typeof_encode_offset = (_Typeof_Iteration*BOOST_TYPEOF_LIMIT_SIZE));\
-            typedef mars_boost_ksim::type_of::offset_vector<BOOST_TYPEOF_VECTOR(0)<>,mars_boost_ksim::mpl::size_t<self_t::_typeof_encode_offset> > _typeof_start_vector;\
+            typedef mars_boost::type_of::offset_vector<BOOST_TYPEOF_VECTOR(0)<>,mars_boost::mpl::size_t<self_t::_typeof_encode_offset> > _typeof_start_vector;\
             BOOST_PP_REPEAT(BOOST_TYPEOF_LIMIT_SIZE,BOOST_TYPEOF_NESTED_TYPEITEM,expr)\
         };\
         template<typename Pos>\
@@ -153,7 +153,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             BOOST_STATIC_CONSTANT(int,iteration=(pos/BOOST_TYPEOF_LIMIT_SIZE));\
             BOOST_STATIC_CONSTANT(int,where=pos%BOOST_TYPEOF_LIMIT_SIZE);\
             BOOST_TYPEOF_FRACTIONTYPE()\
-            typedef typename mars_boost_ksim::type_of::v_iter<fraction_type,mars_boost_ksim::mpl::int_<self_t::where> >::type type;\
+            typedef typename mars_boost::type_of::v_iter<fraction_type,mars_boost::mpl::int_<self_t::where> >::type type;\
             typedef _typeof_fraction_iter<typename Pos::next> next;\
         };
 #endif
@@ -163,7 +163,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 template<typename T>\
 struct BOOST_PP_CAT(_typeof_template_,name) {\
     BOOST_TYPEOF_NESTED_TYPEDEF_IMPL(expr)\
-    typedef typename mars_boost_ksim::type_of::decode_type<_typeof_fraction_iter<mars_boost_ksim::mpl::size_t<0> > >::type type;\
+    typedef typename mars_boost::type_of::decode_type<_typeof_fraction_iter<mars_boost::mpl::size_t<0> > >::type type;\
 };\
 typedef BOOST_PP_CAT(_typeof_template_,name)<int> name;
 
@@ -173,13 +173,13 @@ typedef BOOST_PP_CAT(_typeof_template_,name)<int> name;
 # define BOOST_TYPEOF_NESTED_TYPEDEF_TPL(name,expr) \
     struct name {\
         BOOST_TYPEOF_NESTED_TYPEDEF_IMPL(expr)\
-        typedef typename mars_boost_ksim::type_of::decode_type<_typeof_fraction_iter<mars_boost_ksim::mpl::size_t<0> > >::type type;\
+        typedef typename mars_boost::type_of::decode_type<_typeof_fraction_iter<mars_boost::mpl::size_t<0> > >::type type;\
     };
 
 # define BOOST_TYPEOF_NESTED_TYPEDEF(name,expr) \
     struct name {\
         BOOST_TYPEOF_NESTED_TYPEDEF_IMPL(expr)\
-        typedef mars_boost_ksim::type_of::decode_type<_typeof_fraction_iter<mars_boost_ksim::mpl::size_t<0> > >::type type;\
+        typedef mars_boost::type_of::decode_type<_typeof_fraction_iter<mars_boost::mpl::size_t<0> > >::type type;\
     };
 #endif
 

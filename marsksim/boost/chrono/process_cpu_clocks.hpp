@@ -28,7 +28,7 @@
 #include <boost/config/abi_prefix.hpp> // must be the last #include
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace chrono {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace chrono {
 
     class BOOST_CHRONO_DECL process_real_cpu_clock {
     public:
@@ -243,7 +243,7 @@ namespace chrono
   operator==(const duration<process_times<Rep1>, Period1>& lhs,
         const duration<process_times<Rep2>, Period2>& rhs)
   {
-      return mars_boost_ksim::chrono::detail::duration_eq<
+      return mars_boost::chrono::detail::duration_eq<
           duration<process_times<Rep1>, Period1>, duration<process_times<Rep2>, Period2> >()(lhs, rhs);
   }
 
@@ -253,7 +253,7 @@ namespace chrono
   operator==(const duration<process_times<Rep1>, Period1>& lhs,
         const duration<Rep2, Period2>& rhs)
   {
-      return mars_boost_ksim::chrono::detail::duration_eq<
+      return mars_boost::chrono::detail::duration_eq<
           duration<Rep1, Period1>, duration<Rep2, Period2> >()(duration<Rep1, Period1>(lhs.count().real), rhs);
   }
 
@@ -275,7 +275,7 @@ namespace chrono
   operator< (const duration<process_times<Rep1>, Period1>& lhs,
         const duration<Rep2, Period2>& rhs)
   {
-      return mars_boost_ksim::chrono::detail::duration_lt<
+      return mars_boost::chrono::detail::duration_lt<
         duration<Rep1, Period1>, duration<Rep2, Period2> >()(duration<Rep1, Period1>(lhs.count().real), rhs);
   }
 
@@ -294,7 +294,7 @@ namespace chrono
   operator< (const duration<process_times<Rep1>, Period1>& lhs,
         const duration<process_times<Rep2>, Period2>& rhs)
   {
-    return mars_boost_ksim::chrono::detail::duration_lt<
+    return mars_boost::chrono::detail::duration_lt<
       duration<Rep1, Period1>, duration<Rep2, Period2> >()(lhs, rhs);
   }
 
@@ -306,7 +306,7 @@ namespace chrono
     public:
 
         typedef process_cpu_clock_times times;
-        typedef mars_boost_ksim::chrono::duration<times,  nano>                duration;
+        typedef mars_boost::chrono::duration<times,  nano>                duration;
         typedef duration::rep                       rep;
         typedef duration::period                    period;
         typedef chrono::time_point<process_cpu_clock>  time_point;
@@ -450,14 +450,14 @@ namespace chrono
 #endif
 
 } // namespace chrono
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 namespace std {
 
     template <typename Rep>
-    struct numeric_limits<mars_boost_ksim::chrono::process_times<Rep> >
+    struct numeric_limits<mars_boost::chrono::process_times<Rep> >
     {
-        typedef mars_boost_ksim::chrono::process_times<Rep> Res;
+        typedef mars_boost::chrono::process_times<Rep> Res;
 
         public:
         static const bool is_specialized = true;

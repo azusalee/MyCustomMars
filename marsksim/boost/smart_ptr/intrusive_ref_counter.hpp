@@ -30,7 +30,7 @@
 #pragma warning(disable: 4396)
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim  {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost  {
 
 namespace sp_adl_block {
 
@@ -69,19 +69,19 @@ struct thread_unsafe_counter
  */
 struct thread_safe_counter
 {
-    typedef mars_boost_ksim::detail::atomic_count type;
+    typedef mars_boost::detail::atomic_count type;
 
-    static unsigned int load(mars_boost_ksim::detail::atomic_count const& counter) BOOST_NOEXCEPT
+    static unsigned int load(mars_boost::detail::atomic_count const& counter) BOOST_NOEXCEPT
     {
         return static_cast< unsigned int >(static_cast< long >(counter));
     }
 
-    static void increment(mars_boost_ksim::detail::atomic_count& counter) BOOST_NOEXCEPT
+    static void increment(mars_boost::detail::atomic_count& counter) BOOST_NOEXCEPT
     {
         ++counter;
     }
 
-    static unsigned int decrement(mars_boost_ksim::detail::atomic_count& counter) BOOST_NOEXCEPT
+    static unsigned int decrement(mars_boost::detail::atomic_count& counter) BOOST_NOEXCEPT
     {
         return --counter;
     }
@@ -178,7 +178,7 @@ using sp_adl_block::intrusive_ref_counter;
 using sp_adl_block::thread_unsafe_counter;
 using sp_adl_block::thread_safe_counter;
 
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #if defined(_MSC_VER)
 #pragma warning(pop)

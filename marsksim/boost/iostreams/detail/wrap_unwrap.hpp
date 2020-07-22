@@ -22,7 +22,7 @@
 #include <boost/mpl/if.hpp>
 #include <boost/ref.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace iostreams { namespace detail {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace iostreams { namespace detail {
                     
 //------------------Definition of wrap/unwrap traits--------------------------//
 
@@ -54,15 +54,15 @@ struct unwrap_ios
 
     template<typename T>
     inline typename wrapped_type<T>::type
-    wrap(T& t BOOST_IOSTREAMS_ENABLE_IF_STREAM(T)) { return mars_boost_ksim::ref(t); }
+    wrap(T& t BOOST_IOSTREAMS_ENABLE_IF_STREAM(T)) { return mars_boost::ref(t); }
 #else // #ifndef BOOST_NO_SFINAE //-------------------------------------------//
     template<typename T>
     inline typename wrapped_type<T>::type // BCC 5.x needs namespace qualification.
-    wrap_impl(const T& t, mpl::true_) { return mars_boost_ksim::ref(const_cast<T&>(t)); }
+    wrap_impl(const T& t, mpl::true_) { return mars_boost::ref(const_cast<T&>(t)); }
 
     template<typename T>
     inline typename wrapped_type<T>::type // BCC 5.x needs namespace qualification.
-    wrap_impl(T& t, mpl::true_) { return mars_boost_ksim::ref(t); }
+    wrap_impl(T& t, mpl::true_) { return mars_boost::ref(t); }
 
     template<typename T>
     inline typename wrapped_type<T>::type 

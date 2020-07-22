@@ -12,7 +12,7 @@
 #  include <boost/mpl/set/set0.hpp>
 #  include <boost/mpl/has_key.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace parameter { namespace aux {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace parameter { namespace aux {
 
 typedef mpl::set0<> set0;
 
@@ -28,7 +28,7 @@ struct has_key_
     typedef typename mpl::has_key<Set, K>::type type;
 };
 
-}}} // namespace mars_boost_ksim::parameter::aux
+}}} // namespace mars_boost::parameter::aux
 
 # else
 
@@ -38,7 +38,7 @@ struct has_key_
 #  include <boost/mpl/not.hpp>
 #  include <boost/mpl/push_front.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace parameter { namespace aux {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace parameter { namespace aux {
 
 typedef mpl::list0<> set0;
 
@@ -57,7 +57,7 @@ struct has_key_
     > type;
 };
 
-}}} // namespace mars_boost_ksim::parameter::aux
+}}} // namespace mars_boost::parameter::aux
 
 # endif
 

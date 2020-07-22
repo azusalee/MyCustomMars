@@ -19,7 +19,7 @@
 // missing partial specialization  workaround.
 //////////////////////////////////////////////////////////////////////////////
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range_detail 
     {        
@@ -42,7 +42,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             template< typename P >
             struct pts
             {
-                typedef BOOST_RANGE_DEDUCED_TYPENAME mars_boost_ksim::iterator_value< BOOST_RANGE_DEDUCED_TYPENAME P::first_type >::type type;
+                typedef BOOST_RANGE_DEDUCED_TYPENAME mars_boost::iterator_value< BOOST_RANGE_DEDUCED_TYPENAME P::first_type >::type type;
             };
         };
 

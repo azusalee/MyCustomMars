@@ -18,7 +18,7 @@
 #include <boost/range/reverse_iterator.hpp>
 #include <boost/type_traits/remove_reference.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     //
     // This interface is deprecated, use range_reverse_iterator<const T>
@@ -30,6 +30,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 const BOOST_DEDUCED_TYPENAME remove_reference<C>::type>
     { };
     
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif

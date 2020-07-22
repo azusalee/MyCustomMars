@@ -44,7 +44,7 @@ void __splitstack_setcontext( void * [BOOST_CONTEXT_SEGMENTS]);
 }
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace context {
 namespace detail {
 
@@ -59,7 +59,7 @@ struct data_t {
 };
 
 struct activation_record {
-    typedef mars_boost_ksim::intrusive_ptr< activation_record >    ptr_t;
+    typedef mars_boost::intrusive_ptr< activation_record >    ptr_t;
 
     thread_local static ptr_t   current_rec;
 
@@ -218,7 +218,7 @@ private:
         ar->run();
     }
 
-    typedef mars_boost_ksim::intrusive_ptr< detail::activation_record >    ptr_t;
+    typedef mars_boost::intrusive_ptr< detail::activation_record >    ptr_t;
 
     ptr_t   ptr_;
 

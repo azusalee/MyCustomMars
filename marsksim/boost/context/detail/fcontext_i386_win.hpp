@@ -27,7 +27,7 @@
 # include BOOST_ABI_PREFIX
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace context {
 
 extern "C" {
@@ -47,7 +47,7 @@ struct stack_t
 
 struct fp_t
 {
-    mars_boost_ksim::uint32_t     fc_freg[2];
+    mars_boost::uint32_t     fc_freg[2];
 
     fp_t() :
         fc_freg()
@@ -56,12 +56,12 @@ struct fp_t
 
 struct fcontext_t
 {
-    mars_boost_ksim::uint32_t     fc_greg[6];
+    mars_boost::uint32_t     fc_greg[6];
     stack_t             fc_stack;
     void            *   fc_excpt_lst;
     void            *   fc_local_storage;
     fp_t                fc_fp;
-    mars_boost_ksim::uint32_t     fc_dealloc;
+    mars_boost::uint32_t     fc_dealloc;
 
     fcontext_t() :
         fc_greg(),

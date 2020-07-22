@@ -44,7 +44,7 @@
 using namespace marsksim::stn;
 
 #define AYNC_HANDLER asyncreg_.Get()
-#define RETURN_LONKLINK_SYNC2ASYNC_FUNC(func) RETURN_SYNC2ASYNC_FUNC(func, )
+#define RETURN_LONKLINK_SYNC2ASYNC_FUNCksim(func) RETURN_SYNC2ASYNC_FUNCksim(func, )
 
 LongLinkTaskManager::LongLinkTaskManager(NetSourceksim& _netsource, ActiveLogicksim& _activelogic, DynamicTimeout& _dynamictimeout, MessageQueueksim::MessageQueueksim_t  _messagequeue_id)
     : asyncreg_(MessageQueueksim::InstallAsyncHandler(_messagequeue_id))
@@ -52,7 +52,7 @@ LongLinkTaskManager::LongLinkTaskManager(NetSourceksim& _netsource, ActiveLogick
     , retry_interval_(0)
     , tasks_continuous_fail_count_(0)
     , longlink_(LongLinkChannelFactory::Create(_messagequeue_id, _netsource))
-    , longlinkconnectmon_(new LongLinkConnectMonitor(_activelogic, *longlink_, _messagequeue_id))
+    , longlinkconnectmon_(new LongLinkConnectMonitorksim(_activelogic, *longlink_, _messagequeue_id))
     , dynamic_timeout_(_dynamictimeout)
 #ifdef ANDROID
     , wakeup_lock_(new WakeUpLock())
@@ -521,7 +521,7 @@ std::list<TaskProfile>::iterator LongLinkTaskManager::__Locate(uint32_t _taskid)
 void LongLinkTaskManager::__OnResponse(ErrCmdType _error_type, int _error_code, uint32_t _cmdid, uint32_t _taskid, AutoBuffer& _body, AutoBuffer& _extension, const ConnectProfile& _connect_profile) {
     move_wrapper<AutoBuffer> body(_body);
     move_wrapper<AutoBuffer> extension(_extension);
-    RETURN_LONKLINK_SYNC2ASYNC_FUNC(boost_ksim::bind(&LongLinkTaskManager::__OnResponse, this, _error_type, _error_code, _cmdid, _taskid, body, extension, _connect_profile));
+    RETURN_LONKLINK_SYNC2ASYNC_FUNCksim(boost_ksim::bind(&LongLinkTaskManager::__OnResponse, this, _error_type, _error_code, _cmdid, _taskid, body, extension, _connect_profile));
     // svr push notify
     
     if (kEctOK == _error_type && ::longlink_ispush(_cmdid, _taskid, body, extension))  {
@@ -605,7 +605,7 @@ void LongLinkTaskManager::__OnResponse(ErrCmdType _error_type, int _error_code, 
 }
 
 void LongLinkTaskManager::__OnSend(uint32_t _taskid) {
-    RETURN_LONKLINK_SYNC2ASYNC_FUNC(boost_ksim::bind(&LongLinkTaskManager::__OnSend, this, _taskid));
+    RETURN_LONKLINK_SYNC2ASYNC_FUNCksim(boost_ksim::bind(&LongLinkTaskManager::__OnSend, this, _taskid));
     xverbose_function();
 
     std::list<TaskProfile>::iterator it = __Locate(_taskid);
@@ -619,7 +619,7 @@ void LongLinkTaskManager::__OnSend(uint32_t _taskid) {
 }
 
 void LongLinkTaskManager::__OnRecv(uint32_t _taskid, size_t _cachedsize, size_t _totalsize) {
-    RETURN_LONKLINK_SYNC2ASYNC_FUNC(boost_ksim::bind(&LongLinkTaskManager::__OnRecv, this, _taskid, _cachedsize, _totalsize));
+    RETURN_LONKLINK_SYNC2ASYNC_FUNCksim(boost_ksim::bind(&LongLinkTaskManager::__OnRecv, this, _taskid, _cachedsize, _totalsize));
     xverbose_function();
     std::list<TaskProfile>::iterator it = __Locate(_taskid);
 

@@ -21,7 +21,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 namespace executors
 {
@@ -114,7 +114,7 @@ namespace executors
       if (closed(lk))  BOOST_THROW_EXCEPTION( sync_queue_is_closed() );
       threads_.reserve(threads_.size() + 1);
       thread th(closure);
-      threads_.push_back(thread_t(mars_boost_ksim::move(th)));
+      threads_.push_back(thread_t(mars_boost::move(th)));
     }
 #endif
     void submit(void (*closure)())
@@ -123,7 +123,7 @@ namespace executors
       if (closed(lk))  BOOST_THROW_EXCEPTION( sync_queue_is_closed() );
       threads_.reserve(threads_.size() + 1);
       thread th(closure);
-      threads_.push_back(thread_t(mars_boost_ksim::move(th)));
+      threads_.push_back(thread_t(mars_boost::move(th)));
     }
 
     template <typename Closure>
@@ -132,8 +132,8 @@ namespace executors
       lock_guard<mutex> lk(mtx_);
       if (closed(lk))  BOOST_THROW_EXCEPTION( sync_queue_is_closed() );
       threads_.reserve(threads_.size() + 1);
-      thread th(mars_boost_ksim::forward<Closure>(closure));
-      threads_.push_back(thread_t(mars_boost_ksim::move(th)));
+      thread th(mars_boost::forward<Closure>(closure));
+      threads_.push_back(thread_t(mars_boost::move(th)));
     }
 
     /**

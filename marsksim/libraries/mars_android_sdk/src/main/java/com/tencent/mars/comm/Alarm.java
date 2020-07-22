@@ -1,6 +1,6 @@
 package com.tencent.mars.comm;
 
-import android.app.AlarmManager;
+import android.app.AlarmksimManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -21,9 +21,9 @@ import java.util.TreeSet;
  * 定时器工具类，mars会在网络组件stn中使用定时器管理任务队列、连接间隔等
  * Created by caoshaokun on 16/3/7.
  */
-public class Alarm extends BroadcastReceiver {
+public class Alarmksim extends BroadcastReceiver {
 
-    private final static String TAG = "MicroMsg.Alarm";
+    private final static String TAG = "MicroMsg.Alarmksim";
     private final static String KEXTRA_ID = "ID";
     private final static String KEXTRA_PID = "PID";
 
@@ -34,24 +34,24 @@ public class Alarm extends BroadcastReceiver {
     }
 
     private static WakerLock wakerlock = null;
-    private static Alarm bc_alarm = null;
+    private static Alarmksim bc_alarm = null;
 
-    private native void onAlarm(final long id);
+    private native void onAlarmksim(final long id);
 
-    private static class ComparatorAlarm implements Comparator<Object[]> {
+    private static class ComparatorAlarmksim implements Comparator<Object[]> {
         @Override
         public int compare(Object[] lhs, Object[] rhs) {
             return (int) ((Long) (lhs[TSetData.ID.ordinal()]) - (Long) (rhs[TSetData.ID.ordinal()]));
         }
     }
 
-    private static TreeSet<Object[]> alarm_waiting_set = new TreeSet<Object[]>(new ComparatorAlarm());
+    private static TreeSet<Object[]> alarm_waiting_set = new TreeSet<Object[]>(new ComparatorAlarmksim());
 
-    public static void resetAlarm(final Context context) {
+    public static void resetAlarmksim(final Context context) {
         synchronized (alarm_waiting_set) {
             Iterator<Object[]> it = alarm_waiting_set.iterator();
             while (it.hasNext()) {
-                cancelAlarmMgr(context, (PendingIntent) (it.next()[TSetData.PENDINGINTENT.ordinal()]));
+                cancelAlarmksimMgr(context, (PendingIntent) (it.next()[TSetData.PENDINGINTENT.ordinal()]));
             }
             alarm_waiting_set.clear();
             if (null != bc_alarm) {
@@ -81,7 +81,7 @@ public class Alarm extends BroadcastReceiver {
             }
 
             if (null == bc_alarm) {
-                bc_alarm = new Alarm();
+                bc_alarm = new Alarmksim();
                 context.registerReceiver(bc_alarm, new IntentFilter("ALARM_ACTION(" + String.valueOf(Process.myPid()) + ")"));
             }
 
@@ -95,7 +95,7 @@ public class Alarm extends BroadcastReceiver {
 
             long waittime = after >= 0 ? curtime + after : curtime;
 
-            PendingIntent pendingIntent = setAlarmMgr(id, waittime, context);
+            PendingIntent pendingIntent = setAlarmksimMgr(id, waittime, context);
             if (null == pendingIntent) return false;
 
             alarm_waiting_set.add(new Object[]{id, waittime, pendingIntent});
@@ -117,10 +117,10 @@ public class Alarm extends BroadcastReceiver {
             }
 
             if (null == bc_alarm) {
-                bc_alarm = new Alarm();
+                bc_alarm = new Alarmksim();
                 IntentFilter filter = new IntentFilter();
                 context.registerReceiver(bc_alarm, filter);
-                Log.i(TAG, "stop new Alarm");
+                Log.i(TAG, "stop new Alarmksim");
             }
 
             Iterator<Object[]> it = alarm_waiting_set.iterator();
@@ -128,7 +128,7 @@ public class Alarm extends BroadcastReceiver {
             while (it.hasNext()) {
                 Object[] next = it.next();
                 if ((Long) (next[TSetData.ID.ordinal()]) == id) {
-                    cancelAlarmMgr(context, (PendingIntent) (next[TSetData.PENDINGINTENT.ordinal()]));
+                    cancelAlarmksimMgr(context, (PendingIntent) (next[TSetData.PENDINGINTENT.ordinal()]));
                     it.remove();
                     return true;
                 }
@@ -139,8 +139,8 @@ public class Alarm extends BroadcastReceiver {
         return false;
     }
 
-    private static PendingIntent setAlarmMgr(final long id, final long time, final Context context) {
-        final AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+    private static PendingIntent setAlarmksimMgr(final long id, final long time, final Context context) {
+        final AlarmksimManager am = (AlarmksimManager) context.getSystemService(Context.ALARM_SERVICE);
         if (am == null) {
             Log.e(TAG, "am == null");
             return null;
@@ -154,16 +154,16 @@ public class Alarm extends BroadcastReceiver {
 
 
         if (Build.VERSION.SDK_INT < 19) { //KITKAT
-            am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, time, pendingIntent);
+            am.set(AlarmksimManager.ELAPSED_REALTIME_WAKEUP, time, pendingIntent);
         } else {
-            am.setExact(AlarmManager.ELAPSED_REALTIME_WAKEUP, time, pendingIntent);
+            am.setExact(AlarmksimManager.ELAPSED_REALTIME_WAKEUP, time, pendingIntent);
         }
 
         return pendingIntent;
     }
 
-    private static boolean cancelAlarmMgr(final Context context, PendingIntent pendingIntent) {
-        final AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+    private static boolean cancelAlarmksimMgr(final Context context, PendingIntent pendingIntent) {
+        final AlarmksimManager am = (AlarmksimManager) context.getSystemService(Context.ALARM_SERVICE);
         if (am == null) {
             Log.e(TAG, "am == null");
             return false;
@@ -213,6 +213,6 @@ public class Alarm extends BroadcastReceiver {
         }
 
         if (null != wakerlock) wakerlock.lock(200);
-        if (found) onAlarm(id);
+        if (found) onAlarmksim(id);
     }
 }

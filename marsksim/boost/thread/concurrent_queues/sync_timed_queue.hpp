@@ -18,7 +18,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 namespace concurrent
 {
@@ -36,7 +36,7 @@ namespace detail
     BOOST_THREAD_COPYABLE_AND_MOVABLE(scheduled_type)
 
     scheduled_type(T const& pdata, time_point tp) : data(pdata), time(tp) {}
-    scheduled_type(BOOST_THREAD_RV_REF(T) pdata, time_point tp) : data(mars_boost_ksim::move(pdata)), time(tp) {}
+    scheduled_type(BOOST_THREAD_RV_REF(T) pdata, time_point tp) : data(mars_boost::move(pdata)), time(tp) {}
 
     scheduled_type(scheduled_type const& other) : data(other.data), time(other.time) {}
     scheduled_type& operator=(BOOST_THREAD_COPY_ASSIGN_REF(scheduled_type) other) {
@@ -45,9 +45,9 @@ namespace detail
       return *this;
     }
 
-    scheduled_type(BOOST_THREAD_RV_REF(scheduled_type) other) : data(mars_boost_ksim::move(other.data)), time(other.time) {}
+    scheduled_type(BOOST_THREAD_RV_REF(scheduled_type) other) : data(mars_boost::move(other.data)), time(other.time) {}
     scheduled_type& operator=(BOOST_THREAD_RV_REF(scheduled_type) other) {
-      data = mars_boost_ksim::move(other.data);
+      data = mars_boost::move(other.data);
       time = other.time;
       return *this;
     }
@@ -167,14 +167,14 @@ namespace detail
   template <class Duration>
   void sync_timed_queue<T, Clock>::push(BOOST_THREAD_RV_REF(T) elem, chrono::time_point<clock,Duration> const& tp)
   {
-    super::push(stype(mars_boost_ksim::move(elem),tp));
+    super::push(stype(mars_boost::move(elem),tp));
   }
 
   template <class T, class Clock>
   template <class Rep, class Period>
   void sync_timed_queue<T, Clock>::push(BOOST_THREAD_RV_REF(T) elem, chrono::duration<Rep,Period> const& dura)
   {
-    push(mars_boost_ksim::move(elem), clock::now() + dura);
+    push(mars_boost::move(elem), clock::now() + dura);
   }
 
 
@@ -197,14 +197,14 @@ namespace detail
   template <class Duration>
   queue_op_status sync_timed_queue<T, Clock>::try_push(BOOST_THREAD_RV_REF(T) elem, chrono::time_point<clock,Duration> const& tp)
   {
-    return super::try_push(stype(mars_boost_ksim::move(elem), tp));
+    return super::try_push(stype(mars_boost::move(elem), tp));
   }
 
   template <class T, class Clock>
   template <class Rep, class Period>
   queue_op_status sync_timed_queue<T, Clock>::try_push(BOOST_THREAD_RV_REF(T) elem, chrono::duration<Rep,Period> const& dura)
   {
-    return try_push(mars_boost_ksim::move(elem), clock::now() + dura);
+    return try_push(mars_boost::move(elem), clock::now() + dura);
   }
 
   ///////////////////////////
@@ -290,7 +290,7 @@ namespace detail
   T sync_timed_queue<T, Clock>::pull(unique_lock<mutex>&)
   {
 #if ! defined  BOOST_NO_CXX11_RVALUE_REFERENCES
-    return mars_boost_ksim::move(super::data_.pull().data);
+    return mars_boost::move(super::data_.pull().data);
 #else
     return super::data_.pull().data;
 #endif
@@ -300,7 +300,7 @@ namespace detail
   T sync_timed_queue<T, Clock>::pull(lock_guard<mutex>&)
   {
 #if ! defined  BOOST_NO_CXX11_RVALUE_REFERENCES
-    return mars_boost_ksim::move(super::data_.pull().data);
+    return mars_boost::move(super::data_.pull().data);
 #else
     return super::data_.pull().data;
 #endif
@@ -318,7 +318,7 @@ namespace detail
   void sync_timed_queue<T, Clock>::pull(unique_lock<mutex>&, T& elem)
   {
 #if ! defined  BOOST_NO_CXX11_RVALUE_REFERENCES
-    elem = mars_boost_ksim::move(super::data_.pull().data);
+    elem = mars_boost::move(super::data_.pull().data);
 #else
     elem = super::data_.pull().data;
 #endif
@@ -328,7 +328,7 @@ namespace detail
   void sync_timed_queue<T, Clock>::pull(lock_guard<mutex>&, T& elem)
   {
 #if ! defined  BOOST_NO_CXX11_RVALUE_REFERENCES
-    elem = mars_boost_ksim::move(super::data_.pull().data);
+    elem = mars_boost::move(super::data_.pull().data);
 #else
     elem = super::data_.pull().data;
 #endif

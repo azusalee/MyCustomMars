@@ -17,7 +17,7 @@
 #include <boost/math/special_functions/math_fwd.hpp>
 #include <boost/math/special_functions/detail/fp_traits.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim{ namespace math{ 
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost{ namespace math{ 
 
 namespace detail {
 
@@ -56,11 +56,11 @@ namespace detail {
     //
     inline int signbit_impl(long double x, generic_tag<true> const&)
     {
-       return (mars_boost_ksim::math::signbit)(static_cast<double>(x));
+       return (mars_boost::math::signbit)(static_cast<double>(x));
     }
     inline int signbit_impl(long double x, generic_tag<false> const&)
     {
-       return (mars_boost_ksim::math::signbit)(static_cast<double>(x));
+       return (mars_boost::math::signbit)(static_cast<double>(x));
     }
 #endif
 
@@ -110,15 +110,15 @@ namespace detail {
     inline long double (changesign_impl)(long double x, generic_tag<true> const&)
     {
        double* pd = reinterpret_cast<double*>(&x);
-       pd[0] = mars_boost_ksim::math::changesign(pd[0]);
-       pd[1] = mars_boost_ksim::math::changesign(pd[1]);
+       pd[0] = mars_boost::math::changesign(pd[0]);
+       pd[1] = mars_boost::math::changesign(pd[1]);
        return x;
     }
     inline long double (changesign_impl)(long double x, generic_tag<false> const&)
     {
        double* pd = reinterpret_cast<double*>(&x);
-       pd[0] = mars_boost_ksim::math::changesign(pd[0]);
-       pd[1] = mars_boost_ksim::math::changesign(pd[1]);
+       pd[0] = mars_boost::math::changesign(pd[0]);
+       pd[1] = mars_boost::math::changesign(pd[1]);
        return x;
     }
 #endif
@@ -154,7 +154,7 @@ template<class T> int (signbit)(T x)
 { 
    typedef typename detail::fp_traits<T>::type traits;
    typedef typename traits::method method;
-   // typedef typename mars_boost_ksim::is_floating_point<T>::type fp_tag;
+   // typedef typename mars_boost::is_floating_point<T>::type fp_tag;
    typedef typename tools::promote_args_permissive<T>::type result_type;
    return detail::signbit_impl(static_cast<result_type>(x), method());
 }
@@ -162,14 +162,14 @@ template<class T> int (signbit)(T x)
 template <class T>
 inline int sign BOOST_NO_MACRO_EXPAND(const T& z)
 {
-   return (z == 0) ? 0 : (mars_boost_ksim::math::signbit)(z) ? -1 : 1;
+   return (z == 0) ? 0 : (mars_boost::math::signbit)(z) ? -1 : 1;
 }
 
 template <class T> typename tools::promote_args_permissive<T>::type (changesign)(const T& x)
 { //!< \brief return unchanged binary pattern of x, except for change of sign bit. 
    typedef typename detail::fp_traits<T>::sign_change_type traits;
    typedef typename traits::method method;
-   // typedef typename mars_boost_ksim::is_floating_point<T>::type fp_tag;
+   // typedef typename mars_boost::is_floating_point<T>::type fp_tag;
    typedef typename tools::promote_args_permissive<T>::type result_type;
 
    return detail::changesign_impl(static_cast<result_type>(x), method());
@@ -181,12 +181,12 @@ inline typename tools::promote_args_permissive<T, U>::type
 {
    BOOST_MATH_STD_USING
    typedef typename tools::promote_args_permissive<T, U>::type result_type;
-   return (mars_boost_ksim::math::signbit)(static_cast<result_type>(x)) != (mars_boost_ksim::math::signbit)(static_cast<result_type>(y)) 
-      ? (mars_boost_ksim::math::changesign)(static_cast<result_type>(x)) : static_cast<result_type>(x);
+   return (mars_boost::math::signbit)(static_cast<result_type>(x)) != (mars_boost::math::signbit)(static_cast<result_type>(y)) 
+      ? (mars_boost::math::changesign)(static_cast<result_type>(x)) : static_cast<result_type>(x);
 }
 
 } // namespace math
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 
 #endif // BOOST_MATH_TOOLS_SIGN_HPP

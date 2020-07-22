@@ -45,7 +45,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     class recursive_mutex
     {
@@ -67,33 +67,33 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             int const init_attr_res=pthread_mutexattr_init(&attr);
             if(init_attr_res)
             {
-                mars_boost_ksim::throw_exception(thread_resource_error(init_attr_res, "boost_ksim:: recursive_mutex constructor failed in pthread_mutexattr_init"));
+                mars_boost::throw_exception(thread_resource_error(init_attr_res, "boost_ksim:: recursive_mutex constructor failed in pthread_mutexattr_init"));
             }
             int const set_attr_res=pthread_mutexattr_settype(&attr,PTHREAD_MUTEX_RECURSIVE);
             if(set_attr_res)
             {
                 BOOST_VERIFY(!pthread_mutexattr_destroy(&attr));
-                mars_boost_ksim::throw_exception(thread_resource_error(set_attr_res, "boost_ksim:: recursive_mutex constructor failed in pthread_mutexattr_settype"));
+                mars_boost::throw_exception(thread_resource_error(set_attr_res, "boost_ksim:: recursive_mutex constructor failed in pthread_mutexattr_settype"));
             }
 
             int const res=pthread_mutex_init(&m,&attr);
             if(res)
             {
                 BOOST_VERIFY(!pthread_mutexattr_destroy(&attr));
-                mars_boost_ksim::throw_exception(thread_resource_error(res, "boost_ksim:: recursive_mutex constructor failed in pthread_mutex_init"));
+                mars_boost::throw_exception(thread_resource_error(res, "boost_ksim:: recursive_mutex constructor failed in pthread_mutex_init"));
             }
             BOOST_VERIFY(!pthread_mutexattr_destroy(&attr));
 #else
             int const res=pthread_mutex_init(&m,NULL);
             if(res)
             {
-                mars_boost_ksim::throw_exception(thread_resource_error(res, "boost_ksim:: recursive_mutex constructor failed in pthread_mutex_init"));
+                mars_boost::throw_exception(thread_resource_error(res, "boost_ksim:: recursive_mutex constructor failed in pthread_mutex_init"));
             }
             int const res2=pthread_cond_init(&cond,NULL);
             if(res2)
             {
                 BOOST_VERIFY(!pthread_mutex_destroy(&m));
-                mars_boost_ksim::throw_exception(thread_resource_error(res2, "boost_ksim:: recursive_mutex constructor failed in pthread_cond_init"));
+                mars_boost::throw_exception(thread_resource_error(res2, "boost_ksim:: recursive_mutex constructor failed in pthread_cond_init"));
             }
             is_locked=false;
             count=0;
@@ -134,7 +134,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #else
         void lock()
         {
-            mars_boost_ksim::pthread::pthread_mutex_scoped_lock const local_lock(&m);
+            mars_boost::pthread::pthread_mutex_scoped_lock const local_lock(&m);
             if(is_locked && pthread_equal(owner,pthread_self()))
             {
                 ++count;
@@ -152,7 +152,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         void unlock()
         {
-            mars_boost_ksim::pthread::pthread_mutex_scoped_lock const local_lock(&m);
+            mars_boost::pthread::pthread_mutex_scoped_lock const local_lock(&m);
             if(!--count)
             {
                 is_locked=false;
@@ -162,7 +162,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         bool try_lock()
         {
-            mars_boost_ksim::pthread::pthread_mutex_scoped_lock const local_lock(&m);
+            mars_boost::pthread::pthread_mutex_scoped_lock const local_lock(&m);
             if(is_locked && !pthread_equal(owner,pthread_self()))
             {
                 return false;
@@ -203,32 +203,32 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             int const init_attr_res=pthread_mutexattr_init(&attr);
             if(init_attr_res)
             {
-                mars_boost_ksim::throw_exception(thread_resource_error(init_attr_res, "boost_ksim:: recursive_timed_mutex constructor failed in pthread_mutexattr_init"));
+                mars_boost::throw_exception(thread_resource_error(init_attr_res, "boost_ksim:: recursive_timed_mutex constructor failed in pthread_mutexattr_init"));
             }
             int const set_attr_res=pthread_mutexattr_settype(&attr,PTHREAD_MUTEX_RECURSIVE);
             if(set_attr_res)
             {
-                mars_boost_ksim::throw_exception(thread_resource_error(set_attr_res, "boost_ksim:: recursive_timed_mutex constructor failed in pthread_mutexattr_settype"));
+                mars_boost::throw_exception(thread_resource_error(set_attr_res, "boost_ksim:: recursive_timed_mutex constructor failed in pthread_mutexattr_settype"));
             }
 
             int const res=pthread_mutex_init(&m,&attr);
             if(res)
             {
                 BOOST_VERIFY(!pthread_mutexattr_destroy(&attr));
-                mars_boost_ksim::throw_exception(thread_resource_error(res, "boost_ksim:: recursive_timed_mutex constructor failed in pthread_mutex_init"));
+                mars_boost::throw_exception(thread_resource_error(res, "boost_ksim:: recursive_timed_mutex constructor failed in pthread_mutex_init"));
             }
             BOOST_VERIFY(!pthread_mutexattr_destroy(&attr));
 #else
             int const res=pthread_mutex_init(&m,NULL);
             if(res)
             {
-                mars_boost_ksim::throw_exception(thread_resource_error(res, "boost_ksim:: recursive_timed_mutex constructor failed in pthread_mutex_init"));
+                mars_boost::throw_exception(thread_resource_error(res, "boost_ksim:: recursive_timed_mutex constructor failed in pthread_mutex_init"));
             }
             int const res2=pthread_cond_init(&cond,NULL);
             if(res2)
             {
                 BOOST_VERIFY(!pthread_mutex_destroy(&m));
-                mars_boost_ksim::throw_exception(thread_resource_error(res2, "boost_ksim:: recursive_timed_mutex constructor failed in pthread_cond_init"));
+                mars_boost::throw_exception(thread_resource_error(res2, "boost_ksim:: recursive_timed_mutex constructor failed in pthread_cond_init"));
             }
             is_locked=false;
             count=0;
@@ -280,7 +280,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #else
         void lock()
         {
-            mars_boost_ksim::pthread::pthread_mutex_scoped_lock const local_lock(&m);
+            mars_boost::pthread::pthread_mutex_scoped_lock const local_lock(&m);
             if(is_locked && pthread_equal(owner,pthread_self()))
             {
                 ++count;
@@ -298,7 +298,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         void unlock()
         {
-            mars_boost_ksim::pthread::pthread_mutex_scoped_lock const local_lock(&m);
+            mars_boost::pthread::pthread_mutex_scoped_lock const local_lock(&m);
             if(!--count)
             {
                 is_locked=false;
@@ -308,7 +308,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         bool try_lock() BOOST_NOEXCEPT
         {
-            mars_boost_ksim::pthread::pthread_mutex_scoped_lock const local_lock(&m);
+            mars_boost::pthread::pthread_mutex_scoped_lock const local_lock(&m);
             if(is_locked && !pthread_equal(owner,pthread_self()))
             {
                 return false;
@@ -322,7 +322,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     private:
         bool do_try_lock_until(struct timespec const &timeout)
         {
-            mars_boost_ksim::pthread::pthread_mutex_scoped_lock const local_lock(&m);
+            mars_boost::pthread::pthread_mutex_scoped_lock const local_lock(&m);
             if(is_locked && pthread_equal(owner,pthread_self()))
             {
                 ++count;
@@ -378,7 +378,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
           //using namespace chrono;
           chrono::nanoseconds d = tp.time_since_epoch();
-          timespec ts = mars_boost_ksim::detail::to_timespec(d);
+          timespec ts = mars_boost::detail::to_timespec(d);
           return do_try_lock_until(ts);
         }
 #endif

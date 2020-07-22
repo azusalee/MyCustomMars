@@ -16,18 +16,18 @@
 #include <boost/type_traits/is_empty.hpp>
 #include <boost/config.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 template <typename T>
 struct is_stateless
  : public integral_constant<bool,  
-      (::mars_boost_ksim::has_trivial_constructor<T>::value
-      && ::mars_boost_ksim::has_trivial_copy<T>::value
-      && ::mars_boost_ksim::has_trivial_destructor<T>::value
-      && ::mars_boost_ksim::is_class<T>::value
-      && ::mars_boost_ksim::is_empty<T>::value)>
+      (::mars_boost::has_trivial_constructor<T>::value
+      && ::mars_boost::has_trivial_copy<T>::value
+      && ::mars_boost::has_trivial_destructor<T>::value
+      && ::mars_boost::is_class<T>::value
+      && ::mars_boost::is_empty<T>::value)>
 {};
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_IS_STATELESS_HPP_INCLUDED

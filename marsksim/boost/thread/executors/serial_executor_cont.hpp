@@ -20,7 +20,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 namespace executors
 {
@@ -43,7 +43,7 @@ namespace executors
         typedef void type;
       };
       continuation(BOOST_THREAD_RV_REF(work) tsk)
-      : task(mars_boost_ksim::move(tsk)) {}
+      : task(mars_boost::move(tsk)) {}
       void operator()(future<void> f)
       {
         try {
@@ -157,7 +157,7 @@ namespace executors
     {
       lock_guard<mutex> lk(mtx_);
       if (closed(lk))       BOOST_THROW_EXCEPTION( sync_queue_is_closed() );
-      fut_ = fut_.then(ex_, continuation(work(mars_boost_ksim::forward<Closure>(closure))));
+      fut_ = fut_.then(ex_, continuation(work(mars_boost::forward<Closure>(closure))));
     }
 
   };

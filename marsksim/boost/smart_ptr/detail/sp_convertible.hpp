@@ -32,7 +32,7 @@
 
 #if !defined( BOOST_SP_NO_SP_CONVERTIBLE )
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 namespace detail
@@ -85,7 +85,7 @@ template< class Y, class T > struct sp_enable_if_convertible: public sp_enable_i
 
 } // namespace detail
 
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // !defined( BOOST_SP_NO_SP_CONVERTIBLE )
 

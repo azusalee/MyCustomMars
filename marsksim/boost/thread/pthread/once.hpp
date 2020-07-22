@@ -26,7 +26,7 @@
 #include <pthread.h>
 #include <csignal>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
   struct once_flag;
@@ -35,7 +35,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
   namespace thread_detail
   {
-    typedef mars_boost_ksim::uint32_t  uintmax_atomic_t;
+    typedef mars_boost::uint32_t  uintmax_atomic_t;
     #define BOOST_THREAD_DETAIL_UINTMAX_ATOMIC_C2(value) value##u
     #define BOOST_THREAD_DETAIL_UINTMAX_ATOMIC_MAX_C BOOST_THREAD_DETAIL_UINTMAX_ATOMIC_C2(~0)
 
@@ -102,7 +102,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #define BOOST_THREAD_INVOKE_RET_VOID detail::invoke<void>
 #define BOOST_THREAD_INVOKE_RET_VOID_CALL
 #else
-#define BOOST_THREAD_INVOKE_RET_VOID mars_boost_ksim::bind
+#define BOOST_THREAD_INVOKE_RET_VOID mars_boost::bind
 #define BOOST_THREAD_INVOKE_RET_VOID_CALL ()
 #endif
 
@@ -142,8 +142,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 {
                     pthread::pthread_mutex_scoped_unlock relocker(&thread_detail::once_epoch_mutex);
                     BOOST_THREAD_INVOKE_RET_VOID(
-                        thread_detail::decay_copy(mars_boost_ksim::forward<Function>(f)),
-                        thread_detail::decay_copy(mars_boost_ksim::forward<ArgTypes>(args))...
+                        thread_detail::decay_copy(mars_boost::forward<Function>(f)),
+                        thread_detail::decay_copy(mars_boost::forward<ArgTypes>(args))...
                     ) BOOST_THREAD_INVOKE_RET_VOID_CALL;
                 }
                 BOOST_CATCH (...)
@@ -409,8 +409,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 {
                     pthread::pthread_mutex_scoped_unlock relocker(&thread_detail::once_epoch_mutex);
                     BOOST_THREAD_INVOKE_RET_VOID(
-                        thread_detail::decay_copy(mars_boost_ksim::forward<Function>(f)),
-                        thread_detail::decay_copy(mars_boost_ksim::forward<T1>(p1))
+                        thread_detail::decay_copy(mars_boost::forward<Function>(f)),
+                        thread_detail::decay_copy(mars_boost::forward<T1>(p1))
                     ) BOOST_THREAD_INVOKE_RET_VOID_CALL;
                 }
                 BOOST_CATCH (...)
@@ -455,9 +455,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 {
                     pthread::pthread_mutex_scoped_unlock relocker(&thread_detail::once_epoch_mutex);
                     BOOST_THREAD_INVOKE_RET_VOID(
-                        thread_detail::decay_copy(mars_boost_ksim::forward<Function>(f)),
-                        thread_detail::decay_copy(mars_boost_ksim::forward<T1>(p1)),
-                        thread_detail::decay_copy(mars_boost_ksim::forward<T1>(p2))
+                        thread_detail::decay_copy(mars_boost::forward<Function>(f)),
+                        thread_detail::decay_copy(mars_boost::forward<T1>(p1)),
+                        thread_detail::decay_copy(mars_boost::forward<T1>(p2))
                     ) BOOST_THREAD_INVOKE_RET_VOID_CALL;
                 }
                 BOOST_CATCH (...)
@@ -503,10 +503,10 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 {
                     pthread::pthread_mutex_scoped_unlock relocker(&thread_detail::once_epoch_mutex);
                     BOOST_THREAD_INVOKE_RET_VOID(
-                        thread_detail::decay_copy(mars_boost_ksim::forward<Function>(f)),
-                        thread_detail::decay_copy(mars_boost_ksim::forward<T1>(p1)),
-                        thread_detail::decay_copy(mars_boost_ksim::forward<T1>(p2)),
-                        thread_detail::decay_copy(mars_boost_ksim::forward<T1>(p3))
+                        thread_detail::decay_copy(mars_boost::forward<Function>(f)),
+                        thread_detail::decay_copy(mars_boost::forward<T1>(p1)),
+                        thread_detail::decay_copy(mars_boost::forward<T1>(p2)),
+                        thread_detail::decay_copy(mars_boost::forward<T1>(p3))
                     ) BOOST_THREAD_INVOKE_RET_VOID_CALL;
                 }
                 BOOST_CATCH (...)

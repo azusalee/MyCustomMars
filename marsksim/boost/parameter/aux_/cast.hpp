@@ -12,7 +12,7 @@
 #  include <boost/type_traits/remove_const.hpp>
 # endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace parameter { namespace aux {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace parameter { namespace aux {
 
 struct use_default_tag {};
 
@@ -102,8 +102,8 @@ struct cast<void(T), Args>
     typedef typename mpl::apply2<
         as_placeholder_expr<T>, Args, Args>::type type0;
 
-    typedef typename mars_boost_ksim::add_reference<
-        typename mars_boost_ksim::remove_const<type0>::type 
+    typedef typename mars_boost::add_reference<
+        typename mars_boost::remove_const<type0>::type 
     >::type reference;
 
     static use_default_tag execute(use_default_tag)
@@ -129,13 +129,13 @@ struct cast<void(T), Args>
 };
 
 #  define BOOST_PARAMETER_FUNCTION_CAST(value, predicate, args) \
-    mars_boost_ksim::parameter::aux::cast<void predicate, args>::remove_const( \
-        mars_boost_ksim::parameter::aux::cast<void predicate, args>::execute(value) \
+    mars_boost::parameter::aux::cast<void predicate, args>::remove_const( \
+        mars_boost::parameter::aux::cast<void predicate, args>::execute(value) \
     )
 
 # endif
 
-}}} // namespace mars_boost_ksim::parameter::aux
+}}} // namespace mars_boost::parameter::aux
 
 #endif // BOOST_PARAMETER_CAST_060902_HPP
 

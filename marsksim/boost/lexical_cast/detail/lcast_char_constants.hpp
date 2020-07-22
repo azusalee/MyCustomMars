@@ -23,7 +23,7 @@
 #   pragma once
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim 
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost 
 {
     namespace detail // '0', '-', '+', 'e', 'E' and '.' constants
     {
@@ -39,7 +39,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             BOOST_STATIC_CONSTANT(Char, c_decimal_separator = static_cast<Char>('.'));
         };
     }
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 
 #endif // BOOST_LEXICAL_CAST_DETAIL_LCAST_CHAR_CONSTANTS_HPP

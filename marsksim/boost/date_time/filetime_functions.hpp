@@ -27,7 +27,7 @@
 #include <boost/date_time/time.hpp>
 #include <boost/date_time/date_defs.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 namespace date_time {
 
@@ -39,19 +39,19 @@ namespace winapi {
 
         struct FILETIME
         {
-            mars_boost_ksim::uint32_t dwLowDateTime;
-            mars_boost_ksim::uint32_t dwHighDateTime;
+            mars_boost::uint32_t dwLowDateTime;
+            mars_boost::uint32_t dwHighDateTime;
         };
         struct SYSTEMTIME
         {
-            mars_boost_ksim::uint16_t wYear;
-            mars_boost_ksim::uint16_t wMonth;
-            mars_boost_ksim::uint16_t wDayOfWeek;
-            mars_boost_ksim::uint16_t wDay;
-            mars_boost_ksim::uint16_t wHour;
-            mars_boost_ksim::uint16_t wMinute;
-            mars_boost_ksim::uint16_t wSecond;
-            mars_boost_ksim::uint16_t wMilliseconds;
+            mars_boost::uint16_t wYear;
+            mars_boost::uint16_t wMonth;
+            mars_boost::uint16_t wDayOfWeek;
+            mars_boost::uint16_t wDay;
+            mars_boost::uint16_t wHour;
+            mars_boost::uint16_t wMinute;
+            mars_boost::uint16_t wSecond;
+            mars_boost::uint16_t wMilliseconds;
         };
 
         __declspec(dllimport) void __stdcall GetSystemTimeAsFileTime(FILETIME* lpFileTime);
@@ -89,10 +89,10 @@ namespace winapi {
      *
      * \note The function is templated on the FILETIME type, so that
      *       it can be used with both native FILETIME and the ad-hoc
-     *       mars_boost_ksim::date_time::winapi::file_time type.
+     *       mars_boost::date_time::winapi::file_time type.
      */
     template< typename FileTimeT >
-    inline mars_boost_ksim::uint64_t file_time_to_microseconds(FileTimeT const& ft)
+    inline mars_boost::uint64_t file_time_to_microseconds(FileTimeT const& ft)
     {
         /* shift is difference between 1970-Jan-01 & 1601-Jan-01
         * in 100-nanosecond intervals */
@@ -119,7 +119,7 @@ namespace winapi {
  *
  * \note The function is templated on the FILETIME type, so that
  *       it can be used with both native FILETIME and the ad-hoc
- *       mars_boost_ksim::date_time::winapi::file_time type.
+ *       mars_boost::date_time::winapi::file_time type.
  */
 template< typename TimeT, typename FileTimeT >
 inline
@@ -163,7 +163,7 @@ TimeT time_from_ftime(const FileTimeT& ft)
     return TimeT(d, time_duration_type(hours, minutes, seconds, sub_sec));
 }
 
-}} // mars_boost_ksim::date_time
+}} // mars_boost::date_time
 
 #endif // BOOST_HAS_FTIME
 

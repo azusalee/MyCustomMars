@@ -11,7 +11,7 @@
 
 #include <boost/cstdint.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 namespace math
 {
@@ -82,7 +82,7 @@ template < >
 #ifdef BOOST_NO_INTEGRAL_INT64_T
      typedef unsigned long static_gcd_type;
 #else
-     typedef mars_boost_ksim::uintmax_t static_gcd_type;
+     typedef mars_boost::uintmax_t static_gcd_type;
 #endif
 
 template < static_gcd_type Value1, static_gcd_type Value2 >
@@ -102,7 +102,7 @@ template < typename IntegerType >
 
 
 }  // namespace math
-}  // namespace mars_boost_ksim
+}  // namespace mars_boost
 
 
 #endif  // BOOST_MATH_FWD_HPP

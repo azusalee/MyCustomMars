@@ -26,7 +26,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace thread_detail
   {
@@ -64,7 +64,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       void_completion_function fct_;
       template <typename F>
       void_functor_barrier_reseter(unsigned int size, BOOST_THREAD_RV_REF(F) funct)
-      : size_(size), fct_(mars_boost_ksim::move(funct))
+      : size_(size), fct_(mars_boost::move(funct))
       {}
       template <typename F>
       void_functor_barrier_reseter(unsigned int size, F& funct)
@@ -80,7 +80,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       }
       void_functor_barrier_reseter(BOOST_THREAD_RV_REF(void_functor_barrier_reseter) other) BOOST_NOEXCEPT :
       size_(BOOST_THREAD_RV(other).size_), fct_(BOOST_THREAD_RV(other).fct_)
-      //size_(BOOST_THREAD_RV(other).size_), fct_(mars_boost_ksim::move(BOOST_THREAD_RV(other).fct_))
+      //size_(BOOST_THREAD_RV(other).size_), fct_(mars_boost::move(BOOST_THREAD_RV(other).fct_))
       {
       }
 
@@ -124,7 +124,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
   {
     static inline unsigned int check_counter(unsigned int count)
     {
-      if (count == 0) mars_boost_ksim::throw_exception(
+      if (count == 0) mars_boost::throw_exception(
           thread_exception(system::errc::invalid_argument, "barrier constructor: count cannot be zero."));
       return count;
     }
@@ -151,7 +151,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     : m_count(check_counter(count)),
       m_generation(0),
       fct_(BOOST_THREAD_MAKE_RV_REF(thread_detail::void_functor_barrier_reseter(count,
-        mars_boost_ksim::move(funct)))
+        mars_boost::move(funct)))
     )
     {
     }
@@ -181,7 +181,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     )
     : m_count(check_counter(count)),
       m_generation(0),
-      fct_(mars_boost_ksim::move(funct))
+      fct_(mars_boost::move(funct))
     {
     }
     template <typename F>
@@ -217,7 +217,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
     bool wait()
     {
-      mars_boost_ksim::unique_lock < mars_boost_ksim::mutex > lock(m_mutex);
+      mars_boost::unique_lock < mars_boost::mutex > lock(m_mutex);
       unsigned int gen = m_generation;
 
       if (--m_count == 0)
@@ -247,7 +247,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     thread_detail::size_completion_function fct_;
   };
 
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #include <boost/config/abi_suffix.hpp>
 

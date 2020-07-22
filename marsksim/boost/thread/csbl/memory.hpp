@@ -27,7 +27,7 @@
 #include <boost/thread/csbl/memory/scoped_allocator.hpp>
 
 // 20.7.9, the default allocator:
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace csbl
   {

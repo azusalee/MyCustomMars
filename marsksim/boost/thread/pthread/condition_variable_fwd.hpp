@@ -26,7 +26,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace detail {
     inline int monotonic_pthread_cond_init(pthread_cond_t& cond) {
@@ -58,7 +58,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         pthread_cond_t cond;
 
     public:
-    //private: // used by mars_boost_ksim::thread::try_join_until
+    //private: // used by mars_boost::thread::try_join_until
 
         inline bool do_wait_until(
             unique_lock<mutex>& lock,
@@ -68,7 +68,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             unique_lock<mutex>& lock,
             struct timespec const &timeout)
         {
-          return do_wait_until(lock, mars_boost_ksim::detail::timespec_plus(timeout, mars_boost_ksim::detail::timespec_now()));
+          return do_wait_until(lock, mars_boost::detail::timespec_plus(timeout, mars_boost::detail::timespec_now()));
         }
 
     public:
@@ -79,7 +79,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             int res=pthread_mutex_init(&internal_mutex,NULL);
             if(res)
             {
-                mars_boost_ksim::throw_exception(thread_resource_error(res, "boost_ksim::condition_variable::condition_variable() constructor failed in pthread_mutex_init"));
+                mars_boost::throw_exception(thread_resource_error(res, "boost_ksim::condition_variable::condition_variable() constructor failed in pthread_mutex_init"));
             }
 #endif
             res = detail::monotonic_pthread_cond_init(cond);
@@ -88,7 +88,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #if defined BOOST_THREAD_PROVIDES_INTERRUPTIONS
                 BOOST_VERIFY(!pthread_mutex_destroy(&internal_mutex));
 #endif
-                mars_boost_ksim::throw_exception(thread_resource_error(res, "boost_ksim::condition_variable::condition_variable() constructor failed in detail::monotonic_pthread_cond_init"));
+                mars_boost::throw_exception(thread_resource_error(res, "boost_ksim::condition_variable::condition_variable() constructor failed in detail::monotonic_pthread_cond_init"));
             }
         }
         ~condition_variable()
@@ -117,7 +117,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #if defined BOOST_THREAD_USES_DATETIME
         inline bool timed_wait(
             unique_lock<mutex>& m,
-            mars_boost_ksim::system_time const& abs_time)
+            mars_boost::system_time const& abs_time)
         {
 #if defined BOOST_THREAD_WAIT_BUG
             struct timespec const timeout=detail::to_timespec(abs_time + BOOST_THREAD_WAIT_BUG);
@@ -154,7 +154,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         template<typename predicate_type>
         bool timed_wait(
             unique_lock<mutex>& m,
-            mars_boost_ksim::system_time const& abs_time,predicate_type pred)
+            mars_boost::system_time const& abs_time,predicate_type pred)
         {
             while (!pred())
             {
@@ -247,7 +247,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
             using namespace chrono;
             nanoseconds d = tp.time_since_epoch();
-            timespec ts = mars_boost_ksim::detail::to_timespec(d);
+            timespec ts = mars_boost::detail::to_timespec(d);
             if (do_wait_until(lk, ts)) return cv_status::no_timeout;
             else return cv_status::timeout;
         }
@@ -302,7 +302,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
             using namespace chrono;
             nanoseconds d = tp.time_since_epoch();
-            timespec ts = mars_boost_ksim::detail::to_timespec(d);
+            timespec ts = mars_boost::detail::to_timespec(d);
             if (do_wait_until(lk, ts)) return cv_status::no_timeout;
             else return cv_status::timeout;
         }
@@ -333,7 +333,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 const chrono::duration<Rep, Period>& d,
                 Predicate pred)
         {
-          return wait_until(lock, chrono::steady_clock::now() + d, mars_boost_ksim::move(pred));
+          return wait_until(lock, chrono::steady_clock::now() + d, mars_boost::move(pred));
         }
 #endif
 

@@ -44,10 +44,10 @@ class TimingSync {
     void OnNetworkChange();
 
   private:
-    void __OnAlarm();
+    void __OnAlarmksim();
 
   private:
-    Alarm alarm_;
+    Alarmksim alarm_;
 
     ActiveLogicksim& active_logic_;
     boost_ksim::signals2::scoped_connection timing_sync_active_connection_;

@@ -19,7 +19,7 @@
 #include "boost/date_time/time_iterator.hpp"
 #include "boost/date_time/dst_rules.hpp"
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 //!Defines a non-adjusted time system with nano-second resolution and stable calculation properties
 namespace posix_time {

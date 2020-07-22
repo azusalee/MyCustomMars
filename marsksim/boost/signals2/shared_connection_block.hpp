@@ -15,7 +15,7 @@
 #include <boost/signals2/connection.hpp>
 #include <boost/weak_ptr.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace signals2
   {
@@ -31,7 +31,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       void block()
       {
         if(blocking()) return;
-        mars_boost_ksim::shared_ptr<detail::connection_body_base> connection_body(_weak_connection_body.lock());
+        mars_boost::shared_ptr<detail::connection_body_base> connection_body(_weak_connection_body.lock());
         if(connection_body == 0)
         {
           // Make _blocker non-empty so the blocking() method still returns the correct value
@@ -55,10 +55,10 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         return signals2::connection(_weak_connection_body);
       }
     private:
-      mars_boost_ksim::weak_ptr<detail::connection_body_base> _weak_connection_body;
+      mars_boost::weak_ptr<detail::connection_body_base> _weak_connection_body;
       shared_ptr<void> _blocker;
     };
   }
-} // end namespace mars_boost_ksim
+} // end namespace mars_boost
 
 #endif // BOOST_SIGNALS2_SHARED_CONNECTION_BLOCK_HPP

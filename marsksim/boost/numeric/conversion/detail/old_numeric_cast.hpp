@@ -21,7 +21,7 @@
 //             vc-stlport.
 //  20 Jan 01  Moved BOOST_NO_LIMITS_COMPILE_TIME_CONSTANTS to config.hpp.
 //             Removed unused BOOST_EXPLICIT_TARGET macro. Moved
-//             mars_boost_ksim::detail::type to boost/type.hpp. Made it compile with
+//             mars_boost::detail::type to boost/type.hpp. Made it compile with
 //             stock gcc again (Dave Abrahams)
 //  29 Nov 00  Remove nested namespace cast, cleanup spacing before Formal
 //             Review (Beman Dawes)
@@ -61,12 +61,12 @@
 //  FLC: This macro is repeated in boost/cast.hpp but only locally (is undefined at the bottom)
 //       so is OK to reproduce it here.
 # if defined(BOOST_MSVC) && BOOST_MSVC < 1300
-#  define BOOST_EXPLICIT_DEFAULT_TARGET , ::mars_boost_ksim::type<Target>* = 0
+#  define BOOST_EXPLICIT_DEFAULT_TARGET , ::mars_boost::type<Target>* = 0
 # else
 #  define BOOST_EXPLICIT_DEFAULT_TARGET
 # endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   using numeric::bad_numeric_cast;
 
@@ -92,7 +92,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
          };
       };
 
-      // Move to namespace mars_boost_ksim in utility.hpp?
+      // Move to namespace mars_boost in utility.hpp?
       template <class T, bool specialized>
       struct fixed_numeric_limits_base
           : public if_true< std::numeric_limits<T>::is_signed >
@@ -111,11 +111,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       // long / unsigned long long. Not intended to be full
       // numeric_limits replacements, but good enough for numeric_cast<>
       template <>
-      struct fixed_numeric_limits_base< ::mars_boost_ksim::long_long_type, false>
+      struct fixed_numeric_limits_base< ::mars_boost::long_long_type, false>
       {
           BOOST_STATIC_CONSTANT(bool, is_specialized = true);
           BOOST_STATIC_CONSTANT(bool, is_signed = true);
-          static  ::mars_boost_ksim::long_long_type max BOOST_PREVENT_MACRO_SUBSTITUTION ()
+          static  ::mars_boost::long_long_type max BOOST_PREVENT_MACRO_SUBSTITUTION ()
           {
 #  ifdef LONGLONG_MAX
               return LONGLONG_MAX;
@@ -124,7 +124,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #  endif
           }
 
-          static  ::mars_boost_ksim::long_long_type min BOOST_PREVENT_MACRO_SUBSTITUTION ()
+          static  ::mars_boost::long_long_type min BOOST_PREVENT_MACRO_SUBSTITUTION ()
           {
 #  ifdef LONGLONG_MIN
               return LONGLONG_MIN;
@@ -135,11 +135,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       };
 
       template <>
-      struct fixed_numeric_limits_base< ::mars_boost_ksim::ulong_long_type, false>
+      struct fixed_numeric_limits_base< ::mars_boost::ulong_long_type, false>
       {
           BOOST_STATIC_CONSTANT(bool, is_specialized = true);
           BOOST_STATIC_CONSTANT(bool, is_signed = false);
-          static  ::mars_boost_ksim::ulong_long_type max BOOST_PREVENT_MACRO_SUBSTITUTION ()
+          static  ::mars_boost::ulong_long_type max BOOST_PREVENT_MACRO_SUBSTITUTION ()
           {
 #  ifdef ULONGLONG_MAX
               return ULONGLONG_MAX;
@@ -148,7 +148,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #  endif
           }
 
-          static  ::mars_boost_ksim::ulong_long_type min BOOST_PREVENT_MACRO_SUBSTITUTION () { return 0; }
+          static  ::mars_boost::ulong_long_type min BOOST_PREVENT_MACRO_SUBSTITUTION () { return 0; }
       };
 # endif
     } // namespace detail
@@ -264,7 +264,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #  pragma option push -w-8041
 # endif
 
-       // Move to namespace mars_boost_ksim in utility.hpp?
+       // Move to namespace mars_boost in utility.hpp?
        template <class T>
        struct fixed_numeric_limits : public std::numeric_limits<T>
        {
@@ -334,6 +334,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 #  undef BOOST_EXPLICIT_DEFAULT_TARGET
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif  // BOOST_OLD_NUMERIC_CAST_HPP

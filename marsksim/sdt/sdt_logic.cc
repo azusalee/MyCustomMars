@@ -34,7 +34,7 @@ static Callback* sg_callback = NULL;
 
 static const std::string kLibName = "sdt";
 
-#define SDT_WEAK_CALL(func) \
+#define SDT_WEAK_CALLksim(func) \
     boost_ksim::shared_ptr<SdtCore> sdt_ptr = SdtCore::Singletonksim::Instance_Weak().lock();\
     if (!sdt_ptr) {\
         xwarn2(TSF"sdt uncreate");\
@@ -65,11 +65,11 @@ BOOT_RUN_STARTUP(__initbind_baseprjevent);
 
 //active netcheck interface
 void StartActiveCheck(CheckIPPorts& _longlink_check_items, CheckIPPorts& _shortlink_check_items, int _mode, int _timeout) {
-	SDT_WEAK_CALL(StartCheck(_longlink_check_items, _shortlink_check_items, _mode, _timeout));
+	SDT_WEAK_CALLksim(StartCheck(_longlink_check_items, _shortlink_check_items, _mode, _timeout));
 }
 
 void CancelActiveCheck() {
-	SDT_WEAK_CALL(CancelCheck());
+	SDT_WEAK_CALLksim(CancelCheck());
 }
 
 void SetCallBack(Callback* const callback) {

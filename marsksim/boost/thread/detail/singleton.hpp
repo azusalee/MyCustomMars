@@ -12,7 +12,7 @@
 
 #include <boost/thread/detail/config.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace detail {
 namespace thread {
 
@@ -54,6 +54,6 @@ template <class T>
 
 } // namespace thread
 } // namespace detail
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // BOOST_SINGLETON_MJM012402_HPP

@@ -132,7 +132,7 @@ extern "C" long __cdecl _InterlockedExchangeAdd( long volatile *, long );
 
 #elif defined( WIN32 ) || defined( _WIN32 ) || defined( __WIN32__ ) || defined( __CYGWIN__ )
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 namespace detail
@@ -146,7 +146,7 @@ extern "C" __declspec(dllimport) long __stdcall InterlockedExchangeAdd( long vol
 
 } // namespace detail
 
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 # define BOOST_SP_INTERLOCKED_INCREMENT ::boost_ksim::detail::InterlockedIncrement
 # define BOOST_SP_INTERLOCKED_DECREMENT ::boost_ksim::detail::InterlockedDecrement

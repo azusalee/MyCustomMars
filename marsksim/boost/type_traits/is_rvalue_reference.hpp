@@ -12,14 +12,14 @@
 #include <boost/config.hpp>
 #include <boost/type_traits/integral_constant.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 template <class T> struct is_rvalue_reference : public false_type {};
 #ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
 template <class T> struct is_rvalue_reference<T&&> : public true_type {};
 #endif
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_IS_REFERENCE_HPP_INCLUDED
 

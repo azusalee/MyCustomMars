@@ -33,10 +33,10 @@ class ActiveLogicksim;
 namespace marsksim {
     namespace stn {
         
-class LongLinkConnectMonitor {
+class LongLinkConnectMonitorksim {
   public:
-    LongLinkConnectMonitor(ActiveLogicksim& _activelogic, LongLink& _longlinkk, MessageQueueksim::MessageQueueksim_t _id);
-    ~LongLinkConnectMonitor();
+    LongLinkConnectMonitorksim(ActiveLogicksim& _activelogic, LongLink& _longlinkk, MessageQueueksim::MessageQueueksim_t _id);
+    ~LongLinkConnectMonitorksim();
 
   public:
     bool MakeSureConnected();
@@ -53,7 +53,7 @@ class LongLinkConnectMonitor {
     void __OnSignalForeground(bool _isforeground);
     void __OnSignalActive(bool _isactive);
     void __OnLongLinkStatuChanged(LongLink::TLongLinkStatus _status);
-    void __OnAlarm();
+    void __OnAlarmksim();
 
     void __Run();
 #ifdef __APPLE__
@@ -63,14 +63,14 @@ class LongLinkConnectMonitor {
     void __ReConnect();
     
   private:
-    LongLinkConnectMonitor(const LongLinkConnectMonitor&);
-    LongLinkConnectMonitor& operator=(const LongLinkConnectMonitor&);
+    LongLinkConnectMonitorksim(const LongLinkConnectMonitorksim&);
+    LongLinkConnectMonitorksim& operator=(const LongLinkConnectMonitorksim&);
 
   private:
-    MessageQueueksim::ScopeRegister     asyncreg_;
+    MessageQueueksim::ScopeRegisterksim     asyncreg_;
     ActiveLogicksim& activelogic_;
     LongLink& longlink_;
-    Alarm         alarm_;
+    Alarmksim         alarm_;
     Mutex         mutex_;
 
     LongLink::TLongLinkStatus status_;

@@ -17,7 +17,7 @@
 #include <boost/mpl/bool.hpp>
 #include <boost/cstdint.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range_detail
     {
@@ -32,17 +32,17 @@ private:
     };
 
     template<class C>
-    static mars_boost_ksim::uint8_t f(check<std::size_t(C::*)(void) const, &C::size>*);
+    static mars_boost::uint8_t f(check<std::size_t(C::*)(void) const, &C::size>*);
 
     template<class C>
-    static mars_boost_ksim::uint16_t f(...);
+    static mars_boost::uint16_t f(...);
 
 public:
     static const bool value =
-        (sizeof(f<T>(0)) == sizeof(mars_boost_ksim::uint8_t));
+        (sizeof(f<T>(0)) == sizeof(mars_boost::uint8_t));
 
     typedef typename mpl::if_c<
-        (sizeof(f<T>(0)) == sizeof(mars_boost_ksim::uint8_t)),
+        (sizeof(f<T>(0)) == sizeof(mars_boost::uint8_t)),
         mpl::true_,
         mpl::false_
     >::type type;
@@ -61,6 +61,6 @@ struct has_member_size
 };
 
     } // namespace range_detail
-}// namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+}// namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
  
 #endif // include guard

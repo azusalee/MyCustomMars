@@ -18,14 +18,14 @@
 #endif
 
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace signals2
   {
 #ifdef BOOST_NO_CXX11_VARIADIC_TEMPLATES
     template<typename Signature, typename SlotFunction> class slot;
 #else
-    template<typename Signature, typename SlotFunction = mars_boost_ksim::function<Signature> >
+    template<typename Signature, typename SlotFunction = mars_boost::function<Signature> >
       class slot;
 
 #if BOOST_WORKAROUND(BOOST_MSVC, <= 1900)
@@ -159,7 +159,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       {
         _slot_function = detail::get_invocable_slot(f, detail::tag_type(f));
         signals2::detail::tracked_objects_visitor visitor(this);
-        mars_boost_ksim::visit_each(visitor, f);
+        mars_boost::visit_each(visitor, f);
       }
 
       SlotFunction _slot_function;
@@ -182,6 +182,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     }
 #endif
   } // end namespace signals2
-} // end namespace mars_boost_ksim
+} // end namespace mars_boost
 
 #undef BOOST_SIGNALS2_NUM_ARGS

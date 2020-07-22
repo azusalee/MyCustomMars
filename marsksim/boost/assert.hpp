@@ -44,14 +44,14 @@
 #include <boost/config.hpp> // for BOOST_LIKELY
 #include <boost/current_function.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     void assertion_failed(char const * expr, char const * function, char const * file, long line); // user defined
     void assertion_failed_msg(char const * expr, char const * msg, char const * function, char const * file, long line); // user defined
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
-#define BOOST_ASSERT(expr) (BOOST_LIKELY(!!(expr))? ((void)0): ::mars_boost_ksim::assertion_failed(#expr, BOOST_CURRENT_FUNCTION, __FILE__, __LINE__))
-#define BOOST_ASSERT_MSG(expr, msg) (BOOST_LIKELY(!!(expr))? ((void)0): ::mars_boost_ksim::assertion_failed_msg(#expr, msg, BOOST_CURRENT_FUNCTION, __FILE__, __LINE__))
+#define BOOST_ASSERT(expr) (BOOST_LIKELY(!!(expr))? ((void)0): ::mars_boost::assertion_failed(#expr, BOOST_CURRENT_FUNCTION, __FILE__, __LINE__))
+#define BOOST_ASSERT_MSG(expr, msg) (BOOST_LIKELY(!!(expr))? ((void)0): ::mars_boost::assertion_failed_msg(#expr, msg, BOOST_CURRENT_FUNCTION, __FILE__, __LINE__))
 
 #else
 

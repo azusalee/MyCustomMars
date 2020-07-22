@@ -5,7 +5,7 @@
 
 // Provides std::char_traits for libraries without templated streams. Should not
 // be confused with <boost/iostreams/char_traits.hpp>, which defines the
-// template mars_boost_ksim::iostreams::char_traits.
+// template mars_boost::iostreams::char_traits.
 
 // See http://www.boost.org/libs/iostreams for documentation.
 
@@ -28,9 +28,9 @@
 #ifndef BOOST_IOSTREAMS_NO_STREAM_TEMPLATES //--------------------------------//
 # define BOOST_IOSTREAMS_CHAR_TRAITS(ch) std::char_traits< ch >
 #else
-# define BOOST_IOSTREAMS_CHAR_TRAITS(ch) mars_boost_ksim::iostreams::detail::char_traits
+# define BOOST_IOSTREAMS_CHAR_TRAITS(ch) mars_boost::iostreams::detail::char_traits
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace iostreams { namespace detail {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace iostreams { namespace detail {
 
 struct char_traits  {
     typedef char            char_type;

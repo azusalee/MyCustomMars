@@ -53,7 +53,7 @@
 
 #include <boost/lexical_cast/detail/converter_lexical_streams.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
     namespace detail // normalize_single_byte_char<Char>
     {
@@ -90,38 +90,38 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         // Returns one of char, wchar_t, char16_t, char32_t or deduce_character_type_later<T> types
         // Executed on Stage 1 (See deduce_source_char<T> and deduce_target_char<T>)
         template < typename Type >
-        struct stream_char_common: public mars_boost_ksim::mpl::if_c<
-            mars_boost_ksim::detail::is_character< Type >::value,
+        struct stream_char_common: public mars_boost::mpl::if_c<
+            mars_boost::detail::is_character< Type >::value,
             Type,
-            mars_boost_ksim::detail::deduce_character_type_later< Type >
+            mars_boost::detail::deduce_character_type_later< Type >
         > {};
 
         template < typename Char >
-        struct stream_char_common< Char* >: public mars_boost_ksim::mpl::if_c<
-            mars_boost_ksim::detail::is_character< Char >::value,
+        struct stream_char_common< Char* >: public mars_boost::mpl::if_c<
+            mars_boost::detail::is_character< Char >::value,
             Char,
-            mars_boost_ksim::detail::deduce_character_type_later< Char* >
+            mars_boost::detail::deduce_character_type_later< Char* >
         > {};
 
         template < typename Char >
-        struct stream_char_common< const Char* >: public mars_boost_ksim::mpl::if_c<
-            mars_boost_ksim::detail::is_character< Char >::value,
+        struct stream_char_common< const Char* >: public mars_boost::mpl::if_c<
+            mars_boost::detail::is_character< Char >::value,
             Char,
-            mars_boost_ksim::detail::deduce_character_type_later< const Char* >
+            mars_boost::detail::deduce_character_type_later< const Char* >
         > {};
 
         template < typename Char >
-        struct stream_char_common< mars_boost_ksim::iterator_range< Char* > >: public mars_boost_ksim::mpl::if_c<
-            mars_boost_ksim::detail::is_character< Char >::value,
+        struct stream_char_common< mars_boost::iterator_range< Char* > >: public mars_boost::mpl::if_c<
+            mars_boost::detail::is_character< Char >::value,
             Char,
-            mars_boost_ksim::detail::deduce_character_type_later< mars_boost_ksim::iterator_range< Char* > >
+            mars_boost::detail::deduce_character_type_later< mars_boost::iterator_range< Char* > >
         > {};
     
         template < typename Char >
-        struct stream_char_common< mars_boost_ksim::iterator_range< const Char* > >: public mars_boost_ksim::mpl::if_c<
-            mars_boost_ksim::detail::is_character< Char >::value,
+        struct stream_char_common< mars_boost::iterator_range< const Char* > >: public mars_boost::mpl::if_c<
+            mars_boost::detail::is_character< Char >::value,
             Char,
-            mars_boost_ksim::detail::deduce_character_type_later< mars_boost_ksim::iterator_range< const Char* > >
+            mars_boost::detail::deduce_character_type_later< mars_boost::iterator_range< const Char* > >
         > {};
 
         template < class Char, class Traits, class Alloc >
@@ -131,44 +131,44 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         };
 
         template < class Char, class Traits, class Alloc >
-        struct stream_char_common< mars_boost_ksim::container::basic_string< Char, Traits, Alloc > >
+        struct stream_char_common< mars_boost::container::basic_string< Char, Traits, Alloc > >
         {
             typedef Char type;
         };
 
         template < typename Char, std::size_t N >
-        struct stream_char_common< mars_boost_ksim::array< Char, N > >: public mars_boost_ksim::mpl::if_c<
-            mars_boost_ksim::detail::is_character< Char >::value,
+        struct stream_char_common< mars_boost::array< Char, N > >: public mars_boost::mpl::if_c<
+            mars_boost::detail::is_character< Char >::value,
             Char,
-            mars_boost_ksim::detail::deduce_character_type_later< mars_boost_ksim::array< Char, N > >
+            mars_boost::detail::deduce_character_type_later< mars_boost::array< Char, N > >
         > {};
 
         template < typename Char, std::size_t N >
-        struct stream_char_common< mars_boost_ksim::array< const Char, N > >: public mars_boost_ksim::mpl::if_c<
-            mars_boost_ksim::detail::is_character< Char >::value,
+        struct stream_char_common< mars_boost::array< const Char, N > >: public mars_boost::mpl::if_c<
+            mars_boost::detail::is_character< Char >::value,
             Char,
-            mars_boost_ksim::detail::deduce_character_type_later< mars_boost_ksim::array< const Char, N > >
+            mars_boost::detail::deduce_character_type_later< mars_boost::array< const Char, N > >
         > {};
 
 #ifndef BOOST_NO_CXX11_HDR_ARRAY
         template < typename Char, std::size_t N >
-        struct stream_char_common< std::array<Char, N > >: public mars_boost_ksim::mpl::if_c<
-            mars_boost_ksim::detail::is_character< Char >::value,
+        struct stream_char_common< std::array<Char, N > >: public mars_boost::mpl::if_c<
+            mars_boost::detail::is_character< Char >::value,
             Char,
-            mars_boost_ksim::detail::deduce_character_type_later< std::array< Char, N > >
+            mars_boost::detail::deduce_character_type_later< std::array< Char, N > >
         > {};
 
         template < typename Char, std::size_t N >
-        struct stream_char_common< std::array< const Char, N > >: public mars_boost_ksim::mpl::if_c<
-            mars_boost_ksim::detail::is_character< Char >::value,
+        struct stream_char_common< std::array< const Char, N > >: public mars_boost::mpl::if_c<
+            mars_boost::detail::is_character< Char >::value,
             Char,
-            mars_boost_ksim::detail::deduce_character_type_later< std::array< const Char, N > >
+            mars_boost::detail::deduce_character_type_later< std::array< const Char, N > >
         > {};
 #endif
 
 #ifdef BOOST_HAS_INT128
-        template <> struct stream_char_common< mars_boost_ksim::int128_type >: public mars_boost_ksim::mpl::identity< char > {};
-        template <> struct stream_char_common< mars_boost_ksim::uint128_type >: public mars_boost_ksim::mpl::identity< char > {};
+        template <> struct stream_char_common< mars_boost::int128_type >: public mars_boost::mpl::identity< char > {};
+        template <> struct stream_char_common< mars_boost::uint128_type >: public mars_boost::mpl::identity< char > {};
 #endif
 
 #if !defined(BOOST_LCAST_NO_WCHAR_T) && defined(BOOST_NO_INTRINSIC_WCHAR_T)
@@ -183,31 +183,31 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     namespace detail // deduce_source_char_impl<T>
     {
         // If type T is `deduce_character_type_later` type, then tries to deduce
-        // character type using mars_boost_ksim::has_left_shift<T> metafunction.
+        // character type using mars_boost::has_left_shift<T> metafunction.
         // Otherwise supplied type T is a character type, that must be normalized
         // using normalize_single_byte_char<Char>.
         // Executed at Stage 2  (See deduce_source_char<T> and deduce_target_char<T>)
         template < class Char > 
         struct deduce_source_char_impl
         { 
-            typedef BOOST_DEDUCED_TYPENAME mars_boost_ksim::detail::normalize_single_byte_char< Char >::type type; 
+            typedef BOOST_DEDUCED_TYPENAME mars_boost::detail::normalize_single_byte_char< Char >::type type; 
         };
         
         template < class T > 
         struct deduce_source_char_impl< deduce_character_type_later< T > > 
         {
-            typedef mars_boost_ksim::has_left_shift< std::basic_ostream< char >, T > result_t;
+            typedef mars_boost::has_left_shift< std::basic_ostream< char >, T > result_t;
 
 #if defined(BOOST_LCAST_NO_WCHAR_T)
             BOOST_STATIC_ASSERT_MSG((result_t::value), 
                 "Source type is not std::ostream`able and std::wostream`s are not supported by your STL implementation");
             typedef char type;
 #else
-            typedef BOOST_DEDUCED_TYPENAME mars_boost_ksim::mpl::if_c<
+            typedef BOOST_DEDUCED_TYPENAME mars_boost::mpl::if_c<
                 result_t::value, char, wchar_t
             >::type type;
 
-            BOOST_STATIC_ASSERT_MSG((result_t::value || mars_boost_ksim::has_left_shift< std::basic_ostream< type >, T >::value), 
+            BOOST_STATIC_ASSERT_MSG((result_t::value || mars_boost::has_left_shift< std::basic_ostream< type >, T >::value), 
                 "Source type is neither std::ostream`able nor std::wostream`able");
 #endif
         };
@@ -216,7 +216,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     namespace detail  // deduce_target_char_impl<T>
     {
         // If type T is `deduce_character_type_later` type, then tries to deduce
-        // character type using mars_boost_ksim::has_right_shift<T> metafunction.
+        // character type using mars_boost::has_right_shift<T> metafunction.
         // Otherwise supplied type T is a character type, that must be normalized
         // using normalize_single_byte_char<Char>.
         // Executed at Stage 2  (See deduce_source_char<T> and deduce_target_char<T>)
@@ -229,18 +229,18 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         template < class T > 
         struct deduce_target_char_impl< deduce_character_type_later<T> > 
         { 
-            typedef mars_boost_ksim::has_right_shift<std::basic_istream<char>, T > result_t;
+            typedef mars_boost::has_right_shift<std::basic_istream<char>, T > result_t;
 
 #if defined(BOOST_LCAST_NO_WCHAR_T)
             BOOST_STATIC_ASSERT_MSG((result_t::value), 
                 "Target type is not std::istream`able and std::wistream`s are not supported by your STL implementation");
             typedef char type;
 #else
-            typedef BOOST_DEDUCED_TYPENAME mars_boost_ksim::mpl::if_c<
+            typedef BOOST_DEDUCED_TYPENAME mars_boost::mpl::if_c<
                 result_t::value, char, wchar_t
             >::type type;
             
-            BOOST_STATIC_ASSERT_MSG((result_t::value || mars_boost_ksim::has_right_shift<std::basic_istream<wchar_t>, T >::value), 
+            BOOST_STATIC_ASSERT_MSG((result_t::value || mars_boost::has_right_shift<std::basic_istream<wchar_t>, T >::value), 
                 "Target type is neither std::istream`able nor std::wistream`able");
 #endif
         };
@@ -288,21 +288,21 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         // template parameter. Otherwise we'll be using std::char_traits<Char>
         template < class Char, class T >
         struct extract_char_traits
-                : mars_boost_ksim::false_type
+                : mars_boost::false_type
         {
             typedef std::char_traits< Char > trait_t;
         };
 
         template < class Char, class Traits, class Alloc >
         struct extract_char_traits< Char, std::basic_string< Char, Traits, Alloc > >
-            : mars_boost_ksim::true_type
+            : mars_boost::true_type
         {
             typedef Traits trait_t;
         };
 
         template < class Char, class Traits, class Alloc>
-        struct extract_char_traits< Char, mars_boost_ksim::container::basic_string< Char, Traits, Alloc > >
-            : mars_boost_ksim::true_type
+        struct extract_char_traits< Char, mars_boost::container::basic_string< Char, Traits, Alloc > >
+            : mars_boost::true_type
         {
             typedef Traits trait_t;
         };
@@ -349,7 +349,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         // When is_specialized is false, the whole expression is 0.
         template <class Source>
         struct lcast_src_length<
-                    Source, BOOST_DEDUCED_TYPENAME mars_boost_ksim::enable_if<mars_boost_ksim::is_integral<Source> >::type
+                    Source, BOOST_DEDUCED_TYPENAME mars_boost::enable_if<mars_boost::is_integral<Source> >::type
                 >
         {
 #ifndef BOOST_NO_LIMITS_COMPILE_TIME_CONSTANTS
@@ -376,7 +376,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         // sign + leading digit + decimal point + "e" + exponent sign == 5
         template<class Source>
         struct lcast_src_length<
-                Source, BOOST_DEDUCED_TYPENAME mars_boost_ksim::enable_if<mars_boost_ksim::is_float<Source> >::type
+                Source, BOOST_DEDUCED_TYPENAME mars_boost::enable_if<mars_boost::is_float<Source> >::type
             >
         {
 
@@ -399,45 +399,45 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     {
         template <class Source, class Target>
         struct lexical_cast_stream_traits {
-            typedef BOOST_DEDUCED_TYPENAME mars_boost_ksim::detail::array_to_pointer_decay<Source>::type src;
-            typedef BOOST_DEDUCED_TYPENAME mars_boost_ksim::remove_cv<src>::type            no_cv_src;
+            typedef BOOST_DEDUCED_TYPENAME mars_boost::detail::array_to_pointer_decay<Source>::type src;
+            typedef BOOST_DEDUCED_TYPENAME mars_boost::remove_cv<src>::type            no_cv_src;
                 
-            typedef mars_boost_ksim::detail::deduce_source_char<no_cv_src>                           deduce_src_char_metafunc;
+            typedef mars_boost::detail::deduce_source_char<no_cv_src>                           deduce_src_char_metafunc;
             typedef BOOST_DEDUCED_TYPENAME deduce_src_char_metafunc::type           src_char_t;
-            typedef BOOST_DEDUCED_TYPENAME mars_boost_ksim::detail::deduce_target_char<Target>::type target_char_t;
+            typedef BOOST_DEDUCED_TYPENAME mars_boost::detail::deduce_target_char<Target>::type target_char_t;
                 
-            typedef BOOST_DEDUCED_TYPENAME mars_boost_ksim::detail::widest_char<
+            typedef BOOST_DEDUCED_TYPENAME mars_boost::detail::widest_char<
                 target_char_t, src_char_t
             >::type char_type;
 
 #if !defined(BOOST_NO_CXX11_CHAR16_T) && defined(BOOST_NO_CXX11_UNICODE_LITERALS)
-            BOOST_STATIC_ASSERT_MSG(( !mars_boost_ksim::is_same<char16_t, src_char_t>::value
-                                        && !mars_boost_ksim::is_same<char16_t, target_char_t>::value),
+            BOOST_STATIC_ASSERT_MSG(( !mars_boost::is_same<char16_t, src_char_t>::value
+                                        && !mars_boost::is_same<char16_t, target_char_t>::value),
                 "Your compiler does not have full support for char16_t" );
 #endif
 #if !defined(BOOST_NO_CXX11_CHAR32_T) && defined(BOOST_NO_CXX11_UNICODE_LITERALS)
-            BOOST_STATIC_ASSERT_MSG(( !mars_boost_ksim::is_same<char32_t, src_char_t>::value
-                                        && !mars_boost_ksim::is_same<char32_t, target_char_t>::value),
+            BOOST_STATIC_ASSERT_MSG(( !mars_boost::is_same<char32_t, src_char_t>::value
+                                        && !mars_boost::is_same<char32_t, target_char_t>::value),
                 "Your compiler does not have full support for char32_t" );
 #endif
 
-            typedef BOOST_DEDUCED_TYPENAME mars_boost_ksim::mpl::if_c<
-                mars_boost_ksim::detail::extract_char_traits<char_type, Target>::value,
-                BOOST_DEDUCED_TYPENAME mars_boost_ksim::detail::extract_char_traits<char_type, Target>,
-                BOOST_DEDUCED_TYPENAME mars_boost_ksim::detail::extract_char_traits<char_type, no_cv_src>
+            typedef BOOST_DEDUCED_TYPENAME mars_boost::mpl::if_c<
+                mars_boost::detail::extract_char_traits<char_type, Target>::value,
+                BOOST_DEDUCED_TYPENAME mars_boost::detail::extract_char_traits<char_type, Target>,
+                BOOST_DEDUCED_TYPENAME mars_boost::detail::extract_char_traits<char_type, no_cv_src>
             >::type::trait_t traits;
             
-            typedef mars_boost_ksim::mpl::bool_
+            typedef mars_boost::mpl::bool_
             	<
-                mars_boost_ksim::is_same<char, src_char_t>::value &&                                 // source is not a wide character based type
+                mars_boost::is_same<char, src_char_t>::value &&                                 // source is not a wide character based type
                 (sizeof(char) != sizeof(target_char_t)) &&  // target type is based on wide character
-                (!(mars_boost_ksim::detail::is_character<no_cv_src>::value))
+                (!(mars_boost::detail::is_character<no_cv_src>::value))
             	> is_string_widening_required_t;
 
-            typedef mars_boost_ksim::mpl::bool_
+            typedef mars_boost::mpl::bool_
             	<
-            	!(mars_boost_ksim::is_integral<no_cv_src>::value || 
-                  mars_boost_ksim::detail::is_character<
+            	!(mars_boost::is_integral<no_cv_src>::value || 
+                  mars_boost::detail::is_character<
                     BOOST_DEDUCED_TYPENAME deduce_src_char_metafunc::stage1_type          // if we did not get character type at stage1
                   >::value                                                           // then we have no optimization for that type
             	 )
@@ -449,7 +449,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             	(is_string_widening_required_t::value || is_source_input_not_optimized_t::value)
             );
             
-            typedef mars_boost_ksim::detail::lcast_src_length<no_cv_src> len_t;
+            typedef mars_boost::detail::lcast_src_length<no_cv_src> len_t;
         };
     }
  
@@ -490,7 +490,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         };
     }
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #undef BOOST_LCAST_NO_WCHAR_T
 

@@ -20,14 +20,14 @@
 #include <boost/type_traits/is_assignable.hpp>
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
    template <typename T>
    struct has_trivial_assign : public integral_constant < bool,
 #ifdef BOOST_HAS_TRIVIAL_ASSIGN
       BOOST_HAS_TRIVIAL_ASSIGN(T)
 #else
-      ::mars_boost_ksim::is_pod<T>::value && !::mars_boost_ksim::is_const<T>::value && !::mars_boost_ksim::is_volatile<T>::value
+      ::mars_boost::is_pod<T>::value && !::mars_boost::is_const<T>::value && !::mars_boost::is_volatile<T>::value
 #endif
    > {};
 
@@ -46,6 +46,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
    template <typename T, std::size_t N> struct has_trivial_assign<T[N]> : public false_type{};
    template <typename T> struct has_trivial_assign<T[]> : public false_type{};
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_HAS_TRIVIAL_ASSIGN_HPP_INCLUDED

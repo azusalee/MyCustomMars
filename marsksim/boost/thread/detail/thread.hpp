@@ -51,7 +51,7 @@
 #pragma warning(disable:4251)
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
     namespace detail
@@ -66,7 +66,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       public:
           BOOST_THREAD_NO_COPYABLE(thread_data)
             thread_data(BOOST_THREAD_RV_REF(F) f_, BOOST_THREAD_RV_REF(ArgTypes)... args_):
-              fp(mars_boost_ksim::forward<F>(f_), mars_boost_ksim::forward<ArgTypes>(args_)...)
+              fp(mars_boost::forward<F>(f_), mars_boost::forward<ArgTypes>(args_)...)
             {}
           template <std::size_t ...Indices>
           void run2(tuple_indices<Indices...>)
@@ -94,7 +94,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             BOOST_THREAD_NO_COPYABLE(thread_data)
 #ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
               thread_data(BOOST_THREAD_RV_REF(F) f_):
-                f(mars_boost_ksim::forward<F>(f_))
+                f(mars_boost::forward<F>(f_))
               {}
 // This overloading must be removed if we want the packaged_task's tests to pass.
 //            thread_data(F& f_):
@@ -128,7 +128,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             F& f;
         public:
             BOOST_THREAD_NO_COPYABLE(thread_data)
-            thread_data(mars_boost_ksim::reference_wrapper<F> f_):
+            thread_data(mars_boost::reference_wrapper<F> f_):
                 f(f_)
             {}
             void run()
@@ -138,14 +138,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         };
 
         template<typename F>
-        class thread_data<const mars_boost_ksim::reference_wrapper<F> >:
+        class thread_data<const mars_boost::reference_wrapper<F> >:
             public detail::thread_data_base
         {
         private:
             F& f;
         public:
             BOOST_THREAD_NO_COPYABLE(thread_data)
-            thread_data(const mars_boost_ksim::reference_wrapper<F> f_):
+            thread_data(const mars_boost::reference_wrapper<F> f_):
                 f(f_)
             {}
             void run()
@@ -177,14 +177,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
           if (!start_thread_noexcept())
           {
-            mars_boost_ksim::throw_exception(thread_resource_error());
+            mars_boost::throw_exception(thread_resource_error());
           }
         }
         void start_thread(const attributes& attr)
         {
           if (!start_thread_noexcept(attr))
           {
-            mars_boost_ksim::throw_exception(thread_resource_error());
+            mars_boost::throw_exception(thread_resource_error());
           }
         }
 
@@ -198,9 +198,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         static inline detail::thread_data_ptr make_thread_info(BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_RV_REF(ArgTypes)... args)
         {
             return detail::thread_data_ptr(detail::heap_new<
-                  detail::thread_data<typename mars_boost_ksim::remove_reference<F>::type, ArgTypes...>
+                  detail::thread_data<typename mars_boost::remove_reference<F>::type, ArgTypes...>
                   >(
-                    mars_boost_ksim::forward<F>(f), mars_boost_ksim::forward<ArgTypes>(args)...
+                    mars_boost::forward<F>(f), mars_boost::forward<ArgTypes>(args)...
                   )
                 );
         }
@@ -208,14 +208,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         template<typename F>
         static inline detail::thread_data_ptr make_thread_info(BOOST_THREAD_RV_REF(F) f)
         {
-            return detail::thread_data_ptr(detail::heap_new<detail::thread_data<typename mars_boost_ksim::remove_reference<F>::type> >(
-                mars_boost_ksim::forward<F>(f)));
+            return detail::thread_data_ptr(detail::heap_new<detail::thread_data<typename mars_boost::remove_reference<F>::type> >(
+                mars_boost::forward<F>(f)));
         }
 #endif
         static inline detail::thread_data_ptr make_thread_info(void (*f)())
         {
             return detail::thread_data_ptr(detail::heap_new<detail::thread_data<void(*)()> >(
-                mars_boost_ksim::forward<void(*)()>(f)));
+                mars_boost::forward<void(*)()>(f)));
         }
 #else
         template<typename F>
@@ -260,7 +260,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         explicit thread(BOOST_THREAD_RV_REF(F) f
         //, typename disable_if<is_same<typename decay<F>::type, thread>, dummy* >::type=0
         ):
-          thread_info(make_thread_info(thread_detail::decay_copy(mars_boost_ksim::forward<F>(f))))
+          thread_info(make_thread_info(thread_detail::decay_copy(mars_boost::forward<F>(f))))
         {
             start_thread();
         }
@@ -268,7 +268,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           class F
         >
         thread(attributes const& attrs, BOOST_THREAD_RV_REF(F) f):
-          thread_info(make_thread_info(thread_detail::decay_copy(mars_boost_ksim::forward<F>(f))))
+          thread_info(make_thread_info(thread_detail::decay_copy(mars_boost::forward<F>(f))))
         {
             start_thread(attrs);
         }
@@ -291,7 +291,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         template <class F>
         explicit thread(F f
         , typename disable_if_c<
-        mars_boost_ksim::thread_detail::is_rv<F>::value // todo ass a thread_detail::is_rv
+        mars_boost::thread_detail::is_rv<F>::value // todo ass a thread_detail::is_rv
         //boost_ksim::thread_detail::is_convertible<F&,BOOST_THREAD_RV_REF(F)>::value
             //|| is_same<typename decay<F>::type, thread>::value
            , dummy* >::type=0
@@ -315,7 +315,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         , typename disable_if<is_same<typename decay<F>::type, thread>, dummy* >::type=0
         ):
 #ifdef BOOST_THREAD_USES_MOVE
-        thread_info(make_thread_info(mars_boost_ksim::move<F>(f))) // todo : Add forward
+        thread_info(make_thread_info(mars_boost::move<F>(f))) // todo : Add forward
 #else
         thread_info(make_thread_info(f)) // todo : Add forward
 #endif
@@ -326,7 +326,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         template <class F>
         thread(attributes const& attrs, BOOST_THREAD_RV_REF(F) f):
 #ifdef BOOST_THREAD_USES_MOVE
-            thread_info(make_thread_info(mars_boost_ksim::move<F>(f))) // todo : Add forward
+            thread_info(make_thread_info(mars_boost::move<F>(f))) // todo : Add forward
 #else
             thread_info(make_thread_info(f)) // todo : Add forward
 #endif
@@ -366,9 +366,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         template <class F, class Arg, class ...Args>
         thread(F&& f, Arg&& arg, Args&&... args) :
           thread_info(make_thread_info(
-              thread_detail::decay_copy(mars_boost_ksim::forward<F>(f)),
-              thread_detail::decay_copy(mars_boost_ksim::forward<Arg>(arg)),
-              thread_detail::decay_copy(mars_boost_ksim::forward<Args>(args))...)
+              thread_detail::decay_copy(mars_boost::forward<F>(f)),
+              thread_detail::decay_copy(mars_boost::forward<Arg>(arg)),
+              thread_detail::decay_copy(mars_boost::forward<Args>(args))...)
           )
 
         {
@@ -377,9 +377,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         template <class F, class Arg, class ...Args>
         thread(attributes const& attrs, F&& f, Arg&& arg, Args&&... args) :
           thread_info(make_thread_info(
-              thread_detail::decay_copy(mars_boost_ksim::forward<F>(f)),
-              thread_detail::decay_copy(mars_boost_ksim::forward<Arg>(arg)),
-              thread_detail::decay_copy(mars_boost_ksim::forward<Args>(args))...)
+              thread_detail::decay_copy(mars_boost::forward<F>(f)),
+              thread_detail::decay_copy(mars_boost::forward<Arg>(arg)),
+              thread_detail::decay_copy(mars_boost::forward<Args>(args))...)
           )
 
         {
@@ -388,62 +388,62 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #else
         template <class F,class A1>
         thread(F f,A1 a1,typename disable_if<boost_ksim::thread_detail::is_convertible<F&,thread_attributes >, dummy* >::type=0):
-            thread_info(make_thread_info(mars_boost_ksim::bind(mars_boost_ksim::type<void>(),f,a1)))
+            thread_info(make_thread_info(mars_boost::bind(mars_boost::type<void>(),f,a1)))
         {
             start_thread();
         }
         template <class F,class A1,class A2>
         thread(F f,A1 a1,A2 a2):
-            thread_info(make_thread_info(mars_boost_ksim::bind(mars_boost_ksim::type<void>(),f,a1,a2)))
+            thread_info(make_thread_info(mars_boost::bind(mars_boost::type<void>(),f,a1,a2)))
         {
             start_thread();
         }
 
         template <class F,class A1,class A2,class A3>
         thread(F f,A1 a1,A2 a2,A3 a3):
-            thread_info(make_thread_info(mars_boost_ksim::bind(mars_boost_ksim::type<void>(),f,a1,a2,a3)))
+            thread_info(make_thread_info(mars_boost::bind(mars_boost::type<void>(),f,a1,a2,a3)))
         {
             start_thread();
         }
 
         template <class F,class A1,class A2,class A3,class A4>
         thread(F f,A1 a1,A2 a2,A3 a3,A4 a4):
-            thread_info(make_thread_info(mars_boost_ksim::bind(mars_boost_ksim::type<void>(),f,a1,a2,a3,a4)))
+            thread_info(make_thread_info(mars_boost::bind(mars_boost::type<void>(),f,a1,a2,a3,a4)))
         {
             start_thread();
         }
 
         template <class F,class A1,class A2,class A3,class A4,class A5>
         thread(F f,A1 a1,A2 a2,A3 a3,A4 a4,A5 a5):
-            thread_info(make_thread_info(mars_boost_ksim::bind(mars_boost_ksim::type<void>(),f,a1,a2,a3,a4,a5)))
+            thread_info(make_thread_info(mars_boost::bind(mars_boost::type<void>(),f,a1,a2,a3,a4,a5)))
         {
             start_thread();
         }
 
         template <class F,class A1,class A2,class A3,class A4,class A5,class A6>
         thread(F f,A1 a1,A2 a2,A3 a3,A4 a4,A5 a5,A6 a6):
-            thread_info(make_thread_info(mars_boost_ksim::bind(mars_boost_ksim::type<void>(),f,a1,a2,a3,a4,a5,a6)))
+            thread_info(make_thread_info(mars_boost::bind(mars_boost::type<void>(),f,a1,a2,a3,a4,a5,a6)))
         {
             start_thread();
         }
 
         template <class F,class A1,class A2,class A3,class A4,class A5,class A6,class A7>
         thread(F f,A1 a1,A2 a2,A3 a3,A4 a4,A5 a5,A6 a6,A7 a7):
-            thread_info(make_thread_info(mars_boost_ksim::bind(mars_boost_ksim::type<void>(),f,a1,a2,a3,a4,a5,a6,a7)))
+            thread_info(make_thread_info(mars_boost::bind(mars_boost::type<void>(),f,a1,a2,a3,a4,a5,a6,a7)))
         {
             start_thread();
         }
 
         template <class F,class A1,class A2,class A3,class A4,class A5,class A6,class A7,class A8>
         thread(F f,A1 a1,A2 a2,A3 a3,A4 a4,A5 a5,A6 a6,A7 a7,A8 a8):
-            thread_info(make_thread_info(mars_boost_ksim::bind(mars_boost_ksim::type<void>(),f,a1,a2,a3,a4,a5,a6,a7,a8)))
+            thread_info(make_thread_info(mars_boost::bind(mars_boost::type<void>(),f,a1,a2,a3,a4,a5,a6,a7,a8)))
         {
             start_thread();
         }
 
         template <class F,class A1,class A2,class A3,class A4,class A5,class A6,class A7,class A8,class A9>
         thread(F f,A1 a1,A2 a2,A3 a3,A4 a4,A5 a5,A6 a6,A7 a7,A8 a8,A9 a9):
-            thread_info(make_thread_info(mars_boost_ksim::bind(mars_boost_ksim::type<void>(),f,a1,a2,a3,a4,a5,a6,a7,a8,a9)))
+            thread_info(make_thread_info(mars_boost::bind(mars_boost::type<void>(),f,a1,a2,a3,a4,a5,a6,a7,a8,a9)))
         {
             start_thread();
         }
@@ -539,7 +539,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
           using namespace chrono;
           nanoseconds d = tp.time_since_epoch();
-          timespec ts = mars_boost_ksim::detail::to_timespec(d);
+          timespec ts = mars_boost::detail::to_timespec(d);
           return do_try_join_until(ts);
         }
 #endif
@@ -753,7 +753,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         #if defined BOOST_THREAD_PROVIDES_BASIC_THREAD_ID
              return pthread_self();
         #else
-            mars_boost_ksim::detail::thread_data_base* const thread_info=get_or_make_current_thread_data();
+            mars_boost::detail::thread_data_base* const thread_info=get_or_make_current_thread_data();
             return (thread_info?thread::id(thread_info->shared_from_this()):thread::id());
         #endif
         }
@@ -761,7 +761,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #endif
     void thread::join() {
         if (this_thread::get_id() == get_id())
-          mars_boost_ksim::throw_exception(thread_resource_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost thread: trying joining itself"));
+          mars_boost::throw_exception(thread_resource_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost thread: trying joining itself"));
 
         BOOST_THREAD_VERIFY_PRECONDITION( join_noexcept(),
             thread_resource_error(static_cast<int>(system::errc::invalid_argument), "boost thread: thread not joinable")
@@ -775,7 +775,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #endif
     {
         if (this_thread::get_id() == get_id())
-          mars_boost_ksim::throw_exception(thread_resource_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost thread: trying joining itself"));
+          mars_boost::throw_exception(thread_resource_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost thread: trying joining itself"));
         bool res;
         if (do_try_join_until_noexcept(timeout, res))
         {

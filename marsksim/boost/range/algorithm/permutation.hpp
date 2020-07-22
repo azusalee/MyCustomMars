@@ -15,7 +15,7 @@
 #include <boost/range/concepts.hpp>
 #include <algorithm>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range
     {
@@ -30,7 +30,7 @@ template<class BidirectionalRange>
 inline bool next_permutation(BidirectionalRange& rng)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( BidirectionalRangeConcept<BidirectionalRange> ));
-    return std::next_permutation(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng));
+    return std::next_permutation(mars_boost::begin(rng), mars_boost::end(rng));
 }
 
 /// \overload
@@ -38,7 +38,7 @@ template<class BidirectionalRange>
 inline bool next_permutation(const BidirectionalRange& rng)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( BidirectionalRangeConcept<const BidirectionalRange> ));
-    return std::next_permutation(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng));
+    return std::next_permutation(mars_boost::begin(rng), mars_boost::end(rng));
 }
 
 /// \overload
@@ -46,7 +46,7 @@ template<class BidirectionalRange, class Compare>
 inline bool next_permutation(BidirectionalRange& rng, Compare comp_pred)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( BidirectionalRangeConcept<BidirectionalRange> ));
-    return std::next_permutation(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng),
+    return std::next_permutation(mars_boost::begin(rng), mars_boost::end(rng),
                                  comp_pred);
 }
 
@@ -56,7 +56,7 @@ inline bool next_permutation(const BidirectionalRange& rng,
                              Compare                   comp_pred)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( BidirectionalRangeConcept<const BidirectionalRange> ));
-    return std::next_permutation(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng),
+    return std::next_permutation(mars_boost::begin(rng), mars_boost::end(rng),
                                  comp_pred);
 }
 
@@ -70,7 +70,7 @@ template<class BidirectionalRange>
 inline bool prev_permutation(BidirectionalRange& rng)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( BidirectionalRangeConcept<BidirectionalRange> ));
-    return std::prev_permutation(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng));
+    return std::prev_permutation(mars_boost::begin(rng), mars_boost::end(rng));
 }
 
 /// \overload
@@ -78,7 +78,7 @@ template<class BidirectionalRange>
 inline bool prev_permutation(const BidirectionalRange& rng)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( BidirectionalRangeConcept<const BidirectionalRange> ));
-    return std::prev_permutation(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng));
+    return std::prev_permutation(mars_boost::begin(rng), mars_boost::end(rng));
 }
 
 /// \overload
@@ -86,7 +86,7 @@ template<class BidirectionalRange, class Compare>
 inline bool prev_permutation(BidirectionalRange& rng, Compare comp_pred)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( BidirectionalRangeConcept<BidirectionalRange> ));
-    return std::prev_permutation(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng),
+    return std::prev_permutation(mars_boost::begin(rng), mars_boost::end(rng),
                                  comp_pred);
 }
 
@@ -96,13 +96,13 @@ inline bool prev_permutation(const BidirectionalRange& rng,
                              Compare                   comp_pred)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( BidirectionalRangeConcept<const BidirectionalRange> ));
-    return std::prev_permutation(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng),
+    return std::prev_permutation(mars_boost::begin(rng), mars_boost::end(rng),
                                  comp_pred);
 }
 
     } // namespace range
     using range::next_permutation;
     using range::prev_permutation;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

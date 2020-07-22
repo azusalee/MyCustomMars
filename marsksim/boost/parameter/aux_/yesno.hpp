@@ -8,7 +8,7 @@
 
 #include <boost/mpl/bool.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace parameter { namespace aux {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace parameter { namespace aux {
 
 // types used with the "sizeof trick" to capture the results of
 // overload resolution at compile-time.
@@ -20,7 +20,7 @@ typedef char (&no_tag)[2];
 yes_tag to_yesno(mpl::true_);
 no_tag to_yesno(mpl::false_);
 
-}}} // namespace mars_boost_ksim::parameter::aux
+}}} // namespace mars_boost::parameter::aux
 
 #endif // YESNO_050328_HPP
 

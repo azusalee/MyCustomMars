@@ -18,7 +18,7 @@
 #  pragma warning(disable:4100)
 # endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace concepts {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace concepts {
 
 
 template <class Model>
@@ -97,7 +97,7 @@ struct require<void(*)(Model)>
 enum                                                \
 {                                                   \
     BOOST_PP_CAT(boost_concept_check,__LINE__) =    \
-    sizeof(::mars_boost_ksim::concepts::require<ModelFnPtr>)    \
+    sizeof(::mars_boost::concepts::require<ModelFnPtr>)    \
 }
   
 # else // Not vc-7.1
@@ -110,7 +110,7 @@ require_(void(*)(Model));
 enum                                                    \
 {                                                       \
     BOOST_PP_CAT(boost_concept_check,__LINE__) =        \
-      sizeof(::mars_boost_ksim::concepts::require_((ModelFnPtr)0)) \
+      sizeof(::mars_boost::concepts::require_((ModelFnPtr)0)) \
 }
   
 # endif

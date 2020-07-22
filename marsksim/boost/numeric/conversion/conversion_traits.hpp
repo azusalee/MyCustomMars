@@ -14,7 +14,7 @@
 #include "boost/detail/workaround.hpp"
 #include "boost/config.hpp"
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace numeric
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace numeric
 {
 
 template<class T, class S>
@@ -30,7 +30,7 @@ struct conversion_traits
 #endif
 } ;
 
-} } // namespace mars_boost_ksim::numeric
+} } // namespace mars_boost::numeric
 
 #endif
 //

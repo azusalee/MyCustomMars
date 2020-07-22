@@ -18,7 +18,7 @@
 #include <boost/detail/is_sorted.hpp>
 #include <algorithm>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range
     {
@@ -34,7 +34,7 @@ inline bool is_sorted(const SinglePassRange& rng)
     BOOST_RANGE_CONCEPT_ASSERT((SinglePassRangeConcept<const SinglePassRange>));
     BOOST_RANGE_CONCEPT_ASSERT((LessThanComparableConcept<BOOST_DEDUCED_TYPENAME
       range_value<const SinglePassRange>::type>));
-    return ::boost_ksim::detail::is_sorted(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng));
+    return ::boost_ksim::detail::is_sorted(mars_boost::begin(rng), mars_boost::end(rng));
 }
 
 /// \overload
@@ -45,13 +45,13 @@ inline bool is_sorted(const SinglePassRange& rng, BinaryPredicate pred)
     BOOST_RANGE_CONCEPT_ASSERT((BinaryPredicateConcept<BinaryPredicate,
       BOOST_DEDUCED_TYPENAME range_value<const SinglePassRange>::type,
       BOOST_DEDUCED_TYPENAME range_value<const SinglePassRange>::type>));
-    return ::boost_ksim::detail::is_sorted(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), pred);
+    return ::boost_ksim::detail::is_sorted(mars_boost::begin(rng), mars_boost::end(rng), pred);
 }
 
     } // namespace range
 
 using range::is_sorted;
 
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

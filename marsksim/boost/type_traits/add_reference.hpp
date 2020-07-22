@@ -12,7 +12,7 @@
 #include <boost/detail/workaround.hpp>
 #include <boost/config.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 namespace detail {
 
@@ -39,7 +39,7 @@ struct add_reference_impl<T&&>
 
 template <class T> struct add_reference
 {
-   typedef typename mars_boost_ksim::detail::add_reference_impl<T>::type type;
+   typedef typename mars_boost::detail::add_reference_impl<T>::type type;
 };
 template <class T> struct add_reference<T&>
 {
@@ -54,6 +54,6 @@ template <> struct add_reference<const volatile void> { typedef void type; };
 template <> struct add_reference<volatile void> { typedef void type; };
 #endif
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_ADD_REFERENCE_HPP_INCLUDED

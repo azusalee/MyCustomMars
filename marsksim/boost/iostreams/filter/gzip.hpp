@@ -51,13 +51,13 @@
 namespace std { using ::time_t; }
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace iostreams {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace iostreams {
                     
 //------------------Definitions of constants----------------------------------//
 
 namespace gzip {
 
-using namespace mars_boost_ksim::iostreams::zlib;
+using namespace mars_boost::iostreams::zlib;
 
     // Error codes used by gzip_error.
 
@@ -236,7 +236,7 @@ public:
         if (!(flags_ & f_header_done)) {
             std::streamsize amt = 
                 static_cast<std::streamsize>(header_.size() - offset_);
-            offset_ += mars_boost_ksim::iostreams::write(snk, header_.data() + offset_, amt);
+            offset_ += mars_boost::iostreams::write(snk, header_.data() + offset_, amt);
             if (offset_ == header_.size())
                 flags_ |= f_header_done;
             else
@@ -272,15 +272,15 @@ private:
     std::streamsize read_string(char* s, std::streamsize n, std::string& str);
 
     template<typename Sink>
-    static void write_long(long n, Sink& next, mars_boost_ksim::mpl::true_)
+    static void write_long(long n, Sink& next, mars_boost::mpl::true_)
     {
-        mars_boost_ksim::iostreams::put(next, static_cast<char>(0xFF & n));
-        mars_boost_ksim::iostreams::put(next, static_cast<char>(0xFF & (n >> 8)));
-        mars_boost_ksim::iostreams::put(next, static_cast<char>(0xFF & (n >> 16)));
-        mars_boost_ksim::iostreams::put(next, static_cast<char>(0xFF & (n >> 24)));
+        mars_boost::iostreams::put(next, static_cast<char>(0xFF & n));
+        mars_boost::iostreams::put(next, static_cast<char>(0xFF & (n >> 8)));
+        mars_boost::iostreams::put(next, static_cast<char>(0xFF & (n >> 16)));
+        mars_boost::iostreams::put(next, static_cast<char>(0xFF & (n >> 24)));
     }
     template<typename Sink>
-    static void write_long(long n, Sink& next, mars_boost_ksim::mpl::false_)
+    static void write_long(long n, Sink& next, mars_boost::mpl::false_)
     {
     }
     template<typename Sink>
@@ -389,7 +389,7 @@ private:
     int          offset_; 
 };
 
-} // End namespace mars_boost_ksim::iostreams::detail.
+} // End namespace mars_boost::iostreams::detail.
 
 //------------------Definition of basic_gzip_decompressor---------------------//
 
@@ -440,12 +440,12 @@ public:
                         state_ = s_footer;
                     }
                 } BOOST_CATCH (const zlib_error& e) {
-                    mars_boost_ksim::throw_exception(gzip_error(e));
+                    mars_boost::throw_exception(gzip_error(e));
                 }
             } else { // state_ == s_footer
                 if (footer_.done()) {
                     if (footer_.crc() != this->crc())
-                        mars_boost_ksim::throw_exception(gzip_error(gzip::bad_crc));
+                        mars_boost::throw_exception(gzip_error(gzip::bad_crc));
 
                     base_type::close(snk, BOOST_IOS::out);
                     state_ = s_start;
@@ -471,9 +471,9 @@ public:
                 footer_.reset();
             }
             if (state_ == s_header) {
-                int c = mars_boost_ksim::iostreams::get(peek);
+                int c = mars_boost::iostreams::get(peek);
                 if (traits_type::is_eof(c)) {
-                    mars_boost_ksim::throw_exception(gzip_error(gzip::bad_header));
+                    mars_boost::throw_exception(gzip_error(gzip::bad_header));
                 } else if (traits_type::would_block(c)) {
                     break;
                 }
@@ -493,20 +493,20 @@ public:
                         state_ = s_footer;
                     }
                 } BOOST_CATCH (const zlib_error& e) {
-                    mars_boost_ksim::throw_exception(gzip_error(e));
+                    mars_boost::throw_exception(gzip_error(e));
                 } BOOST_CATCH_END
             } else { // state_ == s_footer
-                int c = mars_boost_ksim::iostreams::get(peek);
+                int c = mars_boost::iostreams::get(peek);
                 if (traits_type::is_eof(c)) {
-                    mars_boost_ksim::throw_exception(gzip_error(gzip::bad_footer));
+                    mars_boost::throw_exception(gzip_error(gzip::bad_footer));
                 } else if (traits_type::would_block(c)) {
                     break;
                 }
                 footer_.process(c);
                 if (footer_.done()) {
                     if (footer_.crc() != this->crc())
-                        mars_boost_ksim::throw_exception(gzip_error(gzip::bad_crc));
-                    int c = mars_boost_ksim::iostreams::get(peek);
+                        mars_boost::throw_exception(gzip_error(gzip::bad_crc));
+                    int c = mars_boost::iostreams::get(peek);
                     if (traits_type::is_eof(c)) {
                         state_ = s_done;
                     } else {
@@ -536,18 +536,18 @@ public:
             base_type::close(src, m);
         } BOOST_CATCH (const zlib_error& e) {
             state_ = s_start;
-            mars_boost_ksim::throw_exception(gzip_error(e));
+            mars_boost::throw_exception(gzip_error(e));
         } BOOST_CATCH_END
         if (m == BOOST_IOS::out) {
             if (state_ == s_start || state_ == s_header)
-                mars_boost_ksim::throw_exception(gzip_error(gzip::bad_header));
+                mars_boost::throw_exception(gzip_error(gzip::bad_header));
             else if (state_ == s_body)
-                mars_boost_ksim::throw_exception(gzip_error(gzip::bad_footer));
+                mars_boost::throw_exception(gzip_error(gzip::bad_footer));
             else if (state_ == s_footer) {
                 if (!footer_.done())
-                    mars_boost_ksim::throw_exception(gzip_error(gzip::bad_footer));
+                    mars_boost::throw_exception(gzip_error(gzip::bad_footer));
                 else if(footer_.crc() != this->crc())
-                    mars_boost_ksim::throw_exception(gzip_error(gzip::bad_crc));
+                    mars_boost::throw_exception(gzip_error(gzip::bad_crc));
             } else {
                 BOOST_ASSERT(!"Bad state");
             }
@@ -589,7 +589,7 @@ private:
 
             // Read characters from src_
             std::streamsize amt = 
-                mars_boost_ksim::iostreams::read(src_, s + result, n - result);
+                mars_boost::iostreams::read(src_, s + result, n - result);
             return amt != -1 ? 
                 result + amt : 
                 result ? result : -1;
@@ -599,8 +599,8 @@ private:
             if (offset_) {
                 putback_[--offset_] = c;
             } else {
-                mars_boost_ksim::throw_exception(
-                    mars_boost_ksim::iostreams::detail::bad_putback());
+                mars_boost::throw_exception(
+                    mars_boost::iostreams::detail::bad_putback());
             }
             return true;
         }
@@ -702,7 +702,7 @@ gzip_params basic_gzip_compressor<Alloc>::normalize_params(gzip_params p)
 template<typename Alloc>
 void basic_gzip_compressor<Alloc>::prepare_footer()
 {
-    mars_boost_ksim::iostreams::back_insert_device<std::string> out(footer_);
+    mars_boost::iostreams::back_insert_device<std::string> out(footer_);
     write_long(this->crc(), out);
     write_long(this->total_in(), out);
     flags_ |= f_body_done;

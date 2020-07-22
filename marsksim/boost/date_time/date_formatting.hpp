@@ -20,7 +20,7 @@
  * date_formatting_limited.hpp
  */
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace date_time {
 
   //! Formats a month as as string into an ostream

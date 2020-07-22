@@ -92,8 +92,8 @@
 // Daniel Wallin discovered that bind/apply.hpp badly interacts with the apply<>
 // member template of a factory as used in the optional<> implementation.
 // He proposed this simple fix which is to move the call to apply<> outside
-// namespace mars_boost_ksim.
-namespace mars_boost_ksim_optional_detail
+// namespace mars_boost.
+namespace mars_boost_optional_detail
 {
   template <class T, class Factory>
   inline void construct(Factory const& factory, void* address)
@@ -103,7 +103,7 @@ namespace mars_boost_ksim_optional_detail
 }
 
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 class in_place_factory_base ;
 class typed_in_place_factory_base ;
@@ -129,7 +129,7 @@ class aligned_storage
     {
         char data[ sizeof(T) ];
         BOOST_DEDUCED_TYPENAME type_with_alignment<
-          ::mars_boost_ksim::alignment_of<T>::value >::type aligner_;
+          ::mars_boost::alignment_of<T>::value >::type aligner_;
     } dummy_ ;
 
   public:
@@ -156,7 +156,7 @@ struct types_when_isnt_ref
   // causes warnings about returning references to a temporary.
   static T&& move(T&& r) { return r; }
 #else
-  static rval_reference_type move(reference_type r) { return mars_boost_ksim::move(r); }
+  static rval_reference_type move(reference_type r) { return mars_boost::move(r); }
 #endif
 #endif
   typedef T const* pointer_const_type ;
@@ -186,7 +186,7 @@ void prevent_binding_rvalue_ref_to_optional_lvalue_ref()
 {
 #ifndef BOOST_OPTIONAL_CONFIG_ALLOW_BINDING_TO_RVALUES
   BOOST_STATIC_ASSERT_MSG(
-    !mars_boost_ksim::is_lvalue_reference<To>::value || !mars_boost_ksim::is_rvalue_reference<From>::value, 
+    !mars_boost::is_lvalue_reference<To>::value || !mars_boost::is_rvalue_reference<From>::value, 
     "binding rvalue references to optional lvalue references is disallowed");
 #endif    
 }
@@ -202,7 +202,7 @@ class optional_base : public optional_tag
 #if !BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x564))
     BOOST_DEDUCED_TYPENAME
 #endif
-    ::mars_boost_ksim::detail::make_reference_content<T>::type internal_type ;
+    ::mars_boost::detail::make_reference_content<T>::type internal_type ;
 
     typedef aligned_storage<internal_type> storage_type ;
 
@@ -262,7 +262,7 @@ class optional_base : public optional_tag
       :
       m_initialized(false)
     {
-      construct( mars_boost_ksim::move(val) );
+      construct( mars_boost::move(val) );
     }
 #endif
 
@@ -294,7 +294,7 @@ class optional_base : public optional_tag
       m_initialized(false)
     {
       if ( rhs.is_initialized() )
-        construct( mars_boost_ksim::move(rhs.get_impl()) );
+        construct( mars_boost::move(rhs.get_impl()) );
     }
 #endif
 
@@ -305,7 +305,7 @@ class optional_base : public optional_tag
       :
       m_initialized(false)
     {
-      construct(mars_boost_ksim::forward<Expr>(expr),tag);
+      construct(mars_boost::forward<Expr>(expr),tag);
     }
 
 #else
@@ -349,13 +349,13 @@ class optional_base : public optional_tag
       if (is_initialized())
       {
         if ( rhs.is_initialized() )
-             assign_value(mars_boost_ksim::move(rhs.get_impl()), is_reference_predicate() );
+             assign_value(mars_boost::move(rhs.get_impl()), is_reference_predicate() );
         else destroy();
       }
       else
       {
         if ( rhs.is_initialized() )
-          construct(mars_boost_ksim::move(rhs.get_impl()));
+          construct(mars_boost::move(rhs.get_impl()));
       }
     }
 #endif 
@@ -419,8 +419,8 @@ class optional_base : public optional_tag
     void assign ( rval_reference_type val )
     {
       if (is_initialized())
-           assign_value( mars_boost_ksim::move(val), is_reference_predicate() );
-      else construct( mars_boost_ksim::move(val) );
+           assign_value( mars_boost::move(val), is_reference_predicate() );
+      else construct( mars_boost::move(val) );
     }
 #endif
 
@@ -435,8 +435,8 @@ class optional_base : public optional_tag
     void assign_expr ( Expr&& expr, ExprPtr const* tag )
     {
       if (is_initialized())
-        assign_expr_to_initialized(mars_boost_ksim::forward<Expr>(expr),tag);
-      else construct(mars_boost_ksim::forward<Expr>(expr),tag);
+        assign_expr_to_initialized(mars_boost::forward<Expr>(expr),tag);
+      else construct(mars_boost::forward<Expr>(expr),tag);
     }
 #else
     template<class Expr>
@@ -491,7 +491,7 @@ class optional_base : public optional_tag
     void emplace_assign ( Args&&... args )
      {
        destroy();
-       ::new (m_storage.address()) internal_type( mars_boost_ksim::forward<Args>(args)... );
+       ::new (m_storage.address()) internal_type( mars_boost::forward<Args>(args)... );
        m_initialized = true ;
      }
 #elif (!defined BOOST_OPTIONAL_DETAIL_NO_RVALUE_REFERENCES)
@@ -499,7 +499,7 @@ class optional_base : public optional_tag
     void emplace_assign ( Arg&& arg )
      {
        destroy();
-       ::new (m_storage.address()) internal_type( mars_boost_ksim::forward<Arg>(arg) );
+       ::new (m_storage.address()) internal_type( mars_boost::forward<Arg>(arg) );
        m_initialized = true ;
      }
      
@@ -541,8 +541,8 @@ class optional_base : public optional_tag
     template<class Expr>
     void construct ( Expr&& factory, in_place_factory_base const* )
      {
-       BOOST_STATIC_ASSERT ( ::mars_boost_ksim::mpl::not_<is_reference_predicate>::value ) ;
-       mars_boost_ksim_optional_detail::construct<value_type>(factory, m_storage.address());
+       BOOST_STATIC_ASSERT ( ::mars_boost::mpl::not_<is_reference_predicate>::value ) ;
+       mars_boost_optional_detail::construct<value_type>(factory, m_storage.address());
        m_initialized = true ;
      }
 
@@ -550,7 +550,7 @@ class optional_base : public optional_tag
     template<class Expr>
     void construct ( Expr&& factory, typed_in_place_factory_base const* )
      {
-       BOOST_STATIC_ASSERT ( ::mars_boost_ksim::mpl::not_<is_reference_predicate>::value ) ;
+       BOOST_STATIC_ASSERT ( ::mars_boost::mpl::not_<is_reference_predicate>::value ) ;
        factory.apply(m_storage.address()) ;
        m_initialized = true ;
      }
@@ -575,8 +575,8 @@ class optional_base : public optional_tag
     template<class Expr>
     void construct ( Expr const& factory, in_place_factory_base const* )
      {
-       BOOST_STATIC_ASSERT ( ::mars_boost_ksim::mpl::not_<is_reference_predicate>::value ) ;
-       mars_boost_ksim_optional_detail::construct<value_type>(factory, m_storage.address());
+       BOOST_STATIC_ASSERT ( ::mars_boost::mpl::not_<is_reference_predicate>::value ) ;
+       mars_boost_optional_detail::construct<value_type>(factory, m_storage.address());
        m_initialized = true ;
      }
 
@@ -584,7 +584,7 @@ class optional_base : public optional_tag
     template<class Expr>
     void construct ( Expr const& factory, typed_in_place_factory_base const* )
      {
-       BOOST_STATIC_ASSERT ( ::mars_boost_ksim::mpl::not_<is_reference_predicate>::value ) ;
+       BOOST_STATIC_ASSERT ( ::mars_boost::mpl::not_<is_reference_predicate>::value ) ;
        factory.apply(m_storage.address()) ;
        m_initialized = true ;
      }
@@ -615,7 +615,7 @@ class optional_base : public optional_tag
     template<class Expr>
     void construct ( Expr&& expr, void const* )
     {
-      new (m_storage.address()) internal_type(mars_boost_ksim::forward<Expr>(expr)) ;
+      new (m_storage.address()) internal_type(mars_boost::forward<Expr>(expr)) ;
       m_initialized = true ;
     }
 
@@ -626,7 +626,7 @@ class optional_base : public optional_tag
     template<class Expr>
     void assign_expr_to_initialized ( Expr&& expr, void const* )
     {
-      assign_value(mars_boost_ksim::forward<Expr>(expr), is_reference_predicate());
+      assign_value(mars_boost::forward<Expr>(expr), is_reference_predicate());
     }
 #else
     // Constructs using any expression implicitly convertible to the single argument
@@ -796,7 +796,7 @@ class optional : public optional_detail::optional_base<T>
 #ifndef  BOOST_OPTIONAL_DETAIL_NO_RVALUE_REFERENCES
     // Creates an optional<T> initialized with 'move(val)'.
     // Can throw if T::T(T &&) does
-    optional ( rval_reference_type val ) : base( mars_boost_ksim::forward<T>(val) ) 
+    optional ( rval_reference_type val ) : base( mars_boost::forward<T>(val) ) 
       {optional_detail::prevent_binding_rvalue_ref_to_optional_lvalue_ref<T, rval_reference_type>();}
 #endif
 
@@ -828,7 +828,7 @@ class optional : public optional_detail::optional_base<T>
       base()
     {
       if ( rhs.is_initialized() )
-        this->construct( mars_boost_ksim::move(rhs.get()) );
+        this->construct( mars_boost::move(rhs.get()) );
     }
 #endif
 
@@ -847,16 +847,16 @@ class optional : public optional_detail::optional_base<T>
 
   template<class Expr>
   explicit optional ( Expr&& expr, 
-                      BOOST_DEDUCED_TYPENAME mars_boost_ksim::disable_if_c<
-                        (mars_boost_ksim::is_base_of<optional_detail::optional_tag, BOOST_DEDUCED_TYPENAME mars_boost_ksim::decay<Expr>::type>::value) || 
-                        mars_boost_ksim::is_same<BOOST_DEDUCED_TYPENAME mars_boost_ksim::decay<Expr>::type, none_t>::value >::type* = 0 
+                      BOOST_DEDUCED_TYPENAME mars_boost::disable_if_c<
+                        (mars_boost::is_base_of<optional_detail::optional_tag, BOOST_DEDUCED_TYPENAME mars_boost::decay<Expr>::type>::value) || 
+                        mars_boost::is_same<BOOST_DEDUCED_TYPENAME mars_boost::decay<Expr>::type, none_t>::value >::type* = 0 
   ) 
-    : base(mars_boost_ksim::forward<Expr>(expr),mars_boost_ksim::addressof(expr)) 
+    : base(mars_boost::forward<Expr>(expr),mars_boost::addressof(expr)) 
     {optional_detail::prevent_binding_rvalue_ref_to_optional_lvalue_ref<T, Expr&&>();}
 
 #else
     template<class Expr>
-    explicit optional ( Expr const& expr ) : base(expr,mars_boost_ksim::addressof(expr)) {}
+    explicit optional ( Expr const& expr ) : base(expr,mars_boost::addressof(expr)) {}
 #endif // !defined BOOST_OPTIONAL_DETAIL_NO_RVALUE_REFERENCES
 #endif // !defined BOOST_OPTIONAL_NO_INPLACE_FACTORY_SUPPORT
 
@@ -868,8 +868,8 @@ class optional : public optional_detail::optional_base<T>
 	// Creates a deep move of another optional<T>
 	// Can throw if T::T(T&&) does
 	optional ( optional && rhs ) 
-	  BOOST_NOEXCEPT_IF(::mars_boost_ksim::is_nothrow_move_constructible<T>::value)
-	  : base( mars_boost_ksim::move(rhs) ) 
+	  BOOST_NOEXCEPT_IF(::mars_boost::is_nothrow_move_constructible<T>::value)
+	  : base( mars_boost::move(rhs) ) 
 	{}
 
 #endif
@@ -882,15 +882,15 @@ class optional : public optional_detail::optional_base<T>
 #ifndef  BOOST_OPTIONAL_DETAIL_NO_RVALUE_REFERENCES
 
     template<class Expr>
-    BOOST_DEDUCED_TYPENAME mars_boost_ksim::disable_if_c<
-      mars_boost_ksim::is_base_of<optional_detail::optional_tag, BOOST_DEDUCED_TYPENAME mars_boost_ksim::decay<Expr>::type>::value || 
-        mars_boost_ksim::is_same<BOOST_DEDUCED_TYPENAME mars_boost_ksim::decay<Expr>::type, none_t>::value,
+    BOOST_DEDUCED_TYPENAME mars_boost::disable_if_c<
+      mars_boost::is_base_of<optional_detail::optional_tag, BOOST_DEDUCED_TYPENAME mars_boost::decay<Expr>::type>::value || 
+        mars_boost::is_same<BOOST_DEDUCED_TYPENAME mars_boost::decay<Expr>::type, none_t>::value,
       optional&
     >::type 
     operator= ( Expr&& expr )
       {
         optional_detail::prevent_binding_rvalue_ref_to_optional_lvalue_ref<T, Expr&&>();
-        this->assign_expr(mars_boost_ksim::forward<Expr>(expr),mars_boost_ksim::addressof(expr));
+        this->assign_expr(mars_boost::forward<Expr>(expr),mars_boost::addressof(expr));
         return *this ;
       }
 
@@ -898,7 +898,7 @@ class optional : public optional_detail::optional_base<T>
     template<class Expr>
     optional& operator= ( Expr const& expr )
       {
-        this->assign_expr(expr,mars_boost_ksim::addressof(expr));
+        this->assign_expr(expr,mars_boost::addressof(expr));
         return *this ;
       }
 #endif // !defined  BOOST_OPTIONAL_DETAIL_NO_RVALUE_REFERENCES
@@ -921,7 +921,7 @@ class optional : public optional_detail::optional_base<T>
     template<class U>
     optional& operator= ( optional<U> && rhs )
       {
-        this->assign(mars_boost_ksim::move(rhs));
+        this->assign(mars_boost::move(rhs));
         return *this ;
       }
 #endif
@@ -938,7 +938,7 @@ class optional : public optional_detail::optional_base<T>
 #ifndef  BOOST_OPTIONAL_DETAIL_NO_RVALUE_REFERENCES
     // Assigns from another optional<T> (deep-moves the rhs value)
     optional& operator= ( optional && rhs ) 
-	  BOOST_NOEXCEPT_IF(::mars_boost_ksim::is_nothrow_move_constructible<T>::value && ::mars_boost_ksim::is_nothrow_move_assignable<T>::value)
+	  BOOST_NOEXCEPT_IF(::mars_boost::is_nothrow_move_constructible<T>::value && ::mars_boost::is_nothrow_move_assignable<T>::value)
       {
         this->assign( static_cast<base &&>(rhs) ) ;
         return *this ;
@@ -958,7 +958,7 @@ class optional : public optional_detail::optional_base<T>
     optional& operator= ( rval_reference_type val )
       {
         optional_detail::prevent_binding_rvalue_ref_to_optional_lvalue_ref<T, rval_reference_type>();
-        this->assign( mars_boost_ksim::move(val) ) ;
+        this->assign( mars_boost::move(val) ) ;
         return *this ;
       }
 #endif
@@ -978,13 +978,13 @@ class optional : public optional_detail::optional_base<T>
     template<class... Args>
     void emplace ( Args&&... args )
      {
-       this->emplace_assign( mars_boost_ksim::forward<Args>(args)... );
+       this->emplace_assign( mars_boost::forward<Args>(args)... );
      }
 #elif (!defined BOOST_OPTIONAL_DETAIL_NO_RVALUE_REFERENCES)
     template<class Arg>
     void emplace ( Arg&& arg )
      {
-       this->emplace_assign( mars_boost_ksim::forward<Arg>(arg) );
+       this->emplace_assign( mars_boost::forward<Arg>(arg) );
      }
      
     void emplace ()
@@ -1011,10 +1011,10 @@ class optional : public optional_detail::optional_base<T>
 #endif
 
     void swap( optional & arg )
-	  BOOST_NOEXCEPT_IF(::mars_boost_ksim::is_nothrow_move_constructible<T>::value && ::mars_boost_ksim::is_nothrow_move_assignable<T>::value)
+	  BOOST_NOEXCEPT_IF(::mars_boost::is_nothrow_move_constructible<T>::value && ::mars_boost::is_nothrow_move_assignable<T>::value)
       {
         // allow for Koenig lookup
-        mars_boost_ksim::swap(*this, arg);
+        mars_boost::swap(*this, arg);
       }
 
 
@@ -1097,7 +1097,7 @@ class optional : public optional_detail::optional_base<T>
         if (this->is_initialized())
           return get();
         else
-          return mars_boost_ksim::forward<U>(v);
+          return mars_boost::forward<U>(v);
       }
     
     template <class U>
@@ -1106,7 +1106,7 @@ class optional : public optional_detail::optional_base<T>
         if (this->is_initialized())
           return base::types::move(get());
         else
-          return mars_boost_ksim::forward<U>(v);
+          return mars_boost::forward<U>(v);
       }
 #elif !defined BOOST_OPTIONAL_DETAIL_NO_RVALUE_REFERENCES
     template <class U>
@@ -1115,7 +1115,7 @@ class optional : public optional_detail::optional_base<T>
         if (this->is_initialized())
           return get();
         else
-          return mars_boost_ksim::forward<U>(v);
+          return mars_boost::forward<U>(v);
       }
 #else
     template <class U>
@@ -1273,7 +1273,7 @@ template<class CharType, class CharTrait>
 std::basic_ostream<CharType, CharTrait>&
 operator<<(std::basic_ostream<CharType, CharTrait>& os, optional_detail::optional_tag const&)
 {
-  BOOST_STATIC_ASSERT_MSG(sizeof(CharType) == 0, "If you want to output mars_boost_ksim::optional, include header <boost/optional/optional_io.hpp>");
+  BOOST_STATIC_ASSERT_MSG(sizeof(CharType) == 0, "If you want to output mars_boost::optional, include header <boost/optional/optional_io.hpp>");
   return os;  
 }
 
@@ -1474,12 +1474,12 @@ struct swap_selector<true>
             y.emplace();
 
         // Boost.Utility.Swap will take care of ADL and workarounds for broken compilers
-        mars_boost_ksim::swap(x.get(),y.get());
+        mars_boost::swap(x.get(),y.get());
 
         if( !hasX )
-            y = mars_boost_ksim::none ;
+            y = mars_boost::none ;
         else if( !hasY )
-            x = mars_boost_ksim::none ;
+            x = mars_boost::none ;
     }
 };
 
@@ -1489,26 +1489,26 @@ struct swap_selector<false>
 {
     template<class T>
     static void optional_swap ( optional<T>& x, optional<T>& y ) 
-    //BOOST_NOEXCEPT_IF(::mars_boost_ksim::is_nothrow_move_constructible<T>::value && BOOST_NOEXCEPT_EXPR(mars_boost_ksim::swap(*x, *y)))
+    //BOOST_NOEXCEPT_IF(::mars_boost::is_nothrow_move_constructible<T>::value && BOOST_NOEXCEPT_EXPR(mars_boost::swap(*x, *y)))
     {
         if(x)
         {
             if (y)
             {
-                mars_boost_ksim::swap(*x, *y);
+                mars_boost::swap(*x, *y);
             }
             else
             {
-                y = mars_boost_ksim::move(*x);
-                x = mars_boost_ksim::none;
+                y = mars_boost::move(*x);
+                x = mars_boost::none;
             }
         }
         else
         {
             if (y)
             {
-                x = mars_boost_ksim::move(*y);
-                y = mars_boost_ksim::none;
+                x = mars_boost::move(*y);
+                y = mars_boost::none;
             }
         }
     }
@@ -1526,17 +1526,17 @@ struct swap_selector<false>
         if ( !hasX && hasY )
         {
             x = y.get();
-            y = mars_boost_ksim::none ;
+            y = mars_boost::none ;
         }
         else if ( hasX && !hasY )
         {
             y = x.get();
-            x = mars_boost_ksim::none ;
+            x = mars_boost::none ;
         }
         else if ( hasX && hasY )
         {
             // Boost.Utility.Swap will take care of ADL and workarounds for broken compilers
-            mars_boost_ksim::swap(x.get(),y.get());
+            mars_boost::swap(x.get(),y.get());
         }
     }
 };
@@ -1547,7 +1547,7 @@ struct swap_selector<false>
 #if (!defined BOOST_NO_CXX11_RVALUE_REFERENCES) && (!defined BOOST_CONFIG_RESTORE_OBSOLETE_SWAP_IMPLEMENTATION)
 
 template<class T>
-struct optional_swap_should_use_default_constructor : mars_boost_ksim::false_type {} ;
+struct optional_swap_should_use_default_constructor : mars_boost::false_type {} ;
 
 #else
 
@@ -1557,11 +1557,11 @@ struct optional_swap_should_use_default_constructor : has_nothrow_default_constr
 #endif //BOOST_NO_CXX11_RVALUE_REFERENCES
 
 template<class T> inline void swap ( optional<T>& x, optional<T>& y )
-  //BOOST_NOEXCEPT_IF(::mars_boost_ksim::is_nothrow_move_constructible<T>::value && BOOST_NOEXCEPT_EXPR(mars_boost_ksim::swap(*x, *y)))
+  //BOOST_NOEXCEPT_IF(::mars_boost::is_nothrow_move_constructible<T>::value && BOOST_NOEXCEPT_EXPR(mars_boost::swap(*x, *y)))
 {
     optional_detail::swap_selector<optional_swap_should_use_default_constructor<T>::value>::optional_swap(x, y);
 }
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif

@@ -37,12 +37,12 @@
 #endif
 #include <boost/container/detail/iterator.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace container {
 
 template <class T, class Difference = std::ptrdiff_t>
 class constant_iterator
-  : public ::mars_boost_ksim::container::iterator
+  : public ::mars_boost::container::iterator
       <std::random_access_iterator_tag, T, Difference, const T*, const T &>
 {
    typedef  constant_iterator<T, Difference> this_type;
@@ -153,7 +153,7 @@ class constant_iterator
 
 template <class T, class Difference>
 class value_init_construct_iterator
-  : public ::mars_boost_ksim::container::iterator
+  : public ::mars_boost::container::iterator
       <std::random_access_iterator_tag, T, Difference, const T*, const T &>
 {
    typedef  value_init_construct_iterator<T, Difference> this_type;
@@ -228,7 +228,7 @@ class value_init_construct_iterator
    {  return *this + (-off);  }
 
    //This pseudo-iterator's dereference operations have no sense since value is not
-   //constructed until ::mars_boost_ksim::container::construct_in_place is called.
+   //constructed until ::mars_boost::container::construct_in_place is called.
    //So comment them to catch bad uses
    //const T& operator*() const;
    //const T& operator[](difference_type) const;
@@ -264,7 +264,7 @@ class value_init_construct_iterator
 
 template <class T, class Difference>
 class default_init_construct_iterator
-  : public ::mars_boost_ksim::container::iterator
+  : public ::mars_boost::container::iterator
       <std::random_access_iterator_tag, T, Difference, const T*, const T &>
 {
    typedef  default_init_construct_iterator<T, Difference> this_type;
@@ -339,7 +339,7 @@ class default_init_construct_iterator
    {  return *this + (-off);  }
 
    //This pseudo-iterator's dereference operations have no sense since value is not
-   //constructed until ::mars_boost_ksim::container::construct_in_place is called.
+   //constructed until ::mars_boost::container::construct_in_place is called.
    //So comment them to catch bad uses
    //const T& operator*() const;
    //const T& operator[](difference_type) const;
@@ -376,7 +376,7 @@ class default_init_construct_iterator
 
 template <class T, class Difference = std::ptrdiff_t>
 class repeat_iterator
-  : public ::mars_boost_ksim::container::iterator
+  : public ::mars_boost::container::iterator
       <std::random_access_iterator_tag, T, Difference>
 {
    typedef repeat_iterator<T, Difference> this_type;
@@ -486,7 +486,7 @@ class repeat_iterator
 
 template <class T, class EmplaceFunctor, class Difference /*= std::ptrdiff_t*/>
 class emplace_iterator
-  : public ::mars_boost_ksim::container::iterator
+  : public ::mars_boost::container::iterator
       <std::random_access_iterator_tag, T, Difference, const T*, const T &>
 {
    typedef emplace_iterator this_type;
@@ -561,7 +561,7 @@ class emplace_iterator
    {  return *this + (-off);  }
 
    //This pseudo-iterator's dereference operations have no sense since value is not
-   //constructed until ::mars_boost_ksim::container::construct_in_place is called.
+   //constructed until ::mars_boost::container::construct_in_place is called.
    //So comment them to catch bad uses
    //const T& operator*() const;
    //const T& operator[](difference_type) const;
@@ -619,7 +619,7 @@ struct emplace_functor
    void inplace_impl(Allocator &a, T* ptr, const container_detail::index_tuple<IdxPack...>&)
    {
       allocator_traits<Allocator>::construct
-         (a, ptr, ::mars_boost_ksim::forward<Args>(container_detail::get<IdxPack>(args_))...);
+         (a, ptr, ::mars_boost::forward<Args>(container_detail::get<IdxPack>(args_))...);
    }
 
    container_detail::tuple<Args&...> args_;
@@ -715,15 +715,15 @@ struct iiterator_types
 {
    typedef typename IIterator::value_type                            it_value_type;
    typedef typename iiterator_node_value_type<it_value_type>::type   value_type;
-   typedef typename mars_boost_ksim::container::iterator_traits<IIterator>::pointer         it_pointer;
-   typedef typename mars_boost_ksim::container::iterator_traits<IIterator>::difference_type difference_type;
-   typedef typename ::mars_boost_ksim::intrusive::pointer_traits<it_pointer>::
+   typedef typename mars_boost::container::iterator_traits<IIterator>::pointer         it_pointer;
+   typedef typename mars_boost::container::iterator_traits<IIterator>::difference_type difference_type;
+   typedef typename ::mars_boost::intrusive::pointer_traits<it_pointer>::
       template rebind_pointer<value_type>::type                      pointer;
-   typedef typename ::mars_boost_ksim::intrusive::pointer_traits<it_pointer>::
+   typedef typename ::mars_boost::intrusive::pointer_traits<it_pointer>::
       template rebind_pointer<const value_type>::type                const_pointer;
-   typedef typename ::mars_boost_ksim::intrusive::
+   typedef typename ::mars_boost::intrusive::
       pointer_traits<pointer>::reference                             reference;
-   typedef typename ::mars_boost_ksim::intrusive::
+   typedef typename ::mars_boost::intrusive::
       pointer_traits<const_pointer>::reference                       const_reference;
    typedef typename IIterator::iterator_category                     iterator_category;
 };
@@ -731,7 +731,7 @@ struct iiterator_types
 template<class IIterator, bool IsConst>
 struct iterator_types
 {
-   typedef typename ::mars_boost_ksim::container::iterator
+   typedef typename ::mars_boost::container::iterator
       < typename iiterator_types<IIterator>::iterator_category
       , typename iiterator_types<IIterator>::value_type
       , typename iiterator_types<IIterator>::difference_type
@@ -742,7 +742,7 @@ struct iterator_types
 template<class IIterator>
 struct iterator_types<IIterator, false>
 {
-   typedef typename ::mars_boost_ksim::container::iterator
+   typedef typename ::mars_boost::container::iterator
       < typename iiterator_types<IIterator>::iterator_category
       , typename iiterator_types<IIterator>::value_type
       , typename iiterator_types<IIterator>::difference_type
@@ -807,7 +807,7 @@ class iterator_from_iiterator
    {  return this->m_iit->get_data();  }
 
    pointer   operator->() const BOOST_NOEXCEPT_OR_NOTHROW
-   {  return ::mars_boost_ksim::intrusive::pointer_traits<pointer>::pointer_to(this->operator*());  }
+   {  return ::mars_boost::intrusive::pointer_traits<pointer>::pointer_to(this->operator*());  }
 
    const IIterator &get() const BOOST_NOEXCEPT_OR_NOTHROW
    {  return this->m_iit;   }
@@ -818,10 +818,10 @@ class iterator_from_iiterator
 
 }  //namespace container_detail {
 
-using ::mars_boost_ksim::intrusive::reverse_iterator;
+using ::mars_boost::intrusive::reverse_iterator;
 
 }  //namespace container {
-}  //namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+}  //namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 #include <boost/container/detail/config_end.hpp>
 

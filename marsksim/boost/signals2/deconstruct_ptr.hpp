@@ -2,8 +2,8 @@
 // deconstruct<T>().
 // A factory function for creating a shared_ptr that enhances the plain
 // shared_ptr constructors by adding support for postconstructors
-// and predestructors through the mars_boost_ksim::signals2::postconstructible and
-// mars_boost_ksim::signals2::predestructible base classes.
+// and predestructors through the mars_boost::signals2::postconstructible and
+// mars_boost::signals2::predestructible base classes.
 //
 // Copyright Frank Mori Hess 2007-2008.
 //
@@ -22,7 +22,7 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/core/no_exceptions_support.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace signals2
   {
@@ -67,7 +67,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     shared_ptr<T> deconstruct_ptr(T *ptr)
     {
       if(ptr == 0) return shared_ptr<T>(ptr);
-      shared_ptr<T> shared(ptr, mars_boost_ksim::signals2::predestructing_deleter<T>());
+      shared_ptr<T> shared(ptr, mars_boost::signals2::predestructing_deleter<T>());
       detail::do_postconstruct(ptr);
       return shared;
     }

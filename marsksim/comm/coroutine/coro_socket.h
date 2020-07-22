@@ -61,7 +61,7 @@ private:
     
 class Multiplexing;
 struct TaskInfo;
-class RunloopCond : public mq::RunloopCond {
+class RunloopCond : public mqksim::RunloopCond {
 public:
     RunloopCond();
     virtual ~RunloopCond();

@@ -25,7 +25,7 @@
 #include <boost/container/detail/type_traits.hpp>
 #include <cstddef>   //std::size_t
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace container {
 namespace container_detail {
 
@@ -151,7 +151,7 @@ struct build_number_seq<0, index_tuple<Indexes...> >
 {  typedef index_tuple<Indexes...> type;  };
 
 
-}}}   //namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace container { namespace container_detail {
+}}}   //namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace container { namespace container_detail {
 
 #include <boost/container/detail/config_end.hpp>
 

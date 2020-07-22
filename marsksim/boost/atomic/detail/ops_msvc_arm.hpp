@@ -39,7 +39,7 @@
 #define BOOST_ATOMIC_DETAIL_ARM_STORE32(p, v) __iso_volatile_store32((volatile __int32*)(p), (__int32)(v))
 #define BOOST_ATOMIC_DETAIL_ARM_STORE64(p, v) __iso_volatile_store64((volatile __int64*)(p), (__int64)(v))
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace atomics {
 namespace detail {
 
@@ -810,7 +810,7 @@ BOOST_FORCEINLINE void signal_fence(memory_order order) BOOST_NOEXCEPT
 
 } // namespace detail
 } // namespace atomics
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #undef BOOST_ATOMIC_DETAIL_ARM_LOAD8
 #undef BOOST_ATOMIC_DETAIL_ARM_LOAD16

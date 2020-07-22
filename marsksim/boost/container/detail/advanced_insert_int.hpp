@@ -41,7 +41,7 @@
 #include <boost/assert.hpp>
 #include <boost/core/no_exceptions_support.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace container { namespace container_detail {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace container { namespace container_detail {
 
 template<class Allocator, class FwdIt, class Iterator>
 struct move_insert_range_proxy
@@ -55,13 +55,13 @@ struct move_insert_range_proxy
 
    void uninitialized_copy_n_and_update(Allocator &a, Iterator p, size_type n)
    {
-      this->first_ = ::mars_boost_ksim::container::uninitialized_move_alloc_n_source
+      this->first_ = ::mars_boost::container::uninitialized_move_alloc_n_source
          (a, this->first_, n, p);
    }
 
    void copy_n_and_update(Allocator &, Iterator p, size_type n)
    {
-      this->first_ = ::mars_boost_ksim::container::move_n_source(this->first_, n, p);
+      this->first_ = ::mars_boost::container::move_n_source(this->first_, n, p);
    }
 
    FwdIt first_;
@@ -80,12 +80,12 @@ struct insert_range_proxy
 
    void uninitialized_copy_n_and_update(Allocator &a, Iterator p, size_type n)
    {
-      this->first_ = ::mars_boost_ksim::container::uninitialized_copy_alloc_n_source(a, this->first_, n, p);
+      this->first_ = ::mars_boost::container::uninitialized_copy_alloc_n_source(a, this->first_, n, p);
    }
 
    void copy_n_and_update(Allocator &, Iterator p, size_type n)
    {
-      this->first_ = ::mars_boost_ksim::container::copy_n_source(this->first_, n, p);
+      this->first_ = ::mars_boost::container::copy_n_source(this->first_, n, p);
    }
 
    FwdIt first_;
@@ -103,7 +103,7 @@ struct insert_n_copies_proxy
    {}
 
    void uninitialized_copy_n_and_update(Allocator &a, Iterator p, size_type n) const
-   {  mars_boost_ksim::container::uninitialized_fill_alloc_n(a, v_, n, p);  }
+   {  mars_boost::container::uninitialized_fill_alloc_n(a, v_, n, p);  }
 
    void copy_n_and_update(Allocator &, Iterator p, size_type n) const
    {
@@ -118,12 +118,12 @@ struct insert_n_copies_proxy
 template<class Allocator, class Iterator>
 struct insert_value_initialized_n_proxy
 {
-   typedef ::mars_boost_ksim::container::allocator_traits<Allocator> alloc_traits;
+   typedef ::mars_boost::container::allocator_traits<Allocator> alloc_traits;
    typedef typename allocator_traits<Allocator>::size_type size_type;
    typedef typename allocator_traits<Allocator>::value_type value_type;
 
    void uninitialized_copy_n_and_update(Allocator &a, Iterator p, size_type n) const
-   {  mars_boost_ksim::container::uninitialized_value_init_alloc_n(a, n, p);  }
+   {  mars_boost::container::uninitialized_value_init_alloc_n(a, n, p);  }
 
    void copy_n_and_update(Allocator &, Iterator, size_type) const
    {  BOOST_ASSERT(false); }
@@ -132,12 +132,12 @@ struct insert_value_initialized_n_proxy
 template<class Allocator, class Iterator>
 struct insert_default_initialized_n_proxy
 {
-   typedef ::mars_boost_ksim::container::allocator_traits<Allocator> alloc_traits;
+   typedef ::mars_boost::container::allocator_traits<Allocator> alloc_traits;
    typedef typename allocator_traits<Allocator>::size_type size_type;
    typedef typename allocator_traits<Allocator>::value_type value_type;
 
    void uninitialized_copy_n_and_update(Allocator &a, Iterator p, size_type n) const
-   {  mars_boost_ksim::container::uninitialized_default_init_alloc_n(a, n, p);  }
+   {  mars_boost::container::uninitialized_default_init_alloc_n(a, n, p);  }
 
    void copy_n_and_update(Allocator &, Iterator, size_type) const
    {  BOOST_ASSERT(false); }
@@ -146,7 +146,7 @@ struct insert_default_initialized_n_proxy
 template<class Allocator, class Iterator>
 struct insert_copy_proxy
 {
-   typedef mars_boost_ksim::container::allocator_traits<Allocator> alloc_traits;
+   typedef mars_boost::container::allocator_traits<Allocator> alloc_traits;
    typedef typename alloc_traits::size_type size_type;
    typedef typename alloc_traits::value_type value_type;
 
@@ -173,7 +173,7 @@ struct insert_copy_proxy
 template<class Allocator, class Iterator>
 struct insert_move_proxy
 {
-   typedef mars_boost_ksim::container::allocator_traits<Allocator> alloc_traits;
+   typedef mars_boost::container::allocator_traits<Allocator> alloc_traits;
    typedef typename alloc_traits::size_type size_type;
    typedef typename alloc_traits::value_type value_type;
 
@@ -184,45 +184,45 @@ struct insert_move_proxy
    void uninitialized_copy_n_and_update(Allocator &a, Iterator p, size_type n) const
    {
       BOOST_ASSERT(n == 1);  (void)n;
-      alloc_traits::construct( a, iterator_to_raw_pointer(p), ::mars_boost_ksim::move(v_) );
+      alloc_traits::construct( a, iterator_to_raw_pointer(p), ::mars_boost::move(v_) );
    }
 
    void copy_n_and_update(Allocator &, Iterator p, size_type n) const
    {
       BOOST_ASSERT(n == 1);  (void)n;
-      *p = ::mars_boost_ksim::move(v_);
+      *p = ::mars_boost::move(v_);
    }
 
    value_type &v_;
 };
 
 template<class It, class Allocator>
-insert_move_proxy<Allocator, It> get_insert_value_proxy(BOOST_RV_REF(typename mars_boost_ksim::container::iterator_traits<It>::value_type) v)
+insert_move_proxy<Allocator, It> get_insert_value_proxy(BOOST_RV_REF(typename mars_boost::container::iterator_traits<It>::value_type) v)
 {
    return insert_move_proxy<Allocator, It>(v);
 }
 
 template<class It, class Allocator>
-insert_copy_proxy<Allocator, It> get_insert_value_proxy(const typename mars_boost_ksim::container::iterator_traits<It>::value_type &v)
+insert_copy_proxy<Allocator, It> get_insert_value_proxy(const typename mars_boost::container::iterator_traits<It>::value_type &v)
 {
    return insert_copy_proxy<Allocator, It>(v);
 }
 
-}}}   //namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace container { namespace container_detail {
+}}}   //namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace container { namespace container_detail {
 
 #if !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES)
 
 #include <boost/container/detail/variadic_templates_tools.hpp>
 #include <boost/move/utility_core.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace container {
 namespace container_detail {
 
 template<class Allocator, class Iterator, class ...Args>
 struct insert_nonmovable_emplace_proxy
 {
-   typedef mars_boost_ksim::container::allocator_traits<Allocator>   alloc_traits;
+   typedef mars_boost::container::allocator_traits<Allocator>   alloc_traits;
    typedef typename alloc_traits::size_type        size_type;
    typedef typename alloc_traits::value_type       value_type;
 
@@ -240,7 +240,7 @@ struct insert_nonmovable_emplace_proxy
    void priv_uninitialized_copy_some_and_update(Allocator &a, const index_tuple<IdxPack...>&, Iterator p, size_type n)
    {
       BOOST_ASSERT(n == 1); (void)n;
-      alloc_traits::construct( a, iterator_to_raw_pointer(p), ::mars_boost_ksim::forward<Args>(get<IdxPack>(this->args_))... );
+      alloc_traits::construct( a, iterator_to_raw_pointer(p), ::mars_boost::forward<Args>(get<IdxPack>(this->args_))... );
    }
 
    protected:
@@ -252,13 +252,13 @@ struct insert_emplace_proxy
    :  public insert_nonmovable_emplace_proxy<Allocator, Iterator, Args...>
 {
    typedef insert_nonmovable_emplace_proxy<Allocator, Iterator, Args...> base_t;
-   typedef mars_boost_ksim::container::allocator_traits<Allocator>   alloc_traits;
+   typedef mars_boost::container::allocator_traits<Allocator>   alloc_traits;
    typedef typename base_t::value_type             value_type;
    typedef typename base_t::size_type              size_type;
    typedef typename base_t::index_tuple_t          index_tuple_t;
 
    explicit insert_emplace_proxy(BOOST_FWD_REF(Args)... args)
-      : base_t(::mars_boost_ksim::forward<Args>(args)...)
+      : base_t(::mars_boost::forward<Args>(args)...)
    {}
 
    void copy_n_and_update(Allocator &a, Iterator p, size_type n)
@@ -273,9 +273,9 @@ struct insert_emplace_proxy
       typename aligned_storage<sizeof(value_type), alignment_of<value_type>::value>::type v;
       value_type *vp = static_cast<value_type *>(static_cast<void *>(&v));
       alloc_traits::construct(a, vp,
-         ::mars_boost_ksim::forward<Args>(get<IdxPack>(this->args_))...);
+         ::mars_boost::forward<Args>(get<IdxPack>(this->args_))...);
       BOOST_TRY{
-         *p = ::mars_boost_ksim::move(*vp);
+         *p = ::mars_boost::move(*vp);
       }
       BOOST_CATCH(...){
          alloc_traits::destroy(a, vp);
@@ -288,10 +288,10 @@ struct insert_emplace_proxy
 
 //Specializations to avoid an unneeded temporary when emplacing from a single argument o type value_type
 template<class Allocator, class Iterator>
-struct insert_emplace_proxy<Allocator, Iterator, typename mars_boost_ksim::container::allocator_traits<Allocator>::value_type>
+struct insert_emplace_proxy<Allocator, Iterator, typename mars_boost::container::allocator_traits<Allocator>::value_type>
    : public insert_move_proxy<Allocator, Iterator>
 {
-   explicit insert_emplace_proxy(typename mars_boost_ksim::container::allocator_traits<Allocator>::value_type &&v)
+   explicit insert_emplace_proxy(typename mars_boost::container::allocator_traits<Allocator>::value_type &&v)
    : insert_move_proxy<Allocator, Iterator>(v)
    {}
 };
@@ -301,42 +301,42 @@ struct insert_emplace_proxy<Allocator, Iterator, typename mars_boost_ksim::conta
 //Any problem is solvable with an extra layer of indirection? ;-)
 template<class Allocator, class Iterator>
 struct insert_emplace_proxy<Allocator, Iterator
-   , typename mars_boost_ksim::container::container_detail::add_const<typename mars_boost_ksim::container::allocator_traits<Allocator>::value_type>::type
+   , typename mars_boost::container::container_detail::add_const<typename mars_boost::container::allocator_traits<Allocator>::value_type>::type
    >
    : public insert_copy_proxy<Allocator, Iterator>
 {
-   explicit insert_emplace_proxy(const typename mars_boost_ksim::container::allocator_traits<Allocator>::value_type &v)
+   explicit insert_emplace_proxy(const typename mars_boost::container::allocator_traits<Allocator>::value_type &v)
    : insert_copy_proxy<Allocator, Iterator>(v)
    {}
 };
 
 template<class Allocator, class Iterator>
-struct insert_emplace_proxy<Allocator, Iterator, typename mars_boost_ksim::container::allocator_traits<Allocator>::value_type &>
+struct insert_emplace_proxy<Allocator, Iterator, typename mars_boost::container::allocator_traits<Allocator>::value_type &>
    : public insert_copy_proxy<Allocator, Iterator>
 {
-   explicit insert_emplace_proxy(const typename mars_boost_ksim::container::allocator_traits<Allocator>::value_type &v)
+   explicit insert_emplace_proxy(const typename mars_boost::container::allocator_traits<Allocator>::value_type &v)
    : insert_copy_proxy<Allocator, Iterator>(v)
    {}
 };
 
 template<class Allocator, class Iterator>
 struct insert_emplace_proxy<Allocator, Iterator
-   , typename mars_boost_ksim::container::container_detail::add_const<typename mars_boost_ksim::container::allocator_traits<Allocator>::value_type>::type &
+   , typename mars_boost::container::container_detail::add_const<typename mars_boost::container::allocator_traits<Allocator>::value_type>::type &
    >
    : public insert_copy_proxy<Allocator, Iterator>
 {
-   explicit insert_emplace_proxy(const typename mars_boost_ksim::container::allocator_traits<Allocator>::value_type &v)
+   explicit insert_emplace_proxy(const typename mars_boost::container::allocator_traits<Allocator>::value_type &v)
    : insert_copy_proxy<Allocator, Iterator>(v)
    {}
 };
 
-}}}   //namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace container { namespace container_detail {
+}}}   //namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace container { namespace container_detail {
 
 #else // !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES)
 
 #include <boost/container/detail/value_init.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace container {
 namespace container_detail {
 
@@ -344,7 +344,7 @@ namespace container_detail {
 template< class Allocator, class Iterator BOOST_MOVE_I##N BOOST_MOVE_CLASS##N >\
 struct insert_nonmovable_emplace_proxy##N\
 {\
-   typedef mars_boost_ksim::container::allocator_traits<Allocator> alloc_traits;\
+   typedef mars_boost::container::allocator_traits<Allocator> alloc_traits;\
    typedef typename alloc_traits::size_type size_type;\
    typedef typename alloc_traits::value_type value_type;\
    \
@@ -372,7 +372,7 @@ struct insert_emplace_proxy_arg##N\
       < Allocator, Iterator BOOST_MOVE_I##N BOOST_MOVE_TARG##N > base_t;\
    typedef typename base_t::value_type value_type;\
    typedef typename base_t::size_type size_type;\
-   typedef mars_boost_ksim::container::allocator_traits<Allocator> alloc_traits;\
+   typedef mars_boost::container::allocator_traits<Allocator> alloc_traits;\
    \
    explicit insert_emplace_proxy_arg##N(BOOST_MOVE_UREF##N)\
       : base_t(BOOST_MOVE_FWD##N){}\
@@ -385,7 +385,7 @@ struct insert_emplace_proxy_arg##N\
       value_type *vp = static_cast<value_type *>(static_cast<void *>(&v));\
       alloc_traits::construct(a, vp BOOST_MOVE_I##N BOOST_MOVE_MFWD##N);\
       BOOST_TRY{\
-         *p = ::mars_boost_ksim::move(*vp);\
+         *p = ::mars_boost::move(*vp);\
       }\
       BOOST_CATCH(...){\
          alloc_traits::destroy(a, vp);\
@@ -403,19 +403,19 @@ BOOST_MOVE_ITERATE_0TO9(BOOST_CONTAINER_ADVANCED_INSERT_INT_CODE)
 
 //Specializations to avoid an unneeded temporary when emplacing from a single argument o type value_type
 template<class Allocator, class Iterator>
-struct insert_emplace_proxy_arg1<Allocator, Iterator, ::mars_boost_ksim::rv<typename mars_boost_ksim::container::allocator_traits<Allocator>::value_type> >
+struct insert_emplace_proxy_arg1<Allocator, Iterator, ::mars_boost::rv<typename mars_boost::container::allocator_traits<Allocator>::value_type> >
    : public insert_move_proxy<Allocator, Iterator>
 {
-   explicit insert_emplace_proxy_arg1(typename mars_boost_ksim::container::allocator_traits<Allocator>::value_type &v)
+   explicit insert_emplace_proxy_arg1(typename mars_boost::container::allocator_traits<Allocator>::value_type &v)
    : insert_move_proxy<Allocator, Iterator>(v)
    {}
 };
 
 template<class Allocator, class Iterator>
-struct insert_emplace_proxy_arg1<Allocator, Iterator, typename mars_boost_ksim::container::allocator_traits<Allocator>::value_type>
+struct insert_emplace_proxy_arg1<Allocator, Iterator, typename mars_boost::container::allocator_traits<Allocator>::value_type>
    : public insert_copy_proxy<Allocator, Iterator>
 {
-   explicit insert_emplace_proxy_arg1(const typename mars_boost_ksim::container::allocator_traits<Allocator>::value_type &v)
+   explicit insert_emplace_proxy_arg1(const typename mars_boost::container::allocator_traits<Allocator>::value_type &v)
    : insert_copy_proxy<Allocator, Iterator>(v)
    {}
 };
@@ -424,10 +424,10 @@ struct insert_emplace_proxy_arg1<Allocator, Iterator, typename mars_boost_ksim::
 
 //Specializations to avoid an unneeded temporary when emplacing from a single argument o type value_type
 template<class Allocator, class Iterator>
-struct insert_emplace_proxy_arg1<Allocator, Iterator, typename mars_boost_ksim::container::allocator_traits<Allocator>::value_type>
+struct insert_emplace_proxy_arg1<Allocator, Iterator, typename mars_boost::container::allocator_traits<Allocator>::value_type>
    : public insert_move_proxy<Allocator, Iterator>
 {
-   explicit insert_emplace_proxy_arg1(typename mars_boost_ksim::container::allocator_traits<Allocator>::value_type &&v)
+   explicit insert_emplace_proxy_arg1(typename mars_boost::container::allocator_traits<Allocator>::value_type &&v)
    : insert_move_proxy<Allocator, Iterator>(v)
    {}
 };
@@ -437,38 +437,38 @@ struct insert_emplace_proxy_arg1<Allocator, Iterator, typename mars_boost_ksim::
 //Any problem is solvable with an extra layer of indirection? ;-)
 template<class Allocator, class Iterator>
 struct insert_emplace_proxy_arg1<Allocator, Iterator
-   , typename mars_boost_ksim::container::container_detail::add_const<typename mars_boost_ksim::container::allocator_traits<Allocator>::value_type>::type
+   , typename mars_boost::container::container_detail::add_const<typename mars_boost::container::allocator_traits<Allocator>::value_type>::type
    >
    : public insert_copy_proxy<Allocator, Iterator>
 {
-   explicit insert_emplace_proxy_arg1(const typename mars_boost_ksim::container::allocator_traits<Allocator>::value_type &v)
+   explicit insert_emplace_proxy_arg1(const typename mars_boost::container::allocator_traits<Allocator>::value_type &v)
    : insert_copy_proxy<Allocator, Iterator>(v)
    {}
 };
 
 template<class Allocator, class Iterator>
-struct insert_emplace_proxy_arg1<Allocator, Iterator, typename mars_boost_ksim::container::allocator_traits<Allocator>::value_type &>
+struct insert_emplace_proxy_arg1<Allocator, Iterator, typename mars_boost::container::allocator_traits<Allocator>::value_type &>
    : public insert_copy_proxy<Allocator, Iterator>
 {
-   explicit insert_emplace_proxy_arg1(const typename mars_boost_ksim::container::allocator_traits<Allocator>::value_type &v)
+   explicit insert_emplace_proxy_arg1(const typename mars_boost::container::allocator_traits<Allocator>::value_type &v)
    : insert_copy_proxy<Allocator, Iterator>(v)
    {}
 };
 
 template<class Allocator, class Iterator>
 struct insert_emplace_proxy_arg1<Allocator, Iterator
-   , typename mars_boost_ksim::container::container_detail::add_const<typename mars_boost_ksim::container::allocator_traits<Allocator>::value_type>::type &
+   , typename mars_boost::container::container_detail::add_const<typename mars_boost::container::allocator_traits<Allocator>::value_type>::type &
    >
    : public insert_copy_proxy<Allocator, Iterator>
 {
-   explicit insert_emplace_proxy_arg1(const typename mars_boost_ksim::container::allocator_traits<Allocator>::value_type &v)
+   explicit insert_emplace_proxy_arg1(const typename mars_boost::container::allocator_traits<Allocator>::value_type &v)
    : insert_copy_proxy<Allocator, Iterator>(v)
    {}
 };
 
 #endif
 
-}}}   //namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace container { namespace container_detail {
+}}}   //namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace container { namespace container_detail {
 
 #endif   // !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES)
 

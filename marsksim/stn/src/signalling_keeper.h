@@ -31,7 +31,7 @@
 namespace marsksim {
     namespace stn {
 
-class SignallingKeeper: IAsyncUdpClientEvent {
+class SignallingKeeper: IAsyncUdpClientksimEvent {
   public:
     static void SetStrategy(unsigned int  _period, unsigned int _keep_time);  // ms
   public:
@@ -43,9 +43,9 @@ class SignallingKeeper: IAsyncUdpClientEvent {
     void Keep();
     void Stop();
 
-    virtual void OnError(UdpClient* _this, int _errno);
-    virtual void OnDataGramRead(UdpClient* _this, void* _buf, size_t _len);
-    virtual void OnDataSent(UdpClient* _this);
+    virtual void OnError(UdpClientksim* _this, int _errno);
+    virtual void OnDataGramRead(UdpClientksim* _this, void* _buf, size_t _len);
+    virtual void OnDataSent(UdpClientksim* _this);
   public:
     boost_ksim::function<unsigned int (const AutoBuffer&, const AutoBuffer&, int)> fun_send_signalling_buffer_;
 
@@ -54,14 +54,14 @@ class SignallingKeeper: IAsyncUdpClientEvent {
     void __OnTimeOut();
 
   private:
-    MessageQueueksim::ScopeRegister msgreg_;
+    MessageQueueksim::ScopeRegisterksim msgreg_;
     uint64_t last_touch_time_;
     bool keeping_;
     MessageQueueksim::MessagePost_t postid_;
     const LongLink& longlink_;
     std::string ip_;
     unsigned int port_;
-    UdpClient udp_client_;
+    UdpClientksim udp_client_;
     bool use_UDP_;
 };
         

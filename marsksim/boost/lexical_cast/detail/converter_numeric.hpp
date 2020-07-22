@@ -36,15 +36,15 @@
 
 #include <boost/numeric/conversion/cast.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace detail {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace detail {
 
 template <class Source >
 struct detect_precision_loss
 {
     typedef Source source_type;
-    typedef mars_boost_ksim::numeric::Trunc<Source> Rounder;
+    typedef mars_boost::numeric::Trunc<Source> Rounder;
     typedef BOOST_DEDUCED_TYPENAME mpl::if_<
-        mars_boost_ksim::is_arithmetic<Source>, Source, Source const&
+        mars_boost::is_arithmetic<Source>, Source, Source const&
     >::type argument_type ;
 
     static inline source_type nearbyint(argument_type s, bool& is_ok) BOOST_NOEXCEPT {
@@ -67,7 +67,7 @@ struct fake_precision_loss: public Base
 {
     typedef Source source_type ;
     typedef BOOST_DEDUCED_TYPENAME mpl::if_<
-        mars_boost_ksim::is_arithmetic<Source>, Source, Source const&
+        mars_boost::is_arithmetic<Source>, Source, Source const&
     >::type argument_type ;
 
     static inline source_type nearbyint(argument_type s, bool& /*is_ok*/) BOOST_NOEXCEPT {
@@ -77,23 +77,23 @@ struct fake_precision_loss: public Base
 
 struct nothrow_overflow_handler
 {
-    inline bool operator() ( mars_boost_ksim::numeric::range_check_result r ) const BOOST_NOEXCEPT {
-        return (r == mars_boost_ksim::numeric::cInRange);
+    inline bool operator() ( mars_boost::numeric::range_check_result r ) const BOOST_NOEXCEPT {
+        return (r == mars_boost::numeric::cInRange);
     }
 };
 
 template <typename Target, typename Source>
 inline bool noexcept_numeric_convert(const Source& arg, Target& result) BOOST_NOEXCEPT {
-    typedef mars_boost_ksim::numeric::converter<
+    typedef mars_boost::numeric::converter<
             Target,
             Source,
-            mars_boost_ksim::numeric::conversion_traits<Target, Source >,
+            mars_boost::numeric::conversion_traits<Target, Source >,
             nothrow_overflow_handler,
             detect_precision_loss<Source >
     > converter_orig_t;
 
-    typedef BOOST_DEDUCED_TYPENAME mars_boost_ksim::mpl::if_c<
-        mars_boost_ksim::is_base_of< detect_precision_loss<Source >, converter_orig_t >::value,
+    typedef BOOST_DEDUCED_TYPENAME mars_boost::mpl::if_c<
+        mars_boost::is_base_of< detect_precision_loss<Source >, converter_orig_t >::value,
         converter_orig_t,
         fake_precision_loss<converter_orig_t, Source>
     >::type converter_t;
@@ -115,10 +115,10 @@ template <typename Target, typename Source>
 struct lexical_cast_dynamic_num_ignoring_minus
 {
     static inline bool try_convert(const Source &arg, Target& result) BOOST_NOEXCEPT {
-        typedef BOOST_DEDUCED_TYPENAME mars_boost_ksim::mpl::eval_if_c<
-                mars_boost_ksim::is_float<Source>::value,
-                mars_boost_ksim::mpl::identity<Source>,
-                mars_boost_ksim::make_unsigned<Source>
+        typedef BOOST_DEDUCED_TYPENAME mars_boost::mpl::eval_if_c<
+                mars_boost::is_float<Source>::value,
+                mars_boost::mpl::identity<Source>,
+                mars_boost::make_unsigned<Source>
         >::type usource_t;
 
         if (arg < 0) {
@@ -143,7 +143,7 @@ struct lexical_cast_dynamic_num_ignoring_minus
  * 3) Otherwise throw a bad_lexical_cast exception
  *
  *
- * Rule 2) required because mars_boost_ksim::lexical_cast has the behavior of
+ * Rule 2) required because mars_boost::lexical_cast has the behavior of
  * stringstream, which uses the rules of scanf for conversions. And
  * in the C99 standard for unsigned input value minus sign is
  * optional, so if a negative number is read, no errors will arise
@@ -153,29 +153,29 @@ template <typename Target, typename Source>
 struct dynamic_num_converter_impl
 {
     static inline bool try_convert(const Source &arg, Target& result) BOOST_NOEXCEPT {
-        typedef BOOST_DEDUCED_TYPENAME mars_boost_ksim::mpl::if_c<
-        	mars_boost_ksim::is_unsigned<Target>::value &&
-        	(mars_boost_ksim::is_signed<Source>::value || mars_boost_ksim::is_float<Source>::value) &&
-        	!(mars_boost_ksim::is_same<Source, bool>::value) &&
-        	!(mars_boost_ksim::is_same<Target, bool>::value),
+        typedef BOOST_DEDUCED_TYPENAME mars_boost::mpl::if_c<
+        	mars_boost::is_unsigned<Target>::value &&
+        	(mars_boost::is_signed<Source>::value || mars_boost::is_float<Source>::value) &&
+        	!(mars_boost::is_same<Source, bool>::value) &&
+        	!(mars_boost::is_same<Target, bool>::value),
             lexical_cast_dynamic_num_ignoring_minus<Target, Source>,
             lexical_cast_dynamic_num_not_ignoring_minus<Target, Source>
         >::type caster_type;
         
 #if 0
 
-        typedef BOOST_DEDUCED_TYPENAME mars_boost_ksim::mpl::if_<
-            BOOST_DEDUCED_TYPENAME mars_boost_ksim::mpl::and_<
-                mars_boost_ksim::is_unsigned<Target>,
-                mars_boost_ksim::mpl::or_<
-                    mars_boost_ksim::is_signed<Source>,
-                    mars_boost_ksim::is_float<Source>
+        typedef BOOST_DEDUCED_TYPENAME mars_boost::mpl::if_<
+            BOOST_DEDUCED_TYPENAME mars_boost::mpl::and_<
+                mars_boost::is_unsigned<Target>,
+                mars_boost::mpl::or_<
+                    mars_boost::is_signed<Source>,
+                    mars_boost::is_float<Source>
                 >,
-                mars_boost_ksim::mpl::not_<
-                    mars_boost_ksim::is_same<Source, bool>
+                mars_boost::mpl::not_<
+                    mars_boost::is_same<Source, bool>
                 >,
-                mars_boost_ksim::mpl::not_<
-                    mars_boost_ksim::is_same<Target, bool>
+                mars_boost::mpl::not_<
+                    mars_boost::is_same<Target, bool>
                 >
             >::type,
             lexical_cast_dynamic_num_ignoring_minus<Target, Source>,
@@ -188,7 +188,7 @@ struct dynamic_num_converter_impl
     }
 };
 
-}} // namespace mars_boost_ksim::detail
+}} // namespace mars_boost::detail
 
 #endif // BOOST_LEXICAL_CAST_DETAIL_CONVERTER_NUMERIC_HPP
 

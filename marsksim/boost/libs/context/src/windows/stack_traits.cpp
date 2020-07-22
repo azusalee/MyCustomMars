@@ -55,8 +55,8 @@ void system_info_( SYSTEM_INFO * si) BOOST_NOEXCEPT_OR_NOTHROW {
 SYSTEM_INFO system_info() BOOST_NOEXCEPT_OR_NOTHROW {
     static SYSTEM_INFO si;
 #if defined(BOOST_NO_CXX11_HDR_MUTEX)
-    static mars_boost_ksim::once_flag flag = BOOST_ONCE_INIT;
-    mars_boost_ksim::call_once( flag, static_cast< void(*)( SYSTEM_INFO *) >( system_info_), & si);
+    static mars_boost::once_flag flag = BOOST_ONCE_INIT;
+    mars_boost::call_once( flag, static_cast< void(*)( SYSTEM_INFO *) >( system_info_), & si);
 #else
     static std::once_flag flag;
     std::call_once( flag, static_cast< void(*)( SYSTEM_INFO *) >( system_info_), & si);
@@ -76,7 +76,7 @@ std::size_t page_count( std::size_t stacksize) BOOST_NOEXCEPT_OR_NOTHROW {
 
 }
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace context {
 
 // Windows seams not to provide a limit for the stacksize

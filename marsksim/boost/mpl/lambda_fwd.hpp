@@ -24,7 +24,7 @@
 #   include <boost/mpl/aux_/lambda_arity_param.hpp>
 #   include <boost/mpl/aux_/template_arity_fwd.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl {
 
 template< 
       typename T = na
@@ -41,7 +41,7 @@ struct lambda;
 
 #   include <boost/mpl/bool.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl {
 
 template< 
       typename T = na

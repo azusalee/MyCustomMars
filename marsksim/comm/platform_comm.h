@@ -240,8 +240,8 @@ float publiccomponent_GetSystemVersion();
 #endif
 
 #ifdef ANDROID
-bool startAlarm(int64_t id, int after);
-bool stopAlarm(int64_t id);
+bool startAlarmksim(int64_t id, int after);
+bool stopAlarmksim(int64_t id);
 
 void* wakeupLock_new();
 void  wakeupLock_delete(void* _object);

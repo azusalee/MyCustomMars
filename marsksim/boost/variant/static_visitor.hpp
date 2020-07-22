@@ -22,7 +22,7 @@
 #include <boost/type_traits/integral_constant.hpp>
 #include <boost/mpl/aux_/lambda_support.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 //////////////////////////////////////////////////////////////////////////
 // class template static_visitor
@@ -39,7 +39,7 @@ namespace detail {
 
 } // namespace detail
 
-template <typename R = ::mars_boost_ksim::detail::static_visitor_default_return>
+template <typename R = ::mars_boost::detail::static_visitor_default_return>
 class static_visitor
     : public detail::is_static_visitor_tag
 {
@@ -75,7 +75,7 @@ template <typename T>
 struct is_static_visitor_impl
 {
     BOOST_STATIC_CONSTANT(bool, value = 
-        (::mars_boost_ksim::is_base_and_derived< 
+        (::mars_boost::is_base_and_derived< 
             detail::is_static_visitor_tag,
             T
         >::value));
@@ -84,12 +84,12 @@ struct is_static_visitor_impl
 } // namespace detail
 
 template< typename T > struct is_static_visitor
-	: public ::mars_boost_ksim::integral_constant<bool,(::mars_boost_ksim::detail::is_static_visitor_impl<T>::value)>
+	: public ::mars_boost::integral_constant<bool,(::mars_boost::detail::is_static_visitor_impl<T>::value)>
 {
 public:
     BOOST_MPL_AUX_LAMBDA_SUPPORT(1,is_static_visitor,(T))
 };
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_VARIANT_STATIC_VISITOR_HPP

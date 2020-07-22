@@ -16,7 +16,7 @@
 #include <boost/range/iterator_range.hpp>
 #include <boost/range/concepts.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace adaptors
     {
@@ -29,14 +29,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         };
 
         template< class RandomAccessRange >
-        class sliced_range : public mars_boost_ksim::iterator_range< BOOST_DEDUCED_TYPENAME range_iterator<RandomAccessRange>::type >
+        class sliced_range : public mars_boost::iterator_range< BOOST_DEDUCED_TYPENAME range_iterator<RandomAccessRange>::type >
         {
-            typedef mars_boost_ksim::iterator_range< BOOST_DEDUCED_TYPENAME range_iterator<RandomAccessRange>::type > base_t;
+            typedef mars_boost::iterator_range< BOOST_DEDUCED_TYPENAME range_iterator<RandomAccessRange>::type > base_t;
         public:
             template<typename Rng, typename T, typename U>
             sliced_range(Rng& rng, T t, U u)
-                : base_t(mars_boost_ksim::next(mars_boost_ksim::begin(rng), t),
-                         mars_boost_ksim::next(mars_boost_ksim::begin(rng), u))
+                : base_t(mars_boost::next(mars_boost::begin(rng), t),
+                         mars_boost::next(mars_boost::begin(rng), u))
             {
             }
         };
@@ -49,7 +49,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 RandomAccessRangeConcept<RandomAccessRange>));
 
             BOOST_ASSERT( t <= u && "error in slice indices" );
-            BOOST_ASSERT( static_cast<std::size_t>(mars_boost_ksim::size(rng)) >= u &&
+            BOOST_ASSERT( static_cast<std::size_t>(mars_boost::size(rng)) >= u &&
                           "second slice index out of bounds" );
 
             return sliced_range<RandomAccessRange>(rng, t, u);
@@ -63,7 +63,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 RandomAccessRangeConcept<const RandomAccessRange>));
 
             BOOST_ASSERT( t <= u && "error in slice indices" );
-            BOOST_ASSERT( static_cast<std::size_t>(mars_boost_ksim::size(rng)) >= u &&
+            BOOST_ASSERT( static_cast<std::size_t>(mars_boost::size(rng)) >= u &&
                           "second slice index out of bounds" );
 
             return sliced_range<const RandomAccessRange>(rng, t, u);
@@ -91,6 +91,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
     } // namespace adaptors
     using adaptors::sliced_range;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif

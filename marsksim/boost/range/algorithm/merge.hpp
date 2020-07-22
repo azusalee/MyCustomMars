@@ -15,7 +15,7 @@
 #include <boost/range/concepts.hpp>
 #include <algorithm>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range
     {
@@ -36,8 +36,8 @@ inline OutputIterator merge(const SinglePassRange1& rng1,
 {
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange1> ));
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange2> ));
-    return std::merge(mars_boost_ksim::begin(rng1), mars_boost_ksim::end(rng1),
-                      mars_boost_ksim::begin(rng2), mars_boost_ksim::end(rng2), out);
+    return std::merge(mars_boost::begin(rng1), mars_boost::end(rng1),
+                      mars_boost::begin(rng2), mars_boost::end(rng2), out);
 }
 
 /// \overload
@@ -50,12 +50,12 @@ inline OutputIterator merge(const SinglePassRange1& rng1,
 {
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange1> ));
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange2> ));
-    return std::merge(mars_boost_ksim::begin(rng1), mars_boost_ksim::end(rng1),
-                      mars_boost_ksim::begin(rng2), mars_boost_ksim::end(rng2), out, pred);
+    return std::merge(mars_boost::begin(rng1), mars_boost::end(rng1),
+                      mars_boost::begin(rng2), mars_boost::end(rng2), out, pred);
 }
 
     } // namespace range
     using range::merge;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

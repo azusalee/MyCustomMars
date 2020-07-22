@@ -16,7 +16,7 @@
 
 #include <boost/mpl/int.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl {
 
 struct forward_iterator_tag       : int_<0> { typedef forward_iterator_tag type; };
 struct bidirectional_iterator_tag : int_<1> { typedef bidirectional_iterator_tag type; };

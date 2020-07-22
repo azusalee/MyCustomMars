@@ -29,7 +29,7 @@
 #include <cwchar>
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range_detail
     {
@@ -90,7 +90,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         inline iterator_range<BOOST_DEDUCED_TYPENAME range_iterator<T>::type>
         make_range( T& r, long )
         {
-            return mars_boost_ksim::make_iterator_range( r );
+            return mars_boost::make_iterator_range( r );
         }
 
     }

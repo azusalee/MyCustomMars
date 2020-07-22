@@ -29,7 +29,7 @@
                 BOOST_PARAMETER_MAX_ARITY                       \
               , BOOST_PP_SEQ_SIZE(ArgTypes)                     \
             )                                                   \
-          , ::mars_boost_ksim::parameter::void_ BOOST_PP_INTERCEPT   \
+          , ::mars_boost::parameter::void_ BOOST_PP_INTERCEPT   \
         )
 
 # else

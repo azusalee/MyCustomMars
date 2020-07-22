@@ -110,7 +110,7 @@
 #endif
 
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 namespace detail { namespace variant {
 
@@ -141,9 +141,9 @@ struct add_alignment
     template <typename State, typename Item>
     struct apply
         : mpl::size_t<
-              ::mars_boost_ksim::math::static_lcm<
+              ::mars_boost::math::static_lcm<
                   BOOST_MPL_AUX_VALUE_WKND(State)::value
-                , ::mars_boost_ksim::alignment_of<Item>::value
+                , ::mars_boost::alignment_of<Item>::value
                 >::value
             >
     {};
@@ -155,7 +155,7 @@ struct add_alignment
 // Provides a fallback (i.e., nothrow default-constructible) type from the
 // specified sequence, or no_fallback_type if not found.
 //
-// This implementation is designed to prefer mars_boost_ksim::blank over other potential
+// This implementation is designed to prefer mars_boost::blank over other potential
 // fallback types, regardless of its position in the specified sequence.
 //
 
@@ -192,12 +192,12 @@ private: // helpers, for metafunction result (below)
     typedef typename first_result_::first first_result_index;
     typedef typename first_result_::second first_result_it;
 
-    // [...now search the rest of the sequence for mars_boost_ksim::blank...]
+    // [...now search the rest of the sequence for mars_boost::blank...]
 
     typedef typename mpl::iter_fold_if<
           mpl::iterator_range< first_result_it,end_it >
         , first_result_index, mpl::protect< mpl::next<> >
-        , mpl::protect< mpl::not_same_as<mars_boost_ksim::blank> >
+        , mpl::protect< mpl::not_same_as<mars_boost::blank> >
         >::type second_result_;
 
     typedef typename second_result_::second second_result_it;
@@ -225,12 +225,12 @@ public: // metafunction result
 //
 template <class Types>
 struct is_variant_move_noexcept_constructible {
-    typedef typename mars_boost_ksim::mpl::find_if<
-        Types, mpl::not_<mars_boost_ksim::is_nothrow_move_constructible<mars_boost_ksim::mpl::_1> >
+    typedef typename mars_boost::mpl::find_if<
+        Types, mpl::not_<mars_boost::is_nothrow_move_constructible<mars_boost::mpl::_1> >
     >::type iterator_t;
 
-    typedef typename mars_boost_ksim::mpl::end<Types>::type end_t;
-    typedef typename mars_boost_ksim::is_same<
+    typedef typename mars_boost::mpl::end<Types>::type end_t;
+    typedef typename mars_boost::is_same<
         iterator_t, end_t
     >::type type;
 };
@@ -242,12 +242,12 @@ struct is_variant_move_noexcept_constructible {
 //
 template <class Types>
 struct is_variant_move_noexcept_assignable {
-    typedef typename mars_boost_ksim::mpl::find_if<
-        Types, mpl::not_<mars_boost_ksim::is_nothrow_move_assignable<mars_boost_ksim::mpl::_1> >
+    typedef typename mars_boost::mpl::find_if<
+        Types, mpl::not_<mars_boost::is_nothrow_move_assignable<mars_boost::mpl::_1> >
     >::type iterator_t;
 
-    typedef typename mars_boost_ksim::mpl::end<Types>::type end_t;
-    typedef typename mars_boost_ksim::is_same<
+    typedef typename mars_boost::mpl::end<Types>::type end_t;
+    typedef typename mars_boost::is_same<
         iterator_t, end_t
     >::type type;
 };
@@ -294,7 +294,7 @@ private: // helpers, for metafunction result (below)
 
 public: // metafunction result
 
-    typedef ::mars_boost_ksim::aligned_storage<
+    typedef ::mars_boost::aligned_storage<
           BOOST_MPL_AUX_VALUE_WKND(max_size)::value
         , BOOST_MPL_AUX_VALUE_WKND(max_alignment)::value
         > type;
@@ -349,7 +349,7 @@ public: // visitor interface
     T& operator()(U&) const
     {
         // logical error to be here: see precondition above
-        return ::mars_boost_ksim::detail::variant::forced_return< T& >();
+        return ::mars_boost::detail::variant::forced_return< T& >();
     }
 };
 
@@ -376,7 +376,7 @@ public: // internal visitor interface
 
     template <typename T>
         BOOST_VARIANT_AUX_RETURN_VOID_TYPE
-    internal_visit(mars_boost_ksim::detail::variant::backup_holder<T>& operand, long) const
+    internal_visit(mars_boost::detail::variant::backup_holder<T>& operand, long) const
     {
         new(storage_) T( operand.get() );
         BOOST_VARIANT_AUX_RETURN_VOID;
@@ -384,7 +384,7 @@ public: // internal visitor interface
 
     template <typename T>
         BOOST_VARIANT_AUX_RETURN_VOID_TYPE
-    internal_visit(const mars_boost_ksim::detail::variant::backup_holder<T>& operand, long) const
+    internal_visit(const mars_boost::detail::variant::backup_holder<T>& operand, long) const
     {
         new(storage_) T( operand.get() );
         BOOST_VARIANT_AUX_RETURN_VOID;
@@ -424,17 +424,17 @@ public: // internal visitor interface
 
     template <typename T>
         BOOST_VARIANT_AUX_RETURN_VOID_TYPE
-    internal_visit(mars_boost_ksim::detail::variant::backup_holder<T>& operand, long) const
+    internal_visit(mars_boost::detail::variant::backup_holder<T>& operand, long) const
     {
-        new(storage_) T( ::mars_boost_ksim::detail::variant::move(operand.get()) );
+        new(storage_) T( ::mars_boost::detail::variant::move(operand.get()) );
         BOOST_VARIANT_AUX_RETURN_VOID;
     }
 
     template <typename T>
         BOOST_VARIANT_AUX_RETURN_VOID_TYPE
-    internal_visit(T& operand, int) const BOOST_NOEXCEPT_IF(BOOST_NOEXCEPT_EXPR(T(mars_boost_ksim::declval<T>())))
+    internal_visit(T& operand, int) const BOOST_NOEXCEPT_IF(BOOST_NOEXCEPT_EXPR(T(mars_boost::declval<T>())))
     {
-        new(storage_) T(::mars_boost_ksim::detail::variant::move(operand));
+        new(storage_) T(::mars_boost::detail::variant::move(operand));
         BOOST_VARIANT_AUX_RETURN_VOID;
     }
 };
@@ -524,7 +524,7 @@ public: // internal visitor interfaces
     internal_visit(backup_holder<T>& lhs_content, long) const
     {
         lhs_content.get()
-            = ::mars_boost_ksim::detail::variant::move(static_cast<backup_holder<T>* >(rhs_storage_)->get());
+            = ::mars_boost::detail::variant::move(static_cast<backup_holder<T>* >(rhs_storage_)->get());
         BOOST_VARIANT_AUX_RETURN_VOID;
     }
 
@@ -533,7 +533,7 @@ public: // internal visitor interfaces
     internal_visit(const backup_holder<T>& lhs_content, long) const
     {
         lhs_content.get()
-            = ::mars_boost_ksim::detail::variant::move(static_cast<backup_holder<T>* >(rhs_storage_)->get());
+            = ::mars_boost::detail::variant::move(static_cast<backup_holder<T>* >(rhs_storage_)->get());
         BOOST_VARIANT_AUX_RETURN_VOID;
     }
 
@@ -548,7 +548,7 @@ public: // internal visitor interfaces
         //
         // Hint: Are any of the bounded types const-qualified or references?
         //
-        lhs_content = ::mars_boost_ksim::detail::variant::move(*static_cast<T* >(rhs_storage_));
+        lhs_content = ::mars_boost::detail::variant::move(*static_cast<T* >(rhs_storage_));
         BOOST_VARIANT_AUX_RETURN_VOID;
     }
 
@@ -623,7 +623,7 @@ public: // visitor interface
 
     bool operator()(T& lhs)
     {
-        lhs = ::mars_boost_ksim::detail::variant::move(rhs_);
+        lhs = ::mars_boost::detail::variant::move(rhs_);
         return true;
     }
 
@@ -726,7 +726,7 @@ private: // helpers, for visitor interface (below)
     {
         // Move lhs content to backup...
         LhsT backup_lhs_content(
-              ::mars_boost_ksim::detail::variant::move(lhs_content)
+              ::mars_boost::detail::variant::move(lhs_content)
             ); // nothrow
 
         // ...destroy lhs content...
@@ -742,7 +742,7 @@ private: // helpers, for visitor interface (below)
             // In case of failure, restore backup content to lhs storage...
             new(lhs_.storage_.address())
                 LhsT(
-                      ::mars_boost_ksim::detail::variant::move(backup_lhs_content)
+                      ::mars_boost::detail::variant::move(backup_lhs_content)
                     ); // nothrow
 
             // ...and rethrow:
@@ -846,7 +846,7 @@ public: // internal visitor interfaces
         T& other = toswap_.apply_visitor(getter);
 
         // ...and swap:
-        ::mars_boost_ksim::detail::variant::move_swap( operand, other );
+        ::mars_boost::detail::variant::move_swap( operand, other );
     }
 
 private:
@@ -861,14 +861,14 @@ private:
 //
 
 class reflect
-    : public static_visitor<const mars_boost_ksim::typeindex::type_info&>
+    : public static_visitor<const mars_boost::typeindex::type_info&>
 {
 public: // visitor interfaces
 
     template <typename T>
-    const mars_boost_ksim::typeindex::type_info& operator()(const T&) const BOOST_NOEXCEPT
+    const mars_boost::typeindex::type_info& operator()(const T&) const BOOST_NOEXCEPT
     {
-        return mars_boost_ksim::typeindex::type_id<T>().type_info();
+        return mars_boost::typeindex::type_id<T>().type_info();
     }
 
 };
@@ -1023,42 +1023,42 @@ public: // internal visitor interfaces, cont.
 
     template <typename T>
         BOOST_VARIANT_AUX_GENERIC_RESULT_TYPE(result_type)
-    internal_visit(mars_boost_ksim::recursive_wrapper<T>& operand, long)
+    internal_visit(mars_boost::recursive_wrapper<T>& operand, long)
     {
         return internal_visit( operand.get(), 1L );
     }
 
     template <typename T>
         BOOST_VARIANT_AUX_GENERIC_RESULT_TYPE(result_type)
-    internal_visit(const mars_boost_ksim::recursive_wrapper<T>& operand, long)
+    internal_visit(const mars_boost::recursive_wrapper<T>& operand, long)
     {
         return internal_visit( operand.get(), 1L );
     }
 
     template <typename T>
         BOOST_VARIANT_AUX_GENERIC_RESULT_TYPE(result_type)
-    internal_visit(mars_boost_ksim::detail::reference_content<T>& operand, long)
+    internal_visit(mars_boost::detail::reference_content<T>& operand, long)
     {
         return internal_visit( operand.get(), 1L );
     }
 
     template <typename T>
         BOOST_VARIANT_AUX_GENERIC_RESULT_TYPE(result_type)
-    internal_visit(const mars_boost_ksim::detail::reference_content<T>& operand, long)
+    internal_visit(const mars_boost::detail::reference_content<T>& operand, long)
     {
         return internal_visit( operand.get(), 1L );
     }
 
     template <typename T>
         BOOST_VARIANT_AUX_GENERIC_RESULT_TYPE(result_type)
-    internal_visit(mars_boost_ksim::detail::variant::backup_holder<T>& operand, long)
+    internal_visit(mars_boost::detail::variant::backup_holder<T>& operand, long)
     {
         return internal_visit( operand.get(), 1L );
     }
 
     template <typename T>
         BOOST_VARIANT_AUX_GENERIC_RESULT_TYPE(result_type)
-    internal_visit(const mars_boost_ksim::detail::variant::backup_holder<T>& operand, long)
+    internal_visit(const mars_boost::detail::variant::backup_holder<T>& operand, long)
     {
         return internal_visit( operand.get(), 1L );
     }
@@ -1117,7 +1117,7 @@ private: // helpers, for typedefs (below)
         >::type specified_types;
 
     BOOST_STATIC_ASSERT((
-          ::mars_boost_ksim::mpl::not_< mpl::empty<specified_types> >::value
+          ::mars_boost::mpl::not_< mpl::empty<specified_types> >::value
         ));
 
     typedef typename mpl::eval_if<
@@ -1354,7 +1354,7 @@ public: // structors
 
     variant() 
 #if !(defined(__SUNPRO_CC) && BOOST_WORKAROUND(__SUNPRO_CC, <= 0x5130))
-              BOOST_NOEXCEPT_IF(mars_boost_ksim::has_nothrow_constructor<internal_T0>::value)
+              BOOST_NOEXCEPT_IF(mars_boost::has_nothrow_constructor<internal_T0>::value)
 #endif
     {
 #ifdef _MSC_VER
@@ -1412,37 +1412,37 @@ private: // helpers, for structors, cont. (below)
 #   endif
 
         template <typename T>
-        int internal_visit(mars_boost_ksim::detail::reference_content<T>& operand, long) const
+        int internal_visit(mars_boost::detail::reference_content<T>& operand, long) const
         {
             return internal_visit( operand.get(), 1L );
         }
 
         template <typename T>
-        int internal_visit(const mars_boost_ksim::detail::reference_content<T>& operand, long) const
+        int internal_visit(const mars_boost::detail::reference_content<T>& operand, long) const
         {
             return internal_visit( operand.get(), 1L );
         }
 
         template <typename T>
-        int internal_visit(mars_boost_ksim::detail::variant::backup_holder<T>& operand, long) const
+        int internal_visit(mars_boost::detail::variant::backup_holder<T>& operand, long) const
         {
             return internal_visit( operand.get(), 1L );
         }
 
         template <typename T>
-        int internal_visit(const mars_boost_ksim::detail::variant::backup_holder<T>& operand, long) const
+        int internal_visit(const mars_boost::detail::variant::backup_holder<T>& operand, long) const
         {
             return internal_visit( operand.get(), 1L );
         }
 
         template <typename T>
-        int internal_visit(mars_boost_ksim::recursive_wrapper<T>& operand, long) const
+        int internal_visit(mars_boost::recursive_wrapper<T>& operand, long) const
         {
             return internal_visit( operand.get(), 1L );
         }
 
         template <typename T>
-        int internal_visit(const mars_boost_ksim::recursive_wrapper<T>& operand, long) const
+        int internal_visit(const mars_boost::recursive_wrapper<T>& operand, long) const
         {
             return internal_visit( operand.get(), 1L );
         }
@@ -1480,37 +1480,37 @@ private: // helpers, for structors, cont. (below)
         }
 
         template <typename T>
-        int internal_visit(mars_boost_ksim::detail::reference_content<T>& operand, long) const
+        int internal_visit(mars_boost::detail::reference_content<T>& operand, long) const
         {
             return internal_visit( operand.get(), 1L );
         }
 
         template <typename T>
-        int internal_visit(const mars_boost_ksim::detail::reference_content<T>& operand, long) const
+        int internal_visit(const mars_boost::detail::reference_content<T>& operand, long) const
         {
             return internal_visit( operand.get(), 1L );
         }
 
         template <typename T>
-        int internal_visit(mars_boost_ksim::detail::variant::backup_holder<T>& operand, long) const
+        int internal_visit(mars_boost::detail::variant::backup_holder<T>& operand, long) const
         {
             return internal_visit( operand.get(), 1L );
         }
 
         template <typename T>
-        int internal_visit(const mars_boost_ksim::detail::variant::backup_holder<T>& operand, long) const
+        int internal_visit(const mars_boost::detail::variant::backup_holder<T>& operand, long) const
         {
             return internal_visit( operand.get(), 1L );
         }
 
         template <typename T>
-        int internal_visit(mars_boost_ksim::recursive_wrapper<T>& operand, long) const
+        int internal_visit(mars_boost::recursive_wrapper<T>& operand, long) const
         {
             return internal_visit( operand.get(), 1L );
         }
 
         template <typename T>
-        int internal_visit(const mars_boost_ksim::recursive_wrapper<T>& operand, long) const
+        int internal_visit(const mars_boost::recursive_wrapper<T>& operand, long) const
         {
             return internal_visit( operand.get(), 1L );
         }
@@ -1543,7 +1543,7 @@ private: // helpers, for structors, below
 
 #ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
     template <typename T>
-    typename mars_boost_ksim::enable_if<mars_boost_ksim::is_rvalue_reference<T&&> >::type convert_construct(
+    typename mars_boost::enable_if<mars_boost::is_rvalue_reference<T&&> >::type convert_construct(
           T&& operand
         , int
         , mpl::false_ = mpl::false_() // is_foreign_variant
@@ -1578,7 +1578,7 @@ private: // helpers, for structors, below
 
 #ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
     template <typename Variant>
-    typename mars_boost_ksim::enable_if<mars_boost_ksim::is_rvalue_reference<Variant&&> >::type convert_construct(
+    typename mars_boost::enable_if<mars_boost::is_rvalue_reference<Variant&&> >::type convert_construct(
           Variant&& operand
         , long
         , mpl::true_// is_foreign_variant
@@ -1620,7 +1620,7 @@ private: // helpers, for structors, below
 
 #ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
     template <typename Variant>
-    typename mars_boost_ksim::enable_if<mars_boost_ksim::is_rvalue_reference<Variant&&> >::type convert_construct_variant(Variant&& operand)
+    typename mars_boost::enable_if<mars_boost::is_rvalue_reference<Variant&&> >::type convert_construct_variant(Variant&& operand)
     {
         // [Determine if the given variant is itself a bounded type, or if its
         //  content needs to be converted (i.e., it is a 'foreign' variant):]
@@ -1649,7 +1649,7 @@ private: // helpers, for structors, below
 
     template <BOOST_VARIANT_ENUM_PARAMS(typename U)>
     void convert_construct(
-          mars_boost_ksim::variant<BOOST_VARIANT_ENUM_PARAMS(U)>& operand
+          mars_boost::variant<BOOST_VARIANT_ENUM_PARAMS(U)>& operand
         , long
         )
     {
@@ -1658,7 +1658,7 @@ private: // helpers, for structors, below
 
     template <BOOST_VARIANT_ENUM_PARAMS(typename U)>
     void convert_construct(
-          const mars_boost_ksim::variant<BOOST_VARIANT_ENUM_PARAMS(U)>& operand
+          const mars_boost::variant<BOOST_VARIANT_ENUM_PARAMS(U)>& operand
         , long
         )
     {
@@ -1668,7 +1668,7 @@ private: // helpers, for structors, below
 #ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
     template <BOOST_VARIANT_ENUM_PARAMS(typename U)>
     void convert_construct(
-          mars_boost_ksim::variant<BOOST_VARIANT_ENUM_PARAMS(U)>&& operand
+          mars_boost::variant<BOOST_VARIANT_ENUM_PARAMS(U)>&& operand
         , long
         )
     {
@@ -1729,8 +1729,8 @@ public: // structors, cont.
     
 #ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
     template <class T>
-    variant(T&& operand, typename mars_boost_ksim::enable_if<mars_boost_ksim::is_rvalue_reference<T&&> >::type* = 0, 
-        typename mars_boost_ksim::disable_if<mars_boost_ksim::is_const<T> >::type* = 0)
+    variant(T&& operand, typename mars_boost::enable_if<mars_boost::is_rvalue_reference<T&&> >::type* = 0, 
+        typename mars_boost::disable_if<mars_boost::is_const<T> >::type* = 0)
     {
         convert_construct( detail::variant::move(operand), 1L);
     }
@@ -2122,7 +2122,7 @@ public: // modifiers
 
 #ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
     template <class T>
-    typename mars_boost_ksim::enable_if_c<mars_boost_ksim::is_rvalue_reference<T&&>::value && !mars_boost_ksim::is_const<T>::value, variant& >::type 
+    typename mars_boost::enable_if_c<mars_boost::is_rvalue_reference<T&&>::value && !mars_boost::is_const<T>::value, variant& >::type 
         operator=(T&& rhs) 
     {
         move_assign( detail::variant::move(rhs) );
@@ -2184,7 +2184,7 @@ public: // queries
         return false;
     }
 
-    const mars_boost_ksim::typeindex::type_info& type() const
+    const mars_boost::typeindex::type_info& type() const
     {
         detail::variant::reflect visitor;
         return this->apply_visitor(visitor);
@@ -2382,7 +2382,7 @@ struct make_variant_over
 {
 private: // precondition assertions
 
-    BOOST_STATIC_ASSERT(( ::mars_boost_ksim::mpl::is_sequence<Types>::value ));
+    BOOST_STATIC_ASSERT(( ::mars_boost::mpl::is_sequence<Types>::value ));
 
 public: // metafunction result
 
@@ -2407,7 +2407,7 @@ inline void swap(
     lhs.swap(rhs);
 }
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 // implementation additions
 

@@ -24,10 +24,10 @@
 #pragma once
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 using atomics::atomic_flag;
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_ATOMIC_ATOMIC_FLAG_HPP_INCLUDED_

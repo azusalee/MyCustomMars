@@ -24,7 +24,7 @@
  * formatters_limited.hpp
  */
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace gregorian {
 
   // wrapper function for to_simple_(w)string(date)

@@ -36,7 +36,7 @@
     array, null-terminated c-strings (and more) using the same interface.
 */
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
     namespace algorithm {
 
 //  collection_traits template class -----------------------------------------//
@@ -260,6 +260,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #endif // BOOST_NO_FUNCTION_TEMPLATE_ORDERING
 
     } // namespace algorithm
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // BOOST_STRING_COLLECTION_TRAITS_HPP

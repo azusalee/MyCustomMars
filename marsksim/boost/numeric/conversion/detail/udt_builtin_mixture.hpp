@@ -17,7 +17,7 @@
 
 #include "boost/mpl/integral_c.hpp"
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace numeric { namespace convdetail
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace numeric { namespace convdetail
 {
   // Integral Constants for 'UdtMixture'
   typedef mpl::integral_c<udt_builtin_mixture_enum, builtin_to_builtin> builtin2builtin_c ;
@@ -62,7 +62,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         type ;
   } ;
 
-} } } // namespace mars_boost_ksim::numeric::convdetail
+} } } // namespace mars_boost::numeric::convdetail
 
 #endif
 

@@ -36,7 +36,7 @@ struct output_iterator_tag;
 BOOST_MOVE_STD_NS_END
 #include <boost/move/detail/std_ns_end.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim{  namespace movelib{
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost{  namespace movelib{
 
 template<class Iterator>
 struct iterator_traits
@@ -68,6 +68,6 @@ struct iterator_traits<const T*>
    typedef std::random_access_iterator_tag   iterator_category;
 };
 
-}} //namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {  namespace movelib{
+}} //namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {  namespace movelib{
 
 #endif //#ifndef BOOST_MOVE_DETAIL_ITERATOR_TRAITS_HPP

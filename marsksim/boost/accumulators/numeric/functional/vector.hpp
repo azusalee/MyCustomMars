@@ -24,7 +24,7 @@
 #include <boost/typeof/std/vector.hpp>
 #include <boost/accumulators/numeric/functional_fwd.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace numeric
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace numeric
 {
     namespace operators
     {
@@ -323,7 +323,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
     } // namespace functional
 
-}} // namespace mars_boost_ksim::numeric
+}} // namespace mars_boost::numeric
 
 #endif
 

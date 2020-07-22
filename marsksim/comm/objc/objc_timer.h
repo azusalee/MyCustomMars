@@ -22,7 +22,7 @@
 
 #include <sys/types.h>
 
-bool StartAlarm(int64_t _id, int after);
-bool StopAlarm(int64_t _id);
+bool StartksimAlarmksim(int64_t _id, int after);
+bool StopksimAlarmksim(int64_t _id);
 
 #endif /* defined(__MicroMessenger__objc_timer__) */

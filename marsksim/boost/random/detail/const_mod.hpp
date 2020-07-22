@@ -24,7 +24,7 @@
 
 #include <boost/random/detail/disable_warnings.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace random {
 
 template<class IntType, IntType m>
@@ -84,7 +84,7 @@ public:
       return add(mult(a, x), c);
   }
 
-  static IntType pow(IntType a, mars_boost_ksim::uintmax_t exponent)
+  static IntType pow(IntType a, mars_boost::uintmax_t exponent)
   {
       IntType result = 1;
       while(exponent != 0) {
@@ -129,10 +129,10 @@ private:
     BOOST_ASSERT(suppress_warnings == 0);
     IntType modulus = m + suppress_warnings;
     BOOST_ASSERT(modulus == m);
-    if(::mars_boost_ksim::uintmax_t(modulus) <=
-        (::std::numeric_limits< ::mars_boost_ksim::uintmax_t>::max)() / modulus)
+    if(::mars_boost::uintmax_t(modulus) <=
+        (::std::numeric_limits< ::mars_boost::uintmax_t>::max)() / modulus)
     {
-      return static_cast<IntType>(mars_boost_ksim::uintmax_t(a) * b % modulus);
+      return static_cast<IntType>(mars_boost::uintmax_t(a) * b % modulus);
     } else {
       return static_cast<IntType>(detail::mulmod(a, b, modulus));
     }
@@ -209,7 +209,7 @@ private:
 };
 
 } // namespace random
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #include <boost/random/detail/enable_warnings.hpp>
 

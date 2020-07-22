@@ -15,7 +15,7 @@
 #include <string>
 
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace date_time {
 
   //! Time representation that uses a single integer count
@@ -63,9 +63,9 @@ namespace date_time {
     //int_type day_count() const
     unsigned long day_count() const
     {
-      /* resolution_traits::as_number returns a mars_boost_ksim::int64_t & 
-       * frac_sec_per_day is also a mars_boost_ksim::int64_t so, naturally, 
-       * the division operation returns a mars_boost_ksim::int64_t. 
+      /* resolution_traits::as_number returns a mars_boost::int64_t & 
+       * frac_sec_per_day is also a mars_boost::int64_t so, naturally, 
+       * the division operation returns a mars_boost::int64_t. 
        * The static_cast to an unsigned long is ok (results in no data loss) 
        * because frac_sec_per_day is either the number of 
        * microseconds per day, or the number of nanoseconds per day. 

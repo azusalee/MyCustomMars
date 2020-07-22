@@ -22,7 +22,7 @@
 #include <boost/current_function.hpp>
 #include <functional>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 namespace core
@@ -76,7 +76,7 @@ namespace detail
 
 template<class T> struct core_typeid_
 {
-    static mars_boost_ksim::core::typeinfo ti_;
+    static mars_boost::core::typeinfo ti_;
 
     static char const * name()
     {
@@ -87,9 +87,9 @@ template<class T> struct core_typeid_
 #if defined(__SUNPRO_CC)
 // see #4199, the Sun Studio compiler gets confused about static initialization 
 // constructor arguments. But an assignment works just fine. 
-template<class T> mars_boost_ksim::core::typeinfo core_typeid_< T >::ti_ = core_typeid_< T >::name();
+template<class T> mars_boost::core::typeinfo core_typeid_< T >::ti_ = core_typeid_< T >::name();
 #else
-template<class T> mars_boost_ksim::core::typeinfo core_typeid_< T >::ti_(core_typeid_< T >::name());
+template<class T> mars_boost::core::typeinfo core_typeid_< T >::ti_(core_typeid_< T >::name());
 #endif
 
 template<class T> struct core_typeid_< T & >: core_typeid_< T >
@@ -110,16 +110,16 @@ template<class T> struct core_typeid_< T const volatile >: core_typeid_< T >
 
 } // namespace detail
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
-#define BOOST_CORE_TYPEID(T) (mars_boost_ksim::detail::core_typeid_<T>::ti_)
+#define BOOST_CORE_TYPEID(T) (mars_boost::detail::core_typeid_<T>::ti_)
 
 #else
 
 #include <boost/core/demangle.hpp>
 #include <typeinfo>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 namespace core
@@ -142,7 +142,7 @@ inline std::string demangled_name( core::typeinfo const & ti )
 
 } // namespace core
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #define BOOST_CORE_TYPEID(T) typeid(T)
 

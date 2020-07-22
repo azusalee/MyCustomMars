@@ -31,7 +31,7 @@
 
 namespace
 {
-  class codecvt_error_cat : public mars_boost_ksim::system::error_category
+  class codecvt_error_cat : public mars_boost::system::error_category
   {
   public:
     codecvt_error_cat(){}
@@ -69,16 +69,16 @@ namespace
 
 } // unnamed namespace
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace filesystem
   {
 
-    BOOST_FILESYSTEM_DECL const mars_boost_ksim::system::error_category& codecvt_error_category()
+    BOOST_FILESYSTEM_DECL const mars_boost::system::error_category& codecvt_error_category()
     {
       static const codecvt_error_cat  codecvt_error_cat_const;
       return codecvt_error_cat_const;
     }
 
   } // namespace filesystem
-} // namespace mars_boost_ksim
+} // namespace mars_boost

@@ -12,7 +12,7 @@
 
 
 /*
- * TcpClientFSM.h
+ * TcpClientksimFSM.h
  *
  *  Created on: 2014-8-19
  *      Author: yerungui
@@ -28,7 +28,7 @@
 class XLogger;
 class SocketSelect;
 
-class TcpClientFSM {
+class TcpClientksimFSM {
   public:
     enum TSocketStatus {
         EStart,
@@ -38,8 +38,8 @@ class TcpClientFSM {
     };
 
   public:
-    TcpClientFSM(const sockaddr& _addr);
-    virtual ~TcpClientFSM();
+    TcpClientksimFSM(const sockaddr& _addr);
+    virtual ~TcpClientksimFSM();
 
     void RequestSend();
 
@@ -64,8 +64,8 @@ class TcpClientFSM {
     int Rtt() const;
 
   private:
-    TcpClientFSM(const TcpClientFSM&);
-    TcpClientFSM& operator=(const TcpClientFSM&);
+    TcpClientksimFSM(const TcpClientksimFSM&);
+    TcpClientksimFSM& operator=(const TcpClientksimFSM&);
 
   protected:
     virtual void PreConnectSelect(SocketSelect& _sel, XLogger& _log);

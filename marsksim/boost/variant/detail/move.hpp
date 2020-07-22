@@ -28,9 +28,9 @@
 #include "boost/move/move.hpp"
 #include "boost/move/adl_move_swap.hpp"
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace detail { namespace variant {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace detail { namespace variant {
 
-using mars_boost_ksim::move;
+using mars_boost::move;
 
 //////////////////////////////////////////////////////////////////////////
 // function template move_swap
@@ -42,10 +42,10 @@ using mars_boost_ksim::move;
 template <typename T>
 inline void move_swap(T& lhs, T& rhs)
 {
-    ::mars_boost_ksim::adl_move_swap(lhs, rhs);
+    ::mars_boost::adl_move_swap(lhs, rhs);
 }
 
-}}} // namespace mars_boost_ksim::detail::variant
+}}} // namespace mars_boost::detail::variant
 
 #endif // BOOST_VARIANT_DETAIL_MOVE_HPP
 

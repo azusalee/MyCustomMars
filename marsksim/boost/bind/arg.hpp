@@ -23,7 +23,7 @@
 #include <boost/is_placeholder.hpp>
 #include <boost/static_assert.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 template< int I > struct arg
@@ -57,6 +57,6 @@ template< int I > struct is_placeholder< arg<I> (*) () >
 
 #endif
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // #ifndef BOOST_BIND_ARG_HPP_INCLUDED

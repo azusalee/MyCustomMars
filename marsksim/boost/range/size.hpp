@@ -24,7 +24,7 @@
 #include <boost/cstdint.hpp>
 #include <boost/utility.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range_detail
     {
@@ -46,7 +46,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         >::type
         range_calculate_size(const SinglePassRange& rng)
         {
-            return std::distance(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng));
+            return std::distance(mars_boost::begin(rng), mars_boost::end(rng));
         }
     }
 
@@ -59,7 +59,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 // working compiler but is vital for at least some compilers such as clang 4.2
 // but only on the Mac!
 #if BOOST_RANGE_ENABLE_CONCEPT_ASSERT == 1
-        BOOST_RANGE_CONCEPT_ASSERT((mars_boost_ksim::SinglePassRangeConcept<SinglePassRange>));
+        BOOST_RANGE_CONCEPT_ASSERT((mars_boost::SinglePassRangeConcept<SinglePassRange>));
 #endif
 
 #if !BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x564)) && \

@@ -14,7 +14,7 @@
 #include <boost/range/concepts.hpp>
 #include <iterator>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range_detail
     {
@@ -174,9 +174,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange1> ));
             BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange2> ));
 
-            return ::mars_boost_ksim::range_detail::equal(
-                ::mars_boost_ksim::begin(rng1), ::mars_boost_ksim::end(rng1),
-                ::mars_boost_ksim::begin(rng2), ::mars_boost_ksim::end(rng2) );
+            return ::mars_boost::range_detail::equal(
+                ::mars_boost::begin(rng1), ::mars_boost::end(rng1),
+                ::mars_boost::begin(rng2), ::mars_boost::end(rng2) );
         }
 
         /// \overload
@@ -187,14 +187,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange1> ));
             BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange2> ));
 
-            return ::mars_boost_ksim::range_detail::equal(
-                ::mars_boost_ksim::begin(rng1), ::mars_boost_ksim::end(rng1),
-                ::mars_boost_ksim::begin(rng2), ::mars_boost_ksim::end(rng2),
+            return ::mars_boost::range_detail::equal(
+                ::mars_boost::begin(rng1), ::mars_boost::end(rng1),
+                ::mars_boost::begin(rng2), ::mars_boost::end(rng2),
                 pred);
         }
 
     } // namespace range
-    using ::mars_boost_ksim::range::equal;
-} // namespace mars_boost_ksim
+    using ::mars_boost::range::equal;
+} // namespace mars_boost
 
 #endif // include guard

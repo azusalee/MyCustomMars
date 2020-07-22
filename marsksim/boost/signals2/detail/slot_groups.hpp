@@ -17,14 +17,14 @@
 #include <map>
 #include <utility>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
   namespace signals2 {
     namespace detail {
       enum slot_meta_group {front_ungrouped_slots, grouped_slots, back_ungrouped_slots};
       template<typename Group>
       struct group_key
       {
-        typedef std::pair<enum slot_meta_group, mars_boost_ksim::optional<Group> > type;
+        typedef std::pair<enum slot_meta_group, mars_boost::optional<Group> > type;
       };
       template<typename Group, typename GroupCompare>
       class group_key_less
@@ -230,6 +230,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     } // end namespace detail
     enum connect_position { at_back, at_front };
   } // end namespace signals2
-} // end namespace mars_boost_ksim
+} // end namespace mars_boost
 
 #endif // BOOST_SIGNALS2_SLOT_GROUPS_HPP

@@ -20,7 +20,7 @@
 
 #include <cstddef>            // for std::ptrdiff_t
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 // Debug hooks
@@ -57,16 +57,16 @@ public:
     explicit scoped_array( T * p = 0 ) BOOST_NOEXCEPT : px( p )
     {
 #if defined(BOOST_SP_ENABLE_DEBUG_HOOKS)
-        mars_boost_ksim::sp_array_constructor_hook( px );
+        mars_boost::sp_array_constructor_hook( px );
 #endif
     }
 
     ~scoped_array() // never throws
     {
 #if defined(BOOST_SP_ENABLE_DEBUG_HOOKS)
-        mars_boost_ksim::sp_array_destructor_hook( px );
+        mars_boost::sp_array_destructor_hook( px );
 #endif
-        mars_boost_ksim::checked_array_delete( px );
+        mars_boost::checked_array_delete( px );
     }
 
     void reset(T * p = 0) // never throws (but has a BOOST_ASSERT in it, so not marked with BOOST_NOEXCEPT)
@@ -100,22 +100,22 @@ public:
 
 #if !defined( BOOST_NO_CXX11_NULLPTR )
 
-template<class T> inline bool operator==( scoped_array<T> const & p, mars_boost_ksim::detail::sp_nullptr_t ) BOOST_NOEXCEPT
+template<class T> inline bool operator==( scoped_array<T> const & p, mars_boost::detail::sp_nullptr_t ) BOOST_NOEXCEPT
 {
     return p.get() == 0;
 }
 
-template<class T> inline bool operator==( mars_boost_ksim::detail::sp_nullptr_t, scoped_array<T> const & p ) BOOST_NOEXCEPT
+template<class T> inline bool operator==( mars_boost::detail::sp_nullptr_t, scoped_array<T> const & p ) BOOST_NOEXCEPT
 {
     return p.get() == 0;
 }
 
-template<class T> inline bool operator!=( scoped_array<T> const & p, mars_boost_ksim::detail::sp_nullptr_t ) BOOST_NOEXCEPT
+template<class T> inline bool operator!=( scoped_array<T> const & p, mars_boost::detail::sp_nullptr_t ) BOOST_NOEXCEPT
 {
     return p.get() != 0;
 }
 
-template<class T> inline bool operator!=( mars_boost_ksim::detail::sp_nullptr_t, scoped_array<T> const & p ) BOOST_NOEXCEPT
+template<class T> inline bool operator!=( mars_boost::detail::sp_nullptr_t, scoped_array<T> const & p ) BOOST_NOEXCEPT
 {
     return p.get() != 0;
 }
@@ -127,6 +127,6 @@ template<class T> inline void swap(scoped_array<T> & a, scoped_array<T> & b) BOO
     a.swap(b);
 }
 
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif  // #ifndef BOOST_SMART_PTR_SCOPED_ARRAY_HPP_INCLUDED

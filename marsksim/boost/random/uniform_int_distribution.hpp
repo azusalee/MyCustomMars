@@ -34,7 +34,7 @@
 #include <boost/mpl/if.hpp>
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace random {
 namespace detail {
     
@@ -49,13 +49,13 @@ namespace detail {
 template<class Engine, class T>
 T generate_uniform_int(
     Engine& eng, T min_value, T max_value,
-    mars_boost_ksim::mpl::true_ /** is_integral<Engine::result_type> */)
+    mars_boost::mpl::true_ /** is_integral<Engine::result_type> */)
 {
     typedef T result_type;
-    typedef typename mars_boost_ksim::random::traits::make_unsigned_or_unbounded<T>::type range_type;
+    typedef typename mars_boost::random::traits::make_unsigned_or_unbounded<T>::type range_type;
     typedef typename Engine::result_type base_result;
     // ranges are always unsigned or unbounded
-    typedef typename mars_boost_ksim::random::traits::make_unsigned_or_unbounded<base_result>::type base_unsigned;
+    typedef typename mars_boost::random::traits::make_unsigned_or_unbounded<base_result>::type base_unsigned;
     const range_type range = random::detail::subtract<result_type>()(max_value, min_value);
     const base_result bmin = (eng.min)();
     const base_unsigned brange =
@@ -167,7 +167,7 @@ T generate_uniform_int(
                 eng,
                 static_cast<range_type>(0),
                 static_cast<range_type>(range/mult),
-                mars_boost_ksim::mpl::true_());
+                mars_boost::mpl::true_());
         if(std::numeric_limits<range_type>::is_bounded && ((std::numeric_limits<range_type>::max)() / mult < result_increment)) {
           // The multiplcation would overflow.  Reject immediately.
           continue;
@@ -234,10 +234,10 @@ T generate_uniform_int(
 template<class Engine, class T>
 inline T generate_uniform_int(
     Engine& eng, T min_value, T max_value,
-    mars_boost_ksim::mpl::false_ /** is_integral<Engine::result_type> */)
+    mars_boost::mpl::false_ /** is_integral<Engine::result_type> */)
 {
     uniform_int_float<Engine> wrapper(eng);
-    return generate_uniform_int(wrapper, min_value, max_value, mars_boost_ksim::mpl::true_());
+    return generate_uniform_int(wrapper, min_value, max_value, mars_boost::mpl::true_());
 }
 
 template<class Engine, class T>
@@ -245,7 +245,7 @@ inline T generate_uniform_int(Engine& eng, T min_value, T max_value)
 {
     typedef typename Engine::result_type base_result;
     return generate_uniform_int(eng, min_value, max_value,
-        mars_boost_ksim::random::traits::is_integral<base_result>());
+        mars_boost::random::traits::is_integral<base_result>());
 }
 
 }
@@ -414,6 +414,6 @@ private:
 };
 
 } // namespace random
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_RANDOM_UNIFORM_INT_HPP

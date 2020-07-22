@@ -16,7 +16,7 @@
 #include <boost/range/concepts.hpp>
 #include <boost/range/iterator_range.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range_detail
     {
@@ -86,6 +86,6 @@ join(SinglePassRange1& r1, SinglePassRange2& r2)
 using ::boost_ksim::range::joined_range;
 using ::boost_ksim::range::join;
 
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

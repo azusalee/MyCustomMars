@@ -16,7 +16,7 @@
 #include <boost/range/difference_type.hpp>
 #include <algorithm>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range_detail
     {
@@ -190,6 +190,6 @@ mismatch(const SinglePassRange1& rng1, SinglePassRange2& rng2, BinaryPredicate p
 
     } // namespace range
     using range::mismatch;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

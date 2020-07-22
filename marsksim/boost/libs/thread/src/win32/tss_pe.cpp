@@ -19,7 +19,7 @@
 
 #include <cstdlib>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     void tss_cleanup_implemented() {}
 }
@@ -31,7 +31,7 @@ namespace {
         {
         case DLL_THREAD_DETACH:
         {
-            mars_boost_ksim::mars_booston_thread_exit();
+            mars_boost::mars_booston_thread_exit();
             break;
         }
         }
@@ -47,9 +47,9 @@ extern "C"
 #else
 extern "C" {
 
-    void (* after_ctors )() __attribute__((section(".ctors")))     = mars_boost_ksim::on_process_enter;
-    void (* before_dtors)() __attribute__((section(".dtors")))     = mars_boost_ksim::on_thread_exit;
-    void (* after_dtors )() __attribute__((section(".dtors.zzz"))) = mars_boost_ksim::on_process_exit;
+    void (* after_ctors )() __attribute__((section(".ctors")))     = mars_boost::on_process_enter;
+    void (* before_dtors)() __attribute__((section(".dtors")))     = mars_boost::on_thread_exit;
+    void (* after_dtors )() __attribute__((section(".dtors.zzz"))) = mars_boost::on_process_exit;
 
     ULONG __tls_index__ = 0;
     char __tls_end__ __attribute__((section(".tls$zzz"))) = 0;
@@ -245,18 +245,18 @@ extern BOOL (WINAPI * const _pDefaultRawDllMainOrig)(HANDLE, DWORD, LPVOID) = NU
             //for destructors of global objects, so that
             //shouldn't be a problem.
 
-            atexit(mars_boost_ksim::on_thread_exit);
+            atexit(mars_boost::on_thread_exit);
 
             //Call Boost process entry callback here
 
-            mars_boost_ksim::on_process_enter();
+            mars_boost::on_process_enter();
 
             return INIRETSUCCESS;
         }
 
         PVAPI on_process_term()
         {
-            mars_boost_ksim::on_process_exit();
+            mars_boost::on_process_exit();
             return INIRETSUCCESS;
         }
 
@@ -265,7 +265,7 @@ extern BOOL (WINAPI * const _pDefaultRawDllMainOrig)(HANDLE, DWORD, LPVOID) = NU
             switch (dwReason)
             {
             case DLL_THREAD_DETACH:
-                mars_boost_ksim::on_thread_exit();
+                mars_boost::on_thread_exit();
                 break;
             }
         }
@@ -279,10 +279,10 @@ extern BOOL (WINAPI * const _pDefaultRawDllMainOrig)(HANDLE, DWORD, LPVOID) = NU
             switch (dwReason)
             {
             case DLL_THREAD_DETACH:
-                mars_boost_ksim::on_thread_exit();
+                mars_boost::on_thread_exit();
                 break;
             case DLL_PROCESS_DETACH:
-                mars_boost_ksim::on_process_exit();
+                mars_boost::on_process_exit();
                 break;
             }
 
@@ -300,7 +300,7 @@ extern "C"
 {
     extern BOOL (WINAPI * const _pRawDllMain)(HANDLE, DWORD, LPVOID)=&dll_callback;
 }
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     void tss_cleanup_implemented()
     {

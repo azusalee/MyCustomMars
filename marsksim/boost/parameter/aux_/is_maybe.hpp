@@ -8,7 +8,7 @@
 
 #include <boost/type_traits/is_base_and_derived.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace parameter {
 namespace aux {
 
@@ -21,6 +21,6 @@ struct is_maybe
 
 } // namespace aux
 } // namespace parameter
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_PARAMETER_IS_MAYBE_050329_HPP

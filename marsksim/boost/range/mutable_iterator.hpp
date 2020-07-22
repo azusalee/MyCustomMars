@@ -24,7 +24,7 @@
 #include <cstddef>
 #include <utility>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
     //////////////////////////////////////////////////////////////////////////
@@ -72,7 +72,7 @@ struct range_mutable_iterator
 {
 };
 
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #include <boost/range/detail/msvc_has_iterator_workaround.hpp>
 

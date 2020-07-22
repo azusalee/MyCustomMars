@@ -14,7 +14,7 @@
 #include <boost/type_traits/intrinsics.hpp>
 #include <boost/type_traits/integral_constant.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 #ifdef BOOST_IS_UNION
 template <class T> struct is_union : public integral_constant<bool, BOOST_IS_UNION(T)> {};
@@ -26,6 +26,6 @@ template <class T> struct is_union<T const> : public is_union<T>{};
 template <class T> struct is_union<T volatile const> : public is_union<T>{};
 template <class T> struct is_union<T volatile> : public is_union<T>{};
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_IS_UNION_HPP_INCLUDED

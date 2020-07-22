@@ -53,7 +53,7 @@
 */
 
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace iterator_range_detail
     {
@@ -66,23 +66,23 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             template< class ForwardRange >
             static IteratorT adl_begin( ForwardRange& r )
             {
-                return IteratorT( mars_boost_ksim::begin( r ) );
+                return IteratorT( mars_boost::begin( r ) );
             }
 
             template< class ForwardRange >
             static IteratorT adl_end( ForwardRange& r )
             {
-                return IteratorT( mars_boost_ksim::end( r ) );
+                return IteratorT( mars_boost::end( r ) );
             }
         };
 
         template< class Left, class Right >
         inline bool less_than( const Left& l, const Right& r )
         {
-            return std::lexicographical_compare( mars_boost_ksim::begin(l),
-                                                 mars_boost_ksim::end(l),
-                                                 mars_boost_ksim::begin(r),
-                                                 mars_boost_ksim::end(r) );
+            return std::lexicographical_compare( mars_boost::begin(l),
+                                                 mars_boost::end(l),
+                                                 mars_boost::begin(r),
+                                                 mars_boost::end(r) );
         }
         
         template< class Left, class Right >
@@ -108,7 +108,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         template< class Left, class Right >
         inline bool equal(const Left& l, const Right& r)
         {
-            return mars_boost_ksim::equal(l, r);
+            return mars_boost::equal(l, r);
         }
 
 struct range_tag
@@ -127,26 +127,26 @@ typedef char (&incrementable_t)[1];
 typedef char (&bidirectional_t)[2];
 typedef char (&random_access_t)[3];
 
-incrementable_t test_traversal_tag(mars_boost_ksim::incrementable_traversal_tag);
-bidirectional_t test_traversal_tag(mars_boost_ksim::bidirectional_traversal_tag);
-random_access_t test_traversal_tag(mars_boost_ksim::random_access_traversal_tag);
+incrementable_t test_traversal_tag(mars_boost::incrementable_traversal_tag);
+bidirectional_t test_traversal_tag(mars_boost::bidirectional_traversal_tag);
+random_access_t test_traversal_tag(mars_boost::random_access_traversal_tag);
 
 template<std::size_t S>
 struct pure_iterator_traversal_impl
 {
-    typedef mars_boost_ksim::incrementable_traversal_tag type;
+    typedef mars_boost::incrementable_traversal_tag type;
 };
 
 template<>
 struct pure_iterator_traversal_impl<sizeof(bidirectional_t)>
 {
-    typedef mars_boost_ksim::bidirectional_traversal_tag type;
+    typedef mars_boost::bidirectional_traversal_tag type;
 };
 
 template<>
 struct pure_iterator_traversal_impl<sizeof(random_access_t)>
 {
-    typedef mars_boost_ksim::random_access_traversal_tag type;
+    typedef mars_boost::random_access_traversal_tag type;
 };
 
 template<typename IteratorT>
@@ -348,15 +348,15 @@ class iterator_range_base<IteratorT, random_access_traversal_tag>
 
 public:
     typedef BOOST_DEDUCED_TYPENAME
-        mars_boost_ksim::mpl::if_<
-            mars_boost_ksim::mpl::or_<
-                mars_boost_ksim::is_abstract<
+        mars_boost::mpl::if_<
+            mars_boost::mpl::or_<
+                mars_boost::is_abstract<
                     BOOST_DEDUCED_TYPENAME base_type::value_type
                 >,
-                mars_boost_ksim::is_array<
+                mars_boost::is_array<
                     BOOST_DEDUCED_TYPENAME base_type::value_type
                 >,
-                mars_boost_ksim::is_function<
+                mars_boost::is_function<
                     BOOST_DEDUCED_TYPENAME base_type::value_type
                 >
             >,
@@ -420,7 +420,7 @@ public:
             but can also be used on iterator_ranges:
 
             \code
-                mars_boost_ksim::tolower( find( s, "UPPERCASE STRING" ) );
+                mars_boost::tolower( find( s, "UPPERCASE STRING" ) );
             \endcode
 
             Many algorithms working with sequences take a pair of iterators,
@@ -577,17 +577,17 @@ public:
         /////////////////////////////////////////////////////////////////////
 
         template< class IteratorT, class ForwardRange >
-        inline BOOST_DEDUCED_TYPENAME mars_boost_ksim::enable_if<
+        inline BOOST_DEDUCED_TYPENAME mars_boost::enable_if<
             mpl::not_<is_base_and_derived<iterator_range_detail::iterator_range_tag, ForwardRange> >,
             bool
         >::type
         operator==( const ForwardRange& l, const iterator_range<IteratorT>& r )
         {
-            return mars_boost_ksim::equal( l, r );
+            return mars_boost::equal( l, r );
         }
 
         template< class IteratorT, class ForwardRange >
-        inline BOOST_DEDUCED_TYPENAME mars_boost_ksim::enable_if<
+        inline BOOST_DEDUCED_TYPENAME mars_boost::enable_if<
             mpl::not_<boost_ksim::is_base_and_derived<iterator_range_detail::iterator_range_tag, ForwardRange> >,
             bool
         >::type
@@ -597,7 +597,7 @@ public:
         }
 
         template< class IteratorT, class ForwardRange >
-        inline BOOST_DEDUCED_TYPENAME mars_boost_ksim::enable_if<
+        inline BOOST_DEDUCED_TYPENAME mars_boost::enable_if<
             mpl::not_<boost_ksim::is_base_and_derived<iterator_range_detail::iterator_range_tag, ForwardRange> >,
             bool
         >::type
@@ -607,7 +607,7 @@ public:
         }
         
         template< class IteratorT, class ForwardRange >
-        inline BOOST_DEDUCED_TYPENAME mars_boost_ksim::enable_if<
+        inline BOOST_DEDUCED_TYPENAME mars_boost::enable_if<
             mpl::not_<boost_ksim::is_base_and_derived<iterator_range_detail::iterator_range_tag, ForwardRange> >,
             bool
         >::type
@@ -617,7 +617,7 @@ public:
         }
         
         template< class IteratorT, class ForwardRange >
-        inline BOOST_DEDUCED_TYPENAME mars_boost_ksim::enable_if<
+        inline BOOST_DEDUCED_TYPENAME mars_boost::enable_if<
             mpl::not_<boost_ksim::is_base_and_derived<iterator_range_detail::iterator_range_tag, ForwardRange> >,
             bool
         >::type
@@ -627,7 +627,7 @@ public:
         }
         
         template< class IteratorT, class ForwardRange >
-        inline BOOST_DEDUCED_TYPENAME mars_boost_ksim::enable_if<
+        inline BOOST_DEDUCED_TYPENAME mars_boost::enable_if<
             mpl::not_<boost_ksim::is_base_and_derived<iterator_range_detail::iterator_range_tag, ForwardRange> >,
             bool
         >::type
@@ -642,17 +642,17 @@ public:
         inline bool
         operator==( const iterator_range<Iterator1T>& l, const iterator_range<Iterator2T>& r )
         {
-            return mars_boost_ksim::equal( l, r );
+            return mars_boost::equal( l, r );
         }
 
         template< class IteratorT, class ForwardRange >
-        inline BOOST_DEDUCED_TYPENAME mars_boost_ksim::enable_if<
+        inline BOOST_DEDUCED_TYPENAME mars_boost::enable_if<
             mpl::not_<boost_ksim::is_base_and_derived<iterator_range_detail::iterator_range_tag, ForwardRange> >,
             bool
         >::type
         operator==( const iterator_range<IteratorT>& l, const ForwardRange& r )
         {
-            return mars_boost_ksim::equal( l, r );
+            return mars_boost::equal( l, r );
         }
 
 
@@ -664,7 +664,7 @@ public:
         }
 
         template< class IteratorT, class ForwardRange >
-        inline BOOST_DEDUCED_TYPENAME mars_boost_ksim::enable_if<
+        inline BOOST_DEDUCED_TYPENAME mars_boost::enable_if<
             mpl::not_<boost_ksim::is_base_and_derived<iterator_range_detail::iterator_range_tag, ForwardRange> >,
             bool
         >::type
@@ -682,7 +682,7 @@ public:
         }
 
         template< class IteratorT, class ForwardRange >
-        inline BOOST_DEDUCED_TYPENAME mars_boost_ksim::enable_if<
+        inline BOOST_DEDUCED_TYPENAME mars_boost::enable_if<
             mpl::not_<boost_ksim::is_base_and_derived<iterator_range_detail::iterator_range_tag, ForwardRange> >,
             bool
         >::type
@@ -699,7 +699,7 @@ public:
         }
         
         template< class IteratorT, class ForwardRange >
-        inline BOOST_DEDUCED_TYPENAME mars_boost_ksim::enable_if<
+        inline BOOST_DEDUCED_TYPENAME mars_boost::enable_if<
             mpl::not_<boost_ksim::is_base_and_derived<iterator_range_detail::iterator_range_tag, ForwardRange> >,
             bool
         >::type
@@ -716,7 +716,7 @@ public:
         }
         
         template< class IteratorT, class ForwardRange >
-        inline BOOST_DEDUCED_TYPENAME mars_boost_ksim::enable_if<
+        inline BOOST_DEDUCED_TYPENAME mars_boost::enable_if<
             mpl::not_<boost_ksim::is_base_and_derived<iterator_range_detail::iterator_range_tag, ForwardRange> >,
             bool
         >::type
@@ -733,7 +733,7 @@ public:
         }
         
         template< class IteratorT, class ForwardRange >
-        inline BOOST_DEDUCED_TYPENAME mars_boost_ksim::enable_if<
+        inline BOOST_DEDUCED_TYPENAME mars_boost::enable_if<
             mpl::not_<boost_ksim::is_base_and_derived<iterator_range_detail::iterator_range_tag, ForwardRange> >,
             bool
         >::type
@@ -765,7 +765,7 @@ public:
         inline iterator_range<IteratorT>
         make_iterator_range_n(IteratorT first, IntegerT n)
         {
-            return iterator_range<IteratorT>(first, mars_boost_ksim::next(first, n));
+            return iterator_range<IteratorT>(first, mars_boost::next(first, n));
         }
 
 #ifdef BOOST_NO_FUNCTION_TEMPLATE_ORDERING
@@ -775,7 +775,7 @@ public:
         make_iterator_range( Range& r )
         {
             return iterator_range< BOOST_DEDUCED_TYPENAME range_iterator<Range>::type >
-                ( mars_boost_ksim::begin( r ), mars_boost_ksim::end( r ) );
+                ( mars_boost::begin( r ), mars_boost::end( r ) );
         }
 
 #else
@@ -818,8 +818,8 @@ public:
                 //
 
                 BOOST_DEDUCED_TYPENAME range_iterator<Range>::type
-                    new_begin = mars_boost_ksim::begin( r ),
-                    new_end   = mars_boost_ksim::end( r );
+                    new_begin = mars_boost::begin( r ),
+                    new_end   = mars_boost::end( r );
                 std::advance( new_begin, advance_begin );
                 std::advance( new_end, advance_end );
                 return make_iterator_range( new_begin, new_end );
@@ -870,7 +870,7 @@ public:
         template< typename SeqT, typename Range >
         inline SeqT copy_range( const Range& r )
         {
-            return SeqT( mars_boost_ksim::begin( r ), mars_boost_ksim::end( r ) );
+            return SeqT( mars_boost::begin( r ), mars_boost::end( r ) );
         }
 
 } // namespace 'boost'

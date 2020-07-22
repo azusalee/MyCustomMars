@@ -14,7 +14,7 @@
 #include <boost/config.hpp>  // for BOOST_STATIC_CONSTANT, etc.
 #include <boost/mpl/integral_c.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 namespace math
 {
@@ -79,7 +79,7 @@ namespace detail
 template < static_gcd_type Value1, static_gcd_type Value2 >
 struct static_gcd : public mpl::integral_c<static_gcd_type, (detail::static_gcd_helper_t<Value1, Value2>::value) >
 {
-};  // mars_boost_ksim::math::static_gcd
+};  // mars_boost::math::static_gcd
 
 
 //  Compile-time least common multiple evaluator class declaration  ----------//
@@ -87,11 +87,11 @@ struct static_gcd : public mpl::integral_c<static_gcd_type, (detail::static_gcd_
 template < static_gcd_type Value1, static_gcd_type Value2 >
 struct static_lcm : public mpl::integral_c<static_gcd_type, (detail::static_lcm_helper_t<Value1, Value2>::value) >
 {
-};  // mars_boost_ksim::math::static_lcm
+};  // mars_boost::math::static_lcm
 
 
 }  // namespace math
-}  // namespace mars_boost_ksim
+}  // namespace mars_boost
 
 
 #endif  // BOOST_MATH_COMMON_FACTOR_CT_HPP

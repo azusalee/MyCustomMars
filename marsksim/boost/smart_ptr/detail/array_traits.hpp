@@ -11,11 +11,11 @@
 
 #include <boost/type_traits/remove_cv.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim  {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost  {
     namespace detail {
         template<class T>
         struct array_base {
-            typedef typename mars_boost_ksim::remove_cv<T>::type type;
+            typedef typename mars_boost::remove_cv<T>::type type;
         };
 
         template<class T>

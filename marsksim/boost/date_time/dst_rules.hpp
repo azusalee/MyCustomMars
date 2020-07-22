@@ -18,7 +18,7 @@
 #include "boost/date_time/date_defs.hpp"
 #include <stdexcept>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
   namespace date_time {
 
     enum time_is_dst_result {is_not_in_dst, is_in_dst, 

@@ -122,7 +122,7 @@ static bool           isValidIpAddress(const char* _ipaddress);
  *返回值:          当返回-1表示查询失败，当返回0则表示查询成功
  *
  */
-int socket_gethostbyname(const char* _host, socket_ipinfo_t* _ipinfo, int _timeout /*ms*/, const char* _dnsserver, NetCheckTrafficMonitor* _traffic_monitor) {
+int socket_gethostbyname(const char* _host, socket_ipinfo_t* _ipinfo, int _timeout /*ms*/, const char* _dnsserver, NetCheckTrafficMonitorksim* _traffic_monitor) {
     xinfo2(TSF"in socket_gethostbyname,_host=%0", _host);
 
     if (NULL == _host) return -1;

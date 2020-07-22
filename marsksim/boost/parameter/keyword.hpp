@@ -10,7 +10,7 @@
 #include <boost/parameter/aux_/tag.hpp>
 #include <boost/parameter/aux_/default.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace parameter {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace parameter {
 
 // Instances of unique specializations of keyword<...> serve to
 // associate arguments with parameter names.  For example:
@@ -112,11 +112,11 @@ keyword<Tag> const keyword<Tag>::instance = {};
     }                                                               \
     namespace                                                       \
     {                                                               \
-       ::mars_boost_ksim::parameter::keyword<tag_namespace::name> const& name \
-       = ::mars_boost_ksim::parameter::keyword<tag_namespace::name>::instance;\
+       ::mars_boost::parameter::keyword<tag_namespace::name> const& name \
+       = ::mars_boost::parameter::keyword<tag_namespace::name>::instance;\
     }
 
-}} // namespace mars_boost_ksim::parameter
+}} // namespace mars_boost::parameter
 
 #endif // KEYWORD_050328_HPP
 

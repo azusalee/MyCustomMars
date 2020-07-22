@@ -13,7 +13,7 @@
 #include <boost/system/error_code.hpp>
 #include <boost/type_traits/integral_constant.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
   //enum class future_errc
@@ -46,14 +46,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     error_code
     make_error_code(future_errc e) BOOST_NOEXCEPT
     {
-        return error_code(underlying_cast<int>(e), mars_boost_ksim::future_category());
+        return error_code(underlying_cast<int>(e), mars_boost::future_category());
     }
 
     inline
     error_condition
     make_error_condition(future_errc e) BOOST_NOEXCEPT
     {
-        return error_condition(underlying_cast<int>(e), mars_boost_ksim::future_category());
+        return error_condition(underlying_cast<int>(e), mars_boost::future_category());
     }
   } // system
 } // boost

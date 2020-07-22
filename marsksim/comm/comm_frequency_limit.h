@@ -24,16 +24,16 @@
 #include <cstddef>
 #include <list>
 
-class CommFrequencyLimit {
+class CommFrequencyLimitksim {
   public:
-    CommFrequencyLimit(size_t _count, uint64_t _time_span);
-    ~CommFrequencyLimit();
+    CommFrequencyLimitksim(size_t _count, uint64_t _time_span);
+    ~CommFrequencyLimitksim();
 
     bool Check();  // true pass, false limit
 
   private:
-    CommFrequencyLimit(CommFrequencyLimit&);
-    CommFrequencyLimit& operator=(CommFrequencyLimit&);
+    CommFrequencyLimitksim(CommFrequencyLimitksim&);
+    CommFrequencyLimitksim& operator=(CommFrequencyLimitksim&);
 
     void __DelOlderTouchTime(uint64_t _time);
 

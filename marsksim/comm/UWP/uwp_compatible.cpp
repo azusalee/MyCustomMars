@@ -219,7 +219,7 @@ bool getifaddrs_ipv6_filter(std::vector<ifaddrinfo_ip_t>& _addrs, unsigned int _
 
 
 using namespace boost;
-namespace mars_boost_ksim
+namespace mars_boost
 {
 	namespace this_thread
 	{

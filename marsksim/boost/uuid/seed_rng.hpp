@@ -7,7 +7,7 @@
 
 // Revision History
 //  09 Nov 2007 - Initial Revision
-//  25 Feb 2008 - moved to namespace mars_boost_ksim::uuids::detail
+//  25 Feb 2008 - moved to namespace mars_boost::uuids::detail
 //  28 Nov 2009 - disabled deprecated warnings for MSVC
 //  28 Jul 2014 - fixed valgrind warnings and better entropy sources for MSVC
 
@@ -30,9 +30,9 @@
 #include <cstdio> // for FILE, fopen, fread, fclose
 #include <boost/core/noncopyable.hpp>
 #include <boost/uuid/sha1.hpp>
-//#include <boost/nondet_random.hpp> //forward declare mars_boost_ksim::random::random_device
+//#include <boost/nondet_random.hpp> //forward declare mars_boost::random::random_device
 
-// can't use mars_boost_ksim::generator_iterator since mars_boost_ksim::random number seed(Iter&, Iter)
+// can't use mars_boost::generator_iterator since mars_boost::random number seed(Iter&, Iter)
 // functions need a last iterator
 //#include <boost/generator_iterator.hpp>
 # include <boost/iterator/iterator_facade.hpp>
@@ -70,16 +70,16 @@ namespace std {
 #endif
 
 // forward declare random number generators
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace random {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace random {
 class random_device;
-}} //namespace mars_boost_ksim::random
+}} //namespace mars_boost::random
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace uuids {
 namespace detail {
 
 // should this be part of Boost.Random?
-class seed_rng: private mars_boost_ksim::noncopyable
+class seed_rng: private mars_boost::noncopyable
 {
 public:
     typedef unsigned int result_type;
@@ -92,12 +92,12 @@ public:
         , random_(NULL)
     {
 #if defined(BOOST_WINDOWS)
-        if (!mars_boost_ksim::detail::winapi::CryptAcquireContextA(
+        if (!mars_boost::detail::winapi::CryptAcquireContextA(
                     &random_,
                     NULL,
                     NULL,
-                    mars_boost_ksim::detail::winapi::PROV_RSA_FULL_,
-                    mars_boost_ksim::detail::winapi::CRYPT_VERIFYCONTEXT_ | mars_boost_ksim::detail::winapi::CRYPT_SILENT_))
+                    mars_boost::detail::winapi::PROV_RSA_FULL_,
+                    mars_boost::detail::winapi::CRYPT_VERIFYCONTEXT_ | mars_boost::detail::winapi::CRYPT_SILENT_))
         {
             random_ = NULL;
         }
@@ -112,7 +112,7 @@ public:
     {
         if (random_) {
 #if defined(BOOST_WINDOWS)
-            mars_boost_ksim::detail::winapi::CryptReleaseContext(random_, 0);
+            mars_boost::detail::winapi::CryptReleaseContext(random_, 0);
 #else
             std::fclose(random_);
 #endif
@@ -152,7 +152,7 @@ private:
 
     void sha1_random_digest_()
     {
-        mars_boost_ksim::uuids::detail::sha1 sha;
+        mars_boost::uuids::detail::sha1 sha;
 
 
         if (random_)
@@ -160,7 +160,7 @@ private:
             // intentionally left uninitialized
             unsigned char state[ 20 ];
 #if defined(BOOST_WINDOWS)
-            mars_boost_ksim::detail::winapi::CryptGenRandom(random_, sizeof(state), state);
+            mars_boost::detail::winapi::CryptGenRandom(random_, sizeof(state), state);
 #else
             ignore_size(std::fread( state, 1, sizeof(state), random_ ));
 #endif
@@ -170,15 +170,15 @@ private:
         {
             // Getting enropy from some system specific sources
 #if defined(BOOST_WINDOWS)
-            mars_boost_ksim::detail::winapi::DWORD_ procid = mars_boost_ksim::detail::winapi::GetCurrentProcessId();
+            mars_boost::detail::winapi::DWORD_ procid = mars_boost::detail::winapi::GetCurrentProcessId();
             sha.process_bytes( (unsigned char const*)&procid, sizeof( procid ) );
 
-            mars_boost_ksim::detail::winapi::DWORD_ threadid = mars_boost_ksim::detail::winapi::GetCurrentThreadId();
+            mars_boost::detail::winapi::DWORD_ threadid = mars_boost::detail::winapi::GetCurrentThreadId();
             sha.process_bytes( (unsigned char const*)&threadid, sizeof( threadid ) );
 
-            mars_boost_ksim::detail::winapi::LARGE_INTEGER_ ts;
+            mars_boost::detail::winapi::LARGE_INTEGER_ ts;
             ts.QuadPart = 0;
-            mars_boost_ksim::detail::winapi::QueryPerformanceCounter( &ts );
+            mars_boost::detail::winapi::QueryPerformanceCounter( &ts );
             sha.process_bytes( (unsigned char const*)&ts, sizeof( ts ) );
 
             std::time_t tm = std::time( 0 );
@@ -240,13 +240,13 @@ private:
     int rd_index_;
 
 #if defined(BOOST_WINDOWS)
-    mars_boost_ksim::detail::winapi::HCRYPTPROV_ random_;
+    mars_boost::detail::winapi::HCRYPTPROV_ random_;
 #else
     std::FILE * random_;
 #endif
 };
 
-// almost a copy of mars_boost_ksim::generator_iterator
+// almost a copy of mars_boost::generator_iterator
 // but default constructor sets m_g to NULL
 template <class Generator>
 class generator_iterator
@@ -302,13 +302,13 @@ inline void seed(UniformRandomNumberGenerator& rng)
 
 // random_device does not / can not be seeded
 template <>
-inline void seed<mars_boost_ksim::random::random_device>(mars_boost_ksim::random::random_device&) {}
+inline void seed<mars_boost::random::random_device>(mars_boost::random::random_device&) {}
 
 // random_device does not / can not be seeded
 template <>
 inline void seed<seed_rng>(seed_rng&) {}
 
-}}} //namespace mars_boost_ksim::uuids::detail
+}}} //namespace mars_boost::uuids::detail
 
 #if defined(_MSC_VER)
 #pragma warning(pop) // Restore warnings to previous state.

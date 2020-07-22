@@ -13,7 +13,7 @@
 /*
 <shared_mutex> synopsis
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 namespace thread_v2
 {
@@ -33,11 +33,11 @@ public:
     void lock();
     bool try_lock();
     template <class Rep, class Period>
-        bool try_lock_for(const mars_boost_ksim::chrono::duration<Rep, Period>& rel_time);
+        bool try_lock_for(const mars_boost::chrono::duration<Rep, Period>& rel_time);
     template <class Clock, class Duration>
         bool
         try_lock_until(
-                      const mars_boost_ksim::chrono::time_point<Clock, Duration>& abs_time);
+                      const mars_boost::chrono::time_point<Clock, Duration>& abs_time);
     void unlock();
 
     // Shared ownership
@@ -46,11 +46,11 @@ public:
     bool try_lock_shared();
     template <class Rep, class Period>
         bool
-        try_lock_shared_for(const mars_boost_ksim::chrono::duration<Rep, Period>& rel_time);
+        try_lock_shared_for(const mars_boost::chrono::duration<Rep, Period>& rel_time);
     template <class Clock, class Duration>
         bool
         try_lock_shared_until(
-                      const mars_boost_ksim::chrono::time_point<Clock, Duration>& abs_time);
+                      const mars_boost::chrono::time_point<Clock, Duration>& abs_time);
     void unlock_shared();
 };
 
@@ -69,11 +69,11 @@ public:
     void lock();
     bool try_lock();
     template <class Rep, class Period>
-        bool try_lock_for(const mars_boost_ksim::chrono::duration<Rep, Period>& rel_time);
+        bool try_lock_for(const mars_boost::chrono::duration<Rep, Period>& rel_time);
     template <class Clock, class Duration>
         bool
         try_lock_until(
-                      const mars_boost_ksim::chrono::time_point<Clock, Duration>& abs_time);
+                      const mars_boost::chrono::time_point<Clock, Duration>& abs_time);
     void unlock();
 
     // Shared ownership
@@ -82,11 +82,11 @@ public:
     bool try_lock_shared();
     template <class Rep, class Period>
         bool
-        try_lock_shared_for(const mars_boost_ksim::chrono::duration<Rep, Period>& rel_time);
+        try_lock_shared_for(const mars_boost::chrono::duration<Rep, Period>& rel_time);
     template <class Clock, class Duration>
         bool
         try_lock_shared_until(
-                      const mars_boost_ksim::chrono::time_point<Clock, Duration>& abs_time);
+                      const mars_boost::chrono::time_point<Clock, Duration>& abs_time);
     void unlock_shared();
 
     // Upgrade ownership
@@ -96,11 +96,11 @@ public:
     template <class Rep, class Period>
         bool
         try_lock_upgrade_for(
-                            const mars_boost_ksim::chrono::duration<Rep, Period>& rel_time);
+                            const mars_boost::chrono::duration<Rep, Period>& rel_time);
     template <class Clock, class Duration>
         bool
         try_lock_upgrade_until(
-                      const mars_boost_ksim::chrono::time_point<Clock, Duration>& abs_time);
+                      const mars_boost::chrono::time_point<Clock, Duration>& abs_time);
     void unlock_upgrade();
 
     // Shared <-> Exclusive
@@ -109,11 +109,11 @@ public:
     template <class Rep, class Period>
         bool
         try_unlock_shared_and_lock_for(
-                            const mars_boost_ksim::chrono::duration<Rep, Period>& rel_time);
+                            const mars_boost::chrono::duration<Rep, Period>& rel_time);
     template <class Clock, class Duration>
         bool
         try_unlock_shared_and_lock_until(
-                      const mars_boost_ksim::chrono::time_point<Clock, Duration>& abs_time);
+                      const mars_boost::chrono::time_point<Clock, Duration>& abs_time);
     void unlock_and_lock_shared();
 
     // Shared <-> Upgrade
@@ -122,11 +122,11 @@ public:
     template <class Rep, class Period>
         bool
         try_unlock_shared_and_lock_upgrade_for(
-                            const mars_boost_ksim::chrono::duration<Rep, Period>& rel_time);
+                            const mars_boost::chrono::duration<Rep, Period>& rel_time);
     template <class Clock, class Duration>
         bool
         try_unlock_shared_and_lock_upgrade_until(
-                      const mars_boost_ksim::chrono::time_point<Clock, Duration>& abs_time);
+                      const mars_boost::chrono::time_point<Clock, Duration>& abs_time);
     void unlock_upgrade_and_lock_shared();
 
     // Upgrade <-> Exclusive
@@ -136,11 +136,11 @@ public:
     template <class Rep, class Period>
         bool
         try_unlock_upgrade_and_lock_for(
-                            const mars_boost_ksim::chrono::duration<Rep, Period>& rel_time);
+                            const mars_boost::chrono::duration<Rep, Period>& rel_time);
     template <class Clock, class Duration>
         bool
         try_unlock_upgrade_and_lock_until(
-                      const mars_boost_ksim::chrono::time_point<Clock, Duration>& abs_time);
+                      const mars_boost::chrono::time_point<Clock, Duration>& abs_time);
     void unlock_and_lock_upgrade();
 };
 
@@ -158,7 +158,7 @@ public:
 #include <boost/system/system_error.hpp>
 #define BOOST_THREAD_INLINE inline
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
   namespace thread_v2 {
 
     class shared_mutex
@@ -194,14 +194,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       BOOST_THREAD_INLINE void lock();
       BOOST_THREAD_INLINE bool try_lock();
       template <class Rep, class Period>
-      bool try_lock_for(const mars_boost_ksim::chrono::duration<Rep, Period>& rel_time)
+      bool try_lock_for(const mars_boost::chrono::duration<Rep, Period>& rel_time)
       {
-        return try_lock_until(mars_boost_ksim::chrono::steady_clock::now() + rel_time);
+        return try_lock_until(mars_boost::chrono::steady_clock::now() + rel_time);
       }
       template <class Clock, class Duration>
       bool
       try_lock_until(
-          const mars_boost_ksim::chrono::time_point<Clock, Duration>& abs_time);
+          const mars_boost::chrono::time_point<Clock, Duration>& abs_time);
       BOOST_THREAD_INLINE void unlock();
 
 
@@ -211,15 +211,15 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       BOOST_THREAD_INLINE bool try_lock_shared();
       template <class Rep, class Period>
       bool
-      try_lock_shared_for(const mars_boost_ksim::chrono::duration<Rep, Period>& rel_time)
+      try_lock_shared_for(const mars_boost::chrono::duration<Rep, Period>& rel_time)
       {
-        return try_lock_shared_until(mars_boost_ksim::chrono::steady_clock::now() +
+        return try_lock_shared_until(mars_boost::chrono::steady_clock::now() +
             rel_time);
       }
       template <class Clock, class Duration>
       bool
       try_lock_shared_until(
-          const mars_boost_ksim::chrono::time_point<Clock, Duration>& abs_time);
+          const mars_boost::chrono::time_point<Clock, Duration>& abs_time);
       BOOST_THREAD_INLINE void unlock_shared();
 
 #if defined BOOST_THREAD_USES_DATETIME
@@ -241,17 +241,17 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template <class Clock, class Duration>
     bool
     shared_mutex::try_lock_until(
-        const mars_boost_ksim::chrono::time_point<Clock, Duration>& abs_time)
+        const mars_boost::chrono::time_point<Clock, Duration>& abs_time)
     {
-      mars_boost_ksim::unique_lock<mutex_t> lk(mut_);
+      mars_boost::unique_lock<mutex_t> lk(mut_);
       if (state_ & write_entered_)
       {
         while (true)
         {
-          mars_boost_ksim::cv_status status = gate1_.wait_until(lk, abs_time);
+          mars_boost::cv_status status = gate1_.wait_until(lk, abs_time);
           if ((state_ & write_entered_) == 0)
             break;
-          if (status == mars_boost_ksim::cv_status::timeout)
+          if (status == mars_boost::cv_status::timeout)
             return false;
         }
       }
@@ -260,10 +260,10 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       {
         while (true)
         {
-          mars_boost_ksim::cv_status status = gate2_.wait_until(lk, abs_time);
+          mars_boost::cv_status status = gate2_.wait_until(lk, abs_time);
           if ((state_ & n_readers_) == 0)
             break;
-          if (status == mars_boost_ksim::cv_status::timeout)
+          if (status == mars_boost::cv_status::timeout)
           {
             state_ &= ~write_entered_;
             return false;
@@ -276,18 +276,18 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template <class Clock, class Duration>
     bool
     shared_mutex::try_lock_shared_until(
-        const mars_boost_ksim::chrono::time_point<Clock, Duration>& abs_time)
+        const mars_boost::chrono::time_point<Clock, Duration>& abs_time)
     {
-      mars_boost_ksim::unique_lock<mutex_t> lk(mut_);
+      mars_boost::unique_lock<mutex_t> lk(mut_);
       if ((state_ & write_entered_) || (state_ & n_readers_) == n_readers_)
       {
         while (true)
         {
-          mars_boost_ksim::cv_status status = gate1_.wait_until(lk, abs_time);
+          mars_boost::cv_status status = gate1_.wait_until(lk, abs_time);
           if ((state_ & write_entered_) == 0 &&
               (state_ & n_readers_) < n_readers_)
             break;
-          if (status == mars_boost_ksim::cv_status::timeout)
+          if (status == mars_boost::cv_status::timeout)
             return false;
         }
       }
@@ -300,7 +300,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #if defined BOOST_THREAD_USES_DATETIME
     bool shared_mutex::timed_lock(system_time const& abs_time)
     {
-      mars_boost_ksim::unique_lock<mutex_t> lk(mut_);
+      mars_boost::unique_lock<mutex_t> lk(mut_);
       if (state_ & write_entered_)
       {
         while (true)
@@ -331,7 +331,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     }
       bool shared_mutex::timed_lock_shared(system_time const& abs_time)
       {
-        mars_boost_ksim::unique_lock<mutex_t> lk(mut_);
+        mars_boost::unique_lock<mutex_t> lk(mut_);
         if (state_ & write_entered_)
         {
           while (true)
@@ -363,8 +363,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #endif
     class upgrade_mutex
     {
-      typedef mars_boost_ksim::mutex              mutex_t;
-      typedef mars_boost_ksim::condition_variable cond_t;
+      typedef mars_boost::mutex              mutex_t;
+      typedef mars_boost::condition_variable cond_t;
       typedef unsigned                count_t;
 
       mutex_t mut_;
@@ -396,14 +396,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       BOOST_THREAD_INLINE void lock();
       BOOST_THREAD_INLINE bool try_lock();
       template <class Rep, class Period>
-      bool try_lock_for(const mars_boost_ksim::chrono::duration<Rep, Period>& rel_time)
+      bool try_lock_for(const mars_boost::chrono::duration<Rep, Period>& rel_time)
       {
-        return try_lock_until(mars_boost_ksim::chrono::steady_clock::now() + rel_time);
+        return try_lock_until(mars_boost::chrono::steady_clock::now() + rel_time);
       }
       template <class Clock, class Duration>
       bool
       try_lock_until(
-          const mars_boost_ksim::chrono::time_point<Clock, Duration>& abs_time);
+          const mars_boost::chrono::time_point<Clock, Duration>& abs_time);
       BOOST_THREAD_INLINE void unlock();
 
       // Shared ownership
@@ -412,15 +412,15 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       BOOST_THREAD_INLINE bool try_lock_shared();
       template <class Rep, class Period>
       bool
-      try_lock_shared_for(const mars_boost_ksim::chrono::duration<Rep, Period>& rel_time)
+      try_lock_shared_for(const mars_boost::chrono::duration<Rep, Period>& rel_time)
       {
-        return try_lock_shared_until(mars_boost_ksim::chrono::steady_clock::now() +
+        return try_lock_shared_until(mars_boost::chrono::steady_clock::now() +
             rel_time);
       }
       template <class Clock, class Duration>
       bool
       try_lock_shared_until(
-          const mars_boost_ksim::chrono::time_point<Clock, Duration>& abs_time);
+          const mars_boost::chrono::time_point<Clock, Duration>& abs_time);
       BOOST_THREAD_INLINE void unlock_shared();
 
       // Upgrade ownership
@@ -430,15 +430,15 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       template <class Rep, class Period>
       bool
       try_lock_upgrade_for(
-          const mars_boost_ksim::chrono::duration<Rep, Period>& rel_time)
+          const mars_boost::chrono::duration<Rep, Period>& rel_time)
       {
-        return try_lock_upgrade_until(mars_boost_ksim::chrono::steady_clock::now() +
+        return try_lock_upgrade_until(mars_boost::chrono::steady_clock::now() +
             rel_time);
       }
       template <class Clock, class Duration>
       bool
       try_lock_upgrade_until(
-          const mars_boost_ksim::chrono::time_point<Clock, Duration>& abs_time);
+          const mars_boost::chrono::time_point<Clock, Duration>& abs_time);
       BOOST_THREAD_INLINE void unlock_upgrade();
 
       // Shared <-> Exclusive
@@ -447,15 +447,15 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       template <class Rep, class Period>
       bool
       try_unlock_shared_and_lock_for(
-          const mars_boost_ksim::chrono::duration<Rep, Period>& rel_time)
+          const mars_boost::chrono::duration<Rep, Period>& rel_time)
       {
         return try_unlock_shared_and_lock_until(
-            mars_boost_ksim::chrono::steady_clock::now() + rel_time);
+            mars_boost::chrono::steady_clock::now() + rel_time);
       }
       template <class Clock, class Duration>
       bool
       try_unlock_shared_and_lock_until(
-          const mars_boost_ksim::chrono::time_point<Clock, Duration>& abs_time);
+          const mars_boost::chrono::time_point<Clock, Duration>& abs_time);
       BOOST_THREAD_INLINE void unlock_and_lock_shared();
 
       // Shared <-> Upgrade
@@ -464,15 +464,15 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       template <class Rep, class Period>
       bool
       try_unlock_shared_and_lock_upgrade_for(
-          const mars_boost_ksim::chrono::duration<Rep, Period>& rel_time)
+          const mars_boost::chrono::duration<Rep, Period>& rel_time)
       {
         return try_unlock_shared_and_lock_upgrade_until(
-            mars_boost_ksim::chrono::steady_clock::now() + rel_time);
+            mars_boost::chrono::steady_clock::now() + rel_time);
       }
       template <class Clock, class Duration>
       bool
       try_unlock_shared_and_lock_upgrade_until(
-          const mars_boost_ksim::chrono::time_point<Clock, Duration>& abs_time);
+          const mars_boost::chrono::time_point<Clock, Duration>& abs_time);
       BOOST_THREAD_INLINE void unlock_upgrade_and_lock_shared();
 
       // Upgrade <-> Exclusive
@@ -482,15 +482,15 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       template <class Rep, class Period>
       bool
       try_unlock_upgrade_and_lock_for(
-          const mars_boost_ksim::chrono::duration<Rep, Period>& rel_time)
+          const mars_boost::chrono::duration<Rep, Period>& rel_time)
       {
         return try_unlock_upgrade_and_lock_until(
-            mars_boost_ksim::chrono::steady_clock::now() + rel_time);
+            mars_boost::chrono::steady_clock::now() + rel_time);
       }
       template <class Clock, class Duration>
       bool
       try_unlock_upgrade_and_lock_until(
-          const mars_boost_ksim::chrono::time_point<Clock, Duration>& abs_time);
+          const mars_boost::chrono::time_point<Clock, Duration>& abs_time);
       BOOST_THREAD_INLINE void unlock_and_lock_upgrade();
 
 #if defined BOOST_THREAD_USES_DATETIME
@@ -519,17 +519,17 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template <class Clock, class Duration>
     bool
     upgrade_mutex::try_lock_until(
-        const mars_boost_ksim::chrono::time_point<Clock, Duration>& abs_time)
+        const mars_boost::chrono::time_point<Clock, Duration>& abs_time)
     {
-      mars_boost_ksim::unique_lock<mutex_t> lk(mut_);
+      mars_boost::unique_lock<mutex_t> lk(mut_);
       if (state_ & (write_entered_ | upgradable_entered_))
       {
         while (true)
         {
-          mars_boost_ksim::cv_status status = gate1_.wait_until(lk, abs_time);
+          mars_boost::cv_status status = gate1_.wait_until(lk, abs_time);
           if ((state_ & (write_entered_ | upgradable_entered_)) == 0)
             break;
-          if (status == mars_boost_ksim::cv_status::timeout)
+          if (status == mars_boost::cv_status::timeout)
             return false;
         }
       }
@@ -538,10 +538,10 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       {
         while (true)
         {
-          mars_boost_ksim::cv_status status = gate2_.wait_until(lk, abs_time);
+          mars_boost::cv_status status = gate2_.wait_until(lk, abs_time);
           if ((state_ & n_readers_) == 0)
             break;
-          if (status == mars_boost_ksim::cv_status::timeout)
+          if (status == mars_boost::cv_status::timeout)
           {
             state_ &= ~write_entered_;
             return false;
@@ -554,18 +554,18 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template <class Clock, class Duration>
     bool
     upgrade_mutex::try_lock_shared_until(
-        const mars_boost_ksim::chrono::time_point<Clock, Duration>& abs_time)
+        const mars_boost::chrono::time_point<Clock, Duration>& abs_time)
     {
-      mars_boost_ksim::unique_lock<mutex_t> lk(mut_);
+      mars_boost::unique_lock<mutex_t> lk(mut_);
       if ((state_ & write_entered_) || (state_ & n_readers_) == n_readers_)
       {
         while (true)
         {
-          mars_boost_ksim::cv_status status = gate1_.wait_until(lk, abs_time);
+          mars_boost::cv_status status = gate1_.wait_until(lk, abs_time);
           if ((state_ & write_entered_) == 0 &&
               (state_ & n_readers_) < n_readers_)
             break;
-          if (status == mars_boost_ksim::cv_status::timeout)
+          if (status == mars_boost::cv_status::timeout)
             return false;
         }
       }
@@ -578,19 +578,19 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template <class Clock, class Duration>
     bool
     upgrade_mutex::try_lock_upgrade_until(
-        const mars_boost_ksim::chrono::time_point<Clock, Duration>& abs_time)
+        const mars_boost::chrono::time_point<Clock, Duration>& abs_time)
     {
-      mars_boost_ksim::unique_lock<mutex_t> lk(mut_);
+      mars_boost::unique_lock<mutex_t> lk(mut_);
       if ((state_ & (write_entered_ | upgradable_entered_)) ||
           (state_ & n_readers_) == n_readers_)
       {
         while (true)
         {
-          mars_boost_ksim::cv_status status = gate1_.wait_until(lk, abs_time);
+          mars_boost::cv_status status = gate1_.wait_until(lk, abs_time);
           if ((state_ & (write_entered_ | upgradable_entered_)) == 0 &&
               (state_ & n_readers_) < n_readers_)
             break;
-          if (status == mars_boost_ksim::cv_status::timeout)
+          if (status == mars_boost::cv_status::timeout)
             return false;
         }
       }
@@ -603,7 +603,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #if defined BOOST_THREAD_USES_DATETIME
       bool upgrade_mutex::timed_lock(system_time const& abs_time)
       {
-        mars_boost_ksim::unique_lock<mutex_t> lk(mut_);
+        mars_boost::unique_lock<mutex_t> lk(mut_);
         if (state_ & (write_entered_ | upgradable_entered_))
         {
           while (true)
@@ -634,7 +634,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       }
       bool upgrade_mutex::timed_lock_shared(system_time const& abs_time)
       {
-        mars_boost_ksim::unique_lock<mutex_t> lk(mut_);
+        mars_boost::unique_lock<mutex_t> lk(mut_);
         if ((state_ & write_entered_) || (state_ & n_readers_) == n_readers_)
         {
           while (true)
@@ -654,7 +654,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       }
       bool upgrade_mutex::timed_lock_upgrade(system_time const& abs_time)
       {
-        mars_boost_ksim::unique_lock<mutex_t> lk(mut_);
+        mars_boost::unique_lock<mutex_t> lk(mut_);
         if ((state_ & (write_entered_ | upgradable_entered_)) ||
             (state_ & n_readers_) == n_readers_)
         {
@@ -678,17 +678,17 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template <class Clock, class Duration>
     bool
     upgrade_mutex::try_unlock_shared_and_lock_until(
-        const mars_boost_ksim::chrono::time_point<Clock, Duration>& abs_time)
+        const mars_boost::chrono::time_point<Clock, Duration>& abs_time)
     {
-      mars_boost_ksim::unique_lock<mutex_t> lk(mut_);
+      mars_boost::unique_lock<mutex_t> lk(mut_);
       if (state_ != 1)
       {
         while (true)
         {
-          mars_boost_ksim::cv_status status = gate2_.wait_until(lk, abs_time);
+          mars_boost::cv_status status = gate2_.wait_until(lk, abs_time);
           if (state_ == 1)
             break;
-          if (status == mars_boost_ksim::cv_status::timeout)
+          if (status == mars_boost::cv_status::timeout)
             return false;
         }
       }
@@ -699,17 +699,17 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template <class Clock, class Duration>
     bool
     upgrade_mutex::try_unlock_shared_and_lock_upgrade_until(
-        const mars_boost_ksim::chrono::time_point<Clock, Duration>& abs_time)
+        const mars_boost::chrono::time_point<Clock, Duration>& abs_time)
     {
-      mars_boost_ksim::unique_lock<mutex_t> lk(mut_);
+      mars_boost::unique_lock<mutex_t> lk(mut_);
       if ((state_ & (write_entered_ | upgradable_entered_)) != 0)
       {
         while (true)
         {
-          mars_boost_ksim::cv_status status = gate2_.wait_until(lk, abs_time);
+          mars_boost::cv_status status = gate2_.wait_until(lk, abs_time);
           if ((state_ & (write_entered_ | upgradable_entered_)) == 0)
             break;
-          if (status == mars_boost_ksim::cv_status::timeout)
+          if (status == mars_boost::cv_status::timeout)
             return false;
         }
       }
@@ -720,17 +720,17 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template <class Clock, class Duration>
     bool
     upgrade_mutex::try_unlock_upgrade_and_lock_until(
-        const mars_boost_ksim::chrono::time_point<Clock, Duration>& abs_time)
+        const mars_boost::chrono::time_point<Clock, Duration>& abs_time)
     {
-      mars_boost_ksim::unique_lock<mutex_t> lk(mut_);
+      mars_boost::unique_lock<mutex_t> lk(mut_);
       if ((state_ & n_readers_) != 1)
       {
         while (true)
         {
-          mars_boost_ksim::cv_status status = gate2_.wait_until(lk, abs_time);
+          mars_boost::cv_status status = gate2_.wait_until(lk, abs_time);
           if ((state_ & n_readers_) == 1)
             break;
-          if (status == mars_boost_ksim::cv_status::timeout)
+          if (status == mars_boost::cv_status::timeout)
             return false;
         }
       }
@@ -748,7 +748,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
     shared_mutex::~shared_mutex()
     {
-      mars_boost_ksim::lock_guard<mutex_t> _(mut_);
+      mars_boost::lock_guard<mutex_t> _(mut_);
     }
 
     // Exclusive ownership
@@ -756,7 +756,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     void
     shared_mutex::lock()
     {
-      mars_boost_ksim::unique_lock<mutex_t> lk(mut_);
+      mars_boost::unique_lock<mutex_t> lk(mut_);
       while (state_ & write_entered_)
         gate1_.wait(lk);
       state_ |= write_entered_;
@@ -767,7 +767,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     bool
     shared_mutex::try_lock()
     {
-      mars_boost_ksim::unique_lock<mutex_t> lk(mut_);
+      mars_boost::unique_lock<mutex_t> lk(mut_);
       if (state_ == 0)
       {
         state_ = write_entered_;
@@ -779,7 +779,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     void
     shared_mutex::unlock()
     {
-      mars_boost_ksim::lock_guard<mutex_t> _(mut_);
+      mars_boost::lock_guard<mutex_t> _(mut_);
       state_ = 0;
       gate1_.notify_all();
     }
@@ -789,7 +789,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     void
     shared_mutex::lock_shared()
     {
-      mars_boost_ksim::unique_lock<mutex_t> lk(mut_);
+      mars_boost::unique_lock<mutex_t> lk(mut_);
       while ((state_ & write_entered_) || (state_ & n_readers_) == n_readers_)
         gate1_.wait(lk);
       count_t num_readers = (state_ & n_readers_) + 1;
@@ -800,7 +800,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     bool
     shared_mutex::try_lock_shared()
     {
-      mars_boost_ksim::unique_lock<mutex_t> lk(mut_);
+      mars_boost::unique_lock<mutex_t> lk(mut_);
       count_t num_readers = state_ & n_readers_;
       if (!(state_ & write_entered_) && num_readers != n_readers_)
       {
@@ -815,7 +815,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     void
     shared_mutex::unlock_shared()
     {
-      mars_boost_ksim::lock_guard<mutex_t> _(mut_);
+      mars_boost::lock_guard<mutex_t> _(mut_);
       count_t num_readers = (state_ & n_readers_) - 1;
       state_ &= ~n_readers_;
       state_ |= num_readers;
@@ -842,7 +842,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
     upgrade_mutex::~upgrade_mutex()
     {
-      mars_boost_ksim::lock_guard<mutex_t> _(mut_);
+      mars_boost::lock_guard<mutex_t> _(mut_);
     }
 
     // Exclusive ownership
@@ -850,7 +850,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     void
     upgrade_mutex::lock()
     {
-      mars_boost_ksim::unique_lock<mutex_t> lk(mut_);
+      mars_boost::unique_lock<mutex_t> lk(mut_);
       while (state_ & (write_entered_ | upgradable_entered_))
         gate1_.wait(lk);
       state_ |= write_entered_;
@@ -861,7 +861,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     bool
     upgrade_mutex::try_lock()
     {
-      mars_boost_ksim::unique_lock<mutex_t> lk(mut_);
+      mars_boost::unique_lock<mutex_t> lk(mut_);
       if (state_ == 0)
       {
         state_ = write_entered_;
@@ -873,7 +873,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     void
     upgrade_mutex::unlock()
     {
-      mars_boost_ksim::lock_guard<mutex_t> _(mut_);
+      mars_boost::lock_guard<mutex_t> _(mut_);
       state_ = 0;
       gate1_.notify_all();
     }
@@ -883,7 +883,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     void
     upgrade_mutex::lock_shared()
     {
-      mars_boost_ksim::unique_lock<mutex_t> lk(mut_);
+      mars_boost::unique_lock<mutex_t> lk(mut_);
       while ((state_ & write_entered_) || (state_ & n_readers_) == n_readers_)
         gate1_.wait(lk);
       count_t num_readers = (state_ & n_readers_) + 1;
@@ -894,7 +894,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     bool
     upgrade_mutex::try_lock_shared()
     {
-      mars_boost_ksim::unique_lock<mutex_t> lk(mut_);
+      mars_boost::unique_lock<mutex_t> lk(mut_);
       count_t num_readers = state_ & n_readers_;
       if (!(state_ & write_entered_) && num_readers != n_readers_)
       {
@@ -909,7 +909,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     void
     upgrade_mutex::unlock_shared()
     {
-      mars_boost_ksim::lock_guard<mutex_t> _(mut_);
+      mars_boost::lock_guard<mutex_t> _(mut_);
       count_t num_readers = (state_ & n_readers_) - 1;
       state_ &= ~n_readers_;
       state_ |= num_readers;
@@ -930,7 +930,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     void
     upgrade_mutex::lock_upgrade()
     {
-      mars_boost_ksim::unique_lock<mutex_t> lk(mut_);
+      mars_boost::unique_lock<mutex_t> lk(mut_);
       while ((state_ & (write_entered_ | upgradable_entered_)) ||
           (state_ & n_readers_) == n_readers_)
         gate1_.wait(lk);
@@ -942,7 +942,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     bool
     upgrade_mutex::try_lock_upgrade()
     {
-      mars_boost_ksim::unique_lock<mutex_t> lk(mut_);
+      mars_boost::unique_lock<mutex_t> lk(mut_);
       count_t num_readers = state_ & n_readers_;
       if (!(state_ & (write_entered_ | upgradable_entered_))
           && num_readers != n_readers_)
@@ -959,7 +959,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     upgrade_mutex::unlock_upgrade()
     {
       {
-        mars_boost_ksim::lock_guard<mutex_t> _(mut_);
+        mars_boost::lock_guard<mutex_t> _(mut_);
         count_t num_readers = (state_ & n_readers_) - 1;
         state_ &= ~(upgradable_entered_ | n_readers_);
         state_ |= num_readers;
@@ -972,7 +972,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     bool
     upgrade_mutex::try_unlock_shared_and_lock()
     {
-      mars_boost_ksim::unique_lock<mutex_t> lk(mut_);
+      mars_boost::unique_lock<mutex_t> lk(mut_);
       if (state_ == 1)
       {
         state_ = write_entered_;
@@ -985,7 +985,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     upgrade_mutex::unlock_and_lock_shared()
     {
       {
-        mars_boost_ksim::lock_guard<mutex_t> _(mut_);
+        mars_boost::lock_guard<mutex_t> _(mut_);
         state_ = 1;
       }
       gate1_.notify_all();
@@ -996,7 +996,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     bool
     upgrade_mutex::try_unlock_shared_and_lock_upgrade()
     {
-      mars_boost_ksim::unique_lock<mutex_t> lk(mut_);
+      mars_boost::unique_lock<mutex_t> lk(mut_);
       if (!(state_ & (write_entered_ | upgradable_entered_)))
       {
         state_ |= upgradable_entered_;
@@ -1009,7 +1009,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     upgrade_mutex::unlock_upgrade_and_lock_shared()
     {
       {
-        mars_boost_ksim::lock_guard<mutex_t> _(mut_);
+        mars_boost::lock_guard<mutex_t> _(mut_);
         state_ &= ~upgradable_entered_;
       }
       gate1_.notify_all();
@@ -1020,7 +1020,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     void
     upgrade_mutex::unlock_upgrade_and_lock()
     {
-      mars_boost_ksim::unique_lock<mutex_t> lk(mut_);
+      mars_boost::unique_lock<mutex_t> lk(mut_);
       count_t num_readers = (state_ & n_readers_) - 1;
       state_ &= ~(upgradable_entered_ | n_readers_);
       state_ |= write_entered_ | num_readers;
@@ -1031,7 +1031,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     bool
     upgrade_mutex::try_unlock_upgrade_and_lock()
     {
-      mars_boost_ksim::unique_lock<mutex_t> lk(mut_);
+      mars_boost::unique_lock<mutex_t> lk(mut_);
       if (state_ == (upgradable_entered_ | 1))
       {
         state_ = write_entered_;
@@ -1044,7 +1044,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     upgrade_mutex::unlock_and_lock_upgrade()
     {
       {
-        mars_boost_ksim::lock_guard<mutex_t> _(mut_);
+        mars_boost::lock_guard<mutex_t> _(mut_);
         state_ = upgradable_entered_ | 1;
       }
       gate1_.notify_all();
@@ -1053,7 +1053,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
   }  // thread_v2
 }  // boost
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
   //using thread_v2::shared_mutex;
   using thread_v2::upgrade_mutex;
   typedef thread_v2::upgrade_mutex shared_mutex;

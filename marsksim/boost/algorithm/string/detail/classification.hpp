@@ -22,7 +22,7 @@
 #include <boost/algorithm/string/predicate_facade.hpp>
 #include <boost/type_traits/remove_const.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
     namespace algorithm {
         namespace detail {
 
@@ -69,7 +69,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             {
             private:
                 // set cannot operate on const value-type
-                typedef typename ::mars_boost_ksim::remove_const<CharT>::type set_value_type;
+                typedef typename ::mars_boost::remove_const<CharT>::type set_value_type;
 
             public:     
                 // Boost.ResultOf support
@@ -82,7 +82,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                     // Prepare storage
                     m_Storage.m_dynSet=0;
 
-                    std::size_t Size=::mars_boost_ksim::distance(Range);
+                    std::size_t Size=::mars_boost::distance(Range);
                     m_Size=Size;
                     set_value_type* Storage=0;
 
@@ -99,7 +99,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                     }
 
                     // Use fixed storage
-                    ::std::copy(::mars_boost_ksim::begin(Range), ::mars_boost_ksim::end(Range), Storage);
+                    ::std::copy(::mars_boost::begin(Range), ::mars_boost::end(Range), Storage);
                     ::std::sort(Storage, Storage+m_Size);
                 }
 
@@ -347,7 +347,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         } // namespace detail
     } // namespace algorithm
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 
 #endif  // BOOST_STRING_CLASSIFICATION_DETAIL_HPP

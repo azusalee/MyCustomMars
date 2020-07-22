@@ -20,7 +20,7 @@
 #pragma warning(disable:4250)
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim{
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost{
 
 #ifndef BOOST_IS_POLYMORPHIC
 
@@ -97,7 +97,7 @@ struct is_polymorphic_selector<true>
 template <class T>
 struct is_polymorphic_imp
 {
-   typedef is_polymorphic_selector< ::mars_boost_ksim::is_class<T>::value> selector;
+   typedef is_polymorphic_selector< ::mars_boost::is_class<T>::value> selector;
    typedef typename selector::template rebind<T> binder;
    typedef typename binder::type imp_type;
    BOOST_STATIC_CONSTANT(bool, value = imp_type::value);
@@ -105,7 +105,7 @@ struct is_polymorphic_imp
 
 } // namespace detail
 
-template <class T> struct is_polymorphic : public integral_constant<bool, ::mars_boost_ksim::detail::is_polymorphic_imp<T>::value> {};
+template <class T> struct is_polymorphic : public integral_constant<bool, ::mars_boost::detail::is_polymorphic_imp<T>::value> {};
 
 #else // BOOST_IS_POLYMORPHIC
 
@@ -113,7 +113,7 @@ template <class T> struct is_polymorphic : public integral_constant<bool, BOOST_
 
 #endif
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #if defined(BOOST_MSVC) && (BOOST_MSVC >= 1700)
 #pragma warning(pop)

@@ -83,14 +83,14 @@ namespace PlatformComm
 
         }
 
-        public bool startAlarm(int id, int after)
+        public bool startAlarmksim(int id, int after)
         {
-            return Alarm.start(id, after);
+            return Alarmksim.start(id, after);
         }
 
-        public bool stopAlarm(int id)
+        public bool stopAlarmksim(int id)
         {
-            return Alarm.stop(id);
+            return Alarmksim.stop(id);
         }
 
 

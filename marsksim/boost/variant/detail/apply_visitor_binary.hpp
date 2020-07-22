@@ -30,7 +30,7 @@
 #   include "boost/variant/detail/has_result_type.hpp"
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 //////////////////////////////////////////////////////////////////////////
 // function template apply_visitor(visitor, visitable1, visitable2)
@@ -108,7 +108,7 @@ public: // visitor interfaces
             , Value1
             > invoker(visitor_, value1);
 
-        return mars_boost_ksim::apply_visitor(invoker, visitable2_);
+        return mars_boost::apply_visitor(invoker, visitable2_);
     }
 
 private:
@@ -147,11 +147,11 @@ apply_visitor(
     , Visitable1& visitable1, Visitable2& visitable2
     )
 {
-    ::mars_boost_ksim::detail::variant::apply_visitor_binary_unwrap<
+    ::mars_boost::detail::variant::apply_visitor_binary_unwrap<
           Visitor, Visitable2
         > unwrapper(visitor, visitable2);
 
-    return mars_boost_ksim::apply_visitor(unwrapper, visitable1);
+    return mars_boost::apply_visitor(unwrapper, visitable1);
 }
 
 #undef BOOST_VARIANT_AUX_APPLY_VISITOR_NON_CONST_RESULT_TYPE
@@ -170,11 +170,11 @@ apply_visitor(
     , Visitable1& visitable1, Visitable2& visitable2
     )
 {
-    ::mars_boost_ksim::detail::variant::apply_visitor_binary_unwrap<
+    ::mars_boost::detail::variant::apply_visitor_binary_unwrap<
           const Visitor, Visitable2
         > unwrapper(visitor, visitable2);
 
-    return mars_boost_ksim::apply_visitor(unwrapper, visitable1);
+    return mars_boost::apply_visitor(unwrapper, visitable1);
 }
 
 
@@ -238,7 +238,7 @@ public: // visitor interfaces
             , Value1
             > invoker(visitor_, value1);
 
-        return mars_boost_ksim::apply_visitor(invoker, visitable2_);
+        return mars_boost::apply_visitor(invoker, visitable2_);
     }
 
 private:
@@ -249,32 +249,32 @@ private:
 
 template <typename Visitor, typename Visitable1, typename Visitable2>
 inline decltype(auto) apply_visitor(Visitor& visitor, Visitable1& visitable1, Visitable2& visitable2,
-    typename mars_boost_ksim::disable_if<
-        mars_boost_ksim::detail::variant::has_result_type<Visitor>
+    typename mars_boost::disable_if<
+        mars_boost::detail::variant::has_result_type<Visitor>
     >::type* = 0)
 {
-    ::mars_boost_ksim::detail::variant::apply_visitor_binary_unwrap_cpp14<
+    ::mars_boost::detail::variant::apply_visitor_binary_unwrap_cpp14<
           Visitor, Visitable2
         > unwrapper(visitor, visitable2);
 
-    return mars_boost_ksim::apply_visitor(unwrapper, visitable1);
+    return mars_boost::apply_visitor(unwrapper, visitable1);
 }
 
 template <typename Visitor, typename Visitable1, typename Visitable2>
 inline decltype(auto) apply_visitor(const Visitor& visitor, Visitable1& visitable1, Visitable2& visitable2,
-    typename mars_boost_ksim::disable_if<
-        mars_boost_ksim::detail::variant::has_result_type<Visitor>
+    typename mars_boost::disable_if<
+        mars_boost::detail::variant::has_result_type<Visitor>
     >::type* = 0)
 {
-    ::mars_boost_ksim::detail::variant::apply_visitor_binary_unwrap_cpp14<
+    ::mars_boost::detail::variant::apply_visitor_binary_unwrap_cpp14<
           const Visitor, Visitable2
         > unwrapper(visitor, visitable2);
 
-    return mars_boost_ksim::apply_visitor(unwrapper, visitable1);
+    return mars_boost::apply_visitor(unwrapper, visitable1);
 }
 
 #endif // !defined(BOOST_NO_CXX14_DECLTYPE_AUTO) && !defined(BOOST_NO_CXX11_DECLTYPE_N3276)
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_VARIANT_DETAIL_APPLY_VISITOR_BINARY_HPP

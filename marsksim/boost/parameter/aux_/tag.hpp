@@ -7,7 +7,7 @@
 # include <boost/parameter/aux_/unwrap_cv_reference.hpp>
 # include <boost/parameter/aux_/tagged_argument.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace parameter { namespace aux { 
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace parameter { namespace aux { 
 
 template <class Keyword, class ActualArg
 #if BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x564))
@@ -33,6 +33,6 @@ struct tag<Keyword,ActualArg,mpl::false_>
 };
 #endif 
 
-}}} // namespace mars_boost_ksim::parameter::aux_
+}}} // namespace mars_boost::parameter::aux_
 
 #endif // BOOST_PARAMETER_AUX_TAG_DWA2005610_HPP

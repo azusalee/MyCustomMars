@@ -26,7 +26,7 @@
 #if defined( BOOST_USE_WINDOWS_H )
 # include <windows.h>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace detail
     {
@@ -126,7 +126,7 @@ struct _SYSTEM_INFO;
 }
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace detail
     {
@@ -220,7 +220,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace detail
     {
@@ -356,7 +356,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 handle const res = create_event(0, type, state);
                 if(!res)
                 {
-                    mars_boost_ksim::throw_exception(thread_resource_error());
+                    mars_boost::throw_exception(thread_resource_error());
                 }
                 return res;
             }
@@ -380,7 +380,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 handle const res=create_anonymous_semaphore_nothrow(initial_count,max_count);
                 if(!res)
                 {
-                    mars_boost_ksim::throw_exception(thread_resource_error());
+                    mars_boost::throw_exception(thread_resource_error());
                 }
                 return res;
             }
@@ -393,7 +393,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 bool const success=DuplicateHandle(current_process,source,current_process,&new_handle,0,false,same_access_flag)!=0;
                 if(!success)
                 {
-                    mars_boost_ksim::throw_exception(thread_resource_error());
+                    mars_boost::throw_exception(thread_resource_error());
                 }
                 return new_handle;
             }
@@ -528,7 +528,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 #if defined(BOOST_MSVC) && (_MSC_VER>=1400)  && !defined(UNDER_CE)
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace detail
     {
@@ -560,7 +560,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 }
 #define BOOST_THREAD_BTS_DEFINED
 #elif (defined(BOOST_MSVC) || defined(BOOST_INTEL_WIN)) && defined(_M_IX86)
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace detail
     {
@@ -620,7 +620,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 #ifndef BOOST_THREAD_BTS_DEFINED
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace detail
     {

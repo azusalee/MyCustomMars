@@ -16,7 +16,7 @@
 #include "boost/type_traits/remove_reference.hpp"
 
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace detail { namespace variant {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace detail { namespace variant {
 
 template <typename T >
 struct has_result_type {
@@ -24,14 +24,14 @@ private:
     typedef char                      yes;
     typedef struct { char array[2]; } no;
 
-    template<typename C> static yes test(typename mars_boost_ksim::remove_reference<typename C::result_type>::type*);
+    template<typename C> static yes test(typename mars_boost::remove_reference<typename C::result_type>::type*);
     template<typename C> static no  test(...);
 
 public:
     BOOST_STATIC_CONSTANT(bool, value = sizeof(test<T>(0)) == sizeof(yes));
 };
 
-}}} // namespace mars_boost_ksim::detail::variant
+}}} // namespace mars_boost::detail::variant
 
 #endif // BOOST_VARIANT_DETAIL_HAS_RESULT_TYPE_HPP
 

@@ -12,7 +12,7 @@
 
 #include <boost/thread/detail/config.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace detail {
 namespace thread {
 
@@ -34,6 +34,6 @@ inline const Return_Type &force_cast(const Argument_Type &rSrc)
 
 } // namespace thread
 } // namespace detail
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // BOOST_FORCE_CAST_MJM012402_HPP

@@ -18,7 +18,7 @@
 #include <boost/range/end.hpp>
 #include <boost/assert.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range
     {
@@ -30,21 +30,21 @@ inline void overwrite( const SinglePassRange1& from, SinglePassRange2& to )
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<SinglePassRange2> ));
 
     BOOST_DEDUCED_TYPENAME range_iterator<const SinglePassRange1>::type
-        i = mars_boost_ksim::begin(from), e = mars_boost_ksim::end(from);
+        i = mars_boost::begin(from), e = mars_boost::end(from);
 
     BOOST_DEDUCED_TYPENAME range_iterator<SinglePassRange2>::type
-        out = mars_boost_ksim::begin(to);
+        out = mars_boost::begin(to);
 
 #ifndef NDEBUG
     BOOST_DEDUCED_TYPENAME range_iterator<SinglePassRange2>::type
-        last_out = mars_boost_ksim::end(to);
+        last_out = mars_boost::end(to);
 #endif
 
     for( ; i != e; ++out, ++i )
     {
 #ifndef NDEBUG
         BOOST_ASSERT( out != last_out
-            && "out of bounds in mars_boost_ksim::overwrite()" );
+            && "out of bounds in mars_boost::overwrite()" );
 #endif
         *out = *i;
     }
@@ -57,21 +57,21 @@ inline void overwrite( const SinglePassRange1& from, const SinglePassRange2& to 
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange2> ));
 
     BOOST_DEDUCED_TYPENAME range_iterator<const SinglePassRange1>::type
-        i = mars_boost_ksim::begin(from), e = mars_boost_ksim::end(from);
+        i = mars_boost::begin(from), e = mars_boost::end(from);
 
     BOOST_DEDUCED_TYPENAME range_iterator<const SinglePassRange2>::type
-        out = mars_boost_ksim::begin(to);
+        out = mars_boost::begin(to);
 
 #ifndef NDEBUG
     BOOST_DEDUCED_TYPENAME range_iterator<const SinglePassRange2>::type
-        last_out = mars_boost_ksim::end(to);
+        last_out = mars_boost::end(to);
 #endif
 
     for( ; i != e; ++out, ++i )
     {
 #ifndef NDEBUG
         BOOST_ASSERT( out != last_out
-            && "out of bounds in mars_boost_ksim::overwrite()" );
+            && "out of bounds in mars_boost::overwrite()" );
 #endif
         *out = *i;
     }
@@ -79,6 +79,6 @@ inline void overwrite( const SinglePassRange1& from, const SinglePassRange2& to 
 
     } // namespace range
     using range::overwrite;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

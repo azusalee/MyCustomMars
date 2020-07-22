@@ -9,7 +9,7 @@
 
 #include <boost/config.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 #ifndef BOOST_NO_CXX11_VARIADIC_TEMPLATES
 
@@ -65,6 +65,6 @@ BOOST_FORCEINLINE BOOST_CXX14_CONSTEXPR void ignore_unused()
 
 #endif
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_CORE_IGNORE_UNUSED_HPP

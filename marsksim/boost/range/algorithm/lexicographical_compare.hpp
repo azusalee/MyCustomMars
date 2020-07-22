@@ -15,7 +15,7 @@
 #include <boost/range/concepts.hpp>
 #include <algorithm>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range
     {
@@ -33,8 +33,8 @@ inline bool lexicographical_compare(const SinglePassRange1& rng1,
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange1> ));
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange2> ));
     return std::lexicographical_compare(
-        mars_boost_ksim::begin(rng1), mars_boost_ksim::end(rng1),
-        mars_boost_ksim::begin(rng2), mars_boost_ksim::end(rng2));
+        mars_boost::begin(rng1), mars_boost::end(rng1),
+        mars_boost::begin(rng2), mars_boost::end(rng2));
 }
 
 /// \overload
@@ -47,12 +47,12 @@ inline bool lexicographical_compare(const SinglePassRange1& rng1,
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange1> ));
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange2> ));
     return std::lexicographical_compare(
-        mars_boost_ksim::begin(rng1), mars_boost_ksim::end(rng1),
-        mars_boost_ksim::begin(rng2), mars_boost_ksim::end(rng2), pred);
+        mars_boost::begin(rng1), mars_boost::end(rng1),
+        mars_boost::begin(rng2), mars_boost::end(rng2), pred);
 }
 
     } // namespace range
     using range::lexicographical_compare;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

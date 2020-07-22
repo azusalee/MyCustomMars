@@ -15,9 +15,9 @@
 
 #if defined(__sgi) && defined(_COMPILER_VERSION) && _COMPILER_VERSION <= 730
 // Work around a compiler bug.
-// mars_boost_ksim::python::tuple has to be seen by the compiler before the
-// mars_boost_ksim::tuple class template.
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace python { class tuple; }}
+// mars_boost::python::tuple has to be seen by the compiler before the
+// mars_boost::tuple class template.
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace python { class tuple; }}
 #endif
 
 #include "boost/config.hpp"
@@ -28,7 +28,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #include "boost/tuple/detail/tuple_basic.hpp"
 
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {    
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {    
 
 using tuples::tuple;
 using tuples::make_tuple;
@@ -61,7 +61,7 @@ get(const tuples::cons<HT, TT>& c) {
 
 #endif // BOOST_NO_USING_TEMPLATE
    
-} // end namespace mars_boost_ksim
+} // end namespace mars_boost
 
 
 #endif // BOOST_TUPLE_HPP

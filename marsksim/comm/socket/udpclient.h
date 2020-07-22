@@ -12,7 +12,7 @@
 
 
 /*
- * UdpClient.h
+ * UdpClientksim.h
  *
  *  Created on: 2014-9-5
  *      Author: zhouzhijie
@@ -33,21 +33,21 @@
 #define IPV4_BROADCAST_IP "255.255.255.255"
 
 struct UdpSendData;
-class UdpClient;
+class UdpClientksim;
 
-class IAsyncUdpClientEvent {
+class IAsyncUdpClientksimEvent {
   public:
-    virtual ~IAsyncUdpClientEvent() {}
-    virtual void OnError(UdpClient* _this, int _errno) = 0;
-    virtual void OnDataGramRead(UdpClient* _this, void* _buf, size_t _len) = 0;
-    virtual void OnDataSent(UdpClient* _this) = 0;
+    virtual ~IAsyncUdpClientksimEvent() {}
+    virtual void OnError(UdpClientksim* _this, int _errno) = 0;
+    virtual void OnDataGramRead(UdpClientksim* _this, void* _buf, size_t _len) = 0;
+    virtual void OnDataSent(UdpClientksim* _this) = 0;
 };
 
-class UdpClient {
+class UdpClientksim {
   public:
-    UdpClient(const std::string& _ip, int _port);
-    UdpClient(const std::string& _ip, int _port, IAsyncUdpClientEvent* _event);
-    ~UdpClient();
+    UdpClientksim(const std::string& _ip, int _port);
+    UdpClientksim(const std::string& _ip, int _port, IAsyncUdpClientksimEvent* _event);
+    ~UdpClientksim();
 
     /*
      * return -2 break, -1 error, 0 timeout, else handle size
@@ -70,7 +70,7 @@ class UdpClient {
   private:
     SOCKET fd_socket_;
     struct sockaddr_in addr_;
-    IAsyncUdpClientEvent* event_;
+    IAsyncUdpClientksimEvent* event_;
 
 	SocketBreaker breaker_;
     SocketSelect selector_;

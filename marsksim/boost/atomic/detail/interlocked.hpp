@@ -427,7 +427,7 @@ extern "C" long __cdecl _InterlockedExchange( long volatile *, long );
 #define BOOST_ATOMIC_INTERLOCKED_IMPORT __declspec(dllimport)
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace atomics {
 namespace detail {
 
@@ -437,9 +437,9 @@ BOOST_ATOMIC_INTERLOCKED_IMPORT long __stdcall InterlockedCompareExchange(long v
 BOOST_ATOMIC_INTERLOCKED_IMPORT long __stdcall InterlockedExchange(long volatile*, long);
 BOOST_ATOMIC_INTERLOCKED_IMPORT long __stdcall InterlockedExchangeAdd(long volatile*, long);
 
-#define BOOST_ATOMIC_INTERLOCKED_COMPARE_EXCHANGE(dest, exchange, compare) mars_boost_ksim::atomics::detail::InterlockedCompareExchange((long*)(dest), (long)(exchange), (long)(compare))
-#define BOOST_ATOMIC_INTERLOCKED_EXCHANGE(dest, newval) mars_boost_ksim::atomics::detail::InterlockedExchange((long*)(dest), (long)(newval))
-#define BOOST_ATOMIC_INTERLOCKED_EXCHANGE_ADD(dest, addend) mars_boost_ksim::atomics::detail::InterlockedExchangeAdd((long*)(dest), (long)(addend))
+#define BOOST_ATOMIC_INTERLOCKED_COMPARE_EXCHANGE(dest, exchange, compare) mars_boost::atomics::detail::InterlockedCompareExchange((long*)(dest), (long)(exchange), (long)(compare))
+#define BOOST_ATOMIC_INTERLOCKED_EXCHANGE(dest, newval) mars_boost::atomics::detail::InterlockedExchange((long*)(dest), (long)(newval))
+#define BOOST_ATOMIC_INTERLOCKED_EXCHANGE_ADD(dest, addend) mars_boost::atomics::detail::InterlockedExchangeAdd((long*)(dest), (long)(addend))
 
 #if defined(_WIN64)
 
@@ -450,12 +450,12 @@ BOOST_ATOMIC_INTERLOCKED_IMPORT __int64 __stdcall InterlockedExchangeAdd64(__int
 BOOST_ATOMIC_INTERLOCKED_IMPORT void* __stdcall InterlockedCompareExchangePointer(void* volatile *, void*, void*);
 BOOST_ATOMIC_INTERLOCKED_IMPORT void* __stdcall InterlockedExchangePointer(void* volatile *, void*);
 
-#define BOOST_ATOMIC_INTERLOCKED_COMPARE_EXCHANGE64(dest, exchange, compare) mars_boost_ksim::atomics::detail::InterlockedCompareExchange64((__int64*)(dest), (__int64)(exchange), (__int64)(compare))
-#define BOOST_ATOMIC_INTERLOCKED_EXCHANGE64(dest, newval) mars_boost_ksim::atomics::detail::InterlockedExchange64((__int64*)(dest), (__int64)(newval))
-#define BOOST_ATOMIC_INTERLOCKED_EXCHANGE_ADD64(dest, addend) mars_boost_ksim::atomics::detail::InterlockedExchangeAdd64((__int64*)(dest), (__int64)(addend))
+#define BOOST_ATOMIC_INTERLOCKED_COMPARE_EXCHANGE64(dest, exchange, compare) mars_boost::atomics::detail::InterlockedCompareExchange64((__int64*)(dest), (__int64)(exchange), (__int64)(compare))
+#define BOOST_ATOMIC_INTERLOCKED_EXCHANGE64(dest, newval) mars_boost::atomics::detail::InterlockedExchange64((__int64*)(dest), (__int64)(newval))
+#define BOOST_ATOMIC_INTERLOCKED_EXCHANGE_ADD64(dest, addend) mars_boost::atomics::detail::InterlockedExchangeAdd64((__int64*)(dest), (__int64)(addend))
 
-#define BOOST_ATOMIC_INTERLOCKED_COMPARE_EXCHANGE_POINTER(dest, exchange, compare) mars_boost_ksim::atomics::detail::InterlockedCompareExchangePointer((void**)(dest), (void*)(exchange), (void*)(compare))
-#define BOOST_ATOMIC_INTERLOCKED_EXCHANGE_POINTER(dest, newval) mars_boost_ksim::atomics::detail::InterlockedExchangePointer((void**)(dest), (void*)(newval))
+#define BOOST_ATOMIC_INTERLOCKED_COMPARE_EXCHANGE_POINTER(dest, exchange, compare) mars_boost::atomics::detail::InterlockedCompareExchangePointer((void**)(dest), (void*)(exchange), (void*)(compare))
+#define BOOST_ATOMIC_INTERLOCKED_EXCHANGE_POINTER(dest, newval) mars_boost::atomics::detail::InterlockedExchangePointer((void**)(dest), (void*)(newval))
 #define BOOST_ATOMIC_INTERLOCKED_EXCHANGE_ADD_POINTER(dest, byte_offset) ((void*)BOOST_ATOMIC_INTERLOCKED_EXCHANGE_ADD64(dest, byte_offset))
 
 #else // defined(_WIN64)
@@ -470,7 +470,7 @@ BOOST_ATOMIC_INTERLOCKED_IMPORT void* __stdcall InterlockedExchangePointer(void*
 
 } // namespace detail
 } // namespace atomics
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #undef BOOST_ATOMIC_INTERLOCKED_IMPORT
 

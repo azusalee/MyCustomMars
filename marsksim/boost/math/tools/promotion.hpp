@@ -24,22 +24,22 @@
 
 // Boost type traits:
 #include <boost/math/tools/config.hpp>
-#include <boost/type_traits/is_floating_point.hpp> // for mars_boost_ksim::is_floating_point;
-#include <boost/type_traits/is_integral.hpp> // for mars_boost_ksim::is_integral
-#include <boost/type_traits/is_convertible.hpp> // for mars_boost_ksim::is_convertible
-#include <boost/type_traits/is_same.hpp>// for mars_boost_ksim::is_same
-#include <boost/type_traits/remove_cv.hpp>// for mars_boost_ksim::remove_cv
+#include <boost/type_traits/is_floating_point.hpp> // for mars_boost::is_floating_point;
+#include <boost/type_traits/is_integral.hpp> // for mars_boost::is_integral
+#include <boost/type_traits/is_convertible.hpp> // for mars_boost::is_convertible
+#include <boost/type_traits/is_same.hpp>// for mars_boost::is_same
+#include <boost/type_traits/remove_cv.hpp>// for mars_boost::remove_cv
 // Boost Template meta programming:
-#include <boost/mpl/if.hpp> // for mars_boost_ksim::mpl::if_c.
-#include <boost/mpl/and.hpp> // for mars_boost_ksim::mpl::if_c.
-#include <boost/mpl/or.hpp> // for mars_boost_ksim::mpl::if_c.
-#include <boost/mpl/not.hpp> // for mars_boost_ksim::mpl::if_c.
+#include <boost/mpl/if.hpp> // for mars_boost::mpl::if_c.
+#include <boost/mpl/and.hpp> // for mars_boost::mpl::if_c.
+#include <boost/mpl/or.hpp> // for mars_boost::mpl::if_c.
+#include <boost/mpl/not.hpp> // for mars_boost::mpl::if_c.
 
 #ifdef BOOST_MATH_NO_LONG_DOUBLE_MATH_FUNCTIONS
 #include <boost/static_assert.hpp>
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace math
   {
@@ -101,7 +101,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #endif
              >::type,
           // else one or the other is a user-defined type:
-          typename mpl::if_< typename mpl::and_<mpl::not_<is_floating_point<T2P> >, ::mars_boost_ksim::is_convertible<T1P, T2P> >, T2P, T1P>::type>::type type;
+          typename mpl::if_< typename mpl::and_<mpl::not_<is_floating_point<T2P> >, ::mars_boost::is_convertible<T1P, T2P> >, T2P, T1P>::type>::type type;
       }; // promote_arg2
       // These full specialisations reduce mpl::if_ usage and speed up
       // compilation:
@@ -145,7 +145,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
          //
          // Guard against use of long double if it's not supported:
          //
-         BOOST_STATIC_ASSERT_MSG((0 == ::mars_boost_ksim::is_same<type, long double>::value), "Sorry, but this platform does not have sufficient long double support for the special functions to be reliably implemented.");
+         BOOST_STATIC_ASSERT_MSG((0 == ::mars_boost::is_same<type, long double>::value), "Sorry, but this platform does not have sufficient long double support for the special functions to be reliably implemented.");
 #endif
       };
 
@@ -176,7 +176,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
     } // namespace tools
   } // namespace math
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_MATH_PROMOTION_HPP
 

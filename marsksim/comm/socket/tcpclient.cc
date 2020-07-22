@@ -12,7 +12,7 @@
 
 
 /*
- * TcpClient.h
+ * TcpClientksim.h
  *
  *  Created on: 2013-5-7
  *      Author: yerungui && jiahong
@@ -33,15 +33,15 @@
 #define strdup _strdup
 #endif
 
-TcpClient::TcpClient(const char* _ip, uint16_t _port, MTcpEvent& _event, int _timeout)
+TcpClientksim::TcpClientksim(const char* _ip, uint16_t _port, MTcpEventksim& _event, int _timeout)
     : ip_(strdup(_ip)) , port_(_port) , event_(_event)
     , socket_(INVALID_SOCKET) , have_read_data_(false) , will_disconnect_(false) , writedbufid_(0)
-    , thread_(boost_ksim::bind(&TcpClient::__RunThread, this))
+    , thread_(boost_ksim::bind(&TcpClientksim::__RunThread, this))
     , timeout_(_timeout), status_(kTcpInit) {
     if (!pipe_.IsCreateSuc()) status_ = kTcpInitErr;
 }
 
-TcpClient::~TcpClient() {
+TcpClientksim::~TcpClientksim() {
     DisconnectAndWait();
 
     for (std::list<AutoBuffer* >::iterator it = lst_buffer_.begin();
@@ -53,7 +53,7 @@ TcpClient::~TcpClient() {
     free(ip_);
 }
 
-bool TcpClient::Connect() {
+bool TcpClientksim::Connect() {
     ScopedLock lock(connect_mutex_);
 
     if (kTcpInit != status_) {
@@ -73,7 +73,7 @@ bool TcpClient::Connect() {
     return true;
 }
 
-void TcpClient::Disconnect() {
+void TcpClientksim::Disconnect() {
     if (will_disconnect_) return;
 
     ScopedLock lock(read_disconnect_mutex_);
@@ -82,20 +82,20 @@ void TcpClient::Disconnect() {
 }
 
 
-void TcpClient::DisconnectAndWait() {
+void TcpClientksim::DisconnectAndWait() {
     Disconnect();
 
     if (thread_.isruning())
         thread_.join();
 }
 
-bool TcpClient::HaveDataRead() const {
+bool TcpClientksim::HaveDataRead() const {
     if (kTcpConnected != status_) return false;
 
     return have_read_data_;
 }
 
-ssize_t TcpClient::Read(void* _buf, unsigned int _len) {
+ssize_t TcpClientksim::Read(void* _buf, unsigned int _len) {
     if (kTcpConnected != status_) return -1;
 
     xassert2(INVALID_SOCKET != socket_);
@@ -108,14 +108,14 @@ ssize_t TcpClient::Read(void* _buf, unsigned int _len) {
     return ret;
 }
 
-bool TcpClient::HaveDataWrite() const {
+bool TcpClientksim::HaveDataWrite() const {
     if (kTcpConnected != status_) return false;
 
     ScopedLock lock(write_mutex_);
     return !lst_buffer_.empty();
 }
 
-int TcpClient::Write(const void* _buf, unsigned int _len) {
+int TcpClientksim::Write(const void* _buf, unsigned int _len) {
     if (kTcpConnected != status_) return -1;
 
     AutoBuffer* tmpbuff = new AutoBuffer;
@@ -129,7 +129,7 @@ int TcpClient::Write(const void* _buf, unsigned int _len) {
     return writedbufid_;
 }
 
-int TcpClient::WritePostData(void* _buf, unsigned int _len) {
+int TcpClientksim::WritePostData(void* _buf, unsigned int _len) {
     if (kTcpConnected != status_) return -1;
 
     AutoBuffer* tmpbuff = new AutoBuffer;
@@ -142,7 +142,7 @@ int TcpClient::WritePostData(void* _buf, unsigned int _len) {
     return writedbufid_;
 }
 
-void TcpClient::__Run() {
+void TcpClientksim::__Run() {
     status_ = kTcpConnecting;
 
     struct sockaddr_in _addr;
@@ -350,7 +350,7 @@ void TcpClient::__Run() {
     }
 }
 
-void TcpClient::__RunThread() {
+void TcpClientksim::__RunThread() {
     __Run();
 
     if (INVALID_SOCKET != socket_) {
@@ -359,6 +359,6 @@ void TcpClient::__RunThread() {
     }
 }
 
-void TcpClient::__SendBreak() {
+void TcpClientksim::__SendBreak() {
     pipe_.Break();
 }

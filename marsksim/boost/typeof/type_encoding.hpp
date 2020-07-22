@@ -8,9 +8,9 @@
 #define BOOST_TYPEOF_REGISTER_TYPE_IMPL(T, Id)                          \
                                                                         \
     template<class V> struct encode_type_impl<V, T >                    \
-        : mars_boost_ksim::type_of::push_back<V, mars_boost_ksim::mpl::size_t<Id> >         \
+        : mars_boost::type_of::push_back<V, mars_boost::mpl::size_t<Id> >         \
     {};                                                                 \
-    template<class Iter> struct decode_type_impl<mars_boost_ksim::mpl::size_t<Id>, Iter> \
+    template<class Iter> struct decode_type_impl<mars_boost::mpl::size_t<Id>, Iter> \
     {                                                                   \
         typedef T type;                                                 \
         typedef Iter iter;                                              \

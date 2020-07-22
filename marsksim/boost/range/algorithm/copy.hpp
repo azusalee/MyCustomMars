@@ -16,7 +16,7 @@
 #include <boost/range/iterator_range.hpp>
 #include <algorithm>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range
     {
@@ -31,11 +31,11 @@ template< class SinglePassRange, class OutputIterator >
 inline OutputIterator copy(const SinglePassRange& rng, OutputIterator out)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange> ));
-    return std::copy(mars_boost_ksim::begin(rng),mars_boost_ksim::end(rng),out);
+    return std::copy(mars_boost::begin(rng),mars_boost::end(rng),out);
 }
 
     } // namespace range
     using range::copy;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

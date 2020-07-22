@@ -16,7 +16,7 @@
 #include <boost/range/iterator.hpp>
 #include <algorithm>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range
     {
@@ -34,11 +34,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         )
     {
         BOOST_RANGE_CONCEPT_ASSERT(( ForwardRangeConcept<const ForwardRange> ));
-        return std::rotate_copy(mars_boost_ksim::begin(rng), middle, mars_boost_ksim::end(rng), target);
+        return std::rotate_copy(mars_boost::begin(rng), middle, mars_boost::end(rng), target);
     }
 
     } // namespace range
     using range::rotate_copy;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

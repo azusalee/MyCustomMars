@@ -14,7 +14,7 @@
 #include <boost/iostreams/traits.hpp>
 #include <boost/iostreams/write.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace iostreams {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace iostreams {
 
 template<typename Device>
 class non_blocking_adapter {

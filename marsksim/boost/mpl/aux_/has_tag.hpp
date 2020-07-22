@@ -16,7 +16,7 @@
 
 #include <boost/mpl/has_xxx.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl { namespace aux {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl { namespace aux {
 BOOST_MPL_HAS_XXX_TRAIT_NAMED_DEF(has_tag, tag, false)
 }}}
 

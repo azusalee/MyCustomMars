@@ -53,7 +53,7 @@
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 template<class T> class shared_ptr;
@@ -213,7 +213,7 @@ template< class T, std::size_t N > struct sp_extent< T[N] >
 
 // enable_shared_from_this support
 
-template< class X, class Y, class T > inline void sp_enable_shared_from_this( mars_boost_ksim::shared_ptr<X> const * ppx, Y const * py, mars_boost_ksim::enable_shared_from_this< T > const * pe )
+template< class X, class Y, class T > inline void sp_enable_shared_from_this( mars_boost::shared_ptr<X> const * ppx, Y const * py, mars_boost::enable_shared_from_this< T > const * pe )
 {
     if( pe != 0 )
     {
@@ -221,7 +221,7 @@ template< class X, class Y, class T > inline void sp_enable_shared_from_this( ma
     }
 }
 
-template< class X, class Y > inline void sp_enable_shared_from_this( mars_boost_ksim::shared_ptr<X> * ppx, Y const * py, mars_boost_ksim::enable_shared_from_raw const * pe );
+template< class X, class Y > inline void sp_enable_shared_from_this( mars_boost::shared_ptr<X> * ppx, Y const * py, mars_boost::enable_shared_from_raw const * pe );
 
 #ifdef _MANAGED
 
@@ -279,43 +279,43 @@ template< class Y, class T > inline void sp_assert_convertible()
 
 // pointer constructor helper
 
-template< class T, class Y > inline void sp_pointer_construct( mars_boost_ksim::shared_ptr< T > * ppx, Y * p, mars_boost_ksim::detail::shared_count & pn )
+template< class T, class Y > inline void sp_pointer_construct( mars_boost::shared_ptr< T > * ppx, Y * p, mars_boost::detail::shared_count & pn )
 {
-    mars_boost_ksim::detail::shared_count( p ).swap( pn );
-    mars_boost_ksim::detail::sp_enable_shared_from_this( ppx, p, p );
+    mars_boost::detail::shared_count( p ).swap( pn );
+    mars_boost::detail::sp_enable_shared_from_this( ppx, p, p );
 }
 
 #if !defined( BOOST_NO_TEMPLATE_PARTIAL_SPECIALIZATION )
 
-template< class T, class Y > inline void sp_pointer_construct( mars_boost_ksim::shared_ptr< T[] > * /*ppx*/, Y * p, mars_boost_ksim::detail::shared_count & pn )
+template< class T, class Y > inline void sp_pointer_construct( mars_boost::shared_ptr< T[] > * /*ppx*/, Y * p, mars_boost::detail::shared_count & pn )
 {
     sp_assert_convertible< Y[], T[] >();
-    mars_boost_ksim::detail::shared_count( p, mars_boost_ksim::checked_array_deleter< T >() ).swap( pn );
+    mars_boost::detail::shared_count( p, mars_boost::checked_array_deleter< T >() ).swap( pn );
 }
 
-template< class T, std::size_t N, class Y > inline void sp_pointer_construct( mars_boost_ksim::shared_ptr< T[N] > * /*ppx*/, Y * p, mars_boost_ksim::detail::shared_count & pn )
+template< class T, std::size_t N, class Y > inline void sp_pointer_construct( mars_boost::shared_ptr< T[N] > * /*ppx*/, Y * p, mars_boost::detail::shared_count & pn )
 {
     sp_assert_convertible< Y[N], T[N] >();
-    mars_boost_ksim::detail::shared_count( p, mars_boost_ksim::checked_array_deleter< T >() ).swap( pn );
+    mars_boost::detail::shared_count( p, mars_boost::checked_array_deleter< T >() ).swap( pn );
 }
 
 #endif // !defined( BOOST_NO_TEMPLATE_PARTIAL_SPECIALIZATION )
 
 // deleter constructor helper
 
-template< class T, class Y > inline void sp_deleter_construct( mars_boost_ksim::shared_ptr< T > * ppx, Y * p )
+template< class T, class Y > inline void sp_deleter_construct( mars_boost::shared_ptr< T > * ppx, Y * p )
 {
-    mars_boost_ksim::detail::sp_enable_shared_from_this( ppx, p, p );
+    mars_boost::detail::sp_enable_shared_from_this( ppx, p, p );
 }
 
 #if !defined( BOOST_NO_TEMPLATE_PARTIAL_SPECIALIZATION )
 
-template< class T, class Y > inline void sp_deleter_construct( mars_boost_ksim::shared_ptr< T[] > * /*ppx*/, Y * /*p*/ )
+template< class T, class Y > inline void sp_deleter_construct( mars_boost::shared_ptr< T[] > * /*ppx*/, Y * /*p*/ )
 {
     sp_assert_convertible< Y[], T[] >();
 }
 
-template< class T, std::size_t N, class Y > inline void sp_deleter_construct( mars_boost_ksim::shared_ptr< T[N] > * /*ppx*/, Y * /*p*/ )
+template< class T, std::size_t N, class Y > inline void sp_deleter_construct( mars_boost::shared_ptr< T[N] > * /*ppx*/, Y * /*p*/ )
 {
     sp_assert_convertible< Y[N], T[N] >();
 }
@@ -342,7 +342,7 @@ private:
 
 public:
 
-    typedef typename mars_boost_ksim::detail::sp_element< T >::type element_type;
+    typedef typename mars_boost::detail::sp_element< T >::type element_type;
 
     shared_ptr() BOOST_NOEXCEPT : px( 0 ), pn() // never throws in 1.30+
     {
@@ -350,7 +350,7 @@ public:
 
 #if !defined( BOOST_NO_CXX11_NULLPTR )
 
-    shared_ptr( mars_boost_ksim::detail::sp_nullptr_t ) BOOST_NOEXCEPT : px( 0 ), pn() // never throws
+    shared_ptr( mars_boost::detail::sp_nullptr_t ) BOOST_NOEXCEPT : px( 0 ), pn() // never throws
     {
     }
 
@@ -359,7 +359,7 @@ public:
     template<class Y>
     explicit shared_ptr( Y * p ): px( p ), pn() // Y must be complete
     {
-        mars_boost_ksim::detail::sp_pointer_construct( this, p, pn );
+        mars_boost::detail::sp_pointer_construct( this, p, pn );
     }
 
     //
@@ -370,12 +370,12 @@ public:
 
     template<class Y, class D> shared_ptr( Y * p, D d ): px( p ), pn( p, d )
     {
-        mars_boost_ksim::detail::sp_deleter_construct( this, p );
+        mars_boost::detail::sp_deleter_construct( this, p );
     }
 
 #if !defined( BOOST_NO_CXX11_NULLPTR )
 
-    template<class D> shared_ptr( mars_boost_ksim::detail::sp_nullptr_t p, D d ): px( p ), pn( p, d )
+    template<class D> shared_ptr( mars_boost::detail::sp_nullptr_t p, D d ): px( p ), pn( p, d )
     {
     }
 
@@ -385,12 +385,12 @@ public:
 
     template<class Y, class D, class A> shared_ptr( Y * p, D d, A a ): px( p ), pn( p, d, a )
     {
-        mars_boost_ksim::detail::sp_deleter_construct( this, p );
+        mars_boost::detail::sp_deleter_construct( this, p );
     }
 
 #if !defined( BOOST_NO_CXX11_NULLPTR )
 
-    template<class D, class A> shared_ptr( mars_boost_ksim::detail::sp_nullptr_t p, D d, A a ): px( p ), pn( p, d, a )
+    template<class D, class A> shared_ptr( mars_boost::detail::sp_nullptr_t p, D d, A a ): px( p ), pn( p, d, a )
     {
     }
 
@@ -411,15 +411,15 @@ public:
     template<class Y>
     explicit shared_ptr( weak_ptr<Y> const & r ): pn( r.pn ) // may throw
     {
-        mars_boost_ksim::detail::sp_assert_convertible< Y, T >();
+        mars_boost::detail::sp_assert_convertible< Y, T >();
 
         // it is now safe to copy r.px, as pn(r.pn) did not throw
         px = r.px;
     }
 
     template<class Y>
-    shared_ptr( weak_ptr<Y> const & r, mars_boost_ksim::detail::sp_nothrow_tag )
-    BOOST_NOEXCEPT : px( 0 ), pn( r.pn, mars_boost_ksim::detail::sp_nothrow_tag() )
+    shared_ptr( weak_ptr<Y> const & r, mars_boost::detail::sp_nothrow_tag )
+    BOOST_NOEXCEPT : px( 0 ), pn( r.pn, mars_boost::detail::sp_nothrow_tag() )
     {
         if( !pn.empty() )
         {
@@ -430,7 +430,7 @@ public:
     template<class Y>
 #if !defined( BOOST_SP_NO_SP_CONVERTIBLE )
 
-    shared_ptr( shared_ptr<Y> const & r, typename mars_boost_ksim::detail::sp_enable_if_convertible<Y,T>::type = mars_boost_ksim::detail::sp_empty() )
+    shared_ptr( shared_ptr<Y> const & r, typename mars_boost::detail::sp_enable_if_convertible<Y,T>::type = mars_boost::detail::sp_empty() )
 
 #else
 
@@ -439,7 +439,7 @@ public:
 #endif
     BOOST_NOEXCEPT : px( r.px ), pn( r.pn )
     {
-        mars_boost_ksim::detail::sp_assert_convertible< Y, T >();
+        mars_boost::detail::sp_assert_convertible< Y, T >();
     }
 
     // aliasing
@@ -453,12 +453,12 @@ public:
     template<class Y>
     explicit shared_ptr( std::auto_ptr<Y> & r ): px(r.get()), pn()
     {
-        mars_boost_ksim::detail::sp_assert_convertible< Y, T >();
+        mars_boost::detail::sp_assert_convertible< Y, T >();
 
         Y * tmp = r.get();
-        pn = mars_boost_ksim::detail::shared_count( r );
+        pn = mars_boost::detail::shared_count( r );
 
-        mars_boost_ksim::detail::sp_deleter_construct( this, tmp );
+        mars_boost::detail::sp_deleter_construct( this, tmp );
     }
 
 #if !defined( BOOST_NO_CXX11_RVALUE_REFERENCES )
@@ -466,27 +466,27 @@ public:
     template<class Y>
     shared_ptr( std::auto_ptr<Y> && r ): px(r.get()), pn()
     {
-        mars_boost_ksim::detail::sp_assert_convertible< Y, T >();
+        mars_boost::detail::sp_assert_convertible< Y, T >();
 
         Y * tmp = r.get();
-        pn = mars_boost_ksim::detail::shared_count( r );
+        pn = mars_boost::detail::shared_count( r );
 
-        mars_boost_ksim::detail::sp_deleter_construct( this, tmp );
+        mars_boost::detail::sp_deleter_construct( this, tmp );
     }
 
 #elif !defined( BOOST_NO_SFINAE ) && !defined( BOOST_NO_TEMPLATE_PARTIAL_SPECIALIZATION )
 
     template<class Ap>
-    explicit shared_ptr( Ap r, typename mars_boost_ksim::detail::sp_enable_if_auto_ptr<Ap, int>::type = 0 ): px( r.get() ), pn()
+    explicit shared_ptr( Ap r, typename mars_boost::detail::sp_enable_if_auto_ptr<Ap, int>::type = 0 ): px( r.get() ), pn()
     {
         typedef typename Ap::element_type Y;
 
-        mars_boost_ksim::detail::sp_assert_convertible< Y, T >();
+        mars_boost::detail::sp_assert_convertible< Y, T >();
 
         Y * tmp = r.get();
-        pn = mars_boost_ksim::detail::shared_count( r );
+        pn = mars_boost::detail::shared_count( r );
 
-        mars_boost_ksim::detail::sp_deleter_construct( this, tmp );
+        mars_boost::detail::sp_deleter_construct( this, tmp );
     }
 
 #endif // BOOST_NO_SFINAE, BOOST_NO_TEMPLATE_PARTIAL_SPECIALIZATION
@@ -498,25 +498,25 @@ public:
     template< class Y, class D >
     shared_ptr( std::unique_ptr< Y, D > && r ): px( r.get() ), pn()
     {
-        mars_boost_ksim::detail::sp_assert_convertible< Y, T >();
+        mars_boost::detail::sp_assert_convertible< Y, T >();
 
         typename std::unique_ptr< Y, D >::pointer tmp = r.get();
-        pn = mars_boost_ksim::detail::shared_count( r );
+        pn = mars_boost::detail::shared_count( r );
 
-        mars_boost_ksim::detail::sp_deleter_construct( this, tmp );
+        mars_boost::detail::sp_deleter_construct( this, tmp );
     }
 
 #endif
 
     template< class Y, class D >
-    shared_ptr( mars_boost_ksim::movelib::unique_ptr< Y, D > r ): px( r.get() ), pn()
+    shared_ptr( mars_boost::movelib::unique_ptr< Y, D > r ): px( r.get() ), pn()
     {
-        mars_boost_ksim::detail::sp_assert_convertible< Y, T >();
+        mars_boost::detail::sp_assert_convertible< Y, T >();
 
-        typename mars_boost_ksim::movelib::unique_ptr< Y, D >::pointer tmp = r.get();
-        pn = mars_boost_ksim::detail::shared_count( r );
+        typename mars_boost::movelib::unique_ptr< Y, D >::pointer tmp = r.get();
+        pn = mars_boost::detail::shared_count( r );
 
-        mars_boost_ksim::detail::sp_deleter_construct( this, tmp );
+        mars_boost::detail::sp_deleter_construct( this, tmp );
     }
 
     // assignment
@@ -559,7 +559,7 @@ public:
 #elif !defined( BOOST_NO_SFINAE ) && !defined( BOOST_NO_TEMPLATE_PARTIAL_SPECIALIZATION )
 
     template<class Ap>
-    typename mars_boost_ksim::detail::sp_enable_if_auto_ptr< Ap, shared_ptr & >::type operator=( Ap r )
+    typename mars_boost::detail::sp_enable_if_auto_ptr< Ap, shared_ptr & >::type operator=( Ap r )
     {
         this_type( r ).swap( *this );
         return *this;
@@ -581,20 +581,20 @@ public:
 #endif
 
     template<class Y, class D>
-    shared_ptr & operator=( mars_boost_ksim::movelib::unique_ptr<Y, D> r )
+    shared_ptr & operator=( mars_boost::movelib::unique_ptr<Y, D> r )
     {
         // this_type( static_cast< unique_ptr<Y, D> && >( r ) ).swap( *this );
 
-        mars_boost_ksim::detail::sp_assert_convertible< Y, T >();
+        mars_boost::detail::sp_assert_convertible< Y, T >();
 
-        typename mars_boost_ksim::movelib::unique_ptr< Y, D >::pointer p = r.get();
+        typename mars_boost::movelib::unique_ptr< Y, D >::pointer p = r.get();
 
         shared_ptr tmp;
 
         tmp.px = p;
-        tmp.pn = mars_boost_ksim::detail::shared_count( r );
+        tmp.pn = mars_boost::detail::shared_count( r );
 
-        mars_boost_ksim::detail::sp_deleter_construct( &tmp, p );
+        mars_boost::detail::sp_deleter_construct( &tmp, p );
 
         tmp.swap( *this );
 
@@ -614,7 +614,7 @@ public:
     template<class Y>
 #if !defined( BOOST_SP_NO_SP_CONVERTIBLE )
 
-    shared_ptr( shared_ptr<Y> && r, typename mars_boost_ksim::detail::sp_enable_if_convertible<Y,T>::type = mars_boost_ksim::detail::sp_empty() )
+    shared_ptr( shared_ptr<Y> && r, typename mars_boost::detail::sp_enable_if_convertible<Y,T>::type = mars_boost::detail::sp_empty() )
 
 #else
 
@@ -623,7 +623,7 @@ public:
 #endif
     BOOST_NOEXCEPT : px( r.px ), pn()
     {
-        mars_boost_ksim::detail::sp_assert_convertible< Y, T >();
+        mars_boost::detail::sp_assert_convertible< Y, T >();
 
         pn.swap( r.pn );
         r.px = 0;
@@ -646,7 +646,7 @@ public:
 
 #if !defined( BOOST_NO_CXX11_NULLPTR )
 
-    shared_ptr & operator=( mars_boost_ksim::detail::sp_nullptr_t ) BOOST_NOEXCEPT // never throws
+    shared_ptr & operator=( mars_boost::detail::sp_nullptr_t ) BOOST_NOEXCEPT // never throws
     {
         this_type().swap(*this);
         return *this;
@@ -681,26 +681,26 @@ public:
     }
     
     // never throws (but has a BOOST_ASSERT in it, so not marked with BOOST_NOEXCEPT)
-    typename mars_boost_ksim::detail::sp_dereference< T >::type operator* () const
+    typename mars_boost::detail::sp_dereference< T >::type operator* () const
     {
         BOOST_ASSERT( px != 0 );
         return *px;
     }
     
     // never throws (but has a BOOST_ASSERT in it, so not marked with BOOST_NOEXCEPT)
-    typename mars_boost_ksim::detail::sp_member_access< T >::type operator-> () const
+    typename mars_boost::detail::sp_member_access< T >::type operator-> () const
     {
         BOOST_ASSERT( px != 0 );
         return px;
     }
     
     // never throws (but has a BOOST_ASSERT in it, so not marked with BOOST_NOEXCEPT)
-    typename mars_boost_ksim::detail::sp_array_access< T >::type operator[] ( std::ptrdiff_t i ) const
+    typename mars_boost::detail::sp_array_access< T >::type operator[] ( std::ptrdiff_t i ) const
     {
         BOOST_ASSERT( px != 0 );
-        BOOST_ASSERT( i >= 0 && ( i < mars_boost_ksim::detail::sp_extent< T >::value || mars_boost_ksim::detail::sp_extent< T >::value == 0 ) );
+        BOOST_ASSERT( i >= 0 && ( i < mars_boost::detail::sp_extent< T >::value || mars_boost::detail::sp_extent< T >::value == 0 ) );
 
-        return static_cast< typename mars_boost_ksim::detail::sp_array_access< T >::type >( px[ i ] );
+        return static_cast< typename mars_boost::detail::sp_array_access< T >::type >( px[ i ] );
     }
 
     element_type * get() const BOOST_NOEXCEPT
@@ -737,7 +737,7 @@ public:
         return pn < rhs.pn;
     }
 
-    void * _internal_get_deleter( mars_boost_ksim::detail::sp_typeinfo const & ti ) const BOOST_NOEXCEPT
+    void * _internal_get_deleter( mars_boost::detail::sp_typeinfo const & ti ) const BOOST_NOEXCEPT
     {
         return pn.get_deleter( ti );
     }
@@ -766,7 +766,7 @@ private:
 #endif
 
     element_type * px;                 // contained pointer
-    mars_boost_ksim::detail::shared_count pn;    // reference counter
+    mars_boost::detail::shared_count pn;    // reference counter
 
 };  // shared_ptr
 
@@ -793,22 +793,22 @@ template<class T> inline bool operator!=(shared_ptr<T> const & a, shared_ptr<T> 
 
 #if !defined( BOOST_NO_CXX11_NULLPTR )
 
-template<class T> inline bool operator==( shared_ptr<T> const & p, mars_boost_ksim::detail::sp_nullptr_t ) BOOST_NOEXCEPT
+template<class T> inline bool operator==( shared_ptr<T> const & p, mars_boost::detail::sp_nullptr_t ) BOOST_NOEXCEPT
 {
     return p.get() == 0;
 }
 
-template<class T> inline bool operator==( mars_boost_ksim::detail::sp_nullptr_t, shared_ptr<T> const & p ) BOOST_NOEXCEPT
+template<class T> inline bool operator==( mars_boost::detail::sp_nullptr_t, shared_ptr<T> const & p ) BOOST_NOEXCEPT
 {
     return p.get() == 0;
 }
 
-template<class T> inline bool operator!=( shared_ptr<T> const & p, mars_boost_ksim::detail::sp_nullptr_t ) BOOST_NOEXCEPT
+template<class T> inline bool operator!=( shared_ptr<T> const & p, mars_boost::detail::sp_nullptr_t ) BOOST_NOEXCEPT
 {
     return p.get() != 0;
 }
 
-template<class T> inline bool operator!=( mars_boost_ksim::detail::sp_nullptr_t, shared_ptr<T> const & p ) BOOST_NOEXCEPT
+template<class T> inline bool operator!=( mars_boost::detail::sp_nullptr_t, shared_ptr<T> const & p ) BOOST_NOEXCEPT
 {
     return p.get() != 0;
 }
@@ -865,7 +865,7 @@ template<class T, class U> shared_ptr<T> reinterpret_pointer_cast( shared_ptr<U>
     return shared_ptr<T>( r, p );
 }
 
-// get_pointer() enables mars_boost_ksim::mem_fn to recognize shared_ptr
+// get_pointer() enables mars_boost::mem_fn to recognize shared_ptr
 
 template<class T> inline typename shared_ptr<T>::element_type * get_pointer(shared_ptr<T> const & p) BOOST_NOEXCEPT
 {
@@ -953,7 +953,7 @@ public:
 
     template<typename D> D* get_deleter() const BOOST_NOEXCEPT
     {
-        return mars_boost_ksim::detail::basic_get_deleter<D>( deleter_ );
+        return mars_boost::detail::basic_get_deleter<D>( deleter_ );
     }
 
     template< class T> void operator()( T* )
@@ -967,11 +967,11 @@ public:
 
 template<class D, class T> D * get_deleter( shared_ptr<T> const & p ) BOOST_NOEXCEPT
 {
-    D *del = mars_boost_ksim::detail::basic_get_deleter<D>(p);
+    D *del = mars_boost::detail::basic_get_deleter<D>(p);
 
     if(del == 0)
     {
-        mars_boost_ksim::detail::esft2_deleter_wrapper *del_wrapper = mars_boost_ksim::detail::basic_get_deleter<boost_ksim::detail::esft2_deleter_wrapper>(p);
+        mars_boost::detail::esft2_deleter_wrapper *del_wrapper = mars_boost::detail::basic_get_deleter<boost_ksim::detail::esft2_deleter_wrapper>(p);
 // The following get_deleter method call is fully qualified because
 // older versions of gcc (2.95, 3.2.3) fail to compile it when written del_wrapper->get_deleter<D>()
         if(del_wrapper) del = del_wrapper->::boost_ksim::detail::esft2_deleter_wrapper::get_deleter<D>();
@@ -991,7 +991,7 @@ template<class T> inline bool atomic_is_lock_free( shared_ptr<T> const * /*p*/ )
 
 template<class T> shared_ptr<T> atomic_load( shared_ptr<T> const * p )
 {
-    mars_boost_ksim::detail::spinlock_pool<2>::scoped_lock lock( p );
+    mars_boost::detail::spinlock_pool<2>::scoped_lock lock( p );
     return *p;
 }
 
@@ -1002,7 +1002,7 @@ template<class T> inline shared_ptr<T> atomic_load_explicit( shared_ptr<T> const
 
 template<class T> void atomic_store( shared_ptr<T> * p, shared_ptr<T> r )
 {
-    mars_boost_ksim::detail::spinlock_pool<2>::scoped_lock lock( p );
+    mars_boost::detail::spinlock_pool<2>::scoped_lock lock( p );
     p->swap( r );
 }
 
@@ -1013,7 +1013,7 @@ template<class T> inline void atomic_store_explicit( shared_ptr<T> * p, shared_p
 
 template<class T> shared_ptr<T> atomic_exchange( shared_ptr<T> * p, shared_ptr<T> r )
 {
-    mars_boost_ksim::detail::spinlock & sp = mars_boost_ksim::detail::spinlock_pool<2>::spinlock_for( p );
+    mars_boost::detail::spinlock & sp = mars_boost::detail::spinlock_pool<2>::spinlock_for( p );
 
     sp.lock();
     p->swap( r );
@@ -1029,7 +1029,7 @@ template<class T> shared_ptr<T> atomic_exchange_explicit( shared_ptr<T> * p, sha
 
 template<class T> bool atomic_compare_exchange( shared_ptr<T> * p, shared_ptr<T> * v, shared_ptr<T> w )
 {
-    mars_boost_ksim::detail::spinlock & sp = mars_boost_ksim::detail::spinlock_pool<2>::spinlock_for( p );
+    mars_boost::detail::spinlock & sp = mars_boost::detail::spinlock_pool<2>::spinlock_for( p );
 
     sp.lock();
 
@@ -1063,12 +1063,12 @@ template<class T> inline bool atomic_compare_exchange_explicit( shared_ptr<T> * 
 
 template< class T > struct hash;
 
-template< class T > std::size_t hash_value( mars_boost_ksim::shared_ptr<T> const & p ) BOOST_NOEXCEPT
+template< class T > std::size_t hash_value( mars_boost::shared_ptr<T> const & p ) BOOST_NOEXCEPT
 {
-    return mars_boost_ksim::hash< typename mars_boost_ksim::shared_ptr<T>::element_type* >()( p.get() );
+    return mars_boost::hash< typename mars_boost::shared_ptr<T>::element_type* >()( p.get() );
 }
 
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #if defined( BOOST_SP_DISABLE_DEPRECATED )
 #pragma GCC diagnostic pop

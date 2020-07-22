@@ -94,7 +94,7 @@ struct name<BOOST_MPL_PP_PARAMS(i,T)>::rebind \
 
 #else // __EDG_VERSION__
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl { namespace aux {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl { namespace aux {
 template< typename T > struct has_rebind_tag;
 }}}
 
@@ -113,21 +113,21 @@ template< typename T > struct has_rebind_tag;
 #if BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x610))
 #   define BOOST_MPL_AUX_LAMBDA_SUPPORT_HAS_REBIND(i, name, params) \
 template< BOOST_MPL_PP_PARAMS(i,typename T) > \
-::mars_boost_ksim::mpl::aux::yes_tag operator|( \
-      ::mars_boost_ksim::mpl::aux::has_rebind_tag<int> \
+::mars_boost::mpl::aux::yes_tag operator|( \
+      ::mars_boost::mpl::aux::has_rebind_tag<int> \
     , name<BOOST_MPL_PP_PARAMS(i,T)>* \
     ); \
-::mars_boost_ksim::mpl::aux::no_tag operator|( \
-      ::mars_boost_ksim::mpl::aux::has_rebind_tag<int> \
-    , name< BOOST_MPL_PP_ENUM(i,::mars_boost_ksim::mpl::na) >* \
+::mars_boost::mpl::aux::no_tag operator|( \
+      ::mars_boost::mpl::aux::has_rebind_tag<int> \
+    , name< BOOST_MPL_PP_ENUM(i,::mars_boost::mpl::na) >* \
     ); \
 /**/
 #elif !BOOST_WORKAROUND(BOOST_MSVC, < 1300)
 #   define BOOST_MPL_AUX_LAMBDA_SUPPORT_HAS_REBIND(i, name, params) \
 template< BOOST_MPL_PP_PARAMS(i,typename T) > \
-::mars_boost_ksim::mpl::aux::yes_tag operator|( \
-      ::mars_boost_ksim::mpl::aux::has_rebind_tag<int> \
-    , ::mars_boost_ksim::mpl::aux::has_rebind_tag< name<BOOST_MPL_PP_PARAMS(i,T)> >* \
+::mars_boost::mpl::aux::yes_tag operator|( \
+      ::mars_boost::mpl::aux::has_rebind_tag<int> \
+    , ::mars_boost::mpl::aux::has_rebind_tag< name<BOOST_MPL_PP_PARAMS(i,T)> >* \
     ); \
 /**/
 #else

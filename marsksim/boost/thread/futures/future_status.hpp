@@ -11,7 +11,7 @@
 #include <boost/thread/detail/config.hpp>
 #include <boost/core/scoped_enum.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   //enum class future_status
   BOOST_SCOPED_ENUM_DECLARE_BEGIN(future_status)

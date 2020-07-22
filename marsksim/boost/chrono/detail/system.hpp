@@ -12,17 +12,17 @@
 #include <boost/system/error_code.hpp>
 
 #if ((BOOST_VERSION / 100000) < 2) && ((BOOST_VERSION / 100 % 1000) < 44)
-#define BOOST_CHRONO_SYSTEM_CATEGORY mars_boost_ksim::system::system_category
+#define BOOST_CHRONO_SYSTEM_CATEGORY mars_boost::system::system_category
 #else
-#define BOOST_CHRONO_SYSTEM_CATEGORY mars_boost_ksim::system::system_category()
+#define BOOST_CHRONO_SYSTEM_CATEGORY mars_boost::system::system_category()
 #endif
 
 #ifdef BOOST_SYSTEM_NO_DEPRECATED
-#define BOOST_CHRONO_THROWS mars_boost_ksim::throws()
-#define BOOST_CHRONO_IS_THROWS(EC) (&EC==&mars_boost_ksim::throws())
+#define BOOST_CHRONO_THROWS mars_boost::throws()
+#define BOOST_CHRONO_IS_THROWS(EC) (&EC==&mars_boost::throws())
 #else
-#define BOOST_CHRONO_THROWS mars_boost_ksim::system::throws
-#define BOOST_CHRONO_IS_THROWS(EC) (&EC==&mars_boost_ksim::system::throws)
+#define BOOST_CHRONO_THROWS mars_boost::system::throws
+#define BOOST_CHRONO_IS_THROWS(EC) (&EC==&mars_boost::system::throws)
 #endif
 
 #endif

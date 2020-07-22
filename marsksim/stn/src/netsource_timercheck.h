@@ -30,7 +30,7 @@
 
 #include "net_source.h"
 
-class CommFrequencyLimit;
+class CommFrequencyLimitksim;
 
 namespace marsksim {
     namespace stn {
@@ -60,10 +60,10 @@ class NetSourceksimTimerCheck {
     NetSourceksim* net_source_;
     SocketBreaker breaker_;
     SocketSelect seletor_;
-    CommFrequencyLimit* frequency_limit_;
+    CommFrequencyLimitksim* frequency_limit_;
     LongLink& longlink_;
 
-    MessageQueueksim::ScopeRegister asyncreg_;
+    MessageQueueksim::ScopeRegisterksim asyncreg_;
     MessageQueueksim::MessagePost_t asyncpost_;
     NetSourceksim::DnsUtil dns_util_;
 };

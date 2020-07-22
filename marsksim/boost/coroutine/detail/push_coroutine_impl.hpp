@@ -24,7 +24,7 @@
 #  include BOOST_ABI_PREFIX
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace coroutines {
 
 struct stack_context;
@@ -97,7 +97,7 @@ public:
                     * callee_,
                     & to) ) );
         flags_ &= ~flag_running;
-        if ( from->do_unwind) mars_boost_ksim::throw_exception(forced_unwind());
+        if ( from->do_unwind) mars_boost::throw_exception(forced_unwind());
         if ( except_) rethrow_exception( except_);
     }
 
@@ -114,7 +114,7 @@ public:
                     * callee_,
                     & to) ) );
         flags_ &= ~flag_running;
-        if ( from->do_unwind) mars_boost_ksim::throw_exception(forced_unwind());
+        if ( from->do_unwind) mars_boost::throw_exception(forced_unwind());
         if ( except_) rethrow_exception( except_);
     }
 
@@ -187,7 +187,7 @@ public:
                     * callee_,
                     & to) ) );
         flags_ &= ~flag_running;
-        if ( from->do_unwind) mars_boost_ksim::throw_exception(forced_unwind());
+        if ( from->do_unwind) mars_boost::throw_exception(forced_unwind());
         if ( except_) rethrow_exception( except_);
     }
 
@@ -260,7 +260,7 @@ public:
                     * callee_,
                     & to) ) );
         flags_ &= ~flag_running;
-        if ( from->do_unwind) mars_boost_ksim::throw_exception(forced_unwind());
+        if ( from->do_unwind) mars_boost::throw_exception(forced_unwind());
         if ( except_) rethrow_exception( except_);
     }
 

@@ -30,7 +30,7 @@
 #include <boost/move/detail/meta_utils.hpp>
 #include <boost/move/detail/type_traits.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 //! If this trait yields to true
 //! (<i>has_trivial_destructor_after_move &lt;T&gt;::value == true</i>)
@@ -43,18 +43,18 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 //! when inserted in containers.
 template <class T>
 struct has_trivial_destructor_after_move
-   : ::mars_boost_ksim::move_detail::is_trivially_destructible<T>
+   : ::mars_boost::move_detail::is_trivially_destructible<T>
 {};
 
 //! By default this traits returns
-//! <pre>mars_boost_ksim::is_nothrow_move_constructible<T>::value && mars_boost_ksim::is_nothrow_move_assignable<T>::value </pre>.
+//! <pre>mars_boost::is_nothrow_move_constructible<T>::value && mars_boost::is_nothrow_move_assignable<T>::value </pre>.
 //! Classes with non-throwing move constructor
 //! and assignment can specialize this trait to obtain some performance improvements.
 template <class T>
 struct has_nothrow_move
 {
-   static const bool value = mars_boost_ksim::move_detail::is_nothrow_move_constructible<T>::value &&
-                             mars_boost_ksim::move_detail::is_nothrow_move_assignable<T>::value;
+   static const bool value = mars_boost::move_detail::is_nothrow_move_constructible<T>::value &&
+                             mars_boost::move_detail::is_nothrow_move_assignable<T>::value;
 };
 
 namespace move_detail {
@@ -70,7 +70,7 @@ struct is_nothrow_move_constructible_or_uncopyable
 };
 
 }  //move_detail {
-}  //namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+}  //namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 #include <boost/move/detail/config_end.hpp>
 

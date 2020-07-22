@@ -10,11 +10,11 @@
 #include <iterator>
 #include <cstddef>           // std::ptrdiff_t
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 using std::iterator;
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_ITERATOR_HPP

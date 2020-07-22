@@ -21,7 +21,7 @@
 #include <boost/range/empty.hpp>
 #include <boost/range/as_literal.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
     namespace algorithm {
         namespace detail {
 
@@ -41,7 +41,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 // Construction
                 template< typename SearchT >
                 first_finderF( const SearchT& Search, PredicateT Comp ) :
-                    m_Search(::mars_boost_ksim::begin(Search), ::mars_boost_ksim::end(Search)), m_Comp(Comp) {}
+                    m_Search(::mars_boost::begin(Search), ::mars_boost::end(Search)), m_Comp(Comp) {}
                 first_finderF(
                         search_iterator_type SearchBegin,
                         search_iterator_type SearchEnd,
@@ -64,7 +64,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                         ++OuterIt)
                     {
                         // Sanity check
-                        if( mars_boost_ksim::empty(m_Search) )
+                        if( mars_boost::empty(m_Search) )
                             return result_type( End, End );
 
                         input_iterator_type InnerIt=OuterIt;
@@ -108,7 +108,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 // Construction
                 template< typename SearchT >
                 last_finderF( const SearchT& Search, PredicateT Comp ) :
-                    m_Search(::mars_boost_ksim::begin(Search), ::mars_boost_ksim::end(Search)), m_Comp(Comp) {}
+                    m_Search(::mars_boost::begin(Search), ::mars_boost::end(Search)), m_Comp(Comp) {}
                 last_finderF(
                         search_iterator_type SearchBegin,
                         search_iterator_type SearchEnd,
@@ -124,10 +124,10 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 {
                     typedef iterator_range<ForwardIteratorT> result_type;
 
-                    if( mars_boost_ksim::empty(m_Search) )
+                    if( mars_boost::empty(m_Search) )
                         return result_type( End, End );
 
-                    typedef BOOST_STRING_TYPENAME mars_boost_ksim::detail::
+                    typedef BOOST_STRING_TYPENAME mars_boost::detail::
                         iterator_traits<ForwardIteratorT>::iterator_category category;
 
                     return findit( Begin, End, category() );
@@ -153,7 +153,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                     while( M )
                     {
                         Last=M;
-                        M=first_finder( ::mars_boost_ksim::end(M), End );
+                        M=first_finder( ::mars_boost::end(M), End );
                     }
 
                     return Last;
@@ -223,7 +223,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                         const SearchT& Search,
                         int Nth,
                         PredicateT Comp) :
-                    m_Search(::mars_boost_ksim::begin(Search), ::mars_boost_ksim::end(Search)),
+                    m_Search(::mars_boost::begin(Search), ::mars_boost::end(Search)),
                     m_Nth(Nth),
                     m_Comp(Comp) {}
                 nth_finderF(
@@ -265,7 +265,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                     typedef iterator_range<ForwardIteratorT> result_type;
 
                     // Sanity check
-                    if( mars_boost_ksim::empty(m_Search) )
+                    if( mars_boost::empty(m_Search) )
                         return result_type( End, End );
 
                     // Instantiate find functor
@@ -277,7 +277,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                     for( unsigned int n=0; n<=N; ++n )
                     {
                         // find next match
-                        M=first_finder( ::mars_boost_ksim::end(M), End );
+                        M=first_finder( ::mars_boost::end(M), End );
 
                         if ( !M )
                         {
@@ -299,7 +299,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                     typedef iterator_range<ForwardIteratorT> result_type;
 
                     // Sanity check
-                    if( mars_boost_ksim::empty(m_Search) )
+                    if( mars_boost::empty(m_Search) )
                         return result_type( End, End );
 
                     // Instantiate find functor
@@ -311,7 +311,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                     for( unsigned int n=1; n<=N; ++n )
                     {
                         // find next match
-                        M=last_finder( Begin, ::mars_boost_ksim::begin(M) );
+                        M=last_finder( Begin, ::mars_boost::begin(M) );
 
                         if ( !M )
                         {
@@ -375,10 +375,10 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 ForwardIteratorT End,
                 unsigned int N )
             {
-                typedef BOOST_STRING_TYPENAME mars_boost_ksim::detail::
+                typedef BOOST_STRING_TYPENAME mars_boost::detail::
                     iterator_traits<ForwardIteratorT>::iterator_category category;
 
-                return ::mars_boost_ksim::algorithm::detail::find_head_impl( Begin, End, N, category() );
+                return ::mars_boost::algorithm::detail::find_head_impl( Begin, End, N, category() );
             }
 
             template< typename ForwardIteratorT >
@@ -448,10 +448,10 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 ForwardIteratorT End,
                 unsigned int N )
             {
-                typedef BOOST_STRING_TYPENAME mars_boost_ksim::detail::
+                typedef BOOST_STRING_TYPENAME mars_boost::detail::
                     iterator_traits<ForwardIteratorT>::iterator_category category;
 
-                return ::mars_boost_ksim::algorithm::detail::find_tail_impl( Begin, End, N, category() );
+                return ::mars_boost::algorithm::detail::find_tail_impl( Begin, End, N, category() );
             }
 
 
@@ -479,14 +479,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 {
                     if(m_N>=0)
                     {
-                        return ::mars_boost_ksim::algorithm::detail::find_head_impl( Begin, End, m_N );
+                        return ::mars_boost::algorithm::detail::find_head_impl( Begin, End, m_N );
                     }
                     else
                     {
                         iterator_range<ForwardIteratorT> Res=
-                            ::mars_boost_ksim::algorithm::detail::find_tail_impl( Begin, End, -m_N );
+                            ::mars_boost::algorithm::detail::find_tail_impl( Begin, End, -m_N );
 
-                        return ::mars_boost_ksim::make_iterator_range(Begin, Res.begin());
+                        return ::mars_boost::make_iterator_range(Begin, Res.begin());
                     }
                 }
 
@@ -517,14 +517,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 {
                     if(m_N>=0)
                     {
-                        return ::mars_boost_ksim::algorithm::detail::find_tail_impl( Begin, End, m_N );
+                        return ::mars_boost::algorithm::detail::find_tail_impl( Begin, End, m_N );
                     }
                     else
                     {
                         iterator_range<ForwardIteratorT> Res=
-                            ::mars_boost_ksim::algorithm::detail::find_head_impl( Begin, End, -m_N );
+                            ::mars_boost::algorithm::detail::find_head_impl( Begin, End, -m_N );
 
-                        return ::mars_boost_ksim::make_iterator_range(Res.end(), End);
+                        return ::mars_boost::make_iterator_range(Res.end(), End);
                     }
                 }
 
@@ -634,6 +634,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         } // namespace detail
     } // namespace algorithm
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif  // BOOST_STRING_FINDER_DETAIL_HPP

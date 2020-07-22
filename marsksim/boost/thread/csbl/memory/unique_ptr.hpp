@@ -16,7 +16,7 @@
 #include <boost/move/unique_ptr.hpp>
 #include <boost/move/make_unique.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace csbl
   {

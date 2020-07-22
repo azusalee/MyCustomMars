@@ -17,7 +17,7 @@
 #include <boost/date_time/time_resolution_traits.hpp> // absolute_value
 #include <boost/date_time/gregorian/conversion.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 namespace posix_time {
 
@@ -40,9 +40,9 @@ namespace posix_time {
 
   //! Convert a time to a tm structure truncating any fractional seconds
   inline
-  std::tm to_tm(const mars_boost_ksim::posix_time::ptime& t) {
-    std::tm timetm = mars_boost_ksim::gregorian::to_tm(t.date());
-    mars_boost_ksim::posix_time::time_duration td = t.time_of_day();
+  std::tm to_tm(const mars_boost::posix_time::ptime& t) {
+    std::tm timetm = mars_boost::gregorian::to_tm(t.date());
+    mars_boost::posix_time::time_duration td = t.time_of_day();
     timetm.tm_hour = td.hours();
     timetm.tm_min = td.minutes();
     timetm.tm_sec = td.seconds();
@@ -51,7 +51,7 @@ namespace posix_time {
   }
   //! Convert a time_duration to a tm structure truncating any fractional seconds and zeroing fields for date components
   inline
-  std::tm to_tm(const mars_boost_ksim::posix_time::time_duration& td) {
+  std::tm to_tm(const mars_boost::posix_time::time_duration& td) {
     std::tm timetm;
     std::memset(&timetm, 0, sizeof(timetm));
     timetm.tm_hour = date_time::absolute_value(td.hours());
@@ -64,7 +64,7 @@ namespace posix_time {
   //! Convert a tm struct to a ptime ignoring is_dst flag
   inline
   ptime ptime_from_tm(const std::tm& timetm) {
-    mars_boost_ksim::gregorian::date d = mars_boost_ksim::gregorian::date_from_tm(timetm);
+    mars_boost::gregorian::date d = mars_boost::gregorian::date_from_tm(timetm);
     return ptime(d, time_duration(timetm.tm_hour, timetm.tm_min, timetm.tm_sec));
   }
 
@@ -82,18 +82,18 @@ namespace posix_time {
    *
    * \note The function is templated on the FILETIME type, so that
    *       it can be used with both native FILETIME and the ad-hoc
-   *       mars_boost_ksim::date_time::winapi::file_time type.
+   *       mars_boost::date_time::winapi::file_time type.
    */
   template< typename TimeT, typename FileTimeT >
   inline
   TimeT from_ftime(const FileTimeT& ft)
   {
-    return mars_boost_ksim::date_time::time_from_ftime<TimeT>(ft);
+    return mars_boost::date_time::time_from_ftime<TimeT>(ft);
   }
 
 #endif // BOOST_HAS_FTIME
 
-} } //namespace mars_boost_ksim::posix_time
+} } //namespace mars_boost::posix_time
 
 
 

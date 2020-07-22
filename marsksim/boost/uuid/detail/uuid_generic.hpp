@@ -7,7 +7,7 @@
 /*!
  * \file   uuid/detail/uuid_generic.hpp
  *
- * \brief  This header contains generic implementation of \c mars_boost_ksim::uuid operations.
+ * \brief  This header contains generic implementation of \c mars_boost::uuid operations.
  */
 
 #ifndef BOOST_UUID_DETAIL_UUID_GENERIC_HPP_INCLUDED_
@@ -15,7 +15,7 @@
 
 #include <string.h>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace uuids {
 
 inline bool uuid::is_nil() const BOOST_NOEXCEPT
@@ -46,6 +46,6 @@ inline bool operator< (uuid const& lhs, uuid const& rhs) BOOST_NOEXCEPT
 }
 
 } // namespace uuids
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_UUID_DETAIL_UUID_GENERIC_HPP_INCLUDED_

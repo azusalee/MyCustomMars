@@ -19,7 +19,7 @@
 #include <boost/date_time/wrapping_int.hpp>
 #include <boost/date_time/compiler_config.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace posix_time {
 
 //Remove the following line if you want 64 bit millisecond resolution time
@@ -30,7 +30,7 @@ namespace posix_time {
 #define BOOST_DATE_TIME_HAS_MILLISECONDS
 #define BOOST_DATE_TIME_HAS_MICROSECONDS
 #define BOOST_DATE_TIME_HAS_NANOSECONDS
-  typedef date_time::time_resolution_traits<mars_boost_ksim::date_time::time_resolution_traits_adapted64_impl, mars_boost_ksim::date_time::nano,
+  typedef date_time::time_resolution_traits<mars_boost::date_time::time_resolution_traits_adapted64_impl, mars_boost::date_time::nano,
     1000000000, 9 > time_res_traits;
 #else
   // set up conditional test compilations
@@ -38,14 +38,14 @@ namespace posix_time {
 #define BOOST_DATE_TIME_HAS_MICROSECONDS
 #undef  BOOST_DATE_TIME_HAS_NANOSECONDS
   typedef date_time::time_resolution_traits<
-    mars_boost_ksim::date_time::time_resolution_traits_adapted64_impl, mars_boost_ksim::date_time::micro,
+    mars_boost::date_time::time_resolution_traits_adapted64_impl, mars_boost::date_time::micro,
                                             1000000, 6 > time_res_traits;
 
 
 // #undef BOOST_DATE_TIME_HAS_MILLISECONDS
 // #undef BOOST_DATE_TIME_HAS_MICROSECONDS
 // #undef BOOST_DATE_TIME_HAS_NANOSECONDS
-//   typedef date_time::time_resolution_traits<mars_boost_ksim::int64_t, mars_boost_ksim::date_time::tenth,
+//   typedef date_time::time_resolution_traits<mars_boost::int64_t, mars_boost::date_time::tenth,
 //                                              10, 0 > time_res_traits;
 
 #endif
@@ -76,7 +76,7 @@ namespace posix_time {
       date_time::time_duration<time_duration, time_res_traits>(0,0,0)
     {}
     //! Construct from special_values
-    time_duration(mars_boost_ksim::date_time::special_values sv) :
+    time_duration(mars_boost::date_time::special_values sv) :
       date_time::time_duration<time_duration, time_res_traits>(sv)
     {}
     //Give duration access to ticks constructor -- hide from users
@@ -145,7 +145,7 @@ namespace posix_time {
     typedef time_res_traits resolution_traits;
 #if (defined(BOOST_DATE_TIME_NO_MEMBER_INIT)) //help bad compilers
 #else
-    BOOST_STATIC_CONSTANT(mars_boost_ksim::int64_t, tick_per_second = 1000000000);
+    BOOST_STATIC_CONSTANT(mars_boost::int64_t, tick_per_second = 1000000000);
 #endif
   };
 
@@ -154,7 +154,7 @@ namespace posix_time {
   class millisec_posix_time_system_config
   {
    public:
-    typedef mars_boost_ksim::int64_t time_rep_type;
+    typedef mars_boost::int64_t time_rep_type;
     //typedef time_res_traits::tick_type time_rep_type;
     typedef gregorian::date date_type;
     typedef gregorian::date_duration date_duration_type;
@@ -164,7 +164,7 @@ namespace posix_time {
     typedef time_res_traits resolution_traits;
 #if (defined(BOOST_DATE_TIME_NO_MEMBER_INIT)) //help bad compilers
 #else
-    BOOST_STATIC_CONSTANT(mars_boost_ksim::int64_t, tick_per_second = 1000000);
+    BOOST_STATIC_CONSTANT(mars_boost::int64_t, tick_per_second = 1000000);
 #endif
   };
 

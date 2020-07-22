@@ -12,7 +12,7 @@
 #include <iosfwd>  // for std::char_traits (declaration)
 
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 namespace io
 {
@@ -61,7 +61,7 @@ class ios_all_word_saver;
 
 
 }  // namespace io
-}  // namespace mars_boost_ksim
+}  // namespace mars_boost
 
 
 #endif  // BOOST_IO_FWD_HPP

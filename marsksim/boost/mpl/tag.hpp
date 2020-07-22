@@ -19,7 +19,7 @@
 #include <boost/mpl/aux_/has_tag.hpp>
 #include <boost/mpl/aux_/config/eti.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl {
 
 namespace aux {
 template< typename T > struct tag_impl

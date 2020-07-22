@@ -30,7 +30,7 @@
 #include <boost/container/detail/mpl.hpp>
 #include <boost/container/detail/type_traits.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim{
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost{
 namespace container {
 namespace container_detail {
 
@@ -103,7 +103,7 @@ typedef container_detail::integral_constant<unsigned, 1> version_1;
 typedef container_detail::integral_constant<unsigned, 2> version_2;
 
 }  //namespace container {
-}  //namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim{
+}  //namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost{
 
 #include <boost/container/detail/config_end.hpp>
 

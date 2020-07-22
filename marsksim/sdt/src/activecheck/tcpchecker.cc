@@ -33,28 +33,28 @@
 using namespace marsksim::sdt;
 using namespace marsksim::stn;
 
-TcpChecker::TcpChecker() {
+TcpCheckerksim::TcpCheckerksim() {
     xverbose_function();
 }
 
-TcpChecker::~TcpChecker() {
+TcpCheckerksim::~TcpCheckerksim() {
     xverbose_function();
 }
 
-int TcpChecker::StartDoCheck(CheckRequestProfile& _check_request) {
+int TcpCheckerksim::StartDoCheck(CheckRequestProfile& _check_request) {
     xinfo_function();
     return BaseChecker::StartDoCheck(_check_request);
 }
 
 
-void TcpChecker::__DoCheck(CheckRequestProfile& _check_request) {
+void TcpCheckerksim::__DoCheck(CheckRequestProfile& _check_request) {
     xinfo_function();
 
     for (CheckIPPorts_Iterator iter = _check_request.longlink_items.begin(); iter != _check_request.longlink_items.end(); ++iter) {
     	std::string host = iter->first;
     	for (std::vector<CheckIPPort>::iterator ipport = iter->second.begin(); ipport != iter->second.end(); ++ipport) {
             if (is_canceled_) {
-                xinfo2(TSF"TcpChecker is canceled.");
+                xinfo2(TSF"TcpCheckerksim is canceled.");
                 return;
             }
     		CheckResultProfile profile;
@@ -118,14 +118,14 @@ void TcpChecker::__DoCheck(CheckRequestProfile& _check_request) {
     }
 }
 
-void TcpChecker::__NoopReq(AutoBuffer& _noop_send) {
+void TcpCheckerksim::__NoopReq(AutoBuffer& _noop_send) {
 	AutoBuffer noop_body;
 	AutoBuffer noop_extension;
 	longlink_noop_req_body(noop_body, noop_extension);
 	longlink_pack(longlink_noop_cmdid(), Task::kNoopTaskID, noop_body, noop_extension, _noop_send, NULL);
 }
 
-bool TcpChecker::__NoopResp(const AutoBuffer& _packed, uint32_t& _cmdid, uint32_t& _seq, size_t& _package_len, AutoBuffer& _body) {
+bool TcpCheckerksim::__NoopResp(const AutoBuffer& _packed, uint32_t& _cmdid, uint32_t& _seq, size_t& _package_len, AutoBuffer& _body) {
     AutoBuffer extension;
 	int unpackret = longlink_unpack(_packed, _cmdid, _seq, _package_len, _body, extension, NULL);
 	if (unpackret == LONGLINK_UNPACK_OK) {

@@ -23,7 +23,7 @@ extern "C" void _mm_pause(void);
 #endif
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace atomics {
 namespace detail {
 
@@ -38,6 +38,6 @@ BOOST_FORCEINLINE void pause() BOOST_NOEXCEPT
 
 } // namespace detail
 } // namespace atomics
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_ATOMIC_DETAIL_PAUSE_HPP_INCLUDED_

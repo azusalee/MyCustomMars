@@ -21,7 +21,7 @@
 #include <boost/variant/variant.hpp>
 #include <vector>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace signals2
   {
@@ -30,8 +30,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       class tracked_objects_visitor;
       class trackable_pointee;
 
-      typedef mars_boost_ksim::variant<mars_boost_ksim::weak_ptr<trackable_pointee>, mars_boost_ksim::weak_ptr<void>, detail::foreign_void_weak_ptr > void_weak_ptr_variant;
-      typedef mars_boost_ksim::variant<mars_boost_ksim::shared_ptr<void>, detail::foreign_void_shared_ptr > void_shared_ptr_variant;
+      typedef mars_boost::variant<mars_boost::weak_ptr<trackable_pointee>, mars_boost::weak_ptr<void>, detail::foreign_void_weak_ptr > void_weak_ptr_variant;
+      typedef mars_boost::variant<mars_boost::shared_ptr<void>, detail::foreign_void_shared_ptr > void_shared_ptr_variant;
       class lock_weak_ptr_visitor
       {
       public:
@@ -45,7 +45,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         // with signals2::trackable objects
         result_type operator()(const weak_ptr<trackable_pointee> &) const
         {
-          return mars_boost_ksim::shared_ptr<void>();
+          return mars_boost::shared_ptr<void>();
         }
       };
       class expired_weak_ptr_visitor
@@ -101,6 +101,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       tracked_container_type _tracked_objects;
     };
   }
-} // end namespace mars_boost_ksim
+} // end namespace mars_boost
 
 #endif // BOOST_SIGNALS2_SLOT_BASE_HPP

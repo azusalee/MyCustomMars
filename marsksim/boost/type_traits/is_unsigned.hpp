@@ -16,7 +16,7 @@
 
 #include <climits>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 #if !defined( __CODEGEARC__ )
 
@@ -42,7 +42,7 @@ struct is_unsigned_values
 template <class T>
 struct is_ununsigned_helper
 {
-   BOOST_STATIC_CONSTANT(bool, value = (::mars_boost_ksim::detail::is_unsigned_values<T>::minus_one > ::mars_boost_ksim::detail::is_unsigned_values<T>::zero));
+   BOOST_STATIC_CONSTANT(bool, value = (::mars_boost::detail::is_unsigned_values<T>::minus_one > ::mars_boost::detail::is_unsigned_values<T>::zero));
 };
 
 template <bool integral_type>
@@ -68,7 +68,7 @@ struct is_unsigned_select_helper<false>
 template <class T>
 struct is_unsigned
 {
-   typedef ::mars_boost_ksim::detail::is_unsigned_select_helper< ::mars_boost_ksim::is_integral<T>::value || ::mars_boost_ksim::is_enum<T>::value > selector;
+   typedef ::mars_boost::detail::is_unsigned_select_helper< ::mars_boost::is_integral<T>::value || ::mars_boost::is_enum<T>::value > selector;
    typedef typename selector::template rebind<T> binder;
    typedef typename binder::type type;
    BOOST_STATIC_CONSTANT(bool, value = type::value);
@@ -76,7 +76,7 @@ struct is_unsigned
 
 } // namespace detail
 
-template <class T> struct is_unsigned : public integral_constant<bool, mars_boost_ksim::detail::is_unsigned<T>::value> {};
+template <class T> struct is_unsigned : public integral_constant<bool, mars_boost::detail::is_unsigned<T>::value> {};
 
 #else
 
@@ -122,15 +122,15 @@ template <> struct is_unsigned<const  long> : public false_type{};
 template <> struct is_unsigned<volatile  long> : public false_type{};
 template <> struct is_unsigned<const volatile  long> : public false_type{};
 #ifdef BOOST_HAS_LONG_LONG
-template <> struct is_unsigned< ::mars_boost_ksim::ulong_long_type> : public true_type{};
-template <> struct is_unsigned<const ::mars_boost_ksim::ulong_long_type> : public true_type{};
-template <> struct is_unsigned<volatile ::mars_boost_ksim::ulong_long_type> : public true_type{};
-template <> struct is_unsigned<const volatile ::mars_boost_ksim::ulong_long_type> : public true_type{};
+template <> struct is_unsigned< ::mars_boost::ulong_long_type> : public true_type{};
+template <> struct is_unsigned<const ::mars_boost::ulong_long_type> : public true_type{};
+template <> struct is_unsigned<volatile ::mars_boost::ulong_long_type> : public true_type{};
+template <> struct is_unsigned<const volatile ::mars_boost::ulong_long_type> : public true_type{};
 
-template <> struct is_unsigned< ::mars_boost_ksim::long_long_type> : public false_type{};
-template <> struct is_unsigned<const ::mars_boost_ksim::long_long_type> : public false_type{};
-template <> struct is_unsigned<volatile ::mars_boost_ksim::long_long_type> : public false_type{};
-template <> struct is_unsigned<const volatile ::mars_boost_ksim::long_long_type> : public false_type{};
+template <> struct is_unsigned< ::mars_boost::long_long_type> : public false_type{};
+template <> struct is_unsigned<const ::mars_boost::long_long_type> : public false_type{};
+template <> struct is_unsigned<volatile ::mars_boost::long_long_type> : public false_type{};
+template <> struct is_unsigned<const volatile ::mars_boost::long_long_type> : public false_type{};
 #endif
 #if defined(CHAR_MIN) 
 #if CHAR_MIN == 0
@@ -158,6 +158,6 @@ template <> struct is_unsigned<volatile wchar_t> : public false_type{};
 template <> struct is_unsigned<const volatile wchar_t> : public false_type{};
 #endif
 #endif
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_IS_MEMBER_FUNCTION_POINTER_HPP_INCLUDED

@@ -13,7 +13,7 @@
 
 #include <boost/function_output_iterator.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace signals2
   {
@@ -26,9 +26,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           void operator()(const T&) const
           {}
       };
-      typedef mars_boost_ksim::function_output_iterator<does_nothing> null_output_iterator;
+      typedef mars_boost::function_output_iterator<does_nothing> null_output_iterator;
     } // namespace detail
   } // namespace signals2
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif  // BOOST_SIGNALS2_NULL_OUTPUT_ITERATOR_HPP

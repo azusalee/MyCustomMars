@@ -13,7 +13,7 @@
 #include <boost/integer_fwd.hpp>  // self include
 
 #include <boost/config.hpp>   // for BOOST_STATIC_CONSTANT
-#include <boost/integer.hpp>  // for mars_boost_ksim::uint_t
+#include <boost/integer.hpp>  // for mars_boost::uint_t
 
 #include <climits>  // for UCHAR_MAX, etc.
 #include <cstddef>  // for std::size_t
@@ -32,7 +32,7 @@
 #pragma GCC system_header
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 
@@ -50,7 +50,7 @@ struct high_bit_mask_t
 
     BOOST_STATIC_CONSTANT( std::size_t, bit_position = Bit );
 
-};  // mars_boost_ksim::high_bit_mask_t
+};  // mars_boost::high_bit_mask_t
 
 
 //  Specified bit-block mask class declaration  ------------------------------//
@@ -68,7 +68,7 @@ struct low_bits_mask_t
 
     BOOST_STATIC_CONSTANT( std::size_t, bit_count = Bits );
 
-};  // mars_boost_ksim::low_bits_mask_t
+};  // mars_boost::low_bits_mask_t
 
 
 #define BOOST_LOW_BITS_MASK_SPECIALIZE( Type )                                  \
@@ -83,7 +83,7 @@ struct low_bits_mask_t
 
 #ifdef BOOST_MSVC
 #pragma warning(push)
-#pragma warning(disable:4245)  // 'initializing' : conversion from 'int' to 'const mars_boost_ksim::low_bits_mask_t<8>::least', signed/unsigned mismatch
+#pragma warning(disable:4245)  // 'initializing' : conversion from 'int' to 'const mars_boost::low_bits_mask_t<8>::least', signed/unsigned mismatch
 #endif
 
 BOOST_LOW_BITS_MASK_SPECIALIZE( unsigned char );
@@ -105,7 +105,7 @@ BOOST_LOW_BITS_MASK_SPECIALIZE( unsigned long );
         (defined(ULONG_LONG_MAX) && (ULONG_LONG_MAX > ULONG_MAX)) ||\
         (defined(ULONGLONG_MAX) && (ULONGLONG_MAX > ULONG_MAX)) ||\
         (defined(_ULLONG_MAX) && (_ULLONG_MAX > ULONG_MAX)))
-    BOOST_LOW_BITS_MASK_SPECIALIZE( mars_boost_ksim::ulong_long_type );
+    BOOST_LOW_BITS_MASK_SPECIALIZE( mars_boost::ulong_long_type );
     #endif
 #elif defined(BOOST_HAS_MS_INT64)
     #if 18446744073709551615ui64 > ULONG_MAX
@@ -120,7 +120,7 @@ BOOST_LOW_BITS_MASK_SPECIALIZE( unsigned long );
 #undef BOOST_LOW_BITS_MASK_SPECIALIZE
 
 
-}  // namespace mars_boost_ksim
+}  // namespace mars_boost
 
 
 #endif  // BOOST_INTEGER_INTEGER_MASK_HPP

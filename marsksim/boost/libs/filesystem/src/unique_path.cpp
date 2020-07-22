@@ -33,14 +33,14 @@
 
 namespace {
 
-void fail(int err, mars_boost_ksim::system::error_code* ec)
+void fail(int err, mars_boost::system::error_code* ec)
 {
   if (ec == 0)
-    BOOST_FILESYSTEM_THROW( mars_boost_ksim::system::system_error(err,
-      mars_boost_ksim::system::system_category(),
-      "mars_boost_ksim::filesystem::unique_path"));
+    BOOST_FILESYSTEM_THROW( mars_boost::system::system_error(err,
+      mars_boost::system::system_category(),
+      "mars_boost::filesystem::unique_path"));
 
-  ec->assign(err, mars_boost_ksim::system::system_category());
+  ec->assign(err, mars_boost::system::system_category());
   return;
 }
 
@@ -71,7 +71,7 @@ int acquire_crypt_handle(HCRYPTPROV& handle)
 
 #endif
 
-void system_crypt_random(void* buf, std::size_t len, mars_boost_ksim::system::error_code* ec)
+void system_crypt_random(void* buf, std::size_t len, mars_boost::system::error_code* ec)
 {
 # ifdef BOOST_POSIX_API
 
@@ -123,7 +123,7 @@ void system_crypt_random(void* buf, std::size_t len, mars_boost_ksim::system::er
 
 }  // unnamed namespace
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace filesystem { namespace detail {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace filesystem { namespace detail {
 
 BOOST_FILESYSTEM_DECL
 path unique_path(const path& model, system::error_code* ec)

@@ -12,7 +12,7 @@
 
 #include <boost/type_traits/detail/config.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 // * convert a type T to const type - add_const<T>
 // this is not required since the result is always
@@ -41,6 +41,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       typedef T& type;
    };
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_ADD_CONST_HPP_INCLUDED

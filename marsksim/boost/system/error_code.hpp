@@ -34,7 +34,7 @@
 #define BOOST_SYSTEM_NOEXCEPT BOOST_NOEXCEPT
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace system
   {
@@ -237,7 +237,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
       template <class ErrorConditionEnum>
         error_condition(ErrorConditionEnum e,
-          typename mars_boost_ksim::enable_if<is_error_condition_enum<ErrorConditionEnum> >::type* = 0) BOOST_SYSTEM_NOEXCEPT
+          typename mars_boost::enable_if<is_error_condition_enum<ErrorConditionEnum> >::type* = 0) BOOST_SYSTEM_NOEXCEPT
       {
         *this = make_error_condition(e);
       }
@@ -251,7 +251,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       }
 
       template<typename ErrorConditionEnum>
-        typename mars_boost_ksim::enable_if<is_error_condition_enum<ErrorConditionEnum>, error_condition>::type &
+        typename mars_boost::enable_if<is_error_condition_enum<ErrorConditionEnum>, error_condition>::type &
           operator=( ErrorConditionEnum val ) BOOST_SYSTEM_NOEXCEPT
       {
         *this = make_error_condition(val);
@@ -324,7 +324,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
       template <class ErrorCodeEnum>
         error_code(ErrorCodeEnum e,
-          typename mars_boost_ksim::enable_if<is_error_code_enum<ErrorCodeEnum> >::type* = 0) BOOST_SYSTEM_NOEXCEPT
+          typename mars_boost::enable_if<is_error_code_enum<ErrorCodeEnum> >::type* = 0) BOOST_SYSTEM_NOEXCEPT
       {
         *this = make_error_code(e);
       }
@@ -337,7 +337,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       }
 
       template<typename ErrorCodeEnum>
-        typename mars_boost_ksim::enable_if<is_error_code_enum<ErrorCodeEnum>, error_code>::type &
+        typename mars_boost::enable_if<is_error_code_enum<ErrorCodeEnum>, error_code>::type &
           operator=( ErrorCodeEnum val ) BOOST_SYSTEM_NOEXCEPT
       {
         *this = make_error_code(val);
@@ -400,7 +400,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
     //  Moving from a "throws" object to a "throws" function without breaking
     //  existing code is a bit of a problem. The workaround is to place the
-    //  "throws" function in namespace mars_boost_ksim rather than namespace mars_boost_ksim::system.
+    //  "throws" function in namespace mars_boost rather than namespace mars_boost::system.
 
   }  // namespace system
 
@@ -507,7 +507,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     }
 
   } // namespace system
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #include <boost/config/abi_suffix.hpp> // pops abi_prefix.hpp pragmas
 

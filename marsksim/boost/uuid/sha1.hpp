@@ -7,7 +7,7 @@
 
 // Revision History
 //  29 May 2007 - Initial Revision
-//  25 Feb 2008 - moved to namespace mars_boost_ksim::uuids::detail
+//  25 Feb 2008 - moved to namespace mars_boost::uuids::detail
 //  10 Jan 2012 - can now handle the full size of messages (2^64 - 1 bits)
 
 // This is a byte oriented implementation
@@ -27,7 +27,7 @@ namespace std {
 } // namespace std
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace uuids {
 namespace detail {
 
@@ -226,6 +226,6 @@ inline void sha1::get_digest(digest_type digest)
     digest[4] = h_[4];
 }
 
-}}} // namespace mars_boost_ksim::uuids::detail
+}}} // namespace mars_boost::uuids::detail
 
 #endif

@@ -26,7 +26,7 @@ public:
     NSOperationQueue* m_operationQueue;
 } gs_threadrunonstart;
 
-@interface __CThreadWarp : NSObject
+@interface __CThreadWarpksim : NSObject
 {
     void (*m_funp)(void*);
     void* m_arg;
@@ -40,7 +40,7 @@ public:
 @property (nonatomic, assign)  void* m_arg;
 @end
 
-@implementation __CThreadWarp
+@implementation __CThreadWarpksim
 
 @synthesize m_funp;
 @synthesize m_fun;
@@ -70,7 +70,7 @@ public:
 @end
 
 
-@interface __ThreadWarp : NSObject
+@interface __ThreadWarpksim : NSObject
 {
     id m_target;
     SEL m_sel;
@@ -83,7 +83,7 @@ public:
 @property (nonatomic, retain)  id m_arg;
 @end
 
-@implementation __ThreadWarp
+@implementation __ThreadWarpksim
 
 @synthesize m_target;
 @synthesize m_sel;
@@ -113,12 +113,12 @@ public:
 }
 @end
 
-@implementation ThreadQueue
+@implementation ThreadQueueksim
 
 +(BOOL) RunWithTarget:(id)target selector:(SEL)sel object:(id)arg
 {
     SCOPE_POOL();
-    __ThreadWarp* warp = [[__ThreadWarp alloc] init];
+    __ThreadWarpksim* warp = [[__ThreadWarpksim alloc] init];
     warp.m_target= target;
     warp.m_sel= sel;
     warp.m_arg = arg;
@@ -139,10 +139,10 @@ public:
 
 @end
 
-extern "C" BOOL RunWithTarget(void (*_funp)(void*), void* _arg)
+extern "C" BOOL RunWithTargetksim(void (*_funp)(void*), void* _arg)
 {
     SCOPE_POOL();
-    __CThreadWarp* warp = [[__CThreadWarp alloc] init];
+    __CThreadWarpksim* warp = [[__CThreadWarpksim alloc] init];
     warp.m_funp = _funp;
     warp.m_arg = _arg;
     
@@ -160,10 +160,10 @@ extern "C" BOOL RunWithTarget(void (*_funp)(void*), void* _arg)
     return YES;
 }
 
-extern "C" BOOL RunWithTargetNoParam(void (*_fun)())
+extern "C" BOOL RunWithTargetNoParamksim(void (*_fun)())
 {
     SCOPE_POOL();
-    __CThreadWarp* warp = [[__CThreadWarp alloc] init];
+    __CThreadWarpksim* warp = [[__CThreadWarpksim alloc] init];
     warp.m_fun = _fun;
     
     NSInvocationOperation* invocation = [[NSInvocationOperation alloc]
@@ -180,4 +180,4 @@ extern "C" BOOL RunWithTargetNoParam(void (*_fun)())
     return YES;
 }
 
-void comm_export_symbols_4(){}
+void comm_export_symbolsksim_4(){}

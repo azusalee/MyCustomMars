@@ -36,7 +36,7 @@ class ShortLinkInterface;
 
 namespace ShortLinkChannelFactory {
 
-extern ShortLinkInterface* (*Create)(const mq::MessageQueueksim_t& _messagequeueid, NetSourceksim& _netsource, const Task& _task, bool _use_proxy);
+extern ShortLinkInterface* (*Create)(const mqksim::MessageQueueksim_t& _messagequeueid, NetSourceksim& _netsource, const Task& _task, bool _use_proxy);
 
 extern void (*Destory)(ShortLinkInterface* _short_link_channel);
 
@@ -44,7 +44,7 @@ extern void (*Destory)(ShortLinkInterface* _short_link_channel);
 
 namespace LongLinkChannelFactory {
 
-extern LongLink* (*Create)(const mq::MessageQueueksim_t& _messagequeueid, NetSourceksim& _netsource);
+extern LongLink* (*Create)(const mqksim::MessageQueueksim_t& _messagequeueid, NetSourceksim& _netsource);
 
 extern void (*Destory)(LongLink* _long_link_channel);
 

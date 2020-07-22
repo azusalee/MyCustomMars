@@ -11,7 +11,7 @@
 #include <boost/thread/lock_options.hpp>
 #include <boost/thread/detail/delete.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
     template<typename Lock>

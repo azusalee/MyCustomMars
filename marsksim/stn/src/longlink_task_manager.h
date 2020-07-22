@@ -47,7 +47,7 @@ namespace marsksim {
 
 struct TaskProfile;
 class DynamicTimeout;
-class LongLinkConnectMonitor;
+class LongLinkConnectMonitorksim;
 
 class LongLinkTaskManager {
   public:
@@ -72,7 +72,7 @@ class LongLinkTaskManager {
     void RetryTasks(ErrCmdType _err_type, int _err_code, int _fail_handle, uint32_t _src_taskid);
 
     LongLink& LongLinkChannel() { return *longlink_; }
-    LongLinkConnectMonitor& getLongLinkConnectMonitor() { return *longlinkconnectmon_; }
+    LongLinkConnectMonitorksim& getLongLinkConnectMonitorksim() { return *longlinkconnectmon_; }
 
     unsigned int GetTaskCount();
     unsigned int GetTasksContinuousFailCount();
@@ -94,14 +94,14 @@ class LongLinkTaskManager {
     std::list<TaskProfile>::iterator __Locate(uint32_t  _taskid);
 
   private:
-    MessageQueueksim::ScopeRegister     asyncreg_;
+    MessageQueueksim::ScopeRegisterksim     asyncreg_;
     std::list<TaskProfile>          lst_cmd_;
     uint64_t                        lastbatcherrortime_;   // ms
     unsigned long                   retry_interval_;	//ms
     unsigned int                    tasks_continuous_fail_count_;
 
     LongLink*                       longlink_;
-    LongLinkConnectMonitor*         longlinkconnectmon_;
+    LongLinkConnectMonitorksim*         longlinkconnectmon_;
     DynamicTimeout&                 dynamic_timeout_;
 
 #ifdef ANDROID

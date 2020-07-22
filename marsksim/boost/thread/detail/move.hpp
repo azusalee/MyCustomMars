@@ -30,7 +30,7 @@
 #ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
 #include <type_traits>
 #endif
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
     namespace detail
@@ -63,14 +63,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 #ifndef BOOST_NO_SFINAE
     template<typename T>
-    typename enable_if<boost_ksim::is_convertible<T&,mars_boost_ksim::detail::thread_move_t<T> >, mars_boost_ksim::detail::thread_move_t<T> >::type move(T& t)
+    typename enable_if<boost_ksim::is_convertible<T&,mars_boost::detail::thread_move_t<T> >, mars_boost::detail::thread_move_t<T> >::type move(T& t)
     {
-        return mars_boost_ksim::detail::thread_move_t<T>(t);
+        return mars_boost::detail::thread_move_t<T>(t);
     }
 #endif
 
     template<typename T>
-    mars_boost_ksim::detail::thread_move_t<T> move(mars_boost_ksim::detail::thread_move_t<T> t)
+    mars_boost::detail::thread_move_t<T> move(mars_boost::detail::thread_move_t<T> t)
     {
         return t;
     }
@@ -159,8 +159,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #else
 
 #define BOOST_THREAD_COPY_ASSIGN_REF(TYPE) const TYPE&
-#define BOOST_THREAD_RV_REF(TYPE) mars_boost_ksim::detail::thread_move_t< TYPE >
-#define BOOST_THREAD_RV_REF_BEG mars_boost_ksim::detail::thread_move_t<
+#define BOOST_THREAD_RV_REF(TYPE) mars_boost::detail::thread_move_t< TYPE >
+#define BOOST_THREAD_RV_REF_BEG mars_boost::detail::thread_move_t<
 #define BOOST_THREAD_RV_REF_END >
 #define BOOST_THREAD_RV(V) (*V)
 #define BOOST_THREAD_FWD_REF(TYPE) BOOST_FWD_REF(TYPE)
@@ -187,7 +187,7 @@ struct enable_move_utility_emulation<
 
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 namespace detail
 {
@@ -213,7 +213,7 @@ namespace detail
 }
 
 #define BOOST_THREAD_MAKE_RV_REF(RVALUE) RVALUE.move()
-//#define BOOST_THREAD_MAKE_RV_REF(RVALUE) mars_boost_ksim::detail::make_rv_ref(RVALUE)
+//#define BOOST_THREAD_MAKE_RV_REF(RVALUE) mars_boost::detail::make_rv_ref(RVALUE)
 #endif
 
 
@@ -280,7 +280,7 @@ namespace detail
 
 
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace thread_detail
   {
@@ -311,9 +311,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 #ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
     template <class Tp>
-    struct remove_reference : mars_boost_ksim::remove_reference<Tp> {};
+    struct remove_reference : mars_boost::remove_reference<Tp> {};
     template <class Tp>
-    struct  decay : mars_boost_ksim::decay<Tp> {};
+    struct  decay : mars_boost::decay<Tp> {};
 #else
   template <class Tp>
   struct remove_reference
@@ -334,8 +334,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
   struct  decay
   {
   private:
-    typedef typename mars_boost_ksim::move_detail::remove_rvalue_reference<Tp>::type Up0;
-    typedef typename mars_boost_ksim::remove_reference<Up0>::type Up;
+    typedef typename mars_boost::move_detail::remove_rvalue_reference<Tp>::type Up0;
+    typedef typename mars_boost::remove_reference<Up0>::type Up;
   public:
       typedef typename conditional
                        <
@@ -356,14 +356,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       typename decay<T>::type
       decay_copy(T&& t)
       {
-          return mars_boost_ksim::forward<T>(t);
+          return mars_boost::forward<T>(t);
       }
 #else
   template <class T>
   typename decay<T>::type
   decay_copy(BOOST_THREAD_FWD_REF(T) t)
   {
-      return mars_boost_ksim::forward<T>(t);
+      return mars_boost::forward<T>(t);
   }
 #endif
   }

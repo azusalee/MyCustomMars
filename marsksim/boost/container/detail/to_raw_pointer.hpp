@@ -20,14 +20,14 @@
 
 #include <boost/intrusive/detail/to_raw_pointer.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace container {
 namespace container_detail {
 
-using ::mars_boost_ksim::intrusive::detail::to_raw_pointer;
+using ::mars_boost::intrusive::detail::to_raw_pointer;
 
 }  //namespace container_detail {
 }  //namespace container {
-}  //namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+}  //namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 #endif   //#ifndef BOOST_CONTAINER_DETAIL_TO_RAW_POINTER_HPP

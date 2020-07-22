@@ -25,15 +25,15 @@
 #include <boost/type_traits/is_destructible.hpp>
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 template <typename T> struct has_trivial_destructor : public integral_constant<bool, BOOST_HAS_TRIVIAL_DESTRUCTOR(T)>{};
 #else
 #include <boost/type_traits/is_pod.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim{
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost{
 
-template <typename T> struct has_trivial_destructor : public integral_constant<bool, ::mars_boost_ksim::is_pod<T>::value>{};
+template <typename T> struct has_trivial_destructor : public integral_constant<bool, ::mars_boost::is_pod<T>::value>{};
 #endif
 
 template <> struct has_trivial_destructor<void> : public false_type{};
@@ -43,6 +43,6 @@ template <> struct has_trivial_destructor<void const volatile> : public false_ty
 template <> struct has_trivial_destructor<void volatile> : public false_type{};
 #endif
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_HAS_TRIVIAL_DESTRUCTOR_HPP_INCLUDED

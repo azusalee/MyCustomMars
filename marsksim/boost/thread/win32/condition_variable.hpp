@@ -33,7 +33,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace detail
     {
@@ -58,7 +58,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 waiters(1),notified(false),references(0)
             {}
 
-            static bool no_waiters(mars_boost_ksim::intrusive_ptr<basic_cv_list_entry> const& entry)
+            static bool no_waiters(mars_boost::intrusive_ptr<basic_cv_list_entry> const& entry)
             {
                 return !detail::interlocked_read_acquire(&entry->waiters);
             }
@@ -120,13 +120,13 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         class basic_condition_variable
         {
-            mars_boost_ksim::mutex internal_mutex;
+            mars_boost::mutex internal_mutex;
             long total_count;
             unsigned active_generation_count;
 
             typedef basic_cv_list_entry list_entry;
 
-            typedef mars_boost_ksim::intrusive_ptr<list_entry> entry_ptr;
+            typedef mars_boost::intrusive_ptr<list_entry> entry_ptr;
             typedef std::vector<entry_ptr> generation_list;
 
             generation_list generations;
@@ -166,7 +166,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
             entry_ptr get_wait_entry()
             {
-                mars_boost_ksim::lock_guard<boost_ksim::mutex> internal_lock(internal_mutex);
+                mars_boost::lock_guard<boost_ksim::mutex> internal_lock(internal_mutex);
 
                 if(!wake_sem)
                 {
@@ -191,16 +191,16 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             struct entry_manager
             {
                 entry_ptr const entry;
-                mars_boost_ksim::mutex& internal_mutex;
+                mars_boost::mutex& internal_mutex;
 
                 BOOST_THREAD_NO_COPYABLE(entry_manager)
-                entry_manager(entry_ptr const& entry_, mars_boost_ksim::mutex& mutex_):
+                entry_manager(entry_ptr const& entry_, mars_boost::mutex& mutex_):
                     entry(entry_), internal_mutex(mutex_)
                 {}
 
                 ~entry_manager()
                 {
-                    mars_boost_ksim::lock_guard<boost_ksim::mutex> internal_lock(internal_mutex);
+                    mars_boost::lock_guard<boost_ksim::mutex> internal_lock(internal_mutex);
                     entry->remove_waiter();
                 }
 
@@ -260,7 +260,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             {
                 if(detail::interlocked_read_acquire(&total_count))
                 {
-                    mars_boost_ksim::lock_guard<boost_ksim::mutex> internal_lock(internal_mutex);
+                    mars_boost::lock_guard<boost_ksim::mutex> internal_lock(internal_mutex);
                     if(!total_count)
                     {
                         return;
@@ -281,7 +281,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             {
                 if(detail::interlocked_read_acquire(&total_count))
                 {
-                    mars_boost_ksim::lock_guard<boost_ksim::mutex> internal_lock(internal_mutex);
+                    mars_boost::lock_guard<boost_ksim::mutex> internal_lock(internal_mutex);
                     if(!total_count)
                     {
                         return;
@@ -325,12 +325,12 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 
 #if defined BOOST_THREAD_USES_DATETIME
-        bool timed_wait(unique_lock<mutex>& m,mars_boost_ksim::system_time const& abs_time)
+        bool timed_wait(unique_lock<mutex>& m,mars_boost::system_time const& abs_time)
         {
             return do_wait(m,abs_time);
         }
 
-        bool timed_wait(unique_lock<mutex>& m,mars_boost_ksim::xtime const& abs_time)
+        bool timed_wait(unique_lock<mutex>& m,mars_boost::xtime const& abs_time)
         {
             return do_wait(m,system_time(abs_time));
         }
@@ -350,12 +350,12 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         }
 
         template<typename predicate_type>
-        bool timed_wait(unique_lock<mutex>& m,mars_boost_ksim::system_time const& abs_time,predicate_type pred)
+        bool timed_wait(unique_lock<mutex>& m,mars_boost::system_time const& abs_time,predicate_type pred)
         {
             return do_wait(m,abs_time,pred);
         }
         template<typename predicate_type>
-        bool timed_wait(unique_lock<mutex>& m,mars_boost_ksim::xtime const& abs_time,predicate_type pred)
+        bool timed_wait(unique_lock<mutex>& m,mars_boost::xtime const& abs_time,predicate_type pred)
         {
             return do_wait(m,system_time(abs_time),pred);
         }
@@ -433,7 +433,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 const chrono::duration<Rep, Period>& d,
                 Predicate pred)
         {
-            return wait_until(lock, chrono::steady_clock::now() + d, mars_boost_ksim::move(pred));
+            return wait_until(lock, chrono::steady_clock::now() + d, mars_boost::move(pred));
         }
 #endif
     };
@@ -463,13 +463,13 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 #if defined BOOST_THREAD_USES_DATETIME
         template<typename lock_type>
-        bool timed_wait(lock_type& m,mars_boost_ksim::system_time const& abs_time)
+        bool timed_wait(lock_type& m,mars_boost::system_time const& abs_time)
         {
             return do_wait(m,abs_time);
         }
 
         template<typename lock_type>
-        bool timed_wait(lock_type& m,mars_boost_ksim::xtime const& abs_time)
+        bool timed_wait(lock_type& m,mars_boost::xtime const& abs_time)
         {
             return do_wait(m,system_time(abs_time));
         }
@@ -481,13 +481,13 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         }
 
         template<typename lock_type,typename predicate_type>
-        bool timed_wait(lock_type& m,mars_boost_ksim::system_time const& abs_time,predicate_type pred)
+        bool timed_wait(lock_type& m,mars_boost::system_time const& abs_time,predicate_type pred)
         {
             return do_wait(m,abs_time,pred);
         }
 
         template<typename lock_type,typename predicate_type>
-        bool timed_wait(lock_type& m,mars_boost_ksim::xtime const& abs_time,predicate_type pred)
+        bool timed_wait(lock_type& m,mars_boost::xtime const& abs_time,predicate_type pred)
         {
             return do_wait(m,system_time(abs_time),pred);
         }
@@ -554,7 +554,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 const chrono::duration<Rep, Period>& d,
                 Predicate pred)
         {
-            return wait_until(lock, chrono::steady_clock::now() + d, mars_boost_ksim::move(pred));
+            return wait_until(lock, chrono::steady_clock::now() + d, mars_boost::move(pred));
         }
 #endif
     };

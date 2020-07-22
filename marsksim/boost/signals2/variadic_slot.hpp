@@ -17,7 +17,7 @@
   template<typename A1, typename A2, typename ... BindArgs> \
     slot(const A1 &arg1, const A2 &arg2, const BindArgs & ... args) \
   { \
-    init_slot_function(mars_boost_ksim::bind(arg1, arg2, args...)); \
+    init_slot_function(mars_boost::bind(arg1, arg2, args...)); \
   }
 
 

@@ -14,7 +14,7 @@
 #include <boost/thread/csbl/vector.hpp>
 #include <boost/move/detail/move_helpers.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace csbl
   {
@@ -29,7 +29,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
       template <class U>
       void priv_push_back(BOOST_FWD_REF(U) x)
-      { data_.push_back(mars_boost_ksim::forward<U>(x)); }
+      { data_.push_back(mars_boost::forward<U>(x)); }
 
     public:
       typedef typename vector_type::size_type size_type;
@@ -43,7 +43,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             front_index_(x.front_index_)
       {}
       devector(BOOST_RV_REF(devector) x) BOOST_NOEXCEPT
-         :  data_(mars_boost_ksim::move(x.data_)),
+         :  data_(mars_boost::move(x.data_)),
             front_index_(x.front_index_)
       {}
 
@@ -62,7 +62,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
          BOOST_NOEXCEPT_IF(vector_type::allocator_traits_type::propagate_on_container_move_assignment::value)
 #endif
       {
-        data_ = mars_boost_ksim::move(x.data_);
+        data_ = mars_boost::move(x.data_);
         front_index_ = x.front_index_;
         return *this;
       }

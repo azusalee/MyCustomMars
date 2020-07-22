@@ -13,15 +13,15 @@
 
 #ifndef BOOST_TYPEOF_SUPPRESS_UNNAMED_NAMESPACE
 
-#   define BOOST_TYPEOF_BEGIN_ENCODE_NS namespace { namespace mars_boost_ksim_typeof {
+#   define BOOST_TYPEOF_BEGIN_ENCODE_NS namespace { namespace mars_boost_typeof {
 #   define BOOST_TYPEOF_END_ENCODE_NS }}
 #   define BOOST_TYPEOF_ENCODE_NS_QUALIFIER mars_boost_typeof
 
 #else
 
-#   define BOOST_TYPEOF_BEGIN_ENCODE_NS namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace type_of {
+#   define BOOST_TYPEOF_BEGIN_ENCODE_NS namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace type_of {
 #   define BOOST_TYPEOF_END_ENCODE_NS }}
-#   define BOOST_TYPEOF_ENCODE_NS_QUALIFIER mars_boost_ksim::type_of
+#   define BOOST_TYPEOF_ENCODE_NS_QUALIFIER mars_boost::type_of
 
 #   define BOOST_TYPEOF_TEXT "unnamed namespace is off"
 #   include <boost/typeof/message.hpp>
@@ -44,7 +44,7 @@ struct decode_nested_template_helper_impl;
 
 BOOST_TYPEOF_END_ENCODE_NS
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace type_of {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace type_of {
 
     template<class V, class T>
     struct encode_type : BOOST_TYPEOF_ENCODE_NS_QUALIFIER::encode_type_impl<V, T>

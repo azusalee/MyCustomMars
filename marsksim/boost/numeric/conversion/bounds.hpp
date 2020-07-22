@@ -12,13 +12,13 @@
 
 #include "boost/numeric/conversion/detail/bounds.hpp"
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace numeric 
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace numeric 
 {
 
 template<class N>
 struct bounds : boundsdetail::get_impl<N>::type
 {} ;
 
-} } // namespace mars_boost_ksim::numeric
+} } // namespace mars_boost::numeric
 
 #endif

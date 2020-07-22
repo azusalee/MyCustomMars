@@ -117,7 +117,7 @@ class LongLink {
     boost_ksim::function<void (int _line, ErrCmdType _errtype, int _errcode, const std::string& _ip, uint16_t _port)> fun_network_report_;
 
   public:
-    LongLink(const mq::MessageQueueksim_t& _messagequeueid, NetSourceksim& _netsource);
+    LongLink(const mqksim::MessageQueueksim_t& _messagequeueid, NetSourceksim& _netsource);
     virtual ~LongLink();
 
     bool    Send(const AutoBuffer& _body, const AutoBuffer& _extension, const Task& _task);
@@ -141,10 +141,10 @@ class LongLink {
     void    __RunResponseError(ErrCmdType _type, int _errcode, ConnectProfile& _profile, bool _networkreport = true);
 
     bool    __SendNoopWhenNoData();
-    bool    __NoopReq(XLogger& _xlog, Alarm& _alarm, bool need_active_timeout);
-    bool    __NoopResp(uint32_t _cmdid, uint32_t _taskid, AutoBuffer& _buf, AutoBuffer& _extension, Alarm& _alarm, bool& _nooping, ConnectProfile& _profile);
+    bool    __NoopReq(XLogger& _xlog, Alarmksim& _alarm, bool need_active_timeout);
+    bool    __NoopResp(uint32_t _cmdid, uint32_t _taskid, AutoBuffer& _buf, AutoBuffer& _extension, Alarmksim& _alarm, bool& _nooping, ConnectProfile& _profile);
 
-    virtual void     __OnAlarm();
+    virtual void     __OnAlarmksim();
     virtual void     __Run();
     virtual SOCKET   __RunConnect(ConnectProfile& _conn_profile);
     virtual void     __RunReadWrite(SOCKET _sock, ErrCmdType& _errtype, int& _errcode, ConnectProfile& _profile);
@@ -157,7 +157,7 @@ class LongLink {
     void       __NotifySmartHeartbeatksimJudgeDozeStyle();
 	
   protected:
-    MessageQueueksim::ScopeRegister     asyncreg_;
+    MessageQueueksim::ScopeRegisterksim     asyncreg_;
     NetSourceksim&                      netsource_;
     
     Mutex                           mutex_;

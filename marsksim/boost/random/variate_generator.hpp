@@ -19,7 +19,7 @@
 
 #include <boost/random/detail/disable_warnings.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 /// \cond hide_private_members
 
@@ -51,7 +51,7 @@ template<class Engine, class Distribution>
 class variate_generator
 {
 private:
-    typedef mars_boost_ksim::random::detail::ptr_helper<Engine> helper_type;
+    typedef mars_boost::random::detail::ptr_helper<Engine> helper_type;
 public:
     typedef typename helper_type::value_type engine_value_type;
     typedef Engine engine_type;
@@ -115,7 +115,7 @@ private:
 
 using random::variate_generator;
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #include <boost/random/detail/enable_warnings.hpp>
 

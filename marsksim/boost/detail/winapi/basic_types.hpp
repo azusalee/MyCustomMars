@@ -73,11 +73,11 @@ typedef HINSTANCE HMODULE;
 #define BOOST_DETAIL_WINAPI_MAY_ALIAS
 #endif
 
-// MinGW64 gcc 4.8.2 fails to compile function declarations with mars_boost_ksim::detail::winapi::VOID_ arguments even though
+// MinGW64 gcc 4.8.2 fails to compile function declarations with mars_boost::detail::winapi::VOID_ arguments even though
 // the typedef expands to void. In Windows SDK, VOID is a macro which unfolds to void. We use our own macro in such cases.
 #define BOOST_DETAIL_WINAPI_VOID void
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace detail {
 namespace winapi {
 #if defined( BOOST_USE_WINDOWS_H )
@@ -161,8 +161,8 @@ typedef LONG_* LPLONG_;
 typedef unsigned long ULONG_;
 typedef ULONG_* PULONG_;
 
-typedef mars_boost_ksim::int64_t LONGLONG_;
-typedef mars_boost_ksim::uint64_t ULONGLONG_;
+typedef mars_boost::int64_t LONGLONG_;
+typedef mars_boost::uint64_t ULONGLONG_;
 
 # ifdef _WIN64
 #  if defined(__CYGWIN__)

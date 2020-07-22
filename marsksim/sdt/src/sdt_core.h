@@ -63,7 +63,7 @@ class SdtCore {
     void __DumpCheckResult();
 
   private:
-    //  MessageQueueksim::ScopeRegister     async_reg_;
+    //  MessageQueueksim::ScopeRegisterksim     async_reg_;
     Thread thread_;
 
     std::list<BaseChecker*>   check_list_;

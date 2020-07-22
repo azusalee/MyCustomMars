@@ -14,7 +14,7 @@
 #include <boost/range/size_type.hpp>
 #include <boost/range/iterator.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     template< class T >
     struct range_mutable_iterator<T*>

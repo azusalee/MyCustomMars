@@ -16,7 +16,7 @@
 #include <boost/exception/detail/object_hex_dump.hpp>
 #include <boost/assert.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace
 mars_boost
     {
     namespace

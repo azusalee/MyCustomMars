@@ -22,7 +22,7 @@
 #include <boost/mpl/aux_/na_spec.hpp>
 #include <boost/mpl/aux_/lambda_support.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl {
 
 template<
       typename BOOST_MPL_AUX_NA_PARAM(Sequence)
@@ -32,7 +32,7 @@ template<
 struct iter_fold
 {
     typedef typename aux::iter_fold_impl<
-          ::mars_boost_ksim::mpl::O1_size<Sequence>::value
+          ::mars_boost::mpl::O1_size<Sequence>::value
         , typename begin<Sequence>::type
         , typename end<Sequence>::type
         , State

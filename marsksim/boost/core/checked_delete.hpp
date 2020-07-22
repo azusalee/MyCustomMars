@@ -21,7 +21,7 @@
 //  See http://www.boost.org/libs/core/doc/html/core/checked_delete.html for documentation.
 //
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 // verify that types are complete for increased safety
@@ -48,8 +48,8 @@ template<class T> struct checked_deleter
 
     void operator()(T * x) const
     {
-        // mars_boost_ksim:: disables ADL
-        mars_boost_ksim::checked_delete(x);
+        // mars_boost:: disables ADL
+        mars_boost::checked_delete(x);
     }
 };
 
@@ -60,10 +60,10 @@ template<class T> struct checked_array_deleter
 
     void operator()(T * x) const
     {
-        mars_boost_ksim::checked_array_delete(x);
+        mars_boost::checked_array_delete(x);
     }
 };
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif  // #ifndef BOOST_CORE_CHECKED_DELETE_HPP

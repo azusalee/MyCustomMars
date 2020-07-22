@@ -18,7 +18,7 @@
 #include <boost/mpl/aux_/config/workaround.hpp>
 
 // agurt 21/sep/04: portability macro for the sake of MSVC 6.x-7.0;
-// resolves conflicts with 'mars_boost_ksim::numeric_cast' function template.
+// resolves conflicts with 'mars_boost::numeric_cast' function template.
 // use it in your own code _only_ if you care about compatibility with
 // these outdated compilers!
 #if BOOST_WORKAROUND(BOOST_MSVC, <= 1300) || BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x570) )
@@ -27,7 +27,7 @@
 #   define BOOST_MPL_AUX_NUMERIC_CAST numeric_cast
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl {
 
 // no default implementation; the definition is needed to make MSVC happy
 

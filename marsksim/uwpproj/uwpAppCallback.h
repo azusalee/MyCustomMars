@@ -1,10 +1,10 @@
 #pragma once
 #include "app/app_logic.h"
 
-class uwpAppCallback : public marsksim::app::Callback {
+class uwpAppCallbackksim : public marsksim::app::Callback {
 
 public:
-	virtual ~uwpAppCallback() {};
+	virtual ~uwpAppCallbackksim() {};
 
 	virtual std::string GetAppFilePath();
 

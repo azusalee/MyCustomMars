@@ -25,14 +25,14 @@
 #include <boost/type_traits/add_lvalue_reference.hpp>
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 template <typename T> struct has_trivial_copy 
 : public integral_constant<bool, 
 #ifdef BOOST_HAS_TRIVIAL_COPY
    BOOST_HAS_TRIVIAL_COPY(T) BOOST_TT_TRIVIAL_CONSTRUCT_FIX
 #else
-   ::mars_boost_ksim::is_pod<T>::value
+   ::mars_boost::is_pod<T>::value
 #endif
 >{};
 // Arrays are not explicitly copyable:
@@ -57,6 +57,6 @@ template <class T> struct has_trivial_copy_constructor : public has_trivial_copy
 
 #undef BOOST_TT_TRIVIAL_CONSTRUCT_FIX
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_HAS_TRIVIAL_COPY_HPP_INCLUDED

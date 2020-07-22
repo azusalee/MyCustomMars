@@ -21,7 +21,7 @@
 
 #ifndef BOOST_NO_SFINAE
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   template<typename T, typename R=void>
   struct enable_if_has_type
@@ -74,11 +74,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
   template <class Cond, class T> 
   struct lazy_disable_if : public lazy_disable_if_c<Cond::value, T> {};
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #else
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
   namespace detail { typedef void enable_if_default_T; }
 
@@ -121,7 +121,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
   struct lazy_disable_if : enable_if_does_not_work_on_this_compiler<T>
   { };
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_NO_SFINAE
 

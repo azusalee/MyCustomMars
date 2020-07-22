@@ -68,7 +68,7 @@ class ShortLink : public ShortLinkInterface {
     void 			 __OnResponse(ErrCmdType _err_type, int _status, AutoBuffer& _body, AutoBuffer& _extension, ConnectProfile& _conn_profile, bool _report = true);
     
   protected:
-    MessageQueueksim::ScopeRegister     asyncreg_;
+    MessageQueueksim::ScopeRegisterksim     asyncreg_;
     NetSourceksim&                      net_source_;
     Task                            task_;
     Thread                          thread_;

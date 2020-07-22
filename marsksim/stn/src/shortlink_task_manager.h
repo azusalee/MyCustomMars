@@ -83,7 +83,7 @@ class ShortLinkTaskManager {
     void __DeleteShortLink(intptr_t& _running_id);
 
   private:
-    MessageQueueksim::ScopeRegister     asyncreg_;
+    MessageQueueksim::ScopeRegisterksim     asyncreg_;
     NetSourceksim&                      net_source_;
     
     std::list<TaskProfile>          lst_cmd_;

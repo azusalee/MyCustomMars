@@ -14,22 +14,22 @@
 #include <boost/regex.hpp>
 #include <boost/range/iterator_range.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range_detail
     {
 
         template< class R >
         struct tokenized_range : 
-            public mars_boost_ksim::iterator_range<
-                      mars_boost_ksim::regex_token_iterator<
+            public mars_boost::iterator_range<
+                      mars_boost::regex_token_iterator<
                           BOOST_DEDUCED_TYPENAME range_iterator<R>::type 
                                               >
                                          >
         {
         private:
             typedef           
-                mars_boost_ksim::regex_token_iterator<
+                mars_boost::regex_token_iterator<
                           BOOST_DEDUCED_TYPENAME range_iterator<R>::type 
                                             >
                 regex_iter;
@@ -37,13 +37,13 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             typedef BOOST_DEDUCED_TYPENAME regex_iter::regex_type 
                 regex_type;
         
-            typedef mars_boost_ksim::iterator_range<regex_iter>
+            typedef mars_boost::iterator_range<regex_iter>
                 base;
 
         public:
             template< class Regex, class Submatch, class Flag >
             tokenized_range( R& r, const Regex& re, const Submatch& sub, Flag f )
-              : base( regex_iter( mars_boost_ksim::begin(r), mars_boost_ksim::end(r),
+              : base( regex_iter( mars_boost::begin(r), mars_boost::end(r),
                                   regex_type(re), sub, f ),
                       regex_iter() )
             { }

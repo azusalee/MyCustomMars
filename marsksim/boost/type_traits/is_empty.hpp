@@ -23,7 +23,7 @@
 #define BOOST_INTERNAL_IS_EMPTY(T) BOOST_IS_EMPTY(T)
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 namespace detail {
 
@@ -72,7 +72,7 @@ struct is_empty_impl
     typedef typename remove_cv<T>::type cvt;
     BOOST_STATIC_CONSTANT(
         bool, 
-        value = ( ::mars_boost_ksim::detail::empty_helper<cvt,::mars_boost_ksim::is_class<T>::value>::value || BOOST_INTERNAL_IS_EMPTY(cvt)));
+        value = ( ::mars_boost::detail::empty_helper<cvt,::mars_boost::is_class<T>::value>::value || BOOST_INTERNAL_IS_EMPTY(cvt)));
 };
 
 #else // __BORLANDC__
@@ -99,10 +99,10 @@ struct is_empty_impl
 
    BOOST_STATIC_CONSTANT(
        bool, value = (
-              ::mars_boost_ksim::detail::empty_helper<
+              ::mars_boost::detail::empty_helper<
                   cvt
-                , ::mars_boost_ksim::is_class<T>::value
-                , ::mars_boost_ksim::is_convertible< r_type,int>::value
+                , ::mars_boost::is_class<T>::value
+                , ::mars_boost::is_convertible< r_type,int>::value
               >::value || BOOST_INTERNAL_IS_EMPTY(cvt));
 };
 
@@ -110,9 +110,9 @@ struct is_empty_impl
 
 } // namespace detail
 
-template <class T> struct is_empty : integral_constant<bool, ::mars_boost_ksim::detail::is_empty_impl<T>::value> {};
+template <class T> struct is_empty : integral_constant<bool, ::mars_boost::detail::is_empty_impl<T>::value> {};
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #undef BOOST_INTERNAL_IS_EMPTY
 

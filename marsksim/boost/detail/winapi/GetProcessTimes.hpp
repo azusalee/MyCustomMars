@@ -23,9 +23,9 @@
 
 #if !defined( BOOST_USE_WINDOWS_H )
 extern "C" {
-BOOST_SYMBOL_IMPORT mars_boost_ksim::detail::winapi::BOOL_ WINAPI
+BOOST_SYMBOL_IMPORT mars_boost::detail::winapi::BOOL_ WINAPI
 GetProcessTimes(
-    mars_boost_ksim::detail::winapi::HANDLE_ hProcess,
+    mars_boost::detail::winapi::HANDLE_ hProcess,
     ::_FILETIME* lpCreationTime,
     ::_FILETIME* lpExitTime,
     ::_FILETIME* lpKernelTime,
@@ -33,7 +33,7 @@ GetProcessTimes(
 }
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace detail {
 namespace winapi {
 

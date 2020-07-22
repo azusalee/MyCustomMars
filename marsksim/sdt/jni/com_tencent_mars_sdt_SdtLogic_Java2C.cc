@@ -33,13 +33,13 @@ extern "C" {
  * Method:    getLoadLibraries
  * Signature: ()jobject
  */
-JNIEXPORT jobject JNICALL Java_com_tencent_mars_sdt_SdtLogic_getLoadLibraries
+JNIEXPORT jobject JNICALL Java_com_tencent_marsksim_sdt_SdtLogic_getLoadLibraries
   (JNIEnv *_env, jclass clz) {
 
 	return marsksim::baseevent::getLoadLibraries(_env);
 }
 
-JNIEXPORT void JNICALL Java_com_tencent_mars_sdt_SdtLogic_setHttpNetcheckCGI
+JNIEXPORT void JNICALL Java_com_tencent_marsksim_sdt_SdtLogic_setHttpNetcheckCGI
   (JNIEnv *_env, jclass clz, jstring cgi) {
 
 	SetHttpNetcheckCGI(ScopedJstring(_env, cgi).GetChar());

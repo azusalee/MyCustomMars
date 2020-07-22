@@ -172,7 +172,7 @@ extern "C" void* __cdecl _InterlockedExchangePointer( void* volatile *, void* );
 
 #define BOOST_INTERLOCKED_IMPORT __declspec(dllimport)
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 namespace detail
@@ -191,17 +191,17 @@ extern "C" BOOST_INTERLOCKED_IMPORT void* __stdcall InterlockedExchangePointer( 
 
 } // namespace detail
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
-# define BOOST_INTERLOCKED_INCREMENT ::mars_boost_ksim::detail::InterlockedIncrement
-# define BOOST_INTERLOCKED_DECREMENT ::mars_boost_ksim::detail::InterlockedDecrement
-# define BOOST_INTERLOCKED_COMPARE_EXCHANGE ::mars_boost_ksim::detail::InterlockedCompareExchange
-# define BOOST_INTERLOCKED_EXCHANGE ::mars_boost_ksim::detail::InterlockedExchange
-# define BOOST_INTERLOCKED_EXCHANGE_ADD ::mars_boost_ksim::detail::InterlockedExchangeAdd
+# define BOOST_INTERLOCKED_INCREMENT ::mars_boost::detail::InterlockedIncrement
+# define BOOST_INTERLOCKED_DECREMENT ::mars_boost::detail::InterlockedDecrement
+# define BOOST_INTERLOCKED_COMPARE_EXCHANGE ::mars_boost::detail::InterlockedCompareExchange
+# define BOOST_INTERLOCKED_EXCHANGE ::mars_boost::detail::InterlockedExchange
+# define BOOST_INTERLOCKED_EXCHANGE_ADD ::mars_boost::detail::InterlockedExchangeAdd
 
 # if defined(_M_IA64) || defined(_M_AMD64)
-#  define BOOST_INTERLOCKED_COMPARE_EXCHANGE_POINTER ::mars_boost_ksim::detail::InterlockedCompareExchangePointer
-#  define BOOST_INTERLOCKED_EXCHANGE_POINTER ::mars_boost_ksim::detail::InterlockedExchangePointer
+#  define BOOST_INTERLOCKED_COMPARE_EXCHANGE_POINTER ::mars_boost::detail::InterlockedCompareExchangePointer
+#  define BOOST_INTERLOCKED_EXCHANGE_POINTER ::mars_boost::detail::InterlockedExchangePointer
 # else
 #  define BOOST_INTERLOCKED_COMPARE_EXCHANGE_POINTER(dest,exchange,compare) \
     ((void*)BOOST_INTERLOCKED_COMPARE_EXCHANGE((long volatile*)(dest),(long)(exchange),(long)(compare)))

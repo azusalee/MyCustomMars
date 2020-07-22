@@ -26,7 +26,7 @@
 #include <boost/move/detail/iterator_traits.hpp>
 #include <boost/move/utility_core.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 //////////////////////////////////////////////////////////////////////////////
 //
@@ -44,18 +44,18 @@ class move_iterator
 {
    public:
    typedef It                                                              iterator_type;
-   typedef typename mars_boost_ksim::movelib::iterator_traits<iterator_type>::value_type        value_type;
+   typedef typename mars_boost::movelib::iterator_traits<iterator_type>::value_type        value_type;
    #if !defined(BOOST_NO_CXX11_RVALUE_REFERENCES) || defined(BOOST_MOVE_DOXYGEN_INVOKED)
    typedef value_type &&                                                   reference;
    #else
-   typedef typename ::mars_boost_ksim::move_detail::if_
-      < ::mars_boost_ksim::has_move_emulation_enabled<value_type>
-      , ::mars_boost_ksim::rv<value_type>&
+   typedef typename ::mars_boost::move_detail::if_
+      < ::mars_boost::has_move_emulation_enabled<value_type>
+      , ::mars_boost::rv<value_type>&
       , value_type & >::type                                               reference;
    #endif
    typedef It                                                              pointer;
-   typedef typename mars_boost_ksim::movelib::iterator_traits<iterator_type>::difference_type   difference_type;
-   typedef typename mars_boost_ksim::movelib::iterator_traits<iterator_type>::iterator_category iterator_category;
+   typedef typename mars_boost::movelib::iterator_traits<iterator_type>::difference_type   difference_type;
+   typedef typename mars_boost::movelib::iterator_traits<iterator_type>::iterator_category iterator_category;
 
    move_iterator()
    {}
@@ -77,7 +77,7 @@ class move_iterator
       #if defined(BOOST_NO_CXX11_RVALUE_REFERENCES) || defined(BOOST_MOVE_OLD_RVALUE_REF_BINDING_RULES)
       return *m_it;
       #else
-      return ::mars_boost_ksim::move(*m_it);
+      return ::mars_boost::move(*m_it);
       #endif
    }
 
@@ -113,7 +113,7 @@ class move_iterator
       #if defined(BOOST_NO_CXX11_RVALUE_REFERENCES) || defined(BOOST_MOVE_OLD_RVALUE_REF_BINDING_RULES)
       return m_it[n];
       #else
-      return ::mars_boost_ksim::move(m_it[n]);
+      return ::mars_boost::move(m_it[n]);
       #endif
    }
 
@@ -155,7 +155,7 @@ struct is_move_iterator
 };
 
 template <class I>
-struct is_move_iterator< ::mars_boost_ksim::move_iterator<I> >
+struct is_move_iterator< ::mars_boost::move_iterator<I> >
 {
    static const bool value = true;
 };
@@ -199,7 +199,7 @@ class back_move_insert_iterator
    explicit back_move_insert_iterator(C& x) : container_m(&x) { }
 
    back_move_insert_iterator& operator=(reference x)
-   { container_m->push_back(mars_boost_ksim::move(x)); return *this; }
+   { container_m->push_back(mars_boost::move(x)); return *this; }
 
    back_move_insert_iterator& operator=(BOOST_RV_REF(value_type) x)
    {  reference rx = x; return this->operator=(rx);  }
@@ -241,7 +241,7 @@ public:
    explicit front_move_insert_iterator(C& x) : container_m(&x) { }
 
    front_move_insert_iterator& operator=(reference x)
-   { container_m->push_front(mars_boost_ksim::move(x)); return *this; }
+   { container_m->push_front(mars_boost::move(x)); return *this; }
 
    front_move_insert_iterator& operator=(BOOST_RV_REF(value_type) x)
    {  reference rx = x; return this->operator=(rx);  }
@@ -284,7 +284,7 @@ class move_insert_iterator
 
    move_insert_iterator& operator=(reference x)
    {
-      pos_ = container_m->insert(pos_, ::mars_boost_ksim::move(x));
+      pos_ = container_m->insert(pos_, ::mars_boost::move(x));
       ++pos_;
       return *this;
    }
@@ -305,7 +305,7 @@ inline move_insert_iterator<C> move_inserter(C& x, typename C::iterator it)
    return move_insert_iterator<C>(x, it);
 }
 
-}  //namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+}  //namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 #include <boost/move/detail/config_end.hpp>
 

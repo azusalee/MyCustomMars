@@ -11,7 +11,7 @@
 
 #include <boost/config.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 namespace type_traits_detail
@@ -70,7 +70,7 @@ template<> struct arithmetic_type<7>
 
 template<> struct arithmetic_type<8>
 {
-    typedef mars_boost_ksim::long_long_type type;
+    typedef mars_boost::long_long_type type;
     typedef char (&result_type) [8];
 };
 
@@ -104,7 +104,7 @@ template<> struct arithmetic_type<12>
 
 template<> struct arithmetic_type<13>
 {
-    typedef mars_boost_ksim::ulong_long_type type;
+    typedef mars_boost::ulong_long_type type;
     typedef char (&result_type) [13];
 };
 
@@ -152,13 +152,13 @@ template<> struct arithmetic_type<18>
 
 template<> struct arithmetic_type<19>
 {
-    typedef mars_boost_ksim::int128_type type;
+    typedef mars_boost::int128_type type;
     typedef char (&result_type) [19];
 };
 
 template<> struct arithmetic_type<20>
 {
-    typedef mars_boost_ksim::uint128_type type;
+    typedef mars_boost::uint128_type type;
     typedef char (&result_type) [20];
 };
 
@@ -207,6 +207,6 @@ public:
 
 } // namespace type_traits_detail
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // #ifndef BOOST_TYPE_TRAITS_DETAIL_COMMON_ARITHMETIC_TYPE_HPP_INCLUDED

@@ -13,7 +13,7 @@
 #include <cassert>
 #include <boost/system/error_code.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace system
   {
@@ -77,7 +77,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     }
 
   } // namespace system
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_SYSTEM_ERROR_HPP
 

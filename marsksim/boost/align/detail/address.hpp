@@ -12,12 +12,12 @@ http://boost.org/LICENSE_1_0.txt
 #include <boost/cstdint.hpp>
 #include <cstddef>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace alignment {
 namespace detail {
 
 #if defined(BOOST_HAS_INTPTR_T)
-typedef mars_boost_ksim::uintptr_t address;
+typedef mars_boost::uintptr_t address;
 #else
 typedef std::size_t address;
 #endif

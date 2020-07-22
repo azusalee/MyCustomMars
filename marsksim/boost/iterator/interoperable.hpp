@@ -14,7 +14,7 @@
 
 # include <boost/iterator/detail/config_def.hpp> // must appear last
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace iterators {
 
   //
@@ -47,7 +47,7 @@ namespace iterators {
 
 using iterators::is_interoperable;
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 # include <boost/iterator/detail/config_undef.hpp>
 

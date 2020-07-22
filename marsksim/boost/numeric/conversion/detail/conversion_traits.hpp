@@ -20,7 +20,7 @@
 #include "boost/numeric/conversion/detail/udt_builtin_mixture.hpp"
 #include "boost/numeric/conversion/detail/is_subranged.hpp"
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace numeric { namespace convdetail
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace numeric { namespace convdetail
 {
   //-------------------------------------------------------------------
   // Implementation of the Conversion Traits for T != S
@@ -90,7 +90,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     typedef typename mpl::if_<is_trivial,trivial_imp,non_trivial_imp>::type type ;
   } ;
 
-} } } // namespace mars_boost_ksim::numeric::convdetail
+} } } // namespace mars_boost::numeric::convdetail
 
 #endif
 

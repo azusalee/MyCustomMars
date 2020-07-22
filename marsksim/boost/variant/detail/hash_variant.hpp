@@ -23,13 +23,13 @@
 #include <boost/variant/apply_visitor.hpp>
 #include <boost/functional/hash_fwd.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
     namespace detail { namespace variant {
-        struct variant_hasher: public mars_boost_ksim::static_visitor<std::size_t> {
+        struct variant_hasher: public mars_boost::static_visitor<std::size_t> {
             template <class T>
             std::size_t operator()(T const& val) const {
-                mars_boost_ksim::hash<T> hasher;
+                mars_boost::hash<T> hasher;
                 return hasher(val);
             }
         };
@@ -37,7 +37,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
     template < BOOST_VARIANT_ENUM_PARAMS(typename T) >
     std::size_t hash_value(variant< BOOST_VARIANT_ENUM_PARAMS(T) > const& val) {
-        std::size_t seed = mars_boost_ksim::apply_visitor(detail::variant::variant_hasher(), val);
+        std::size_t seed = mars_boost::apply_visitor(detail::variant::variant_hasher(), val);
         hash_combine(seed, val.which());
         return seed;
     }

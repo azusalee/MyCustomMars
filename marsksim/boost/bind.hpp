@@ -30,7 +30,7 @@
 # endif
 #endif
 
-using namespace mars_boost_ksim::placeholders;
+using namespace mars_boost::placeholders;
 
 #if defined(BOOST_CLANG)
 # pragma clang diagnostic pop

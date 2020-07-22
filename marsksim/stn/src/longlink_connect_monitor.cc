@@ -68,7 +68,7 @@ static unsigned long const sg_interval[][5]  = {
     {0,  0,  0,   0,   0},
 };
 
-static int __CurActiveState(const ActiveLogicksim& _activeLogic) {
+static int __CurActiveStateksim(const ActiveLogicksim& _activeLogic) {
     if (!_activeLogic.IsActive()) return kInactive;
 
     if (!_activeLogic.IsForeground()) return kBackgroundActive;
@@ -81,11 +81,11 @@ static int __CurActiveState(const ActiveLogicksim& _activeLogic) {
 }
 
 static unsigned long __Interval(int _type, const ActiveLogicksim& _activelogic) {
-    unsigned long interval = sg_interval[_type][__CurActiveState(_activelogic)];
+    unsigned long interval = sg_interval[_type][__CurActiveStateksim(_activelogic)];
 
     if (kLongLinkConnect != _type) return interval;
 
-    if (__CurActiveState(_activelogic) == kInactive || __CurActiveState(_activelogic) == kForgroundActive) {  // now - LastForegroundChangeTime>10min
+    if (__CurActiveStateksim(_activelogic) == kInactive || __CurActiveStateksim(_activelogic) == kForgroundActive) {  // now - LastForegroundChangeTime>10min
         if (!_activelogic.IsActive() && GetAccountInfo().username.empty()) {
             interval = kNoAccountInfoInactiveInterval;
             xwarn2(TSF"no account info and inactive, interval:%_", interval);
@@ -109,37 +109,37 @@ static unsigned long __Interval(int _type, const ActiveLogicksim& _activelogic) 
 
 #define AYNC_HANDLER asyncreg_.Get()
 
-LongLinkConnectMonitor::LongLinkConnectMonitor(ActiveLogicksim& _activelogic, LongLink& _longlink, MessageQueueksim::MessageQueueksim_t _id)
+LongLinkConnectMonitorksim::LongLinkConnectMonitorksim(ActiveLogicksim& _activelogic, LongLink& _longlink, MessageQueueksim::MessageQueueksim_t _id)
     : asyncreg_(MessageQueueksim::InstallAsyncHandler(_id))
-    , activelogic_(_activelogic), longlink_(_longlink), alarm_(boost_ksim::bind(&LongLinkConnectMonitor::__OnAlarm, this), _id)
+    , activelogic_(_activelogic), longlink_(_longlink), alarm_(boost_ksim::bind(&LongLinkConnectMonitorksim::__OnAlarmksim, this), _id)
     , status_(LongLink::kDisConnected)
     , last_connect_time_(0)
     , last_connect_net_type_(kNoNet)
-    , thread_(boost_ksim::bind(&LongLinkConnectMonitor::__Run, this), XLOGGER_TAG"::con_mon")
+    , thread_(boost_ksim::bind(&LongLinkConnectMonitorksim::__Run, this), XLOGGER_TAG"::con_mon")
     , conti_suc_count_(0)
     , isstart_(false) {
     xinfo2(TSF"handler:(%_,%_)", asyncreg_.Get().queue,asyncreg_.Get().seq);
-    activelogic_.SignalActive.connect(boost_ksim::bind(&LongLinkConnectMonitor::__OnSignalActive, this, _1));
-    activelogic_.SignalForeground.connect(boost_ksim::bind(&LongLinkConnectMonitor::__OnSignalForeground, this, _1));
-    longlink_.SignalConnection.connect(boost_ksim::bind(&LongLinkConnectMonitor::__OnLongLinkStatuChanged, this, _1));
+    activelogic_.SignalActive.connect(boost_ksim::bind(&LongLinkConnectMonitorksim::__OnSignalActive, this, _1));
+    activelogic_.SignalForeground.connect(boost_ksim::bind(&LongLinkConnectMonitorksim::__OnSignalForeground, this, _1));
+    longlink_.SignalConnection.connect(boost_ksim::bind(&LongLinkConnectMonitorksim::__OnLongLinkStatuChanged, this, _1));
 }
 
-LongLinkConnectMonitor::~LongLinkConnectMonitor() {
+LongLinkConnectMonitorksim::~LongLinkConnectMonitorksim() {
 #ifdef __APPLE__
     __StopTimer();
 #endif
-    longlink_.SignalConnection.disconnect(boost_ksim::bind(&LongLinkConnectMonitor::__OnLongLinkStatuChanged, this, _1));
-    activelogic_.SignalForeground.disconnect(boost_ksim::bind(&LongLinkConnectMonitor::__OnSignalForeground, this, _1));
-    activelogic_.SignalActive.disconnect(boost_ksim::bind(&LongLinkConnectMonitor::__OnSignalActive, this, _1));
+    longlink_.SignalConnection.disconnect(boost_ksim::bind(&LongLinkConnectMonitorksim::__OnLongLinkStatuChanged, this, _1));
+    activelogic_.SignalForeground.disconnect(boost_ksim::bind(&LongLinkConnectMonitorksim::__OnSignalForeground, this, _1));
+    activelogic_.SignalActive.disconnect(boost_ksim::bind(&LongLinkConnectMonitorksim::__OnSignalActive, this, _1));
     asyncreg_.CancelAndWait();
 }
 
-bool LongLinkConnectMonitor::MakeSureConnected() {
+bool LongLinkConnectMonitorksim::MakeSureConnected() {
     __IntervalConnect(kTaskConnect);
     return LongLink::kConnected == longlink_.ConnectStatus();
 }
 
-bool LongLinkConnectMonitor::NetworkChange() {
+bool LongLinkConnectMonitorksim::NetworkChange() {
     xinfo_function();
 #ifdef __APPLE__
     __StopTimer();
@@ -161,7 +161,7 @@ bool LongLinkConnectMonitor::NetworkChange() {
     return 0 == __IntervalConnect(kNetworkChangeConnect);
 }
 
-uint64_t LongLinkConnectMonitor::__IntervalConnect(int _type) {
+uint64_t LongLinkConnectMonitorksim::__IntervalConnect(int _type) {
     if (LongLink::kConnecting == longlink_.ConnectStatus() || LongLink::kConnected == longlink_.ConnectStatus()) return 0;
 
     uint64_t interval =  __Interval(_type, activelogic_) * 1000ULL;
@@ -178,7 +178,7 @@ uint64_t LongLinkConnectMonitor::__IntervalConnect(int _type) {
     }
 }
 
-uint64_t LongLinkConnectMonitor::__AutoIntervalConnect() {
+uint64_t LongLinkConnectMonitorksim::__AutoIntervalConnect() {
     alarm_.Cancel();
     uint64_t remain = __IntervalConnect(kLongLinkConnect);
 
@@ -189,7 +189,7 @@ uint64_t LongLinkConnectMonitor::__AutoIntervalConnect() {
     return remain;
 }
 
-void LongLinkConnectMonitor::__OnSignalForeground(bool _isForeground) {
+void LongLinkConnectMonitorksim::__OnSignalForeground(bool _isForeground) {
     ASYNC_BLOCK_START
 #ifdef __APPLE__
     xinfo2(TSF"forground:%_ time:%_ tick:%_", _isForeground, timeMs(), gettickcount());
@@ -209,13 +209,13 @@ void LongLinkConnectMonitor::__OnSignalForeground(bool _isForeground) {
     ASYNC_BLOCK_END
 }
 
-void LongLinkConnectMonitor::__OnSignalActive(bool _isactive) {
+void LongLinkConnectMonitorksim::__OnSignalActive(bool _isactive) {
     ASYNC_BLOCK_START
     __AutoIntervalConnect();
     ASYNC_BLOCK_END
 }
 
-void LongLinkConnectMonitor::__OnLongLinkStatuChanged(LongLink::TLongLinkStatus _status) {
+void LongLinkConnectMonitorksim::__OnLongLinkStatuChanged(LongLink::TLongLinkStatus _status) {
     alarm_.Cancel();
 
     if (LongLink::kConnectFailed == _status || LongLink::kDisConnected == _status) {
@@ -229,12 +229,12 @@ void LongLinkConnectMonitor::__OnLongLinkStatuChanged(LongLink::TLongLinkStatus 
     last_connect_net_type_ = ::getNetInfo();
 }
 
-void LongLinkConnectMonitor::__OnAlarm() {
+void LongLinkConnectMonitorksim::__OnAlarmksim() {
     __AutoIntervalConnect();
 }
 
 #ifdef __APPLE__
-bool LongLinkConnectMonitor::__StartTimer() {
+bool LongLinkConnectMonitorksim::__StartTimer() {
     xdebug_function();
 
     conti_suc_count_ = 0;
@@ -251,7 +251,7 @@ bool LongLinkConnectMonitor::__StartTimer() {
 }
 
 
-bool LongLinkConnectMonitor::__StopTimer() {
+bool LongLinkConnectMonitorksim::__StopTimer() {
     xdebug_function();
 
     ScopedLock lock(testmutex_);
@@ -273,7 +273,7 @@ bool LongLinkConnectMonitor::__StopTimer() {
 #endif
 
 
-void LongLinkConnectMonitor::__Run() {
+void LongLinkConnectMonitorksim::__Run() {
     int netifo = getNetInfo();
 
     if (LongLink::kConnected != status_ || (::gettickcount() - last_connect_time_) <= 12 * 1000
@@ -297,7 +297,7 @@ void LongLinkConnectMonitor::__Run() {
     }
 }
 
-void LongLinkConnectMonitor::__ReConnect() {
+void LongLinkConnectMonitorksim::__ReConnect() {
     xinfo_function();
     xassert2(fun_longlink_reset_);
     fun_longlink_reset_();

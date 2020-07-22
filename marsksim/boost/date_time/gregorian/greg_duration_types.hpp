@@ -15,7 +15,7 @@
 #include <boost/date_time/date_duration_types.hpp>
 #include <boost/date_time/gregorian/greg_duration.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace gregorian {
 
   //! config struct for additional duration types (ie months_duration<> & years_duration<>)
@@ -38,6 +38,6 @@ namespace gregorian {
 
   typedef weeks_duration weeks;
 
-}} // namespace mars_boost_ksim::gregorian
+}} // namespace mars_boost::gregorian
 
 #endif // GREG_DURATION_TYPES_HPP___

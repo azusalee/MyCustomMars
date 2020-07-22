@@ -14,7 +14,7 @@
 #include <boost/filesystem/fstream.hpp>
 #include <boost/filesystem/operations.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 namespace filesystem
 {
@@ -38,6 +38,6 @@ void load_string_file(const path& p, std::string& str)
   file.read(&str[0], sz);
 }
 }  // namespace filesystem
-}  // namespace mars_boost_ksim
+}  // namespace mars_boost
 
 #endif  // include guard

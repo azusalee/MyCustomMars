@@ -13,10 +13,10 @@
 
 #include <boost/core/enable_if.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   template<typename Iterator>
-  typename mars_boost_ksim::disable_if<is_future_type<Iterator>,void>::type wait_for_all(Iterator begin,Iterator end)
+  typename mars_boost::disable_if<is_future_type<Iterator>,void>::type wait_for_all(Iterator begin,Iterator end)
   {
       for(Iterator current=begin;current!=end;++current)
       {
@@ -26,7 +26,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 #ifdef BOOST_NO_CXX11_VARIADIC_TEMPLATES
     template<typename F1,typename F2>
-    typename mars_boost_ksim::enable_if<is_future_type<F1>,void>::type wait_for_all(F1& f1,F2& f2)
+    typename mars_boost::enable_if<is_future_type<F1>,void>::type wait_for_all(F1& f1,F2& f2)
     {
         f1.wait();
         f2.wait();

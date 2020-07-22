@@ -16,7 +16,7 @@
 #include <boost/detail/winapi/timers.hpp>
 #include <boost/detail/winapi/GetLastError.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 namespace chrono
 {
@@ -25,8 +25,8 @@ namespace chrono_detail
 
   BOOST_CHRONO_INLINE double get_nanosecs_per_tic() BOOST_NOEXCEPT
   {
-      mars_boost_ksim::detail::winapi::LARGE_INTEGER_ freq;
-      if ( !mars_boost_ksim::detail::winapi::QueryPerformanceFrequency( &freq ) )
+      mars_boost::detail::winapi::LARGE_INTEGER_ freq;
+      if ( !mars_boost::detail::winapi::QueryPerformanceFrequency( &freq ) )
           return 0.0L;
       return double(1000000000.0L / freq.QuadPart);
   }
@@ -37,14 +37,14 @@ namespace chrono_detail
   {
     double nanosecs_per_tic = chrono_detail::get_nanosecs_per_tic();
 
-    mars_boost_ksim::detail::winapi::LARGE_INTEGER_ pcount;
+    mars_boost::detail::winapi::LARGE_INTEGER_ pcount;
     if ( nanosecs_per_tic <= 0.0L )
     {
       BOOST_ASSERT(0 && "Boost::Chrono - get_nanosecs_per_tic Internal Error");
       return steady_clock::time_point();
     }
     unsigned times=0;
-    while ( ! mars_boost_ksim::detail::winapi::QueryPerformanceCounter( &pcount ) )
+    while ( ! mars_boost::detail::winapi::QueryPerformanceCounter( &pcount ) )
     {
       if ( ++times > 3 )
       {
@@ -63,16 +63,16 @@ namespace chrono_detail
   {
     double nanosecs_per_tic = chrono_detail::get_nanosecs_per_tic();
 
-    mars_boost_ksim::detail::winapi::LARGE_INTEGER_ pcount;
+    mars_boost::detail::winapi::LARGE_INTEGER_ pcount;
     if ( (nanosecs_per_tic <= 0.0L)
-            || (!mars_boost_ksim::detail::winapi::QueryPerformanceCounter( &pcount )) )
+            || (!mars_boost::detail::winapi::QueryPerformanceCounter( &pcount )) )
     {
-        mars_boost_ksim::detail::winapi::DWORD_ cause =
+        mars_boost::detail::winapi::DWORD_ cause =
             ((nanosecs_per_tic <= 0.0L)
                     ? ERROR_NOT_SUPPORTED
-                    : mars_boost_ksim::detail::winapi::GetLastError());
+                    : mars_boost::detail::winapi::GetLastError());
         if (BOOST_CHRONO_IS_THROWS(ec)) {
-            mars_boost_ksim::throw_exception(
+            mars_boost::throw_exception(
                     system::system_error(
                             cause,
                             BOOST_CHRONO_SYSTEM_CATEGORY,
@@ -97,8 +97,8 @@ namespace chrono_detail
   BOOST_CHRONO_INLINE
   system_clock::time_point system_clock::now() BOOST_NOEXCEPT
   {
-    mars_boost_ksim::detail::winapi::FILETIME_ ft;
-    mars_boost_ksim::detail::winapi::GetSystemTimeAsFileTime( &ft );  // never fails
+    mars_boost::detail::winapi::FILETIME_ ft;
+    mars_boost::detail::winapi::GetSystemTimeAsFileTime( &ft );  // never fails
     return system_clock::time_point(
       system_clock::duration(
         ((static_cast<__int64>( ft.dwHighDateTime ) << 32) | ft.dwLowDateTime)
@@ -112,8 +112,8 @@ namespace chrono_detail
   BOOST_CHRONO_INLINE
   system_clock::time_point system_clock::now( system::error_code & ec )
   {
-    mars_boost_ksim::detail::winapi::FILETIME_ ft;
-    mars_boost_ksim::detail::winapi::GetSystemTimeAsFileTime( &ft );  // never fails
+    mars_boost::detail::winapi::FILETIME_ ft;
+    mars_boost::detail::winapi::GetSystemTimeAsFileTime( &ft );  // never fails
     if (!BOOST_CHRONO_IS_THROWS(ec))
     {
         ec.clear();
@@ -144,6 +144,6 @@ namespace chrono_detail
   }
 
 }  // namespace chrono
-}  // namespace mars_boost_ksim
+}  // namespace mars_boost
 
 #endif

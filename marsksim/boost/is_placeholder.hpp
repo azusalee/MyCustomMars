@@ -18,7 +18,7 @@
 //  http://www.boost.org/LICENSE_1_0.txt
 
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 template< class T > struct is_placeholder
@@ -26,6 +26,6 @@ template< class T > struct is_placeholder
     enum _vt { value = 0 };
 };
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // #ifndef BOOST_IS_PLACEHOLDER_HPP_INCLUDED

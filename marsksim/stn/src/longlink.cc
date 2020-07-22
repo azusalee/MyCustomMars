@@ -48,7 +48,7 @@
 #include "smart_heartbeat.h"
 
 #define AYNC_HANDLER  asyncreg_.Get()
-#define STATIC_RETURN_SYNC2ASYNC_FUNC(func) RETURN_SYNC2ASYNC_FUNC(func, )
+#define STATIC_RETURN_SYNC2ASYNC_FUNCksim(func) RETURN_SYNC2ASYNC_FUNCksim(func, )
 
 using namespace marsksim::stn;
 using namespace marsksim::app;
@@ -130,7 +130,7 @@ class LongLinkConnectObserverksim : public MComplexConnectksim {
 
 }
 
-LongLink::LongLink(const mq::MessageQueueksim_t& _messagequeueid, NetSourceksim& _netsource)
+LongLink::LongLink(const mqksim::MessageQueueksim_t& _messagequeueid, NetSourceksim& _netsource)
     : asyncreg_(MessageQueueksim::InstallAsyncHandler(_messagequeueid))
     , netsource_(_netsource)
     , thread_(boost_ksim::bind(&LongLink::__Run, this), XLOGGER_TAG "::lonklink")
@@ -270,7 +270,7 @@ void LongLink::Disconnect(TDisconnectInternalCode _scene) {
     }
 }
 
-bool LongLink::__NoopReq(XLogger& _log, Alarm& _alarm, bool need_active_timeout) {
+bool LongLink::__NoopReq(XLogger& _log, Alarmksim& _alarm, bool need_active_timeout) {
     AutoBuffer buffer;
     uint32_t req_cmdid = 0;
     bool suc = false;
@@ -299,7 +299,7 @@ bool LongLink::__NoopReq(XLogger& _log, Alarm& _alarm, bool need_active_timeout)
     return suc;
 }
 
-bool LongLink::__NoopResp(uint32_t _cmdid, uint32_t _taskid, AutoBuffer& _buf, AutoBuffer& _extension, Alarm& _alarm, bool& _nooping, ConnectProfile& _profile) {
+bool LongLink::__NoopResp(uint32_t _cmdid, uint32_t _taskid, AutoBuffer& _buf, AutoBuffer& _extension, Alarmksim& _alarm, bool& _nooping, ConnectProfile& _profile) {
     bool is_noop = false;
     
     if (identifychecker_.IsIdentifyResp(_cmdid, _taskid, _buf, _extension)) {
@@ -351,17 +351,17 @@ void LongLink::__ConnectStatus(TLongLinkStatus _status) {
     __NotifySmartHeartbeatksimConnectStatus(connectstatus_);
     if (kConnected==connectstatus_ && fun_network_report_)
         fun_network_report_(__LINE__, kEctOK, 0, conn_profile_.ip, conn_profile_.port);
-    STATIC_RETURN_SYNC2ASYNC_FUNC(boost_ksim::bind(boost_ksim::ref(SignalConnection), connectstatus_));
+    STATIC_RETURN_SYNC2ASYNC_FUNCksim(boost_ksim::bind(boost_ksim::ref(SignalConnection), connectstatus_));
 }
 
 void LongLink::__UpdateProfile(const ConnectProfile& _conn_profile) {
-    STATIC_RETURN_SYNC2ASYNC_FUNC(boost_ksim::bind(&LongLink::__UpdateProfile, this, _conn_profile));
+    STATIC_RETURN_SYNC2ASYNC_FUNCksim(boost_ksim::bind(&LongLink::__UpdateProfile, this, _conn_profile));
     conn_profile_ = _conn_profile;
     
     if (0 != conn_profile_.disconn_time) broadcast_linkstatus_signal_(conn_profile_);
 }
 
-void LongLink::__OnAlarm() {
+void LongLink::__OnAlarmksim() {
     readwritebreak_.Break();
 #ifdef ANDROID
     wakelock_->Lock(3 * 1000);
@@ -558,8 +558,8 @@ SOCKET LongLink::__RunConnect(ConnectProfile& _conn_profile) {
 
 void LongLink::__RunReadWrite(SOCKET _sock, ErrCmdType& _errtype, int& _errcode, ConnectProfile& _profile) {
     
-    Alarm alarmnoopinterval(boost_ksim::bind(&LongLink::__OnAlarm, this), false);
-    Alarm alarmnooptimeout(boost_ksim::bind(&LongLink::__OnAlarm, this), false);
+    Alarmksim alarmnoopinterval(boost_ksim::bind(&LongLink::__OnAlarmksim, this), false);
+    Alarmksim alarmnooptimeout(boost_ksim::bind(&LongLink::__OnAlarmksim, this), false);
     
     std::map <uint32_t, StreamResp> sent_taskids;
     std::vector<LongLinkNWriteData> nsent_datas;
@@ -571,16 +571,16 @@ void LongLink::__RunReadWrite(SOCKET _sock, ErrCmdType& _errtype, int& _errcode,
     
     while (true) {
         if (!alarmnoopinterval.IsWaiting()) {
-            if (first_noop_sent && alarmnoopinterval.Status() != Alarm::kOnAlarm) {
+            if (first_noop_sent && alarmnoopinterval.Status() != Alarmksim::kOnAlarmksim) {
                 xassert2(false, "noop interval alarm not running");
             }
           
-            if(first_noop_sent && alarmnoopinterval.Status() == Alarm::kOnAlarm) {
+            if(first_noop_sent && alarmnoopinterval.Status() == Alarmksim::kOnAlarmksim) {
               __NotifySmartHeartbeatksimJudgeDozeStyle();
             }
             xgroup2_define(noop_xlog);
             uint64_t last_noop_interval = alarmnoopinterval.After();
-            uint64_t last_noop_actual_interval = (alarmnoopinterval.Status() == Alarm::kOnAlarm) ? alarmnoopinterval.ElapseTime() : 0;
+            uint64_t last_noop_actual_interval = (alarmnoopinterval.Status() == Alarmksim::kOnAlarmksim) ? alarmnoopinterval.ElapseTime() : 0;
             bool has_late_toomuch = (last_noop_actual_interval >= (15*60*1000));
             
             if (__NoopReq(noop_xlog, alarmnooptimeout, has_late_toomuch)) {
@@ -596,7 +596,7 @@ void LongLink::__RunReadWrite(SOCKET _sock, ErrCmdType& _errtype, int& _errcode,
             alarmnoopinterval.Start((int)noop_interval);
         }
         
-        if (nooping && (alarmnooptimeout.Status() == Alarm::kInit || alarmnooptimeout.Status() == Alarm::kCancel)) {
+        if (nooping && (alarmnooptimeout.Status() == Alarmksim::kInit || alarmnooptimeout.Status() == Alarmksim::kCancel)) {
             xassert2(false, "noop but alarmnooptimeout not running, take as noop timeout");
             _errtype = kEctSocket;
             _errcode = kEctSocketRecvErr;
@@ -645,7 +645,7 @@ void LongLink::__RunReadWrite(SOCKET _sock, ErrCmdType& _errtype, int& _errcode,
             goto End;
         }
         
-        if (nooping && alarmnooptimeout.Status() == Alarm::kOnAlarm) {
+        if (nooping && alarmnooptimeout.Status() == Alarmksim::kOnAlarmksim) {
             xerror2(TSF"task socket close sock:%0, noop timeout, nread:%_, nwrite:%_", _sock, socket_nread(_sock), socket_nwrite(_sock)) >> close_log;
 //            __NotifySmartHeartbeatksimJudgeDozeStyle();
             _errtype = kEctSocket;

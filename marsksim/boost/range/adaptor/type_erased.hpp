@@ -16,7 +16,7 @@
 #include <boost/range/any_range.hpp>
 #include <boost/range/concepts.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace adaptors
     {
@@ -67,7 +67,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
               , Difference
               , Buffer
             >::type range_type;
-            return range_type(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng));
+            return range_type(mars_boost::begin(rng), mars_boost::end(rng));
         }
 
         template<
@@ -106,7 +106,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
               , Difference
               , Buffer
             >::type range_type;
-            return range_type(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng));
+            return range_type(mars_boost::begin(rng), mars_boost::end(rng));
         }
 
         template<
@@ -147,7 +147,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
               , Buffer
             >::type range_type;
 
-            return range_type(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng));
+            return range_type(mars_boost::begin(rng), mars_boost::end(rng));
         }
 
         template<
@@ -188,9 +188,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
               , Buffer
             >::type range_type;
 
-            return range_type(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng));
+            return range_type(mars_boost::begin(rng), mars_boost::end(rng));
         }
     }
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

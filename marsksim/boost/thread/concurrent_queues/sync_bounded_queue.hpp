@@ -24,7 +24,7 @@
 #endif
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 namespace concurrent
 {
@@ -175,20 +175,20 @@ namespace concurrent
 #ifndef BOOST_THREAD_QUEUE_DEPRECATE_OLD
     inline void pull(value_type& elem, unique_lock<mutex>& lk)
     {
-      elem = mars_boost_ksim::move(data_[out_]);
+      elem = mars_boost::move(data_[out_]);
       out_ = inc(out_);
       notify_not_full_if_needed(lk);
     }
     inline value_type pull(unique_lock<mutex>& lk)
     {
-      value_type elem = mars_boost_ksim::move(data_[out_]);
+      value_type elem = mars_boost::move(data_[out_]);
       out_ = inc(out_);
       notify_not_full_if_needed(lk);
-      return mars_boost_ksim::move(elem);
+      return mars_boost::move(elem);
     }
-    inline mars_boost_ksim::shared_ptr<value_type> ptr_pull(unique_lock<mutex>& lk)
+    inline mars_boost::shared_ptr<value_type> ptr_pull(unique_lock<mutex>& lk)
     {
-      shared_ptr<value_type> res = make_shared<value_type>(mars_boost_ksim::move(data_[out_]));
+      shared_ptr<value_type> res = make_shared<value_type>(mars_boost::move(data_[out_]));
       out_ = inc(out_);
       notify_not_full_if_needed(lk);
       return res;
@@ -196,16 +196,16 @@ namespace concurrent
 #endif
     inline void pull_front(value_type& elem, unique_lock<mutex>& lk)
     {
-      elem = mars_boost_ksim::move(data_[out_]);
+      elem = mars_boost::move(data_[out_]);
       out_ = inc(out_);
       notify_not_full_if_needed(lk);
     }
     inline value_type pull_front(unique_lock<mutex>& lk)
     {
-      value_type elem = mars_boost_ksim::move(data_[out_]);
+      value_type elem = mars_boost::move(data_[out_]);
       out_ = inc(out_);
       notify_not_full_if_needed(lk);
-      return mars_boost_ksim::move(elem);
+      return mars_boost::move(elem);
     }
 
     inline void set_in(size_type in, unique_lock<mutex>& lk)
@@ -222,7 +222,7 @@ namespace concurrent
 
     inline void push_at(BOOST_THREAD_RV_REF(value_type) elem, size_type in_p_1, unique_lock<mutex>& lk)
     {
-      data_[in_] = mars_boost_ksim::move(elem);
+      data_[in_] = mars_boost::move(elem);
       set_in(in_p_1, lk);
     }
   };
@@ -246,8 +246,8 @@ namespace concurrent
 //    try
 //    {
 //      typedef typename Range::iterator iterator_t;
-//      iterator_t first = mars_boost_ksim::begin(range);
-//      iterator_t end = mars_boost_ksim::end(range);
+//      iterator_t first = mars_boost::begin(range);
+//      iterator_t end = mars_boost::end(range);
 //      size_type in = 0;
 //      for (iterator_t cur = first; cur != end; ++cur, ++in)
 //      {
@@ -378,7 +378,7 @@ namespace concurrent
       return try_pull(elem, lk);
   }
   template <typename ValueType>
-  mars_boost_ksim::shared_ptr<ValueType> sync_bounded_queue<ValueType>::try_pull()
+  mars_boost::shared_ptr<ValueType> sync_bounded_queue<ValueType>::try_pull()
   {
       unique_lock<mutex> lk(mtx_);
       return try_pull(lk);
@@ -454,7 +454,7 @@ namespace concurrent
       return pull(lk);
   }
   template <typename ValueType>
-  mars_boost_ksim::shared_ptr<ValueType> sync_bounded_queue<ValueType>::ptr_pull()
+  mars_boost::shared_ptr<ValueType> sync_bounded_queue<ValueType>::ptr_pull()
   {
       unique_lock<mutex> lk(mtx_);
       wait_until_not_empty(lk);
@@ -611,7 +611,7 @@ namespace concurrent
     {
       return false;
     }
-    push_at(mars_boost_ksim::move(elem), in_p_1, lk);
+    push_at(mars_boost::move(elem), in_p_1, lk);
     return true;
   }
 
@@ -619,7 +619,7 @@ namespace concurrent
   bool sync_bounded_queue<ValueType>::try_push(BOOST_THREAD_RV_REF(ValueType) elem)
   {
       unique_lock<mutex> lk(mtx_);
-      return try_push(mars_boost_ksim::move(elem), lk);
+      return try_push(mars_boost::move(elem), lk);
   }
 #endif
 
@@ -632,28 +632,28 @@ namespace concurrent
     {
       return queue_op_status::full;
     }
-    push_at(mars_boost_ksim::move(elem), in_p_1, lk);
+    push_at(mars_boost::move(elem), in_p_1, lk);
     return queue_op_status::success;
   }
   template <typename ValueType>
   queue_op_status sync_bounded_queue<ValueType>::try_push_back(BOOST_THREAD_RV_REF(ValueType) elem)
   {
       unique_lock<mutex> lk(mtx_);
-      return try_push_back(mars_boost_ksim::move(elem), lk);
+      return try_push_back(mars_boost::move(elem), lk);
   }
 
   template <typename ValueType>
   queue_op_status sync_bounded_queue<ValueType>::wait_push_back(BOOST_THREAD_RV_REF(ValueType) elem, unique_lock<mutex>& lk)
   {
     if (closed(lk)) return queue_op_status::closed;
-    push_at(mars_boost_ksim::move(elem), wait_until_not_full(lk), lk);
+    push_at(mars_boost::move(elem), wait_until_not_full(lk), lk);
     return queue_op_status::success;
   }
   template <typename ValueType>
   queue_op_status sync_bounded_queue<ValueType>::wait_push_back(BOOST_THREAD_RV_REF(ValueType) elem)
   {
       unique_lock<mutex> lk(mtx_);
-      return try_push_back(mars_boost_ksim::move(elem), lk);
+      return try_push_back(mars_boost::move(elem), lk);
   }
 
 
@@ -666,7 +666,7 @@ namespace concurrent
       {
         return false;
       }
-      return try_push(mars_boost_ksim::move(elem), lk);
+      return try_push(mars_boost::move(elem), lk);
   }
 #endif
   template <typename ValueType>
@@ -677,7 +677,7 @@ namespace concurrent
       {
         return queue_op_status::busy;
       }
-      return try_push_back(mars_boost_ksim::move(elem), lk);
+      return try_push_back(mars_boost::move(elem), lk);
   }
 
 #ifndef BOOST_THREAD_QUEUE_DEPRECATE_OLD
@@ -685,20 +685,20 @@ namespace concurrent
   void sync_bounded_queue<ValueType>::push(BOOST_THREAD_RV_REF(ValueType) elem)
   {
       unique_lock<mutex> lk(mtx_);
-      push_at(mars_boost_ksim::move(elem), wait_until_not_full(lk), lk);
+      push_at(mars_boost::move(elem), wait_until_not_full(lk), lk);
   }
 #endif
   template <typename ValueType>
   void sync_bounded_queue<ValueType>::push_back(BOOST_THREAD_RV_REF(ValueType) elem)
   {
       unique_lock<mutex> lk(mtx_);
-      push_at(mars_boost_ksim::move(elem), wait_until_not_full(lk), lk);
+      push_at(mars_boost::move(elem), wait_until_not_full(lk), lk);
   }
 
   template <typename ValueType>
   sync_bounded_queue<ValueType>& operator<<(sync_bounded_queue<ValueType>& sbq, BOOST_THREAD_RV_REF(ValueType) elem)
   {
-    sbq.push_back(mars_boost_ksim::move(elem));
+    sbq.push_back(mars_boost::move(elem));
     return sbq;
   }
 

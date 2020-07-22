@@ -28,7 +28,7 @@
 
 #endif // BOOST_IS_CLASS
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 namespace detail {
 
@@ -47,16 +47,16 @@ namespace detail {
 // http://groups.google.com/groups?hl=en&selm=000001c1cc83%24e154d5e0%247772e50c%40c161550a&rnum=1
 #if defined(__GNUC__)  && !defined(__EDG_VERSION__)
 
-template <class U> ::mars_boost_ksim::type_traits::yes_type is_class_tester(void(U::*)(void));
-template <class U> ::mars_boost_ksim::type_traits::no_type is_class_tester(...);
+template <class U> ::mars_boost::type_traits::yes_type is_class_tester(void(U::*)(void));
+template <class U> ::mars_boost::type_traits::no_type is_class_tester(...);
 
 template <typename T>
 struct is_class_impl
 {
 
     BOOST_STATIC_CONSTANT(bool, value =
-            sizeof(is_class_tester<T>(0)) == sizeof(::mars_boost_ksim::type_traits::yes_type)
-            && ! ::mars_boost_ksim::is_union<T>::value
+            sizeof(is_class_tester<T>(0)) == sizeof(::mars_boost::type_traits::yes_type)
+            && ! ::mars_boost::is_union<T>::value
         );
 };
 
@@ -65,12 +65,12 @@ struct is_class_impl
 template <typename T>
 struct is_class_impl
 {
-    template <class U> static ::mars_boost_ksim::type_traits::yes_type is_class_tester(void(U::*)(void));
-    template <class U> static ::mars_boost_ksim::type_traits::no_type is_class_tester(...);
+    template <class U> static ::mars_boost::type_traits::yes_type is_class_tester(void(U::*)(void));
+    template <class U> static ::mars_boost::type_traits::no_type is_class_tester(...);
 
     BOOST_STATIC_CONSTANT(bool, value =
-            sizeof(is_class_tester<T>(0)) == sizeof(::mars_boost_ksim::type_traits::yes_type)
-            && ! ::mars_boost_ksim::is_union<T>::value
+            sizeof(is_class_tester<T>(0)) == sizeof(::mars_boost::type_traits::yes_type)
+            && ! ::mars_boost::is_union<T>::value
         );
 };
 
@@ -82,12 +82,12 @@ template <typename T>
 struct is_class_impl
 {
     BOOST_STATIC_CONSTANT(bool, value =
-        ! ::mars_boost_ksim::is_union<T>::value >::value
-        && ! ::mars_boost_ksim::is_scalar<T>::value
-        && ! ::mars_boost_ksim::is_array<T>::value
-        && ! ::mars_boost_ksim::is_reference<T>::value
-        && ! ::mars_boost_ksim::is_void<T>::value
-        && ! ::mars_boost_ksim::is_function<T>::value
+        ! ::mars_boost::is_union<T>::value >::value
+        && ! ::mars_boost::is_scalar<T>::value
+        && ! ::mars_boost::is_array<T>::value
+        && ! ::mars_boost::is_reference<T>::value
+        && ! ::mars_boost::is_void<T>::value
+        && ! ::mars_boost::is_function<T>::value
         );
 };
 
@@ -102,13 +102,13 @@ struct is_class_impl
 
 } // namespace detail
 
-template <class T> struct is_class : public integral_constant<bool, ::mars_boost_ksim::detail::is_class_impl<T>::value> {};
+template <class T> struct is_class : public integral_constant<bool, ::mars_boost::detail::is_class_impl<T>::value> {};
 # ifdef __EDG_VERSION__
 template <class T> struct is_class<const T> : public is_class<T>{};
 template <class T> struct is_class<const volatile T> : public is_class<T>{};
 template <class T> struct is_class<volatile T> : public is_class<T>{};
 # endif
     
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_IS_CLASS_HPP_INCLUDED

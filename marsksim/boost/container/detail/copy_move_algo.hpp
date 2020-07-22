@@ -34,7 +34,7 @@
 // std
 #include <cstring> //for emmove/memcpy
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace container {
 namespace container_detail {
 
@@ -59,7 +59,7 @@ struct are_elements_contiguous<T*>
 /////////////////////////
 
 template<class It>
-struct are_elements_contiguous< ::mars_boost_ksim::move_iterator<It> >
+struct are_elements_contiguous< ::mars_boost::move_iterator<It> >
    : are_elements_contiguous<It>
 {};
 
@@ -98,13 +98,13 @@ namespace container_detail {
 #ifndef BOOST_CONTAINER_VECTOR_ITERATOR_IS_POINTER
 
 template<class Pointer>
-struct are_elements_contiguous<mars_boost_ksim::container::container_detail::vector_iterator<Pointer> >
+struct are_elements_contiguous<mars_boost::container::container_detail::vector_iterator<Pointer> >
 {
    static const bool value = true;
 };
 
 template<class Pointer>
-struct are_elements_contiguous<mars_boost_ksim::container::container_detail::vector_const_iterator<Pointer> >
+struct are_elements_contiguous<mars_boost::container::container_detail::vector_const_iterator<Pointer> >
 {
    static const bool value = true;
 };
@@ -116,35 +116,35 @@ struct are_elements_contiguous<mars_boost_ksim::container::container_detail::vec
 /////////////////////////
 
 template <class PointedType, class DifferenceType, class OffsetType, std::size_t OffsetAlignment>
-struct are_elements_contiguous< ::mars_boost_ksim::interprocess::offset_ptr<PointedType, DifferenceType, OffsetType, OffsetAlignment> >
+struct are_elements_contiguous< ::mars_boost::interprocess::offset_ptr<PointedType, DifferenceType, OffsetType, OffsetAlignment> >
 {
    static const bool value = true;
 };
 
 template <typename I, typename O>
 struct are_contiguous_and_same
-   : mars_boost_ksim::move_detail::and_
+   : mars_boost::move_detail::and_
       < are_elements_contiguous<I>
       , are_elements_contiguous<O>
-      , is_same< typename remove_const< typename ::mars_boost_ksim::container::iterator_traits<I>::value_type >::type
-               , typename ::mars_boost_ksim::container::iterator_traits<O>::value_type
+      , is_same< typename remove_const< typename ::mars_boost::container::iterator_traits<I>::value_type >::type
+               , typename ::mars_boost::container::iterator_traits<O>::value_type
                >
       >
 {};
 
 template <typename I, typename O>
 struct is_memtransfer_copy_assignable
-   : mars_boost_ksim::move_detail::and_
+   : mars_boost::move_detail::and_
       < are_contiguous_and_same<I, O>
-      , container_detail::is_trivially_copy_assignable< typename ::mars_boost_ksim::container::iterator_traits<I>::value_type >
+      , container_detail::is_trivially_copy_assignable< typename ::mars_boost::container::iterator_traits<I>::value_type >
       >
 {};
 
 template <typename I, typename O>
 struct is_memtransfer_copy_constructible
-   : mars_boost_ksim::move_detail::and_
+   : mars_boost::move_detail::and_
       < are_contiguous_and_same<I, O>
-      , container_detail::is_trivially_copy_constructible< typename ::mars_boost_ksim::container::iterator_traits<I>::value_type >
+      , container_detail::is_trivially_copy_constructible< typename ::mars_boost::container::iterator_traits<I>::value_type >
       >
 {};
 
@@ -173,11 +173,11 @@ template
     typename F> // F models ForwardIterator
 inline F memmove(I f, I l, F r) BOOST_NOEXCEPT_OR_NOTHROW
 {
-   typedef typename mars_boost_ksim::container::iterator_traits<I>::value_type value_type;
-   typename mars_boost_ksim::container::iterator_traits<I>::difference_type n = mars_boost_ksim::container::iterator_distance(f, l);
+   typedef typename mars_boost::container::iterator_traits<I>::value_type value_type;
+   typename mars_boost::container::iterator_traits<I>::difference_type n = mars_boost::container::iterator_distance(f, l);
    if(n){
       std::memmove((iterator_to_raw_pointer)(r), (iterator_to_raw_pointer)(f), sizeof(value_type)*n);
-      mars_boost_ksim::container::iterator_advance(r, n);
+      mars_boost::container::iterator_advance(r, n);
    }
    return r;
 }
@@ -185,12 +185,12 @@ inline F memmove(I f, I l, F r) BOOST_NOEXCEPT_OR_NOTHROW
 template
    <typename I, // I models InputIterator
     typename F> // F models ForwardIterator
-F memmove_n(I f, typename mars_boost_ksim::container::iterator_traits<I>::difference_type n, F r) BOOST_NOEXCEPT_OR_NOTHROW
+F memmove_n(I f, typename mars_boost::container::iterator_traits<I>::difference_type n, F r) BOOST_NOEXCEPT_OR_NOTHROW
 {
-   typedef typename mars_boost_ksim::container::iterator_traits<I>::value_type value_type;
+   typedef typename mars_boost::container::iterator_traits<I>::value_type value_type;
    if(n){
       std::memmove((iterator_to_raw_pointer)(r), (iterator_to_raw_pointer)(f), sizeof(value_type)*n);
-      mars_boost_ksim::container::iterator_advance(r, n);
+      mars_boost::container::iterator_advance(r, n);
    }
    return r;
 }
@@ -198,12 +198,12 @@ F memmove_n(I f, typename mars_boost_ksim::container::iterator_traits<I>::differ
 template
    <typename I, // I models InputIterator
     typename F> // F models ForwardIterator
-I memmove_n_source(I f, typename mars_boost_ksim::container::iterator_traits<I>::difference_type n, F r) BOOST_NOEXCEPT_OR_NOTHROW
+I memmove_n_source(I f, typename mars_boost::container::iterator_traits<I>::difference_type n, F r) BOOST_NOEXCEPT_OR_NOTHROW
 {
    if(n){
-      typedef typename mars_boost_ksim::container::iterator_traits<I>::value_type value_type;
+      typedef typename mars_boost::container::iterator_traits<I>::value_type value_type;
       std::memmove((iterator_to_raw_pointer)(r), (iterator_to_raw_pointer)(f), sizeof(value_type)*n);
-      mars_boost_ksim::container::iterator_advance(f, n);
+      mars_boost::container::iterator_advance(f, n);
    }
    return f;
 }
@@ -211,13 +211,13 @@ I memmove_n_source(I f, typename mars_boost_ksim::container::iterator_traits<I>:
 template
    <typename I, // I models InputIterator
     typename F> // F models ForwardIterator
-I memmove_n_source_dest(I f, typename mars_boost_ksim::container::iterator_traits<I>::difference_type n, F &r) BOOST_NOEXCEPT_OR_NOTHROW
+I memmove_n_source_dest(I f, typename mars_boost::container::iterator_traits<I>::difference_type n, F &r) BOOST_NOEXCEPT_OR_NOTHROW
 {
-   typedef typename mars_boost_ksim::container::iterator_traits<I>::value_type value_type;
+   typedef typename mars_boost::container::iterator_traits<I>::value_type value_type;
    if(n){
       std::memmove((iterator_to_raw_pointer)(r), (iterator_to_raw_pointer)(f), sizeof(value_type)*n);
-      mars_boost_ksim::container::iterator_advance(f, n);
-      mars_boost_ksim::container::iterator_advance(r, n);
+      mars_boost::container::iterator_advance(f, n);
+      mars_boost::container::iterator_advance(r, n);
    }
    return f;
 }
@@ -225,7 +225,7 @@ I memmove_n_source_dest(I f, typename mars_boost_ksim::container::iterator_trait
 template <typename O>
 struct is_memzero_initializable
 {
-   typedef typename ::mars_boost_ksim::container::iterator_traits<O>::value_type value_type;
+   typedef typename ::mars_boost::container::iterator_traits<O>::value_type value_type;
    static const bool value = are_elements_contiguous<O>::value &&
       (  container_detail::is_integral<value_type>::value || container_detail::is_enum<value_type>::value
       #if defined(BOOST_CONTAINER_MEMZEROED_POINTER_IS_NULL)
@@ -253,14 +253,14 @@ struct disable_if_memzero_initializable
 template <typename I, typename R>
 struct enable_if_trivially_destructible
    : enable_if_c < container_detail::is_trivially_destructible
-                  <typename mars_boost_ksim::container::iterator_traits<I>::value_type>::value
+                  <typename mars_boost::container::iterator_traits<I>::value_type>::value
                , R>
 {};
 
 template <typename I, typename R>
 struct disable_if_trivially_destructible
    : enable_if_c <!container_detail::is_trivially_destructible
-                  <typename mars_boost_ksim::container::iterator_traits<I>::value_type>::value
+                  <typename mars_boost::container::iterator_traits<I>::value_type>::value
                , R>
 {};
 
@@ -276,7 +276,7 @@ struct disable_if_trivially_destructible
 //! <b>Effects</b>:
 //!   \code
 //!   for (; f != l; ++r, ++f)
-//!      allocator_traits::construct(a, &*r, mars_boost_ksim::move(*f));
+//!      allocator_traits::construct(a, &*r, mars_boost::move(*f));
 //!   \endcode
 //!
 //! <b>Returns</b>: r
@@ -290,7 +290,7 @@ inline typename container_detail::disable_if_memtransfer_copy_constructible<I, F
    F back = r;
    BOOST_TRY{
       while (f != l) {
-         allocator_traits<Allocator>::construct(a, container_detail::iterator_to_raw_pointer(r), mars_boost_ksim::move(*f));
+         allocator_traits<Allocator>::construct(a, container_detail::iterator_to_raw_pointer(r), mars_boost::move(*f));
          ++f; ++r;
       }
    }
@@ -321,7 +321,7 @@ inline typename container_detail::enable_if_memtransfer_copy_constructible<I, F,
 //! <b>Effects</b>:
 //!   \code
 //!   for (; n--; ++r, ++f)
-//!      allocator_traits::construct(a, &*r, mars_boost_ksim::move(*f));
+//!      allocator_traits::construct(a, &*r, mars_boost::move(*f));
 //!   \endcode
 //!
 //! <b>Returns</b>: r
@@ -330,12 +330,12 @@ template
     typename I, // I models InputIterator
     typename F> // F models ForwardIterator
 inline typename container_detail::disable_if_memtransfer_copy_constructible<I, F, F>::type
-   uninitialized_move_alloc_n(Allocator &a, I f, typename mars_boost_ksim::container::iterator_traits<I>::difference_type n, F r)
+   uninitialized_move_alloc_n(Allocator &a, I f, typename mars_boost::container::iterator_traits<I>::difference_type n, F r)
 {
    F back = r;
    BOOST_TRY{
       while (n--) {
-         allocator_traits<Allocator>::construct(a, container_detail::iterator_to_raw_pointer(r), mars_boost_ksim::move(*f));
+         allocator_traits<Allocator>::construct(a, container_detail::iterator_to_raw_pointer(r), mars_boost::move(*f));
          ++f; ++r;
       }
    }
@@ -354,7 +354,7 @@ template
     typename I, // I models InputIterator
     typename F> // F models ForwardIterator
 inline typename container_detail::enable_if_memtransfer_copy_constructible<I, F, F>::type
-   uninitialized_move_alloc_n(Allocator &, I f, typename mars_boost_ksim::container::iterator_traits<I>::difference_type n, F r) BOOST_NOEXCEPT_OR_NOTHROW
+   uninitialized_move_alloc_n(Allocator &, I f, typename mars_boost::container::iterator_traits<I>::difference_type n, F r) BOOST_NOEXCEPT_OR_NOTHROW
 {  return container_detail::memmove_n(f, n, r); }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -366,7 +366,7 @@ inline typename container_detail::enable_if_memtransfer_copy_constructible<I, F,
 //! <b>Effects</b>:
 //!   \code
 //!   for (; n--; ++r, ++f)
-//!      allocator_traits::construct(a, &*r, mars_boost_ksim::move(*f));
+//!      allocator_traits::construct(a, &*r, mars_boost::move(*f));
 //!   \endcode
 //!
 //! <b>Returns</b>: f (after incremented)
@@ -375,12 +375,12 @@ template
     typename I, // I models InputIterator
     typename F> // F models ForwardIterator
 inline typename container_detail::disable_if_memtransfer_copy_constructible<I, F, I>::type
-   uninitialized_move_alloc_n_source(Allocator &a, I f, typename mars_boost_ksim::container::iterator_traits<I>::difference_type n, F r)
+   uninitialized_move_alloc_n_source(Allocator &a, I f, typename mars_boost::container::iterator_traits<I>::difference_type n, F r)
 {
    F back = r;
    BOOST_TRY{
       while (n--) {
-         allocator_traits<Allocator>::construct(a, container_detail::iterator_to_raw_pointer(r), mars_boost_ksim::move(*f));
+         allocator_traits<Allocator>::construct(a, container_detail::iterator_to_raw_pointer(r), mars_boost::move(*f));
          ++f; ++r;
       }
    }
@@ -399,7 +399,7 @@ template
     typename I, // I models InputIterator
     typename F> // F models ForwardIterator
 inline typename container_detail::enable_if_memtransfer_copy_constructible<I, F, I>::type
-   uninitialized_move_alloc_n_source(Allocator &, I f, typename mars_boost_ksim::container::iterator_traits<I>::difference_type n, F r) BOOST_NOEXCEPT_OR_NOTHROW
+   uninitialized_move_alloc_n_source(Allocator &, I f, typename mars_boost::container::iterator_traits<I>::difference_type n, F r) BOOST_NOEXCEPT_OR_NOTHROW
 {  return container_detail::memmove_n_source(f, n, r); }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -465,7 +465,7 @@ template
     typename I, // I models InputIterator
     typename F> // F models ForwardIterator
 inline typename container_detail::disable_if_memtransfer_copy_constructible<I, F, F>::type
-   uninitialized_copy_alloc_n(Allocator &a, I f, typename mars_boost_ksim::container::iterator_traits<I>::difference_type n, F r)
+   uninitialized_copy_alloc_n(Allocator &a, I f, typename mars_boost::container::iterator_traits<I>::difference_type n, F r)
 {
    F back = r;
    BOOST_TRY{
@@ -489,7 +489,7 @@ template
     typename I, // I models InputIterator
     typename F> // F models ForwardIterator
 inline typename container_detail::enable_if_memtransfer_copy_constructible<I, F, F>::type
-   uninitialized_copy_alloc_n(Allocator &, I f, typename mars_boost_ksim::container::iterator_traits<I>::difference_type n, F r) BOOST_NOEXCEPT_OR_NOTHROW
+   uninitialized_copy_alloc_n(Allocator &, I f, typename mars_boost::container::iterator_traits<I>::difference_type n, F r) BOOST_NOEXCEPT_OR_NOTHROW
 {  return container_detail::memmove_n(f, n, r); }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -510,7 +510,7 @@ template
     typename I, // I models InputIterator
     typename F> // F models ForwardIterator
 inline typename container_detail::disable_if_memtransfer_copy_constructible<I, F, I>::type
-   uninitialized_copy_alloc_n_source(Allocator &a, I f, typename mars_boost_ksim::container::iterator_traits<I>::difference_type n, F r)
+   uninitialized_copy_alloc_n_source(Allocator &a, I f, typename mars_boost::container::iterator_traits<I>::difference_type n, F r)
 {
    F back = r;
    BOOST_TRY{
@@ -534,7 +534,7 @@ template
     typename I, // I models InputIterator
     typename F> // F models ForwardIterator
 inline typename container_detail::enable_if_memtransfer_copy_constructible<I, F, I>::type
-   uninitialized_copy_alloc_n_source(Allocator &, I f, typename mars_boost_ksim::container::iterator_traits<I>::difference_type n, F r) BOOST_NOEXCEPT_OR_NOTHROW
+   uninitialized_copy_alloc_n_source(Allocator &, I f, typename mars_boost::container::iterator_traits<I>::difference_type n, F r) BOOST_NOEXCEPT_OR_NOTHROW
 {  return container_detail::memmove_n_source(f, n, r); }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -579,9 +579,9 @@ template
 inline typename container_detail::enable_if_memzero_initializable<F, F>::type
    uninitialized_value_init_alloc_n(Allocator &, typename allocator_traits<Allocator>::difference_type n, F r)
 {
-   typedef typename mars_boost_ksim::container::iterator_traits<F>::value_type value_type;
+   typedef typename mars_boost::container::iterator_traits<F>::value_type value_type;
    std::memset((void*)container_detail::iterator_to_raw_pointer(r), 0, sizeof(value_type)*n);
-   mars_boost_ksim::container::iterator_advance(r, n);
+   mars_boost::container::iterator_advance(r, n);
    return r;
 }
 
@@ -728,7 +728,7 @@ template
 <typename I,   // I models InputIterator
 typename F>   // F models ForwardIterator
 inline typename container_detail::disable_if_memtransfer_copy_assignable<I, F, F>::type
-   copy_n(I f, typename mars_boost_ksim::container::iterator_traits<I>::difference_type n, F r)
+   copy_n(I f, typename mars_boost::container::iterator_traits<I>::difference_type n, F r)
 {
    while (n--) {
       *r = *f;
@@ -741,7 +741,7 @@ template
 <typename I,   // I models InputIterator
 typename F>   // F models ForwardIterator
 inline typename container_detail::enable_if_memtransfer_copy_assignable<I, F, F>::type
-   copy_n(I f, typename mars_boost_ksim::container::iterator_traits<I>::difference_type n, F r) BOOST_NOEXCEPT_OR_NOTHROW
+   copy_n(I f, typename mars_boost::container::iterator_traits<I>::difference_type n, F r) BOOST_NOEXCEPT_OR_NOTHROW
 {  return container_detail::memmove_n(f, n, r); }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -754,7 +754,7 @@ template
 <typename I,   // I models InputIterator
 typename F>   // F models ForwardIterator
 inline typename container_detail::disable_if_memtransfer_copy_assignable<I, F, I>::type
-   copy_n_source(I f, typename mars_boost_ksim::container::iterator_traits<I>::difference_type n, F r)
+   copy_n_source(I f, typename mars_boost::container::iterator_traits<I>::difference_type n, F r)
 {
    while (n--) {
       *r = *f;
@@ -767,7 +767,7 @@ template
 <typename I,   // I models InputIterator
 typename F>   // F models ForwardIterator
 inline typename container_detail::enable_if_memtransfer_copy_assignable<I, F, I>::type
-   copy_n_source(I f, typename mars_boost_ksim::container::iterator_traits<I>::difference_type n, F r) BOOST_NOEXCEPT_OR_NOTHROW
+   copy_n_source(I f, typename mars_boost::container::iterator_traits<I>::difference_type n, F r) BOOST_NOEXCEPT_OR_NOTHROW
 {  return container_detail::memmove_n_source(f, n, r); }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -780,7 +780,7 @@ template
 <typename I,   // I models InputIterator
 typename F>   // F models ForwardIterator
 inline typename container_detail::disable_if_memtransfer_copy_assignable<I, F, I>::type
-   copy_n_source_dest(I f, typename mars_boost_ksim::container::iterator_traits<I>::difference_type n, F &r)
+   copy_n_source_dest(I f, typename mars_boost::container::iterator_traits<I>::difference_type n, F &r)
 {
    while (n--) {
       *r = *f;
@@ -793,7 +793,7 @@ template
 <typename I,   // I models InputIterator
 typename F>   // F models ForwardIterator
 inline typename container_detail::enable_if_memtransfer_copy_assignable<I, F, I>::type
-   copy_n_source_dest(I f, typename mars_boost_ksim::container::iterator_traits<I>::difference_type n, F &r) BOOST_NOEXCEPT_OR_NOTHROW
+   copy_n_source_dest(I f, typename mars_boost::container::iterator_traits<I>::difference_type n, F &r) BOOST_NOEXCEPT_OR_NOTHROW
 {  return container_detail::memmove_n_source_dest(f, n, r);  }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -809,7 +809,7 @@ inline typename container_detail::disable_if_memtransfer_copy_assignable<I, F, F
    move(I f, I l, F r)
 {
    while (f != l) {
-      *r = ::mars_boost_ksim::move(*f);
+      *r = ::mars_boost::move(*f);
       ++f; ++r;
    }
    return r;
@@ -832,10 +832,10 @@ template
 <typename I,   // I models InputIterator
 typename F>   // F models ForwardIterator
 inline typename container_detail::disable_if_memtransfer_copy_assignable<I, F, F>::type
-   move_n(I f, typename mars_boost_ksim::container::iterator_traits<I>::difference_type n, F r)
+   move_n(I f, typename mars_boost::container::iterator_traits<I>::difference_type n, F r)
 {
    while (n--) {
-      *r = ::mars_boost_ksim::move(*f);
+      *r = ::mars_boost::move(*f);
       ++f; ++r;
    }
    return r;
@@ -845,7 +845,7 @@ template
 <typename I,   // I models InputIterator
 typename F>   // F models ForwardIterator
 inline typename container_detail::enable_if_memtransfer_copy_assignable<I, F, F>::type
-   move_n(I f, typename mars_boost_ksim::container::iterator_traits<I>::difference_type n, F r) BOOST_NOEXCEPT_OR_NOTHROW
+   move_n(I f, typename mars_boost::container::iterator_traits<I>::difference_type n, F r) BOOST_NOEXCEPT_OR_NOTHROW
 {  return container_detail::memmove_n(f, n, r); }
 
 
@@ -863,7 +863,7 @@ inline typename container_detail::disable_if_memtransfer_copy_assignable<I, F, F
 {
    while (f != l) {
       --l; --r;
-      *r = ::mars_boost_ksim::move(*l);
+      *r = ::mars_boost::move(*l);
    }
    return r;
 }
@@ -874,8 +874,8 @@ typename F>   // F models ForwardIterator
 inline typename container_detail::enable_if_memtransfer_copy_assignable<I, F, F>::type
    move_backward(I f, I l, F r) BOOST_NOEXCEPT_OR_NOTHROW
 {
-   typedef typename mars_boost_ksim::container::iterator_traits<I>::value_type value_type;
-   const typename mars_boost_ksim::container::iterator_traits<I>::difference_type n = mars_boost_ksim::container::iterator_distance(f, l);
+   typedef typename mars_boost::container::iterator_traits<I>::value_type value_type;
+   const typename mars_boost::container::iterator_traits<I>::difference_type n = mars_boost::container::iterator_distance(f, l);
    r -= n;
    std::memmove((container_detail::iterator_to_raw_pointer)(r), (container_detail::iterator_to_raw_pointer)(f), sizeof(value_type)*n);
    return r;
@@ -891,10 +891,10 @@ template
 <typename I    // I models InputIterator
 ,typename F>   // F models ForwardIterator
 inline typename container_detail::disable_if_memtransfer_copy_assignable<I, F, I>::type
-   move_n_source_dest(I f, typename mars_boost_ksim::container::iterator_traits<I>::difference_type n, F &r)
+   move_n_source_dest(I f, typename mars_boost::container::iterator_traits<I>::difference_type n, F &r)
 {
    while (n--) {
-      *r = ::mars_boost_ksim::move(*f);
+      *r = ::mars_boost::move(*f);
       ++f; ++r;
    }
    return f;
@@ -904,7 +904,7 @@ template
 <typename I    // I models InputIterator
 ,typename F>   // F models ForwardIterator
 inline typename container_detail::enable_if_memtransfer_copy_assignable<I, F, I>::type
-   move_n_source_dest(I f, typename mars_boost_ksim::container::iterator_traits<I>::difference_type n, F &r) BOOST_NOEXCEPT_OR_NOTHROW
+   move_n_source_dest(I f, typename mars_boost::container::iterator_traits<I>::difference_type n, F &r) BOOST_NOEXCEPT_OR_NOTHROW
 {  return container_detail::memmove_n_source_dest(f, n, r); }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -917,10 +917,10 @@ template
 <typename I    // I models InputIterator
 ,typename F>   // F models ForwardIterator
 inline typename container_detail::disable_if_memtransfer_copy_assignable<I, F, I>::type
-   move_n_source(I f, typename mars_boost_ksim::container::iterator_traits<I>::difference_type n, F r)
+   move_n_source(I f, typename mars_boost::container::iterator_traits<I>::difference_type n, F r)
 {
    while (n--) {
-      *r = ::mars_boost_ksim::move(*f);
+      *r = ::mars_boost::move(*f);
       ++f; ++r;
    }
    return f;
@@ -930,7 +930,7 @@ template
 <typename I    // I models InputIterator
 ,typename F>   // F models ForwardIterator
 inline typename container_detail::enable_if_memtransfer_copy_assignable<I, F, I>::type
-   move_n_source(I f, typename mars_boost_ksim::container::iterator_traits<I>::difference_type n, F r) BOOST_NOEXCEPT_OR_NOTHROW
+   move_n_source(I f, typename mars_boost::container::iterator_traits<I>::difference_type n, F r) BOOST_NOEXCEPT_OR_NOTHROW
 {  return container_detail::memmove_n_source(f, n, r); }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -978,10 +978,10 @@ inline typename container_detail::disable_if_memtransfer_copy_assignable<F, G, v
 {
    typename allocator_traits<Allocator>::size_type n = 0;
    for (; n != n_i ; ++short_range_f, ++large_range_f, ++n){
-      mars_boost_ksim::adl_move_swap(*short_range_f, *large_range_f);
+      mars_boost::adl_move_swap(*short_range_f, *large_range_f);
    }
-   mars_boost_ksim::container::uninitialized_move_alloc_n(a, large_range_f, n_j - n_i, short_range_f);  // may throw
-   mars_boost_ksim::container::destroy_alloc_n(a, large_range_f, n_j - n_i);
+   mars_boost::container::uninitialized_move_alloc_n(a, large_range_f, n_j - n_i, short_range_f);  // may throw
+   mars_boost::container::destroy_alloc_n(a, large_range_f, n_j - n_i);
 }
 
 static const std::size_t DeepSwapAllocNMaxStorage = std::size_t(1) << std::size_t(11); //2K bytes
@@ -1010,10 +1010,10 @@ inline typename container_detail::enable_if_c
    std::memcpy(stora_ptr, large_ptr, n_i_bytes);
    std::memcpy(large_ptr, short_ptr, n_i_bytes);
    std::memcpy(short_ptr, stora_ptr, n_i_bytes);
-   mars_boost_ksim::container::iterator_advance(large_range_f, n_i);
-   mars_boost_ksim::container::iterator_advance(short_range_f, n_i);
-   mars_boost_ksim::container::uninitialized_move_alloc_n(a, large_range_f, n_j - n_i, short_range_f);  // may throw
-   mars_boost_ksim::container::destroy_alloc_n(a, large_range_f, n_j - n_i);
+   mars_boost::container::iterator_advance(large_range_f, n_i);
+   mars_boost::container::iterator_advance(short_range_f, n_i);
+   mars_boost::container::uninitialized_move_alloc_n(a, large_range_f, n_j - n_i, short_range_f);  // may throw
+   mars_boost::container::destroy_alloc_n(a, large_range_f, n_j - n_i);
 }
 
 template
@@ -1081,10 +1081,10 @@ inline typename container_detail::enable_if_c
    std::memcpy(stora_ptr, large_ptr, szt_rem);
    std::memcpy(large_ptr, short_ptr, szt_rem);
    std::memcpy(short_ptr, stora_ptr, szt_rem);
-   mars_boost_ksim::container::iterator_advance(large_range_f, n_i);
-   mars_boost_ksim::container::iterator_advance(short_range_f, n_i);
-   mars_boost_ksim::container::uninitialized_move_alloc_n(a, large_range_f, n_j - n_i, short_range_f);  // may throw
-   mars_boost_ksim::container::destroy_alloc_n(a, large_range_f, n_j - n_i);
+   mars_boost::container::iterator_advance(large_range_f, n_i);
+   mars_boost::container::iterator_advance(short_range_f, n_i);
+   mars_boost::container::uninitialized_move_alloc_n(a, large_range_f, n_j - n_i, short_range_f);  // may throw
+   mars_boost::container::destroy_alloc_n(a, large_range_f, n_j - n_i);
 }
 
 
@@ -1103,12 +1103,12 @@ void copy_assign_range_alloc_n( Allocator &a, I inp_start, typename allocator_tr
                               , O out_start, typename allocator_traits<Allocator>::size_type n_o )
 {
    if (n_o < n_i){
-      inp_start = mars_boost_ksim::container::copy_n_source_dest(inp_start, n_o, out_start);     // may throw
-      mars_boost_ksim::container::uninitialized_copy_alloc_n(a, inp_start, n_i - n_o, out_start);// may throw
+      inp_start = mars_boost::container::copy_n_source_dest(inp_start, n_o, out_start);     // may throw
+      mars_boost::container::uninitialized_copy_alloc_n(a, inp_start, n_i - n_o, out_start);// may throw
    }
    else{
-      out_start = mars_boost_ksim::container::copy_n(inp_start, n_i, out_start);  // may throw
-      mars_boost_ksim::container::destroy_alloc_n(a, out_start, n_o - n_i);
+      out_start = mars_boost::container::copy_n(inp_start, n_i, out_start);  // may throw
+      mars_boost::container::destroy_alloc_n(a, out_start, n_o - n_i);
    }
 }
 
@@ -1127,16 +1127,16 @@ void move_assign_range_alloc_n( Allocator &a, I inp_start, typename allocator_tr
                               , O out_start, typename allocator_traits<Allocator>::size_type n_o )
 {
    if (n_o < n_i){
-      inp_start = mars_boost_ksim::container::move_n_source_dest(inp_start, n_o, out_start);  // may throw
-      mars_boost_ksim::container::uninitialized_move_alloc_n(a, inp_start, n_i - n_o, out_start);  // may throw
+      inp_start = mars_boost::container::move_n_source_dest(inp_start, n_o, out_start);  // may throw
+      mars_boost::container::uninitialized_move_alloc_n(a, inp_start, n_i - n_o, out_start);  // may throw
    }
    else{
-      out_start = mars_boost_ksim::container::move_n(inp_start, n_i, out_start);  // may throw
-      mars_boost_ksim::container::destroy_alloc_n(a, out_start, n_o - n_i);
+      out_start = mars_boost::container::move_n(inp_start, n_i, out_start);  // may throw
+      mars_boost::container::destroy_alloc_n(a, out_start, n_o - n_i);
    }
 }
 
 }  //namespace container {
-}  //namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+}  //namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 #endif   //#ifndef BOOST_CONTAINER_DETAIL_UTILITIES_HPP

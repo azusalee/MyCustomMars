@@ -15,7 +15,7 @@
 #include <boost/range/concepts.hpp>
 #include <algorithm>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range
     {
@@ -29,7 +29,7 @@ template< class ForwardRange, class Generator >
 inline ForwardRange& generate( ForwardRange& rng, Generator gen )
 {
     BOOST_RANGE_CONCEPT_ASSERT(( ForwardRangeConcept<ForwardRange> ));
-    std::generate(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), gen);
+    std::generate(mars_boost::begin(rng), mars_boost::end(rng), gen);
     return rng;
 }
 
@@ -38,12 +38,12 @@ template< class ForwardRange, class Generator >
 inline const ForwardRange& generate( const ForwardRange& rng, Generator gen )
 {
     BOOST_RANGE_CONCEPT_ASSERT(( ForwardRangeConcept<const ForwardRange> ));
-    std::generate(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), gen);
+    std::generate(mars_boost::begin(rng), mars_boost::end(rng), gen);
     return rng;
 }
 
     } // namespace range
     using range::generate;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

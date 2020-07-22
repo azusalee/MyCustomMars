@@ -23,7 +23,7 @@
 
 #include <boost/type_traits/is_same.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl {
 
 struct has_push_back_arg {};
 
@@ -38,7 +38,7 @@ struct push_back_impl
         // if you've got an assert here, you are requesting a 'push_back' 
         // specialization that doesn't exist.
         BOOST_MPL_ASSERT_MSG(
-              ( mars_boost_ksim::is_same< T, has_push_back_arg >::value )
+              ( mars_boost::is_same< T, has_push_back_arg >::value )
             , REQUESTED_PUSH_BACK_SPECIALIZATION_FOR_SEQUENCE_DOES_NOT_EXIST
             , ( Sequence )
             );

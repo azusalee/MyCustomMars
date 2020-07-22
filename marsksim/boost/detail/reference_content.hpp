@@ -20,7 +20,7 @@
 
 #include "boost/mpl/void.hpp"
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 namespace detail {
 
@@ -108,13 +108,13 @@ struct make_reference_content< mpl::void_ >
 
 template <typename T>
 struct has_nothrow_copy<
-      ::mars_boost_ksim::detail::reference_content< T& >
+      ::mars_boost::detail::reference_content< T& >
     >
     : mpl::true_
 {
 };
 
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_DETAIL_REFERENCE_CONTENT_HPP

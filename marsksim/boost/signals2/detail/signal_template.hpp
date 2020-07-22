@@ -24,7 +24,7 @@
   BOOST_SIGNALS2_SIGNATURE_TEMPLATE_INSTANTIATION(BOOST_SIGNALS2_NUM_ARGS), \
   Combiner, Group, GroupCompare, SlotFunction, ExtendedSlotFunction, Mutex
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace signals2
   {
@@ -112,7 +112,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {}
 
         ExtendedSlotFunction _fun;
-        mars_boost_ksim::shared_ptr<connection> _connection;
+        mars_boost::shared_ptr<connection> _connection;
       };
 
       template<BOOST_SIGNALS2_SIGNAL_TEMPLATE_DECL(BOOST_SIGNALS2_NUM_ARGS)>
@@ -358,14 +358,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #define BOOST_SIGNALS2_M_ARG_NAMES(arity) BOOST_PP_ENUM(arity, BOOST_SIGNALS2_M_ARG_NAME, ~)
           template<typename SlotResultType>
           result_type m_invoke(const connection_body_type &connectionBody,
-            typename mars_boost_ksim::enable_if<mars_boost_ksim::is_void<SlotResultType> >::type * = 0) const
+            typename mars_boost::enable_if<mars_boost::is_void<SlotResultType> >::type * = 0) const
           {
             connectionBody->slot().slot_function()(BOOST_SIGNALS2_M_ARG_NAMES(BOOST_SIGNALS2_NUM_ARGS));
             return void_type();
           }
           template<typename SlotResultType>
           result_type m_invoke(const connection_body_type &connectionBody, 
-            typename mars_boost_ksim::disable_if<mars_boost_ksim::is_void<SlotResultType> >::type * = 0) const
+            typename mars_boost::disable_if<mars_boost::is_void<SlotResultType> >::type * = 0) const
           {
             return connectionBody->slot().slot_function()(BOOST_SIGNALS2_M_ARG_NAMES(BOOST_SIGNALS2_NUM_ARGS));
           }
@@ -585,7 +585,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         mutable typename connection_list_type::iterator _garbage_collector_it;
         // connection list mutex must never be locked when attempting a blocking lock on a slot,
         // or you could deadlock.
-        const mars_boost_ksim::shared_ptr<mutex_type> _mutex;
+        const mars_boost::shared_ptr<mutex_type> _mutex;
       };
 
       template<BOOST_SIGNALS2_SIGNAL_TEMPLATE_DECL(BOOST_SIGNALS2_NUM_ARGS)>
@@ -794,7 +794,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           shared_ptr<detail::BOOST_SIGNALS2_SIGNAL_IMPL_CLASS_NAME(BOOST_SIGNALS2_NUM_ARGS)
             <BOOST_SIGNALS2_SIGNAL_TEMPLATE_INSTANTIATION> >
             shared_pimpl(_weak_pimpl.lock());
-          if(shared_pimpl == 0) mars_boost_ksim::throw_exception(expired_slot());
+          if(shared_pimpl == 0) mars_boost::throw_exception(expired_slot());
           return (*shared_pimpl)(BOOST_SIGNALS2_SIGNATURE_ARG_NAMES(BOOST_SIGNALS2_NUM_ARGS));
         }
         result_type operator ()(BOOST_SIGNALS2_SIGNATURE_FULL_ARGS(BOOST_SIGNALS2_NUM_ARGS)) const
@@ -802,11 +802,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           shared_ptr<detail::BOOST_SIGNALS2_SIGNAL_IMPL_CLASS_NAME(BOOST_SIGNALS2_NUM_ARGS)
             <BOOST_SIGNALS2_SIGNAL_TEMPLATE_INSTANTIATION> >
             shared_pimpl(_weak_pimpl.lock());
-          if(shared_pimpl == 0) mars_boost_ksim::throw_exception(expired_slot());
+          if(shared_pimpl == 0) mars_boost::throw_exception(expired_slot());
           return (*shared_pimpl)(BOOST_SIGNALS2_SIGNATURE_ARG_NAMES(BOOST_SIGNALS2_NUM_ARGS));
         }
       private:
-        mars_boost_ksim::weak_ptr<detail::BOOST_SIGNALS2_SIGNAL_IMPL_CLASS_NAME(BOOST_SIGNALS2_NUM_ARGS)
+        mars_boost::weak_ptr<detail::BOOST_SIGNALS2_SIGNAL_IMPL_CLASS_NAME(BOOST_SIGNALS2_NUM_ARGS)
           <BOOST_SIGNALS2_SIGNAL_TEMPLATE_INSTANTIATION> > _weak_pimpl;
       };
 
@@ -823,14 +823,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       {
       public:
 // typename function_traits<Signature>::result_type (
-// const mars_boost_ksim::signals2::connection &,
+// const mars_boost::signals2::connection &,
 // typename function_traits<Signature>::arg1_type,
 // typename function_traits<Signature>::arg2_type,
 // ...,
 // typename function_traits<Signature>::argn_type)
 #define BOOST_SIGNALS2_EXT_SIGNATURE(arity, Signature) \
   typename function_traits<Signature>::result_type ( \
-  const mars_boost_ksim::signals2::connection & BOOST_SIGNALS2_PP_COMMA_IF(BOOST_SIGNALS2_NUM_ARGS) \
+  const mars_boost::signals2::connection & BOOST_SIGNALS2_PP_COMMA_IF(BOOST_SIGNALS2_NUM_ARGS) \
   BOOST_PP_ENUM(arity, BOOST_SIGNALS2_SIGNATURE_TO_ARGN_TYPE, Signature) )
         typedef function<BOOST_SIGNALS2_EXT_SIGNATURE(BOOST_SIGNALS2_NUM_ARGS, Signature)> function_type;
 #undef BOOST_SIGNALS2_EXT_SIGNATURE
@@ -858,7 +858,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
     } // namespace detail
   } // namespace signals2
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #undef BOOST_SIGNALS2_NUM_ARGS
 #undef BOOST_SIGNALS2_SIGNAL_TEMPLATE_INSTANTIATION

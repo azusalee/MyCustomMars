@@ -12,7 +12,7 @@
 
 #include <boost/signals2/slot_base.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace signals2
   {
@@ -27,6 +27,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       }
     } // namespace detail
   } // namespace signals2
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_SIGNALS2_DETAIL_REPLACE_SLOT_FUNCTION_HPP

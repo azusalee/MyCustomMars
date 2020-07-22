@@ -19,11 +19,11 @@
 // Windows CE define GetCurrentProcess as an inline function in kfuncs.h
 #if !defined( BOOST_USE_WINDOWS_H ) && !defined( UNDER_CE )
 extern "C" {
-BOOST_SYMBOL_IMPORT mars_boost_ksim::detail::winapi::HANDLE_ WINAPI GetCurrentProcess(BOOST_DETAIL_WINAPI_VOID);
+BOOST_SYMBOL_IMPORT mars_boost::detail::winapi::HANDLE_ WINAPI GetCurrentProcess(BOOST_DETAIL_WINAPI_VOID);
 }
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace detail {
 namespace winapi {
 using ::GetCurrentProcess;

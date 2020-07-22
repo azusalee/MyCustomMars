@@ -8,7 +8,7 @@
 
 # include <boost/detail/workaround.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace parameter { namespace aux {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace parameter { namespace aux {
 
 // A wrapper for the default value passed by the user when resolving
 // the value of the parameter with the given Keyword
@@ -63,7 +63,7 @@ struct lazy_default
 #  define BOOST_PARAMETER_lazy_default_fallback lazy_default
 # endif 
 
-}}} // namespace mars_boost_ksim::parameter::aux
+}}} // namespace mars_boost::parameter::aux
 
 #endif // DEFAULT_050329_HPP
 

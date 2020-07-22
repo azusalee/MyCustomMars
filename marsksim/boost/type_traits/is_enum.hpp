@@ -29,7 +29,7 @@
 #endif
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 #ifndef BOOST_IS_ENUM
 #if !(defined(__BORLANDC__) && (__BORLANDC__ <= 0x551))
@@ -41,7 +41,7 @@ namespace detail {
 template <typename T>
 struct is_class_or_union
 {
-   BOOST_STATIC_CONSTANT(bool, value = ::mars_boost_ksim::is_class<T>::value || ::mars_boost_ksim::is_union<T>::value);
+   BOOST_STATIC_CONSTANT(bool, value = ::mars_boost::is_class<T>::value || ::mars_boost::is_union<T>::value);
 };
 
 #else
@@ -52,17 +52,17 @@ struct is_class_or_union
 # if BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x581))// we simply can't detect it this way.
     BOOST_STATIC_CONSTANT(bool, value = false);
 # else
-    template <class U> static ::mars_boost_ksim::type_traits::yes_type is_class_or_union_tester(void(U::*)(void));
+    template <class U> static ::mars_boost::type_traits::yes_type is_class_or_union_tester(void(U::*)(void));
 
 #  if BOOST_WORKAROUND(__MWERKS__, <= 0x3000) // no SFINAE
-    static ::mars_boost_ksim::type_traits::no_type is_class_or_union_tester(...);
+    static ::mars_boost::type_traits::no_type is_class_or_union_tester(...);
     BOOST_STATIC_CONSTANT(
-        bool, value = sizeof(is_class_or_union_tester(0)) == sizeof(::mars_boost_ksim::type_traits::yes_type));
+        bool, value = sizeof(is_class_or_union_tester(0)) == sizeof(::mars_boost::type_traits::yes_type));
 #  else
     template <class U>
-    static ::mars_boost_ksim::type_traits::no_type is_class_or_union_tester(...);
+    static ::mars_boost::type_traits::no_type is_class_or_union_tester(...);
     BOOST_STATIC_CONSTANT(
-        bool, value = sizeof(is_class_or_union_tester<T>(0)) == sizeof(::mars_boost_ksim::type_traits::yes_type));
+        bool, value = sizeof(is_class_or_union_tester<T>(0)) == sizeof(::mars_boost::type_traits::yes_type));
 #  endif
 # endif
 };
@@ -89,13 +89,13 @@ struct is_enum_helper<false>
 {
     template <typename T> struct type
     {
-       static const bool value = ::mars_boost_ksim::is_convertible<typename mars_boost_ksim::add_reference<T>::type, ::mars_boost_ksim::detail::int_convertible>::value;
+       static const bool value = ::mars_boost::is_convertible<typename mars_boost::add_reference<T>::type, ::mars_boost::detail::int_convertible>::value;
     };
 };
 
 template <typename T> struct is_enum_impl
 {
-   //typedef ::mars_boost_ksim::add_reference<T> ar_t;
+   //typedef ::mars_boost::add_reference<T> ar_t;
    //typedef typename ar_t::type r_type;
 
 #if defined(__GNUC__)
@@ -106,37 +106,37 @@ template <typename T> struct is_enum_impl
    // order to correctly deduce that noncopyable types are not enums
    // (dwa 2002/04/15)...
    BOOST_STATIC_CONSTANT(bool, selector =
-           ::mars_boost_ksim::is_arithmetic<T>::value
-         || ::mars_boost_ksim::is_reference<T>::value
-         || ::mars_boost_ksim::is_function<T>::value
+           ::mars_boost::is_arithmetic<T>::value
+         || ::mars_boost::is_reference<T>::value
+         || ::mars_boost::is_function<T>::value
          || is_class_or_union<T>::value
          || is_array<T>::value);
 #else
    // ...however, not checking is_class_or_union on non-conforming
    // compilers prevents a dependency recursion.
    BOOST_STATIC_CONSTANT(bool, selector =
-           ::mars_boost_ksim::is_arithmetic<T>::value
-         || ::mars_boost_ksim::is_reference<T>::value
-         || ::mars_boost_ksim::is_function<T>::value
+           ::mars_boost::is_arithmetic<T>::value
+         || ::mars_boost::is_reference<T>::value
+         || ::mars_boost::is_function<T>::value
          || is_array<T>::value);
 #endif // BOOST_TT_HAS_CONFORMING_IS_CLASS_IMPLEMENTATION
 
 #else // !defined(__GNUC__):
     
    BOOST_STATIC_CONSTANT(bool, selector =
-           ::mars_boost_ksim::is_arithmetic<T>::value
-         || ::mars_boost_ksim::is_reference<T>::value
+           ::mars_boost::is_arithmetic<T>::value
+         || ::mars_boost::is_reference<T>::value
          || is_class_or_union<T>::value
          || is_array<T>::value);
     
 #endif
 
 #if BOOST_WORKAROUND(__BORLANDC__, < 0x600)
-    typedef ::mars_boost_ksim::detail::is_enum_helper<
-          ::mars_boost_ksim::detail::is_enum_impl<T>::selector
+    typedef ::mars_boost::detail::is_enum_helper<
+          ::mars_boost::detail::is_enum_impl<T>::selector
         > se_t;
 #else
-    typedef ::mars_boost_ksim::detail::is_enum_helper<selector> se_t;
+    typedef ::mars_boost::detail::is_enum_helper<selector> se_t;
 #endif
 
     typedef typename se_t::template type<T> helper;
@@ -145,7 +145,7 @@ template <typename T> struct is_enum_impl
 
 } // namespace detail
 
-template <class T> struct is_enum : public integral_constant<bool, ::mars_boost_ksim::detail::is_enum_impl<T>::value> {};
+template <class T> struct is_enum : public integral_constant<bool, ::mars_boost::detail::is_enum_impl<T>::value> {};
 
 #else // __BORLANDC__
 //
@@ -161,6 +161,6 @@ template <class T> struct is_enum : public integral_constant<bool, BOOST_IS_ENUM
 
 #endif
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_IS_ENUM_HPP_INCLUDED

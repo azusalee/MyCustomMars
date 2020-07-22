@@ -6,7 +6,7 @@
 #ifndef PARAMETER_REQUIREMENTS_050331_HPP
 #define PARAMETER_REQUIREMENTS_050331_HPP
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace parameter { namespace aux {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace parameter { namespace aux {
 
 // Used to pass static information about parameter requirements
 // through the satisfies() overload set (below).  The
@@ -20,6 +20,6 @@ struct parameter_requirements
     typedef HasDefault has_default;
 };
 
-}}} // namespace mars_boost_ksim::parameter::aux
+}}} // namespace mars_boost::parameter::aux
 
 #endif // PARAMETER_REQUIREMENTS_050331_HPP

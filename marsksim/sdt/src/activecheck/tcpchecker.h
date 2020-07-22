@@ -29,10 +29,10 @@
 namespace marsksim {
 namespace sdt {
 
-class TcpChecker : public BaseChecker {
+class TcpCheckerksim : public BaseChecker {
   public:
-    TcpChecker();
-    virtual ~TcpChecker();
+    TcpCheckerksim();
+    virtual ~TcpCheckerksim();
 
     virtual int StartDoCheck(CheckRequestProfile& _check_request);
 

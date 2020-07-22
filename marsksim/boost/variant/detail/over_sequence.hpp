@@ -18,7 +18,7 @@
 #include "boost/mpl/aux_/config/ctps.hpp"
 
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace detail { namespace variant {
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -53,6 +53,6 @@ struct is_over_sequence< over_sequence<Types> >
 
 
 }} // namespace detail::variant
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_VARIANT_DETAIL_OVER_SEQUENCE_HPP

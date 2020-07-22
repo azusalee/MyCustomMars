@@ -23,18 +23,18 @@
 #   pragma once
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace detail {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace detail {
 
     template <typename TargetChar, typename SourceChar>
     struct widest_char {
-        typedef BOOST_DEDUCED_TYPENAME mars_boost_ksim::mpl::if_c<
+        typedef BOOST_DEDUCED_TYPENAME mars_boost::mpl::if_c<
             (sizeof(TargetChar) > sizeof(SourceChar))
             , TargetChar
             , SourceChar
         >::type type;
     };
 
-}} // namespace mars_boost_ksim::detail
+}} // namespace mars_boost::detail
 
 #endif // BOOST_LEXICAL_CAST_DETAIL_WIDEST_CHAR_HPP
 

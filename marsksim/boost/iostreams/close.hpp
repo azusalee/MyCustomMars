@@ -33,7 +33,7 @@
 // Must come last.
 #include <boost/iostreams/detail/config/disable_warnings.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace iostreams {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace iostreams {
 
 template<typename T>
 void close(T& t);
@@ -50,28 +50,28 @@ template<typename T>
 void close_all(T& t)
 { 
     BOOST_TRY {
-        mars_boost_ksim::iostreams::close(t, BOOST_IOS::in);
+        mars_boost::iostreams::close(t, BOOST_IOS::in);
     } BOOST_CATCH (...) {
         BOOST_TRY {
-            mars_boost_ksim::iostreams::close(t, BOOST_IOS::out);
+            mars_boost::iostreams::close(t, BOOST_IOS::out);
         } BOOST_CATCH (...) { } BOOST_CATCH_END
         BOOST_RETHROW;
     } BOOST_CATCH_END
-    mars_boost_ksim::iostreams::close(t, BOOST_IOS::out);
+    mars_boost::iostreams::close(t, BOOST_IOS::out);
 }
 
 template<typename T, typename Sink>
 void close_all(T& t, Sink& snk)
 {
     BOOST_TRY {
-        mars_boost_ksim::iostreams::close(t, snk, BOOST_IOS::in);
+        mars_boost::iostreams::close(t, snk, BOOST_IOS::in);
     } BOOST_CATCH (...) {
         BOOST_TRY {
-            mars_boost_ksim::iostreams::close(t, snk, BOOST_IOS::out);
+            mars_boost::iostreams::close(t, snk, BOOST_IOS::out);
         } BOOST_CATCH (...) { } BOOST_CATCH_END
         BOOST_RETHROW;
     } BOOST_CATCH_END
-    mars_boost_ksim::iostreams::close(t, snk, BOOST_IOS::out);
+    mars_boost::iostreams::close(t, snk, BOOST_IOS::out);
 }
 
 } // End namespace detail.
@@ -82,7 +82,7 @@ void close_all(T& t, Sink& snk)
 # include <boost/iostreams/detail/vc6/close.hpp>
 #else // #if BOOST_WORKAROUND(BOOST_MSVC, < 1300) //--------------------------//
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace iostreams {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace iostreams {
 
 namespace detail {
 

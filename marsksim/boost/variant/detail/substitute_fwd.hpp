@@ -32,7 +32,7 @@
 #   define BOOST_VARIANT_DETAIL_NO_SUBSTITUTE
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace detail { namespace variant {
 
 #if !defined(BOOST_VARIANT_DETAIL_NO_SUBSTITUTE)
@@ -53,6 +53,6 @@ struct substitute;
 #endif // !defined(BOOST_VARIANT_DETAIL_NO_SUBSTITUTE)
 
 }} // namespace detail::variant
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_VARIANT_DETAIL_SUBSTITUTE_FWD_HPP

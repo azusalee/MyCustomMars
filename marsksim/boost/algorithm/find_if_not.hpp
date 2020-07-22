@@ -17,7 +17,7 @@
 #include <boost/range/begin.hpp>
 #include <boost/range/end.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {  namespace algorithm {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {  namespace algorithm {
 
 #if __cplusplus >= 201103L
 //  Use the C++11 versions of find_if_not if it is available
@@ -51,9 +51,9 @@ InputIterator find_if_not ( InputIterator first, InputIterator last, Predicate p
 /// \param p        A predicate for testing the elements of the range
 ///
 template<typename Range, typename Predicate>
-typename mars_boost_ksim::range_iterator<const Range>::type find_if_not ( const Range &r, Predicate p )
+typename mars_boost::range_iterator<const Range>::type find_if_not ( const Range &r, Predicate p )
 {
-    return mars_boost_ksim::algorithm::find_if_not (mars_boost_ksim::begin (r), mars_boost_ksim::end(r), p);
+    return mars_boost::algorithm::find_if_not (mars_boost::begin (r), mars_boost::end(r), p);
 }
 
 }}

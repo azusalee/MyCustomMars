@@ -16,7 +16,7 @@
 #include <boost/range/detail/range_return.hpp>
 #include <algorithm>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range
     {
@@ -28,20 +28,20 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 /// \pre ForwardRange is a model of the ForwardRangeConcept
 /// \pre UnaryPredicate is a model of the UnaryPredicateConcept
 template< class ForwardRange, class UnaryPredicate >
-inline BOOST_DEDUCED_TYPENAME mars_boost_ksim::range_iterator<ForwardRange>::type
+inline BOOST_DEDUCED_TYPENAME mars_boost::range_iterator<ForwardRange>::type
 remove_if(ForwardRange& rng, UnaryPredicate pred)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( ForwardRangeConcept<ForwardRange> ));
-    return std::remove_if(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), pred);
+    return std::remove_if(mars_boost::begin(rng), mars_boost::end(rng), pred);
 }
 
 /// \overload
 template< class ForwardRange, class UnaryPredicate >
-inline BOOST_DEDUCED_TYPENAME mars_boost_ksim::range_iterator<const ForwardRange>::type
+inline BOOST_DEDUCED_TYPENAME mars_boost::range_iterator<const ForwardRange>::type
 remove_if(const ForwardRange& rng, UnaryPredicate pred)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( ForwardRangeConcept<const ForwardRange> ));
-    return std::remove_if(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), pred);
+    return std::remove_if(mars_boost::begin(rng), mars_boost::end(rng), pred);
 }
 
 // range_return overloads
@@ -53,7 +53,7 @@ remove_if(ForwardRange& rng, UnaryPredicate pred)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( ForwardRangeConcept<ForwardRange> ));
     return range_return<ForwardRange,re>::pack(
-        std::remove_if(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), pred),
+        std::remove_if(mars_boost::begin(rng), mars_boost::end(rng), pred),
         rng);
 }
 
@@ -64,12 +64,12 @@ remove_if(const ForwardRange& rng, UnaryPredicate pred)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( ForwardRangeConcept<const ForwardRange> ));
     return range_return<const ForwardRange,re>::pack(
-        std::remove_if(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), pred),
+        std::remove_if(mars_boost::begin(rng), mars_boost::end(rng), pred),
         rng);
 }
 
     } // namespace range
     using range::remove_if;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

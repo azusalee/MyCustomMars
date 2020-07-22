@@ -1,8 +1,8 @@
 // DEPRECATED in favor of adl_postconstruct with deconstruct<T>().
 // A simple framework for creating objects with postconstructors.
-// The objects must inherit from mars_boost_ksim::signals2::postconstructible, and
+// The objects must inherit from mars_boost::signals2::postconstructible, and
 // have their lifetimes managed by
-// mars_boost_ksim::shared_ptr created with the mars_boost_ksim::signals2::deconstruct_ptr()
+// mars_boost::shared_ptr created with the mars_boost::signals2::deconstruct_ptr()
 // function.
 //
 // Copyright Frank Mori Hess 2007-2008.
@@ -15,7 +15,7 @@
 #ifndef BOOST_SIGNALS2_POSTCONSTRUCTIBLE_HPP
 #define BOOST_SIGNALS2_POSTCONSTRUCTIBLE_HPP
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   template<typename T> class shared_ptr;
 
@@ -27,7 +27,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     }
     namespace detail
     {
-      void do_postconstruct(const mars_boost_ksim::signals2::postconstructible_adl_barrier::postconstructible *ptr);
+      void do_postconstruct(const mars_boost::signals2::postconstructible_adl_barrier::postconstructible *ptr);
     } // namespace detail
 
     namespace postconstructible_adl_barrier

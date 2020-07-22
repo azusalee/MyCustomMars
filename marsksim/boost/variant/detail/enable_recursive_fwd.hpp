@@ -19,7 +19,7 @@
 
 #   include "boost/mpl/bool.hpp"
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace detail { namespace variant {
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -60,7 +60,7 @@ struct is_recursive_flag< recursive_flag<T> >
 // (detail) metafunction enable_recursive
 //
 // Attempts recursive_variant_ tag substitution, wrapping with
-// mars_boost_ksim::recursive_wrapper if substituion occurs w/ non-indirect result
+// mars_boost::recursive_wrapper if substituion occurs w/ non-indirect result
 // (i.e., not a reference or pointer) *and* NoWrapper is false_.
 //
 template <
@@ -82,6 +82,6 @@ template <
 struct quoted_enable_recursive;
 
 }} // namespace detail::variant
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_VARIANT_DETAIL_ENABLE_RECURSIVE_FWD_HPP

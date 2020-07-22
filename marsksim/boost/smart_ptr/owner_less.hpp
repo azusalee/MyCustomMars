@@ -15,7 +15,7 @@
 
 #include <functional>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   template<typename T> class shared_ptr;
   template<typename T> class weak_ptr;
@@ -52,6 +52,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     public detail::generic_owner_less<weak_ptr<T>, shared_ptr<T> >
   {};
 
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif  // #ifndef BOOST_SMART_PTR_OWNER_LESS_HPP_INCLUDED

@@ -624,7 +624,7 @@ void PingQuery::__preparePacket(char* _sendbuffer, int& _len) {
     memcpy(_sendbuffer, sendbuf, _len);
 }
 
-void PingQuery::__onAlarm() {
+void PingQuery::__onAlarmksim() {
     readwrite_breaker_.Break();
 }
 

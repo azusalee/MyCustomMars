@@ -16,7 +16,7 @@
 #include <boost/type_traits/is_pointer.hpp>
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 #ifdef BOOST_MSVC
 
@@ -44,7 +44,7 @@ namespace detail{
    template <class T, bool b> 
    struct remove_pointer_imp3
    {
-      typedef typename remove_pointer_imp<typename mars_boost_ksim::remove_cv<T>::type>::type type;
+      typedef typename remove_pointer_imp<typename mars_boost::remove_cv<T>::type>::type type;
    };
 
    template <class T> 
@@ -56,11 +56,11 @@ namespace detail{
    template <class T> 
    struct remove_pointer_imp2
    {
-      typedef typename remove_pointer_imp3<T, ::mars_boost_ksim::is_pointer<T>::value>::type type;
+      typedef typename remove_pointer_imp3<T, ::mars_boost::is_pointer<T>::value>::type type;
    };
 }
 
-template <class T> struct remove_pointer{ typedef typename mars_boost_ksim::detail::remove_pointer_imp2<T>::type type; };
+template <class T> struct remove_pointer{ typedef typename mars_boost::detail::remove_pointer_imp2<T>::type type; };
 
 #else
 
@@ -72,6 +72,6 @@ template <class T> struct remove_pointer<T*const volatile>{ typedef T type; };
 
 #endif
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_REMOVE_POINTER_HPP_INCLUDED

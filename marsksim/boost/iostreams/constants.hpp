@@ -28,7 +28,7 @@
 
 #include <boost/iostreams/detail/ios.hpp>  // streamsize.
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace iostreams {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace iostreams {
 
 const std::streamsize default_device_buffer_size = 
     BOOST_IOSTREAMS_DEFAULT_DEVICE_BUFFER_SIZE; 

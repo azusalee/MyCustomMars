@@ -50,8 +50,8 @@ BOOST_TYPEOF_REGISTER_TYPE(__int64)
 #endif
 
 # if defined(BOOST_HAS_LONG_LONG)
-BOOST_TYPEOF_REGISTER_TYPE(::mars_boost_ksim::ulong_long_type)
-BOOST_TYPEOF_REGISTER_TYPE(::mars_boost_ksim::long_long_type)
+BOOST_TYPEOF_REGISTER_TYPE(::mars_boost::ulong_long_type)
+BOOST_TYPEOF_REGISTER_TYPE(::mars_boost::long_long_type)
 #elif defined(BOOST_HAS_MS_INT64)
 BOOST_TYPEOF_REGISTER_TYPE(unsigned __int64)
 BOOST_TYPEOF_REGISTER_TYPE(__int64)

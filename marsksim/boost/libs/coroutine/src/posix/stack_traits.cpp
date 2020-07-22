@@ -52,22 +52,22 @@ void stacksize_limit_( rlimit * limit)
 std::size_t pagesize()
 {
     static std::size_t size = 0;
-    static mars_boost_ksim::once_flag flag;
-    mars_boost_ksim::call_once( flag, pagesize_, & size);
+    static mars_boost::once_flag flag;
+    mars_boost::call_once( flag, pagesize_, & size);
     return size;
 }
 
 rlimit stacksize_limit()
 {
     static rlimit limit;
-    static mars_boost_ksim::once_flag flag;
-    mars_boost_ksim::call_once( flag, stacksize_limit_, & limit);
+    static mars_boost::once_flag flag;
+    mars_boost::call_once( flag, stacksize_limit_, & limit);
     return limit;
 }
 
 }
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace coroutines {
 
 bool

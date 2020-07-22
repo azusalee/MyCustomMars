@@ -16,16 +16,16 @@
     template<class V, class T> struct encode_type_impl<V, Fun(T)>\
     {\
         typedef\
-            typename mars_boost_ksim::type_of::encode_type<\
-            typename mars_boost_ksim::type_of::push_back<\
+            typename mars_boost::type_of::encode_type<\
+            typename mars_boost::type_of::push_back<\
             V\
-            , mars_boost_ksim::mpl::size_t<ID> >::type\
+            , mars_boost::mpl::size_t<ID> >::type\
             , T>::type\
             type;\
     };\
-    template<class Iter> struct decode_type_impl<mars_boost_ksim::mpl::size_t<ID>, Iter>\
+    template<class Iter> struct decode_type_impl<mars_boost::mpl::size_t<ID>, Iter>\
     {\
-        typedef mars_boost_ksim::type_of::decode_type<Iter> d1;\
+        typedef mars_boost::type_of::decode_type<Iter> d1;\
         typedef Fun(typename d1::type) type;\
         typedef typename d1::iter iter;\
     }
@@ -90,20 +90,20 @@ BOOST_TYPEOF_END_ENCODE_NS
     struct encode_type_impl<V, Qualifier() T[N]>\
     {\
         typedef\
-            typename mars_boost_ksim::type_of::encode_type<\
-            typename mars_boost_ksim::type_of::push_back<\
-            typename mars_boost_ksim::type_of::push_back<\
+            typename mars_boost::type_of::encode_type<\
+            typename mars_boost::type_of::push_back<\
+            typename mars_boost::type_of::push_back<\
             V\
-            , mars_boost_ksim::mpl::size_t<ID> >::type\
-            , mars_boost_ksim::mpl::size_t<N> >::type\
+            , mars_boost::mpl::size_t<ID> >::type\
+            , mars_boost::mpl::size_t<N> >::type\
             , T>::type\
         type;\
     };\
     template<class Iter>\
-    struct decode_type_impl<mars_boost_ksim::mpl::size_t<ID>, Iter>\
+    struct decode_type_impl<mars_boost::mpl::size_t<ID>, Iter>\
     {\
         enum{n = Iter::type::value};\
-        typedef mars_boost_ksim::type_of::decode_type<typename Iter::next> d;\
+        typedef mars_boost::type_of::decode_type<typename Iter::next> d;\
         typedef typename d::type Qualifier() type[n];\
         typedef typename d::iter iter;\
     }

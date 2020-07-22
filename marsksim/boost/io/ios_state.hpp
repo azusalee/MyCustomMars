@@ -21,7 +21,7 @@
 #include <string>     // for std::char_traits
 
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 namespace io
 {
@@ -433,7 +433,7 @@ private:
 
 
 }  // namespace io
-}  // namespace mars_boost_ksim
+}  // namespace mars_boost
 
 
 #endif  // BOOST_IO_IOS_STATE_HPP

@@ -21,7 +21,7 @@
 #include <boost/assert.hpp>
 #include <pthread.h>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 namespace signals2
@@ -73,6 +73,6 @@ public:
 
 } // namespace signals2
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // #ifndef BOOST_SIGNALS2_LWM_PTHREADS_HPP

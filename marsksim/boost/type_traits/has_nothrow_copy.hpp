@@ -31,7 +31,7 @@
 #endif
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 template <class T> struct has_nothrow_copy_constructor : public integral_constant<bool, BOOST_HAS_NOTHROW_COPY(T)>{};
 
@@ -40,26 +40,26 @@ template <class T> struct has_nothrow_copy_constructor : public integral_constan
 #include <boost/type_traits/declval.hpp>
 #include <boost/type_traits/is_copy_constructible.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim{
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost{
 
 namespace detail{
 
 template <class T, bool b>
-struct has_nothrow_copy_constructor_imp : public mars_boost_ksim::integral_constant<bool, false>{};
+struct has_nothrow_copy_constructor_imp : public mars_boost::integral_constant<bool, false>{};
 template <class T>
-struct has_nothrow_copy_constructor_imp<T, true> : public mars_boost_ksim::integral_constant<bool, noexcept(T(mars_boost_ksim::declval<const T&>()))>{};
+struct has_nothrow_copy_constructor_imp<T, true> : public mars_boost::integral_constant<bool, noexcept(T(mars_boost::declval<const T&>()))>{};
 
 }
 
-template <class T> struct has_nothrow_copy_constructor : public detail::has_nothrow_copy_constructor_imp<T, mars_boost_ksim::is_copy_constructible<T>::value>{};
+template <class T> struct has_nothrow_copy_constructor : public detail::has_nothrow_copy_constructor_imp<T, mars_boost::is_copy_constructible<T>::value>{};
 
 #else
 
 #include <boost/type_traits/has_trivial_copy.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim{
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost{
 
-template <class T> struct has_nothrow_copy_constructor : public integral_constant<bool, ::mars_boost_ksim::has_trivial_copy<T>::value>{};
+template <class T> struct has_nothrow_copy_constructor : public integral_constant<bool, ::mars_boost::has_trivial_copy<T>::value>{};
 
 #endif
 
@@ -77,6 +77,6 @@ template <> struct has_nothrow_copy_constructor<void const volatile> : public fa
 
 template <class T> struct has_nothrow_copy : public has_nothrow_copy_constructor<T>{};
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_HAS_NOTHROW_COPY_HPP_INCLUDED

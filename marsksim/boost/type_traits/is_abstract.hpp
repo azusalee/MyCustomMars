@@ -59,7 +59,7 @@
 #endif
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 namespace detail{
 
@@ -128,7 +128,7 @@ struct is_abstract_select<false>
 template <class T>
 struct is_abstract_imp
 {
-   typedef is_abstract_select< ::mars_boost_ksim::is_class<T>::value> selector;
+   typedef is_abstract_select< ::mars_boost::is_class<T>::value> selector;
    typedef typename selector::template rebind<T> binder;
    typedef typename binder::type type;
 
@@ -139,11 +139,11 @@ struct is_abstract_imp
 }
 
 #ifndef BOOST_NO_IS_ABSTRACT
-template <class T> struct is_abstract : public integral_constant<bool, ::mars_boost_ksim::detail::is_abstract_imp<T>::value> {};
+template <class T> struct is_abstract : public integral_constant<bool, ::mars_boost::detail::is_abstract_imp<T>::value> {};
 #else
-template <class T> struct is_abstract : public integral_constant<bool, ::mars_boost_ksim::detail::is_polymorphic_imp<T>::value> {};
+template <class T> struct is_abstract : public integral_constant<bool, ::mars_boost::detail::is_polymorphic_imp<T>::value> {};
 #endif
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif //BOOST_TT_IS_ABSTRACT_CLASS_HPP

@@ -19,8 +19,8 @@ class WaitThread {
 private:
     struct Wrapper_ {
         Mutex mutex;
-        mq::MessagePost_t message_timeout;
-        mq::MessagePost_t message_running;
+        mqksim::MessagePost_t message_timeout;
+        mqksim::MessagePost_t message_running;
         boost_ksim::intrusive_ptr<Wrapper> wrapper;
         int status;
     };
@@ -52,16 +52,16 @@ public:
         typedef typename boost_ksim::result_of<F()>::type R;
         boost_ksim::shared_ptr<R> result(new R);
         
-        mq::AsyncResult<R> async_result(_block_func, [wrapper, result](const R& _result, bool _valid) {
+        mqksim::AsyncResult<R> async_result(_block_func, [wrapper, result](const R& _result, bool _valid) {
             
             ASSERT(_valid);
             
             ScopedLock lock(wrapper->mutex);
             *result = _result;
             if (!wrapper->wrapper) return;
-            if (mq::KNullPost != wrapper->message_running)  { return; }
-            if (mq::KNullPost == wrapper->message_timeout
-                || mq::CancelMessage(wrapper->message_timeout)){
+            if (mqksim::KNullPost != wrapper->message_running)  { return; }
+            if (mqksim::KNullPost == wrapper->message_timeout
+                || mqksim::CancelMessage(wrapper->message_timeout)){
                 wrapper->status = kFinish;
                 wrapper->message_running = Resume(wrapper->wrapper);
                 return;
@@ -86,15 +86,15 @@ public:
         
         if (0 <= _timeout) { wrapper->message_timeout = Resume(wrapper->wrapper, _timeout); }
         
-        mq::AsyncResult<void> async_result(_block_func, [wrapper](bool _valid) {
+        mqksim::AsyncResult<void> async_result(_block_func, [wrapper](bool _valid) {
             
             ASSERT(_valid);
             
             ScopedLock lock(wrapper->mutex);
             if (!wrapper->wrapper) return;
-            if (mq::KNullPost != wrapper->message_running)  { return; }
-            if (mq::KNullPost == wrapper->message_timeout
-                || mq::CancelMessage(wrapper->message_timeout)){
+            if (mqksim::KNullPost != wrapper->message_running)  { return; }
+            if (mqksim::KNullPost == wrapper->message_timeout
+                || mqksim::CancelMessage(wrapper->message_timeout)){
                 wrapper->status = kFinish;
                 wrapper->message_running = Resume(wrapper->wrapper);
                 return;
@@ -111,9 +111,9 @@ public:
     void Cancel() const {
         ScopedLock lock(wrapper_->mutex);
         if (!wrapper_->wrapper) return;
-        if (mq::KNullPost != wrapper_->message_running)  { return; }
-        if (mq::KNullPost == wrapper_->message_timeout
-            || mq::CancelMessage(wrapper_->message_timeout)){
+        if (mqksim::KNullPost != wrapper_->message_running)  { return; }
+        if (mqksim::KNullPost == wrapper_->message_timeout
+            || mqksim::CancelMessage(wrapper_->message_timeout)){
             wrapper_->status = kCancel;
             wrapper_->message_running = Resume(wrapper_->wrapper);
             return;
@@ -136,13 +136,13 @@ typename boost_ksim::result_of< F()>::type MessageInvoke(const F& _func) {
     boost_ksim::intrusive_ptr<Wrapper> wrapper = RunningCoroutine();
     
     typedef typename boost_ksim::result_of<F()>::type R;
-    mq::AsyncResult<R> result(
+    mqksim::AsyncResult<R> result(
                               [_func, wrapper](){
                                 Resume(wrapper);
                                 return _func();
                               });
     
-    mq::AsyncInvoke(result, mq::Post2Handler(mq::RunningMessageID()));
+    mqksim::AsyncInvoke(result, mqksim::Post2Handler(mqksim::RunningMessageID()));
     Yield();
     return result.Result();
 }

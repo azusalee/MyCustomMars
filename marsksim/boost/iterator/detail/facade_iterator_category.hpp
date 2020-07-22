@@ -30,7 +30,7 @@
 // iterator_category deduction for iterator_facade
 //
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace iterators {
 
 // forward declaration
@@ -63,7 +63,7 @@ struct iterator_writability_disabled
 # ifdef BOOST_ITERATOR_REF_CONSTNESS_KILLS_WRITABILITY // Adding Thomas' logic?
   : mpl::or_<
         is_const<Reference>
-      , mars_boost_ksim::detail::indirect_traits::is_reference_to_const<Reference>
+      , mars_boost::detail::indirect_traits::is_reference_to_const<Reference>
       , is_const<ValueParam>
     >
 # else
@@ -186,7 +186,7 @@ struct facade_iterator_category
 {
 };
 
-}}} // namespace mars_boost_ksim::iterators::detail
+}}} // namespace mars_boost::iterators::detail
 
 # include <boost/iterator/detail/config_undef.hpp>
 

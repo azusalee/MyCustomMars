@@ -50,7 +50,7 @@
 
 //--------------------------------------------------------------------------------------//
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace filesystem
   {
@@ -162,7 +162,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         path         m_path2; // may be empty()
         std::string  m_what;  // not built until needed
       };
-      mars_boost_ksim::shared_ptr<m_imp> m_imp_ptr;
+      mars_boost::shared_ptr<m_imp> m_imp_ptr;
     };
 
 //--------------------------------------------------------------------------------------//
@@ -336,9 +336,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
   struct space_info
   {
     // all values are byte counts
-    mars_boost_ksim::uintmax_t capacity;
-    mars_boost_ksim::uintmax_t free;      // <= capacity
-    mars_boost_ksim::uintmax_t available; // <= free
+    mars_boost::uintmax_t capacity;
+    mars_boost::uintmax_t free;      // <= capacity
+    mars_boost::uintmax_t available; // <= free
   };
 
   BOOST_SCOPED_ENUM_START(copy_option)
@@ -393,9 +393,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     BOOST_FILESYSTEM_DECL
     bool equivalent(const path& p1, const path& p2, system::error_code* ec=0);
     BOOST_FILESYSTEM_DECL
-    mars_boost_ksim::uintmax_t file_size(const path& p, system::error_code* ec=0);
+    mars_boost::uintmax_t file_size(const path& p, system::error_code* ec=0);
     BOOST_FILESYSTEM_DECL
-    mars_boost_ksim::uintmax_t hard_link_count(const path& p, system::error_code* ec=0);
+    mars_boost::uintmax_t hard_link_count(const path& p, system::error_code* ec=0);
     BOOST_FILESYSTEM_DECL
     std::time_t last_write_time(const path& p, system::error_code* ec=0);
     BOOST_FILESYSTEM_DECL
@@ -410,7 +410,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     BOOST_FILESYSTEM_DECL
     bool remove(const path& p, system::error_code* ec=0);
     BOOST_FILESYSTEM_DECL
-    mars_boost_ksim::uintmax_t remove_all(const path& p, system::error_code* ec=0);
+    mars_boost::uintmax_t remove_all(const path& p, system::error_code* ec=0);
     BOOST_FILESYSTEM_DECL
     void rename(const path& old_p, const path& new_p, system::error_code* ec=0);
     BOOST_FILESYSTEM_DECL
@@ -612,16 +612,16 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
   bool equivalent(const path& p1, const path& p2, system::error_code& ec) BOOST_NOEXCEPT
                                        {return detail::equivalent(p1, p2, &ec);}
   inline
-  mars_boost_ksim::uintmax_t file_size(const path& p) {return detail::file_size(p);}
+  mars_boost::uintmax_t file_size(const path& p) {return detail::file_size(p);}
 
   inline
-  mars_boost_ksim::uintmax_t file_size(const path& p, system::error_code& ec) BOOST_NOEXCEPT
+  mars_boost::uintmax_t file_size(const path& p, system::error_code& ec) BOOST_NOEXCEPT
                                        {return detail::file_size(p, &ec);}
   inline
-  mars_boost_ksim::uintmax_t hard_link_count(const path& p) {return detail::hard_link_count(p);}
+  mars_boost::uintmax_t hard_link_count(const path& p) {return detail::hard_link_count(p);}
 
   inline
-  mars_boost_ksim::uintmax_t hard_link_count(const path& p, system::error_code& ec) BOOST_NOEXCEPT
+  mars_boost::uintmax_t hard_link_count(const path& p, system::error_code& ec) BOOST_NOEXCEPT
                                        {return detail::hard_link_count(p, &ec);}
   inline
   path initial_path()                  {return detail::initial_path();}
@@ -669,10 +669,10 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                                        {return detail::remove(p, &ec);}
 
   inline
-  mars_boost_ksim::uintmax_t remove_all(const path& p) {return detail::remove_all(p);}
+  mars_boost::uintmax_t remove_all(const path& p) {return detail::remove_all(p);}
     
   inline
-  mars_boost_ksim::uintmax_t remove_all(const path& p, system::error_code& ec) BOOST_NOEXCEPT
+  mars_boost::uintmax_t remove_all(const path& p, system::error_code& ec) BOOST_NOEXCEPT
                                        {return detail::remove_all(p, &ec);}
   inline
   void rename(const path& old_p, const path& new_p) {detail::rename(old_p, new_p);}
@@ -745,13 +745,13 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 class BOOST_FILESYSTEM_DECL directory_entry
 {
 public:
-  typedef mars_boost_ksim::filesystem::path::value_type value_type;   // enables class path ctor taking directory_entry
+  typedef mars_boost::filesystem::path::value_type value_type;   // enables class path ctor taking directory_entry
 
   directory_entry() BOOST_NOEXCEPT {}
-  explicit directory_entry(const mars_boost_ksim::filesystem::path& p)
+  explicit directory_entry(const mars_boost::filesystem::path& p)
     : m_path(p), m_status(file_status()), m_symlink_status(file_status())
     {}
-  directory_entry(const mars_boost_ksim::filesystem::path& p,
+  directory_entry(const mars_boost::filesystem::path& p,
     file_status st, file_status symlink_st = file_status())
     : m_path(p), m_status(st), m_symlink_status(symlink_st) {}
 
@@ -786,11 +786,11 @@ public:
   }
 #endif
 
-  void assign(const mars_boost_ksim::filesystem::path& p,
+  void assign(const mars_boost::filesystem::path& p,
     file_status st = file_status(), file_status symlink_st = file_status())
     { m_path = p; m_status = st; m_symlink_status = symlink_st; }
 
-  void replace_filename(const mars_boost_ksim::filesystem::path& p,
+  void replace_filename(const mars_boost::filesystem::path& p,
     file_status st = file_status(), file_status symlink_st = file_status())
   {
     m_path.remove_filename();
@@ -800,13 +800,13 @@ public:
   }
 
 # ifndef BOOST_FILESYSTEM_NO_DEPRECATED
-  void replace_leaf(const mars_boost_ksim::filesystem::path& p,
+  void replace_leaf(const mars_boost::filesystem::path& p,
     file_status st, file_status symlink_st)
       { replace_filename(p, st, symlink_st); }
 # endif
 
-  const mars_boost_ksim::filesystem::path&  path() const BOOST_NOEXCEPT {return m_path;}
-  operator const mars_boost_ksim::filesystem::path&() const BOOST_NOEXCEPT
+  const mars_boost::filesystem::path&  path() const BOOST_NOEXCEPT {return m_path;}
+  operator const mars_boost::filesystem::path&() const BOOST_NOEXCEPT
                                                               {return m_path;}
   file_status   status() const                                {return m_get_status();}
   file_status   status(system::error_code& ec) const BOOST_NOEXCEPT
@@ -823,7 +823,7 @@ public:
   bool operator>=(const directory_entry& rhs) const BOOST_NOEXCEPT {return m_path >= rhs.m_path;} 
 
 private:
-  mars_boost_ksim::filesystem::path   m_path;
+  mars_boost::filesystem::path   m_path;
   mutable file_status       m_status;           // stat()-like
   mutable file_status       m_symlink_status;   // lstat()-like
 
@@ -889,9 +889,9 @@ namespace detail
 //--------------------------------------------------------------------------------------//
 
   class directory_iterator
-    : public mars_boost_ksim::iterator_facade< directory_iterator,
+    : public mars_boost::iterator_facade< directory_iterator,
                                      directory_entry,
-                                     mars_boost_ksim::single_pass_traversal_tag >
+                                     mars_boost::single_pass_traversal_tag >
   {
   public:
 
@@ -924,14 +924,14 @@ namespace detail
 
     // shared_ptr provides shallow-copy semantics required for InputIterators.
     // m_imp.get()==0 indicates the end iterator.
-    mars_boost_ksim::shared_ptr< detail::dir_itr_imp >  m_imp;
+    mars_boost::shared_ptr< detail::dir_itr_imp >  m_imp;
 
-    friend class mars_boost_ksim::iterator_core_access;
+    friend class mars_boost::iterator_core_access;
 
-    mars_boost_ksim::iterator_facade<
+    mars_boost::iterator_facade<
       directory_iterator,
       directory_entry,
-      mars_boost_ksim::single_pass_traversal_tag >::reference dereference() const 
+      mars_boost::single_pass_traversal_tag >::reference dereference() const 
     {
       BOOST_ASSERT_MSG(m_imp.get(), "attempt to dereference end iterator");
       return m_imp->dir_entry;
@@ -969,13 +969,13 @@ namespace detail
     {return directory_iterator();}
   }  // namespace filesystem
 
-  //  namespace mars_boost_ksim template specializations
+  //  namespace mars_boost template specializations
   template<>
-  struct range_mutable_iterator<mars_boost_ksim::filesystem::directory_iterator>
-    { typedef mars_boost_ksim::filesystem::directory_iterator type; };
+  struct range_mutable_iterator<mars_boost::filesystem::directory_iterator>
+    { typedef mars_boost::filesystem::directory_iterator type; };
   template<>
-  struct range_const_iterator <mars_boost_ksim::filesystem::directory_iterator>
-    { typedef mars_boost_ksim::filesystem::directory_iterator type; };
+  struct range_const_iterator <mars_boost::filesystem::directory_iterator>
+    { typedef mars_boost::filesystem::directory_iterator type; };
 
 namespace filesystem
 {
@@ -1018,7 +1018,7 @@ namespace filesystem
 
     //  Implementation is inline to avoid dynamic linking difficulties with m_stack:
     //  Microsoft warning C4251, m_stack needs to have dll-interface to be used by
-    //  clients of struct 'mars_boost_ksim::filesystem::detail::recur_dir_itr_imp'
+    //  clients of struct 'mars_boost::filesystem::detail::recur_dir_itr_imp'
 
     inline
     bool recur_dir_itr_imp::push_directory(system::error_code& ec) BOOST_NOEXCEPT
@@ -1137,10 +1137,10 @@ namespace filesystem
 //--------------------------------------------------------------------------------------//
 
   class recursive_directory_iterator
-    : public mars_boost_ksim::iterator_facade<
+    : public mars_boost::iterator_facade<
         recursive_directory_iterator,
         directory_entry,
-        mars_boost_ksim::single_pass_traversal_tag >
+        mars_boost::single_pass_traversal_tag >
   {
   public:
 
@@ -1257,14 +1257,14 @@ namespace filesystem
 
     // shared_ptr provides shallow-copy semantics required for InputIterators.
     // m_imp.get()==0 indicates the end iterator.
-    mars_boost_ksim::shared_ptr< detail::recur_dir_itr_imp >  m_imp;
+    mars_boost::shared_ptr< detail::recur_dir_itr_imp >  m_imp;
 
-    friend class mars_boost_ksim::iterator_core_access;
+    friend class mars_boost::iterator_core_access;
 
-    mars_boost_ksim::iterator_facade< 
+    mars_boost::iterator_facade< 
       recursive_directory_iterator,
       directory_entry,
-      mars_boost_ksim::single_pass_traversal_tag >::reference
+      mars_boost::single_pass_traversal_tag >::reference
     dereference() const 
     {
       BOOST_ASSERT_MSG(m_imp.get(),
@@ -1314,13 +1314,13 @@ namespace filesystem
                                                   {return recursive_directory_iterator();}
   }  // namespace filesystem
 
-  //  namespace mars_boost_ksim template specializations
+  //  namespace mars_boost template specializations
   template<>
-  struct range_mutable_iterator<mars_boost_ksim::filesystem::recursive_directory_iterator>
-                        { typedef mars_boost_ksim::filesystem::recursive_directory_iterator type; };
+  struct range_mutable_iterator<mars_boost::filesystem::recursive_directory_iterator>
+                        { typedef mars_boost::filesystem::recursive_directory_iterator type; };
   template<>
-  struct range_const_iterator <mars_boost_ksim::filesystem::recursive_directory_iterator>
-                        { typedef mars_boost_ksim::filesystem::recursive_directory_iterator type; };
+  struct range_const_iterator <mars_boost::filesystem::recursive_directory_iterator>
+                        { typedef mars_boost::filesystem::recursive_directory_iterator type; };
 
 namespace filesystem
 {
@@ -1341,7 +1341,7 @@ namespace filesystem
   }
 
   } // namespace filesystem
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #include <boost/config/abi_suffix.hpp> // pops abi_prefix.hpp pragmas
 #endif // BOOST_FILESYSTEM3_OPERATIONS_HPP

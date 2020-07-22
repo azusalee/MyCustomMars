@@ -158,7 +158,7 @@ namespace
             memmove(dst,src,ti.size);
         }
 
-    mars_boost_ksim::shared_ptr<void>
+    mars_boost::shared_ptr<void>
     clone_msvc_exception( void * src, cpp_exception_type const & et )
         {
         assert(src!=0);
@@ -175,7 +175,7 @@ namespace
                 free(dst);
                 throw;
                 }
-            return mars_boost_ksim::shared_ptr<void>(dst,exception_object_deleter(et));
+            return mars_boost::shared_ptr<void>(dst,exception_object_deleter(et));
             }
         else
             throw std::bad_alloc();
@@ -183,13 +183,13 @@ namespace
 
     class
     cloned_exception:
-        public mars_boost_ksim::exception_detail::clone_base
+        public mars_boost::exception_detail::clone_base
         {
         cloned_exception( cloned_exception const & );
         cloned_exception & operator=( cloned_exception const & );
 
         cpp_exception_type const & et_;
-        mars_boost_ksim::shared_ptr<void> exc_;
+        mars_boost::shared_ptr<void> exc_;
 
         public:
 
@@ -203,7 +203,7 @@ namespace
             {
             }
 
-        mars_boost_ksim::exception_detail::clone_base const *
+        mars_boost::exception_detail::clone_base const *
         clone() const
             {
             return new cloned_exception(exc_.get(),et_);
@@ -233,7 +233,7 @@ namespace
         }
 
     unsigned long
-    exception_cloning_filter( int & result, mars_boost_ksim::exception_detail::clone_base const * & ptr, void * info_ )
+    exception_cloning_filter( int & result, mars_boost::exception_detail::clone_base const * & ptr, void * info_ )
         {
         BOOST_ASSERT(exception_info_offset>=0);
         BOOST_ASSERT(info_!=0);
@@ -249,24 +249,24 @@ namespace
                     ptr = new cloned_exception(
                             reinterpret_cast<void *>(record->ExceptionInformation[1]),
                             *reinterpret_cast<cpp_exception_type const *>(record->ExceptionInformation[2]));
-                    result = mars_boost_ksim::exception_detail::clone_current_exception_result::success;
+                    result = mars_boost::exception_detail::clone_current_exception_result::success;
                     }
                 catch(
                 std::bad_alloc & )
                     {
-                    result = mars_boost_ksim::exception_detail::clone_current_exception_result::bad_alloc;
+                    result = mars_boost::exception_detail::clone_current_exception_result::bad_alloc;
                     }
                 catch(
                 ... )
                     {
-                    result = mars_boost_ksim::exception_detail::clone_current_exception_result::bad_exception;
+                    result = mars_boost::exception_detail::clone_current_exception_result::bad_exception;
                     }
             }
         return EXCEPTION_EXECUTE_HANDLER;
         }
     }
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace
 mars_boost
     {
     namespace
@@ -303,7 +303,7 @@ mars_boost
 
 #include <boost/config.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace
 mars_boost
     {
     namespace

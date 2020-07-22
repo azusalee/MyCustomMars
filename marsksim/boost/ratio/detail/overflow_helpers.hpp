@@ -55,7 +55,7 @@ time2_demo contained this comment:
 #pragma GCC system_header
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 //----------------------------------------------------------------------------//
@@ -65,122 +65,122 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 namespace ratio_detail
 {
 
-  template <mars_boost_ksim::intmax_t X, mars_boost_ksim::intmax_t Y, mars_boost_ksim::intmax_t = mpl::sign_c<mars_boost_ksim::intmax_t, Y>::value>
+  template <mars_boost::intmax_t X, mars_boost::intmax_t Y, mars_boost::intmax_t = mpl::sign_c<mars_boost::intmax_t, Y>::value>
   class br_add;
 
-  template <mars_boost_ksim::intmax_t X, mars_boost_ksim::intmax_t Y>
+  template <mars_boost::intmax_t X, mars_boost::intmax_t Y>
   class br_add<X, Y, 1>
   {
-      static const mars_boost_ksim::intmax_t min = mars_boost_ksim::integer_traits<mars_boost_ksim::intmax_t>::const_min;
-      static const mars_boost_ksim::intmax_t max = mars_boost_ksim::integer_traits<mars_boost_ksim::intmax_t>::const_max;
+      static const mars_boost::intmax_t min = mars_boost::integer_traits<mars_boost::intmax_t>::const_min;
+      static const mars_boost::intmax_t max = mars_boost::integer_traits<mars_boost::intmax_t>::const_max;
 
       BOOST_RATIO_STATIC_ASSERT(X <= max - Y , BOOST_RATIO_OVERFLOW_IN_ADD, ());
   public:
-      static const mars_boost_ksim::intmax_t value = X + Y;
+      static const mars_boost::intmax_t value = X + Y;
   };
 
-  template <mars_boost_ksim::intmax_t X, mars_boost_ksim::intmax_t Y>
+  template <mars_boost::intmax_t X, mars_boost::intmax_t Y>
   class br_add<X, Y, 0>
   {
   public:
-      static const mars_boost_ksim::intmax_t value = X;
+      static const mars_boost::intmax_t value = X;
   };
 
-  template <mars_boost_ksim::intmax_t X, mars_boost_ksim::intmax_t Y>
+  template <mars_boost::intmax_t X, mars_boost::intmax_t Y>
   class br_add<X, Y, -1>
   {
-      static const mars_boost_ksim::intmax_t min = mars_boost_ksim::integer_traits<mars_boost_ksim::intmax_t>::const_min;
-      static const mars_boost_ksim::intmax_t max = mars_boost_ksim::integer_traits<mars_boost_ksim::intmax_t>::const_max;
+      static const mars_boost::intmax_t min = mars_boost::integer_traits<mars_boost::intmax_t>::const_min;
+      static const mars_boost::intmax_t max = mars_boost::integer_traits<mars_boost::intmax_t>::const_max;
 
       BOOST_RATIO_STATIC_ASSERT(min - Y <= X, BOOST_RATIO_OVERFLOW_IN_ADD, ());
   public:
-      static const mars_boost_ksim::intmax_t value = X + Y;
+      static const mars_boost::intmax_t value = X + Y;
   };
 
-  template <mars_boost_ksim::intmax_t X, mars_boost_ksim::intmax_t Y, mars_boost_ksim::intmax_t = mpl::sign_c<mars_boost_ksim::intmax_t, Y>::value>
+  template <mars_boost::intmax_t X, mars_boost::intmax_t Y, mars_boost::intmax_t = mpl::sign_c<mars_boost::intmax_t, Y>::value>
   class br_sub;
 
-  template <mars_boost_ksim::intmax_t X, mars_boost_ksim::intmax_t Y>
+  template <mars_boost::intmax_t X, mars_boost::intmax_t Y>
   class br_sub<X, Y, 1>
   {
-      static const mars_boost_ksim::intmax_t min = mars_boost_ksim::integer_traits<mars_boost_ksim::intmax_t>::const_min;
-      static const mars_boost_ksim::intmax_t max = mars_boost_ksim::integer_traits<mars_boost_ksim::intmax_t>::const_max;
+      static const mars_boost::intmax_t min = mars_boost::integer_traits<mars_boost::intmax_t>::const_min;
+      static const mars_boost::intmax_t max = mars_boost::integer_traits<mars_boost::intmax_t>::const_max;
 
       BOOST_RATIO_STATIC_ASSERT(min + Y <= X, BOOST_RATIO_OVERFLOW_IN_SUB, ());
   public:
-      static const mars_boost_ksim::intmax_t value = X - Y;
+      static const mars_boost::intmax_t value = X - Y;
   };
 
-  template <mars_boost_ksim::intmax_t X, mars_boost_ksim::intmax_t Y>
+  template <mars_boost::intmax_t X, mars_boost::intmax_t Y>
   class br_sub<X, Y, 0>
   {
   public:
-      static const mars_boost_ksim::intmax_t value = X;
+      static const mars_boost::intmax_t value = X;
   };
 
-  template <mars_boost_ksim::intmax_t X, mars_boost_ksim::intmax_t Y>
+  template <mars_boost::intmax_t X, mars_boost::intmax_t Y>
   class br_sub<X, Y, -1>
   {
-      static const mars_boost_ksim::intmax_t min = mars_boost_ksim::integer_traits<mars_boost_ksim::intmax_t>::const_min;
-      static const mars_boost_ksim::intmax_t max = mars_boost_ksim::integer_traits<mars_boost_ksim::intmax_t>::const_max;
+      static const mars_boost::intmax_t min = mars_boost::integer_traits<mars_boost::intmax_t>::const_min;
+      static const mars_boost::intmax_t max = mars_boost::integer_traits<mars_boost::intmax_t>::const_max;
 
       BOOST_RATIO_STATIC_ASSERT(X <= max + Y, BOOST_RATIO_OVERFLOW_IN_SUB, ());
   public:
-      static const mars_boost_ksim::intmax_t value = X - Y;
+      static const mars_boost::intmax_t value = X - Y;
   };
 
-  template <mars_boost_ksim::intmax_t X, mars_boost_ksim::intmax_t Y>
+  template <mars_boost::intmax_t X, mars_boost::intmax_t Y>
   class br_mul
   {
-      static const mars_boost_ksim::intmax_t nan =
-          mars_boost_ksim::intmax_t(BOOST_RATIO_UINTMAX_C(1) << (sizeof(mars_boost_ksim::intmax_t) * CHAR_BIT - 1));
-      static const mars_boost_ksim::intmax_t min = mars_boost_ksim::integer_traits<mars_boost_ksim::intmax_t>::const_min;
-      static const mars_boost_ksim::intmax_t max = mars_boost_ksim::integer_traits<mars_boost_ksim::intmax_t>::const_max;
+      static const mars_boost::intmax_t nan =
+          mars_boost::intmax_t(BOOST_RATIO_UINTMAX_C(1) << (sizeof(mars_boost::intmax_t) * CHAR_BIT - 1));
+      static const mars_boost::intmax_t min = mars_boost::integer_traits<mars_boost::intmax_t>::const_min;
+      static const mars_boost::intmax_t max = mars_boost::integer_traits<mars_boost::intmax_t>::const_max;
 
-      static const mars_boost_ksim::intmax_t a_x = mpl::abs_c<mars_boost_ksim::intmax_t, X>::value;
-      static const mars_boost_ksim::intmax_t a_y = mpl::abs_c<mars_boost_ksim::intmax_t, Y>::value;
+      static const mars_boost::intmax_t a_x = mpl::abs_c<mars_boost::intmax_t, X>::value;
+      static const mars_boost::intmax_t a_y = mpl::abs_c<mars_boost::intmax_t, Y>::value;
 
       BOOST_RATIO_STATIC_ASSERT(X != nan, BOOST_RATIO_OVERFLOW_IN_MUL, ());
       BOOST_RATIO_STATIC_ASSERT(Y != nan, BOOST_RATIO_OVERFLOW_IN_MUL, ());
       BOOST_RATIO_STATIC_ASSERT(a_x <= max / a_y, BOOST_RATIO_OVERFLOW_IN_MUL, ());
   public:
-      static const mars_boost_ksim::intmax_t value = X * Y;
+      static const mars_boost::intmax_t value = X * Y;
   };
 
-  template <mars_boost_ksim::intmax_t Y>
+  template <mars_boost::intmax_t Y>
   class br_mul<0, Y>
   {
   public:
-      static const mars_boost_ksim::intmax_t value = 0;
+      static const mars_boost::intmax_t value = 0;
   };
 
-  template <mars_boost_ksim::intmax_t X>
+  template <mars_boost::intmax_t X>
   class br_mul<X, 0>
   {
   public:
-      static const mars_boost_ksim::intmax_t value = 0;
+      static const mars_boost::intmax_t value = 0;
   };
 
   template <>
   class br_mul<0, 0>
   {
   public:
-      static const mars_boost_ksim::intmax_t value = 0;
+      static const mars_boost::intmax_t value = 0;
   };
 
   // Not actually used but left here in case needed in future maintenance
-  template <mars_boost_ksim::intmax_t X, mars_boost_ksim::intmax_t Y>
+  template <mars_boost::intmax_t X, mars_boost::intmax_t Y>
   class br_div
   {
-      static const mars_boost_ksim::intmax_t nan = mars_boost_ksim::intmax_t(BOOST_RATIO_UINTMAX_C(1) << (sizeof(mars_boost_ksim::intmax_t) * CHAR_BIT - 1));
-      static const mars_boost_ksim::intmax_t min = mars_boost_ksim::integer_traits<mars_boost_ksim::intmax_t>::const_min;
-      static const mars_boost_ksim::intmax_t max = mars_boost_ksim::integer_traits<mars_boost_ksim::intmax_t>::const_max;
+      static const mars_boost::intmax_t nan = mars_boost::intmax_t(BOOST_RATIO_UINTMAX_C(1) << (sizeof(mars_boost::intmax_t) * CHAR_BIT - 1));
+      static const mars_boost::intmax_t min = mars_boost::integer_traits<mars_boost::intmax_t>::const_min;
+      static const mars_boost::intmax_t max = mars_boost::integer_traits<mars_boost::intmax_t>::const_max;
 
       BOOST_RATIO_STATIC_ASSERT(X != nan, BOOST_RATIO_OVERFLOW_IN_DIV, ());
       BOOST_RATIO_STATIC_ASSERT(Y != nan, BOOST_RATIO_OVERFLOW_IN_DIV, ());
       BOOST_RATIO_STATIC_ASSERT(Y != 0, BOOST_RATIO_DIVIDE_BY_0, ());
   public:
-      static const mars_boost_ksim::intmax_t value = X / Y;
+      static const mars_boost::intmax_t value = X / Y;
   };
 
   // ratio arithmetic
@@ -194,10 +194,10 @@ namespace ratio_detail
   {
       //The nested typedef type shall be a synonym for ratio<T1, T2>::type where T1 has the value R1::num *
       //R2::den + R2::num * R1::den and T2 has the value R1::den * R2::den.
-      // As the preceding doesn't works because of overflow on mars_boost_ksim::intmax_t we need something more elaborated.
+      // As the preceding doesn't works because of overflow on mars_boost::intmax_t we need something more elaborated.
   private:
-      static const mars_boost_ksim::intmax_t gcd_n1_n2 = mpl::gcd_c<mars_boost_ksim::intmax_t, R1::num, R2::num>::value;
-      static const mars_boost_ksim::intmax_t gcd_d1_d2 = mpl::gcd_c<mars_boost_ksim::intmax_t, R1::den, R2::den>::value;
+      static const mars_boost::intmax_t gcd_n1_n2 = mpl::gcd_c<mars_boost::intmax_t, R1::num, R2::num>::value;
+      static const mars_boost::intmax_t gcd_d1_d2 = mpl::gcd_c<mars_boost::intmax_t, R1::den, R2::den>::value;
   public:
       // No need to normalize as ratio_multiply is already normalized
       typedef typename ratio_multiply
@@ -205,16 +205,16 @@ namespace ratio_detail
              ratio<gcd_n1_n2, R1::den / gcd_d1_d2>,
              ratio
              <
-                 mars_boost_ksim::ratio_detail::br_add
+                 mars_boost::ratio_detail::br_add
                  <
-                     mars_boost_ksim::ratio_detail::br_mul<R1::num / gcd_n1_n2, R2::den / gcd_d1_d2>::value,
-                     mars_boost_ksim::ratio_detail::br_mul<R2::num / gcd_n1_n2, R1::den / gcd_d1_d2>::value
+                     mars_boost::ratio_detail::br_mul<R1::num / gcd_n1_n2, R2::den / gcd_d1_d2>::value,
+                     mars_boost::ratio_detail::br_mul<R2::num / gcd_n1_n2, R1::den / gcd_d1_d2>::value
                  >::value,
                  R2::den
              >
          >::type type;
   };
-  template <class R, mars_boost_ksim::intmax_t D>
+  template <class R, mars_boost::intmax_t D>
   struct ratio_add<R, ratio<0,D> >
   {
     typedef R type;
@@ -225,10 +225,10 @@ namespace ratio_detail
   {
       //The nested typedef type shall be a synonym for ratio<T1, T2>::type where T1 has the value
       // R1::num *R2::den - R2::num * R1::den and T2 has the value R1::den * R2::den.
-      // As the preceding doesn't works because of overflow on mars_boost_ksim::intmax_t we need something more elaborated.
+      // As the preceding doesn't works because of overflow on mars_boost::intmax_t we need something more elaborated.
   private:
-      static const mars_boost_ksim::intmax_t gcd_n1_n2 = mpl::gcd_c<mars_boost_ksim::intmax_t, R1::num, R2::num>::value;
-      static const mars_boost_ksim::intmax_t gcd_d1_d2 = mpl::gcd_c<mars_boost_ksim::intmax_t, R1::den, R2::den>::value;
+      static const mars_boost::intmax_t gcd_n1_n2 = mpl::gcd_c<mars_boost::intmax_t, R1::num, R2::num>::value;
+      static const mars_boost::intmax_t gcd_d1_d2 = mpl::gcd_c<mars_boost::intmax_t, R1::den, R2::den>::value;
   public:
       // No need to normalize as ratio_multiply is already normalized
       typedef typename ratio_multiply
@@ -236,17 +236,17 @@ namespace ratio_detail
              ratio<gcd_n1_n2, R1::den / gcd_d1_d2>,
              ratio
              <
-                 mars_boost_ksim::ratio_detail::br_sub
+                 mars_boost::ratio_detail::br_sub
                  <
-                     mars_boost_ksim::ratio_detail::br_mul<R1::num / gcd_n1_n2, R2::den / gcd_d1_d2>::value,
-                     mars_boost_ksim::ratio_detail::br_mul<R2::num / gcd_n1_n2, R1::den / gcd_d1_d2>::value
+                     mars_boost::ratio_detail::br_mul<R1::num / gcd_n1_n2, R2::den / gcd_d1_d2>::value,
+                     mars_boost::ratio_detail::br_mul<R2::num / gcd_n1_n2, R1::den / gcd_d1_d2>::value
                  >::value,
                  R2::den
              >
          >::type type;
   };
 
-  template <class R, mars_boost_ksim::intmax_t D>
+  template <class R, mars_boost::intmax_t D>
   struct ratio_subtract<R, ratio<0,D> >
   {
     typedef R type;
@@ -256,15 +256,15 @@ namespace ratio_detail
   struct ratio_multiply
   {
       // The nested typedef type  shall be a synonym for ratio<R1::num * R2::den - R2::num * R1::den, R1::den * R2::den>::type.
-      // As the preceding doesn't works because of overflow on mars_boost_ksim::intmax_t we need something more elaborated.
+      // As the preceding doesn't works because of overflow on mars_boost::intmax_t we need something more elaborated.
   private:
-     static const mars_boost_ksim::intmax_t gcd_n1_d2 = mpl::gcd_c<mars_boost_ksim::intmax_t, R1::num, R2::den>::value;
-     static const mars_boost_ksim::intmax_t gcd_d1_n2 = mpl::gcd_c<mars_boost_ksim::intmax_t, R1::den, R2::num>::value;
+     static const mars_boost::intmax_t gcd_n1_d2 = mpl::gcd_c<mars_boost::intmax_t, R1::num, R2::den>::value;
+     static const mars_boost::intmax_t gcd_d1_n2 = mpl::gcd_c<mars_boost::intmax_t, R1::den, R2::num>::value;
   public:
       typedef typename ratio
          <
-             mars_boost_ksim::ratio_detail::br_mul<R1::num / gcd_n1_d2, R2::num / gcd_d1_n2>::value,
-             mars_boost_ksim::ratio_detail::br_mul<R2::den / gcd_n1_d2, R1::den / gcd_d1_n2>::value
+             mars_boost::ratio_detail::br_mul<R1::num / gcd_n1_d2, R2::num / gcd_d1_n2>::value,
+             mars_boost::ratio_detail::br_mul<R2::den / gcd_n1_d2, R1::den / gcd_d1_n2>::value
          >::type type;
   };
 
@@ -272,23 +272,23 @@ namespace ratio_detail
   struct ratio_divide
   {
       // The nested typedef type  shall be a synonym for ratio<R1::num * R2::den, R2::num * R1::den>::type.
-      // As the preceding doesn't works because of overflow on mars_boost_ksim::intmax_t we need something more elaborated.
+      // As the preceding doesn't works because of overflow on mars_boost::intmax_t we need something more elaborated.
   private:
-      static const mars_boost_ksim::intmax_t gcd_n1_n2 = mpl::gcd_c<mars_boost_ksim::intmax_t, R1::num, R2::num>::value;
-      static const mars_boost_ksim::intmax_t gcd_d1_d2 = mpl::gcd_c<mars_boost_ksim::intmax_t, R1::den, R2::den>::value;
+      static const mars_boost::intmax_t gcd_n1_n2 = mpl::gcd_c<mars_boost::intmax_t, R1::num, R2::num>::value;
+      static const mars_boost::intmax_t gcd_d1_d2 = mpl::gcd_c<mars_boost::intmax_t, R1::den, R2::den>::value;
   public:
       typedef typename ratio
          <
-             mars_boost_ksim::ratio_detail::br_mul<R1::num / gcd_n1_n2, R2::den / gcd_d1_d2>::value,
-             mars_boost_ksim::ratio_detail::br_mul<R2::num / gcd_n1_n2, R1::den / gcd_d1_d2>::value
+             mars_boost::ratio_detail::br_mul<R1::num / gcd_n1_n2, R2::den / gcd_d1_d2>::value,
+             mars_boost::ratio_detail::br_mul<R2::num / gcd_n1_n2, R1::den / gcd_d1_d2>::value
          >::type type;
   };
   template <class R1, class R2>
   struct is_evenly_divisible_by
   {
   private:
-      static const mars_boost_ksim::intmax_t gcd_n1_n2 = mpl::gcd_c<mars_boost_ksim::intmax_t, R1::num, R2::num>::value;
-      static const mars_boost_ksim::intmax_t gcd_d1_d2 = mpl::gcd_c<mars_boost_ksim::intmax_t, R1::den, R2::den>::value;
+      static const mars_boost::intmax_t gcd_n1_n2 = mpl::gcd_c<mars_boost::intmax_t, R1::num, R2::num>::value;
+      static const mars_boost::intmax_t gcd_d1_d2 = mpl::gcd_c<mars_boost::intmax_t, R1::den, R2::den>::value;
   public:
       typedef integral_constant<bool,
              ((R2::num / gcd_n1_n2 ==1) && (R1::den / gcd_d1_d2)==1)
@@ -296,39 +296,39 @@ namespace ratio_detail
   };
 
   template <class T>
-  struct is_ratio : public mars_boost_ksim::false_type
+  struct is_ratio : public mars_boost::false_type
   {};
-  template <mars_boost_ksim::intmax_t N, mars_boost_ksim::intmax_t D>
-  struct is_ratio<ratio<N, D> > : public mars_boost_ksim::true_type
+  template <mars_boost::intmax_t N, mars_boost::intmax_t D>
+  struct is_ratio<ratio<N, D> > : public mars_boost::true_type
   {};
 
   template <class R1, class R2,
-            mars_boost_ksim::intmax_t Q1 = R1::num / R1::den, mars_boost_ksim::intmax_t M1 = R1::num % R1::den,
-            mars_boost_ksim::intmax_t Q2 = R2::num / R2::den, mars_boost_ksim::intmax_t M2 = R2::num % R2::den>
+            mars_boost::intmax_t Q1 = R1::num / R1::den, mars_boost::intmax_t M1 = R1::num % R1::den,
+            mars_boost::intmax_t Q2 = R2::num / R2::den, mars_boost::intmax_t M2 = R2::num % R2::den>
   struct ratio_less1
   {
     static const bool value = Q1 < Q2;
   };
 
-  template <class R1, class R2, mars_boost_ksim::intmax_t Q>
+  template <class R1, class R2, mars_boost::intmax_t Q>
   struct ratio_less1<R1, R2, Q, 0, Q, 0>
   {
     static const bool value = false;
   };
 
-  template <class R1, class R2, mars_boost_ksim::intmax_t Q, mars_boost_ksim::intmax_t M2>
+  template <class R1, class R2, mars_boost::intmax_t Q, mars_boost::intmax_t M2>
   struct ratio_less1<R1, R2, Q, 0, Q, M2>
   {
     static const bool value = true;
   };
 
-  template <class R1, class R2, mars_boost_ksim::intmax_t Q, mars_boost_ksim::intmax_t M1>
+  template <class R1, class R2, mars_boost::intmax_t Q, mars_boost::intmax_t M1>
   struct ratio_less1<R1, R2, Q, M1, Q, 0>
   {
     static const bool value = false;
   };
 
-  template <class R1, class R2, mars_boost_ksim::intmax_t Q, mars_boost_ksim::intmax_t M1, mars_boost_ksim::intmax_t M2>
+  template <class R1, class R2, mars_boost::intmax_t Q, mars_boost::intmax_t M1, mars_boost::intmax_t M2>
   struct ratio_less1<R1, R2, Q, M1, Q, M2>
   {
     static const bool value = ratio_less1<ratio<R2::den, M2>, ratio<R1::den, M1>
@@ -338,8 +338,8 @@ namespace ratio_detail
   template <
       class R1,
       class R2,
-      mars_boost_ksim::intmax_t S1 = mpl::sign_c<mars_boost_ksim::intmax_t, R1::num>::value,
-    mars_boost_ksim::intmax_t S2 = mpl::sign_c<mars_boost_ksim::intmax_t, R2::num>::value
+      mars_boost::intmax_t S1 = mpl::sign_c<mars_boost::intmax_t, R1::num>::value,
+    mars_boost::intmax_t S2 = mpl::sign_c<mars_boost::intmax_t, R2::num>::value
 >
   struct ratio_less
   {
@@ -362,6 +362,6 @@ namespace ratio_detail
 
 }  // namespace ratio_detail
 
-}  // namespace mars_boost_ksim
+}  // namespace mars_boost
 
 #endif  // BOOST_RATIO_HPP

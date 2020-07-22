@@ -11,7 +11,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   struct exceptional_ptr {
     exception_ptr ptr_;
@@ -19,12 +19,12 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     exceptional_ptr() : ptr_() {}
     explicit exceptional_ptr(exception_ptr ex) : ptr_(ex) {}
     template <class E>
-    explicit exceptional_ptr(BOOST_FWD_REF(E) ex) : ptr_(mars_boost_ksim::copy_exception(mars_boost_ksim::forward<E>(ex))) {}
+    explicit exceptional_ptr(BOOST_FWD_REF(E) ex) : ptr_(mars_boost::copy_exception(mars_boost::forward<E>(ex))) {}
   };
 
   template <class E>
   inline exceptional_ptr make_exceptional(BOOST_FWD_REF(E) ex) {
-    return exceptional_ptr(mars_boost_ksim::forward<E>(ex));
+    return exceptional_ptr(mars_boost::forward<E>(ex));
   }
 
   inline exceptional_ptr make_exceptional(exception_ptr ex)
@@ -37,7 +37,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     return exceptional_ptr();
   }
 
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #include <boost/config/abi_suffix.hpp>
 

@@ -15,27 +15,27 @@
    (\
       /* Lhs==fundamental and Rhs==fundamental and (Lhs!=integral or Rhs!=integral) */\
       (\
-         ::mars_boost_ksim::is_fundamental< Lhs_nocv >::value && \
-         ::mars_boost_ksim::is_fundamental< Rhs_nocv >::value && \
+         ::mars_boost::is_fundamental< Lhs_nocv >::value && \
+         ::mars_boost::is_fundamental< Rhs_nocv >::value && \
          ( \
-            (!  ::mars_boost_ksim::is_integral< Lhs_noref >::value ) || \
-            (!  ::mars_boost_ksim::is_integral< Rhs_noref >::value )\
+            (!  ::mars_boost::is_integral< Lhs_noref >::value ) || \
+            (!  ::mars_boost::is_integral< Rhs_noref >::value )\
          )\
       )||\
       /* Lhs==fundamental and Rhs==pointer */\
       (\
-         ::mars_boost_ksim::is_fundamental< Lhs_nocv >::value && \
-         ::mars_boost_ksim::is_pointer< Rhs_noref >::value\
+         ::mars_boost::is_fundamental< Lhs_nocv >::value && \
+         ::mars_boost::is_pointer< Rhs_noref >::value\
       )||\
       /* Rhs==fundamental and Lhs==pointer */\
       (\
-         ::mars_boost_ksim::is_fundamental< Rhs_nocv >::value && \
-         ::mars_boost_ksim::is_pointer< Lhs_noref >::value\
+         ::mars_boost::is_fundamental< Rhs_nocv >::value && \
+         ::mars_boost::is_pointer< Lhs_noref >::value\
       )||\
       /* Lhs==pointer and Rhs==pointer */\
       (\
-         ::mars_boost_ksim::is_pointer< Lhs_noref >::value && \
-         ::mars_boost_ksim::is_pointer< Rhs_noref >::value\
+         ::mars_boost::is_pointer< Lhs_noref >::value && \
+         ::mars_boost::is_pointer< Rhs_noref >::value\
       )\
       )
 

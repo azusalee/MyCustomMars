@@ -55,7 +55,7 @@ static unsigned int __MakeSeq() {
 }
 
 struct MessageWrapper {
-    MessageWrapper(const MessageHandler_t& _handlerid, const Message& _message, const MessageTiming& _timing, unsigned int _seq)
+    MessageWrapper(const MessageHandler_tksim& _handlerid, const Message& _message, const MessageTiming& _timing, unsigned int _seq)
         : message(_message), timing(_timing) {
         postid.reg = _handlerid;
         postid.seq = _seq;
@@ -89,7 +89,7 @@ struct HandlerWrapper {
         reg.queue = _messagequeueid;
     }
 
-    MessageHandler_t reg;
+    MessageHandler_tksim reg;
     MessageHandler handler;
     bool recvbroadcast;
 };
@@ -100,7 +100,7 @@ struct RunLoopInfo {
     boost_ksim::shared_ptr<Condition> runing_cond;
     MessagePost_t runing_message_id;
     Message* runing_message;
-    std::list <MessageHandler_t> runing_handler;
+    std::list <MessageHandler_tksim> runing_handler;
 };
     
 class Cond : public RunloopCond {
@@ -134,7 +134,7 @@ struct MessageQueueksimContent {
     MessageQueueksimContent(const MessageQueueksimContent&): breakflag(false) { /*ASSERT(false);*/ }
 #endif
 
-    MessageHandler_t invoke_reg;
+    MessageHandler_tksim invoke_reg;
     bool breakflag;
     boost_ksim::shared_ptr<RunloopCond> breaker;
     std::list<MessageWrapper*> lst_message;
@@ -150,13 +150,13 @@ private:
 #endif
 };
 
-#define sg_messagequeue_map_mutex messagequeue_map_mutex()
-static Mutex& messagequeue_map_mutex() {
+#define sg_messagequeue_mapksim_mutex messagequeue_mapksim_mutex()
+static Mutex& messagequeue_mapksim_mutex() {
     static Mutex* mutex = new Mutex;
     return *mutex;
 }
-#define sg_messagequeue_map messagequeue_map()
-static std::map<MessageQueueksim_t, MessageQueueksimContent>& messagequeue_map() {
+#define sg_messagequeue_mapksim messagequeue_mapksim()
+static std::map<MessageQueueksim_t, MessageQueueksimContent>& messagequeue_mapksim() {
     static std::map<MessageQueueksim_t, MessageQueueksimContent>* mq_map = new std::map<MessageQueueksim_t, MessageQueueksimContent>;
     return *mq_map;
 }
@@ -174,11 +174,11 @@ static std::string DumpMessage(const std::list<MessageWrapper*>& _message_lst) {
     return xmsg.String();
 }
 std::string DumpMQ(const MessageQueueksim_t& _msq_queue_id) {
-    ScopedLock lock(sg_messagequeue_map_mutex);
+    ScopedLock lock(sg_messagequeue_mapksim_mutex);
     const MessageQueueksim_t& id = _msq_queue_id;
     
-    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_map.find(id);
-    if (sg_messagequeue_map.end() == pos) {
+    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_mapksim.find(id);
+    if (sg_messagequeue_mapksim.end() == pos) {
         //ASSERT2(false, "%" PRIu64, id);
         xinfo2(TSF"message queue not found.");
         return "";
@@ -189,28 +189,28 @@ std::string DumpMQ(const MessageQueueksim_t& _msq_queue_id) {
 }
 
 MessageQueueksim_t CurrentThreadMessageQueueksim() {
-    ScopedLock lock(sg_messagequeue_map_mutex);
+    ScopedLock lock(sg_messagequeue_mapksim_mutex);
     MessageQueueksim_t id = (MessageQueueksim_t)ThreadUtilksim::currentthreadid();
 
-    if (sg_messagequeue_map.end() == sg_messagequeue_map.find(id)) id = KInvalidQueueID;
+    if (sg_messagequeue_mapksim.end() == sg_messagequeue_mapksim.find(id)) id = KInvalidQueueID;
 
     return id;
 }
 
 MessageQueueksim_t TID2MessageQueueksim(thread_tid _tid) {
-    ScopedLock lock(sg_messagequeue_map_mutex);
+    ScopedLock lock(sg_messagequeue_mapksim_mutex);
     MessageQueueksim_t id = (MessageQueueksim_t)_tid;
 
-    if (sg_messagequeue_map.end() == sg_messagequeue_map.find(id))id = KInvalidQueueID;
+    if (sg_messagequeue_mapksim.end() == sg_messagequeue_mapksim.find(id))id = KInvalidQueueID;
 
     return id;
 }
     
 thread_tid  MessageQueueksim2TID(MessageQueueksim_t _id) {
-    ScopedLock lock(sg_messagequeue_map_mutex);
+    ScopedLock lock(sg_messagequeue_mapksim_mutex);
     MessageQueueksim_t& id = _id;
     
-    if (sg_messagequeue_map.end() == sg_messagequeue_map.find(id)) return 0;
+    if (sg_messagequeue_mapksim.end() == sg_messagequeue_mapksim.find(id)) return 0;
     
     return (thread_tid)id;
 }
@@ -218,11 +218,11 @@ thread_tid  MessageQueueksim2TID(MessageQueueksim_t _id) {
 void WaitForRunningLockEnd(const MessagePost_t&  _message) {
     if (Handler2Queue(Post2Handler(_message)) == CurrentThreadMessageQueueksim()) return;
 
-    ScopedLock lock(sg_messagequeue_map_mutex);
+    ScopedLock lock(sg_messagequeue_mapksim_mutex);
     const MessageQueueksim_t& id = Handler2Queue(Post2Handler(_message));
 
-    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_map.find(id);
-    if (sg_messagequeue_map.end() == pos) return;
+    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_mapksim.find(id);
+    if (sg_messagequeue_mapksim.end() == pos) return;
     MessageQueueksimContent& content = pos->second;
     
     if (content.lst_runloop_info.empty()) return;
@@ -239,11 +239,11 @@ void WaitForRunningLockEnd(const MessagePost_t&  _message) {
 void WaitForRunningLockEnd(const MessageQueueksim_t&  _messagequeueid) {
     if (_messagequeueid == CurrentThreadMessageQueueksim()) return;
 
-    ScopedLock lock(sg_messagequeue_map_mutex);
+    ScopedLock lock(sg_messagequeue_mapksim_mutex);
     const MessageQueueksim_t& id = _messagequeueid;
 
-    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_map.find(id);
-    if (sg_messagequeue_map.end() == pos) return;
+    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_mapksim.find(id);
+    if (sg_messagequeue_mapksim.end() == pos) return;
     MessageQueueksimContent& content = pos->second;
 
     if (content.lst_runloop_info.empty()) return;
@@ -253,14 +253,14 @@ void WaitForRunningLockEnd(const MessageQueueksim_t&  _messagequeueid) {
     runing_cond->wait(lock);
 }
 
-void WaitForRunningLockEnd(const MessageHandler_t&  _handler) {
+void WaitForRunningLockEnd(const MessageHandler_tksim&  _handler) {
     if (Handler2Queue(_handler) == CurrentThreadMessageQueueksim()) return;
 
-    ScopedLock lock(sg_messagequeue_map_mutex);
+    ScopedLock lock(sg_messagequeue_mapksim_mutex);
     const MessageQueueksim_t& id = Handler2Queue(_handler);
 
-    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_map.find(id);
-    if (sg_messagequeue_map.end() == pos) { return; }
+    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_mapksim.find(id);
+    if (sg_messagequeue_mapksim.end() == pos) { return; }
     MessageQueueksimContent& content = pos->second;
     if (content.lst_runloop_info.empty()) return;
 
@@ -278,11 +278,11 @@ void WaitForRunningLockEnd(const MessageHandler_t&  _handler) {
 void BreakMessageQueueksimRunloop(const MessageQueueksim_t&  _messagequeueid) {
     ASSERT(0 != _messagequeueid);
 
-    ScopedLock lock(sg_messagequeue_map_mutex);
+    ScopedLock lock(sg_messagequeue_mapksim_mutex);
     const MessageQueueksim_t& id = _messagequeueid;
 
-    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_map.find(id);
-    if (sg_messagequeue_map.end() == pos) {
+    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_mapksim.find(id);
+    if (sg_messagequeue_mapksim.end() == pos) {
         //ASSERT2(false, "%llu", (unsigned long long)id);
         return;
     }
@@ -291,14 +291,14 @@ void BreakMessageQueueksimRunloop(const MessageQueueksim_t&  _messagequeueid) {
     pos->second.breaker->Notify(lock);
 }
 
-MessageHandler_t InstallMessageHandler(const MessageHandler& _handler, bool _recvbroadcast, const MessageQueueksim_t& _messagequeueid) {
+MessageHandler_tksim InstallMessageHandler(const MessageHandler& _handler, bool _recvbroadcast, const MessageQueueksim_t& _messagequeueid) {
     ASSERT(bool(_handler));
 
-    ScopedLock lock(sg_messagequeue_map_mutex);
+    ScopedLock lock(sg_messagequeue_mapksim_mutex);
     const MessageQueueksim_t& id = _messagequeueid;
 
-    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_map.find(id);
-    if (sg_messagequeue_map.end() == pos) {
+    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_mapksim.find(id);
+    if (sg_messagequeue_mapksim.end() == pos) {
         ASSERT2(false, "%llu", (unsigned long long)id);
         return KNullHandler;
     }
@@ -308,17 +308,17 @@ MessageHandler_t InstallMessageHandler(const MessageHandler& _handler, bool _rec
     return handler->reg;
 }
 
-void UnInstallMessageHandler(const MessageHandler_t& _handlerid) {
+void UnInstallMessageHandler(const MessageHandler_tksim& _handlerid) {
     ASSERT(0 != _handlerid.queue);
     ASSERT(0 != _handlerid.seq);
 
     if (0 == _handlerid.queue || 0 == _handlerid.seq) return;
 
-    ScopedLock lock(sg_messagequeue_map_mutex);
+    ScopedLock lock(sg_messagequeue_mapksim_mutex);
     const MessageQueueksim_t& id = _handlerid.queue;
 
-    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_map.find(id);
-    if (sg_messagequeue_map.end() == pos) return;
+    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_mapksim.find(id);
+    if (sg_messagequeue_mapksim.end() == pos) return;
 
     MessageQueueksimContent& content = pos->second;
 
@@ -331,12 +331,12 @@ void UnInstallMessageHandler(const MessageHandler_t& _handlerid) {
     }
 }
 
-MessagePost_t PostMessage(const MessageHandler_t& _handlerid, const Message& _message, const MessageTiming& _timing) {
-    ScopedLock lock(sg_messagequeue_map_mutex);
+MessagePost_t PostMessage(const MessageHandler_tksim& _handlerid, const Message& _message, const MessageTiming& _timing) {
+    ScopedLock lock(sg_messagequeue_mapksim_mutex);
     const MessageQueueksim_t& id = _handlerid.queue;
 
-    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_map.find(id);
-    if (sg_messagequeue_map.end() == pos) {
+    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_mapksim.find(id);
+    if (sg_messagequeue_mapksim.end() == pos) {
         //ASSERT2(false, "%" PRIu64, id);
         return KNullPost;
     }
@@ -355,12 +355,12 @@ MessagePost_t PostMessage(const MessageHandler_t& _handlerid, const Message& _me
     return messagewrapper->postid;
 }
 
-MessagePost_t SingletonksimMessage(bool _replace, const MessageHandler_t& _handlerid, const Message& _message, const MessageTiming& _timing) {
-    ScopedLock lock(sg_messagequeue_map_mutex);
+MessagePost_t SingletonksimMessage(bool _replace, const MessageHandler_tksim& _handlerid, const Message& _message, const MessageTiming& _timing) {
+    ScopedLock lock(sg_messagequeue_mapksim_mutex);
     const MessageQueueksim_t& id = _handlerid.queue;
 
-    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_map.find(id);
-    if (sg_messagequeue_map.end() == pos) return KNullPost;
+    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_mapksim.find(id);
+    if (sg_messagequeue_mapksim.end() == pos) return KNullPost;
 
     MessageQueueksimContent& content = pos->second;
 
@@ -392,11 +392,11 @@ MessagePost_t SingletonksimMessage(bool _replace, const MessageHandler_t& _handl
 }
 
 MessagePost_t BroadcastMessage(const MessageQueueksim_t& _messagequeueid,  const Message& _message, const MessageTiming& _timing) {
-    ScopedLock lock(sg_messagequeue_map_mutex);
+    ScopedLock lock(sg_messagequeue_mapksim_mutex);
     const MessageQueueksim_t& id = _messagequeueid;
 
-    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_map.find(id);
-    if (sg_messagequeue_map.end() == pos) {
+    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_mapksim.find(id);
+    if (sg_messagequeue_mapksim.end() == pos) {
         ASSERT2(false, "%" PRIu64, id);
         return KNullPost;
     }
@@ -408,7 +408,7 @@ MessagePost_t BroadcastMessage(const MessageQueueksim_t& _messagequeueid,  const
         return KNullPost;
     }
 
-    MessageHandler_t reg;
+    MessageHandler_tksim reg;
     reg.queue = _messagequeueid;
     reg.seq = 0;
     MessageWrapper* messagewrapper = new MessageWrapper(reg, _message, _timing, __MakeSeq());
@@ -439,12 +439,12 @@ static int64_t __ComputerWaitTime(const MessageWrapper& _wrap) {
     return 0 < wait_time ? wait_time : 0;
 }
 
-MessagePost_t FasterMessage(const MessageHandler_t& _handlerid, const Message& _message, const MessageTiming& _timing) {
-    ScopedLock lock(sg_messagequeue_map_mutex);
+MessagePost_t FasterMessage(const MessageHandler_tksim& _handlerid, const Message& _message, const MessageTiming& _timing) {
+    ScopedLock lock(sg_messagequeue_mapksim_mutex);
     const MessageQueueksim_t& id = _handlerid.queue;
 
-    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_map.find(id);
-    if (sg_messagequeue_map.end() == pos) return KNullPost;
+    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_mapksim.find(id);
+    if (sg_messagequeue_mapksim.end() == pos) return KNullPost;
 
     MessageQueueksimContent& content = pos->second;
 
@@ -478,10 +478,10 @@ MessagePost_t FasterMessage(const MessageHandler_t& _handlerid, const Message& _
 bool WaitMessage(const MessagePost_t& _message, long _timeoutInMs) {
     bool is_in_mq = Handler2Queue(Post2Handler(_message)) == CurrentThreadMessageQueueksim();
 
-    ScopedLock lock(sg_messagequeue_map_mutex);
+    ScopedLock lock(sg_messagequeue_mapksim_mutex);
     const MessageQueueksim_t& id = Handler2Queue(Post2Handler(_message));
-    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_map.find(id);
-    if (sg_messagequeue_map.end() == pos) return false;
+    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_mapksim.find(id);
+    if (sg_messagequeue_mapksim.end() == pos) return false;
     MessageQueueksimContent& content = pos->second;
 
     auto find_it = std::find_if(content.lst_message.begin(), content.lst_message.end(),
@@ -509,7 +509,7 @@ bool WaitMessage(const MessagePost_t& _message, long _timeoutInMs) {
         if (is_in_mq) {
             lock.unlock();
             RunLoop( [&_message](){
-                        MessageQueueksimContent& content = sg_messagequeue_map[Handler2Queue(Post2Handler(_message))];
+                        MessageQueueksimContent& content = sg_messagequeue_mapksim[Handler2Queue(Post2Handler(_message))];
                         return content.lst_message.end() == std::find_if(content.lst_message.begin(), content.lst_message.end(),
                                                                 [&_message](const MessageWrapper *  const &_v) {
                                                                     return _message == _v->postid;
@@ -533,11 +533,11 @@ bool WaitMessage(const MessagePost_t& _message, long _timeoutInMs) {
 }
 
 bool FoundMessage(const MessagePost_t& _message) {
-    ScopedLock lock(sg_messagequeue_map_mutex);
+    ScopedLock lock(sg_messagequeue_mapksim_mutex);
     const MessageQueueksim_t& id = Handler2Queue(Post2Handler(_message));
 
-    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_map.find(id);
-    if (sg_messagequeue_map.end() == pos) return false;
+    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_mapksim.find(id);
+    if (sg_messagequeue_mapksim.end() == pos) return false;
     MessageQueueksimContent& content = pos->second;
     if (content.lst_runloop_info.empty()) return false;
 
@@ -560,11 +560,11 @@ bool CancelMessage(const MessagePost_t& _postid) {
     // 0==_postid.reg.seq for BroadcastMessage
     if (0 == _postid.reg.queue || 0 == _postid.seq) return false;
 
-    ScopedLock lock(sg_messagequeue_map_mutex);
+    ScopedLock lock(sg_messagequeue_mapksim_mutex);
     const MessageQueueksim_t& id = _postid.reg.queue;
 
-    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_map.find(id);
-    if (sg_messagequeue_map.end() == pos) {
+    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_mapksim.find(id);
+    if (sg_messagequeue_mapksim.end() == pos) {
         ASSERT2(false, "%" PRIu64, id);
         return false;
     }
@@ -582,17 +582,17 @@ bool CancelMessage(const MessagePost_t& _postid) {
     return false;
 }
 
-void CancelMessage(const MessageHandler_t& _handlerid) {
+void CancelMessage(const MessageHandler_tksim& _handlerid) {
     ASSERT(0 != _handlerid.queue);
 
     // 0==_handlerid.seq for BroadcastMessage
     if (0 == _handlerid.queue) return;
 
-    ScopedLock lock(sg_messagequeue_map_mutex);
+    ScopedLock lock(sg_messagequeue_mapksim_mutex);
     const MessageQueueksim_t& id = _handlerid.queue;
 
-    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_map.find(id);
-    if (sg_messagequeue_map.end() == pos) {
+    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_mapksim.find(id);
+    if (sg_messagequeue_mapksim.end() == pos) {
         //        ASSERT2(false, "%lu", id);
         return;
     }
@@ -609,17 +609,17 @@ void CancelMessage(const MessageHandler_t& _handlerid) {
     }
 }
 
-void CancelMessage(const MessageHandler_t& _handlerid, const MessageTitle_t& _title) {
+void CancelMessage(const MessageHandler_tksim& _handlerid, const MessageTitle_t& _title) {
     ASSERT(0 != _handlerid.queue);
 
     // 0==_handlerid.seq for BroadcastMessage
     if (0 == _handlerid.queue) return;
 
-    ScopedLock lock(sg_messagequeue_map_mutex);
+    ScopedLock lock(sg_messagequeue_mapksim_mutex);
     const MessageQueueksim_t& id = _handlerid.queue;
 
-    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_map.find(id);
-    if (sg_messagequeue_map.end() == pos) {
+    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_mapksim.find(id);
+    if (sg_messagequeue_mapksim.end() == pos) {
         ASSERT2(false, "%" PRIu64, id);
         return;
     }
@@ -638,10 +638,10 @@ void CancelMessage(const MessageHandler_t& _handlerid, const MessageTitle_t& _ti
     
 const Message& RunningMessage() {
     MessageQueueksim_t id = (MessageQueueksim_t)ThreadUtilksim::currentthreadid();
-    ScopedLock lock(sg_messagequeue_map_mutex);
+    ScopedLock lock(sg_messagequeue_mapksim_mutex);
     
-    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_map.find(id);
-    if (sg_messagequeue_map.end() == pos) {
+    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_mapksim.find(id);
+    if (sg_messagequeue_mapksim.end() == pos) {
         return KNullMessage;
     }
     
@@ -655,10 +655,10 @@ MessagePost_t RunningMessageID() {
 }
 
 MessagePost_t RunningMessageID(const MessageQueueksim_t& _id) {
-    ScopedLock lock(sg_messagequeue_map_mutex);
+    ScopedLock lock(sg_messagequeue_mapksim_mutex);
 
-    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_map.find(_id);
-    if (sg_messagequeue_map.end() == pos) {
+    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_mapksim.find(_id);
+    if (sg_messagequeue_mapksim.end() == pos) {
         return KNullPost;
     }
 
@@ -670,19 +670,19 @@ static void __AsyncInvokeHandler(const MessagePost_t& _id, Message& _message) {
     (*boost_ksim::any_cast<boost_ksim::shared_ptr<AsyncInvokeFunction> >(_message.body1))();
 }
 
-MessageHandler_t InstallAsyncHandler(const MessageQueueksim_t& id) {
+MessageHandler_tksim InstallAsyncHandler(const MessageQueueksim_t& id) {
     ASSERT(0 != id);
     return InstallMessageHandler(__AsyncInvokeHandler, false, id);
 }
     
 
 static MessageQueueksim_t __CreateMessageQueueksimInfo(boost_ksim::shared_ptr<RunloopCond>& _breaker, thread_tid _tid) {
-    ScopedLock lock(sg_messagequeue_map_mutex);
+    ScopedLock lock(sg_messagequeue_mapksim_mutex);
 
     MessageQueueksim_t id = (MessageQueueksim_t)_tid;
 
-    if (sg_messagequeue_map.end() == sg_messagequeue_map.find(id)) {
-        MessageQueueksimContent& content = sg_messagequeue_map[id];
+    if (sg_messagequeue_mapksim.end() == sg_messagequeue_mapksim.find(id)) {
+        MessageQueueksimContent& content = sg_messagequeue_mapksim[id];
         HandlerWrapper* handler = new HandlerWrapper(&__AsyncInvokeHandler, false, id, __MakeSeq());
         content.lst_handler.push_back(handler);
         content.invoke_reg = handler->reg;
@@ -699,8 +699,8 @@ static void __ReleaseMessageQueueksimInfo() {
 
     MessageQueueksim_t id = (MessageQueueksim_t)ThreadUtilksim::currentthreadid();
 
-    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_map.find(id);
-    if (sg_messagequeue_map.end() != pos) {
+    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_mapksim.find(id);
+    if (sg_messagequeue_mapksim.end() != pos) {
         MessageQueueksimContent& content = pos->second;
 
         for (std::list<MessageWrapper*>::iterator it = content.lst_message.begin(); it != content.lst_message.end(); ++it) {
@@ -711,14 +711,14 @@ static void __ReleaseMessageQueueksimInfo() {
             delete(*it);
         }
 
-        sg_messagequeue_map.erase(id);
+        sg_messagequeue_mapksim.erase(id);
     }
 }
 
     
 const static int kMQCallANRId = 110;
 const static long kWaitANRTimeout = 15 * 1000;
-static void __ANRAssert(bool _iOS_style, const marsksim::comm::check_content& _content, MessageHandler_t _mq_id) {
+static void __ANRAssert(bool _iOS_style, const marsksim::comm::check_content& _content, MessageHandler_tksim _mq_id) {
     if(MessageQueueksim2TID(_mq_id.queue) == 0) {
         xwarn2(TSF"messagequeue already destroy, handler:(%_,%_)", _mq_id.queue, _mq_id.seq);
         return;
@@ -738,7 +738,7 @@ static void __ANRCheckCallback(bool _iOS_style, const marsksim::comm::check_cont
         return;
     }
     
-    MessageHandler_t mq_id = *((MessageHandler_t*)_content.extra_info);
+    MessageHandler_tksim mq_id = *((MessageHandler_tksim*)_content.extra_info);
     xinfo2(TSF"anr check content:%_, handler:(%_,%_)", _content.call_id, mq_id.queue, mq_id.seq);
     
     boost_ksim::shared_ptr<Thread> thread(new Thread(boost_ksim::bind(__ANRAssert, _iOS_style, _content, mq_id)));
@@ -768,15 +768,15 @@ void RunLoop::Run() {
     MessageQueueksim_t id = CurrentThreadMessageQueueksim();
     ASSERT(0 != id);
     {
-        ScopedLock lock(sg_messagequeue_map_mutex);
-        sg_messagequeue_map[id].lst_runloop_info.push_back(RunLoopInfo());
+        ScopedLock lock(sg_messagequeue_mapksim_mutex);
+        sg_messagequeue_mapksim[id].lst_runloop_info.push_back(RunLoopInfo());
     }
     
     xinfo_function(TSF"messagequeue id:%_", id);
 
     while (true) {
-        ScopedLock lock(sg_messagequeue_map_mutex);
-        MessageQueueksimContent& content = sg_messagequeue_map[id];
+        ScopedLock lock(sg_messagequeue_mapksim_mutex);
+        MessageQueueksimContent& content = sg_messagequeue_mapksim[id];
         content.lst_runloop_info.back().runing_message_id = KNullPost;
         content.lst_runloop_info.back().runing_message = NULL;
         content.lst_runloop_info.back().runing_handler.clear();
@@ -881,11 +881,11 @@ void RunLoop::Run() {
 }
 
 boost_ksim::shared_ptr<RunloopCond> RunloopCond::CurrentCond() {
-    ScopedLock lock(sg_messagequeue_map_mutex);
+    ScopedLock lock(sg_messagequeue_mapksim_mutex);
     MessageQueueksim_t id = (MessageQueueksim_t)ThreadUtilksim::currentthreadid();
 
-    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_map.find(id);
-    if (sg_messagequeue_map.end() != pos) {
+    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_mapksim.find(id);
+    if (sg_messagequeue_mapksim.end() != pos) {
         MessageQueueksimContent& content = pos->second;
         return content.breaker;
     } else {
@@ -997,34 +997,34 @@ MessageQueueksim_t GetDefTaskQueue() {
     return s_deftaskqueue->CreateMessageQueueksim();
 }
 
-MessageHandler_t DefAsyncInvokeHandler(const MessageQueueksim_t& _messagequeue) {
-    ScopedLock lock(sg_messagequeue_map_mutex);
+MessageHandler_tksim DefAsyncInvokeHandler(const MessageQueueksim_t& _messagequeue) {
+    ScopedLock lock(sg_messagequeue_mapksim_mutex);
     const MessageQueueksim_t& id = _messagequeue;
 
-    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_map.find(id);
-    if (sg_messagequeue_map.end() == pos) return KNullHandler;
+    std::map<MessageQueueksim_t, MessageQueueksimContent>::iterator pos = sg_messagequeue_mapksim.find(id);
+    if (sg_messagequeue_mapksim.end() == pos) return KNullHandler;
 
     MessageQueueksimContent& content = pos->second;
     return content.invoke_reg;
 }
 
-ScopeRegister::ScopeRegister(const MessageHandler_t& _reg)
-: m_reg(new MessageHandler_t(_reg)) {}
+ScopeRegisterksim::ScopeRegisterksim(const MessageHandler_tksim& _reg)
+: m_regksim(new MessageHandler_tksim(_reg)) {}
 
-ScopeRegister::~ScopeRegister() {
+ScopeRegisterksim::~ScopeRegisterksim() {
     Cancel();
-    delete m_reg;
+    delete m_regksim;
 }
 
-const MessageHandler_t& ScopeRegister::Get() const
-{return *m_reg;}
+const MessageHandler_tksim& ScopeRegisterksim::Get() const
+{return *m_regksim;}
 
-void ScopeRegister::Cancel() const {
-    UnInstallMessageHandler(*m_reg);
-    CancelMessage(*m_reg);
+void ScopeRegisterksim::Cancel() const {
+    UnInstallMessageHandler(*m_regksim);
+    CancelMessage(*m_regksim);
 }
-void ScopeRegister::CancelAndWait() const {
+void ScopeRegisterksim::CancelAndWait() const {
     Cancel();
-    WaitForRunningLockEnd(*m_reg);
+    WaitForRunningLockEnd(*m_regksim);
 }
 }  // namespace MessageQueueksim

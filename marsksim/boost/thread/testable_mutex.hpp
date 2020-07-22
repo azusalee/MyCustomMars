@@ -16,7 +16,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   /**
    * Based on Associate Mutexes with Data to Prevent Races, By Herb Sutter, May 13, 2010
@@ -24,7 +24,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
    *
    * Make our mutex testable if it isn't already.
    *
-   * Many mutex services (including mars_boost_ksim::mutex) don't provide a way to ask,
+   * Many mutex services (including mars_boost::mutex) don't provide a way to ask,
    * "Do I already hold a lock on this mutex?"
    * Sometimes it is needed to know if a method like is_locked to be available.
    * This wrapper associates an arbitrary lockable type with a thread id that stores the ID of the thread that

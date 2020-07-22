@@ -38,7 +38,7 @@
     substrings, the other one over the gaps between these matches.
 */
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
     namespace algorithm {
 
 //  iterate find ---------------------------------------------------//
@@ -55,7 +55,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 Both outer and inner container must have constructor taking a pair
                 of iterators as an argument.
                 Typical type of the result is 
-                    \c std::vector<mars_boost_ksim::iterator_range<iterator>>
+                    \c std::vector<mars_boost::iterator_range<iterator>>
                 (each element of such a vector will container a range delimiting 
                 a match).
             \param Input A container which will be searched.
@@ -80,7 +80,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                     BOOST_STRING_TYPENAME range_iterator<RangeT>::type>
                 ));
 
-            iterator_range<BOOST_STRING_TYPENAME range_iterator<RangeT>::type> lit_input(::mars_boost_ksim::as_literal(Input));
+            iterator_range<BOOST_STRING_TYPENAME range_iterator<RangeT>::type> lit_input(::mars_boost::as_literal(Input));
 
             typedef BOOST_STRING_TYPENAME 
                 range_iterator<RangeT>::type input_iterator_type;
@@ -90,18 +90,18 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                     range_value<SequenceSequenceT>::type,
                 input_iterator_type> copy_range_type;
             
-            input_iterator_type InputEnd=::mars_boost_ksim::end(lit_input);
+            input_iterator_type InputEnd=::mars_boost::end(lit_input);
 
             typedef transform_iterator<copy_range_type, find_iterator_type>
                 transform_iter_type;
     
             transform_iter_type itBegin=
-                ::mars_boost_ksim::make_transform_iterator( 
-                    find_iterator_type( ::mars_boost_ksim::begin(lit_input), InputEnd, Finder ),
+                ::mars_boost::make_transform_iterator( 
+                    find_iterator_type( ::mars_boost::begin(lit_input), InputEnd, Finder ),
                     copy_range_type());
             
             transform_iter_type itEnd=
-                ::mars_boost_ksim::make_transform_iterator( 
+                ::mars_boost::make_transform_iterator( 
                     find_iterator_type(),
                     copy_range_type());
 
@@ -126,7 +126,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 Both outer and inner container must have constructor taking a pair
                 of iterators as an argument.
                 Typical type of the result is 
-                    \c std::vector<mars_boost_ksim::iterator_range<iterator>>
+                    \c std::vector<mars_boost::iterator_range<iterator>>
                 (each element of such a vector will container a range delimiting 
                 a match).
             \param Input A container which will be searched.
@@ -150,7 +150,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 BOOST_STRING_TYPENAME range_iterator<RangeT>::type>
                 ));
 
-            iterator_range<BOOST_STRING_TYPENAME range_iterator<RangeT>::type> lit_input(::mars_boost_ksim::as_literal(Input));
+            iterator_range<BOOST_STRING_TYPENAME range_iterator<RangeT>::type> lit_input(::mars_boost::as_literal(Input));
 
             typedef BOOST_STRING_TYPENAME 
                 range_iterator<RangeT>::type input_iterator_type;
@@ -160,18 +160,18 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                     range_value<SequenceSequenceT>::type,
                 input_iterator_type> copy_range_type;
             
-            input_iterator_type InputEnd=::mars_boost_ksim::end(lit_input);
+            input_iterator_type InputEnd=::mars_boost::end(lit_input);
 
             typedef transform_iterator<copy_range_type, find_iterator_type>
                 transform_iter_type;
     
             transform_iter_type itBegin=
-                ::mars_boost_ksim::make_transform_iterator( 
-                    find_iterator_type( ::mars_boost_ksim::begin(lit_input), InputEnd, Finder ),
+                ::mars_boost::make_transform_iterator( 
+                    find_iterator_type( ::mars_boost::begin(lit_input), InputEnd, Finder ),
                     copy_range_type() );
 
             transform_iter_type itEnd=
-                ::mars_boost_ksim::make_transform_iterator( 
+                ::mars_boost::make_transform_iterator( 
                     find_iterator_type(),
                     copy_range_type() );
             
@@ -187,7 +187,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     using algorithm::iter_find;
     using algorithm::iter_split;
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 
 #endif  // BOOST_STRING_ITER_FIND_HPP

@@ -8,7 +8,7 @@
 # include <boost/detail/workaround.hpp>
 # include <boost/concept/detail/backward_compatibility.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace concepts {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace concepts {
 
 namespace detail
 { 
@@ -45,6 +45,6 @@ struct not_satisfied
     typedef mpl::bool_<value> type;
 };
 
-}} // namespace mars_boost_ksim::concepts::detail
+}} // namespace mars_boost::concepts::detail
 
 #endif // BOOST_CONCEPT_DETAIL_HAS_CONSTRAINTS_DWA2006429_HPP

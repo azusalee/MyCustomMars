@@ -16,9 +16,9 @@
 #ifndef BOOST_INTEGER_STATIC_LOG2_HPP
 #define BOOST_INTEGER_STATIC_LOG2_HPP
 
-#include "boost/integer_fwd.hpp" // for mars_boost_ksim::intmax_t
+#include "boost/integer_fwd.hpp" // for mars_boost::intmax_t
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
  namespace detail {
 
@@ -41,8 +41,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
      // terminates with x = 1 and n = 0 (see the algorithm's
      // invariant).
 
-     typedef mars_boost_ksim::static_log2_argument_type argument_type;
-     typedef mars_boost_ksim::static_log2_result_type result_type;
+     typedef mars_boost::static_log2_argument_type argument_type;
+     typedef mars_boost::static_log2_result_type result_type;
 
      template <result_type n>
      struct choose_initial_n {

@@ -16,7 +16,7 @@
 #include <string>
 #include <sstream>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace gregorian {
 
   //! Return special_value from string argument

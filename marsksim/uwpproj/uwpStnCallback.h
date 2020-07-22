@@ -1,10 +1,10 @@
 #pragma once
 #include "stn/stn_logic.h"
 
-class uwpStnCallback :public marsksim::stn::Callback
+class uwpStnCallbackksim :public marsksim::stn::Callback
 {
 public:
-	virtual ~uwpStnCallback() {}
+	virtual ~uwpStnCallbackksim() {}
 	virtual bool MakesureAuthed();
 
 	//����ͳ��

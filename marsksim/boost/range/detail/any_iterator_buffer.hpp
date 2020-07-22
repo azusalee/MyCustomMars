@@ -15,7 +15,7 @@
 #include <boost/static_assert.hpp>
 #include <boost/noncopyable.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     template<std::size_t StackBufferSize>
     class any_iterator_buffer
@@ -58,7 +58,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         void operator=(const any_iterator_buffer&);
 
         char* m_ptr;
-        mars_boost_ksim::array<char, StackBufferSize> m_buffer;
+        mars_boost::array<char, StackBufferSize> m_buffer;
     };
 
     class any_iterator_heap_only_buffer
@@ -108,10 +108,10 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         }
 
     private:
-        mars_boost_ksim::array<char, StackBufferSize> m_buffer;
+        mars_boost::array<char, StackBufferSize> m_buffer;
     };
 
     typedef any_iterator_buffer<64> any_iterator_default_buffer;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

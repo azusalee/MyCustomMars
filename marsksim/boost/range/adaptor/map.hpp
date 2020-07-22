@@ -17,7 +17,7 @@
 #include <boost/range/reference.hpp>
 #include <boost/range/concepts.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range_detail
     {
@@ -125,7 +125,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 SinglePassRangeConcept<const StdPairRng>));
 
             return operator|( r,
-                mars_boost_ksim::adaptors::transformed( select_first<StdPairRng>() ) );
+                mars_boost::adaptors::transformed( select_first<StdPairRng>() ) );
         }
 
         template< class StdPairRng >
@@ -135,7 +135,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             BOOST_RANGE_CONCEPT_ASSERT((SinglePassRangeConcept<StdPairRng>));
 
             return operator|( r,
-                mars_boost_ksim::adaptors::transformed( select_second_mutable<StdPairRng>() ) );
+                mars_boost::adaptors::transformed( select_second_mutable<StdPairRng>() ) );
         }
 
         template< class StdPairRng >
@@ -146,7 +146,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 SinglePassRangeConcept<const StdPairRng>));
 
             return operator|( r,
-                mars_boost_ksim::adaptors::transformed( select_second_const<StdPairRng>() ) );
+                mars_boost::adaptors::transformed( select_second_const<StdPairRng>() ) );
         }
 
     } // 'range_detail'

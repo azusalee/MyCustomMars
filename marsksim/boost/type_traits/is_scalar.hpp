@@ -15,13 +15,13 @@
 #include <boost/type_traits/is_member_pointer.hpp>
 #include <boost/config.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 template <typename T>
 struct is_scalar
-   : public integral_constant<bool, ::mars_boost_ksim::is_arithmetic<T>::value || ::mars_boost_ksim::is_enum<T>::value || ::mars_boost_ksim::is_pointer<T>::value || ::mars_boost_ksim::is_member_pointer<T>::value>
+   : public integral_constant<bool, ::mars_boost::is_arithmetic<T>::value || ::mars_boost::is_enum<T>::value || ::mars_boost::is_pointer<T>::value || ::mars_boost::is_member_pointer<T>::value>
 {};
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_IS_SCALAR_HPP_INCLUDED

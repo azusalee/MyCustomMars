@@ -22,7 +22,7 @@
 #include <iterator>
 #include <vector>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace detail
   {
@@ -55,20 +55,20 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         typedef count_type count_type_portable;
 #endif
         count_type_portable count;
-        mars_boost_ksim::scoped_array<boost_ksim::unique_lock<boost_ksim::mutex> > locks;
+        mars_boost::scoped_array<boost_ksim::unique_lock<boost_ksim::mutex> > locks;
 
         all_futures_lock(std::vector<registered_waiter>& waiters) :
-          count(waiters.size()), locks(new mars_boost_ksim::unique_lock<boost_ksim::mutex>[count])
+          count(waiters.size()), locks(new mars_boost::unique_lock<boost_ksim::mutex>[count])
         {
           for (count_type_portable i = 0; i < count; ++i)
           {
-            locks[i] = BOOST_THREAD_MAKE_RV_REF(mars_boost_ksim::unique_lock<boost_ksim::mutex>(waiters[i].future_->mutex()));
+            locks[i] = BOOST_THREAD_MAKE_RV_REF(mars_boost::unique_lock<boost_ksim::mutex>(waiters[i].future_->mutex()));
           }
         }
 
         void lock()
         {
-          mars_boost_ksim::lock(locks.get(), locks.get() + count);
+          mars_boost::lock(locks.get(), locks.get() + count);
         }
 
         void unlock()
@@ -80,7 +80,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         }
       };
 
-      mars_boost_ksim::condition_variable_any cv;
+      mars_boost::condition_variable_any cv;
       std::vector<registered_waiter> waiters_;
       count_type future_count;
 
@@ -145,7 +145,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
   }
 
   template <typename Iterator>
-  typename mars_boost_ksim::disable_if<is_future_type<Iterator> , Iterator>::type wait_for_any(Iterator begin, Iterator end)
+  typename mars_boost::disable_if<is_future_type<Iterator> , Iterator>::type wait_for_any(Iterator begin, Iterator end)
   {
     if (begin == end) return end;
 
@@ -154,7 +154,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     {
       waiter.add(*current);
     }
-    return mars_boost_ksim::next(begin, waiter.wait());
+    return mars_boost::next(begin, waiter.wait());
   }
 }
 

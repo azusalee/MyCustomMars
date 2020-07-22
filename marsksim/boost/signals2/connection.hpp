@@ -1,5 +1,5 @@
 /*
-  mars_boost_ksim::signals2::connection provides a handle to a signal/slot connection.
+  mars_boost::signals2::connection provides a handle to a signal/slot connection.
 
   Author: Frank Mori Hess <fmhess@users.sourceforge.net>
   Begin: 2007-01-23
@@ -24,7 +24,7 @@
 #include <boost/signals2/slot.hpp>
 #include <boost/weak_ptr.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace signals2
   {
@@ -141,7 +141,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       {
       public:
         typedef Mutex mutex_type;
-        connection_body(const SlotType &slot_in, const mars_boost_ksim::shared_ptr<mutex_type> &signal_mutex):
+        connection_body(const SlotType &slot_in, const mars_boost::shared_ptr<mutex_type> &signal_mutex):
           m_slot(new SlotType(slot_in)), _mutex(signal_mutex)
         {
         }
@@ -216,8 +216,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           return released_slot;
         }
       private:
-        mutable mars_boost_ksim::shared_ptr<SlotType> m_slot;
-        const mars_boost_ksim::shared_ptr<mutex_type> _mutex;
+        mutable mars_boost::shared_ptr<SlotType> m_slot;
+        const mars_boost::shared_ptr<mutex_type> _mutex;
         GroupKey _group_key;
       };
     }
@@ -232,7 +232,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       connection() {}
       connection(const connection &other): _weak_connection_body(other._weak_connection_body)
       {}
-      connection(const mars_boost_ksim::weak_ptr<detail::connection_body_base> &connectionBody):
+      connection(const mars_boost::weak_ptr<detail::connection_body_base> &connectionBody):
         _weak_connection_body(connectionBody)
       {}
       
@@ -264,26 +264,26 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       ~connection() {}
       void disconnect() const
       {
-        mars_boost_ksim::shared_ptr<detail::connection_body_base> connectionBody(_weak_connection_body.lock());
+        mars_boost::shared_ptr<detail::connection_body_base> connectionBody(_weak_connection_body.lock());
         if(connectionBody == 0) return;
         connectionBody->disconnect();
       }
       bool connected() const
       {
-        mars_boost_ksim::shared_ptr<detail::connection_body_base> connectionBody(_weak_connection_body.lock());
+        mars_boost::shared_ptr<detail::connection_body_base> connectionBody(_weak_connection_body.lock());
         if(connectionBody == 0) return false;
         return connectionBody->connected();
       }
       bool blocked() const
       {
-        mars_boost_ksim::shared_ptr<detail::connection_body_base> connectionBody(_weak_connection_body.lock());
+        mars_boost::shared_ptr<detail::connection_body_base> connectionBody(_weak_connection_body.lock());
         if(connectionBody == 0) return true;
         return connectionBody->blocked();
       }
       bool operator==(const connection& other) const
       {
-        mars_boost_ksim::shared_ptr<detail::connection_body_base> connectionBody(_weak_connection_body.lock());
-        mars_boost_ksim::shared_ptr<detail::connection_body_base> otherConnectionBody(other._weak_connection_body.lock());
+        mars_boost::shared_ptr<detail::connection_body_base> connectionBody(_weak_connection_body.lock());
+        mars_boost::shared_ptr<detail::connection_body_base> otherConnectionBody(other._weak_connection_body.lock());
         return connectionBody == otherConnectionBody;
       }
       bool operator!=(const connection& other) const
@@ -292,8 +292,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       }
       bool operator<(const connection& other) const
       {
-        mars_boost_ksim::shared_ptr<detail::connection_body_base> connectionBody(_weak_connection_body.lock());
-        mars_boost_ksim::shared_ptr<detail::connection_body_base> otherConnectionBody(other._weak_connection_body.lock());
+        mars_boost::shared_ptr<detail::connection_body_base> connectionBody(_weak_connection_body.lock());
+        mars_boost::shared_ptr<detail::connection_body_base> otherConnectionBody(other._weak_connection_body.lock());
         return connectionBody < otherConnectionBody;
       }
       void swap(connection &other)
@@ -303,7 +303,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       }
     protected:
 
-      mars_boost_ksim::weak_ptr<detail::connection_body_base> _weak_connection_body;
+      mars_boost::weak_ptr<detail::connection_body_base> _weak_connection_body;
     };
     inline void swap(connection &conn1, connection &conn2)
     {

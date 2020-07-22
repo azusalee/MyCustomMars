@@ -20,7 +20,7 @@
 #include "boost/mpl/bool.hpp"
 #include "boost/mpl/identity.hpp"
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace numeric { namespace convdetail
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace numeric { namespace convdetail
 {
    template< class T1, class T2>
    struct equal_to
@@ -113,7 +113,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     typedef typename mpl::eval_if<caseTT,TT_Q,choose_TF_FT_FF_Q>::type type ;
   } ;
 
-} } } // namespace mars_boost_ksim::numeric::convdetail
+} } } // namespace mars_boost::numeric::convdetail
 
 #endif
 

@@ -7,8 +7,8 @@
 using namespace PublicComponent;
 
 
-void Cs2Runtime_Comm::OnAlarm(int id) {
-    Alarm::OnAlarm(reinterpret_cast<Alarm*>(id));
+void Cs2Runtime_Comm::OnAlarmksim(int id) {
+    Alarmksim::OnAlarmksim(reinterpret_cast<Alarmksim*>(id));
 }
 
 
@@ -77,16 +77,16 @@ void Runtime2Cs_Comm::SetCallback(ICallback_Comm^ _callback) {
 
 
 
-bool Runtime2Cs_Comm::startAlarm(int id, int after) {
+bool Runtime2Cs_Comm::startAlarmksim(int id, int after) {
     if (nullptr == m_callback) return false;
 
-    return m_callback->startAlarm(id, after);
+    return m_callback->startAlarmksim(id, after);
 }
 
-bool Runtime2Cs_Comm::stopAlarm(int id) {
+bool Runtime2Cs_Comm::stopAlarmksim(int id) {
     if (nullptr == m_callback) return false;
 
-    return m_callback->stopAlarm(id);
+    return m_callback->stopAlarmksim(id);
 }
 
 int Runtime2Cs_Comm::getNetInfo() {

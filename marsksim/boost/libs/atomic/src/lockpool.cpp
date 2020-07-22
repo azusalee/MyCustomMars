@@ -30,7 +30,7 @@
 #include <boost/atomic/detail/lockpool.hpp>
 #include <boost/atomic/detail/pause.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace atomics {
 namespace detail {
 
@@ -148,4 +148,4 @@ BOOST_ATOMIC_DECL void lockpool::signal_fence() BOOST_NOEXCEPT
 
 } // namespace detail
 } // namespace atomics
-} // namespace mars_boost_ksim
+} // namespace mars_boost

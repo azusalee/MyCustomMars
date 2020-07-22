@@ -26,7 +26,7 @@
 //
 //    void foo(std::string<char>);
 //
-//    namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl {
+//    namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl {
 //    template< int > struct arg;
 //    }}
 

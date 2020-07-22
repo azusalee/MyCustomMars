@@ -12,7 +12,7 @@
 
 #if defined(BOOST_HAS_WINTHREADS)
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     BOOST_THREAD_DECL void __cdecl on_process_enter(void);
         //Function to be called when the exe or dll

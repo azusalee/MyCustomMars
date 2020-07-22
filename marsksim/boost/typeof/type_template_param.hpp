@@ -19,13 +19,13 @@
 // TYPE_PARAM "virtual functions" implementation
 
 #define BOOST_TYPEOF_TYPE_PARAM_ENCODE(This, n)\
-    typedef typename mars_boost_ksim::type_of::encode_type<\
+    typedef typename mars_boost::type_of::encode_type<\
         BOOST_PP_CAT(V, n),\
         BOOST_PP_CAT(P, n)\
     >::type BOOST_PP_CAT(V, BOOST_PP_INC(n)); 
 
 #define BOOST_TYPEOF_TYPE_PARAM_DECODE(This, n)\
-    typedef mars_boost_ksim::type_of::decode_type< BOOST_PP_CAT(iter, n) > BOOST_PP_CAT(d, n);\
+    typedef mars_boost::type_of::decode_type< BOOST_PP_CAT(iter, n) > BOOST_PP_CAT(d, n);\
     typedef typename BOOST_PP_CAT(d, n)::type BOOST_PP_CAT(P, n);\
     typedef typename BOOST_PP_CAT(d, n)::iter BOOST_PP_CAT(iter, BOOST_PP_INC(n));
 

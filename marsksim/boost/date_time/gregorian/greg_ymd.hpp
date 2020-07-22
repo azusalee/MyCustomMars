@@ -15,7 +15,7 @@
 #include "boost/date_time/gregorian/greg_year.hpp"
 #include "boost/date_time/gregorian/greg_month.hpp"
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace gregorian {
   
   typedef date_time::year_month_day_base<greg_year, 

@@ -19,7 +19,7 @@
 //  http://www.boost.org/libs/assert/current_function.html
 //
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 namespace detail
@@ -66,6 +66,6 @@ inline void current_function_helper()
 
 } // namespace detail
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // #ifndef BOOST_CURRENT_FUNCTION_HPP_INCLUDED

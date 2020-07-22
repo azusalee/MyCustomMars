@@ -33,7 +33,7 @@
 
 #include <boost/random/detail/disable_warnings.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace random {
 
 /**
@@ -181,7 +181,7 @@ public:
     { return 0; }
     /** Returns the largest value that the generator can produce. */
     static result_type max BOOST_PREVENT_MACRO_SUBSTITUTION ()
-    { return mars_boost_ksim::low_bits_mask_t<w>::sig_bits; }
+    { return mars_boost::low_bits_mask_t<w>::sig_bits; }
 
     /** Produces the next value of the generator. */
     result_type operator()();
@@ -200,7 +200,7 @@ public:
      * }
      * @endcode
      */
-    void discard(mars_boost_ksim::uintmax_t z)
+    void discard(mars_boost::uintmax_t z)
     {
 #ifndef BOOST_RANDOM_MERSENNE_TWISTER_DISCARD_THRESHOLD
 #define BOOST_RANDOM_MERSENNE_TWISTER_DISCARD_THRESHOLD 10000000
@@ -208,7 +208,7 @@ public:
         if(z > BOOST_RANDOM_MERSENNE_TWISTER_DISCARD_THRESHOLD) {
             discard_many(z);
         } else {
-            for(mars_boost_ksim::uintmax_t j = 0; j < z; ++j) {
+            for(mars_boost::uintmax_t j = 0; j < z; ++j) {
                 (*this)();
             }
         }
@@ -387,7 +387,7 @@ private:
      * Sequences and Their Applications (SETA '08).
      * DOI=10.1007/978-3-540-85912-3_26
      */
-    void discard_many(mars_boost_ksim::uintmax_t z)
+    void discard_many(mars_boost::uintmax_t z)
     {
         // Compute the minimal polynomial, phi(t)
         // This depends only on the transition function,
@@ -671,11 +671,11 @@ using random::mt11213b;
 using random::mt19937;
 using random::mt19937_64;
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
-BOOST_RANDOM_PTR_HELPER_SPEC(mars_boost_ksim::mt11213b)
-BOOST_RANDOM_PTR_HELPER_SPEC(mars_boost_ksim::mt19937)
-BOOST_RANDOM_PTR_HELPER_SPEC(mars_boost_ksim::mt19937_64)
+BOOST_RANDOM_PTR_HELPER_SPEC(mars_boost::mt11213b)
+BOOST_RANDOM_PTR_HELPER_SPEC(mars_boost::mt19937)
+BOOST_RANDOM_PTR_HELPER_SPEC(mars_boost::mt19937_64)
 
 #include <boost/random/detail/enable_warnings.hpp>
 

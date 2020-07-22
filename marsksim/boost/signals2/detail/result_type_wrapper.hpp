@@ -13,7 +13,7 @@
 
 #include <boost/config.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
   namespace signals2 {
     namespace detail {
       // A placeholder for void on compilers that don't support void returns
@@ -67,6 +67,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       };
     } // end namespace detail
   } // end namespace signals2
-} // end namespace mars_boost_ksim
+} // end namespace mars_boost
 
 #endif // BOOST_SIGNALS2_RESULT_TYPE_WRAPPER_HPP

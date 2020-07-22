@@ -15,13 +15,13 @@
 #endif
 #include <iostream>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace thread_detail
   {
-    inline mars_boost_ksim::recursive_mutex& terminal_mutex()
+    inline mars_boost::recursive_mutex& terminal_mutex()
     {
-      static mars_boost_ksim::recursive_mutex mtx;
+      static mars_boost::recursive_mutex mtx;
       return mtx;
     }
 
@@ -31,13 +31,13 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 #define BOOST_THREAD_LOG \
   { \
-    mars_boost_ksim::lock_guard<boost_ksim::recursive_mutex> _lk_(mars_boost_ksim::thread_detail::terminal_mutex()); \
-    std::cout << mars_boost_ksim::this_thread::get_id() << " - "<<__FILE__<<"["<<__LINE__<<"] " <<std::dec
+    mars_boost::lock_guard<boost_ksim::recursive_mutex> _lk_(mars_boost::thread_detail::terminal_mutex()); \
+    std::cout << mars_boost::this_thread::get_id() << " - "<<__FILE__<<"["<<__LINE__<<"] " <<std::dec
 #else
 
 #define BOOST_THREAD_LOG \
 { \
-  mars_boost_ksim::lock_guard<boost_ksim::recursive_mutex> _lk_(mars_boost_ksim::thread_detail::terminal_mutex()); \
+  mars_boost::lock_guard<boost_ksim::recursive_mutex> _lk_(mars_boost::thread_detail::terminal_mutex()); \
   std::cout << __FILE__<<"["<<__LINE__<<"] " <<std::dec
 
 #endif
@@ -47,7 +47,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 #else
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace thread_detail
   {
@@ -72,8 +72,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
   }
 }
 
-#define BOOST_THREAD_LOG if (true) {} else mars_boost_ksim::thread_detail::dummy_stream
-#define BOOST_THREAD_END_LOG mars_boost_ksim::thread_detail::dummy_stream
+#define BOOST_THREAD_LOG if (true) {} else mars_boost::thread_detail::dummy_stream
+#define BOOST_THREAD_END_LOG mars_boost::thread_detail::dummy_stream
 
 #endif
 

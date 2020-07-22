@@ -21,36 +21,36 @@
 
 //! \file
 //! This header file forward declares the following containers:
-//!   - mars_boost_ksim::container::vector
-//!   - mars_boost_ksim::container::stable_vector
-//!   - mars_boost_ksim::container::static_vector
-//!   - mars_boost_ksim::container::small_vector
-//!   - mars_boost_ksim::container::slist
-//!   - mars_boost_ksim::container::list
-//!   - mars_boost_ksim::container::set
-//!   - mars_boost_ksim::container::multiset
-//!   - mars_boost_ksim::container::map
-//!   - mars_boost_ksim::container::multimap
-//!   - mars_boost_ksim::container::flat_set
-//!   - mars_boost_ksim::container::flat_multiset
-//!   - mars_boost_ksim::container::flat_map
-//!   - mars_boost_ksim::container::flat_multimap
-//!   - mars_boost_ksim::container::basic_string
-//!   - mars_boost_ksim::container::string
-//!   - mars_boost_ksim::container::wstring
+//!   - mars_boost::container::vector
+//!   - mars_boost::container::stable_vector
+//!   - mars_boost::container::static_vector
+//!   - mars_boost::container::small_vector
+//!   - mars_boost::container::slist
+//!   - mars_boost::container::list
+//!   - mars_boost::container::set
+//!   - mars_boost::container::multiset
+//!   - mars_boost::container::map
+//!   - mars_boost::container::multimap
+//!   - mars_boost::container::flat_set
+//!   - mars_boost::container::flat_multiset
+//!   - mars_boost::container::flat_map
+//!   - mars_boost::container::flat_multimap
+//!   - mars_boost::container::basic_string
+//!   - mars_boost::container::string
+//!   - mars_boost::container::wstring
 //!
 //! Forward declares the following allocators:
-//!   - mars_boost_ksim::container::allocator
-//!   - mars_boost_ksim::container::node_allocator
-//!   - mars_boost_ksim::container::adaptive_pool
+//!   - mars_boost::container::allocator
+//!   - mars_boost::container::node_allocator
+//!   - mars_boost::container::adaptive_pool
 //!
 //! Forward declares the following polymorphic resource classes:
-//!   - mars_boost_ksim::container::pmr::memory_resource
-//!   - mars_boost_ksim::container::pmr::polymorphic_allocator
-//!   - mars_boost_ksim::container::pmr::monotonic_buffer_resource
-//!   - mars_boost_ksim::container::pmr::pool_options
-//!   - mars_boost_ksim::container::pmr::unsynchronized_pool_resource
-//!   - mars_boost_ksim::container::pmr::synchronized_pool_resource
+//!   - mars_boost::container::pmr::memory_resource
+//!   - mars_boost::container::pmr::polymorphic_allocator
+//!   - mars_boost::container::pmr::monotonic_buffer_resource
+//!   - mars_boost::container::pmr::pool_options
+//!   - mars_boost::container::pmr::unsynchronized_pool_resource
+//!   - mars_boost::container::pmr::synchronized_pool_resource
 //!
 //! And finally it defines the following types
 
@@ -61,20 +61,20 @@
    #include <boost/container/detail/std_fwd.hpp>
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim{
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost{
 namespace intrusive{
 namespace detail{
    //Create namespace to avoid compilation errors
 }}}
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim{ namespace container{ namespace container_detail{
-   namespace bi = mars_boost_ksim::intrusive;
-   namespace bid = mars_boost_ksim::intrusive::detail;
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost{ namespace container{ namespace container_detail{
+   namespace bi = mars_boost::intrusive;
+   namespace bid = mars_boost::intrusive::detail;
 }}}
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim{ namespace container{ namespace pmr{
-   namespace bi = mars_boost_ksim::intrusive;
-   namespace bid = mars_boost_ksim::intrusive::detail;
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost{ namespace container{ namespace pmr{
+   namespace bi = mars_boost::intrusive;
+   namespace bid = mars_boost::intrusive::detail;
 }}}
 
 #include <cstddef>
@@ -85,7 +85,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 //                             Containers
 //////////////////////////////////////////////////////////////////////////////
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace container {
 
 //! Enumeration used to configure ordered associative containers
@@ -312,6 +312,6 @@ struct dummy
 
 #endif   //#ifndef BOOST_CONTAINER_DOXYGEN_INVOKED
 
-}}  //namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace container {
+}}  //namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace container {
 
 #endif //#ifndef BOOST_CONTAINER_CONTAINER_FWD_HPP

@@ -24,7 +24,7 @@
 #include <boost/token_functions.hpp>
 #include <utility>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   template <class TokenizerFunc, class Iterator, class Type>
   class token_iterator
@@ -123,6 +123,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         return ret_type(fun,begin,end);
     }
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif

@@ -34,7 +34,7 @@
 #   undef LONG_MAX
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl {
 
 #if !defined(AUX778076_SEQUENCE_BASE_NAME)
 #   define AUX778076_SEQUENCE_BASE_NAME AUX778076_SEQUENCE_NAME

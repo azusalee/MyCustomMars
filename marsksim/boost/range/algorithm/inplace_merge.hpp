@@ -15,7 +15,7 @@
 #include <boost/range/concepts.hpp>
 #include <algorithm>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range
     {
@@ -31,44 +31,44 @@ inline BidirectionalRange& inplace_merge(BidirectionalRange& rng,
     BOOST_DEDUCED_TYPENAME range_iterator<BidirectionalRange>::type middle)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( BidirectionalRangeConcept<BidirectionalRange> ));
-    std::inplace_merge(mars_boost_ksim::begin(rng), middle, mars_boost_ksim::end(rng));
+    std::inplace_merge(mars_boost::begin(rng), middle, mars_boost::end(rng));
     return rng;
 }
 
 /// \overload
 template<class BidirectionalRange>
 inline const BidirectionalRange& inplace_merge(const BidirectionalRange& rng,
-    BOOST_DEDUCED_TYPENAME mars_boost_ksim::range_iterator<const BidirectionalRange>::type middle)
+    BOOST_DEDUCED_TYPENAME mars_boost::range_iterator<const BidirectionalRange>::type middle)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( BidirectionalRangeConcept<const BidirectionalRange> ));
-    std::inplace_merge(mars_boost_ksim::begin(rng), middle, mars_boost_ksim::end(rng));
+    std::inplace_merge(mars_boost::begin(rng), middle, mars_boost::end(rng));
     return rng;
 }
 
 /// \overload
 template<class BidirectionalRange, class BinaryPredicate>
 inline BidirectionalRange& inplace_merge(BidirectionalRange& rng,
-    BOOST_DEDUCED_TYPENAME mars_boost_ksim::range_iterator<BidirectionalRange>::type middle,
+    BOOST_DEDUCED_TYPENAME mars_boost::range_iterator<BidirectionalRange>::type middle,
     BinaryPredicate pred)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( BidirectionalRangeConcept<BidirectionalRange> ));
-    std::inplace_merge(mars_boost_ksim::begin(rng), middle, mars_boost_ksim::end(rng), pred);
+    std::inplace_merge(mars_boost::begin(rng), middle, mars_boost::end(rng), pred);
     return rng;
 }
 
 /// \overload
 template<class BidirectionalRange, class BinaryPredicate>
 inline const BidirectionalRange& inplace_merge(const BidirectionalRange& rng,
-    BOOST_DEDUCED_TYPENAME mars_boost_ksim::range_iterator<const BidirectionalRange>::type middle,
+    BOOST_DEDUCED_TYPENAME mars_boost::range_iterator<const BidirectionalRange>::type middle,
     BinaryPredicate pred)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( BidirectionalRangeConcept<const BidirectionalRange> ));
-    std::inplace_merge(mars_boost_ksim::begin(rng), middle, mars_boost_ksim::end(rng), pred);
+    std::inplace_merge(mars_boost::begin(rng), middle, mars_boost::end(rng), pred);
     return rng;
 }
 
     } // namespace range
     using range::inplace_merge;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

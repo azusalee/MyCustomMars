@@ -24,7 +24,7 @@
 
 //Small meta-typetraits to support move
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace move_detail {
 
 //////////////////////////////////////
@@ -115,6 +115,6 @@ struct is_same<T, T>
 };
 
 }  //namespace move_detail {
-}  //namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+}  //namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 #endif //#ifndef BOOST_MOVE_DETAIL_META_UTILS_CORE_HPP

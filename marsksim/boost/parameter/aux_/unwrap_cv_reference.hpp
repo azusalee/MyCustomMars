@@ -11,9 +11,9 @@
 #include <boost/mpl/identity.hpp>
 #include <boost/mpl/eval_if.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { template<class T> class reference_wrapper; }
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { template<class T> class reference_wrapper; }
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace parameter { namespace aux {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace parameter { namespace aux {
 
 //
 // reference_wrapper support -- because of the forwarding problem,
@@ -72,7 +72,7 @@ struct unwrap_cv_reference<T, mpl::true_>
 
 #else 
 // Produces the unwrapped type to hold a reference to in named<>
-// Can't use mars_boost_ksim::unwrap_reference<> here because it
+// Can't use mars_boost::unwrap_reference<> here because it
 // doesn't handle the case where T = reference_wrapper<U> cv
 template <class T>
 struct unwrap_cv_reference
@@ -85,7 +85,7 @@ struct unwrap_cv_reference
 };
 #endif
 
-}}} // namespace mars_boost_ksim::parameter::aux
+}}} // namespace mars_boost::parameter::aux
 
 #endif // UNWRAP_CV_REFERENCE_050328_HPP
 

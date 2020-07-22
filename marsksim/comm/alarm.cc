@@ -33,7 +33,7 @@ static const MessageQueueksim::MessageTitle_t KALARM_MESSAGETITLE(0x1F1FF);
 #define MAX_LOCK_TIME (5000)
 #define INVAILD_SEQ (0)
 
-bool Alarm::Start(int _after) {
+bool Alarmksim::Start(int _after) {
     ScopedLock lock(sg_lock);
 
     if (INVAILD_SEQ != seq_) return false;
@@ -42,7 +42,7 @@ bool Alarm::Start(int _after) {
 
     int64_t seq = sg_seq++;
     uint64_t starttime = gettickcount();
-    broadcast_msg_id_ = MessageQueueksim::BroadcastMessage(MessageQueueksim::GetDefMessageQueueksim(), MessageQueueksim::Message(KALARM_MESSAGETITLE, (int64_t)seq, 1, "Alarm.broadcast"), MessageQueueksim::MessageTiming(_after));
+    broadcast_msg_id_ = MessageQueueksim::BroadcastMessage(MessageQueueksim::GetDefMessageQueueksim(), MessageQueueksim::Message(KALARM_MESSAGETITLE, (int64_t)seq, 1, "Alarmksim.broadcast"), MessageQueueksim::MessageTiming(_after));
 
     if (MessageQueueksim::KNullPost == broadcast_msg_id_) {
         xerror2(TSF"mq alarm return null post, id:%0, after:%1, seq:%2", (uintptr_t)this, _after, seq);
@@ -51,8 +51,8 @@ bool Alarm::Start(int _after) {
 
 #ifdef ANDROID
 
-    if (!::startAlarm((int64_t) seq, _after)) {
-        xerror2(TSF"startAlarm error, id:%0, after:%1, seq:%2", (uintptr_t)this, _after, seq);
+    if (!::startAlarmksim((int64_t) seq, _after)) {
+        xerror2(TSF"startAlarmksim error, id:%0, after:%1, seq:%2", (uintptr_t)this, _after, seq);
         MessageQueueksim::CancelMessage(broadcast_msg_id_);
         broadcast_msg_id_ = MessageQueueksim::KNullPost;
         return false;
@@ -70,7 +70,7 @@ bool Alarm::Start(int _after) {
     return true;
 }
 
-bool Alarm::Cancel() {
+bool Alarmksim::Cancel() {
     ScopedLock lock(sg_lock);
     if (broadcast_msg_id_!=MessageQueueksim::KNullPost) {
         MessageQueueksim::CancelMessage(broadcast_msg_id_);
@@ -81,8 +81,8 @@ bool Alarm::Cancel() {
 
 #ifdef ANDROID
 
-    if (!::stopAlarm((int64_t)seq_)) {
-        xwarn2(TSF"stopAlarm error, id:%0, seq:%1", (uintptr_t)this, seq_);
+    if (!::stopAlarmksim((int64_t)seq_)) {
+        xwarn2(TSF"stopAlarmksim error, id:%0, seq:%1", (uintptr_t)this, seq_);
         status_ = kCancel;
         endtime_ = gettickcount();
         seq_ = INVAILD_SEQ;
@@ -98,32 +98,32 @@ bool Alarm::Cancel() {
     return true;
 }
 
-bool Alarm::IsWaiting() const {
+bool Alarmksim::IsWaiting() const {
     return kStart == status_;
 }
 
-int Alarm::Status() const {
+int Alarmksim::Status() const {
     return status_;
 }
 
-int Alarm::After() const {
+int Alarmksim::After() const {
     return after_;
 }
 
-int64_t Alarm::ElapseTime() const {
+int64_t Alarmksim::ElapseTime() const {
     if (endtime_ < starttime_)
         return gettickspan(starttime_);
 
     return endtime_ -  starttime_;
 }
 
-void Alarm::OnAlarm(const MessageQueueksim::MessagePost_t& _id, MessageQueueksim::Message& _message) {
+void Alarmksim::OnAlarmksim(const MessageQueueksim::MessagePost_t& _id, MessageQueueksim::Message& _message) {
     if (KALARM_MESSAGETITLE != _message.title) return;
 
     ScopedLock lock(sg_lock);
 
     if (MessageQueueksim::CurrentThreadMessageQueueksim() != MessageQueueksim::Handler2Queue(reg_async_.Get())) {
-        MessageQueueksim::AsyncInvoke(boost_ksim::bind(&Alarm::OnAlarm, this, _id, _message), (MessageQueueksim::MessageTitle_t)this, reg_async_.Get(), "Alarm::OnAlarm");
+        MessageQueueksim::AsyncInvoke(boost_ksim::bind(&Alarmksim::OnAlarmksim, this, _id, _message), (MessageQueueksim::MessageTitle_t)this, reg_async_.Get(), "Alarmksim::OnAlarmksim");
         return;
     }
 
@@ -133,7 +133,7 @@ void Alarm::OnAlarm(const MessageQueueksim::MessagePost_t& _id, MessageQueueksim
     int64_t   elapseTime = curtime - starttime_;
     int64_t   missTime = after_ - elapseTime;
     xgroup2_define(group);
-    xinfo2(TSF"OnAlarm id:%_, seq:%_, elapsed:%_, after:%_, miss:%_, android alarm:%_, ", (uintptr_t)this, seq_, elapseTime, after_, -missTime, !bool(boost_ksim::any_cast<int>(_message.body2))) >> group;
+    xinfo2(TSF"OnAlarmksim id:%_, seq:%_, elapsed:%_, after:%_, miss:%_, android alarm:%_, ", (uintptr_t)this, seq_, elapseTime, after_, -missTime, !bool(boost_ksim::any_cast<int>(_message.body2))) >> group;
 
 #ifdef ANDROID
 
@@ -146,34 +146,34 @@ void Alarm::OnAlarm(const MessageQueueksim::MessagePost_t& _id, MessageQueueksim
             return;
         }
 
-        ::stopAlarm(seq_);
+        ::stopAlarmksim(seq_);
 
-        if (::startAlarm((int64_t) seq_, missTime)) return;
+        if (::startAlarmksim((int64_t) seq_, missTime)) return;
 
-        xerror2(TSF"startAlarm err, continue") >> group;
+        xerror2(TSF"startAlarmksim err, continue") >> group;
     }
 
 #endif
 
     xinfo2(TSF"runing") >> group;
-    status_ = kOnAlarm;
+    status_ = kOnAlarmksim;
     seq_ = INVAILD_SEQ;
     endtime_ = curtime;
 
     if (inthread_)
         runthread_.start();
     else
-        MessageQueueksim::AsyncInvoke(boost_ksim::bind(&Alarm::__Run, this), (MessageQueueksim::MessageTitle_t)this, reg_async_.Get(), "Alarm::__Run");
+        MessageQueueksim::AsyncInvoke(boost_ksim::bind(&Alarmksim::__Run, this), (MessageQueueksim::MessageTitle_t)this, reg_async_.Get(), "Alarmksim::__Run");
 }
 
-void Alarm::__Run() {
+void Alarmksim::__Run() {
     target_->run();
 }
 
-const Thread& Alarm::RunThread() const {
+const Thread& Alarmksim::RunThread() const {
     return runthread_;
 }
 
 #ifdef ANDROID
-#include "jni/OnAlarm.inl"
+#include "jni/OnAlarmksim.inl"
 #endif

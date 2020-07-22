@@ -27,7 +27,7 @@
 # include <iosfwd>
 #endif 
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace iostreams { namespace detail {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace iostreams { namespace detail {
 
 #ifndef BOOST_IOSTREAMS_NO_STREAM_TEMPLATES //--------------------------------//
 # define BOOST_IOSTREAMS_BASIC_IOS(ch, tr)  std::basic_ios< ch, tr >
@@ -42,7 +42,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #ifdef ANDROID
 #undef BOOST_IOSTREAMS_FAILURE
     
-#define BOOST_IOSTREAMS_FAILURE            mars_boost_ksim::iostreams::detail::failure
+#define BOOST_IOSTREAMS_FAILURE            mars_boost::iostreams::detail::failure
     
     class failure : public std::exception {
     public:
@@ -64,7 +64,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     
 #define BOOST_IOS                          std::ios
 #define BOOST_IOSTREAMS_BASIC_IOS(ch, tr)  std::ios
-#define BOOST_IOSTREAMS_FAILURE            mars_boost_ksim::iostreams::detail::failure
+#define BOOST_IOSTREAMS_FAILURE            mars_boost::iostreams::detail::failure
     
     class failure : std::exception {
     public:

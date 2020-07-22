@@ -25,27 +25,27 @@
         {
             case DLL_PROCESS_ATTACH:
             {
-                mars_boost_ksim::on_process_enter();
-                mars_boost_ksim::on_thread_enter();
+                mars_boost::on_process_enter();
+                mars_boost::on_thread_enter();
                 break;
             }
 
             case DLL_THREAD_ATTACH:
             {
-                mars_boost_ksim::on_thread_enter();
+                mars_boost::on_thread_enter();
                 break;
             }
 
             case DLL_THREAD_DETACH:
             {
-                mars_boost_ksim::on_thread_exit();
+                mars_boost::on_thread_exit();
                 break;
             }
 
             case DLL_PROCESS_DETACH:
             {
-                mars_boost_ksim::on_thread_exit();
-                mars_boost_ksim::on_process_exit();
+                mars_boost::on_thread_exit();
+                mars_boost::on_process_exit();
                 break;
             }
         }
@@ -53,7 +53,7 @@
         return TRUE;
     }
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     void tss_cleanup_implemented()
     {
@@ -77,7 +77,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 #ifdef _MSC_VER
 // Prevent LNK4221 warning with link=static
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace link_static_warning_inhibit {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace link_static_warning_inhibit {
     extern __declspec(dllexport) void foo() { }
 } }
 #endif

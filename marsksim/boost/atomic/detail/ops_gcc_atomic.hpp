@@ -45,12 +45,12 @@
 #pragma system_header
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace atomics {
 namespace detail {
 
 /*!
- * The function converts \c mars_boost_ksim::memory_order values to the compiler-specific constants.
+ * The function converts \c mars_boost::memory_order values to the compiler-specific constants.
  *
  * NOTE: The intention is that the function is optimized away by the compiler, and the
  *       compiler-specific constants are passed to the intrinsics. I know constexpr doesn't
@@ -390,6 +390,6 @@ BOOST_FORCEINLINE void signal_fence(memory_order order) BOOST_NOEXCEPT
 
 } // namespace detail
 } // namespace atomics
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_ATOMIC_DETAIL_OPS_GCC_ATOMIC_HPP_INCLUDED_

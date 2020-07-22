@@ -17,7 +17,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
   /**
@@ -31,7 +31,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
    *
    * Example:
    *
-   *     mars_boost_ksim::strict_scoped_thread<> t((mars_boost_ksim::thread(F)));
+   *     mars_boost::strict_scoped_thread<> t((mars_boost::thread(F)));
    *
    */
   template <class CallableThread = join_if_joinable>
@@ -49,21 +49,21 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #if ! defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES)
     template <class F, class ...Args, typename = typename disable_if<is_same<typename decay<F>::type, thread>, void* >::type>
     explicit strict_scoped_thread(BOOST_THREAD_FWD_REF(F) f, BOOST_THREAD_FWD_REF(Args)... args) :
-      t_(mars_boost_ksim::forward<F>(f), mars_boost_ksim::forward<Args>(args)...) {}
+      t_(mars_boost::forward<F>(f), mars_boost::forward<Args>(args)...) {}
 #else
     template <class F>
     explicit strict_scoped_thread(BOOST_THREAD_FWD_REF(F) f,
         typename disable_if<is_same<typename decay<F>::type, thread>, void* >::type=0) :
-      t_(mars_boost_ksim::forward<F>(f)) {}
+      t_(mars_boost::forward<F>(f)) {}
     template <class F, class A1>
     strict_scoped_thread(BOOST_THREAD_FWD_REF(F) f, BOOST_THREAD_FWD_REF(A1) a1) :
-      t_(mars_boost_ksim::forward<F>(f), mars_boost_ksim::forward<A1>(a1)) {}
+      t_(mars_boost::forward<F>(f), mars_boost::forward<A1>(a1)) {}
     template <class F, class A1, class A2>
     strict_scoped_thread(BOOST_THREAD_FWD_REF(F) f, BOOST_THREAD_FWD_REF(A1) a1, BOOST_THREAD_FWD_REF(A2) a2) :
-      t_(mars_boost_ksim::forward<F>(f), mars_boost_ksim::forward<A1>(a1), mars_boost_ksim::forward<A2>(a2)) {}
+      t_(mars_boost::forward<F>(f), mars_boost::forward<A1>(a1), mars_boost::forward<A2>(a2)) {}
     template <class F, class A1, class A2, class A3>
     strict_scoped_thread(BOOST_THREAD_FWD_REF(F) f, BOOST_THREAD_FWD_REF(A1) a1, BOOST_THREAD_FWD_REF(A2) a2, BOOST_THREAD_FWD_REF(A3) a3) :
-      t_(mars_boost_ksim::forward<F>(f), mars_boost_ksim::forward<A1>(a1), mars_boost_ksim::forward<A2>(a2), mars_boost_ksim::forward<A3>(a3)) {}
+      t_(mars_boost::forward<F>(f), mars_boost::forward<A1>(a1), mars_boost::forward<A2>(a2), mars_boost::forward<A3>(a3)) {}
 #endif
 
     /**
@@ -74,7 +74,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
      * Effects: move the thread to own @c t.
      */
     explicit strict_scoped_thread(BOOST_THREAD_RV_REF(thread) t) BOOST_NOEXCEPT :
-    t_(mars_boost_ksim::move(t))
+    t_(mars_boost::move(t))
     {
     }
 
@@ -107,7 +107,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
    *
    * Example:
    *
-   *     mars_boost_ksim::scoped_thread<> t((mars_boost_ksim::thread(F)));
+   *     mars_boost::scoped_thread<> t((mars_boost::thread(F)));
    *     t.interrupt();
    *
    */
@@ -139,21 +139,21 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #if ! defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES)
     template <class F, class ...Args, typename = typename disable_if<is_same<typename decay<F>::type, thread>, void* >::type>
     explicit scoped_thread(BOOST_THREAD_FWD_REF(F) f, BOOST_THREAD_FWD_REF(Args)... args) :
-      t_(mars_boost_ksim::forward<F>(f), mars_boost_ksim::forward<Args>(args)...) {}
+      t_(mars_boost::forward<F>(f), mars_boost::forward<Args>(args)...) {}
 #else
     template <class F>
     explicit scoped_thread(BOOST_THREAD_FWD_REF(F) f,
         typename disable_if<is_same<typename decay<F>::type, thread>, void* >::type=0) :
-      t_(mars_boost_ksim::forward<F>(f)) {}
+      t_(mars_boost::forward<F>(f)) {}
     template <class F, class A1>
     scoped_thread(BOOST_THREAD_FWD_REF(F) f, BOOST_THREAD_FWD_REF(A1) a1) :
-      t_(mars_boost_ksim::forward<F>(f), mars_boost_ksim::forward<A1>(a1)) {}
+      t_(mars_boost::forward<F>(f), mars_boost::forward<A1>(a1)) {}
     template <class F, class A1, class A2>
     scoped_thread(BOOST_THREAD_FWD_REF(F) f, BOOST_THREAD_FWD_REF(A1) a1, BOOST_THREAD_FWD_REF(A2) a2) :
-      t_(mars_boost_ksim::forward<F>(f), mars_boost_ksim::forward<A1>(a1), mars_boost_ksim::forward<A2>(a2)) {}
+      t_(mars_boost::forward<F>(f), mars_boost::forward<A1>(a1), mars_boost::forward<A2>(a2)) {}
     template <class F, class A1, class A2, class A3>
     scoped_thread(BOOST_THREAD_FWD_REF(F) f, BOOST_THREAD_FWD_REF(A1) a1, BOOST_THREAD_FWD_REF(A2) a2, BOOST_THREAD_FWD_REF(A3) a3) :
-      t_(mars_boost_ksim::forward<F>(f), mars_boost_ksim::forward<A1>(a1), mars_boost_ksim::forward<A2>(a2), mars_boost_ksim::forward<A3>(a3)) {}
+      t_(mars_boost::forward<F>(f), mars_boost::forward<A1>(a1), mars_boost::forward<A2>(a2), mars_boost::forward<A3>(a3)) {}
 
 #endif
     /**
@@ -164,20 +164,20 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
      * Effects: move the thread to own @c t.
      */
     explicit scoped_thread(BOOST_THREAD_RV_REF(thread) t) BOOST_NOEXCEPT :
-    t_(mars_boost_ksim::move(t))
+    t_(mars_boost::move(t))
     {
     }
 
 //    explicit operator thread()
 //    {
-//      return mars_boost_ksim::move(t_);
+//      return mars_boost::move(t_);
 //    }
 
     /**
      * Move constructor.
      */
     scoped_thread(BOOST_RV_REF(scoped_thread) x) BOOST_NOEXCEPT :
-    t_(mars_boost_ksim::move(BOOST_THREAD_RV(x).t_))
+    t_(mars_boost::move(BOOST_THREAD_RV(x).t_))
     {}
 
     /**
@@ -200,7 +200,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       CallableThread on_destructor;
 
       on_destructor(t_);
-      t_ = mars_boost_ksim::move(BOOST_THREAD_RV(x).t_);
+      t_ = mars_boost::move(BOOST_THREAD_RV(x).t_);
       return *this;
     }
 

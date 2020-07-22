@@ -25,7 +25,7 @@
 #include <boost/get_pointer.hpp>
 #include <boost/detail/workaround.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 #if defined(BOOST_NO_VOID_RETURNS)
@@ -384,6 +384,6 @@ template<class R, class T> _mfi::dm<R, T> mem_fn(R T::*f)
     return _mfi::dm<R, T>(f);
 }
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // #ifndef BOOST_BIND_MEM_FN_HPP_INCLUDED

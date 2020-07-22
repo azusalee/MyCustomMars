@@ -31,7 +31,7 @@
 #include <algorithm> //copy, copy_backward
 #include <memory>    //uninitialized_copy
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 //////////////////////////////////////////////////////////////////////////////
 //
@@ -43,7 +43,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
    //! <b>Effects</b>: Moves elements in the range [first,last) into the range [result,result + (last -
    //!   first)) starting from first and proceeding to last. For each non-negative integer n < (last-first),
-   //!   performs *(result + n) = ::mars_boost_ksim::move (*(first + n)).
+   //!   performs *(result + n) = ::mars_boost::move (*(first + n)).
    //!
    //! <b>Effects</b>: result + (last - first).
    //!
@@ -55,7 +55,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
    O move(I f, I l, O result)
    {
       while (f != l) {
-         *result = ::mars_boost_ksim::move(*f);
+         *result = ::mars_boost::move(*f);
          ++f; ++result;
       }
       return result;
@@ -70,7 +70,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
    //! <b>Effects</b>: Moves elements in the range [first,last) into the range
    //!   [result - (last-first),result) starting from last - 1 and proceeding to
    //!   first. For each positive integer n <= (last - first),
-   //!   performs *(result - n) = ::mars_boost_ksim::move(*(last - n)).
+   //!   performs *(result - n) = ::mars_boost::move(*(last - n)).
    //!
    //! <b>Requires</b>: result shall not be in the range [first,last).
    //!
@@ -83,7 +83,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
    {
       while (f != l) {
          --l; --result;
-         *result = ::mars_boost_ksim::move(*l);
+         *result = ::mars_boost::move(*l);
       }
       return result;
    }
@@ -104,7 +104,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 //!   \code
 //!   for (; first != last; ++result, ++first)
 //!      new (static_cast<void*>(&*result))
-//!         typename iterator_traits<ForwardIterator>::value_type(mars_boost_ksim::move(*first));
+//!         typename iterator_traits<ForwardIterator>::value_type(mars_boost::move(*first));
 //!   \endcode
 //!
 //! <b>Returns</b>: result
@@ -113,7 +113,7 @@ template
     typename F> // F models ForwardIterator
 F uninitialized_move(I f, I l, F r
    /// @cond
-//   ,typename ::mars_boost_ksim::move_detail::enable_if<has_move_emulation_enabled<typename std::iterator_traits<I>::value_type> >::type* = 0
+//   ,typename ::mars_boost::move_detail::enable_if<has_move_emulation_enabled<typename std::iterator_traits<I>::value_type> >::type* = 0
    /// @endcond
    )
 {
@@ -122,8 +122,8 @@ F uninitialized_move(I f, I l, F r
    F back = r;
    BOOST_TRY{
       while (f != l) {
-         void * const addr = static_cast<void*>(::mars_boost_ksim::move_detail::addressof(*r));
-         ::new(addr) input_value_type(::mars_boost_ksim::move(*f));
+         void * const addr = static_cast<void*>(::mars_boost::move_detail::addressof(*r));
+         ::new(addr) input_value_type(::mars_boost::move(*f));
          ++f; ++r;
       }
    }
@@ -143,7 +143,7 @@ template
    <typename I,   // I models InputIterator
     typename F>   // F models ForwardIterator
 F uninitialized_move(I f, I l, F r,
-   typename ::mars_boost_ksim::move_detail::disable_if<has_move_emulation_enabled<typename std::iterator_traits<I>::value_type> >::type* = 0)
+   typename ::mars_boost::move_detail::disable_if<has_move_emulation_enabled<typename std::iterator_traits<I>::value_type> >::type* = 0)
 {
    return std::uninitialized_copy(f, l, r);
 }
@@ -161,17 +161,17 @@ template
 <typename I,   // I models InputIterator
 typename F>   // F models ForwardIterator
 inline F uninitialized_move_move_iterator(I f, I l, F r
-//                             ,typename ::mars_boost_ksim::move_detail::enable_if< has_move_emulation_enabled<typename I::value_type> >::type* = 0
+//                             ,typename ::mars_boost::move_detail::enable_if< has_move_emulation_enabled<typename I::value_type> >::type* = 0
 )
 {
-   return ::mars_boost_ksim::uninitialized_move(f, l, r);
+   return ::mars_boost::uninitialized_move(f, l, r);
 }
 /*
 template
 <typename I,   // I models InputIterator
 typename F>   // F models ForwardIterator
 F uninitialized_move_move_iterator(I f, I l, F r,
-                                   typename ::mars_boost_ksim::move_detail::disable_if< has_move_emulation_enabled<typename I::value_type> >::type* = 0)
+                                   typename ::mars_boost::move_detail::disable_if< has_move_emulation_enabled<typename I::value_type> >::type* = 0)
 {
    return std::uninitialized_copy(f.base(), l.base(), r);
 }
@@ -182,9 +182,9 @@ template
 <typename I,   // I models InputIterator
 typename F>   // F models ForwardIterator
 inline F uninitialized_copy_or_move(I f, I l, F r,
-                             typename ::mars_boost_ksim::move_detail::enable_if< move_detail::is_move_iterator<I> >::type* = 0)
+                             typename ::mars_boost::move_detail::enable_if< move_detail::is_move_iterator<I> >::type* = 0)
 {
-   return ::mars_boost_ksim::move_detail::uninitialized_move_move_iterator(f, l, r);
+   return ::mars_boost::move_detail::uninitialized_move_move_iterator(f, l, r);
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -199,17 +199,17 @@ template
 <typename I,   // I models InputIterator
 typename F>   // F models ForwardIterator
 inline F move_move_iterator(I f, I l, F r
-//                             ,typename ::mars_boost_ksim::move_detail::enable_if< has_move_emulation_enabled<typename I::value_type> >::type* = 0
+//                             ,typename ::mars_boost::move_detail::enable_if< has_move_emulation_enabled<typename I::value_type> >::type* = 0
 )
 {
-   return ::mars_boost_ksim::move(f, l, r);
+   return ::mars_boost::move(f, l, r);
 }
 /*
 template
 <typename I,   // I models InputIterator
 typename F>   // F models ForwardIterator
 F move_move_iterator(I f, I l, F r,
-                                   typename ::mars_boost_ksim::move_detail::disable_if< has_move_emulation_enabled<typename I::value_type> >::type* = 0)
+                                   typename ::mars_boost::move_detail::disable_if< has_move_emulation_enabled<typename I::value_type> >::type* = 0)
 {
    return std::copy(f.base(), l.base(), r);
 }
@@ -221,9 +221,9 @@ template
 <typename I,   // I models InputIterator
 typename F>   // F models ForwardIterator
 inline F copy_or_move(I f, I l, F r,
-                             typename ::mars_boost_ksim::move_detail::enable_if< move_detail::is_move_iterator<I> >::type* = 0)
+                             typename ::mars_boost::move_detail::enable_if< move_detail::is_move_iterator<I> >::type* = 0)
 {
-   return ::mars_boost_ksim::move_detail::move_move_iterator(f, l, r);
+   return ::mars_boost::move_detail::move_move_iterator(f, l, r);
 }
 
 /// @endcond
@@ -245,7 +245,7 @@ template
 typename F>   // F models ForwardIterator
 inline F uninitialized_copy_or_move(I f, I l, F r
    /// @cond
-   ,typename ::mars_boost_ksim::move_detail::disable_if< move_detail::is_move_iterator<I> >::type* = 0
+   ,typename ::mars_boost::move_detail::disable_if< move_detail::is_move_iterator<I> >::type* = 0
    /// @endcond
    )
 {
@@ -268,14 +268,14 @@ template
 typename F>   // F models ForwardIterator
 inline F copy_or_move(I f, I l, F r
    /// @cond
-   ,typename ::mars_boost_ksim::move_detail::disable_if< move_detail::is_move_iterator<I> >::type* = 0
+   ,typename ::mars_boost::move_detail::disable_if< move_detail::is_move_iterator<I> >::type* = 0
    /// @endcond
    )
 {
    return std::copy(f, l, r);
 }
 
-}  //namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+}  //namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 #include <boost/move/detail/config_end.hpp>
 

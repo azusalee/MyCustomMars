@@ -40,7 +40,7 @@
 //
 // For example, program_options library might contain:
 //    #define BOOST_UTF8_BEGIN_NAMESPACE <backslash character> 
-//             namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace program_options {
+//             namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace program_options {
 //    #define BOOST_UTF8_END_NAMESPACE }}
 //    #define BOOST_UTF8_DECL BOOST_PROGRAM_OPTIONS_DECL
 //    #include <boost/detail/utf8_codecvt_facet.ipp>

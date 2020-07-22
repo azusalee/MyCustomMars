@@ -27,7 +27,7 @@
 #include <new>              // ::operator new, ::operator delete
 #include <cstddef>          // std::size_t
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 namespace detail
@@ -35,7 +35,7 @@ namespace detail
 
 template<unsigned size, unsigned align_> union freeblock
 {
-    typedef typename mars_boost_ksim::type_with_alignment<align_>::type aligner_type;
+    typedef typename mars_boost::type_with_alignment<align_>::type aligner_type;
     aligner_type aligner;
     char bytes[size];
     freeblock * next;
@@ -74,7 +74,7 @@ template<unsigned size, unsigned align_> struct allocator_impl
 
     static lightweight_mutex & mutex()
     {
-        static freeblock< sizeof( lightweight_mutex ), mars_boost_ksim::alignment_of< lightweight_mutex >::value > fbm;
+        static freeblock< sizeof( lightweight_mutex ), mars_boost::alignment_of< lightweight_mutex >::value > fbm;
         static lightweight_mutex * pm = new( &fbm ) lightweight_mutex;
         return *pm;
     }
@@ -188,12 +188,12 @@ template<unsigned size, unsigned align_>
   unsigned allocator_impl<size, align_>::last = allocator_impl<size, align_>::items_per_page;
 
 template<class T>
-struct quick_allocator: public allocator_impl< sizeof(T), mars_boost_ksim::alignment_of<T>::value >
+struct quick_allocator: public allocator_impl< sizeof(T), mars_boost::alignment_of<T>::value >
 {
 };
 
 } // namespace detail
 
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif  // #ifndef BOOST_SMART_PTR_DETAIL_QUICK_ALLOCATOR_HPP_INCLUDED

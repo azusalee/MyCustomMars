@@ -47,7 +47,7 @@ class NetSourceksimTimerCheck;
 #endif
         
 class SignallingKeeper;
-class NetCheckLogic;
+class NetCheckLogicksim;
 class DynamicTimeout;
 class AntiAvalanche;
 
@@ -123,9 +123,9 @@ class NetCoreksim {
 
   private:
     MessageQueueksim::MessageQueueksimCreater   messagequeue_creater_;
-    MessageQueueksim::ScopeRegister         asyncreg_;
+    MessageQueueksim::ScopeRegisterksim         asyncreg_;
     NetSourceksim*                          net_source_;
-    NetCheckLogic*                      netcheck_logic_;
+    NetCheckLogicksim*                      netcheck_logic_;
     AntiAvalanche*                      anti_avalanche_;
     
     DynamicTimeout*                     dynamic_timeout_;

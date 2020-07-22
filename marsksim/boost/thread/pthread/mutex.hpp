@@ -41,7 +41,7 @@
 #define BOOST_THREAD_HAS_EINTR_BUG
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace posix {
 #ifdef BOOST_THREAD_HAS_EINTR_BUG
@@ -101,13 +101,13 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             int const res=pthread_mutex_init(&m,NULL);
             if(res)
             {
-                mars_boost_ksim::throw_exception(thread_resource_error(res, "boost_ksim:: mutex constructor failed in pthread_mutex_init"));
+                mars_boost::throw_exception(thread_resource_error(res, "boost_ksim:: mutex constructor failed in pthread_mutex_init"));
             }
         }
         ~mutex()
         {
           int const res = posix::pthread_mutex_destroy(&m);
-          mars_boost_ksim::ignore_unused(res);
+          mars_boost::ignore_unused(res);
           BOOST_ASSERT(!res);
         }
 
@@ -116,7 +116,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             int res = posix::pthread_mutex_lock(&m);
             if (res)
             {
-                mars_boost_ksim::throw_exception(lock_error(res,"boost: mutex lock failed in pthread_mutex_lock"));
+                mars_boost::throw_exception(lock_error(res,"boost: mutex lock failed in pthread_mutex_lock"));
             }
         }
 
@@ -127,7 +127,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             BOOST_ASSERT(res == 0);
 //            if (res)
 //            {
-//                mars_boost_ksim::throw_exception(lock_error(res,"boost: mutex unlock failed in pthread_mutex_unlock"));
+//                mars_boost::throw_exception(lock_error(res,"boost: mutex unlock failed in pthread_mutex_unlock"));
 //            }
         }
 
@@ -176,7 +176,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             int const res=pthread_mutex_init(&m,NULL);
             if(res)
             {
-                mars_boost_ksim::throw_exception(thread_resource_error(res, "boost_ksim:: timed_mutex constructor failed in pthread_mutex_init"));
+                mars_boost::throw_exception(thread_resource_error(res, "boost_ksim:: timed_mutex constructor failed in pthread_mutex_init"));
             }
 #ifndef BOOST_PTHREAD_HAS_TIMEDLOCK
             int const res2=pthread_cond_init(&cond,NULL);
@@ -184,7 +184,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             {
                 BOOST_VERIFY(!posix::pthread_mutex_destroy(&m));
                 //BOOST_VERIFY(!pthread_mutex_destroy(&m));
-                mars_boost_ksim::throw_exception(thread_resource_error(res2, "boost_ksim:: timed_mutex constructor failed in pthread_cond_init"));
+                mars_boost::throw_exception(thread_resource_error(res2, "boost_ksim:: timed_mutex constructor failed in pthread_cond_init"));
             }
             is_locked=false;
 #endif
@@ -203,7 +203,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
             return timed_lock(get_system_time()+relative_time);
         }
-        bool timed_lock(mars_boost_ksim::xtime const & absolute_time)
+        bool timed_lock(mars_boost::xtime const & absolute_time)
         {
             return timed_lock(system_time(absolute_time));
         }
@@ -214,7 +214,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             int res = posix::pthread_mutex_lock(&m);
             if (res)
             {
-                mars_boost_ksim::throw_exception(lock_error(res,"boost: mutex lock failed in pthread_mutex_lock"));
+                mars_boost::throw_exception(lock_error(res,"boost: mutex lock failed in pthread_mutex_lock"));
             }
         }
 
@@ -225,7 +225,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             BOOST_ASSERT(res == 0);
 //            if (res)
 //            {
-//                mars_boost_ksim::throw_exception(lock_error(res,"boost: mutex unlock failed in pthread_mutex_unlock"));
+//                mars_boost::throw_exception(lock_error(res,"boost: mutex unlock failed in pthread_mutex_unlock"));
 //            }
         }
 
@@ -257,7 +257,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #else
         void lock()
         {
-            mars_boost_ksim::pthread::pthread_mutex_scoped_lock const local_lock(&m);
+            mars_boost::pthread::pthread_mutex_scoped_lock const local_lock(&m);
             while(is_locked)
             {
                 BOOST_VERIFY(!pthread_cond_wait(&cond,&m));
@@ -267,14 +267,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         void unlock()
         {
-            mars_boost_ksim::pthread::pthread_mutex_scoped_lock const local_lock(&m);
+            mars_boost::pthread::pthread_mutex_scoped_lock const local_lock(&m);
             is_locked=false;
             BOOST_VERIFY(!pthread_cond_signal(&cond));
         }
 
         bool try_lock()
         {
-            mars_boost_ksim::pthread::pthread_mutex_scoped_lock const local_lock(&m);
+            mars_boost::pthread::pthread_mutex_scoped_lock const local_lock(&m);
             if(is_locked)
             {
                 return false;
@@ -286,7 +286,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     private:
         bool do_try_lock_until(struct timespec const &timeout)
         {
-            mars_boost_ksim::pthread::pthread_mutex_scoped_lock const local_lock(&m);
+            mars_boost::pthread::pthread_mutex_scoped_lock const local_lock(&m);
             while(is_locked)
             {
                 int const cond_res=pthread_cond_timedwait(&cond,&m,&timeout);
@@ -334,7 +334,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
           //using namespace chrono;
           chrono::nanoseconds d = tp.time_since_epoch();
-          timespec ts = mars_boost_ksim::detail::to_timespec(d);
+          timespec ts = mars_boost::detail::to_timespec(d);
           return do_try_lock_until(ts);
         }
 #endif

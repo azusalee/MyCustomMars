@@ -37,7 +37,7 @@
 #include <vector>
 #include <string.h> // memcmp.
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace detail
     {
@@ -58,10 +58,10 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         struct thread_exit_callback_node
         {
-            mars_boost_ksim::detail::thread_exit_function_base* func;
+            mars_boost::detail::thread_exit_function_base* func;
             thread_exit_callback_node* next;
 
-            thread_exit_callback_node(mars_boost_ksim::detail::thread_exit_function_base* func_,
+            thread_exit_callback_node(mars_boost::detail::thread_exit_function_base* func_,
                                       thread_exit_callback_node* next_):
                 func(func_),next(next_)
             {}
@@ -70,9 +70,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         namespace
         {
 #ifdef BOOST_THREAD_PROVIDES_ONCE_CXX11
-          mars_boost_ksim::once_flag current_thread_tls_init_flag;
+          mars_boost::once_flag current_thread_tls_init_flag;
 #else
-            mars_boost_ksim::once_flag current_thread_tls_init_flag=BOOST_ONCE_INIT;
+            mars_boost::once_flag current_thread_tls_init_flag=BOOST_ONCE_INIT;
 #endif
             pthread_key_t current_thread_tls_key;
 
@@ -80,8 +80,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             {
                 static void tls_destructor(void* data)
                 {
-                    //mars_boost_ksim::detail::thread_data_base* thread_info=static_cast<mars_boost_ksim::detail::thread_data_base*>(data);
-                    mars_boost_ksim::detail::thread_data_ptr thread_info = static_cast<mars_boost_ksim::detail::thread_data_base*>(data)->shared_from_this();
+                    //mars_boost::detail::thread_data_base* thread_info=static_cast<mars_boost::detail::thread_data_base*>(data);
+                    mars_boost::detail::thread_data_ptr thread_info = static_cast<mars_boost::detail::thread_data_base*>(data)->shared_from_this();
 
                     if(thread_info)
                     {
@@ -123,8 +123,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 }
                 ~delete_current_thread_tls_key_on_dlclose_t()
                 {
-                    const mars_boost_ksim::once_flag uninitialized = BOOST_ONCE_INIT;
-                    if (memcmp(&current_thread_tls_init_flag, &uninitialized, sizeof(mars_boost_ksim::once_flag)))
+                    const mars_boost::once_flag uninitialized = BOOST_ONCE_INIT;
+                    if (memcmp(&current_thread_tls_init_flag, &uninitialized, sizeof(mars_boost::once_flag)))
                     {
                       void* data = pthread_getspecific(current_thread_tls_key);
                       if (data)
@@ -141,15 +141,15 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             }
         }
 
-        mars_boost_ksim::detail::thread_data_base* get_current_thread_data()
+        mars_boost::detail::thread_data_base* get_current_thread_data()
         {
-            mars_boost_ksim::call_once(current_thread_tls_init_flag,create_current_thread_tls_key);
-            return (mars_boost_ksim::detail::thread_data_base*)pthread_getspecific(current_thread_tls_key);
+            mars_boost::call_once(current_thread_tls_init_flag,create_current_thread_tls_key);
+            return (mars_boost::detail::thread_data_base*)pthread_getspecific(current_thread_tls_key);
         }
 
         void set_current_thread_data(detail::thread_data_base* new_data)
         {
-            mars_boost_ksim::call_once(current_thread_tls_init_flag,create_current_thread_tls_key);
+            mars_boost::call_once(current_thread_tls_init_flag,create_current_thread_tls_key);
             BOOST_VERIFY(!pthread_setspecific(current_thread_tls_key,new_data));
         }
     }
@@ -160,8 +160,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
             static void* thread_proxy(void* param)
             {
-                //mars_boost_ksim::detail::thread_data_ptr thread_info = static_cast<mars_boost_ksim::detail::thread_data_base*>(param)->self;
-                mars_boost_ksim::detail::thread_data_ptr thread_info = static_cast<mars_boost_ksim::detail::thread_data_base*>(param)->shared_from_this();
+                //mars_boost::detail::thread_data_ptr thread_info = static_cast<mars_boost::detail::thread_data_base*>(param)->self;
+                mars_boost::detail::thread_data_ptr thread_info = static_cast<mars_boost::detail::thread_data_base*>(param)->shared_from_this();
                 thread_info->self.reset();
                 detail::set_current_thread_data(thread_info.get());
 #if defined BOOST_THREAD_PROVIDES_INTERRUPTIONS
@@ -187,7 +187,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #endif
                 detail::tls_destructor(thread_info.get());
                 detail::set_current_thread_data(0);
-                mars_boost_ksim::lock_guard<mars_boost_ksim::mutex> lock(thread_info->data_mutex);
+                mars_boost::lock_guard<mars_boost::mutex> lock(thread_info->data_mutex);
                 thread_info->done=true;
                 thread_info->done_condition.notify_all();
 
@@ -435,7 +435,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           void BOOST_THREAD_DECL sleep_for(const timespec& ts)
           {
 
-                if (mars_boost_ksim::detail::timespec_ge(ts, mars_boost_ksim::detail::timespec_zero()))
+                if (mars_boost::detail::timespec_ge(ts, mars_boost::detail::timespec_zero()))
                 {
 
     #   if defined(BOOST_HAS_PTHREAD_DELAY_NP)
@@ -459,19 +459,19 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
           void BOOST_THREAD_DECL sleep_until(const timespec& ts)
           {
-                timespec now = mars_boost_ksim::detail::timespec_now();
-                if (mars_boost_ksim::detail::timespec_gt(ts, now))
+                timespec now = mars_boost::detail::timespec_now();
+                if (mars_boost::detail::timespec_gt(ts, now))
                 {
                   for (int foo=0; foo < 5; ++foo)
                   {
 
     #   if defined(BOOST_HAS_PTHREAD_DELAY_NP)
-                    timespec d = mars_boost_ksim::detail::timespec_minus(ts, now);
+                    timespec d = mars_boost::detail::timespec_minus(ts, now);
                     BOOST_VERIFY(!pthread_delay_np(&d));
     #   elif defined(BOOST_HAS_NANOSLEEP)
                     //  nanosleep takes a timespec that is an offset, not
                     //  an absolute time.
-                    timespec d = mars_boost_ksim::detail::timespec_minus(ts, now);
+                    timespec d = mars_boost::detail::timespec_minus(ts, now);
                     nanosleep(&d, 0);
     #   else
                     mutex mx;
@@ -479,8 +479,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                     condition_variable cond;
                     cond.do_wait_until(lock, ts);
     #   endif
-                    timespec now2 = mars_boost_ksim::detail::timespec_now();
-                    if (mars_boost_ksim::detail::timespec_ge(now2, ts))
+                    timespec now2 = mars_boost::detail::timespec_now();
+                    if (mars_boost::detail::timespec_ge(now2, ts))
                     {
                       return;
                     }
@@ -494,7 +494,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       {
         void BOOST_THREAD_DECL sleep_for(const timespec& ts)
         {
-            mars_boost_ksim::detail::thread_data_base* const thread_info=mars_boost_ksim::detail::get_current_thread_data();
+            mars_boost::detail::thread_data_base* const thread_info=mars_boost::detail::get_current_thread_data();
 
             if(thread_info)
             {
@@ -503,13 +503,13 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             }
             else
             {
-              mars_boost_ksim::this_thread::no_interruption_point::hiden::sleep_for(ts);
+              mars_boost::this_thread::no_interruption_point::hiden::sleep_for(ts);
             }
         }
 
         void BOOST_THREAD_DECL sleep_until(const timespec& ts)
         {
-            mars_boost_ksim::detail::thread_data_base* const thread_info=mars_boost_ksim::detail::get_current_thread_data();
+            mars_boost::detail::thread_data_base* const thread_info=mars_boost::detail::get_current_thread_data();
 
             if(thread_info)
             {
@@ -518,7 +518,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             }
             else
             {
-              mars_boost_ksim::this_thread::no_interruption_point::hiden::sleep_until(ts);
+              mars_boost::this_thread::no_interruption_point::hiden::sleep_until(ts);
             }
         }
       } // hiden
@@ -586,23 +586,23 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                     continue;
 
                 vector<string> key_val(2);
-                mars_boost_ksim::split(key_val, line, mars_boost_ksim::is_any_of(":"));
+                mars_boost::split(key_val, line, mars_boost::is_any_of(":"));
 
                 if (key_val.size() != 2)
                   return hardware_concurrency();
 
                 string key   = key_val[0];
                 string value = key_val[1];
-                mars_boost_ksim::trim(key);
-                mars_boost_ksim::trim(value);
+                mars_boost::trim(key);
+                mars_boost::trim(value);
 
                 if (key == physical_id) {
-                    current_core_entry.first = mars_boost_ksim::lexical_cast<unsigned>(value);
+                    current_core_entry.first = mars_boost::lexical_cast<unsigned>(value);
                     continue;
                 }
 
                 if (key == core_id) {
-                    current_core_entry.second = mars_boost_ksim::lexical_cast<unsigned>(value);
+                    current_core_entry.second = mars_boost::lexical_cast<unsigned>(value);
                     cores.insert(current_core_entry);
                     continue;
                 }
@@ -632,7 +632,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             local_thread_info->interrupt_requested=true;
             if(local_thread_info->current_cond)
             {
-                mars_boost_ksim::pthread::pthread_mutex_scoped_lock internal_lock(local_thread_info->cond_mutex);
+                mars_boost::pthread::pthread_mutex_scoped_lock internal_lock(local_thread_info->cond_mutex);
                 BOOST_VERIFY(!pthread_cond_broadcast(local_thread_info->current_cond));
             }
         }
@@ -675,7 +675,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         void interruption_point()
         {
 #ifndef BOOST_NO_EXCEPTIONS
-            mars_boost_ksim::detail::thread_data_base* const thread_info=detail::get_current_thread_data();
+            mars_boost::detail::thread_data_base* const thread_info=detail::get_current_thread_data();
             if(thread_info && thread_info->interrupt_enabled)
             {
                 lock_guard<mutex> lg(thread_info->data_mutex);
@@ -690,13 +690,13 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         bool interruption_enabled() BOOST_NOEXCEPT
         {
-            mars_boost_ksim::detail::thread_data_base* const thread_info=detail::get_current_thread_data();
+            mars_boost::detail::thread_data_base* const thread_info=detail::get_current_thread_data();
             return thread_info && thread_info->interrupt_enabled;
         }
 
         bool interruption_requested() BOOST_NOEXCEPT
         {
-            mars_boost_ksim::detail::thread_data_base* const thread_info=detail::get_current_thread_data();
+            mars_boost::detail::thread_data_base* const thread_info=detail::get_current_thread_data();
             if(!thread_info)
             {
                 return false;
@@ -778,7 +778,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         }
 
         void add_new_tss_node(void const* key,
-                              mars_boost_ksim::shared_ptr<tss_cleanup_function> func,
+                              mars_boost::shared_ptr<tss_cleanup_function> func,
                               void* tss_data)
         {
             detail::thread_data_base* const current_thread_data(get_or_make_current_thread_data());
@@ -795,7 +795,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         }
 
         void set_tss_data(void const* key,
-                          mars_boost_ksim::shared_ptr<tss_cleanup_function> func,
+                          mars_boost::shared_ptr<tss_cleanup_function> func,
                           void* tss_data,bool cleanup_existing)
         {
             if(tss_data_node* const current_node=find_tss_data(key))

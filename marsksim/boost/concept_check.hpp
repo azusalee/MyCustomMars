@@ -37,7 +37,7 @@
 # pragma warning( disable : 4610 ) // object 'class' can never be instantiated - user-defined constructor required
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
   //
@@ -87,8 +87,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
   template <> struct Integer<long> {};
   template <> struct Integer<unsigned long> {};
 # if defined(BOOST_HAS_LONG_LONG)
-  template <> struct Integer< ::mars_boost_ksim::long_long_type> {};
-  template <> struct Integer< ::mars_boost_ksim::ulong_long_type> {};
+  template <> struct Integer< ::mars_boost::long_long_type> {};
+  template <> struct Integer< ::mars_boost::ulong_long_type> {};
 # elif defined(BOOST_HAS_MS_INT64)
   template <> struct Integer<__int64> {};
   template <> struct Integer<unsigned __int64> {};
@@ -106,7 +106,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
   template <> struct SignedInteger<int> {};
   template <> struct SignedInteger<long> {};
 # if defined(BOOST_HAS_LONG_LONG)
-  template <> struct SignedInteger< ::mars_boost_ksim::long_long_type> {};
+  template <> struct SignedInteger< ::mars_boost::long_long_type> {};
 # elif defined(BOOST_HAS_MS_INT64)
   template <> struct SignedInteger<__int64> {};
 # endif
@@ -124,7 +124,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
   template <> struct UnsignedInteger<unsigned int> {};
   template <> struct UnsignedInteger<unsigned long> {};
 # if defined(BOOST_HAS_LONG_LONG)
-  template <> struct UnsignedInteger< ::mars_boost_ksim::ulong_long_type> {};
+  template <> struct UnsignedInteger< ::mars_boost::ulong_long_type> {};
 # elif defined(BOOST_HAS_MS_INT64)
   template <> struct UnsignedInteger<unsigned __int64> {};
 # endif
@@ -301,14 +301,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       BOOST_CONCEPT_USAGE(Generator) { test(is_void<Return>()); }
 
    private:
-      void test(mars_boost_ksim::mpl::false_)
+      void test(mars_boost::mpl::false_)
       {
           // Do we really want a reference here?
           const Return& r = f();
           ignore_unused_variable_warning(r);
       }
 
-      void test(mars_boost_ksim::mpl::true_)
+      void test(mars_boost::mpl::true_)
       {
           f();
       }
@@ -321,14 +321,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       BOOST_CONCEPT_USAGE(UnaryFunction) { test(is_void<Return>()); }
 
    private:
-      void test(mars_boost_ksim::mpl::false_)
+      void test(mars_boost::mpl::false_)
       {
           f(arg);               // "priming the pump" this way keeps msvc6 happy (ICE)
           Return r = f(arg);
           ignore_unused_variable_warning(r);
       }
 
-      void test(mars_boost_ksim::mpl::true_)
+      void test(mars_boost::mpl::true_)
       {
           f(arg);
       }
@@ -337,7 +337,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                       && BOOST_WORKAROUND(__GNUC__, > 3)))
       // Declare a dummy construktor to make gcc happy.
       // It seems the compiler can not generate a sensible constructor when this is instantiated with a refence type.
-      // (warning: non-static reference "const double& mars_boost_ksim::UnaryFunction<YourClassHere>::arg"
+      // (warning: non-static reference "const double& mars_boost::UnaryFunction<YourClassHere>::arg"
       // in class without a constructor [-Wuninitialized])
       UnaryFunction();
 #endif
@@ -350,14 +350,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
   {
       BOOST_CONCEPT_USAGE(BinaryFunction) { test(is_void<Return>()); }
    private:
-      void test(mars_boost_ksim::mpl::false_)
+      void test(mars_boost::mpl::false_)
       {
           f(first,second);
           Return r = f(first, second); // require operator()
           (void)r;
       }
 
-      void test(mars_boost_ksim::mpl::true_)
+      void test(mars_boost::mpl::true_)
       {
           f(first,second);
       }
@@ -366,7 +366,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                       && BOOST_WORKAROUND(__GNUC__, > 3)))
       // Declare a dummy constructor to make gcc happy.
       // It seems the compiler can not generate a sensible constructor when this is instantiated with a refence type.
-      // (warning: non-static reference "const double& mars_boost_ksim::BinaryFunction<YourClassHere>::arg"
+      // (warning: non-static reference "const double& mars_boost::BinaryFunction<YourClassHere>::arg"
       // in class without a constructor [-Wuninitialized])
       BinaryFunction();
 #endif
@@ -386,7 +386,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                       && BOOST_WORKAROUND(__GNUC__, > 3)))
       // Declare a dummy constructor to make gcc happy.
       // It seems the compiler can not generate a sensible constructor when this is instantiated with a refence type.
-      // (warning: non-static reference "const double& mars_boost_ksim::UnaryPredicate<YourClassHere>::arg"
+      // (warning: non-static reference "const double& mars_boost::UnaryPredicate<YourClassHere>::arg"
       // in class without a constructor [-Wuninitialized])
       UnaryPredicate();
 #endif
@@ -405,7 +405,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                       && BOOST_WORKAROUND(__GNUC__, > 3)))
       // Declare a dummy constructor to make gcc happy.
       // It seems the compiler can not generate a sensible constructor when this is instantiated with a refence type.
-      // (warning: non-static reference "const double& mars_boost_ksim::BinaryPredicate<YourClassHere>::arg"
+      // (warning: non-static reference "const double& mars_boost::BinaryPredicate<YourClassHere>::arg"
       // in class without a constructor [-Wuninitialized])
       BinaryPredicate();
 #endif
@@ -430,7 +430,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                       && BOOST_WORKAROUND(__GNUC__, > 3)))
       // Declare a dummy constructor to make gcc happy.
       // It seems the compiler can not generate a sensible constructor when this is instantiated with a refence type.
-      // (warning: non-static reference "const double& mars_boost_ksim::Const_BinaryPredicate<YourClassHere>::arg"
+      // (warning: non-static reference "const double& mars_boost::Const_BinaryPredicate<YourClassHere>::arg"
       // in class without a constructor [-Wuninitialized])
       Const_BinaryPredicate();
 #endif
@@ -966,7 +966,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       {
           typedef typename C::key_type key_type;
           typedef typename C::value_type value_type;
-          BOOST_MPL_ASSERT((mars_boost_ksim::is_same<key_type,value_type>));
+          BOOST_MPL_ASSERT((mars_boost::is_same<key_type,value_type>));
       }
   };
 
@@ -979,7 +979,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           typedef typename C::value_type value_type;
           typedef typename C::mapped_type mapped_type;
           typedef std::pair<const key_type, mapped_type> required_value_type;
-          BOOST_MPL_ASSERT((mars_boost_ksim::is_same<value_type,required_value_type>));
+          BOOST_MPL_ASSERT((mars_boost::is_same<value_type,required_value_type>));
       }
   };
 
@@ -1038,9 +1038,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
   {
       BOOST_CONCEPT_USAGE(Collection)
       {
-        mars_boost_ksim::function_requires<mars_boost_ksim::InputIteratorConcept<iterator> >();
-        mars_boost_ksim::function_requires<mars_boost_ksim::InputIteratorConcept<const_iterator> >();
-        mars_boost_ksim::function_requires<mars_boost_ksim::CopyConstructibleConcept<value_type> >();
+        mars_boost::function_requires<mars_boost::InputIteratorConcept<iterator> >();
+        mars_boost::function_requires<mars_boost::InputIteratorConcept<const_iterator> >();
+        mars_boost::function_requires<mars_boost::CopyConstructibleConcept<value_type> >();
         const_constraints(c);
         i = c.begin();
         i = c.end();
@@ -1070,7 +1070,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       const_iterator ci;
       size_type n;
   };
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #if (defined _MSC_VER)
 # pragma warning( pop )

@@ -168,7 +168,7 @@ namespace ATL {
 #include <boost/pointee.hpp>
 
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 
     template< class E >
@@ -197,7 +197,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     { };
 
 
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 
 
@@ -213,7 +213,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #include <atlbase.h> // CComBSTR
 
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace range_detail_microsoft {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace range_detail_microsoft {
 
 
 #if !defined(BOOST_RANGE_ATL_NO_COLLECTIONS)
@@ -559,18 +559,18 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         template< class Iterator, class X >
         Iterator begin(X& x)
         {
-            return Iterator(mars_boost_ksim::make_tuple(x.m_aKey, x.m_aVal));
+            return Iterator(mars_boost::make_tuple(x.m_aKey, x.m_aVal));
         }
 
         template< class Iterator, class X >
         Iterator end(X& x)
         {
-            return Iterator(mars_boost_ksim::make_tuple(x.m_aKey + x.GetSize(), x.m_aVal + x.GetSize()));
+            return Iterator(mars_boost::make_tuple(x.m_aKey + x.GetSize(), x.m_aVal + x.GetSize()));
         }
     };
 
 
-} } // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim::range_detail_microsoft
+} } // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost::range_detail_microsoft
 
 
 
@@ -585,17 +585,17 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     // arrays
     //
     BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TEMPLATE(
-        mars_boost_ksim::range_detail_microsoft::using_type_as_tag,
+        mars_boost::range_detail_microsoft::using_type_as_tag,
         (ATL, BOOST_PP_NIL), CAtlArray, 2
     )
 
     BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TEMPLATE(
-        mars_boost_ksim::range_detail_microsoft::using_type_as_tag,
+        mars_boost::range_detail_microsoft::using_type_as_tag,
         (ATL, BOOST_PP_NIL), CAutoPtrArray, 1
     )
 
     BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TEMPLATE(
-        mars_boost_ksim::range_detail_microsoft::using_type_as_tag,
+        mars_boost::range_detail_microsoft::using_type_as_tag,
         (ATL, BOOST_PP_NIL), CInterfaceArray, (class)(const IID *)
     )
 
@@ -603,22 +603,22 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     // lists
     //
     BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TEMPLATE(
-        mars_boost_ksim::range_detail_microsoft::using_type_as_tag,
+        mars_boost::range_detail_microsoft::using_type_as_tag,
         (ATL, BOOST_PP_NIL), CAtlList, 2
     )
 
     BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TEMPLATE(
-        mars_boost_ksim::range_detail_microsoft::using_type_as_tag,
+        mars_boost::range_detail_microsoft::using_type_as_tag,
         (ATL, BOOST_PP_NIL), CAutoPtrList, 1
     )
 
     BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TEMPLATE(
-        mars_boost_ksim::range_detail_microsoft::using_type_as_tag,
+        mars_boost::range_detail_microsoft::using_type_as_tag,
         (ATL, BOOST_PP_NIL), CHeapPtrList, 2
     )
 
     BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TEMPLATE(
-        mars_boost_ksim::range_detail_microsoft::using_type_as_tag,
+        mars_boost::range_detail_microsoft::using_type_as_tag,
         (ATL, BOOST_PP_NIL), CInterfaceList, (class)(const IID *)
     )
 
@@ -626,22 +626,22 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     //maps
     //
     BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TEMPLATE(
-        mars_boost_ksim::range_detail_microsoft::using_type_as_tag,
+        mars_boost::range_detail_microsoft::using_type_as_tag,
         (ATL, BOOST_PP_NIL), CAtlMap, 4
     )
 
     BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TEMPLATE(
-        mars_boost_ksim::range_detail_microsoft::atl_rb_tree_tag,
+        mars_boost::range_detail_microsoft::atl_rb_tree_tag,
         (ATL, BOOST_PP_NIL), CRBTree, 4
     )
 
     BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TEMPLATE(
-        mars_boost_ksim::range_detail_microsoft::atl_rb_tree_tag,
+        mars_boost::range_detail_microsoft::atl_rb_tree_tag,
         (ATL, BOOST_PP_NIL), CRBMap, 4
     )
 
     BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TEMPLATE(
-        mars_boost_ksim::range_detail_microsoft::atl_rb_tree_tag,
+        mars_boost::range_detail_microsoft::atl_rb_tree_tag,
         (ATL, BOOST_PP_NIL), CRBMultiMap, 4
     )
 
@@ -650,28 +650,28 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     //
     #if !defined(BOOST_RANGE_ATL_HAS_OLD_CSIMPLESTRING)
         BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TEMPLATE(
-            mars_boost_ksim::range_detail_microsoft::atl_string_tag,
+            mars_boost::range_detail_microsoft::atl_string_tag,
             (ATL, BOOST_PP_NIL), CSimpleStringT, (class)(bool)
         )
     #else
         BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TEMPLATE(
-            mars_boost_ksim::range_detail_microsoft::atl_string_tag,
+            mars_boost::range_detail_microsoft::atl_string_tag,
             (ATL, BOOST_PP_NIL), CSimpleStringT, 1
         )
     #endif
 
     BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TEMPLATE(
-        mars_boost_ksim::range_detail_microsoft::atl_string_tag,
+        mars_boost::range_detail_microsoft::atl_string_tag,
         (ATL, BOOST_PP_NIL), CStringT, 2
     )
 
     BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TEMPLATE(
-        mars_boost_ksim::range_detail_microsoft::atl_string_tag,
+        mars_boost::range_detail_microsoft::atl_string_tag,
         (ATL, BOOST_PP_NIL), CFixedStringT, (class)(int)
     )
 
     BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TEMPLATE(
-        mars_boost_ksim::range_detail_microsoft::using_type_as_tag,
+        mars_boost::range_detail_microsoft::using_type_as_tag,
         (ATL, BOOST_PP_NIL), CStaticString, (class)(const int)
     )
 
@@ -680,7 +680,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 
 BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TYPE(
-    mars_boost_ksim::range_detail_microsoft::using_type_as_tag,
+    mars_boost::range_detail_microsoft::using_type_as_tag,
     (ATL, BOOST_PP_NIL), CComBSTR
 )
 
@@ -690,29 +690,29 @@ BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TYPE(
 #if !defined(BOOST_RANGE_ATL_HAS_OLD_CSIMPLE_XXX)
 
     BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TEMPLATE(
-        mars_boost_ksim::range_detail_microsoft::using_type_as_tag,
+        mars_boost::range_detail_microsoft::using_type_as_tag,
         (ATL, BOOST_PP_NIL), CSimpleArray, 2
     )
 
     BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TEMPLATE(
-        mars_boost_ksim::range_detail_microsoft::using_type_as_tag,
+        mars_boost::range_detail_microsoft::using_type_as_tag,
         (ATL, BOOST_PP_NIL), CSimpleMap, 3
     )
 
 #else
 
     BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TEMPLATE(
-        mars_boost_ksim::range_detail_microsoft::using_type_as_tag,
+        mars_boost::range_detail_microsoft::using_type_as_tag,
         (ATL, BOOST_PP_NIL), CSimpleArray, 1
     )
 
     BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TEMPLATE(
-        mars_boost_ksim::range_detail_microsoft::using_type_as_tag,
+        mars_boost::range_detail_microsoft::using_type_as_tag,
         (ATL, BOOST_PP_NIL), CSimpleMap, 2
     )
 
     BOOST_RANGE_DETAIL_MICROSOFT_CUSTOMIZATION_TEMPLATE(
-        mars_boost_ksim::range_detail_microsoft::using_type_as_tag,
+        mars_boost::range_detail_microsoft::using_type_as_tag,
         (ATL, BOOST_PP_NIL), CSimpleValArray, 1
     )
 

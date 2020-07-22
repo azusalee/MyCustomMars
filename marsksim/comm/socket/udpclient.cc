@@ -12,7 +12,7 @@
 
 
 /*
- * UdpClient.cpp
+ * UdpClientksim.cpp
  *
  *  Created on: 2014-9-5
  *      Author: zhouzhijie
@@ -37,7 +37,7 @@ struct UdpSendData
 };
 
 
-UdpClient::UdpClient(const std::string& _ip, int _port)
+UdpClientksim::UdpClientksim(const std::string& _ip, int _port)
 :fd_socket_(INVALID_SOCKET)
 , event_(NULL)
 , selector_(breaker_, true)
@@ -46,17 +46,17 @@ UdpClient::UdpClient(const std::string& _ip, int _port)
     __InitSocket(_ip, _port);
 }
 
-UdpClient::UdpClient(const std::string& _ip, int _port, IAsyncUdpClientEvent* _event)
+UdpClientksim::UdpClientksim(const std::string& _ip, int _port, IAsyncUdpClientksimEvent* _event)
 :fd_socket_(INVALID_SOCKET)
 , event_(_event)
 , selector_(breaker_, true)
 {
-    thread_ = new Thread(boost_ksim::bind(&UdpClient::__RunLoop, this));
+    thread_ = new Thread(boost_ksim::bind(&UdpClientksim::__RunLoop, this));
     
     __InitSocket(_ip, _port);
 }
 
-UdpClient::~UdpClient()
+UdpClientksim::~UdpClientksim()
 {
     if (thread_ && thread_->isruning())
     {
@@ -73,7 +73,7 @@ UdpClient::~UdpClient()
         socket_close(fd_socket_);
 }
 
-int UdpClient::SendBlock(void* _buf, size_t _len)
+int UdpClientksim::SendBlock(void* _buf, size_t _len)
 {
     xassert2((fd_socket_ != INVALID_SOCKET && event_ == NULL), "socket invalid");
     if (fd_socket_ == INVALID_SOCKET || event_ != NULL)
@@ -83,7 +83,7 @@ int UdpClient::SendBlock(void* _buf, size_t _len)
     return __DoSelect(false, true, _buf, _len, err, -1);
 }
 
-int UdpClient::ReadBlock(void* _buf, size_t _len, int _timeOutMs)
+int UdpClientksim::ReadBlock(void* _buf, size_t _len, int _timeOutMs)
 {
     xassert2((fd_socket_ != INVALID_SOCKET && event_ == NULL), "socket invalid");
     if (fd_socket_ == INVALID_SOCKET || event_ != NULL)
@@ -94,13 +94,13 @@ int UdpClient::ReadBlock(void* _buf, size_t _len, int _timeOutMs)
 }
 
 
-bool UdpClient::HasBuuferToSend()
+bool UdpClientksim::HasBuuferToSend()
 {
     ScopedLock lock(mutex_);
     return !list_buffer_.empty();
 }
 
-void UdpClient::SendAsync(void* _buf, size_t _len)
+void UdpClientksim::SendAsync(void* _buf, size_t _len)
 {
     xassert2((fd_socket_ != INVALID_SOCKET && event_ != NULL), "socket invalid");
     if (fd_socket_ == INVALID_SOCKET || event_ == NULL)
@@ -115,13 +115,13 @@ void UdpClient::SendAsync(void* _buf, size_t _len)
     breaker_.Break();
 }
 
-void UdpClient::SetIpPort(const std::string& _ip, int _port)
+void UdpClientksim::SetIpPort(const std::string& _ip, int _port)
 {
     bzero(&addr_, sizeof(addr_));
     addr_ = *(struct sockaddr_in*)(&socket_address(_ip.c_str(), _port).address());
 }
 
-void UdpClient::__InitSocket(const std::string& _ip, int _port)
+void UdpClientksim::__InitSocket(const std::string& _ip, int _port)
 {
     int errCode = 0;
     
@@ -148,7 +148,7 @@ void UdpClient::__InitSocket(const std::string& _ip, int _port)
     }
 }
 
-void UdpClient::__RunLoop()
+void UdpClientksim::__RunLoop()
 {
     xassert2(fd_socket_ != INVALID_SOCKET, "socket invalid");
     if (fd_socket_ == INVALID_SOCKET)
@@ -205,7 +205,7 @@ void UdpClient::__RunLoop()
 /*
  * return -2 break, -1 error, 0 timeout, else handle size
  */
-int UdpClient::__DoSelect(bool _bReadSet, bool _bWriteSet, void* _buf, size_t _len, int& _errno, int _timeoutMs)
+int UdpClientksim::__DoSelect(bool _bReadSet, bool _bWriteSet, void* _buf, size_t _len, int& _errno, int _timeoutMs)
 {
     xassert2((!(_bReadSet && _bWriteSet) && (_bReadSet || _bWriteSet)), "only read or write can be true, not both");
     

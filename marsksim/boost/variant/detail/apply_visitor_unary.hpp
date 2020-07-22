@@ -33,7 +33,7 @@
 #   include "boost/variant/detail/has_result_type.hpp"
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 //////////////////////////////////////////////////////////////////////////
 // function template apply_visitor(visitor, visitable)
@@ -94,33 +94,33 @@ namespace detail { namespace variant {
 template <class Visitor, class Variant>
 struct result_multideduce1 {
     typedef typename Variant::types                 types;
-    typedef typename mars_boost_ksim::mpl::begin<types>::type begin_it;
-    typedef typename mars_boost_ksim::mpl::advance<
-        begin_it, mars_boost_ksim::mpl::int_<mars_boost_ksim::mpl::size<types>::type::value - 1>
+    typedef typename mars_boost::mpl::begin<types>::type begin_it;
+    typedef typename mars_boost::mpl::advance<
+        begin_it, mars_boost::mpl::int_<mars_boost::mpl::size<types>::type::value - 1>
     >::type                                         last_it;
 
     // For metaprogramming purposes ONLY! Do not use this method (and class) at runtime!
     static Visitor& vis() BOOST_NOEXCEPT {
         // Functions that work with lambdas must be defined in same translation unit.
-        // Because of that, we can not use `mars_boost_ksim::decval<Visitor&>()` here.
+        // Because of that, we can not use `mars_boost::decval<Visitor&>()` here.
         Visitor&(*f)() = 0; // pointer to function
         return f();
     }
 
     static decltype(auto) deduce_impl(last_it, unsigned /*helper*/) {
-        typedef typename mars_boost_ksim::mpl::deref<last_it>::type value_t;
-        return vis()( mars_boost_ksim::declval< value_t& >() );
+        typedef typename mars_boost::mpl::deref<last_it>::type value_t;
+        return vis()( mars_boost::declval< value_t& >() );
     }
 
     template <class It>
     static decltype(auto) deduce_impl(It, unsigned helper) {
-        typedef typename mars_boost_ksim::mpl::next<It>::type next_t;
-        typedef typename mars_boost_ksim::mpl::deref<It>::type value_t;
-        if (helper == mars_boost_ksim::mpl::distance<begin_it, It>::type::value) {
+        typedef typename mars_boost::mpl::next<It>::type next_t;
+        typedef typename mars_boost::mpl::deref<It>::type value_t;
+        if (helper == mars_boost::mpl::distance<begin_it, It>::type::value) {
             return deduce_impl(next_t(), ++helper);
         }
 
-        return vis()( mars_boost_ksim::declval< value_t& >() );
+        return vis()( mars_boost::declval< value_t& >() );
     }
 
     static decltype(auto) deduce() {
@@ -148,26 +148,26 @@ struct result_wrapper1
 
 template <typename Visitor, typename Visitable>
 inline decltype(auto) apply_visitor(Visitor& visitor, Visitable& visitable,
-    typename mars_boost_ksim::disable_if<
-        mars_boost_ksim::detail::variant::has_result_type<Visitor>
+    typename mars_boost::disable_if<
+        mars_boost::detail::variant::has_result_type<Visitor>
     >::type* = 0)
 {
-    mars_boost_ksim::detail::variant::result_wrapper1<Visitor, Visitable> cpp14_vis(visitor);
+    mars_boost::detail::variant::result_wrapper1<Visitor, Visitable> cpp14_vis(visitor);
     return visitable.apply_visitor(cpp14_vis);
 }
 
 template <typename Visitor, typename Visitable>
 inline decltype(auto) apply_visitor(const Visitor& visitor, Visitable& visitable,
-    typename mars_boost_ksim::disable_if<
-        mars_boost_ksim::detail::variant::has_result_type<Visitor>
+    typename mars_boost::disable_if<
+        mars_boost::detail::variant::has_result_type<Visitor>
     >::type* = 0)
 {
-    mars_boost_ksim::detail::variant::result_wrapper1<const Visitor, Visitable> cpp14_vis(visitor);
+    mars_boost::detail::variant::result_wrapper1<const Visitor, Visitable> cpp14_vis(visitor);
     return visitable.apply_visitor(cpp14_vis);
 }
 
 #endif // !defined(BOOST_NO_CXX14_DECLTYPE_AUTO) && !defined(BOOST_NO_CXX11_DECLTYPE_N3276)
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_VARIANT_DETAIL_APPLY_VISITOR_UNARY_HPP

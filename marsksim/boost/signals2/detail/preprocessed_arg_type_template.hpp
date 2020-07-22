@@ -11,7 +11,7 @@
 
 #define BOOST_SIGNALS2_NUM_ARGS BOOST_PP_ITERATION()
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace signals2
   {
@@ -34,6 +34,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
     } // namespace detail
   } // namespace signals2
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #undef BOOST_SIGNALS2_NUM_ARGS

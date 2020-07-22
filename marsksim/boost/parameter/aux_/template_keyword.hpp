@@ -10,7 +10,7 @@
 # include <boost/type_traits/is_convertible.hpp>
 # include <boost/type_traits/is_reference.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace parameter { 
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace parameter { 
 
 namespace aux 
 {
@@ -41,7 +41,7 @@ struct template_keyword
     typedef value_type reference;
 };
 
-}} // namespace mars_boost_ksim::parameter
+}} // namespace mars_boost::parameter
 
 #endif // BOOST_PARAMETER_TEMPLATE_KEYWORD_060203_HPP
 

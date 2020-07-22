@@ -14,7 +14,7 @@
 #include <boost/thread/detail/delete.hpp>
 #include <boost/chrono/chrono.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
   //[basic_poly_lockable

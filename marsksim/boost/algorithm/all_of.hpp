@@ -16,7 +16,7 @@
 #include <boost/range/begin.hpp>
 #include <boost/range/end.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {  namespace algorithm {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {  namespace algorithm {
 
 #if __cplusplus >= 201103L
 //  Use the C++11 versions of all_of if it is available
@@ -53,7 +53,7 @@ bool all_of ( InputIterator first, InputIterator last, Predicate p )
 template<typename Range, typename Predicate> 
 bool all_of ( const Range &r, Predicate p )
 {
-    return mars_boost_ksim::algorithm::all_of ( mars_boost_ksim::begin (r), mars_boost_ksim::end (r), p );
+    return mars_boost::algorithm::all_of ( mars_boost::begin (r), mars_boost::end (r), p );
 } 
 
 /// \fn all_of_equal ( InputIterator first, InputIterator last, const T &val )
@@ -83,7 +83,7 @@ bool all_of_equal ( InputIterator first, InputIterator last, const T &val )
 template<typename Range, typename T> 
 bool all_of_equal ( const Range &r, const T &val ) 
 {
-    return mars_boost_ksim::algorithm::all_of_equal ( mars_boost_ksim::begin (r), mars_boost_ksim::end (r), val );
+    return mars_boost::algorithm::all_of_equal ( mars_boost::begin (r), mars_boost::end (r), val );
 } 
 
 }} // namespace boost and algorithm

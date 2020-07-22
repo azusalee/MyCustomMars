@@ -51,7 +51,7 @@
 #   include <boost/mpl/if.hpp>
 #   include <boost/mpl/bool.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl { namespace aux {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl { namespace aux {
 
 struct has_xxx_tag;
 
@@ -91,26 +91,26 @@ struct msvc_is_incomplete<int>
 }}}
 
 #   define BOOST_MPL_HAS_XXX_TRAIT_NAMED_DEF_(trait, name, default_) \
-template< typename T, typename name = ::mars_boost_ksim::mpl::aux::has_xxx_tag > \
+template< typename T, typename name = ::mars_boost::mpl::aux::has_xxx_tag > \
 struct BOOST_PP_CAT(trait,_impl) : T \
 { \
-    static mars_boost_ksim::mpl::aux::no_tag \
-    test(void(*)(::mars_boost_ksim::mpl::aux::has_xxx_tag)); \
+    static mars_boost::mpl::aux::no_tag \
+    test(void(*)(::mars_boost::mpl::aux::has_xxx_tag)); \
     \
-    static mars_boost_ksim::mpl::aux::yes_tag test(...); \
+    static mars_boost::mpl::aux::yes_tag test(...); \
     \
     BOOST_STATIC_CONSTANT(bool, value = \
           sizeof(test(static_cast<void(*)(name)>(0))) \
-            != sizeof(mars_boost_ksim::mpl::aux::no_tag) \
+            != sizeof(mars_boost::mpl::aux::no_tag) \
         ); \
-    typedef mars_boost_ksim::mpl::bool_<value> type; \
+    typedef mars_boost::mpl::bool_<value> type; \
 }; \
 \
-template< typename T, typename fallback_ = mars_boost_ksim::mpl::bool_<default_> > \
+template< typename T, typename fallback_ = mars_boost::mpl::bool_<default_> > \
 struct trait \
-    : mars_boost_ksim::mpl::if_c< \
-          mars_boost_ksim::mpl::aux::msvc_is_incomplete<T>::value \
-        , mars_boost_ksim::mpl::bool_<false> \
+    : mars_boost::mpl::if_c< \
+          mars_boost::mpl::aux::msvc_is_incomplete<T>::value \
+        , mars_boost::mpl::bool_<false> \
         , BOOST_PP_CAT(trait,_impl)<T> \
         >::type \
 { \
@@ -136,7 +136,7 @@ BOOST_MPL_AUX_HAS_XXX_TRAIT_SPEC(trait, long double) \
 template<> struct trait<T> \
 { \
     BOOST_STATIC_CONSTANT(bool, value = false); \
-    typedef mars_boost_ksim::mpl::bool_<false> type; \
+    typedef mars_boost::mpl::bool_<false> type; \
 }; \
 /**/
 
@@ -176,7 +176,7 @@ template< typename T, typename U = void > \
 struct BOOST_PP_CAT(trait,_impl_) \
 { \
     BOOST_STATIC_CONSTANT(bool, value = false); \
-    typedef mars_boost_ksim::mpl::bool_<value> type; \
+    typedef mars_boost::mpl::bool_<value> type; \
 }; \
 \
 template< typename T > \
@@ -186,10 +186,10 @@ struct BOOST_PP_CAT(trait,_impl_)< \
     > \
 { \
     BOOST_STATIC_CONSTANT(bool, value = true); \
-    typedef mars_boost_ksim::mpl::bool_<value> type; \
+    typedef mars_boost::mpl::bool_<value> type; \
 }; \
 \
-template< typename T, typename fallback_ = mars_boost_ksim::mpl::bool_<default_> > \
+template< typename T, typename fallback_ = mars_boost::mpl::bool_<default_> > \
 struct trait \
     : BOOST_PP_CAT(trait,_impl_)<T> \
 { \
@@ -210,18 +210,18 @@ struct trait_tester< T, true > \
     struct trait_tester_impl \
     { \
         template < class U > \
-        static int  resolve( mars_boost_ksim::mpl::aux::type_wrapper<U> const volatile * \
-                           , mars_boost_ksim::mpl::aux::type_wrapper<typename U::name >* = 0 ); \
+        static int  resolve( mars_boost::mpl::aux::type_wrapper<U> const volatile * \
+                           , mars_boost::mpl::aux::type_wrapper<typename U::name >* = 0 ); \
         static char resolve( ... ); \
     }; \
-    typedef mars_boost_ksim::mpl::aux::type_wrapper<T> t_; \
+    typedef mars_boost::mpl::aux::type_wrapper<T> t_; \
     BOOST_STATIC_CONSTANT( bool, value = ( sizeof( trait_tester_impl::resolve( static_cast< t_ * >(0) ) ) == sizeof(int) ) ); \
 }; \
-template< typename T, typename fallback_ = mars_boost_ksim::mpl::bool_<default_> > \
+template< typename T, typename fallback_ = mars_boost::mpl::bool_<default_> > \
 struct trait           \
 {                      \
-    BOOST_STATIC_CONSTANT( bool, value = (trait_tester< T, mars_boost_ksim::is_class< T >::value >::value) );     \
-    typedef mars_boost_ksim::mpl::bool_< trait< T, fallback_ >::value > type; \
+    BOOST_STATIC_CONSTANT( bool, value = (trait_tester< T, mars_boost::is_class< T >::value >::value) );     \
+    typedef mars_boost::mpl::bool_< trait< T, fallback_ >::value > type; \
 };
 
 #   define BOOST_MPL_HAS_XXX_TRAIT_NAMED_DEF(trait, name, default_) \
@@ -234,26 +234,26 @@ struct trait           \
 #   else // other SFINAE-capable compilers
 
 #   define BOOST_MPL_HAS_XXX_TRAIT_NAMED_DEF(trait, name, default_) \
-template< typename T, typename fallback_ = mars_boost_ksim::mpl::bool_<default_> > \
+template< typename T, typename fallback_ = mars_boost::mpl::bool_<default_> > \
 struct trait \
 { \
     struct gcc_3_2_wknd \
     { \
         template< typename U > \
-        static mars_boost_ksim::mpl::aux::yes_tag test( \
-              mars_boost_ksim::mpl::aux::type_wrapper<U> const volatile* \
-            , mars_boost_ksim::mpl::aux::type_wrapper<BOOST_MSVC_TYPENAME U::name>* = 0 \
+        static mars_boost::mpl::aux::yes_tag test( \
+              mars_boost::mpl::aux::type_wrapper<U> const volatile* \
+            , mars_boost::mpl::aux::type_wrapper<BOOST_MSVC_TYPENAME U::name>* = 0 \
             ); \
     \
-        static mars_boost_ksim::mpl::aux::no_tag test(...); \
+        static mars_boost::mpl::aux::no_tag test(...); \
     }; \
     \
-    typedef mars_boost_ksim::mpl::aux::type_wrapper<T> t_; \
+    typedef mars_boost::mpl::aux::type_wrapper<T> t_; \
     BOOST_STATIC_CONSTANT(bool, value = \
           sizeof(gcc_3_2_wknd::test(static_cast<t_*>(0))) \
-            == sizeof(mars_boost_ksim::mpl::aux::yes_tag) \
+            == sizeof(mars_boost::mpl::aux::yes_tag) \
         ); \
-    typedef mars_boost_ksim::mpl::bool_<value> type; \
+    typedef mars_boost::mpl::bool_<value> type; \
 }; \
 /**/
 
@@ -265,7 +265,7 @@ struct trait \
 // placeholder implementation
 
 #   define BOOST_MPL_HAS_XXX_TRAIT_NAMED_DEF(trait, name, default_) \
-template< typename T, typename fallback_ = mars_boost_ksim::mpl::bool_<default_> > \
+template< typename T, typename fallback_ = mars_boost::mpl::bool_<default_> > \
 struct trait \
 { \
     BOOST_STATIC_CONSTANT(bool, value = fallback_::value); \
@@ -351,12 +351,12 @@ struct trait \
 #   if !BOOST_MPL_HAS_XXX_NO_EXPLICIT_TEST_FUNCTION
 #     define BOOST_MPL_HAS_MEMBER_REJECT(args, member_macro) \
         template< typename V > \
-        static mars_boost_ksim::mpl::aux::no_tag \
+        static mars_boost::mpl::aux::no_tag \
         BOOST_MPL_HAS_MEMBER_INTROSPECTION_TEST_NAME(args)(...); \
       /**/
 #   else
 #     define BOOST_MPL_HAS_MEMBER_REJECT(args, member_macro) \
-        static mars_boost_ksim::mpl::aux::no_tag \
+        static mars_boost::mpl::aux::no_tag \
         BOOST_MPL_HAS_MEMBER_INTROSPECTION_TEST_NAME(args)(...); \
       /**/
 #   endif
@@ -364,9 +364,9 @@ struct trait \
 #   if !BOOST_MPL_HAS_XXX_NO_WRAPPED_TYPES
 #     define BOOST_MPL_HAS_MEMBER_MULTI_ACCEPT(z, n, args) \
         template< typename V > \
-        static mars_boost_ksim::mpl::aux::yes_tag \
+        static mars_boost::mpl::aux::yes_tag \
         BOOST_MPL_HAS_MEMBER_INTROSPECTION_TEST_NAME(args)( \
-            mars_boost_ksim::mpl::aux::type_wrapper< V > const volatile* \
+            mars_boost::mpl::aux::type_wrapper< V > const volatile* \
           , BOOST_MPL_HAS_MEMBER_INTROSPECTION_SUBSTITUTE_NAME(args, n) < \
                 V::template BOOST_PP_ARRAY_ELEM(1, args) \
             >* = 0 \
@@ -382,7 +382,7 @@ struct trait \
 #   else
 #     define BOOST_MPL_HAS_MEMBER_ACCEPT(args, member_macro) \
         template< typename V > \
-        static mars_boost_ksim::mpl::aux::yes_tag \
+        static mars_boost::mpl::aux::yes_tag \
         BOOST_MPL_HAS_MEMBER_INTROSPECTION_TEST_NAME(args)( \
             V const volatile* \
           , member_macro(args, V, T)* = 0 \
@@ -393,16 +393,16 @@ struct trait \
 #   if !BOOST_MPL_HAS_XXX_NO_EXPLICIT_TEST_FUNCTION
 #     define BOOST_MPL_HAS_MEMBER_TEST(args) \
           sizeof(BOOST_MPL_HAS_MEMBER_INTROSPECTION_TEST_NAME(args)< U >(0)) \
-              == sizeof(mars_boost_ksim::mpl::aux::yes_tag) \
+              == sizeof(mars_boost::mpl::aux::yes_tag) \
       /**/
 #   else
 #     if !BOOST_MPL_HAS_XXX_NO_WRAPPED_TYPES
 #       define BOOST_MPL_HAS_MEMBER_TEST(args) \
           sizeof( \
               BOOST_MPL_HAS_MEMBER_INTROSPECTION_TEST_NAME(args)( \
-                  static_cast< mars_boost_ksim::mpl::aux::type_wrapper< U >* >(0) \
+                  static_cast< mars_boost::mpl::aux::type_wrapper< U >* >(0) \
               ) \
-          ) == sizeof(mars_boost_ksim::mpl::aux::yes_tag) \
+          ) == sizeof(mars_boost::mpl::aux::yes_tag) \
         /**/
 #     else
 #       define BOOST_MPL_HAS_MEMBER_TEST(args) \
@@ -410,7 +410,7 @@ struct trait \
               BOOST_MPL_HAS_MEMBER_INTROSPECTION_TEST_NAME(args)( \
                   static_cast< U* >(0) \
               ) \
-          ) == sizeof(mars_boost_ksim::mpl::aux::yes_tag) \
+          ) == sizeof(mars_boost::mpl::aux::yes_tag) \
         /**/
 #     endif
 #   endif
@@ -426,7 +426,7 @@ struct trait \
           BOOST_STATIC_CONSTANT( \
               bool, value = BOOST_MPL_HAS_MEMBER_TEST(args) \
           ); \
-          typedef mars_boost_ksim::mpl::bool_< value > type; \
+          typedef mars_boost::mpl::bool_< value > type; \
       }; \
     /**/
 
@@ -436,7 +436,7 @@ struct trait \
       template< \
           typename T \
         , typename fallback_ \
-              = mars_boost_ksim::mpl::bool_< BOOST_PP_ARRAY_ELEM(3, args) > \
+              = mars_boost::mpl::bool_< BOOST_PP_ARRAY_ELEM(3, args) > \
       > \
       class BOOST_PP_ARRAY_ELEM(0, args) { \
           introspect_macro(args, substitute_macro, member_macro) \
@@ -536,7 +536,7 @@ struct trait \
         > \
         struct BOOST_MPL_HAS_MEMBER_INTROSPECTION_TEST_NAME(args) { \
             BOOST_STATIC_CONSTANT(bool, value = false); \
-            typedef mars_boost_ksim::mpl::bool_< value > type; \
+            typedef mars_boost::mpl::bool_< value > type; \
         }; \
       /**/
 
@@ -554,7 +554,7 @@ struct trait \
                 >::type \
         > { \
             BOOST_STATIC_CONSTANT(bool, value = true); \
-            typedef mars_boost_ksim::mpl::bool_< value > type; \
+            typedef mars_boost::mpl::bool_< value > type; \
         }; \
       /**/
 
@@ -629,7 +629,7 @@ struct trait \
 
 #   define BOOST_MPL_HAS_XXX_TEMPLATE_NAMED_DEF(trait, name, default_) \
       template< typename T \
-              , typename fallback_ = mars_boost_ksim::mpl::bool_< default_ > > \
+              , typename fallback_ = mars_boost::mpl::bool_< default_ > > \
       struct trait { \
           BOOST_STATIC_CONSTANT(bool, value = fallback_::value); \
           typedef fallback_ type; \

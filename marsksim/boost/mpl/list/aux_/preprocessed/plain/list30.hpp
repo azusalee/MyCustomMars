@@ -9,7 +9,7 @@
 // Preprocessed version of "boost/mpl/list/list30.hpp" header
 // -- DO NOT modify by hand!
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl {
 
 template<
       typename T0, typename T1, typename T2, typename T3, typename T4

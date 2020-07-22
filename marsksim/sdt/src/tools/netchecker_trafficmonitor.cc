@@ -12,7 +12,7 @@
 
 
 /*
- * NetCheckTrafficMonitor.cpp
+ * NetCheckTrafficMonitorksim.cpp
  *
  *  Created on: 2015年1月27日
  *      Author: wutianqiang
@@ -22,7 +22,7 @@
 #include "marsksim/comm/xlogger/xlogger.h"
 #include "marsksim/comm/platform_comm.h"
 
-NetCheckTrafficMonitor::NetCheckTrafficMonitor(unsigned long mobileDataThreshold, bool isIgnoreRecvData, unsigned long wifiDataThreshold)
+NetCheckTrafficMonitorksim::NetCheckTrafficMonitorksim(unsigned long mobileDataThreshold, bool isIgnoreRecvData, unsigned long wifiDataThreshold)
     : wifi_recv_data_size_(0)
     , wifi_send_data_size_(0)
     , mobile_recv_data_size_(0)
@@ -34,12 +34,12 @@ NetCheckTrafficMonitor::NetCheckTrafficMonitor(unsigned long mobileDataThreshold
 }
 
 
-NetCheckTrafficMonitor::~NetCheckTrafficMonitor() {
+NetCheckTrafficMonitorksim::~NetCheckTrafficMonitorksim() {
     __dumpDataSize();
 }
 
 
-bool NetCheckTrafficMonitor::sendLimitCheck(unsigned long sendDataSize) {
+bool NetCheckTrafficMonitorksim::sendLimitCheck(unsigned long sendDataSize) {
     ScopedLock lock(mutex_);
 
     if ((wifi_send_data_size_ + sendDataSize) > wifi_data_threshold_
@@ -53,7 +53,7 @@ bool NetCheckTrafficMonitor::sendLimitCheck(unsigned long sendDataSize) {
 
     return false;
 }
-bool NetCheckTrafficMonitor::recvLimitCheck(unsigned long recvDataSize) {
+bool NetCheckTrafficMonitorksim::recvLimitCheck(unsigned long recvDataSize) {
     ScopedLock lock(mutex_);
     __data(0, recvDataSize);
 
@@ -68,7 +68,7 @@ bool NetCheckTrafficMonitor::recvLimitCheck(unsigned long recvDataSize) {
 
     return false;
 }
-void NetCheckTrafficMonitor::reset() {
+void NetCheckTrafficMonitorksim::reset() {
     ScopedLock lock(mutex_);
     wifi_recv_data_size_ = 0;
     wifi_send_data_size_ = 0;
@@ -78,7 +78,7 @@ void NetCheckTrafficMonitor::reset() {
     mobile_data_threshold_ = 0;
 }
 
-int NetCheckTrafficMonitor::__data(unsigned long sendDataSize, unsigned long recvDataSize) {
+int NetCheckTrafficMonitorksim::__data(unsigned long sendDataSize, unsigned long recvDataSize) {
     if (0 < sendDataSize || 0 < recvDataSize) {
         if (kMobile != getNetInfo())
             wifi_recv_data_size_ += recvDataSize;
@@ -94,7 +94,7 @@ int NetCheckTrafficMonitor::__data(unsigned long sendDataSize, unsigned long rec
     return 0;
 }
 
-void NetCheckTrafficMonitor::__dumpDataSize() {
+void NetCheckTrafficMonitorksim::__dumpDataSize() {
     xinfo_function();
     xinfo2(TSF"m_wifiRecvDataSize=%_,wifi_send_data_size_=%_,mobile_recv_data_size_=%_,mobile_send_data_size_=%_,wifi_data_threshold_=%_,mobile_data_threshold_=%_,is_ignore_recv_data_=%_"
            , wifi_recv_data_size_, wifi_send_data_size_, mobile_recv_data_size_, mobile_send_data_size_, wifi_data_threshold_, mobile_data_threshold_, is_ignore_recv_data_);

@@ -24,7 +24,7 @@
 #include <boost/type_traits/add_const.hpp>
 #include <boost/type_traits/remove_reference.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace detail {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace detail {
 
 # define BOOST_DETAIL_default_arg(z, n, _)                                      \
     typedef mpl::void_ BOOST_PP_CAT(arg, n);
@@ -143,6 +143,6 @@ struct function_name
 # undef args
 };
 
-}} // namespace mars_boost_ksim::detail
+}} // namespace mars_boost::detail
 
 //#endif // BOOST_DETAIL_FUNCTION_N_DWA2006514_HPP

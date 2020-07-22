@@ -26,9 +26,9 @@
 #if defined(BOOST_NO_CXX11_RVALUE_REFERENCES)
 
 #define BOOST_MOVE_CATCH_CONST(U)  \
-   typename ::mars_boost_ksim::move_detail::if_< ::mars_boost_ksim::move_detail::is_class<U>, BOOST_CATCH_CONST_RLVALUE(U), const U &>::type
+   typename ::mars_boost::move_detail::if_< ::mars_boost::move_detail::is_class<U>, BOOST_CATCH_CONST_RLVALUE(U), const U &>::type
 #define BOOST_MOVE_CATCH_RVALUE(U)\
-   typename ::mars_boost_ksim::move_detail::if_< ::mars_boost_ksim::move_detail::is_class<U>, BOOST_RV_REF(U), ::mars_boost_ksim::move_detail::nat>::type
+   typename ::mars_boost::move_detail::if_< ::mars_boost::move_detail::is_class<U>, BOOST_RV_REF(U), ::mars_boost::move_detail::nat>::type
 #define BOOST_MOVE_CATCH_FWD(U) BOOST_FWD_REF(U)
 #else
 #define BOOST_MOVE_CATCH_CONST(U)  const U &
@@ -48,7 +48,7 @@
       {  return FWD_FUNCTION(static_cast<const TYPE&>(x)); }\
       \
       RETURN_VALUE PUB_FUNCTION(BOOST_MOVE_CATCH_RVALUE(TYPE) x) \
-      {  return FWD_FUNCTION(::mars_boost_ksim::move(x));  }\
+      {  return FWD_FUNCTION(::mars_boost::move(x));  }\
       \
       RETURN_VALUE PUB_FUNCTION(TYPE &x)\
       {  return FWD_FUNCTION(const_cast<const TYPE &>(x)); }\
@@ -59,27 +59,27 @@
          \
          template<class BOOST_MOVE_TEMPL_PARAM>\
          RETURN_VALUE PUB_FUNCTION(const BOOST_MOVE_TEMPL_PARAM &u,\
-            typename ::mars_boost_ksim::move_detail::enable_if_and\
-                                 < ::mars_boost_ksim::move_detail::nat \
-                                 , ::mars_boost_ksim::move_detail::is_same<TYPE, BOOST_MOVE_TEMPL_PARAM>\
-                                 , ::mars_boost_ksim::move_detail::is_class<TYPE>\
-                                 , ::mars_boost_ksim::has_move_emulation_disabled<BOOST_MOVE_TEMPL_PARAM>\
+            typename ::mars_boost::move_detail::enable_if_and\
+                                 < ::mars_boost::move_detail::nat \
+                                 , ::mars_boost::move_detail::is_same<TYPE, BOOST_MOVE_TEMPL_PARAM>\
+                                 , ::mars_boost::move_detail::is_class<TYPE>\
+                                 , ::mars_boost::has_move_emulation_disabled<BOOST_MOVE_TEMPL_PARAM>\
                                  >::type* = 0)\
          { return FWD_FUNCTION(u); }\
          \
          template<class BOOST_MOVE_TEMPL_PARAM>\
          RETURN_VALUE PUB_FUNCTION(const BOOST_MOVE_TEMPL_PARAM &u,\
-            typename ::mars_boost_ksim::move_detail::disable_if_or\
-                              < ::mars_boost_ksim::move_detail::nat \
-                              , ::mars_boost_ksim::move_detail::is_same<TYPE, BOOST_MOVE_TEMPL_PARAM> \
-                              , ::mars_boost_ksim::move_detail::and_ \
-                                 < ::mars_boost_ksim::move_detail::is_rv<BOOST_MOVE_TEMPL_PARAM> \
-                                 , ::mars_boost_ksim::move_detail::is_class<BOOST_MOVE_TEMPL_PARAM> \
+            typename ::mars_boost::move_detail::disable_if_or\
+                              < ::mars_boost::move_detail::nat \
+                              , ::mars_boost::move_detail::is_same<TYPE, BOOST_MOVE_TEMPL_PARAM> \
+                              , ::mars_boost::move_detail::and_ \
+                                 < ::mars_boost::move_detail::is_rv<BOOST_MOVE_TEMPL_PARAM> \
+                                 , ::mars_boost::move_detail::is_class<BOOST_MOVE_TEMPL_PARAM> \
                                  > \
                               >::type* = 0)\
          {\
             TYPE t(u);\
-            return FWD_FUNCTION(::mars_boost_ksim::move(t));\
+            return FWD_FUNCTION(::mars_boost::move(t));\
          }\
       //
    #else
@@ -87,28 +87,28 @@
          BOOST_MOVE_CONVERSION_AWARE_CATCH_COMMON(PUB_FUNCTION, TYPE, RETURN_VALUE, FWD_FUNCTION)\
          \
          template<class BOOST_MOVE_TEMPL_PARAM>\
-         typename ::mars_boost_ksim::move_detail::enable_if_and\
+         typename ::mars_boost::move_detail::enable_if_and\
                                        < RETURN_VALUE \
-                                       , ::mars_boost_ksim::move_detail::is_same<TYPE, BOOST_MOVE_TEMPL_PARAM>\
-                                       , ::mars_boost_ksim::move_detail::is_class<TYPE>\
-                                       , ::mars_boost_ksim::has_move_emulation_disabled<BOOST_MOVE_TEMPL_PARAM>\
+                                       , ::mars_boost::move_detail::is_same<TYPE, BOOST_MOVE_TEMPL_PARAM>\
+                                       , ::mars_boost::move_detail::is_class<TYPE>\
+                                       , ::mars_boost::has_move_emulation_disabled<BOOST_MOVE_TEMPL_PARAM>\
                                        >::type\
             PUB_FUNCTION(const BOOST_MOVE_TEMPL_PARAM &u)\
          { return FWD_FUNCTION(u); }\
          \
          template<class BOOST_MOVE_TEMPL_PARAM>\
-         typename ::mars_boost_ksim::move_detail::disable_if_or\
+         typename ::mars_boost::move_detail::disable_if_or\
                            < RETURN_VALUE \
-                           , ::mars_boost_ksim::move_detail::is_same<TYPE, BOOST_MOVE_TEMPL_PARAM> \
-                           , ::mars_boost_ksim::move_detail::and_ \
-                              < ::mars_boost_ksim::move_detail::is_rv<BOOST_MOVE_TEMPL_PARAM> \
-                              , ::mars_boost_ksim::move_detail::is_class<BOOST_MOVE_TEMPL_PARAM> \
+                           , ::mars_boost::move_detail::is_same<TYPE, BOOST_MOVE_TEMPL_PARAM> \
+                           , ::mars_boost::move_detail::and_ \
+                              < ::mars_boost::move_detail::is_rv<BOOST_MOVE_TEMPL_PARAM> \
+                              , ::mars_boost::move_detail::is_class<BOOST_MOVE_TEMPL_PARAM> \
                               > \
                            >::type\
             PUB_FUNCTION(const BOOST_MOVE_TEMPL_PARAM &u)\
          {\
             TYPE t(u);\
-            return FWD_FUNCTION(::mars_boost_ksim::move(t));\
+            return FWD_FUNCTION(::mars_boost::move(t));\
          }\
       //
    #endif
@@ -119,16 +119,16 @@
       {  return FWD_FUNCTION(static_cast<const TYPE&>(x)); }\
       \
       RETURN_VALUE PUB_FUNCTION(BOOST_MOVE_CATCH_RVALUE(TYPE) x) \
-      {  return FWD_FUNCTION(::mars_boost_ksim::move(x));  }\
+      {  return FWD_FUNCTION(::mars_boost::move(x));  }\
       \
       template<class BOOST_MOVE_TEMPL_PARAM>\
-      typename ::mars_boost_ksim::move_detail::enable_if_c\
-                        < !::mars_boost_ksim::move_detail::is_same<TYPE, BOOST_MOVE_TEMPL_PARAM>::value\
+      typename ::mars_boost::move_detail::enable_if_c\
+                        < !::mars_boost::move_detail::is_same<TYPE, BOOST_MOVE_TEMPL_PARAM>::value\
                         , RETURN_VALUE >::type\
       PUB_FUNCTION(const BOOST_MOVE_TEMPL_PARAM &u)\
       {\
          TYPE t(u);\
-         return FWD_FUNCTION(::mars_boost_ksim::move(t));\
+         return FWD_FUNCTION(::mars_boost::move(t));\
       }\
    //
 
@@ -139,7 +139,7 @@
       {  return FWD_FUNCTION(static_cast<const TYPE&>(x)); }\
       \
       RETURN_VALUE PUB_FUNCTION(BOOST_MOVE_CATCH_RVALUE(TYPE) x) \
-      {  return FWD_FUNCTION(::mars_boost_ksim::move(x));  }\
+      {  return FWD_FUNCTION(::mars_boost::move(x));  }\
    //
 
 #endif   //BOOST_NO_CXX11_RVALUE_REFERENCES
@@ -156,7 +156,7 @@
       {  return FWD_FUNCTION(arg1, static_cast<const TYPE&>(x)); }\
       \
       RETURN_VALUE PUB_FUNCTION(ARG1 arg1, BOOST_MOVE_CATCH_RVALUE(TYPE) x) \
-      {  return FWD_FUNCTION(arg1, ::mars_boost_ksim::move(x));  }\
+      {  return FWD_FUNCTION(arg1, ::mars_boost::move(x));  }\
       \
       RETURN_VALUE PUB_FUNCTION(ARG1 arg1, TYPE &x)\
       {  return FWD_FUNCTION(arg1, const_cast<const TYPE &>(x)); }\
@@ -167,24 +167,24 @@
          \
          template<class BOOST_MOVE_TEMPL_PARAM>\
          RETURN_VALUE PUB_FUNCTION(ARG1 arg1, const BOOST_MOVE_TEMPL_PARAM &u,\
-            typename ::mars_boost_ksim::move_detail::enable_if_and\
-                              < ::mars_boost_ksim::move_detail::nat \
-                              , ::mars_boost_ksim::move_detail::is_same<TYPE, BOOST_MOVE_TEMPL_PARAM>\
-                              , ::mars_boost_ksim::has_move_emulation_disabled<BOOST_MOVE_TEMPL_PARAM>\
+            typename ::mars_boost::move_detail::enable_if_and\
+                              < ::mars_boost::move_detail::nat \
+                              , ::mars_boost::move_detail::is_same<TYPE, BOOST_MOVE_TEMPL_PARAM>\
+                              , ::mars_boost::has_move_emulation_disabled<BOOST_MOVE_TEMPL_PARAM>\
                               >::type* = 0)\
          { return FWD_FUNCTION(arg1, u); }\
          \
          template<class BOOST_MOVE_TEMPL_PARAM>\
          RETURN_VALUE PUB_FUNCTION(ARG1 arg1, const BOOST_MOVE_TEMPL_PARAM &u,\
-            typename ::mars_boost_ksim::move_detail::disable_if_or\
+            typename ::mars_boost::move_detail::disable_if_or\
                               < void \
-                              , ::mars_boost_ksim::move_detail::is_rv<BOOST_MOVE_TEMPL_PARAM>\
-                              , ::mars_boost_ksim::move_detail::is_same<TYPE, BOOST_MOVE_TEMPL_PARAM>\
-                              , ::mars_boost_ksim::move_detail::is_convertible<BOOST_MOVE_TEMPL_PARAM, UNLESS_CONVERTIBLE_TO>\
+                              , ::mars_boost::move_detail::is_rv<BOOST_MOVE_TEMPL_PARAM>\
+                              , ::mars_boost::move_detail::is_same<TYPE, BOOST_MOVE_TEMPL_PARAM>\
+                              , ::mars_boost::move_detail::is_convertible<BOOST_MOVE_TEMPL_PARAM, UNLESS_CONVERTIBLE_TO>\
                               >::type* = 0)\
          {\
             TYPE t(u);\
-            return FWD_FUNCTION(arg1, ::mars_boost_ksim::move(t));\
+            return FWD_FUNCTION(arg1, ::mars_boost::move(t));\
          }\
       //
    #else
@@ -192,25 +192,25 @@
          BOOST_MOVE_CONVERSION_AWARE_CATCH_1ARG_COMMON(PUB_FUNCTION, TYPE, RETURN_VALUE, FWD_FUNCTION, ARG1, UNLESS_CONVERTIBLE_TO)\
          \
          template<class BOOST_MOVE_TEMPL_PARAM>\
-         typename ::mars_boost_ksim::move_detail::enable_if_and\
+         typename ::mars_boost::move_detail::enable_if_and\
                            < RETURN_VALUE \
-                           , ::mars_boost_ksim::move_detail::is_same<TYPE, BOOST_MOVE_TEMPL_PARAM>\
-                           , ::mars_boost_ksim::has_move_emulation_disabled<BOOST_MOVE_TEMPL_PARAM>\
+                           , ::mars_boost::move_detail::is_same<TYPE, BOOST_MOVE_TEMPL_PARAM>\
+                           , ::mars_boost::has_move_emulation_disabled<BOOST_MOVE_TEMPL_PARAM>\
                            >::type\
             PUB_FUNCTION(ARG1 arg1, const BOOST_MOVE_TEMPL_PARAM &u)\
          { return FWD_FUNCTION(arg1, u); }\
          \
          template<class BOOST_MOVE_TEMPL_PARAM>\
-         typename ::mars_boost_ksim::move_detail::disable_if_or\
+         typename ::mars_boost::move_detail::disable_if_or\
                            < RETURN_VALUE \
-                           , ::mars_boost_ksim::move_detail::is_rv<BOOST_MOVE_TEMPL_PARAM>\
-                           , ::mars_boost_ksim::move_detail::is_same<TYPE, BOOST_MOVE_TEMPL_PARAM>\
-                           , ::mars_boost_ksim::move_detail::is_convertible<BOOST_MOVE_TEMPL_PARAM, UNLESS_CONVERTIBLE_TO>\
+                           , ::mars_boost::move_detail::is_rv<BOOST_MOVE_TEMPL_PARAM>\
+                           , ::mars_boost::move_detail::is_same<TYPE, BOOST_MOVE_TEMPL_PARAM>\
+                           , ::mars_boost::move_detail::is_convertible<BOOST_MOVE_TEMPL_PARAM, UNLESS_CONVERTIBLE_TO>\
                            >::type\
             PUB_FUNCTION(ARG1 arg1, const BOOST_MOVE_TEMPL_PARAM &u)\
          {\
             TYPE t(u);\
-            return FWD_FUNCTION(arg1, ::mars_boost_ksim::move(t));\
+            return FWD_FUNCTION(arg1, ::mars_boost::move(t));\
          }\
       //
    #endif
@@ -222,18 +222,18 @@
       {  return FWD_FUNCTION(arg1, static_cast<const TYPE&>(x)); }\
       \
       RETURN_VALUE PUB_FUNCTION(ARG1 arg1, BOOST_MOVE_CATCH_RVALUE(TYPE) x) \
-      {  return FWD_FUNCTION(arg1, ::mars_boost_ksim::move(x));  }\
+      {  return FWD_FUNCTION(arg1, ::mars_boost::move(x));  }\
       \
       template<class BOOST_MOVE_TEMPL_PARAM>\
-      typename ::mars_boost_ksim::move_detail::disable_if_or\
+      typename ::mars_boost::move_detail::disable_if_or\
                         < RETURN_VALUE \
-                        , ::mars_boost_ksim::move_detail::is_same<TYPE, BOOST_MOVE_TEMPL_PARAM> \
-                        , ::mars_boost_ksim::move_detail::is_convertible<BOOST_MOVE_TEMPL_PARAM, UNLESS_CONVERTIBLE_TO> \
+                        , ::mars_boost::move_detail::is_same<TYPE, BOOST_MOVE_TEMPL_PARAM> \
+                        , ::mars_boost::move_detail::is_convertible<BOOST_MOVE_TEMPL_PARAM, UNLESS_CONVERTIBLE_TO> \
                         >::type\
       PUB_FUNCTION(ARG1 arg1, const BOOST_MOVE_TEMPL_PARAM &u)\
       {\
          TYPE t(u);\
-         return FWD_FUNCTION(arg1, ::mars_boost_ksim::move(t));\
+         return FWD_FUNCTION(arg1, ::mars_boost::move(t));\
       }\
    //
 
@@ -244,7 +244,7 @@
       {  return FWD_FUNCTION(arg1, static_cast<const TYPE&>(x)); }\
       \
       RETURN_VALUE PUB_FUNCTION(ARG1 arg1, BOOST_MOVE_CATCH_RVALUE(TYPE) x) \
-      {  return FWD_FUNCTION(arg1, ::mars_boost_ksim::move(x));  }\
+      {  return FWD_FUNCTION(arg1, ::mars_boost::move(x));  }\
    //
 
 #endif

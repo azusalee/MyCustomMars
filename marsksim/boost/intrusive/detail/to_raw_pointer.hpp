@@ -24,7 +24,7 @@
 #include <boost/intrusive/detail/config_begin.hpp>
 #include <boost/intrusive/detail/pointer_element.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace intrusive {
 namespace detail {
 
@@ -33,13 +33,13 @@ inline T* to_raw_pointer(T* p)
 {  return p; }
 
 template <class Pointer>
-inline typename mars_boost_ksim::intrusive::pointer_element<Pointer>::type*
+inline typename mars_boost::intrusive::pointer_element<Pointer>::type*
 to_raw_pointer(const Pointer &p)
-{  return mars_boost_ksim::intrusive::detail::to_raw_pointer(p.operator->());  }
+{  return mars_boost::intrusive::detail::to_raw_pointer(p.operator->());  }
 
 } //namespace detail
 } //namespace intrusive
-} //namespace mars_boost_ksim
+} //namespace mars_boost
 
 #include <boost/intrusive/detail/config_end.hpp>
 

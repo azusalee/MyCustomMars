@@ -17,7 +17,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 enum xtime_clock_types
 {
@@ -46,21 +46,21 @@ struct xtime
 
     operator system_time() const
     {
-        return mars_boost_ksim::posix_time::from_time_t(0)+
-            mars_boost_ksim::posix_time::seconds(static_cast<long>(sec))+
+        return mars_boost::posix_time::from_time_t(0)+
+            mars_boost::posix_time::seconds(static_cast<long>(sec))+
 #ifdef BOOST_DATE_TIME_HAS_NANOSECONDS
-            mars_boost_ksim::posix_time::nanoseconds(nsec);
+            mars_boost::posix_time::nanoseconds(nsec);
 #else
-        mars_boost_ksim::posix_time::microseconds((nsec+500)/1000);
+        mars_boost::posix_time::microseconds((nsec+500)/1000);
 #endif
     }
 
 };
 
-inline xtime get_xtime(mars_boost_ksim::system_time const& abs_time)
+inline xtime get_xtime(mars_boost::system_time const& abs_time)
 {
     xtime res;
-    mars_boost_ksim::posix_time::time_duration const time_since_epoch=abs_time-boost_ksim::posix_time::from_time_t(0);
+    mars_boost::posix_time::time_duration const time_since_epoch=abs_time-boost_ksim::posix_time::from_time_t(0);
 
     res.sec=static_cast<xtime::xtime_sec_t>(time_since_epoch.total_seconds());
     res.nsec=static_cast<xtime::xtime_nsec_t>(time_since_epoch.fractional_seconds()*(1000000000/time_since_epoch.ticks_per_second()));
@@ -86,7 +86,7 @@ inline int xtime_cmp(const xtime& xt1, const xtime& xt2)
         return (xt1.sec > xt2.sec) ? 1 : -1;
 }
 
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #include <boost/config/abi_suffix.hpp>
 #endif

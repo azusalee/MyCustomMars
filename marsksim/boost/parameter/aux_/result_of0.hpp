@@ -12,23 +12,23 @@
 #ifndef BOOST_NO_RESULT_OF
 
 # include <boost/utility/result_of.hpp>
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace parameter { namespace aux { 
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace parameter { namespace aux { 
 template <class F>
 struct result_of0 : result_of<F()>
 {};
 
-}}} // namespace mars_boost_ksim::parameter::aux_
+}}} // namespace mars_boost::parameter::aux_
 
 #else
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace parameter { namespace aux { 
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace parameter { namespace aux { 
 template <class F>
 struct result_of0
 {
     typedef typename F::result_type type;
 };
 
-}}} // namespace mars_boost_ksim::parameter::aux_
+}}} // namespace mars_boost::parameter::aux_
 
 #endif 
 

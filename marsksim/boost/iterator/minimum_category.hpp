@@ -11,7 +11,7 @@
 # include <boost/mpl/placeholders.hpp>
 # include <boost/mpl/aux_/lambda_support.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace iterators {
 namespace detail {
 
@@ -67,9 +67,9 @@ struct minimum_category_impl<false,false>
 template <class T1 = mpl::_1, class T2 = mpl::_2>
 struct minimum_category
 {
-    typedef mars_boost_ksim::iterators::detail::minimum_category_impl<
-        ::mars_boost_ksim::is_convertible<T1,T2>::value
-      , ::mars_boost_ksim::is_convertible<T2,T1>::value
+    typedef mars_boost::iterators::detail::minimum_category_impl<
+        ::mars_boost::is_convertible<T1,T2>::value
+      , ::mars_boost::is_convertible<T2,T1>::value
     > outer;
 
     typedef typename outer::template apply<T1,T2> inner;
@@ -90,6 +90,6 @@ struct minimum_category<mpl::_1,mpl::_2>
 
 } // namespace iterators
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_ITERATOR_MINIMUM_CATEGORY_HPP_INCLUDED_

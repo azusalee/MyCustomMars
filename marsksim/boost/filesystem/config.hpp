@@ -39,7 +39,7 @@
 
 //  throw an exception  ----------------------------------------------------------------//
 //
-//  Exceptions were originally thrown via mars_boost_ksim::throw_exception().
+//  Exceptions were originally thrown via mars_boost::throw_exception().
 //  As throw_exception() became more complex, it caused user error reporting
 //  to be harder to interpret, since the exception reported became much more complex.
 //  The immediate fix was to throw directly, wrapped in a macro to make any later change

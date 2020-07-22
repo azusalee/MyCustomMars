@@ -10,7 +10,7 @@
 // Preprocessed version of "boost/mpl/bind.hpp" header
 // -- DO NOT modify by hand!
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl {
 
 namespace aux {
 template< bool >
@@ -116,7 +116,7 @@ struct is_bind_template_impl<false>
 };
 
 template< typename T > struct is_bind_template
-    : is_bind_template_impl< ::mars_boost_ksim::detail::is_reference_impl<T>::value >
+    : is_bind_template_impl< ::mars_boost::detail::is_reference_impl<T>::value >
         ::template result_<T>
 {
 };

@@ -11,7 +11,7 @@
   #define BOOST_DATE_TIME_INLINE inline
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace date_time {
   //! Return the day of the week (0==Sunday, 1==Monday, etc)
   /*! Converts a year-month-day into a day of the week number

@@ -19,7 +19,7 @@
 #include "boost/preprocessor/cat.hpp"
 #include "boost/preprocessor/enum.hpp"
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace detail { namespace variant {
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -68,6 +68,6 @@ public: // metafunction result
 #endif // BOOST_VARIANT_DO_NOT_USE_VARIADIC_TEMPLATES workaround
 
 }} // namespace detail::variant
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_VARIANT_DETAIL_MAKE_VARIANT_LIST_HPP

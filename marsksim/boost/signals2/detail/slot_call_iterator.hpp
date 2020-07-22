@@ -25,7 +25,7 @@
 #include <boost/type_traits/add_reference.hpp>
 #include <boost/weak_ptr.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
   namespace signals2 {
     namespace detail {
       template<typename ResultType, typename Function>
@@ -74,22 +74,22 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       //   - caches the result of calling the slots
       template<typename Function, typename Iterator, typename ConnectionBody>
       class slot_call_iterator_t
-        : public mars_boost_ksim::iterator_facade<slot_call_iterator_t<Function, Iterator, ConnectionBody>,
+        : public mars_boost::iterator_facade<slot_call_iterator_t<Function, Iterator, ConnectionBody>,
         typename Function::result_type,
-        mars_boost_ksim::single_pass_traversal_tag,
-        typename mars_boost_ksim::add_const<typename mars_boost_ksim::add_reference<typename Function::result_type>::type>::type >
+        mars_boost::single_pass_traversal_tag,
+        typename mars_boost::add_const<typename mars_boost::add_reference<typename Function::result_type>::type>::type >
       {
-        typedef mars_boost_ksim::iterator_facade<slot_call_iterator_t<Function, Iterator, ConnectionBody>,
+        typedef mars_boost::iterator_facade<slot_call_iterator_t<Function, Iterator, ConnectionBody>,
           typename Function::result_type,
-          mars_boost_ksim::single_pass_traversal_tag,
-          typename mars_boost_ksim::add_const<typename mars_boost_ksim::add_reference<typename Function::result_type>::type>::type >
+          mars_boost::single_pass_traversal_tag,
+          typename mars_boost::add_const<typename mars_boost::add_reference<typename Function::result_type>::type>::type >
         inherited;
 
         typedef typename Function::result_type result_type;
 
         typedef slot_call_iterator_cache<result_type, Function> cache_type;
 
-        friend class mars_boost_ksim::iterator_core_access;
+        friend class mars_boost::iterator_core_access;
 
       public:
         slot_call_iterator_t(Iterator iter_in, Iterator end_in,
@@ -189,6 +189,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       };
     } // end namespace detail
   } // end namespace BOOST_SIGNALS_NAMESPACE
-} // end namespace mars_boost_ksim
+} // end namespace mars_boost
 
 #endif // BOOST_SIGNALS2_SLOT_CALL_ITERATOR_HPP

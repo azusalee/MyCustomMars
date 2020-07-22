@@ -22,7 +22,7 @@
 #include "boost/mpl/if.hpp"
 #include "boost/mpl/integral_c.hpp"
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace numeric
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace numeric
 {
 
 template<class S>
@@ -166,9 +166,9 @@ struct def_overflow_handler
            throw positive_overflow() ;
 #else
     if ( r == cNegOverflow )
-      ::mars_boost_ksim::throw_exception(negative_overflow()) ;
+      ::mars_boost::throw_exception(negative_overflow()) ;
     else if ( r == cPosOverflow )
-           ::mars_boost_ksim::throw_exception(positive_overflow()) ;
+           ::mars_boost::throw_exception(positive_overflow()) ;
 #endif
   }
 } ;
@@ -189,6 +189,6 @@ struct raw_converter
 
 struct UseInternalRangeChecker {} ;
 
-} } // namespace mars_boost_ksim::numeric
+} } // namespace mars_boost::numeric
 
 #endif

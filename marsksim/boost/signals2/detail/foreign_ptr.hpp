@@ -22,7 +22,7 @@
 #include <memory>
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   template<typename T> class shared_ptr;
   template<typename T> class weak_ptr;
@@ -31,9 +31,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
   {
     template<typename WeakPtr> struct weak_ptr_traits
     {};
-    template<typename T> struct weak_ptr_traits<mars_boost_ksim::weak_ptr<T> >
+    template<typename T> struct weak_ptr_traits<mars_boost::weak_ptr<T> >
     {
-      typedef mars_boost_ksim::shared_ptr<T> shared_type;
+      typedef mars_boost::shared_ptr<T> shared_type;
     };
 #ifndef BOOST_NO_CXX11_SMART_PTR
     template<typename T> struct weak_ptr_traits<std::weak_ptr<T> >
@@ -45,9 +45,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template<typename SharedPtr> struct shared_ptr_traits
     {};
 
-    template<typename T> struct shared_ptr_traits<mars_boost_ksim::shared_ptr<T> >
+    template<typename T> struct shared_ptr_traits<mars_boost::shared_ptr<T> >
     {
-      typedef mars_boost_ksim::weak_ptr<T> weak_type;
+      typedef mars_boost::weak_ptr<T> weak_type;
     };
 #ifndef BOOST_NO_CXX11_SMART_PTR
     template<typename T> struct shared_ptr_traits<std::shared_ptr<T> >
@@ -108,7 +108,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         }
         void swap(foreign_void_shared_ptr &other)
         {
-          mars_boost_ksim::swap(_p, other._p);
+          mars_boost::swap(_p, other._p);
         }
       private:
         foreign_shared_ptr_impl_base *_p;
@@ -164,7 +164,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         }
         void swap(foreign_void_weak_ptr &other)
         {
-          mars_boost_ksim::swap(_p, other._p);
+          mars_boost::swap(_p, other._p);
         }
         foreign_void_shared_ptr lock() const
         {
@@ -175,11 +175,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           return _p->expired();
         }
       private:
-        mars_boost_ksim::scoped_ptr<foreign_weak_ptr_impl_base> _p;
+        mars_boost::scoped_ptr<foreign_weak_ptr_impl_base> _p;
       };
     } // namespace detail
 
   } // namespace signals2
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif  // BOOST_SIGNALS2_FOREIGN_PTR_HPP

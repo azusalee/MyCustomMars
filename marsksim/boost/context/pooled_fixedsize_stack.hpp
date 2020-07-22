@@ -28,7 +28,7 @@
 #  include BOOST_ABI_PREFIX
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace context {
 
 template< typename traitsT >
@@ -38,7 +38,7 @@ private:
     private:
         std::atomic< std::size_t >                                  use_count_;
         std::size_t                                                 stack_size_;
-        mars_boost_ksim::pool< mars_boost_ksim::default_user_allocator_malloc_free >    storage_;
+        mars_boost::pool< mars_boost::default_user_allocator_malloc_free >    storage_;
 
     public:
         storage( std::size_t stack_size, std::size_t next_size, std::size_t max_size) :

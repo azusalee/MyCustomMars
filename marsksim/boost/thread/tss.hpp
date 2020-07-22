@@ -11,7 +11,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace detail
     {
@@ -23,7 +23,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             virtual void operator()(void* data)=0;
         };
 
-        BOOST_THREAD_DECL void set_tss_data(void const* key,mars_boost_ksim::shared_ptr<tss_cleanup_function> func,void* tss_data,bool cleanup_existing);
+        BOOST_THREAD_DECL void set_tss_data(void const* key,mars_boost::shared_ptr<tss_cleanup_function> func,void* tss_data,bool cleanup_existing);
         BOOST_THREAD_DECL void* get_tss_data(void const* key);
     }
 
@@ -59,7 +59,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         };
 
 
-        mars_boost_ksim::shared_ptr<detail::tss_cleanup_function> cleanup;
+        mars_boost::shared_ptr<detail::tss_cleanup_function> cleanup;
 
     public:
         typedef T element_type;
@@ -76,7 +76,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         }
         ~thread_specific_ptr()
         {
-            detail::set_tss_data(this,mars_boost_ksim::shared_ptr<detail::tss_cleanup_function>(),0,true);
+            detail::set_tss_data(this,mars_boost::shared_ptr<detail::tss_cleanup_function>(),0,true);
         }
 
         T* get() const
@@ -87,14 +87,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
             return get();
         }
-        typename mars_boost_ksim::detail::sp_dereference< T >::type operator*() const
+        typename mars_boost::detail::sp_dereference< T >::type operator*() const
         {
             return *get();
         }
         T* release()
         {
             T* const temp=get();
-            detail::set_tss_data(this,mars_boost_ksim::shared_ptr<detail::tss_cleanup_function>(),0,false);
+            detail::set_tss_data(this,mars_boost::shared_ptr<detail::tss_cleanup_function>(),0,false);
             return temp;
         }
         void reset(T* new_value=0)

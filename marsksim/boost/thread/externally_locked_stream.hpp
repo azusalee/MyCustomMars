@@ -18,7 +18,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
   template <typename Stream, typename RecursiveMutex=recursive_mutex>
@@ -144,7 +144,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
   {
     stream_guard<Stream, RecursiveMutex> lk(mtx);
     mtx.get(lk) << arg;
-    return mars_boost_ksim::move(lk);
+    return mars_boost::move(lk);
   }
 
   template <typename Stream, typename RecursiveMutex>
@@ -152,7 +152,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
   {
     stream_guard<Stream, RecursiveMutex> lk(mtx);
     mtx.get(lk) << arg;
-    return mars_boost_ksim::move(lk);
+    return mars_boost::move(lk);
   }
 
   template <typename Stream, typename RecursiveMutex, typename T>
@@ -160,7 +160,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
   {
     stream_guard<Stream, RecursiveMutex> lk(mtx);
     mtx.get(lk) >> arg;
-    return mars_boost_ksim::move(lk);
+    return mars_boost::move(lk);
   }
 
 }

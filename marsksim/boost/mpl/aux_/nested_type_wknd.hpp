@@ -22,7 +22,7 @@
     || BOOST_WORKAROUND(__SUNPRO_CC, BOOST_TESTED_AT(0x530)) \
     || BOOST_WORKAROUND(__DMC__, BOOST_TESTED_AT(0x840))
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl { namespace aux {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl { namespace aux {
 template< typename T > struct nested_type_wknd
     : T::type
 {
@@ -35,7 +35,7 @@ template< typename T > struct nested_type_wknd
 /**/
 #else
 #   define BOOST_MPL_AUX_NESTED_TYPE_WKND(T) \
-    ::mars_boost_ksim::mpl::aux::nested_type_wknd<T> \
+    ::mars_boost::mpl::aux::nested_type_wknd<T> \
 /**/
 #endif
 

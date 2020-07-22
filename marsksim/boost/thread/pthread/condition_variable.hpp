@@ -20,7 +20,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 #if defined BOOST_THREAD_PROVIDES_INTERRUPTIONS
     namespace this_thread
@@ -60,7 +60,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #if defined BOOST_THREAD_THROW_IF_PRECONDITION_NOT_SATISFIED
         if(! m.owns_lock())
         {
-            mars_boost_ksim::throw_exception(condition_error(-1, "boost_ksim::condition_variable::wait() failed precondition mutex not owned"));
+            mars_boost::throw_exception(condition_error(-1, "boost_ksim::condition_variable::wait() failed precondition mutex not owned"));
         }
 #endif
         int res=0;
@@ -82,7 +82,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #endif
         if(res)
         {
-            mars_boost_ksim::throw_exception(condition_error(res, "boost_ksim::condition_variable::wait failed in pthread_cond_wait"));
+            mars_boost::throw_exception(condition_error(res, "boost_ksim::condition_variable::wait failed in pthread_cond_wait"));
         }
     }
 
@@ -93,7 +93,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #if defined BOOST_THREAD_THROW_IF_PRECONDITION_NOT_SATISFIED
         if (!m.owns_lock())
         {
-            mars_boost_ksim::throw_exception(condition_error(EPERM, "boost_ksim::condition_variable::do_wait_until() failed precondition mutex not owned"));
+            mars_boost::throw_exception(condition_error(EPERM, "boost_ksim::condition_variable::do_wait_until() failed precondition mutex not owned"));
         }
 #endif
         int cond_res;
@@ -117,7 +117,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         }
         if(cond_res)
         {
-            mars_boost_ksim::throw_exception(condition_error(cond_res, "boost_ksim::condition_variable::do_wait_until failed in pthread_cond_timedwait"));
+            mars_boost::throw_exception(condition_error(cond_res, "boost_ksim::condition_variable::do_wait_until failed in pthread_cond_timedwait"));
         }
         return true;
     }
@@ -125,7 +125,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     inline void condition_variable::notify_one() BOOST_NOEXCEPT
     {
 #if defined BOOST_THREAD_PROVIDES_INTERRUPTIONS
-        mars_boost_ksim::pthread::pthread_mutex_scoped_lock internal_lock(&internal_mutex);
+        mars_boost::pthread::pthread_mutex_scoped_lock internal_lock(&internal_mutex);
 #endif
         BOOST_VERIFY(!pthread_cond_signal(&cond));
     }
@@ -133,7 +133,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     inline void condition_variable::notify_all() BOOST_NOEXCEPT
     {
 #if defined BOOST_THREAD_PROVIDES_INTERRUPTIONS
-        mars_boost_ksim::pthread::pthread_mutex_scoped_lock internal_lock(&internal_mutex);
+        mars_boost::pthread::pthread_mutex_scoped_lock internal_lock(&internal_mutex);
 #endif
         BOOST_VERIFY(!pthread_cond_broadcast(&cond));
     }
@@ -150,13 +150,13 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             int const res=pthread_mutex_init(&internal_mutex,NULL);
             if(res)
             {
-                mars_boost_ksim::throw_exception(thread_resource_error(res, "boost_ksim::condition_variable_any::condition_variable_any() failed in pthread_mutex_init"));
+                mars_boost::throw_exception(thread_resource_error(res, "boost_ksim::condition_variable_any::condition_variable_any() failed in pthread_mutex_init"));
             }
             int const res2 = detail::monotonic_pthread_cond_init(cond);
             if(res2)
             {
                 BOOST_VERIFY(!pthread_mutex_destroy(&internal_mutex));
-                mars_boost_ksim::throw_exception(thread_resource_error(res2, "boost_ksim::condition_variable_any::condition_variable_any() failed in detail::monotonic_pthread_cond_init"));
+                mars_boost::throw_exception(thread_resource_error(res2, "boost_ksim::condition_variable_any::condition_variable_any() failed in detail::monotonic_pthread_cond_init"));
             }
         }
         ~condition_variable_any()
@@ -174,7 +174,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #if defined BOOST_THREAD_PROVIDES_INTERRUPTIONS
                 detail::interruption_checker check_for_interruption(&internal_mutex,&cond);
 #else
-                mars_boost_ksim::pthread::pthread_mutex_scoped_lock check_for_interruption(&internal_mutex);
+                mars_boost::pthread::pthread_mutex_scoped_lock check_for_interruption(&internal_mutex);
 #endif
                 guard.activate(m);
                 res=pthread_cond_wait(&cond,&internal_mutex);
@@ -184,7 +184,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #endif
             if(res)
             {
-                mars_boost_ksim::throw_exception(condition_error(res, "boost_ksim::condition_variable_any::wait() failed in pthread_cond_wait"));
+                mars_boost::throw_exception(condition_error(res, "boost_ksim::condition_variable_any::wait() failed in pthread_cond_wait"));
             }
         }
 
@@ -196,7 +196,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 #if defined BOOST_THREAD_USES_DATETIME
         template<typename lock_type>
-        bool timed_wait(lock_type& m,mars_boost_ksim::system_time const& abs_time)
+        bool timed_wait(lock_type& m,mars_boost::system_time const& abs_time)
         {
             struct timespec const timeout=detail::to_timespec(abs_time);
             return do_wait_until(m, timeout);
@@ -214,7 +214,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         }
 
         template<typename lock_type,typename predicate_type>
-        bool timed_wait(lock_type& m,mars_boost_ksim::system_time const& abs_time, predicate_type pred)
+        bool timed_wait(lock_type& m,mars_boost::system_time const& abs_time, predicate_type pred)
         {
             while (!pred())
             {
@@ -288,7 +288,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
             using namespace chrono;
             nanoseconds d = tp.time_since_epoch();
-            timespec ts = mars_boost_ksim::detail::to_timespec(d);
+            timespec ts = mars_boost::detail::to_timespec(d);
             if (do_wait_until(lk, ts)) return cv_status::no_timeout;
             else return cv_status::timeout;
         }
@@ -343,7 +343,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
             using namespace chrono;
             nanoseconds d = tp.time_since_epoch();
-            timespec ts = mars_boost_ksim::detail::to_timespec(d);
+            timespec ts = mars_boost::detail::to_timespec(d);
             if (do_wait_until(lock, ts)) return cv_status::no_timeout;
             else return cv_status::timeout;
         }
@@ -374,22 +374,22 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 const chrono::duration<Rep, Period>& d,
                 Predicate pred)
         {
-          return wait_until(lock, chrono::steady_clock::now() + d, mars_boost_ksim::move(pred));
+          return wait_until(lock, chrono::steady_clock::now() + d, mars_boost::move(pred));
         }
 #endif
 
         void notify_one() BOOST_NOEXCEPT
         {
-            mars_boost_ksim::pthread::pthread_mutex_scoped_lock internal_lock(&internal_mutex);
+            mars_boost::pthread::pthread_mutex_scoped_lock internal_lock(&internal_mutex);
             BOOST_VERIFY(!pthread_cond_signal(&cond));
         }
 
         void notify_all() BOOST_NOEXCEPT
         {
-            mars_boost_ksim::pthread::pthread_mutex_scoped_lock internal_lock(&internal_mutex);
+            mars_boost::pthread::pthread_mutex_scoped_lock internal_lock(&internal_mutex);
             BOOST_VERIFY(!pthread_cond_broadcast(&cond));
         }
-    private: // used by mars_boost_ksim::thread::try_join_until
+    private: // used by mars_boost::thread::try_join_until
 
         template <class lock_type>
         bool do_wait_until(
@@ -402,7 +402,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #if defined BOOST_THREAD_PROVIDES_INTERRUPTIONS
               detail::interruption_checker check_for_interruption(&internal_mutex,&cond);
 #else
-              mars_boost_ksim::pthread::pthread_mutex_scoped_lock check_for_interruption(&internal_mutex);
+              mars_boost::pthread::pthread_mutex_scoped_lock check_for_interruption(&internal_mutex);
 #endif
               guard.activate(m);
               res=pthread_cond_timedwait(&cond,&internal_mutex,&timeout);
@@ -416,7 +416,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           }
           if(res)
           {
-              mars_boost_ksim::throw_exception(condition_error(res, "boost_ksim::condition_variable_any::do_wait_until() failed in pthread_cond_timedwait"));
+              mars_boost::throw_exception(condition_error(res, "boost_ksim::condition_variable_any::do_wait_until() failed in pthread_cond_timedwait"));
           }
           return true;
         }

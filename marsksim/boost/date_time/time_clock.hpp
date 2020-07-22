@@ -16,7 +16,7 @@
 #include "boost/date_time/c_time.hpp"
 #include "boost/shared_ptr.hpp"
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace date_time {
 
 
@@ -54,7 +54,7 @@ namespace date_time {
     }
 
     template<class time_zone_type>
-    static time_type local_time(mars_boost_ksim::shared_ptr<time_zone_type> tz_ptr)
+    static time_type local_time(mars_boost::shared_ptr<time_zone_type> tz_ptr)
     {
       typedef typename time_type::utc_time_type utc_time_type;
       utc_time_type utc_time = second_clock<utc_time_type>::universal_time();

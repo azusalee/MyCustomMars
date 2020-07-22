@@ -9,7 +9,7 @@
 // Preprocessed version of "boost/mpl/set_c.hpp" header
 // -- DO NOT modify by hand!
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl {
 
 template<
       typename T, long C0 = LONG_MAX, long C1 = LONG_MAX, long C2 = LONG_MAX

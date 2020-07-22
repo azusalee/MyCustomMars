@@ -23,47 +23,47 @@ extern "C" {
 struct _FILETIME;
 struct _SYSTEMTIME;
 
-BOOST_SYMBOL_IMPORT mars_boost_ksim::detail::winapi::VOID_ WINAPI
+BOOST_SYMBOL_IMPORT mars_boost::detail::winapi::VOID_ WINAPI
 GetSystemTime(::_SYSTEMTIME* lpSystemTime);
 
 #ifdef BOOST_HAS_GETSYSTEMTIMEASFILETIME  // Windows CE does not define GetSystemTimeAsFileTime
-BOOST_SYMBOL_IMPORT mars_boost_ksim::detail::winapi::VOID_ WINAPI
+BOOST_SYMBOL_IMPORT mars_boost::detail::winapi::VOID_ WINAPI
 GetSystemTimeAsFileTime(::_FILETIME* lpSystemTimeAsFileTime);
 #endif
 
-BOOST_SYMBOL_IMPORT mars_boost_ksim::detail::winapi::BOOL_ WINAPI
+BOOST_SYMBOL_IMPORT mars_boost::detail::winapi::BOOL_ WINAPI
 SystemTimeToFileTime(
     const ::_SYSTEMTIME* lpSystemTime,
     ::_FILETIME* lpFileTime);
 
-BOOST_SYMBOL_IMPORT mars_boost_ksim::detail::winapi::BOOL_ WINAPI
+BOOST_SYMBOL_IMPORT mars_boost::detail::winapi::BOOL_ WINAPI
 FileTimeToSystemTime(
     const ::_FILETIME* lpFileTime,
     ::_SYSTEMTIME* lpSystemTime);
 
 #if BOOST_PLAT_WINDOWS_DESKTOP
-BOOST_SYMBOL_IMPORT mars_boost_ksim::detail::winapi::BOOL_ WINAPI
+BOOST_SYMBOL_IMPORT mars_boost::detail::winapi::BOOL_ WINAPI
 FileTimeToLocalFileTime(
     const ::_FILETIME* lpFileTime,
     ::_FILETIME* lpLocalFileTime);
 
-BOOST_SYMBOL_IMPORT mars_boost_ksim::detail::winapi::BOOL_ WINAPI
+BOOST_SYMBOL_IMPORT mars_boost::detail::winapi::BOOL_ WINAPI
 LocalFileTimeToFileTime(
     const ::_FILETIME* lpLocalFileTime,
     ::_FILETIME* lpFileTime);
 
-BOOST_SYMBOL_IMPORT mars_boost_ksim::detail::winapi::DWORD_ WINAPI
+BOOST_SYMBOL_IMPORT mars_boost::detail::winapi::DWORD_ WINAPI
 GetTickCount(BOOST_DETAIL_WINAPI_VOID);
 #endif
 
 #if BOOST_USE_WINAPI_VERSION >= BOOST_WINAPI_VERSION_WIN6
-BOOST_SYMBOL_IMPORT mars_boost_ksim::detail::winapi::ULONGLONG_ WINAPI
+BOOST_SYMBOL_IMPORT mars_boost::detail::winapi::ULONGLONG_ WINAPI
 GetTickCount64(BOOST_DETAIL_WINAPI_VOID);
 #endif
 }
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace detail {
 namespace winapi {
 
@@ -104,9 +104,9 @@ BOOST_FORCEINLINE VOID_ GetSystemTimeAsFileTime(LPFILETIME_ lpSystemTimeAsFileTi
 // Windows CE does not define GetSystemTimeAsFileTime
 BOOST_FORCEINLINE VOID_ GetSystemTimeAsFileTime(FILETIME_* lpFileTime)
 {
-    mars_boost_ksim::detail::winapi::SYSTEMTIME_ st;
-    mars_boost_ksim::detail::winapi::GetSystemTime(&st);
-    mars_boost_ksim::detail::winapi::SystemTimeToFileTime(&st, lpFileTime);
+    mars_boost::detail::winapi::SYSTEMTIME_ st;
+    mars_boost::detail::winapi::GetSystemTime(&st);
+    mars_boost::detail::winapi::SystemTimeToFileTime(&st, lpFileTime);
 }
 #endif
 

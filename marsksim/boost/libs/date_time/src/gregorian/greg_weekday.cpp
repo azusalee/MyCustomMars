@@ -15,7 +15,7 @@
 
 #include "greg_names.hpp"
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace gregorian {
   
   //! Return a 3 digit english string of the day of week (eg: Sun)

@@ -11,7 +11,7 @@
 
 #include <boost/type_traits/integral_constant.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 template <class T>
 struct is_void : public false_type {};
@@ -21,6 +21,6 @@ template<> struct is_void<const void> : public true_type{};
 template<> struct is_void<const volatile void> : public true_type{};
 template<> struct is_void<volatile void> : public true_type{};
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_IS_VOID_HPP_INCLUDED

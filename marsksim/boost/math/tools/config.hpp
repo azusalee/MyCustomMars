@@ -12,7 +12,7 @@
 
 #include <boost/config.hpp>
 #include <boost/predef.h>
-#include <boost/cstdint.hpp> // for mars_boost_ksim::uintmax_t
+#include <boost/cstdint.hpp> // for mars_boost::uintmax_t
 #include <boost/detail/workaround.hpp>
 #include <boost/type_traits/is_integral.hpp>
 #include <algorithm>  // for min and max
@@ -131,10 +131,10 @@
 #  include "boost/type.hpp"
 #  include "boost/non_type.hpp"
 
-#  define BOOST_MATH_EXPLICIT_TEMPLATE_TYPE(t)         mars_boost_ksim::type<t>* = 0
-#  define BOOST_MATH_EXPLICIT_TEMPLATE_TYPE_SPEC(t)    mars_boost_ksim::type<t>*
-#  define BOOST_MATH_EXPLICIT_TEMPLATE_NON_TYPE(t, v)  mars_boost_ksim::non_type<t, v>* = 0
-#  define BOOST_MATH_EXPLICIT_TEMPLATE_NON_TYPE_SPEC(t, v)  mars_boost_ksim::non_type<t, v>*
+#  define BOOST_MATH_EXPLICIT_TEMPLATE_TYPE(t)         mars_boost::type<t>* = 0
+#  define BOOST_MATH_EXPLICIT_TEMPLATE_TYPE_SPEC(t)    mars_boost::type<t>*
+#  define BOOST_MATH_EXPLICIT_TEMPLATE_NON_TYPE(t, v)  mars_boost::non_type<t, v>* = 0
+#  define BOOST_MATH_EXPLICIT_TEMPLATE_NON_TYPE_SPEC(t, v)  mars_boost::non_type<t, v>*
 
 #  define BOOST_MATH_APPEND_EXPLICIT_TEMPLATE_TYPE(t)         \
              , BOOST_MATH_EXPLICIT_TEMPLATE_TYPE(t)
@@ -231,8 +231,8 @@
 #  define BOOST_MATH_IS_FLOAT(T) (std::is_floating_point<T>::value)
 #else
 #include <boost/type_traits/is_floating_point.hpp>
-#  define BOOST_MATH_NOEXCEPT(T) noexcept(mars_boost_ksim::is_floating_point<T>::value)
-#  define BOOST_MATH_IS_FLOAT(T) (mars_boost_ksim::is_floating_point<T>::value)
+#  define BOOST_MATH_NOEXCEPT(T) noexcept(mars_boost::is_floating_point<T>::value)
+#  define BOOST_MATH_IS_FLOAT(T) (mars_boost::is_floating_point<T>::value)
 #endif
 #else
 #  define BOOST_MATH_NOEXCEPT(T)
@@ -344,7 +344,7 @@
 
 #define BOOST_MATH_STD_USING BOOST_MATH_STD_USING_CORE
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim{ namespace math{
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost{ namespace math{
 namespace tools
 {
 
@@ -372,7 +372,7 @@ namespace detail{
 template <class T>
 struct is_integer_for_rounding
 {
-   static const bool value = mars_boost_ksim::is_integral<T>::value
+   static const bool value = mars_boost::is_integral<T>::value
 #ifndef BOOST_NO_LIMITS_COMPILE_TIME_CONSTANTS
       || (std::numeric_limits<T>::is_specialized && std::numeric_limits<T>::is_integer)
 #endif
@@ -381,7 +381,7 @@ struct is_integer_for_rounding
 
 }
 
-}} // namespace mars_boost_ksim namespace math
+}} // namespace mars_boost namespace math
 
 #ifdef __GLIBC_PREREQ
 #  if __GLIBC_PREREQ(2,14)
@@ -401,7 +401,7 @@ struct is_integer_for_rounding
 
 #  ifdef FE_ALL_EXCEPT
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim{ namespace math{
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost{ namespace math{
    namespace detail
    {
    struct fpu_guard
@@ -422,7 +422,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
    } // namespace detail
    }} // namespaces
 
-#    define BOOST_FPU_EXCEPTION_GUARD mars_boost_ksim::math::detail::fpu_guard local_guard_object;
+#    define BOOST_FPU_EXCEPTION_GUARD mars_boost::math::detail::fpu_guard local_guard_object;
 #    define BOOST_MATH_INSTRUMENT_FPU do{ fexcept_t cpu_flags; fegetexceptflag(&cpu_flags, FE_ALL_EXCEPT); BOOST_MATH_INSTRUMENT_VARIABLE(cpu_flags); } while(0); 
 
 #  else

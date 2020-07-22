@@ -16,7 +16,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace executors
   {
@@ -27,7 +27,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     public:
       resubmitter(Executor& ex, Function funct) :
         ex(ex),
-        funct(mars_boost_ksim::move(funct))
+        funct(mars_boost::move(funct))
       {}
 
       void operator()()
@@ -44,7 +44,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template <class Executor, class Function>
     resubmitter<Executor, typename decay<Function>::type>
     resubmit(Executor& ex, BOOST_THREAD_FWD_REF(Function) funct) {
-      return resubmitter<Executor, typename decay<Function>::type >(ex, mars_boost_ksim::move(funct));
+      return resubmitter<Executor, typename decay<Function>::type >(ex, mars_boost::move(funct));
     }
 
     /// Wraps references to a @c Scheduler and an @c Executor providing an @c Executor that
@@ -77,7 +77,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
           BOOST_THROW_EXCEPTION( sync_queue_is_closed() );
         }
-        sch.submit_at(resubmit(ex,mars_boost_ksim::forward<Work>(w)), tp);
+        sch.submit_at(resubmit(ex,mars_boost::forward<Work>(w)), tp);
       }
 
       Executor& underlying_executor()
@@ -198,7 +198,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
           BOOST_THROW_EXCEPTION( sync_queue_is_closed() );
         }
-        sch.submit_at(mars_boost_ksim::forward<Work>(w), tp);
+        sch.submit_at(mars_boost::forward<Work>(w), tp);
       }
 
       template <class Executor>

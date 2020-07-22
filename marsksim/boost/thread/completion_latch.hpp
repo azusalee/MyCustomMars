@@ -21,7 +21,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace thread_detail
   {
@@ -47,8 +47,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     struct around_wait
     {
       completion_latch &that_;
-      mars_boost_ksim::unique_lock<boost_ksim::mutex> &lk_;
-      around_wait(completion_latch &that, mars_boost_ksim::unique_lock<boost_ksim::mutex> &lk)
+      mars_boost::unique_lock<boost_ksim::mutex> &lk_;
+      around_wait(completion_latch &that, mars_boost::unique_lock<boost_ksim::mutex> &lk)
       : that_(that), lk_(lk)
       {
         that_.leavers_.cond_.wait(lk, detail::counter_is_zero(that_.leavers_));
@@ -91,7 +91,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template <typename F>
     completion_latch(std::size_t count, BOOST_THREAD_RV_REF(F) funct) :
     count_(count),
-    funct_(mars_boost_ksim::move(funct)),
+    funct_(mars_boost::move(funct)),
     waiters_(0),
     leavers_(0)
     {
@@ -110,7 +110,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     /// Blocks until the latch has counted down to zero.
     void wait()
     {
-      mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(mutex_);
+      mars_boost::unique_lock<boost_ksim::mutex> lk(mutex_);
       around_wait aw(*this, lk);
       count_.cond_.wait(lk, detail::counter_is_zero(count_));
     }
@@ -118,7 +118,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     /// @return true if the internal counter is already 0, false otherwise
     bool try_wait()
     {
-      mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(mutex_);
+      mars_boost::unique_lock<boost_ksim::mutex> lk(mutex_);
       around_wait aw(*this, lk);
       return (count_ == 0);
     }
@@ -128,7 +128,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template <class Rep, class Period>
     cv_status wait_for(const chrono::duration<Rep, Period>& rel_time)
     {
-      mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(mutex_);
+      mars_boost::unique_lock<boost_ksim::mutex> lk(mutex_);
       around_wait aw(*this, lk);
       return count_.cond_.wait_for(lk, rel_time, detail::counter_is_zero(count_))
               ? cv_status::no_timeout
@@ -140,7 +140,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template <class Clock, class Duration>
     cv_status wait_until(const chrono::time_point<Clock, Duration>& abs_time)
     {
-      mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(mutex_);
+      mars_boost::unique_lock<boost_ksim::mutex> lk(mutex_);
       around_wait aw(*this, lk);
       return count_.cond_.wait_until(lk, abs_time, detail::counter_is_zero(count_))
           ? cv_status::no_timeout
@@ -164,7 +164,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     /// @Requires count must be greater than 0
     void count_down_and_wait()
     {
-      mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(mutex_);
+      mars_boost::unique_lock<boost_ksim::mutex> lk(mutex_);
       if (count_down(lk))
       {
         return;
@@ -181,7 +181,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     /// #Requires This method may only be invoked when there are no other threads currently inside the count_down_and_wait() method.
     void reset(std::size_t count)
     {
-      mars_boost_ksim::lock_guard<boost_ksim::mutex> lk(mutex_);
+      mars_boost::lock_guard<boost_ksim::mutex> lk(mutex_);
       //BOOST_ASSERT(count_ == 0);
       count_ = count;
     }
@@ -197,15 +197,15 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template <typename F>
     completion_function then(BOOST_THREAD_RV_REF(F) funct)
     {
-      mars_boost_ksim::lock_guard<boost_ksim::mutex> lk(mutex_);
+      mars_boost::lock_guard<boost_ksim::mutex> lk(mutex_);
       completion_function tmp(funct_);
-      funct_ = mars_boost_ksim::move(funct);
+      funct_ = mars_boost::move(funct);
       return tmp;
     }
 #endif
     completion_function then(void(*funct)())
     {
-      mars_boost_ksim::lock_guard<boost_ksim::mutex> lk(mutex_);
+      mars_boost::lock_guard<boost_ksim::mutex> lk(mutex_);
       completion_function tmp(funct_);
       funct_ = completion_function(funct);
       return tmp;
@@ -219,7 +219,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     detail::counter leavers_;
   };
 
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #include <boost/config/abi_suffix.hpp>
 

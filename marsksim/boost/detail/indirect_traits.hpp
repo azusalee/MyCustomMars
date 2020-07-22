@@ -26,7 +26,7 @@
 # include <boost/mpl/aux_/lambda_support.hpp>
 
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace detail {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace detail {
 
 namespace indirect_traits {
 
@@ -199,6 +199,6 @@ struct is_pointer_to_class
 
 using namespace indirect_traits;
 
-}} // namespace mars_boost_ksim::python::detail
+}} // namespace mars_boost::python::detail
 
 #endif // INDIRECT_TRAITS_DWA2002131_HPP

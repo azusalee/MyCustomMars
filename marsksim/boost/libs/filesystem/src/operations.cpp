@@ -61,13 +61,13 @@
 # include <iostream>
 #endif
 
-namespace fs = mars_boost_ksim::filesystem;
-using mars_boost_ksim::filesystem::path;
-using mars_boost_ksim::filesystem::filesystem_error;
-using mars_boost_ksim::filesystem::perms;
-using mars_boost_ksim::system::error_code;
-using mars_boost_ksim::system::error_category;
-using mars_boost_ksim::system::system_category;
+namespace fs = mars_boost::filesystem;
+using mars_boost::filesystem::path;
+using mars_boost::filesystem::filesystem_error;
+using mars_boost::filesystem::perms;
+using mars_boost::system::error_code;
+using mars_boost::system::error_category;
+using mars_boost::system::system_category;
 using std::string;
 using std::wstring;
 
@@ -90,7 +90,7 @@ using std::wstring;
 #       include <sys/mount.h>
 #     endif
 #     define BOOST_STATVFS statfs
-#     define BOOST_STATVFS_F_FRSIZE static_cast<mars_boost_ksim::uintmax_t>(vfs.f_bsize)
+#     define BOOST_STATVFS_F_FRSIZE static_cast<mars_boost::uintmax_t>(vfs.f_bsize)
 #   endif
 #   include <dirent.h>
 #   include <unistd.h>
@@ -263,7 +263,7 @@ namespace
 
   fs::file_type query_file_type(const path& p, error_code* ec);
 
-  mars_boost_ksim::filesystem::directory_iterator end_dir_itr;
+  mars_boost::filesystem::directory_iterator end_dir_itr;
 
   //  error handling helpers  ----------------------------------------------------------//
 
@@ -370,22 +370,22 @@ namespace
       )
     {
       if (error(!remove_directory(p) ? BOOST_ERRNO : 0, p, ec,
-        "mars_boost_ksim::filesystem::remove"))
+        "mars_boost::filesystem::remove"))
           return false;
     }
     else
     {
       if (error(!remove_file(p) ? BOOST_ERRNO : 0, p, ec,
-        "mars_boost_ksim::filesystem::remove"))
+        "mars_boost::filesystem::remove"))
           return false;
     }
     return true;
   }
 
-  mars_boost_ksim::uintmax_t remove_all_aux(const path& p, fs::file_type type,
+  mars_boost::uintmax_t remove_all_aux(const path& p, fs::file_type type,
     error_code* ec)
   {
-    mars_boost_ksim::uintmax_t count = 1;
+    mars_boost::uintmax_t count = 1;
 
     if (type == fs::directory_file)  // but not a directory symlink
     {
@@ -422,7 +422,7 @@ namespace
     const std::string& to_p, bool fail_if_exists)
   {
     const std::size_t buf_sz = 32768;
-    mars_boost_ksim::scoped_array<char> buf(new char [buf_sz]);
+    mars_boost::scoped_array<char> buf(new char [buf_sz]);
     int infile=-1, outfile=-1;  // -1 means not open
 
     // bug fixed: code previously did a stat()on the from_file first, but that
@@ -595,7 +595,7 @@ namespace
     if (h.handle == INVALID_HANDLE_VALUE)
       return false;
 
-    mars_boost_ksim::scoped_array<char> buf(new char [MAXIMUM_REPARSE_DATA_BUFFER_SIZE]);    
+    mars_boost::scoped_array<char> buf(new char [MAXIMUM_REPARSE_DATA_BUFFER_SIZE]);    
  
     // Query the reparse data
     DWORD dwRetLen;
@@ -638,7 +638,7 @@ namespace
       return fs::file_status(fs::type_unknown);
     }
     if (ec == 0)
-      BOOST_FILESYSTEM_THROW(filesystem_error("mars_boost_ksim::filesystem::status",
+      BOOST_FILESYSTEM_THROW(filesystem_error("mars_boost::filesystem::status",
         p, error_code(errval, system_category())));
     return fs::file_status(fs::status_error);
   }
@@ -669,7 +669,7 @@ namespace
       : fs::regular_file;
   }
 
-  BOOL resize_file_api(const wchar_t* p, mars_boost_ksim::uintmax_t size)
+  BOOL resize_file_api(const wchar_t* p, mars_boost::uintmax_t size)
   {
     handle_wrapper h(CreateFileW(p, GENERIC_WRITE, 0, 0, OPEN_EXISTING,
                                 FILE_ATTRIBUTE_NORMAL, 0));
@@ -723,7 +723,7 @@ namespace
 //                                                                                      //
 //--------------------------------------------------------------------------------------//
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 namespace filesystem
 {
@@ -809,7 +809,7 @@ namespace detail
     {
       if (ec == 0)
         BOOST_FILESYSTEM_THROW(filesystem_error(
-          "mars_boost_ksim::filesystem::canonical", source,
+          "mars_boost::filesystem::canonical", source,
           error_code(system::errc::no_such_file_or_directory, system::generic_category())));
       else
           ec->assign(system::errc::no_such_file_or_directory, system::generic_category());
@@ -819,7 +819,7 @@ namespace detail
     {
       if (ec == 0)
         BOOST_FILESYSTEM_THROW(filesystem_error(
-          "mars_boost_ksim::filesystem::canonical", source, local_ec));
+          "mars_boost::filesystem::canonical", source, local_ec));
       *ec = local_ec;
       return result;
     }
@@ -899,7 +899,7 @@ namespace detail
     else
     {
       if (ec == 0)
-        BOOST_FILESYSTEM_THROW(filesystem_error("mars_boost_ksim::filesystem::copy",
+        BOOST_FILESYSTEM_THROW(filesystem_error("mars_boost::filesystem::copy",
           from, to, error_code(BOOST_ERROR_NOT_SUPPORTED, system_category())));
       else
         ec->assign(BOOST_ERROR_NOT_SUPPORTED, system_category());
@@ -913,7 +913,7 @@ namespace detail
     struct stat from_stat;
 #   endif
     error(!BOOST_COPY_DIRECTORY(from.c_str(), to.c_str()) ? BOOST_ERRNO : 0,
-      from, to, ec, "mars_boost_ksim::filesystem::copy_directory");
+      from, to, ec, "mars_boost::filesystem::copy_directory");
   }
 
   BOOST_FILESYSTEM_DECL
@@ -921,7 +921,7 @@ namespace detail
   {
     error(!BOOST_COPY_FILE(from.c_str(), to.c_str(),
       option == fail_if_exists) ? BOOST_ERRNO : 0,
-        from, to, ec, "mars_boost_ksim::filesystem::copy_file");
+        from, to, ec, "mars_boost::filesystem::copy_file");
   }
 
   BOOST_FILESYSTEM_DECL
@@ -930,7 +930,7 @@ namespace detail
   {
 # if defined(_WIN32_WINNT) && _WIN32_WINNT < 0x0600
     error(BOOST_ERROR_NOT_SUPPORTED, new_symlink, existing_symlink, ec,
-      "mars_boost_ksim::filesystem::copy_symlink");
+      "mars_boost::filesystem::copy_symlink");
 
 # else  // modern Windows or BOOST_POSIX_API 
     path p(read_symlink(existing_symlink, ec));
@@ -974,7 +974,7 @@ namespace detail
         {
           if (ec == 0)
             BOOST_FILESYSTEM_THROW(filesystem_error(
-              "mars_boost_ksim::filesystem::create_directories", parent, local_ec));
+              "mars_boost::filesystem::create_directories", parent, local_ec));
           else
             *ec = local_ec;
           return false;
@@ -1008,7 +1008,7 @@ namespace detail
 
     //  attempt to create directory failed && it doesn't already exist
     if (ec == 0)
-      BOOST_FILESYSTEM_THROW(filesystem_error("mars_boost_ksim::filesystem::create_directory",
+      BOOST_FILESYSTEM_THROW(filesystem_error("mars_boost::filesystem::create_directory",
         p, error_code(errval, system_category())));
     else
       ec->assign(errval, system_category());
@@ -1022,19 +1022,19 @@ namespace detail
 #   if defined(BOOST_WINDOWS_API) && _WIN32_WINNT < 0x0600  // SDK earlier than Vista and Server 2008
 
     error(BOOST_ERROR_NOT_SUPPORTED, to, from, ec,
-      "mars_boost_ksim::filesystem::create_directory_symlink");
+      "mars_boost::filesystem::create_directory_symlink");
 #   else
 
 #     if defined(BOOST_WINDOWS_API) && _WIN32_WINNT >= 0x0600
         // see if actually supported by Windows runtime dll
         if (error(!create_symbolic_link_api ? BOOST_ERROR_NOT_SUPPORTED : 0, to, from, ec,
-            "mars_boost_ksim::filesystem::create_directory_symlink"))
+            "mars_boost::filesystem::create_directory_symlink"))
           return;
 #     endif
 
     error(!BOOST_CREATE_SYMBOLIC_LINK(from.c_str(), to.c_str(),
       SYMBOLIC_LINK_FLAG_DIRECTORY) ? BOOST_ERRNO : 0,
-      to, from, ec, "mars_boost_ksim::filesystem::create_directory_symlink");
+      to, from, ec, "mars_boost::filesystem::create_directory_symlink");
 #   endif
   }
 
@@ -1045,18 +1045,18 @@ namespace detail
 #   if defined(BOOST_WINDOWS_API) && _WIN32_WINNT < 0x0500  // SDK earlier than Win 2K
 
     error(BOOST_ERROR_NOT_SUPPORTED, to, from, ec,
-      "mars_boost_ksim::filesystem::create_hard_link");
+      "mars_boost::filesystem::create_hard_link");
 #   else
 
 #     if defined(BOOST_WINDOWS_API) && _WIN32_WINNT >= 0x0500
         // see if actually supported by Windows runtime dll
         if (error(!create_hard_link_api ? BOOST_ERROR_NOT_SUPPORTED : 0, to, from, ec,
-            "mars_boost_ksim::filesystem::create_hard_link"))
+            "mars_boost::filesystem::create_hard_link"))
           return;
 #     endif
 
     error(!BOOST_CREATE_HARD_LINK(from.c_str(), to.c_str()) ? BOOST_ERRNO : 0, to, from, ec,
-      "mars_boost_ksim::filesystem::create_hard_link");
+      "mars_boost::filesystem::create_hard_link");
 #   endif
   }
 
@@ -1065,18 +1065,18 @@ namespace detail
   {
 #   if defined(BOOST_WINDOWS_API) && _WIN32_WINNT < 0x0600  // SDK earlier than Vista and Server 2008
     error(BOOST_ERROR_NOT_SUPPORTED, to, from, ec,
-      "mars_boost_ksim::filesystem::create_directory_symlink");
+      "mars_boost::filesystem::create_directory_symlink");
 #   else
 
 #     if defined(BOOST_WINDOWS_API) && _WIN32_WINNT >= 0x0600
         // see if actually supported by Windows runtime dll
         if (error(!create_symbolic_link_api ? BOOST_ERROR_NOT_SUPPORTED : 0, to, from, ec,
-            "mars_boost_ksim::filesystem::create_symlink"))
+            "mars_boost::filesystem::create_symlink"))
           return;
 #     endif
 
     error(!BOOST_CREATE_SYMBOLIC_LINK(from.c_str(), to.c_str(), 0) ? BOOST_ERRNO : 0,
-      to, from, ec, "mars_boost_ksim::filesystem::create_symlink");
+      to, from, ec, "mars_boost::filesystem::create_symlink");
 #   endif
   }
 
@@ -1087,7 +1087,7 @@ namespace detail
     path cur;
     for (long path_max = 128;; path_max *=2)// loop 'til buffer large enough
     {
-      mars_boost_ksim::scoped_array<char>
+      mars_boost::scoped_array<char>
         buf(new char[static_cast<std::size_t>(path_max)]);
       if (::getcwd(buf.get(), static_cast<std::size_t>(path_max))== 0)
       {
@@ -1096,7 +1096,7 @@ namespace detail
 #         if defined(__MSL__) && (defined(macintosh) || defined(__APPLE__) || defined(__APPLE_CC__))
           && errno != 0
 #         endif
-          , ec, "mars_boost_ksim::filesystem::current_path"))
+          , ec, "mars_boost::filesystem::current_path"))
         {
           break;
         }
@@ -1113,9 +1113,9 @@ namespace detail
 #   else
     DWORD sz;
     if ((sz = ::GetCurrentDirectoryW(0, NULL)) == 0)sz = 1;
-    mars_boost_ksim::scoped_array<path::value_type> buf(new path::value_type[sz]);
+    mars_boost::scoped_array<path::value_type> buf(new path::value_type[sz]);
     error(::GetCurrentDirectoryW(sz, buf.get()) == 0 ? BOOST_ERRNO : 0, ec,
-      "mars_boost_ksim::filesystem::current_path");
+      "mars_boost::filesystem::current_path");
     return path(buf.get());
 #   endif
   }
@@ -1125,7 +1125,7 @@ namespace detail
   void current_path(const path& p, system::error_code* ec)
   {
     error(!BOOST_SET_CURRENT_DIRECTORY(p.c_str()) ? BOOST_ERRNO : 0,
-      p, ec, "mars_boost_ksim::filesystem::current_path");
+      p, ec, "mars_boost::filesystem::current_path");
   }
 
   BOOST_FILESYSTEM_DECL
@@ -1141,7 +1141,7 @@ namespace detail
     {
       // if one is invalid and the other isn't then they aren't equivalent,
       // but if both are invalid then it is an error
-      error (e1 != 0 && e2 != 0, p1, p2, ec, "mars_boost_ksim::filesystem::equivalent");
+      error (e1 != 0 && e2 != 0, p1, p2, ec, "mars_boost::filesystem::equivalent");
       return false;
     }
 
@@ -1188,7 +1188,7 @@ namespace detail
       // but if both are invalid then it is an error
       error((h1.handle == INVALID_HANDLE_VALUE
         && h2.handle == INVALID_HANDLE_VALUE) ? BOOST_ERROR_NOT_SUPPORTED : 0, p1, p2, ec,
-          "mars_boost_ksim::filesystem::equivalent");
+          "mars_boost::filesystem::equivalent");
       return false;
     }
 
@@ -1197,11 +1197,11 @@ namespace detail
     BY_HANDLE_FILE_INFORMATION info1, info2;
 
     if (error(!::GetFileInformationByHandle(h1.handle, &info1) ? BOOST_ERRNO : 0,
-      p1, p2, ec, "mars_boost_ksim::filesystem::equivalent"))
+      p1, p2, ec, "mars_boost::filesystem::equivalent"))
         return  false;
 
     if (error(!::GetFileInformationByHandle(h2.handle, &info2) ? BOOST_ERRNO : 0,
-      p1, p2, ec, "mars_boost_ksim::filesystem::equivalent"))
+      p1, p2, ec, "mars_boost::filesystem::equivalent"))
         return  false;
 
     // In theory, volume serial numbers are sufficient to distinguish between
@@ -1222,19 +1222,19 @@ namespace detail
   }
 
   BOOST_FILESYSTEM_DECL
-  mars_boost_ksim::uintmax_t file_size(const path& p, error_code* ec)
+  mars_boost::uintmax_t file_size(const path& p, error_code* ec)
   {
 #   ifdef BOOST_POSIX_API
 
     struct stat path_stat;
     if (error(::stat(p.c_str(), &path_stat)!= 0 ? BOOST_ERRNO : 0,
-        p, ec, "mars_boost_ksim::filesystem::file_size"))
-      return static_cast<mars_boost_ksim::uintmax_t>(-1);
+        p, ec, "mars_boost::filesystem::file_size"))
+      return static_cast<mars_boost::uintmax_t>(-1);
    if (error(!S_ISREG(path_stat.st_mode) ? EPERM : 0,
-        p, ec, "mars_boost_ksim::filesystem::file_size"))
-      return static_cast<mars_boost_ksim::uintmax_t>(-1);
+        p, ec, "mars_boost::filesystem::file_size"))
+      return static_cast<mars_boost::uintmax_t>(-1);
 
-    return static_cast<mars_boost_ksim::uintmax_t>(path_stat.st_size);
+    return static_cast<mars_boost::uintmax_t>(path_stat.st_size);
 
 #   else  // Windows
 
@@ -1243,28 +1243,28 @@ namespace detail
     WIN32_FILE_ATTRIBUTE_DATA fad;
 
     if (error(::GetFileAttributesExW(p.c_str(), ::GetFileExInfoStandard, &fad)== 0
-      ? BOOST_ERRNO : 0, p, ec, "mars_boost_ksim::filesystem::file_size"))
-          return static_cast<mars_boost_ksim::uintmax_t>(-1);
+      ? BOOST_ERRNO : 0, p, ec, "mars_boost::filesystem::file_size"))
+          return static_cast<mars_boost::uintmax_t>(-1);
 
     if (error((fad.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)!= 0
-      ? ERROR_NOT_SUPPORTED : 0, p, ec, "mars_boost_ksim::filesystem::file_size"))
-      return static_cast<mars_boost_ksim::uintmax_t>(-1);
+      ? ERROR_NOT_SUPPORTED : 0, p, ec, "mars_boost::filesystem::file_size"))
+      return static_cast<mars_boost::uintmax_t>(-1);
 
-    return (static_cast<mars_boost_ksim::uintmax_t>(fad.nFileSizeHigh)
+    return (static_cast<mars_boost::uintmax_t>(fad.nFileSizeHigh)
               << (sizeof(fad.nFileSizeLow)*8)) + fad.nFileSizeLow;
 #   endif
   }
 
   BOOST_FILESYSTEM_DECL
-  mars_boost_ksim::uintmax_t hard_link_count(const path& p, system::error_code* ec)
+  mars_boost::uintmax_t hard_link_count(const path& p, system::error_code* ec)
   {
 #   ifdef BOOST_POSIX_API
 
     struct stat path_stat;
     return error(::stat(p.c_str(), &path_stat)!= 0 ? BOOST_ERRNO : 0,
-                  p, ec, "mars_boost_ksim::filesystem::hard_link_count")
+                  p, ec, "mars_boost::filesystem::hard_link_count")
            ? 0
-           : static_cast<mars_boost_ksim::uintmax_t>(path_stat.st_nlink);
+           : static_cast<mars_boost::uintmax_t>(path_stat.st_nlink);
 
 #   else // Windows
 
@@ -1276,9 +1276,9 @@ namespace detail
           OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, 0));
     return
       !error(h.handle == INVALID_HANDLE_VALUE ? BOOST_ERRNO : 0,
-              p, ec, "mars_boost_ksim::filesystem::hard_link_count")
+              p, ec, "mars_boost::filesystem::hard_link_count")
       && !error(::GetFileInformationByHandle(h.handle, &info)== 0 ? BOOST_ERRNO : 0,
-                 p, ec, "mars_boost_ksim::filesystem::hard_link_count")
+                 p, ec, "mars_boost::filesystem::hard_link_count")
            ? info.nNumberOfLinks
            : 0;
 #   endif
@@ -1301,7 +1301,7 @@ namespace detail
 
     struct stat path_stat;
     if (error(::stat(p.c_str(), &path_stat)!= 0,
-        p, ec, "mars_boost_ksim::filesystem::is_empty"))
+        p, ec, "mars_boost::filesystem::is_empty"))
       return false;        
     return S_ISDIR(path_stat.st_mode)
       ? is_empty_directory(p)
@@ -1310,7 +1310,7 @@ namespace detail
 
     WIN32_FILE_ATTRIBUTE_DATA fad;
     if (error(::GetFileAttributesExW(p.c_str(), ::GetFileExInfoStandard, &fad)== 0
-      ? BOOST_ERRNO : 0, p, ec, "mars_boost_ksim::filesystem::is_empty"))
+      ? BOOST_ERRNO : 0, p, ec, "mars_boost::filesystem::is_empty"))
         return false;
 
     if (ec != 0) ec->clear();
@@ -1328,7 +1328,7 @@ namespace detail
 
     struct stat path_stat;
     if (error(::stat(p.c_str(), &path_stat)!= 0 ? BOOST_ERRNO : 0,
-      p, ec, "mars_boost_ksim::filesystem::last_write_time"))
+      p, ec, "mars_boost::filesystem::last_write_time"))
         return std::time_t(-1);
     return path_stat.st_mtime;
 
@@ -1340,13 +1340,13 @@ namespace detail
         OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, 0));
 
     if (error(hw.handle == INVALID_HANDLE_VALUE ? BOOST_ERRNO : 0,
-      p, ec, "mars_boost_ksim::filesystem::last_write_time"))
+      p, ec, "mars_boost::filesystem::last_write_time"))
         return std::time_t(-1);
 
     FILETIME lwt;
 
     if (error(::GetFileTime(hw.handle, 0, 0, &lwt)== 0 ? BOOST_ERRNO : 0,
-      p, ec, "mars_boost_ksim::filesystem::last_write_time"))
+      p, ec, "mars_boost::filesystem::last_write_time"))
         return std::time_t(-1);
 
     return to_time_t(lwt);
@@ -1361,13 +1361,13 @@ namespace detail
 
     struct stat path_stat;
     if (error(::stat(p.c_str(), &path_stat)!= 0,
-      p, ec, "mars_boost_ksim::filesystem::last_write_time"))
+      p, ec, "mars_boost::filesystem::last_write_time"))
         return;
     ::utimbuf buf;
     buf.actime = path_stat.st_atime; // utime()updates access time too:-(
     buf.modtime = new_time;
     error(::utime(p.c_str(), &buf)!= 0 ? BOOST_ERRNO : 0,
-      p, ec, "mars_boost_ksim::filesystem::last_write_time");
+      p, ec, "mars_boost::filesystem::last_write_time");
 
 #   else
 
@@ -1377,14 +1377,14 @@ namespace detail
         OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, 0));
 
     if (error(hw.handle == INVALID_HANDLE_VALUE ? BOOST_ERRNO : 0,
-      p, ec, "mars_boost_ksim::filesystem::last_write_time"))
+      p, ec, "mars_boost::filesystem::last_write_time"))
         return;
 
     FILETIME lwt;
     to_FILETIME(new_time, lwt);
 
     error(::SetFileTime(hw.handle, 0, 0, &lwt)== 0 ? BOOST_ERRNO : 0,
-      p, ec, "mars_boost_ksim::filesystem::last_write_time");
+      p, ec, "mars_boost::filesystem::last_write_time");
 #   endif
   }
 
@@ -1411,7 +1411,7 @@ namespace detail
     {
       if (ec == 0)
       BOOST_FILESYSTEM_THROW(filesystem_error(
-          "mars_boost_ksim::filesystem::permissions", p, local_ec));
+          "mars_boost::filesystem::permissions", p, local_ec));
       else
         *ec = local_ec;
       return;
@@ -1448,7 +1448,7 @@ namespace detail
     {
       if (ec == 0)
       BOOST_FILESYSTEM_THROW(filesystem_error(
-          "mars_boost_ksim::filesystem::permissions", p,
+          "mars_boost::filesystem::permissions", p,
           error_code(errno, system::generic_category())));
       else
         ec->assign(errno, system::generic_category());
@@ -1463,7 +1463,7 @@ namespace detail
 
     DWORD attr = ::GetFileAttributesW(p.c_str());
 
-    if (error(attr == 0 ? BOOST_ERRNO : 0, p, ec, "mars_boost_ksim::filesystem::permissions"))
+    if (error(attr == 0 ? BOOST_ERRNO : 0, p, ec, "mars_boost::filesystem::permissions"))
       return;
 
     if (prms & add_perms)
@@ -1476,7 +1476,7 @@ namespace detail
       attr |= FILE_ATTRIBUTE_READONLY;
 
     error(::SetFileAttributesW(p.c_str(), attr) == 0 ? BOOST_ERRNO : 0,
-      p, ec, "mars_boost_ksim::filesystem::permissions");
+      p, ec, "mars_boost::filesystem::permissions");
 # endif
   }
 
@@ -1489,12 +1489,12 @@ namespace detail
 
     for (std::size_t path_max = 64;; path_max *= 2)// loop 'til buffer large enough
     {
-      mars_boost_ksim::scoped_array<char> buf(new char[path_max]);
+      mars_boost::scoped_array<char> buf(new char[path_max]);
       ssize_t result;
       if ((result=::readlink(p.c_str(), buf.get(), path_max))== -1)
       {
         if (ec == 0)
-          BOOST_FILESYSTEM_THROW(filesystem_error("mars_boost_ksim::filesystem::read_symlink",
+          BOOST_FILESYSTEM_THROW(filesystem_error("mars_boost::filesystem::read_symlink",
             p, error_code(errno, system_category())));
         else ec->assign(errno, system_category());
         break;
@@ -1512,7 +1512,7 @@ namespace detail
 
 #   elif _WIN32_WINNT < 0x0600  // SDK earlier than Vista and Server 2008
     error(BOOST_ERROR_NOT_SUPPORTED, p, ec,
-          "mars_boost_ksim::filesystem::read_symlink");
+          "mars_boost::filesystem::read_symlink");
 #   else  // Vista and Server 2008 SDK, or later
 
     union info_t
@@ -1526,14 +1526,14 @@ namespace detail
         FILE_FLAG_BACKUP_SEMANTICS | FILE_FLAG_OPEN_REPARSE_POINT, 0));
 
     if (error(h.handle == INVALID_HANDLE_VALUE ? BOOST_ERRNO : 0,
-      p, ec, "mars_boost_ksim::filesystem::read_symlink"))
+      p, ec, "mars_boost::filesystem::read_symlink"))
         return symlink_path;
 
     DWORD sz;
 
     if (!error(::DeviceIoControl(h.handle, FSCTL_GET_REPARSE_POINT,
           0, 0, info.buf, sizeof(info), &sz, 0) == 0 ? BOOST_ERRNO : 0, p, ec,
-          "mars_boost_ksim::filesystem::read_symlink" ))
+          "mars_boost::filesystem::read_symlink" ))
       symlink_path.assign(
         static_cast<wchar_t*>(info.rdb.SymbolicLinkReparseBuffer.PathBuffer)
         + info.rdb.SymbolicLinkReparseBuffer.PrintNameOffset/sizeof(wchar_t),
@@ -1549,10 +1549,10 @@ namespace detail
   {
     error_code tmp_ec;
     path wc_base(weakly_canonical(base, &tmp_ec));
-    if (error(tmp_ec.value(), base, ec, "mars_boost_ksim::filesystem::relative"))
+    if (error(tmp_ec.value(), base, ec, "mars_boost::filesystem::relative"))
       return path();
     path wc_p(weakly_canonical(p, &tmp_ec));
-    if (error(tmp_ec.value(), base, ec, "mars_boost_ksim::filesystem::relative"))
+    if (error(tmp_ec.value(), base, ec, "mars_boost::filesystem::relative"))
       return path();
     return wc_p.lexically_relative(wc_base);
   }
@@ -1563,7 +1563,7 @@ namespace detail
     error_code tmp_ec;
     file_type type = query_file_type(p, &tmp_ec);
     if (error(type == status_error ? tmp_ec.value() : 0, p, ec,
-        "mars_boost_ksim::filesystem::remove"))
+        "mars_boost::filesystem::remove"))
       return false;
 
     // Since POSIX remove() is specified to work with either files or directories, in a
@@ -1574,12 +1574,12 @@ namespace detail
   }
 
   BOOST_FILESYSTEM_DECL
-  mars_boost_ksim::uintmax_t remove_all(const path& p, error_code* ec)
+  mars_boost::uintmax_t remove_all(const path& p, error_code* ec)
   {
     error_code tmp_ec;
     file_type type = query_file_type(p, &tmp_ec);
     if (error(type == status_error ? tmp_ec.value() : 0, p, ec,
-      "mars_boost_ksim::filesystem::remove_all"))
+      "mars_boost::filesystem::remove_all"))
       return 0;
 
     return (type != status_error && type != file_not_found) // exists
@@ -1591,7 +1591,7 @@ namespace detail
   void rename(const path& old_p, const path& new_p, error_code* ec)
   {
     error(!BOOST_MOVE_FILE(old_p.c_str(), new_p.c_str()) ? BOOST_ERRNO : 0, old_p, new_p,
-      ec, "mars_boost_ksim::filesystem::rename");
+      ec, "mars_boost::filesystem::rename");
   }
 
   BOOST_FILESYSTEM_DECL
@@ -1599,12 +1599,12 @@ namespace detail
   {
 #   if defined(BOOST_POSIX_API)
     if (BOOST_UNLIKELY(size > static_cast< uintmax_t >((std::numeric_limits< off_t >::max)()))) {
-      error(system::errc::file_too_large, p, ec, "mars_boost_ksim::filesystem::resize_file");
+      error(system::errc::file_too_large, p, ec, "mars_boost::filesystem::resize_file");
       return;
     }
 #   endif
     error(!BOOST_RESIZE_FILE(p.c_str(), size) ? BOOST_ERRNO : 0, p, ec,
-      "mars_boost_ksim::filesystem::resize_file");
+      "mars_boost::filesystem::resize_file");
   }
 
   BOOST_FILESYSTEM_DECL
@@ -1614,14 +1614,14 @@ namespace detail
     struct BOOST_STATVFS vfs;
     space_info info;
     if (!error(::BOOST_STATVFS(p.c_str(), &vfs)!= 0,
-      p, ec, "mars_boost_ksim::filesystem::space"))
+      p, ec, "mars_boost::filesystem::space"))
     {
       info.capacity 
-        = static_cast<mars_boost_ksim::uintmax_t>(vfs.f_blocks)* BOOST_STATVFS_F_FRSIZE;
+        = static_cast<mars_boost::uintmax_t>(vfs.f_blocks)* BOOST_STATVFS_F_FRSIZE;
       info.free 
-        = static_cast<mars_boost_ksim::uintmax_t>(vfs.f_bfree)* BOOST_STATVFS_F_FRSIZE;
+        = static_cast<mars_boost::uintmax_t>(vfs.f_bfree)* BOOST_STATVFS_F_FRSIZE;
       info.available
-        = static_cast<mars_boost_ksim::uintmax_t>(vfs.f_bavail)* BOOST_STATVFS_F_FRSIZE;
+        = static_cast<mars_boost::uintmax_t>(vfs.f_bavail)* BOOST_STATVFS_F_FRSIZE;
     }
 
 #   else
@@ -1629,16 +1629,16 @@ namespace detail
     space_info info;
 
     if (!error(::GetDiskFreeSpaceExW(p.c_str(), &avail, &total, &free)== 0,
-       p, ec, "mars_boost_ksim::filesystem::space"))
+       p, ec, "mars_boost::filesystem::space"))
     {
       info.capacity
-        = (static_cast<mars_boost_ksim::uintmax_t>(total.HighPart)<< 32)
+        = (static_cast<mars_boost::uintmax_t>(total.HighPart)<< 32)
           + total.LowPart;
       info.free
-        = (static_cast<mars_boost_ksim::uintmax_t>(free.HighPart)<< 32)
+        = (static_cast<mars_boost::uintmax_t>(free.HighPart)<< 32)
           + free.LowPart;
       info.available
-        = (static_cast<mars_boost_ksim::uintmax_t>(avail.HighPart)<< 32)
+        = (static_cast<mars_boost::uintmax_t>(avail.HighPart)<< 32)
           + avail.LowPart;
     }
 
@@ -1667,7 +1667,7 @@ namespace detail
         return fs::file_status(fs::file_not_found, fs::no_perms);
       }
       if (ec == 0)
-        BOOST_FILESYSTEM_THROW(filesystem_error("mars_boost_ksim::filesystem::status",
+        BOOST_FILESYSTEM_THROW(filesystem_error("mars_boost::filesystem::status",
           p, error_code(errno, system_category())));
       return fs::file_status(fs::status_error);
     }
@@ -1747,7 +1747,7 @@ namespace detail
         return fs::file_status(fs::file_not_found, fs::no_perms);
       }
       if (ec == 0)
-        BOOST_FILESYSTEM_THROW(filesystem_error("mars_boost_ksim::filesystem::status",
+        BOOST_FILESYSTEM_THROW(filesystem_error("mars_boost::filesystem::status",
           p, error_code(errno, system_category())));
       return fs::file_status(fs::status_error);
     }
@@ -1818,7 +1818,7 @@ namespace detail
        
       if (p.empty() || (ec&&!is_directory(p, *ec))||(!ec&&!is_directory(p)))
       {
-        error(ENOTDIR, p, ec, "mars_boost_ksim::filesystem::temp_directory_path");
+        error(ENOTDIR, p, ec, "mars_boost::filesystem::temp_directory_path");
         return p;
       }
         
@@ -1857,7 +1857,7 @@ namespace detail
         if (buf.empty()
           || ::GetWindowsDirectoryW(&buf[0], static_cast<UINT>(buf.size())) == 0)
         {
-          error(::GetLastError(), ec, "mars_boost_ksim::filesystem::temp_directory_path");
+          error(::GetLastError(), ec, "mars_boost::filesystem::temp_directory_path");
           return path();
         }
         p = &*buf.begin();  // do not depend on buf.size(); see ticket #10388
@@ -1885,16 +1885,16 @@ namespace detail
     wchar_t* pfn;
     std::size_t len = get_full_path_name(p, buf_size, buf, &pfn);
 
-    if (error(len == 0 ? BOOST_ERRNO : 0, p, ec, "mars_boost_ksim::filesystem::system_complete"))
+    if (error(len == 0 ? BOOST_ERRNO : 0, p, ec, "mars_boost::filesystem::system_complete"))
       return path();
 
     if (len < buf_size)// len does not include null termination character
       return path(&buf[0]);
 
-    mars_boost_ksim::scoped_array<wchar_t> big_buf(new wchar_t[len]);
+    mars_boost::scoped_array<wchar_t> big_buf(new wchar_t[len]);
 
     return error(get_full_path_name(p, len , big_buf.get(), &pfn)== 0 ? BOOST_ERRNO : 0,
-      p, ec, "mars_boost_ksim::filesystem::system_complete")
+      p, ec, "mars_boost::filesystem::system_complete")
       ? path()
       : path(big_buf.get());
 #   endif
@@ -1912,7 +1912,7 @@ namespace detail
     {
       file_status head_status = status(head, tmp_ec);
       if (error(head_status.type() == fs::status_error,
-        head, ec, "mars_boost_ksim::filesystem::weakly_canonical"))
+        head, ec, "mars_boost::filesystem::weakly_canonical"))
         return path();
       if (head_status.type() != fs::file_not_found)
         break;
@@ -1933,7 +1933,7 @@ namespace detail
     if (head.empty())
       return p.lexically_normal();
     head = canonical(head, tmp_ec);
-    if (error(tmp_ec.value(), head, ec, "mars_boost_ksim::filesystem::weakly_canonical"))
+    if (error(tmp_ec.value(), head, ec, "mars_boost::filesystem::weakly_canonical"))
       return path();
     return tail.empty()
       ? head
@@ -2007,7 +2007,7 @@ namespace path_traits
   }
 }  // namespace path_traits
 } // namespace filesystem
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 //--------------------------------------------------------------------------------------//
 //                                                                                      //
@@ -2227,7 +2227,7 @@ namespace
 
 }  // unnamed namespace
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 namespace filesystem
 {
@@ -2267,7 +2267,7 @@ namespace detail
     const path& p, system::error_code* ec)    
   {
     if (error(p.empty() ? not_found_error_code.value() : 0, p, ec,
-              "mars_boost_ksim::filesystem::directory_iterator::construct"))
+              "mars_boost::filesystem::directory_iterator::construct"))
       return;
 
     path::string_type filename;
@@ -2282,7 +2282,7 @@ namespace detail
     {
       it.m_imp.reset();
       error(result.value(), p,
-        ec, "mars_boost_ksim::filesystem::directory_iterator::construct");
+        ec, "mars_boost::filesystem::directory_iterator::construct");
       return;
     }
     
@@ -2323,7 +2323,7 @@ namespace detail
         it.m_imp.reset();
         if (ec == 0)
           BOOST_FILESYSTEM_THROW(
-            filesystem_error("mars_boost_ksim::filesystem::directory_iterator::operator++",
+            filesystem_error("mars_boost::filesystem::directory_iterator::operator++",
               error_path,
               error_code(BOOST_ERRNO, system_category())));
         else
@@ -2351,4 +2351,4 @@ namespace detail
   }
 }  // namespace detail
 } // namespace filesystem
-} // namespace mars_boost_ksim
+} // namespace mars_boost

@@ -23,7 +23,7 @@
 #include <boost/bind/arg.hpp>
 #include <boost/config.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 namespace placeholders
@@ -31,32 +31,32 @@ namespace placeholders
 
 #if defined(__BORLANDC__) || defined(__GNUC__) && (__GNUC__ < 4)
 
-inline mars_boost_ksim::arg<1> _1() { return mars_boost_ksim::arg<1>(); }
-inline mars_boost_ksim::arg<2> _2() { return mars_boost_ksim::arg<2>(); }
-inline mars_boost_ksim::arg<3> _3() { return mars_boost_ksim::arg<3>(); }
-inline mars_boost_ksim::arg<4> _4() { return mars_boost_ksim::arg<4>(); }
-inline mars_boost_ksim::arg<5> _5() { return mars_boost_ksim::arg<5>(); }
-inline mars_boost_ksim::arg<6> _6() { return mars_boost_ksim::arg<6>(); }
-inline mars_boost_ksim::arg<7> _7() { return mars_boost_ksim::arg<7>(); }
-inline mars_boost_ksim::arg<8> _8() { return mars_boost_ksim::arg<8>(); }
-inline mars_boost_ksim::arg<9> _9() { return mars_boost_ksim::arg<9>(); }
+inline mars_boost::arg<1> _1() { return mars_boost::arg<1>(); }
+inline mars_boost::arg<2> _2() { return mars_boost::arg<2>(); }
+inline mars_boost::arg<3> _3() { return mars_boost::arg<3>(); }
+inline mars_boost::arg<4> _4() { return mars_boost::arg<4>(); }
+inline mars_boost::arg<5> _5() { return mars_boost::arg<5>(); }
+inline mars_boost::arg<6> _6() { return mars_boost::arg<6>(); }
+inline mars_boost::arg<7> _7() { return mars_boost::arg<7>(); }
+inline mars_boost::arg<8> _8() { return mars_boost::arg<8>(); }
+inline mars_boost::arg<9> _9() { return mars_boost::arg<9>(); }
 
 #else
 
-BOOST_STATIC_CONSTEXPR mars_boost_ksim::arg<1> _1;
-BOOST_STATIC_CONSTEXPR mars_boost_ksim::arg<2> _2;
-BOOST_STATIC_CONSTEXPR mars_boost_ksim::arg<3> _3;
-BOOST_STATIC_CONSTEXPR mars_boost_ksim::arg<4> _4;
-BOOST_STATIC_CONSTEXPR mars_boost_ksim::arg<5> _5;
-BOOST_STATIC_CONSTEXPR mars_boost_ksim::arg<6> _6;
-BOOST_STATIC_CONSTEXPR mars_boost_ksim::arg<7> _7;
-BOOST_STATIC_CONSTEXPR mars_boost_ksim::arg<8> _8;
-BOOST_STATIC_CONSTEXPR mars_boost_ksim::arg<9> _9;
+BOOST_STATIC_CONSTEXPR mars_boost::arg<1> _1;
+BOOST_STATIC_CONSTEXPR mars_boost::arg<2> _2;
+BOOST_STATIC_CONSTEXPR mars_boost::arg<3> _3;
+BOOST_STATIC_CONSTEXPR mars_boost::arg<4> _4;
+BOOST_STATIC_CONSTEXPR mars_boost::arg<5> _5;
+BOOST_STATIC_CONSTEXPR mars_boost::arg<6> _6;
+BOOST_STATIC_CONSTEXPR mars_boost::arg<7> _7;
+BOOST_STATIC_CONSTEXPR mars_boost::arg<8> _8;
+BOOST_STATIC_CONSTEXPR mars_boost::arg<9> _9;
 
 #endif
 
 } // namespace placeholders
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // #ifndef BOOST_BIND_PLACEHOLDERS_HPP_INCLUDED

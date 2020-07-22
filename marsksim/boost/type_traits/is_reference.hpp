@@ -15,16 +15,16 @@
 #include <boost/type_traits/is_lvalue_reference.hpp>
 #include <boost/type_traits/is_rvalue_reference.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 template <class T> struct is_reference 
    : public 
    integral_constant<
       bool, 
-      ::mars_boost_ksim::is_lvalue_reference<T>::value || ::mars_boost_ksim::is_rvalue_reference<T>::value>
+      ::mars_boost::is_lvalue_reference<T>::value || ::mars_boost::is_rvalue_reference<T>::value>
 {};
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_IS_REFERENCE_HPP_INCLUDED
 

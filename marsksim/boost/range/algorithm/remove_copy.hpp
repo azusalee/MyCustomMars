@@ -15,7 +15,7 @@
 #include <boost/range/concepts.hpp>
 #include <algorithm>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range
     {
@@ -34,11 +34,11 @@ inline OutputIterator
 remove_copy(const SinglePassRange& rng, OutputIterator out_it, const Value& val)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( SinglePassRangeConcept<const SinglePassRange> ));
-    return std::remove_copy(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), out_it, val);
+    return std::remove_copy(mars_boost::begin(rng), mars_boost::end(rng), out_it, val);
 }
 
     } // namespace range
     using range::remove_copy;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

@@ -33,7 +33,7 @@
 
 #include <boost/core/no_exceptions_support.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace container {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace container {
 
 namespace container_detail {
 
@@ -57,7 +57,7 @@ namespace container_detail {
       struct dummy;
 
       template<class X>
-      static decltype(X(mars_boost_ksim::move_detail::declval<Args>()...), true_type()) test(int);
+      static decltype(X(mars_boost::move_detail::declval<Args>()...), true_type()) test(int);
 
       template<class X>
       static no_type test(...);
@@ -118,7 +118,7 @@ inline typename container_detail::enable_if_and
    ( ConstructAlloc & construct_alloc, BOOST_FWD_REF(ArgAlloc) arg_alloc, T* p, BOOST_FWD_REF(Args)...args)
 {
    (void)arg_alloc;
-   allocator_traits<ConstructAlloc>::construct(construct_alloc, p, ::mars_boost_ksim::forward<Args>(args)...);
+   allocator_traits<ConstructAlloc>::construct(construct_alloc, p, ::mars_boost::forward<Args>(args)...);
 }
 
 // allocator_arg_t
@@ -137,7 +137,7 @@ inline typename container_detail::enable_if_and
 {
    allocator_traits<ConstructAlloc>::construct
       ( construct_alloc, p, allocator_arg
-      , ::mars_boost_ksim::forward<ArgAlloc>(arg_alloc), ::mars_boost_ksim::forward<Args>(args)...);
+      , ::mars_boost::forward<ArgAlloc>(arg_alloc), ::mars_boost::forward<Args>(args)...);
 }
 
 // allocator suffix
@@ -155,7 +155,7 @@ inline typename container_detail::enable_if_and
    ( ConstructAlloc& construct_alloc, BOOST_FWD_REF(ArgAlloc) arg_alloc, T* p, BOOST_FWD_REF(Args)...args)
 {
    allocator_traits<ConstructAlloc>::construct
-      (construct_alloc, p, ::mars_boost_ksim::forward<Args>(args)..., ::mars_boost_ksim::forward<ArgAlloc>(arg_alloc));
+      (construct_alloc, p, ::mars_boost::forward<Args>(args)..., ::mars_boost::forward<ArgAlloc>(arg_alloc));
 }
 
 #else    //#if !defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES)
@@ -189,7 +189,7 @@ BOOST_MOVE_ITERATE_0TO9(BOOST_CONTAINER_SCOPED_ALLOCATOR_DISPATCH_USES_ALLOCATOR
       (ConstructAlloc& construct_alloc, BOOST_FWD_REF(ArgAlloc) arg_alloc, T* p BOOST_MOVE_I##N BOOST_MOVE_UREF##N)\
    {\
       allocator_traits<ConstructAlloc>::construct\
-         (construct_alloc, p, allocator_arg, ::mars_boost_ksim::forward<ArgAlloc>(arg_alloc) BOOST_MOVE_I##N BOOST_MOVE_FWD##N);\
+         (construct_alloc, p, allocator_arg, ::mars_boost::forward<ArgAlloc>(arg_alloc) BOOST_MOVE_I##N BOOST_MOVE_FWD##N);\
    }\
 //
 BOOST_MOVE_ITERATE_0TO9(BOOST_CONTAINER_SCOPED_ALLOCATOR_DISPATCH_USES_ALLOCATOR_CODE)
@@ -207,7 +207,7 @@ BOOST_MOVE_ITERATE_0TO9(BOOST_CONTAINER_SCOPED_ALLOCATOR_DISPATCH_USES_ALLOCATOR
       (ConstructAlloc& construct_alloc, BOOST_FWD_REF(ArgAlloc) arg_alloc, T* p BOOST_MOVE_I##N BOOST_MOVE_UREF##N)\
    {\
       allocator_traits<ConstructAlloc>::construct\
-         (construct_alloc, p BOOST_MOVE_I##N BOOST_MOVE_FWD##N, ::mars_boost_ksim::forward<ArgAlloc>(arg_alloc));\
+         (construct_alloc, p BOOST_MOVE_I##N BOOST_MOVE_FWD##N, ::mars_boost::forward<ArgAlloc>(arg_alloc));\
    }\
 //
 BOOST_MOVE_ITERATE_0TO9(BOOST_CONTAINER_SCOPED_ALLOCATOR_DISPATCH_USES_ALLOCATOR_CODE)
@@ -246,9 +246,9 @@ BOOST_CONTAINER_DOC1ST(void, typename container_detail::enable_if<container_deta
    , ArgAlloc & arg_alloc
    , Pair* p, BOOST_FWD_REF(U) x, BOOST_FWD_REF(V) y)
 {
-   (dispatch_uses_allocator)(construct_alloc, arg_alloc, container_detail::addressof(p->first), ::mars_boost_ksim::forward<U>(x));
+   (dispatch_uses_allocator)(construct_alloc, arg_alloc, container_detail::addressof(p->first), ::mars_boost::forward<U>(x));
    BOOST_TRY{
-      (dispatch_uses_allocator)(construct_alloc, arg_alloc, container_detail::addressof(p->second), ::mars_boost_ksim::forward<V>(y));
+      (dispatch_uses_allocator)(construct_alloc, arg_alloc, container_detail::addressof(p->second), ::mars_boost::forward<V>(y));
    }
    BOOST_CATCH(...){
       allocator_traits<ConstructAlloc>::destroy(construct_alloc, container_detail::addressof(p->first));
@@ -273,12 +273,12 @@ template < typename ConstructAlloc
 typename container_detail::enable_if_and
    < void
    , container_detail::is_pair<Pair>
-   , container_detail::not_<mars_boost_ksim::move_detail::is_reference<Pair2> > >::type //This is needed for MSVC10 and ambiguous overloads
+   , container_detail::not_<mars_boost::move_detail::is_reference<Pair2> > >::type //This is needed for MSVC10 and ambiguous overloads
    dispatch_uses_allocator
    (ConstructAlloc & construct_alloc
       , ArgAlloc & arg_alloc
       , Pair* p, BOOST_RV_REF_BEG Pair2 BOOST_RV_REF_END x)
-{  (dispatch_uses_allocator)(construct_alloc, arg_alloc, p, ::mars_boost_ksim::move(x.first), ::mars_boost_ksim::move(x.second));  }
+{  (dispatch_uses_allocator)(construct_alloc, arg_alloc, p, ::mars_boost::move(x.first), ::mars_boost::move(x.second));  }
 
 //template <typename ConstructAlloc, typename ArgAlloc, class Pair, class Pair2>
 //void dispatch_uses_allocator( ConstructAlloc & construct_alloc, ArgAlloc & arg_alloc
@@ -286,7 +286,7 @@ typename container_detail::enable_if_and
 
 }  //namespace container_detail
 
-}} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace container {
+}} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace container {
 
 #include <boost/container/detail/config_end.hpp>
 

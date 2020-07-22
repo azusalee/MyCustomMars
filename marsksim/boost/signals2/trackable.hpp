@@ -9,7 +9,7 @@
 
 // Compatibility class to ease porting from the original
 // Boost.Signals library.  However,
-// mars_boost_ksim::signals2::trackable is NOT thread-safe.
+// mars_boost::signals2::trackable is NOT thread-safe.
 
 // For more information, see http://www.boost.org
 
@@ -20,7 +20,7 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/weak_ptr.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
   namespace signals2 {
     namespace detail
     {
@@ -54,6 +54,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       shared_ptr<detail::trackable_pointee> _tracked_ptr;
     };
   } // end namespace signals2
-} // end namespace mars_boost_ksim
+} // end namespace mars_boost
 
 #endif // BOOST_SIGNALS2_TRACKABLE_HPP

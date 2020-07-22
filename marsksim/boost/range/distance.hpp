@@ -19,14 +19,14 @@
 #include <boost/range/end.hpp>
 #include <boost/range/difference_type.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
     template< class T >
     inline BOOST_DEDUCED_TYPENAME range_difference<T>::type 
     distance( const T& r )
     {
-        return std::distance( mars_boost_ksim::begin( r ), mars_boost_ksim::end( r ) );
+        return std::distance( mars_boost::begin( r ), mars_boost::end( r ) );
     }
 
 } // namespace 'boost'

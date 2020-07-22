@@ -16,7 +16,7 @@
 #include <boost/range/detail/range_return.hpp>
 #include <algorithm>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range
     {
@@ -32,8 +32,8 @@ unique( ForwardRange& rng )
 {
     BOOST_RANGE_CONCEPT_ASSERT(( ForwardRangeConcept<ForwardRange> ));
     return range_return<ForwardRange,re>::
-        pack( std::unique( mars_boost_ksim::begin(rng),
-                           mars_boost_ksim::end(rng)), rng );
+        pack( std::unique( mars_boost::begin(rng),
+                           mars_boost::end(rng)), rng );
 }
 
 /// \overload
@@ -43,8 +43,8 @@ unique( const ForwardRange& rng )
 {
     BOOST_RANGE_CONCEPT_ASSERT(( ForwardRangeConcept<const ForwardRange> ));
     return range_return<const ForwardRange,re>::
-        pack( std::unique( mars_boost_ksim::begin(rng),
-                           mars_boost_ksim::end(rng)), rng );
+        pack( std::unique( mars_boost::begin(rng),
+                           mars_boost::end(rng)), rng );
 }
 /// \overload
 template< range_return_value re, class ForwardRange, class BinaryPredicate >
@@ -53,7 +53,7 @@ unique( ForwardRange& rng, BinaryPredicate pred )
 {
     BOOST_RANGE_CONCEPT_ASSERT(( ForwardRangeConcept<ForwardRange> ));
     return range_return<ForwardRange,re>::
-        pack(std::unique(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), pred),
+        pack(std::unique(mars_boost::begin(rng), mars_boost::end(rng), pred),
              rng);
 }
 /// \overload
@@ -63,7 +63,7 @@ unique( const ForwardRange& rng, BinaryPredicate pred )
 {
     BOOST_RANGE_CONCEPT_ASSERT(( ForwardRangeConcept<const ForwardRange> ));
     return range_return<const ForwardRange,re>::
-        pack(std::unique(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), pred),
+        pack(std::unique(mars_boost::begin(rng), mars_boost::end(rng), pred),
              rng);
 }
 
@@ -102,6 +102,6 @@ unique( const ForwardRange& rng, BinaryPredicate pred )
 
     } // namespace range
     using range::unique;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

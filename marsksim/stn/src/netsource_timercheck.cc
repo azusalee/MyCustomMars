@@ -41,7 +41,7 @@ static const int kMaxSpeedTestCount = 30;
 static const unsigned long kIntervalTime = 1 * 60 * 60 * 1000;    // ms
 
 #define AYNC_HANDLER asyncreg_.Get()
-#define RETURN_NETCORE_SYNC2ASYNC_FUNC(func) RETURN_SYNC2ASYNC_FUNC(func, )
+#define RETURN_NETCORE_SYNC2ASYNC_FUNCksim(func) RETURN_SYNC2ASYNC_FUNCksim(func, )
 
 NetSourceksimTimerCheck::NetSourceksimTimerCheck(NetSourceksim* _net_source, ActiveLogicksim& _active_logic, LongLink& _longlink, MessageQueueksim::MessageQueueksim_t  _messagequeue_id)
     : net_source_(_net_source)
@@ -50,7 +50,7 @@ NetSourceksimTimerCheck::NetSourceksimTimerCheck(NetSourceksim* _net_source, Act
 	, asyncreg_(MessageQueueksim::InstallAsyncHandler(_messagequeue_id)){
     xassert2(breaker_.IsCreateSuc(), "create breaker fail");
         xinfo2(TSF"handler:(%_,%_)", asyncreg_.Get().queue, asyncreg_.Get().seq);
-    frequency_limit_ = new CommFrequencyLimit(kMaxSpeedTestCount, kIntervalTime);
+    frequency_limit_ = new CommFrequencyLimitksim(kMaxSpeedTestCount, kIntervalTime);
 
     active_connection_ = _active_logic.SignalActive.connect(boost_ksim::bind(&NetSourceksimTimerCheck::__OnActiveChanged, this, _1));
 
@@ -78,7 +78,7 @@ NetSourceksimTimerCheck::~NetSourceksimTimerCheck() {
 }
 
 void NetSourceksimTimerCheck::CancelConnect() {
-	RETURN_NETCORE_SYNC2ASYNC_FUNC(boost_ksim::bind(&NetSourceksimTimerCheck::CancelConnect, this));
+	RETURN_NETCORE_SYNC2ASYNC_FUNCksim(boost_ksim::bind(&NetSourceksimTimerCheck::CancelConnect, this));
     xinfo_function();
 
     if (!thread_.isruning()) {
@@ -93,7 +93,7 @@ void NetSourceksimTimerCheck::CancelConnect() {
 
 void NetSourceksimTimerCheck::__StartCheck() {
 
-	RETURN_NETCORE_SYNC2ASYNC_FUNC(boost_ksim::bind(&NetSourceksimTimerCheck::__StartCheck, this));
+	RETURN_NETCORE_SYNC2ASYNC_FUNCksim(boost_ksim::bind(&NetSourceksimTimerCheck::__StartCheck, this));
     xdebug_function();
 
     if (asyncpost_ != MessageQueueksim::KNullPost) return;
@@ -134,7 +134,7 @@ void NetSourceksimTimerCheck::__Check() {
 
 void NetSourceksimTimerCheck::__StopCheck() {
 
-	RETURN_NETCORE_SYNC2ASYNC_FUNC(boost_ksim::bind(&NetSourceksimTimerCheck::__StopCheck, this));
+	RETURN_NETCORE_SYNC2ASYNC_FUNCksim(boost_ksim::bind(&NetSourceksimTimerCheck::__StopCheck, this));
 
     xdebug_function();
 

@@ -7,7 +7,7 @@
 # pragma once
 #endif
 
-// what:  variant type mars_boost_ksim::any
+// what:  variant type mars_boost::any
 // who:   contributed by Kevlin Henney,
 //        with features contributed and bugs found by
 //        Antony Polukhin, Ed Brey, Mark Rodgers, 
@@ -31,7 +31,7 @@
 #include <boost/type_traits/is_const.hpp>
 #include <boost/mpl/if.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     class any
     {
@@ -66,8 +66,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         // Perfect forwarding of ValueType
         template<typename ValueType>
         any(ValueType&& value
-            , typename mars_boost_ksim::disable_if<mars_boost_ksim::is_same<any&, ValueType> >::type* = 0 // disable if value has type `any&`
-            , typename mars_boost_ksim::disable_if<mars_boost_ksim::is_const<ValueType> >::type* = 0) // disable if value has type `const ValueType&&`
+            , typename mars_boost::disable_if<mars_boost::is_same<any&, ValueType> >::type* = 0 // disable if value has type `any&`
+            , typename mars_boost::disable_if<mars_boost::is_const<ValueType> >::type* = 0) // disable if value has type `const ValueType&&`
           : content(new holder< typename decay<ValueType>::type >(static_cast<ValueType&&>(value)))
         {
         }
@@ -137,9 +137,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             any().swap(*this);
         }
 
-        const mars_boost_ksim::typeindex::type_info& type() const BOOST_NOEXCEPT
+        const mars_boost::typeindex::type_info& type() const BOOST_NOEXCEPT
         {
-            return content ? content->type() : mars_boost_ksim::typeindex::type_id<void>().type_info();
+            return content ? content->type() : mars_boost::typeindex::type_id<void>().type_info();
         }
 
 #ifndef BOOST_NO_MEMBER_TEMPLATE_FRIENDS
@@ -158,7 +158,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         public: // queries
 
-            virtual const mars_boost_ksim::typeindex::type_info& type() const BOOST_NOEXCEPT = 0;
+            virtual const mars_boost::typeindex::type_info& type() const BOOST_NOEXCEPT = 0;
 
             virtual placeholder * clone() const = 0;
 
@@ -182,9 +182,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #endif
         public: // queries
 
-            virtual const mars_boost_ksim::typeindex::type_info& type() const BOOST_NOEXCEPT
+            virtual const mars_boost::typeindex::type_info& type() const BOOST_NOEXCEPT
             {
-                return mars_boost_ksim::typeindex::type_id<ValueType>().type_info();
+                return mars_boost::typeindex::type_id<ValueType>().type_info();
             }
 
             virtual placeholder * clone() const
@@ -235,15 +235,15 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     public:
         virtual const char * what() const BOOST_NOEXCEPT_OR_NOTHROW
         {
-            return "mars_boost_ksim::bad_any_cast: "
-                   "failed conversion using mars_boost_ksim::any_cast";
+            return "mars_boost::bad_any_cast: "
+                   "failed conversion using mars_boost::any_cast";
         }
     };
 
     template<typename ValueType>
     ValueType * any_cast(any * operand) BOOST_NOEXCEPT
     {
-        return operand && operand->type() == mars_boost_ksim::typeindex::type_id<ValueType>()
+        return operand && operand->type() == mars_boost::typeindex::type_id<ValueType>()
             ? &static_cast<any::holder<BOOST_DEDUCED_TYPENAME remove_cv<ValueType>::type> *>(operand->content)->held
             : 0;
     }
@@ -262,16 +262,16 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         nonref * result = any_cast<nonref>(&operand);
         if(!result)
-            mars_boost_ksim::throw_exception(bad_any_cast());
+            mars_boost::throw_exception(bad_any_cast());
 
         // Attempt to avoid construction of a temporary object in cases when 
         // `ValueType` is not a reference. Example:
         // `static_cast<std::string>(*result);` 
         // which is equal to `std::string(*result);`
-        typedef BOOST_DEDUCED_TYPENAME mars_boost_ksim::mpl::if_<
-            mars_boost_ksim::is_reference<ValueType>,
+        typedef BOOST_DEDUCED_TYPENAME mars_boost::mpl::if_<
+            mars_boost::is_reference<ValueType>,
             ValueType,
-            BOOST_DEDUCED_TYPENAME mars_boost_ksim::add_reference<ValueType>::type
+            BOOST_DEDUCED_TYPENAME mars_boost::add_reference<ValueType>::type
         >::type ref_type;
 
         return static_cast<ref_type>(*result);
@@ -289,9 +289,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     inline ValueType any_cast(any&& operand)
     {
         BOOST_STATIC_ASSERT_MSG(
-            mars_boost_ksim::is_rvalue_reference<ValueType&&>::value /*true if ValueType is rvalue or just a value*/
-            || mars_boost_ksim::is_const< typename mars_boost_ksim::remove_reference<ValueType>::type >::value,
-            "mars_boost_ksim::any_cast shall not be used for getting nonconst references to temporary objects" 
+            mars_boost::is_rvalue_reference<ValueType&&>::value /*true if ValueType is rvalue or just a value*/
+            || mars_boost::is_const< typename mars_boost::remove_reference<ValueType>::type >::value,
+            "mars_boost::any_cast shall not be used for getting nonconst references to temporary objects" 
         );
         return any_cast<ValueType>(operand);
     }

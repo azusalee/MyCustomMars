@@ -7,12 +7,12 @@
 # include <boost/config.hpp>
 # include <boost/detail/workaround.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace parameter { namespace aux { 
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace parameter { namespace aux { 
 
 // A macro that takes a parenthesized C++ type name (T) and transforms
 // it into an un-parenthesized type expression equivalent to T.
 #  define BOOST_PARAMETER_PARENTHESIZED_TYPE(x)                    \
-    mars_boost_ksim::parameter::aux::unaryfunptr_arg_type< void(*)x >::type
+    mars_boost::parameter::aux::unaryfunptr_arg_type< void(*)x >::type
 
 // A metafunction that transforms void(*)(T) -> T
 template <class UnaryFunctionPointer>
@@ -30,6 +30,6 @@ struct unaryfunptr_arg_type<void(*)(void)>
     typedef void type;
 };
     
-}}} // namespace mars_boost_ksim::parameter::aux
+}}} // namespace mars_boost::parameter::aux
 
 #endif // BOOST_PARAMETER_AUX_PARENTHESIZED_TYPE_DWA2006414_HPP

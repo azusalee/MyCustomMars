@@ -16,22 +16,22 @@
 
 #include <boost/type_traits/detail/yes_no_type.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim{
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost{
 
    namespace detail{
 
       struct is_default_constructible_imp
       {
          template<typename _Tp, typename = decltype(_Tp())>
-         static mars_boost_ksim::type_traits::yes_type test(int);
+         static mars_boost::type_traits::yes_type test(int);
 
          template<typename>
-         static mars_boost_ksim::type_traits::no_type test(...);
+         static mars_boost::type_traits::no_type test(...);
       };
 
    }
 
-   template <class T> struct is_default_constructible : public integral_constant<bool, sizeof(detail::is_default_constructible_imp::test<T>(0)) == sizeof(mars_boost_ksim::type_traits::yes_type)>{};
+   template <class T> struct is_default_constructible : public integral_constant<bool, sizeof(detail::is_default_constructible_imp::test<T>(0)) == sizeof(mars_boost::type_traits::yes_type)>{};
    template <class T, std::size_t N> struct is_default_constructible<T[N]> : public is_default_constructible<T>{};
    template <class T> struct is_default_constructible<T[]> : public is_default_constructible<T>{};
    template <class T> struct is_default_constructible<T&> : public integral_constant<bool, false>{};
@@ -47,7 +47,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 #include <boost/type_traits/is_pod.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim{
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost{
 
    // We don't know how to implement this, note we can not use has_trivial_constructor here
    // because the correct implementation of that trait requires this one:
@@ -59,6 +59,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 #endif
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_IS_DEFAULT_CONSTRUCTIBLE_HPP_INCLUDED

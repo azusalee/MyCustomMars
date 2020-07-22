@@ -88,7 +88,7 @@ namespace std {
 #endif
 
 // The macro marks up places where compiler complains for missing return statement or
-// uninitialized variables after calling to mars_boost_ksim::throw_exception.
+// uninitialized variables after calling to mars_boost::throw_exception.
 // BOOST_UNREACHABLE_RETURN doesn't work since even compilers that support
 // unreachable statements detection emit such warnings.
 #if defined(_MSC_VER)

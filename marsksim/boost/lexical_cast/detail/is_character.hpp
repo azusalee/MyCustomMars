@@ -26,7 +26,7 @@
 #include <boost/mpl/bool.hpp>
 #include <boost/type_traits/is_same.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
     namespace detail // is_character<...>
     {
@@ -34,19 +34,19 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         template < typename T >
         struct is_character
         {
-            typedef BOOST_DEDUCED_TYPENAME mars_boost_ksim::mpl::bool_<
-                    mars_boost_ksim::is_same< T, char >::value ||
+            typedef BOOST_DEDUCED_TYPENAME mars_boost::mpl::bool_<
+                    mars_boost::is_same< T, char >::value ||
                     #if !defined(BOOST_NO_STRINGSTREAM) && !defined(BOOST_NO_STD_WSTRING)
-                        mars_boost_ksim::is_same< T, wchar_t >::value ||
+                        mars_boost::is_same< T, wchar_t >::value ||
                     #endif
                     #ifndef BOOST_NO_CXX11_CHAR16_T
-                        mars_boost_ksim::is_same< T, char16_t >::value ||
+                        mars_boost::is_same< T, char16_t >::value ||
                     #endif
                     #ifndef BOOST_NO_CXX11_CHAR32_T
-                        mars_boost_ksim::is_same< T, char32_t >::value ||
+                        mars_boost::is_same< T, char32_t >::value ||
                     #endif
-                   	mars_boost_ksim::is_same< T, unsigned char >::value ||
-                   	mars_boost_ksim::is_same< T, signed char >::value
+                   	mars_boost::is_same< T, unsigned char >::value ||
+                   	mars_boost::is_same< T, signed char >::value
             > type;
 
             BOOST_STATIC_CONSTANT(bool, value = (type::value) );

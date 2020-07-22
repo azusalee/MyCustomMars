@@ -16,7 +16,7 @@
 #include <boost/thread/csbl/memory/shared_ptr.hpp>
 #include <boost/type_traits/decay.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace detail
   {
@@ -44,7 +44,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {}
 #endif
         impl_type(BOOST_THREAD_RV_REF(F) f_)
-          : f(mars_boost_ksim::move(f_))
+          : f(mars_boost::move(f_))
         {}
 
         void call()
@@ -78,7 +78,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #endif
       template<typename F>
       nullary_function(BOOST_THREAD_RV_REF(F) f):
-      impl(new impl_type<typename decay<F>::type>(thread_detail::decay_copy(mars_boost_ksim::forward<F>(f))))
+      impl(new impl_type<typename decay<F>::type>(thread_detail::decay_copy(mars_boost::forward<F>(f))))
       {}
 
       nullary_function()
@@ -96,7 +96,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         BOOST_THREAD_RV(other).impl.reset();
       }
 #else
-      impl(mars_boost_ksim::move(other.impl))
+      impl(mars_boost::move(other.impl))
       {
       }
 #endif
@@ -115,7 +115,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         impl=BOOST_THREAD_RV(other).impl;
         BOOST_THREAD_RV(other).impl.reset();
 #else
-        impl = mars_boost_ksim::move(other.impl);
+        impl = mars_boost::move(other.impl);
 #endif
         return *this;
       }
@@ -147,7 +147,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {}
 #endif
         impl_type(BOOST_THREAD_RV_REF(F) f_)
-          : f(mars_boost_ksim::move(f_))
+          : f(mars_boost::move(f_))
         {}
 
         R call()
@@ -181,7 +181,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #endif
       template<typename F>
       nullary_function(BOOST_THREAD_RV_REF(F) f):
-      impl(new impl_type<typename decay<F>::type>(thread_detail::decay_copy(mars_boost_ksim::forward<F>(f))))
+      impl(new impl_type<typename decay<F>::type>(thread_detail::decay_copy(mars_boost::forward<F>(f))))
       {}
 
       nullary_function(nullary_function const& other) BOOST_NOEXCEPT :
@@ -195,7 +195,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         BOOST_THREAD_RV(other).impl.reset();
       }
 #else
-      impl(mars_boost_ksim::move(other.impl))
+      impl(mars_boost::move(other.impl))
       {
       }
 #endif
@@ -218,7 +218,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         impl=BOOST_THREAD_RV(other).impl;
         BOOST_THREAD_RV(other).impl.reset();
 #else
-        impl = mars_boost_ksim::move(other.impl);
+        impl = mars_boost::move(other.impl);
 #endif
         return *this;
       }

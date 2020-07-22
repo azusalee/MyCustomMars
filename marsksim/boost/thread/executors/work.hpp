@@ -11,7 +11,7 @@
 #include <boost/thread/detail/nullary_function.hpp>
 #include <boost/thread/csbl/functional.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace executors
   {
@@ -24,7 +24,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     typedef csbl::function<void()> work_pq;
 #endif
   }
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 
 #endif //  BOOST_THREAD_EXECUTORS_WORK_HPP

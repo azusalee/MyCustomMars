@@ -38,7 +38,7 @@
 # endif
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 namespace core
@@ -121,7 +121,7 @@ inline std::string demangle( char const * name )
 
 } // namespace core
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #undef BOOST_CORE_HAS_CXXABI_H
 

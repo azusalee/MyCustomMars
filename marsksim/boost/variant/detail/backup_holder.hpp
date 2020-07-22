@@ -16,7 +16,7 @@
 #include "boost/config.hpp"
 #include "boost/assert.hpp"
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace detail { namespace variant {
 
 template <typename T>
@@ -90,6 +90,6 @@ void swap(backup_holder<T>& lhs, backup_holder<T>& rhs) BOOST_NOEXCEPT
 }
 
 }} // namespace detail::variant
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_VARIANT_DETAIL_BACKUP_HOLDER_HPP

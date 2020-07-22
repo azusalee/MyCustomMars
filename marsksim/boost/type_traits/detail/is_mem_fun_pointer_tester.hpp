@@ -33,7 +33,7 @@
 #undef
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace type_traits {
 
 no_type BOOST_TT_DECL is_mem_fun_pointer_tester(...);
@@ -1717,7 +1717,7 @@ yes_type is_mem_fun_pointer_tester(R (__cdecl T::*const volatile*)( T0 , T1 , T2
 #endif // BOOST_TT_PREPROCESSING_MODE
 
 } // namespace type_traits
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_DETAIL_IS_MEM_FUN_POINTER_TESTER_HPP_INCLUDED
 

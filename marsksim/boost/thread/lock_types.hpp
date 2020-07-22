@@ -26,7 +26,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   struct xtime;
 
@@ -335,13 +335,13 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     {
       if (m == 0)
       {
-        mars_boost_ksim::throw_exception(
-            mars_boost_ksim::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost unique_lock has no mutex"));
+        mars_boost::throw_exception(
+            mars_boost::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost unique_lock has no mutex"));
       }
       if (owns_lock())
       {
-        mars_boost_ksim::throw_exception(
-            mars_boost_ksim::lock_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost unique_lock owns already the mutex"));
+        mars_boost::throw_exception(
+            mars_boost::lock_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost unique_lock owns already the mutex"));
       }
       m->lock();
       is_locked = true;
@@ -350,13 +350,13 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     {
       if (m == 0)
       {
-        mars_boost_ksim::throw_exception(
-            mars_boost_ksim::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost unique_lock has no mutex"));
+        mars_boost::throw_exception(
+            mars_boost::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost unique_lock has no mutex"));
       }
       if (owns_lock())
       {
-        mars_boost_ksim::throw_exception(
-            mars_boost_ksim::lock_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost unique_lock owns already the mutex"));
+        mars_boost::throw_exception(
+            mars_boost::lock_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost unique_lock owns already the mutex"));
       }
       is_locked = m->try_lock();
       return is_locked;
@@ -367,11 +367,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     {
       if(m==0)
       {
-        mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost unique_lock has no mutex"));
+        mars_boost::throw_exception(mars_boost::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost unique_lock has no mutex"));
       }
       if(owns_lock())
       {
-        mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost unique_lock owns already the mutex"));
+        mars_boost::throw_exception(mars_boost::lock_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost unique_lock owns already the mutex"));
       }
       is_locked=m->timed_lock(relative_time);
       return is_locked;
@@ -381,11 +381,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     {
       if(m==0)
       {
-        mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost unique_lock has no mutex"));
+        mars_boost::throw_exception(mars_boost::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost unique_lock has no mutex"));
       }
       if(owns_lock())
       {
-        mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost unique_lock owns already the mutex"));
+        mars_boost::throw_exception(mars_boost::lock_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost unique_lock owns already the mutex"));
       }
       is_locked=m->timed_lock(absolute_time);
       return is_locked;
@@ -394,11 +394,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     {
       if(m==0)
       {
-        mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost unique_lock has no mutex"));
+        mars_boost::throw_exception(mars_boost::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost unique_lock has no mutex"));
       }
       if(owns_lock())
       {
-        mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost unique_lock owns already the mutex"));
+        mars_boost::throw_exception(mars_boost::lock_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost unique_lock owns already the mutex"));
       }
       is_locked=m->timed_lock(absolute_time);
       return is_locked;
@@ -411,11 +411,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     {
       if(m==0)
       {
-        mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost unique_lock has no mutex"));
+        mars_boost::throw_exception(mars_boost::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost unique_lock has no mutex"));
       }
       if(owns_lock())
       {
-        mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost unique_lock owns already the mutex"));
+        mars_boost::throw_exception(mars_boost::lock_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost unique_lock owns already the mutex"));
       }
       is_locked=m->try_lock_for(rel_time);
       return is_locked;
@@ -425,11 +425,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     {
       if(m==0)
       {
-        mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost unique_lock has no mutex"));
+        mars_boost::throw_exception(mars_boost::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost unique_lock has no mutex"));
       }
       if(owns_lock())
       {
-        mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost unique_lock owns already the mutex"));
+        mars_boost::throw_exception(mars_boost::lock_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost unique_lock owns already the mutex"));
       }
       is_locked=m->try_lock_until(abs_time);
       return is_locked;
@@ -440,13 +440,13 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     {
       if (m == 0)
       {
-        mars_boost_ksim::throw_exception(
-            mars_boost_ksim::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost unique_lock has no mutex"));
+        mars_boost::throw_exception(
+            mars_boost::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost unique_lock has no mutex"));
       }
       if (!owns_lock())
       {
-        mars_boost_ksim::throw_exception(
-            mars_boost_ksim::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost unique_lock doesn't own the mutex"));
+        mars_boost::throw_exception(
+            mars_boost::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost unique_lock doesn't own the mutex"));
       }
       m->unlock();
       is_locked = false;
@@ -636,11 +636,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     {
       if(m==0)
       {
-        mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost shared_lock has no mutex"));
+        mars_boost::throw_exception(mars_boost::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost shared_lock has no mutex"));
       }
       if(owns_lock())
       {
-        mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost shared_lock owns already the mutex"));
+        mars_boost::throw_exception(mars_boost::lock_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost shared_lock owns already the mutex"));
       }
       m->lock_shared();
       is_locked=true;
@@ -649,25 +649,25 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     {
       if(m==0)
       {
-        mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost shared_lock has no mutex"));
+        mars_boost::throw_exception(mars_boost::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost shared_lock has no mutex"));
       }
       if(owns_lock())
       {
-        mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost shared_lock owns already the mutex"));
+        mars_boost::throw_exception(mars_boost::lock_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost shared_lock owns already the mutex"));
       }
       is_locked=m->try_lock_shared();
       return is_locked;
     }
 #if defined BOOST_THREAD_USES_DATETIME
-    bool timed_lock(mars_boost_ksim::system_time const& target_time)
+    bool timed_lock(mars_boost::system_time const& target_time)
     {
       if(m==0)
       {
-        mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost shared_lock has no mutex"));
+        mars_boost::throw_exception(mars_boost::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost shared_lock has no mutex"));
       }
       if(owns_lock())
       {
-        mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost shared_lock owns already the mutex"));
+        mars_boost::throw_exception(mars_boost::lock_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost shared_lock owns already the mutex"));
       }
       is_locked=m->timed_lock_shared(target_time);
       return is_locked;
@@ -677,11 +677,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     {
       if(m==0)
       {
-        mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost shared_lock has no mutex"));
+        mars_boost::throw_exception(mars_boost::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost shared_lock has no mutex"));
       }
       if(owns_lock())
       {
-        mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost shared_lock owns already the mutex"));
+        mars_boost::throw_exception(mars_boost::lock_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost shared_lock owns already the mutex"));
       }
       is_locked=m->timed_lock_shared(target_time);
       return is_locked;
@@ -693,11 +693,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     {
       if(m==0)
       {
-        mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost shared_lock has no mutex"));
+        mars_boost::throw_exception(mars_boost::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost shared_lock has no mutex"));
       }
       if(owns_lock())
       {
-        mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost shared_lock owns already the mutex"));
+        mars_boost::throw_exception(mars_boost::lock_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost shared_lock owns already the mutex"));
       }
       is_locked=m->try_lock_shared_for(rel_time);
       return is_locked;
@@ -707,11 +707,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     {
       if(m==0)
       {
-        mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost shared_lock has no mutex"));
+        mars_boost::throw_exception(mars_boost::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost shared_lock has no mutex"));
       }
       if(owns_lock())
       {
-        mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost shared_lock owns already the mutex"));
+        mars_boost::throw_exception(mars_boost::lock_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost shared_lock owns already the mutex"));
       }
       is_locked=m->try_lock_shared_until(abs_time);
       return is_locked;
@@ -721,11 +721,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     {
       if(m==0)
       {
-        mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost shared_lock has no mutex"));
+        mars_boost::throw_exception(mars_boost::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost shared_lock has no mutex"));
       }
       if(!owns_lock())
       {
-        mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost shared_lock doesn't own the mutex"));
+        mars_boost::throw_exception(mars_boost::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost shared_lock doesn't own the mutex"));
       }
       m->unlock_shared();
       is_locked=false;
@@ -933,13 +933,13 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     {
       if (m == 0)
       {
-        mars_boost_ksim::throw_exception(
-            mars_boost_ksim::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost shared_lock has no mutex"));
+        mars_boost::throw_exception(
+            mars_boost::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost shared_lock has no mutex"));
       }
       if (owns_lock())
       {
-        mars_boost_ksim::throw_exception(
-            mars_boost_ksim::lock_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost upgrade_lock owns already the mutex"));
+        mars_boost::throw_exception(
+            mars_boost::lock_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost upgrade_lock owns already the mutex"));
       }
       m->lock_upgrade();
       is_locked = true;
@@ -948,13 +948,13 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     {
       if (m == 0)
       {
-        mars_boost_ksim::throw_exception(
-            mars_boost_ksim::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost shared_lock has no mutex"));
+        mars_boost::throw_exception(
+            mars_boost::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost shared_lock has no mutex"));
       }
       if (owns_lock())
       {
-        mars_boost_ksim::throw_exception(
-            mars_boost_ksim::lock_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost upgrade_lock owns already the mutex"));
+        mars_boost::throw_exception(
+            mars_boost::lock_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost upgrade_lock owns already the mutex"));
       }
       is_locked = m->try_lock_upgrade();
       return is_locked;
@@ -963,13 +963,13 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     {
       if (m == 0)
       {
-        mars_boost_ksim::throw_exception(
-            mars_boost_ksim::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost shared_lock has no mutex"));
+        mars_boost::throw_exception(
+            mars_boost::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost shared_lock has no mutex"));
       }
       if (!owns_lock())
       {
-        mars_boost_ksim::throw_exception(
-            mars_boost_ksim::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost upgrade_lock doesn't own the mutex"));
+        mars_boost::throw_exception(
+            mars_boost::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost upgrade_lock doesn't own the mutex"));
       }
       m->unlock_upgrade();
       is_locked = false;
@@ -980,11 +980,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     {
       if(m==0)
       {
-        mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost shared_lock has no mutex"));
+        mars_boost::throw_exception(mars_boost::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost shared_lock has no mutex"));
       }
       if(owns_lock())
       {
-        mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost shared_lock owns already the mutex"));
+        mars_boost::throw_exception(mars_boost::lock_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost shared_lock owns already the mutex"));
       }
       is_locked=m->try_lock_upgrade_for(rel_time);
       return is_locked;
@@ -994,11 +994,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     {
       if(m==0)
       {
-        mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost shared_lock has no mutex"));
+        mars_boost::throw_exception(mars_boost::lock_error(static_cast<int>(system::errc::operation_not_permitted), "boost shared_lock has no mutex"));
       }
       if(owns_lock())
       {
-        mars_boost_ksim::throw_exception(mars_boost_ksim::lock_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost shared_lock owns already the mutex"));
+        mars_boost::throw_exception(mars_boost::lock_error(static_cast<int>(system::errc::resource_deadlock_would_occur), "boost shared_lock owns already the mutex"));
       }
       is_locked=m->try_lock_upgrade_until(abs_time);
       return is_locked;

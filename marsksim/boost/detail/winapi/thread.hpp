@@ -21,18 +21,18 @@
 extern "C" {
 // Windows CE define GetCurrentThreadId as an inline function in kfuncs.h
 #if !defined( UNDER_CE )
-BOOST_SYMBOL_IMPORT mars_boost_ksim::detail::winapi::DWORD_ WINAPI GetCurrentThreadId(BOOST_DETAIL_WINAPI_VOID);
+BOOST_SYMBOL_IMPORT mars_boost::detail::winapi::DWORD_ WINAPI GetCurrentThreadId(BOOST_DETAIL_WINAPI_VOID);
 #endif
-BOOST_SYMBOL_IMPORT mars_boost_ksim::detail::winapi::DWORD_ WINAPI
+BOOST_SYMBOL_IMPORT mars_boost::detail::winapi::DWORD_ WINAPI
 SleepEx(
-    mars_boost_ksim::detail::winapi::DWORD_ dwMilliseconds,
-    mars_boost_ksim::detail::winapi::BOOL_ bAlertable);
-BOOST_SYMBOL_IMPORT mars_boost_ksim::detail::winapi::VOID_ WINAPI Sleep(mars_boost_ksim::detail::winapi::DWORD_ dwMilliseconds);
-BOOST_SYMBOL_IMPORT mars_boost_ksim::detail::winapi::BOOL_ WINAPI SwitchToThread(BOOST_DETAIL_WINAPI_VOID);
+    mars_boost::detail::winapi::DWORD_ dwMilliseconds,
+    mars_boost::detail::winapi::BOOL_ bAlertable);
+BOOST_SYMBOL_IMPORT mars_boost::detail::winapi::VOID_ WINAPI Sleep(mars_boost::detail::winapi::DWORD_ dwMilliseconds);
+BOOST_SYMBOL_IMPORT mars_boost::detail::winapi::BOOL_ WINAPI SwitchToThread(BOOST_DETAIL_WINAPI_VOID);
 }
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace detail {
 namespace winapi {
 using ::GetCurrentThreadId;

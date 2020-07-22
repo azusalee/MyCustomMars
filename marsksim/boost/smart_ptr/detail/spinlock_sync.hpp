@@ -21,7 +21,7 @@
 # include <ia64intrin.h>
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 namespace detail
@@ -45,7 +45,7 @@ public:
     {
         for( unsigned k = 0; !try_lock(); ++k )
         {
-            mars_boost_ksim::detail::yield( k );
+            mars_boost::detail::yield( k );
         }
     }
 
@@ -80,7 +80,7 @@ public:
 };
 
 } // namespace detail
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #define BOOST_DETAIL_SPINLOCK_INIT {0}
 

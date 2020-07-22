@@ -16,7 +16,7 @@
 #include <boost/range/begin.hpp>
 #include <boost/range/end.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {  namespace algorithm {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {  namespace algorithm {
 
 #if __cplusplus >= 201103L && TARGET_OS_IPHONE
 //  Use the C++11 versions of copy_if if it is available
@@ -56,7 +56,7 @@ OutputIterator copy_if ( InputIterator first, InputIterator last, OutputIterator
 template<typename Range, typename OutputIterator, typename Predicate>
 OutputIterator copy_if ( const Range &r, OutputIterator result, Predicate p )
 {
-    return mars_boost_ksim::algorithm::copy_if (mars_boost_ksim::begin (r), mars_boost_ksim::end(r), result, p);
+    return mars_boost::algorithm::copy_if (mars_boost::begin (r), mars_boost::end(r), result, p);
 }
 
 
@@ -89,10 +89,10 @@ copy_while ( InputIterator first, InputIterator last, OutputIterator result, Pre
 /// \param p        A predicate for testing the elements of the range
 ///
 template<typename Range, typename OutputIterator, typename Predicate>
-std::pair<typename mars_boost_ksim::range_iterator<const Range>::type, OutputIterator>
+std::pair<typename mars_boost::range_iterator<const Range>::type, OutputIterator>
 copy_while ( const Range &r, OutputIterator result, Predicate p )
 {
-    return mars_boost_ksim::algorithm::copy_while (mars_boost_ksim::begin (r), mars_boost_ksim::end(r), result, p);
+    return mars_boost::algorithm::copy_while (mars_boost::begin (r), mars_boost::end(r), result, p);
 }
 
 
@@ -125,10 +125,10 @@ copy_until ( InputIterator first, InputIterator last, OutputIterator result, Pre
 /// \param p        A predicate for testing the elements of the range
 ///
 template<typename Range, typename OutputIterator, typename Predicate>
-std::pair<typename mars_boost_ksim::range_iterator<const Range>::type, OutputIterator>
+std::pair<typename mars_boost::range_iterator<const Range>::type, OutputIterator>
 copy_until ( const Range &r, OutputIterator result, Predicate p )
 {
-    return mars_boost_ksim::algorithm::copy_until (mars_boost_ksim::begin (r), mars_boost_ksim::end(r), result, p);
+    return mars_boost::algorithm::copy_until (mars_boost::begin (r), mars_boost::end(r), result, p);
 }
 
 }} // namespace boost and algorithm

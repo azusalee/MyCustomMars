@@ -18,7 +18,7 @@
 #include <boost/range/begin.hpp>
 #include <boost/range/end.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {  namespace algorithm {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {  namespace algorithm {
 
 #if __cplusplus >= 201103L
 //  Use the C++11 versions of partition_copy if it is available
@@ -69,8 +69,8 @@ std::pair<OutputIterator1, OutputIterator2>
 partition_copy ( const Range &r, OutputIterator1 out_true, OutputIterator2 out_false, 
                                 UnaryPredicate p )
 {
-    return mars_boost_ksim::algorithm::partition_copy
-                      (mars_boost_ksim::begin(r), mars_boost_ksim::end(r), out_true, out_false, p );
+    return mars_boost::algorithm::partition_copy
+                      (mars_boost::begin(r), mars_boost::end(r), out_true, out_false, p );
 }
 
 }} // namespace boost and algorithm

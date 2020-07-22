@@ -61,15 +61,15 @@
 // R, T1, T2, ..., TN
 #define BOOST_SIGNALS2_SIGNATURE_TEMPLATE_INSTANTIATION(arity) \
   R BOOST_PP_COMMA_IF(arity) BOOST_PP_ENUM_SHIFTED_PARAMS(BOOST_PP_INC(arity), T)
-// mars_boost_ksim::functionN<R, T1, T2, ..., TN>
-#define BOOST_SIGNALS2_FUNCTION_N_DECL(arity) BOOST_PP_CAT(mars_boost_ksim::function, arity)<\
+// mars_boost::functionN<R, T1, T2, ..., TN>
+#define BOOST_SIGNALS2_FUNCTION_N_DECL(arity) BOOST_PP_CAT(mars_boost::function, arity)<\
   BOOST_SIGNALS2_SIGNATURE_TEMPLATE_INSTANTIATION(arity) >
-// R, const mars_boost_ksim::signals2::connection&, T1, T2, ..., TN
+// R, const mars_boost::signals2::connection&, T1, T2, ..., TN
 #define BOOST_SIGNALS2_EXT_SLOT_TEMPLATE_INSTANTIATION(arity) \
-  R, const mars_boost_ksim::signals2::connection&  BOOST_PP_COMMA_IF(arity) \
+  R, const mars_boost::signals2::connection&  BOOST_PP_COMMA_IF(arity) \
   BOOST_PP_ENUM_SHIFTED_PARAMS(BOOST_PP_INC(arity), T)
-// mars_boost_ksim::functionN<R, const mars_boost_ksim::signals2::connection &, T1, T2, ..., TN>
-#define BOOST_SIGNALS2_EXT_FUNCTION_N_DECL(arity) BOOST_PP_CAT(mars_boost_ksim::function, BOOST_PP_INC(arity))<\
+// mars_boost::functionN<R, const mars_boost::signals2::connection &, T1, T2, ..., TN>
+#define BOOST_SIGNALS2_EXT_FUNCTION_N_DECL(arity) BOOST_PP_CAT(mars_boost::function, BOOST_PP_INC(arity))<\
   BOOST_SIGNALS2_EXT_SLOT_TEMPLATE_INSTANTIATION(arity) >
 // slotN
 #define BOOST_SIGNALS2_SLOT_CLASS_NAME(arity) BOOST_PP_CAT(slot, arity)
@@ -157,7 +157,7 @@
 #define BOOST_SIGNALS2_EXTENDED_SLOT_TYPE(arity) slot<R (const connection &, Args...), extended_slot_function_type>
 #define BOOST_SIGNALS2_BOUND_EXTENDED_SLOT_FUNCTION_N(arity) bound_extended_slot_function
 #define BOOST_SIGNALS2_BOUND_EXTENDED_SLOT_FUNCTION_INVOKER_N(arity) bound_extended_slot_function_invoker
-#define BOOST_SIGNALS2_FUNCTION_N_DECL(arity) mars_boost_ksim::function<Signature>
+#define BOOST_SIGNALS2_FUNCTION_N_DECL(arity) mars_boost::function<Signature>
 #define BOOST_SIGNALS2_PREFIXED_SIGNATURE_TEMPLATE_DECL(arity, prefix) typename prefixSignature
 #define BOOST_SIGNALS2_PREFIXED_SIGNATURE_TEMPLATE_INSTANTIATION(arity, prefix) prefixSignature
 #define BOOST_SIGNALS2_SIGNATURE_FULL_ARGS(arity) Args ... args
@@ -181,10 +181,10 @@
   typename Mutex
 #define BOOST_SIGNALS2_SIGNAL_TEMPLATE_DEFAULTED_DECL(arity) \
   typename Signature, \
-  typename Combiner = optional_last_value<typename mars_boost_ksim::function_traits<Signature>::result_type>, \
+  typename Combiner = optional_last_value<typename mars_boost::function_traits<Signature>::result_type>, \
   typename Group = int, \
   typename GroupCompare = std::less<Group>, \
-  typename SlotFunction = mars_boost_ksim::function<Signature>, \
+  typename SlotFunction = mars_boost::function<Signature>, \
   typename ExtendedSlotFunction = typename detail::variadic_extended_signature<Signature>::function_type, \
   typename Mutex = signals2::mutex
 #define BOOST_SIGNALS2_SIGNAL_TEMPLATE_SPECIALIZATION_DECL(arity) \

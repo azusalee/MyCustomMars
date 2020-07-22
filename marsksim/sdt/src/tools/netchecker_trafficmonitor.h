@@ -12,7 +12,7 @@
 
 
 /*
- * NetCheckTrafficMonitor.h
+ * NetCheckTrafficMonitorksim.h
  *
  *  Created on: 2015年1月27日
  *      Author: wutianqiang
@@ -26,10 +26,10 @@
 #include "marsksim/comm/thread/mutex.h"
 #include "marsksim/comm/thread/lock.h"
 
-class NetCheckTrafficMonitor {
+class NetCheckTrafficMonitorksim {
   public:
-    NetCheckTrafficMonitor(unsigned long mobileDataThreshold, bool isIgnoreRecvData = true, unsigned long wifiDataThreshold = ULONG_MAX);
-    ~NetCheckTrafficMonitor();
+    NetCheckTrafficMonitorksim(unsigned long mobileDataThreshold, bool isIgnoreRecvData = true, unsigned long wifiDataThreshold = ULONG_MAX);
+    ~NetCheckTrafficMonitorksim();
     bool sendLimitCheck(unsigned long sendDataSize);
     bool recvLimitCheck(unsigned long recvDataSize);
     void reset();
@@ -39,8 +39,8 @@ class NetCheckTrafficMonitor {
     void __dumpDataSize();
 
   private:
-    NetCheckTrafficMonitor(const NetCheckTrafficMonitor&);
-    NetCheckTrafficMonitor& operator=(const NetCheckTrafficMonitor&);
+    NetCheckTrafficMonitorksim(const NetCheckTrafficMonitorksim&);
+    NetCheckTrafficMonitorksim& operator=(const NetCheckTrafficMonitorksim&);
 
   private:
     unsigned long wifi_recv_data_size_;

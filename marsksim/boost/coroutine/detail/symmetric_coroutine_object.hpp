@@ -23,7 +23,7 @@
 #  include BOOST_ABI_PREFIX
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace coroutines {
 
 struct stack_context;
@@ -71,7 +71,7 @@ public:
 #ifdef BOOST_NO_CXX11_RVALUE_REFERENCES
         fn_( fn),
 #else
-        fn_( mars_boost_ksim::forward< Fn >( fn) ),
+        fn_( mars_boost::forward< Fn >( fn) ),
 #endif
         stack_ctx_( palloc.sctx),
         stack_alloc_( stack_alloc)
@@ -147,7 +147,7 @@ public:
 #ifdef BOOST_NO_CXX11_RVALUE_REFERENCES
         fn_( fn),
 #else
-        fn_( mars_boost_ksim::forward< Fn >( fn) ),
+        fn_( mars_boost::forward< Fn >( fn) ),
 #endif
         stack_ctx_( palloc.sctx),
         stack_alloc_( stack_alloc)
@@ -223,7 +223,7 @@ public:
 #ifdef BOOST_NO_CXX11_RVALUE_REFERENCES
         fn_( fn),
 #else
-        fn_( mars_boost_ksim::forward< Fn >( fn) ),
+        fn_( mars_boost::forward< Fn >( fn) ),
 #endif
         stack_ctx_( palloc.sctx),
         stack_alloc_( stack_alloc)

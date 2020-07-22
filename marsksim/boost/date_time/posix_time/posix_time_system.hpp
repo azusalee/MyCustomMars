@@ -16,7 +16,7 @@
 #include "boost/date_time/compiler_config.hpp"
 
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace posix_time { 
 
 #ifdef BOOST_DATE_TIME_POSIX_TIME_STD_CONFIG

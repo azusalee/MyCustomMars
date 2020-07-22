@@ -63,7 +63,7 @@ time2_demo contained this comment:
 #pragma GCC system_header
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 
@@ -73,29 +73,29 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 //                                                                            //
 //----------------------------------------------------------------------------//
 
-template <mars_boost_ksim::intmax_t N, mars_boost_ksim::intmax_t D>
+template <mars_boost::intmax_t N, mars_boost::intmax_t D>
 class ratio
 {
-    static const mars_boost_ksim::intmax_t ABS_N = mpl::abs_c<mars_boost_ksim::intmax_t, N>::value;
-    static const mars_boost_ksim::intmax_t ABS_D = mpl::abs_c<mars_boost_ksim::intmax_t, D>::value;
+    static const mars_boost::intmax_t ABS_N = mpl::abs_c<mars_boost::intmax_t, N>::value;
+    static const mars_boost::intmax_t ABS_D = mpl::abs_c<mars_boost::intmax_t, D>::value;
     BOOST_RATIO_STATIC_ASSERT(ABS_N >= 0, BOOST_RATIO_NUMERATOR_IS_OUT_OF_RANGE, ());
     BOOST_RATIO_STATIC_ASSERT(ABS_D > 0, BOOST_RATIO_DENOMINATOR_IS_OUT_OF_RANGE, ());
     BOOST_RATIO_STATIC_ASSERT(D != 0, BOOST_RATIO_DIVIDE_BY_0 , ());
-    static const mars_boost_ksim::intmax_t SIGN_N = mpl::sign_c<mars_boost_ksim::intmax_t,N>::value
-      * mpl::sign_c<mars_boost_ksim::intmax_t,D>::value;
-    static const mars_boost_ksim::intmax_t GCD = mpl::gcd_c<mars_boost_ksim::intmax_t, ABS_N, ABS_D>::value;
+    static const mars_boost::intmax_t SIGN_N = mpl::sign_c<mars_boost::intmax_t,N>::value
+      * mpl::sign_c<mars_boost::intmax_t,D>::value;
+    static const mars_boost::intmax_t GCD = mpl::gcd_c<mars_boost::intmax_t, ABS_N, ABS_D>::value;
 public:
-    BOOST_STATIC_CONSTEXPR mars_boost_ksim::intmax_t num = SIGN_N * ABS_N / GCD;
-    BOOST_STATIC_CONSTEXPR mars_boost_ksim::intmax_t den = ABS_D / GCD;
+    BOOST_STATIC_CONSTEXPR mars_boost::intmax_t num = SIGN_N * ABS_N / GCD;
+    BOOST_STATIC_CONSTEXPR mars_boost::intmax_t den = ABS_D / GCD;
 
 #ifdef BOOST_RATIO_EXTENSIONS
     typedef mpl::rational_c_tag tag;
-    typedef mars_boost_ksim::rational<mars_boost_ksim::intmax_t> value_type;
-    typedef mars_boost_ksim::intmax_t num_type;
-    typedef mars_boost_ksim::intmax_t den_type;
+    typedef mars_boost::rational<mars_boost::intmax_t> value_type;
+    typedef mars_boost::intmax_t num_type;
+    typedef mars_boost::intmax_t den_type;
     ratio()
     {}
-    template <mars_boost_ksim::intmax_t _N2, mars_boost_ksim::intmax_t _D2>
+    template <mars_boost::intmax_t _N2, mars_boost::intmax_t _D2>
     ratio(const ratio<_N2, _D2>&,
         typename enable_if_c
             <
@@ -104,7 +104,7 @@ public:
             >::type* = 0)
     {}
 
-    template <mars_boost_ksim::intmax_t _N2, mars_boost_ksim::intmax_t _D2>
+    template <mars_boost::intmax_t _N2, mars_boost::intmax_t _D2>
         typename enable_if_c
         <
             (ratio<_N2, _D2>::num == num &&
@@ -120,10 +120,10 @@ public:
 };
 
 #if defined(BOOST_NO_CXX11_CONSTEXPR)
-template <mars_boost_ksim::intmax_t N, mars_boost_ksim::intmax_t D>
-const    mars_boost_ksim::intmax_t ratio<N, D>::num;
-template <mars_boost_ksim::intmax_t N, mars_boost_ksim::intmax_t D>
-const    mars_boost_ksim::intmax_t ratio<N, D>::den;
+template <mars_boost::intmax_t N, mars_boost::intmax_t D>
+const    mars_boost::intmax_t ratio<N, D>::num;
+template <mars_boost::intmax_t N, mars_boost::intmax_t D>
+const    mars_boost::intmax_t ratio<N, D>::den;
 #endif
 
 //----------------------------------------------------------------------------//
@@ -134,25 +134,25 @@ const    mars_boost_ksim::intmax_t ratio<N, D>::den;
 
 template <class R1, class R2>
 struct ratio_add
-: mars_boost_ksim::ratio_detail::ratio_add<R1, R2>::type
+: mars_boost::ratio_detail::ratio_add<R1, R2>::type
 {
 };
 
 template <class R1, class R2>
 struct ratio_subtract
-: mars_boost_ksim::ratio_detail::ratio_subtract<R1, R2>::type
+: mars_boost::ratio_detail::ratio_subtract<R1, R2>::type
 {
 };
 
 template <class R1, class R2>
 struct ratio_multiply
-: mars_boost_ksim::ratio_detail::ratio_multiply<R1, R2>::type
+: mars_boost::ratio_detail::ratio_multiply<R1, R2>::type
 {
 };
 
 template <class R1, class R2>
 struct ratio_divide
-: mars_boost_ksim::ratio_detail::ratio_divide<R1, R2>::type
+: mars_boost::ratio_detail::ratio_divide<R1, R2>::type
 {
 };
 
@@ -166,41 +166,41 @@ struct ratio_divide
 
 template <class R1, class R2>
 struct ratio_equal
-    : public mars_boost_ksim::integral_constant<bool,
+    : public mars_boost::integral_constant<bool,
                                (R1::num == R2::num && R1::den == R2::den)>
 {};
 
 template <class R1, class R2>
 struct ratio_not_equal
-    : public mars_boost_ksim::integral_constant<bool, !ratio_equal<R1, R2>::value>
+    : public mars_boost::integral_constant<bool, !ratio_equal<R1, R2>::value>
 {};
 
 // ratio_less
 
 template <class R1, class R2>
 struct ratio_less
-    : mars_boost_ksim::integral_constant<bool, mars_boost_ksim::ratio_detail::ratio_less<R1, R2>::value>
+    : mars_boost::integral_constant<bool, mars_boost::ratio_detail::ratio_less<R1, R2>::value>
 {};
 
 template <class R1, class R2>
 struct ratio_less_equal
-    : mars_boost_ksim::integral_constant<bool, !ratio_less<R2, R1>::value>
+    : mars_boost::integral_constant<bool, !ratio_less<R2, R1>::value>
 {};
 
 template <class R1, class R2>
 struct ratio_greater
-    : mars_boost_ksim::integral_constant<bool, ratio_less<R2, R1>::value>
+    : mars_boost::integral_constant<bool, ratio_less<R2, R1>::value>
 {};
 
 template <class R1, class R2>
 struct ratio_greater_equal
-    : mars_boost_ksim::integral_constant<bool, !ratio_less<R1, R2>::value>
+    : mars_boost::integral_constant<bool, !ratio_less<R1, R2>::value>
 {};
 
 template <class R1, class R2>
 struct ratio_gcd :
-    ratio<mpl::gcd_c<mars_boost_ksim::intmax_t, R1::num, R2::num>::value,
-        mpl::lcm_c<mars_boost_ksim::intmax_t, R1::den, R2::den>::value>::type
+    ratio<mpl::gcd_c<mars_boost::intmax_t, R1::num, R2::num>::value,
+        mpl::lcm_c<mars_boost::intmax_t, R1::den, R2::den>::value>::type
 {
 };
 
@@ -218,12 +218,12 @@ struct ratio_negate
 };
 template <class R>
 struct ratio_abs
-    : ratio<mpl::abs_c<mars_boost_ksim::intmax_t, R::num>::value, R::den>::type
+    : ratio<mpl::abs_c<mars_boost::intmax_t, R::num>::value, R::den>::type
 {
 };
 template <class R>
 struct ratio_sign
-    : mpl::sign_c<mars_boost_ksim::intmax_t, R::num>
+    : mpl::sign_c<mars_boost::intmax_t, R::num>
 {
 };
 
@@ -236,8 +236,8 @@ struct ratio_inverse
 
 template <class R1, class R2>
 struct ratio_lcm :
-    ratio<mpl::lcm_c<mars_boost_ksim::intmax_t, R1::num, R2::num>::value,
-        mpl::gcd_c<mars_boost_ksim::intmax_t, R1::den, R2::den>::value>::type
+    ratio<mpl::lcm_c<mars_boost::intmax_t, R1::num, R2::num>::value,
+        mpl::gcd_c<mars_boost::intmax_t, R1::den, R2::den>::value>::type
 {
 };
 
@@ -287,7 +287,7 @@ template<typename R>
 struct ratio_power<R, -1> : ratio_divide<ratio<1>, R>::type {};
 
 #endif
-}  // namespace mars_boost_ksim
+}  // namespace mars_boost
 
 
 #endif  // BOOST_RATIO_RATIO_HPP

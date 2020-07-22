@@ -1,5 +1,5 @@
 /*
-  Helper class used by variadic implementation of variadic mars_boost_ksim::signals2::signal.
+  Helper class used by variadic implementation of variadic mars_boost::signals2::signal.
 
   Author: Frank Mori Hess <fmhess@users.sourceforge.net>
   Begin: 2009-05-27
@@ -18,12 +18,12 @@
 #include <boost/mpl/size_t.hpp>
 #include <boost/signals2/detail/variadic_arg_type.hpp>
 
-// if compiler has std::tuple use it instead of mars_boost_ksim::tuple
-// because mars_boost_ksim::tuple does not have variadic template support at present.
+// if compiler has std::tuple use it instead of mars_boost::tuple
+// because mars_boost::tuple does not have variadic template support at present.
 #ifdef BOOST_NO_CXX11_HDR_TUPLE
 #include <boost/tuple/tuple.hpp>
-#define BOOST_SIGNALS2_TUPLE mars_boost_ksim::tuple
-#define BOOST_SIGNALS2_GET mars_boost_ksim::get
+#define BOOST_SIGNALS2_TUPLE mars_boost::tuple
+#define BOOST_SIGNALS2_GET mars_boost::get
 #else
 #include <tuple>
 #define BOOST_SIGNALS2_TUPLE std::tuple
@@ -40,7 +40,7 @@
 #endif
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace signals2
   {
@@ -92,14 +92,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       private:
         template<typename Func, unsigned ... indices, typename ... Args>
           R m_invoke(Func &func, unsigned_meta_array<indices...>, BOOST_SIGNALS2_TUPLE<Args...> args,
-            typename mars_boost_ksim::disable_if<mars_boost_ksim::is_void<typename Func::result_type> >::type * = 0
+            typename mars_boost::disable_if<mars_boost::is_void<typename Func::result_type> >::type * = 0
           ) const
         {
           return func(BOOST_SIGNALS2_GET<indices>(args)...);
         }
         template<typename Func, unsigned ... indices, typename ... Args>
           R m_invoke(Func &func, unsigned_meta_array<indices...>, BOOST_SIGNALS2_TUPLE<Args...> args,
-            typename mars_boost_ksim::enable_if<mars_boost_ksim::is_void<typename Func::result_type> >::type * = 0
+            typename mars_boost::enable_if<mars_boost::is_void<typename Func::result_type> >::type * = 0
           ) const
         {
           func(BOOST_SIGNALS2_GET<indices>(args)...);
@@ -111,7 +111,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         // on certain compilers (some versions of gcc and msvc)
         template<typename Func>
         R m_invoke(Func &func, unsigned_meta_array<>, BOOST_SIGNALS2_TUPLE<>, 
-          typename mars_boost_ksim::enable_if<mars_boost_ksim::is_void<typename Func::result_type> >::type * = 0
+          typename mars_boost::enable_if<mars_boost::is_void<typename Func::result_type> >::type * = 0
         ) const
         {
           func();
@@ -138,7 +138,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       };
     } // namespace detail
   } // namespace signals2
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #if defined(BOOST_MSVC)
 #pragma warning(pop)

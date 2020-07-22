@@ -38,7 +38,7 @@ time2_demo contained this comment:
 #pragma GCC system_header
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 //----------------------------------------------------------------------------//
@@ -48,7 +48,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 //----------------------------------------------------------------------------//
 
 // ratio
-template <mars_boost_ksim::intmax_t N, mars_boost_ksim::intmax_t D = 1> class ratio;
+template <mars_boost::intmax_t N, mars_boost::intmax_t D = 1> class ratio;
 
 // ratio arithmetic
 template <class R1, class R2> struct ratio_add;
@@ -103,7 +103,7 @@ typedef ratio<                 BOOST_RATIO_1024*BOOST_RATIO_1024*BOOST_RATIO_102
 typedef ratio<BOOST_RATIO_1024*BOOST_RATIO_1024*BOOST_RATIO_1024*BOOST_RATIO_1024*BOOST_RATIO_1024*BOOST_RATIO_1024> exbi;
 
 #endif
-}  // namespace mars_boost_ksim
+}  // namespace mars_boost
 
 
 #endif  // BOOST_RATIO_HPP

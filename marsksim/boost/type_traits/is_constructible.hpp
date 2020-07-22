@@ -19,34 +19,34 @@
 #include <boost/type_traits/detail/yes_no_type.hpp>
 #include <boost/type_traits/declval.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim{
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost{
 
    namespace detail{
 
       struct is_constructible_imp
       {
-         template<typename T, typename ...TheArgs, typename = decltype(T(mars_boost_ksim::declval<TheArgs>()...))>
-         static mars_boost_ksim::type_traits::yes_type test(int);
+         template<typename T, typename ...TheArgs, typename = decltype(T(mars_boost::declval<TheArgs>()...))>
+         static mars_boost::type_traits::yes_type test(int);
          template<typename, typename...>
-         static mars_boost_ksim::type_traits::no_type test(...);
+         static mars_boost::type_traits::no_type test(...);
 
-         template<typename T, typename Arg, typename = decltype(::new T(mars_boost_ksim::declval<Arg>()))>
-         static mars_boost_ksim::type_traits::yes_type test1(int);
+         template<typename T, typename Arg, typename = decltype(::new T(mars_boost::declval<Arg>()))>
+         static mars_boost::type_traits::yes_type test1(int);
          template<typename, typename>
-         static mars_boost_ksim::type_traits::no_type test1(...);
+         static mars_boost::type_traits::no_type test1(...);
 
          template <typename T>
-         static mars_boost_ksim::type_traits::yes_type ref_test(T);
+         static mars_boost::type_traits::yes_type ref_test(T);
          template <typename T>
-         static mars_boost_ksim::type_traits::no_type ref_test(...);
+         static mars_boost::type_traits::no_type ref_test(...);
       };
 
    }
 
-   template <class T, class ...Args> struct is_constructible : public integral_constant<bool, sizeof(detail::is_constructible_imp::test<T, Args...>(0)) == sizeof(mars_boost_ksim::type_traits::yes_type)>{};
-   template <class T, class Arg> struct is_constructible<T, Arg> : public integral_constant<bool, is_destructible<T>::value && sizeof(detail::is_constructible_imp::test1<T, Arg>(0)) == sizeof(mars_boost_ksim::type_traits::yes_type)>{};
-   template <class Ref, class Arg> struct is_constructible<Ref&, Arg> : public integral_constant<bool, sizeof(detail::is_constructible_imp::ref_test<Ref&>(mars_boost_ksim::declval<Arg>())) == sizeof(mars_boost_ksim::type_traits::yes_type)>{};
-   template <class Ref, class Arg> struct is_constructible<Ref&&, Arg> : public integral_constant<bool, sizeof(detail::is_constructible_imp::ref_test<Ref&&>(mars_boost_ksim::declval<Arg>())) == sizeof(mars_boost_ksim::type_traits::yes_type)>{};
+   template <class T, class ...Args> struct is_constructible : public integral_constant<bool, sizeof(detail::is_constructible_imp::test<T, Args...>(0)) == sizeof(mars_boost::type_traits::yes_type)>{};
+   template <class T, class Arg> struct is_constructible<T, Arg> : public integral_constant<bool, is_destructible<T>::value && sizeof(detail::is_constructible_imp::test1<T, Arg>(0)) == sizeof(mars_boost::type_traits::yes_type)>{};
+   template <class Ref, class Arg> struct is_constructible<Ref&, Arg> : public integral_constant<bool, sizeof(detail::is_constructible_imp::ref_test<Ref&>(mars_boost::declval<Arg>())) == sizeof(mars_boost::type_traits::yes_type)>{};
+   template <class Ref, class Arg> struct is_constructible<Ref&&, Arg> : public integral_constant<bool, sizeof(detail::is_constructible_imp::ref_test<Ref&&>(mars_boost::declval<Arg>())) == sizeof(mars_boost::type_traits::yes_type)>{};
 
    template <> struct is_constructible<void> : public false_type{};
    template <> struct is_constructible<void const> : public false_type{};
@@ -60,7 +60,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #include <boost/type_traits/is_convertible.hpp>
 #include <boost/type_traits/is_default_constructible.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim{
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost{
 
    // We don't know how to implement this:
    template <class T, class U = void> struct is_constructible : public is_convertible<U, T>{};
@@ -75,6 +75,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #endif
 #endif
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_IS_CONSTRUCTIBLE_HPP_INCLUDED

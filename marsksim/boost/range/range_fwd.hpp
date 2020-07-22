@@ -10,7 +10,7 @@
 #ifndef BOOST_RANGE_RANGE_FWD_HPP_INCLUDED
 #define BOOST_RANGE_RANGE_FWD_HPP_INCLUDED
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 // Extension points
@@ -58,6 +58,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template<typename T>
     struct has_range_const_iterator;
 
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

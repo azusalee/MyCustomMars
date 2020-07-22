@@ -19,7 +19,7 @@
 // (bcc<=5.64 cannot include instance data in a precompiled header)
 //  -- * To be verified, now that there's no unnamed namespace
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 #ifdef BOOST_OPTIONAL_USE_OLD_DEFINITION_OF_NONE
 
@@ -29,7 +29,7 @@ none_t const none = (static_cast<none_t>(0)) ;
 
 namespace detail { namespace optional_detail {
 
-  // the trick here is to make mars_boost_ksim::none defined once as a global but in a header file
+  // the trick here is to make mars_boost::none defined once as a global but in a header file
   template <typename T>
   struct none_instance
   {
@@ -53,7 +53,7 @@ const none_t none ((none_t::init_tag()));
 
 #endif // older definitions
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // header guard
 

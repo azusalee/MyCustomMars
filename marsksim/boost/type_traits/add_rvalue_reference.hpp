@@ -28,7 +28,7 @@
 // reference. -end note ]
 //----------------------------------------------------------------------------//
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 namespace type_traits_detail {
 
@@ -47,7 +47,7 @@ namespace type_traits_detail {
     template <typename T>
     struct add_rvalue_reference_imp
     {
-       typedef typename mars_boost_ksim::type_traits_detail::add_rvalue_reference_helper
+       typedef typename mars_boost::type_traits_detail::add_rvalue_reference_helper
                   <T, (is_void<T>::value == false && is_reference<T>::value == false) >::type type;
     };
 
@@ -55,10 +55,10 @@ namespace type_traits_detail {
 
 template <class T> struct add_rvalue_reference
 {
-   typedef typename mars_boost_ksim::type_traits_detail::add_rvalue_reference_imp<T>::type type;
+   typedef typename mars_boost::type_traits_detail::add_rvalue_reference_imp<T>::type type;
 };
 
-}  // namespace mars_boost_ksim
+}  // namespace mars_boost
 
 #endif  // BOOST_TYPE_TRAITS_EXT_ADD_RVALUE_REFERENCE__HPP
 

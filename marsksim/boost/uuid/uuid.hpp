@@ -23,7 +23,7 @@
 //  01 Jun 2007 - removed using namespace directives
 //  09 Nov 2007 - moved implementation to uuid.ipp file
 //  12 Nov 2007 - moved serialize code to uuid_serialize.hpp file
-//  25 Feb 2008 - moved to namespace mars_boost_ksim::uuids
+//  25 Feb 2008 - moved to namespace mars_boost::uuids
 //  19 Mar 2009 - changed to a POD, reorganized files
 //  28 Nov 2009 - disabled deprecated warnings for MSVC
 //  30 Nov 2009 - used BOOST_STATIC_CONSTANT
@@ -57,7 +57,7 @@ namespace std {
 } //namespace std
 #endif //BOOST_NO_STDC_NAMESPACE
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace uuids {
 
 struct uuid
@@ -175,7 +175,7 @@ inline void swap(uuid& lhs, uuid& rhs) BOOST_NOEXCEPT
     lhs.swap(rhs);
 }
 
-// This is equivalent to mars_boost_ksim::hash_range(u.begin(), u.end());
+// This is equivalent to mars_boost::hash_range(u.begin(), u.end());
 inline std::size_t hash_value(uuid const& u) BOOST_NOEXCEPT
 {
     std::size_t seed = 0;
@@ -187,16 +187,16 @@ inline std::size_t hash_value(uuid const& u) BOOST_NOEXCEPT
     return seed;
 }
 
-}} //namespace mars_boost_ksim::uuids
+}} //namespace mars_boost::uuids
 
 #ifndef BOOST_UUID_NO_TYPE_TRAITS
 // type traits specializations
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 template <>
 struct is_pod<uuids::uuid> : true_type {};
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 #endif
 
 #if defined(BOOST_UUID_USE_SSE2)

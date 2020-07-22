@@ -27,7 +27,7 @@
   BOOST_SIGNALS2_SLOT_CLASS_NAME(BOOST_SIGNALS2_NUM_ARGS)( \
     const Func &func, BOOST_SIGNALS2_PREFIXED_FULL_REF_ARGS(n, const BindArg)) \
   { \
-    init_slot_function(mars_boost_ksim::bind(func, BOOST_SIGNALS2_SIGNATURE_ARG_NAMES(n))); \
+    init_slot_function(mars_boost::bind(func, BOOST_SIGNALS2_SIGNATURE_ARG_NAMES(n))); \
   }
 #define BOOST_SIGNALS2_SLOT_N_BINDING_CONSTRUCTORS \
   BOOST_PP_REPEAT_FROM_TO(1, BOOST_SIGNALS2_SLOT_MAX_BINDING_ARGS, BOOST_SIGNALS2_SLOT_N_BINDING_CONSTRUCTOR, ~)
@@ -40,17 +40,17 @@
 #undef BOOST_SIGNALS2_SLOT_N_BINDING_CONSTRUCTOR
 #undef BOOST_SIGNALS2_SLOT_N_BINDING_CONSTRUCTORS
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace signals2
   {
     template<typename Signature,
-      typename SlotFunction = mars_boost_ksim::function<Signature> >
+      typename SlotFunction = mars_boost::function<Signature> >
     class slot: public detail::slotN<function_traits<Signature>::arity,
       Signature, SlotFunction>::type
     {
     private:
-      typedef typename detail::slotN<mars_boost_ksim::function_traits<Signature>::arity,
+      typedef typename detail::slotN<mars_boost::function_traits<Signature>::arity,
         Signature, SlotFunction>::type base_type;
     public:
       template<typename F>

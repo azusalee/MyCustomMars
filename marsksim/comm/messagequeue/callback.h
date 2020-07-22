@@ -35,11 +35,11 @@ public:
     typedef boost_ksim::function<void ()> invoke_function;
 
     //if MessageQueueksim::KNullHandler, will callback in worker thread
-    CallBack(const T& _func, MessageHandler_t _handler=MessageQueueksim::KNullHandler):cb_handler_(_handler), cb_func_(_func), valid_(true) {}
+    CallBack(const T& _func, MessageHandler_tksim _handler=MessageQueueksim::KNullHandler):cb_handler_(_handler), cb_func_(_func), valid_(true) {}
     
     CallBack():cb_handler_(MessageQueueksim::KNullHandler), valid_(false) {}
     
-    void set(const T& _func, MessageHandler_t _handler=MessageQueueksim::KNullHandler) {
+    void set(const T& _func, MessageHandler_tksim _handler=MessageQueueksim::KNullHandler) {
         ScopedLock lock(mutex_);
         cb_handler_ = _handler;
         cb_func_ = _func;
@@ -74,7 +74,7 @@ public:
     }
 
 private:
-    MessageHandler_t cb_handler_;
+    MessageHandler_tksim cb_handler_;
     T cb_func_;
     Mutex mutex_;
     bool valid_;

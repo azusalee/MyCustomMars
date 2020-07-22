@@ -13,7 +13,7 @@
 #endif
 #include "boost/date_time/date_generators.hpp"
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace date_time {
 
   const char* const _nth_as_str[] = {"out of range", "first", "second",

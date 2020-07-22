@@ -10,8 +10,8 @@
 
 #include <boost/thread/detail/config.hpp>
 
-// mars_boost_ksim::thread::future requires exception handling
-// due to mars_boost_ksim::exception::exception_ptr dependency
+// mars_boost::thread::future requires exception handling
+// due to mars_boost::exception::exception_ptr dependency
 
 //#define BOOST_THREAD_CONTINUATION_SYNC
 #define BOOST_THREAD_FUTURE_BLOCKING
@@ -92,7 +92,7 @@
 #define BOOST_THREAD_FUTURE unique_future
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   template <class T>
   shared_ptr<T> static_shared_from_this(T* that)
@@ -118,9 +118,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         struct relocker
         {
-            mars_boost_ksim::unique_lock<boost_ksim::mutex>& lock_;
+            mars_boost::unique_lock<boost_ksim::mutex>& lock_;
 
-            relocker(mars_boost_ksim::unique_lock<boost_ksim::mutex>& lk):
+            relocker(mars_boost::unique_lock<boost_ksim::mutex>& lk):
                 lock_(lk)
             {
                 lock_.unlock();
@@ -148,16 +148,16 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             typedef shared_ptr<shared_state_base> continuation_ptr_type;
             typedef std::vector<continuation_ptr_type> continuations_type;
 
-            mars_boost_ksim::exception_ptr exception;
+            mars_boost::exception_ptr exception;
             bool done;
             bool is_valid_;
             bool is_deferred_;
             bool is_constructed;
             launch policy_;
-            mutable mars_boost_ksim::mutex mutex;
-            mars_boost_ksim::condition_variable waiters;
+            mutable mars_boost::mutex mutex;
+            mars_boost::condition_variable waiters;
             waiter_list external_waiters;
-            mars_boost_ksim::function<void()> callback;
+            mars_boost::function<void()> callback;
             // This declaration should be only included conditionally, but is included to maintain the same layout.
             continuations_type continuations;
             executor_ptr_type ex;
@@ -202,30 +202,30 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
               set_executor();
               ex = aex;
             }
-            void set_executor_policy(executor_ptr_type aex, mars_boost_ksim::lock_guard<boost_ksim::mutex>&)
+            void set_executor_policy(executor_ptr_type aex, mars_boost::lock_guard<boost_ksim::mutex>&)
             {
               set_executor();
               ex = aex;
             }
-            void set_executor_policy(executor_ptr_type aex, mars_boost_ksim::unique_lock<boost_ksim::mutex>&)
+            void set_executor_policy(executor_ptr_type aex, mars_boost::unique_lock<boost_ksim::mutex>&)
             {
               set_executor();
               ex = aex;
             }
 
-            bool valid(mars_boost_ksim::unique_lock<boost_ksim::mutex>&) { return is_valid_; }
+            bool valid(mars_boost::unique_lock<boost_ksim::mutex>&) { return is_valid_; }
             bool valid() {
-              mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(this->mutex);
+              mars_boost::unique_lock<boost_ksim::mutex> lk(this->mutex);
               return valid(lk);
             }
-            void invalidate(mars_boost_ksim::unique_lock<boost_ksim::mutex>&) { is_valid_ = false; }
+            void invalidate(mars_boost::unique_lock<boost_ksim::mutex>&) { is_valid_ = false; }
             void invalidate() {
-              mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(this->mutex);
+              mars_boost::unique_lock<boost_ksim::mutex> lk(this->mutex);
               invalidate(lk);
             }
-            void validate(mars_boost_ksim::unique_lock<boost_ksim::mutex>&) { is_valid_ = true; }
+            void validate(mars_boost::unique_lock<boost_ksim::mutex>&) { is_valid_ = true; }
             void validate() {
-              mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(this->mutex);
+              mars_boost::unique_lock<boost_ksim::mutex> lk(this->mutex);
               validate(lk);
             }
 
@@ -250,21 +250,21 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             {
             }
 #endif
-            notify_when_ready_handle notify_when_ready(mars_boost_ksim::condition_variable_any& cv)
+            notify_when_ready_handle notify_when_ready(mars_boost::condition_variable_any& cv)
             {
-                mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(this->mutex);
+                mars_boost::unique_lock<boost_ksim::mutex> lock(this->mutex);
                 do_callback(lock);
                 return external_waiters.insert(external_waiters.end(),&cv);
             }
 
             void unnotify_when_ready(notify_when_ready_handle it)
             {
-                mars_boost_ksim::lock_guard<boost_ksim::mutex> lock(this->mutex);
+                mars_boost::lock_guard<boost_ksim::mutex> lock(this->mutex);
                 external_waiters.erase(it);
             }
 
 #if defined BOOST_THREAD_PROVIDES_FUTURE_CONTINUATION
-            void do_continuation(mars_boost_ksim::unique_lock<boost_ksim::mutex>& lock)
+            void do_continuation(mars_boost::unique_lock<boost_ksim::mutex>& lock)
             {
                 if (! continuations.empty()) {
                   continuations_type the_continuations = continuations;
@@ -276,12 +276,12 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 }
             }
 #else
-            void do_continuation(mars_boost_ksim::unique_lock<boost_ksim::mutex>&)
+            void do_continuation(mars_boost::unique_lock<boost_ksim::mutex>&)
             {
             }
 #endif
 #if defined BOOST_THREAD_PROVIDES_FUTURE_CONTINUATION
-            virtual void set_continuation_ptr(continuation_ptr_type continuation, mars_boost_ksim::unique_lock<boost_ksim::mutex>& lock)
+            virtual void set_continuation_ptr(continuation_ptr_type continuation, mars_boost::unique_lock<boost_ksim::mutex>& lock)
             {
               continuations.push_back(continuation);
               if (done) {
@@ -289,7 +289,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
               }
             }
 #endif
-            void mark_finished_internal(mars_boost_ksim::unique_lock<boost_ksim::mutex>& lock)
+            void mark_finished_internal(mars_boost::unique_lock<boost_ksim::mutex>& lock)
             {
                 done=true;
                 waiters.notify_all();
@@ -302,15 +302,15 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             }
             void make_ready()
             {
-              mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(this->mutex);
+              mars_boost::unique_lock<boost_ksim::mutex> lock(this->mutex);
               mark_finished_internal(lock);
             }
 
-            void do_callback(mars_boost_ksim::unique_lock<boost_ksim::mutex>& lock)
+            void do_callback(mars_boost::unique_lock<boost_ksim::mutex>& lock)
             {
                 if(callback && !done)
                 {
-                    mars_boost_ksim::function<void()> local_callback=callback;
+                    mars_boost::function<void()> local_callback=callback;
                     relocker relock(lock);
                     local_callback();
                 }
@@ -318,7 +318,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
             virtual bool run_if_is_deferred()
             {
-              mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(this->mutex);
+              mars_boost::unique_lock<boost_ksim::mutex> lk(this->mutex);
               if (is_deferred_)
               {
                 is_deferred_=false;
@@ -330,7 +330,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             }
             virtual bool run_if_is_deferred_or_ready()
             {
-              mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(this->mutex);
+              mars_boost::unique_lock<boost_ksim::mutex> lk(this->mutex);
               if (is_deferred_)
               {
                 is_deferred_=false;
@@ -341,7 +341,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
               else
                 return done;
             }
-            void wait_internal(mars_boost_ksim::unique_lock<boost_ksim::mutex> &lk, bool rethrow=true)
+            void wait_internal(mars_boost::unique_lock<boost_ksim::mutex> &lk, bool rethrow=true)
             {
               do_callback(lk);
               if (is_deferred_)
@@ -355,25 +355,25 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
               }
               if(rethrow && exception)
               {
-                  mars_boost_ksim::rethrow_exception(exception);
+                  mars_boost::rethrow_exception(exception);
               }
             }
 
-            virtual void wait(mars_boost_ksim::unique_lock<boost_ksim::mutex>& lock, bool rethrow=true)
+            virtual void wait(mars_boost::unique_lock<boost_ksim::mutex>& lock, bool rethrow=true)
             {
                 wait_internal(lock, rethrow);
             }
 
             void wait(bool rethrow=true)
             {
-                mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(this->mutex);
+                mars_boost::unique_lock<boost_ksim::mutex> lock(this->mutex);
                 wait(lock, rethrow);
             }
 
 #if defined BOOST_THREAD_USES_DATETIME
-            bool timed_wait_until(mars_boost_ksim::system_time const& target_time)
+            bool timed_wait_until(mars_boost::system_time const& target_time)
             {
-                mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(this->mutex);
+                mars_boost::unique_lock<boost_ksim::mutex> lock(this->mutex);
                 if (is_deferred_)
                     return false;
 
@@ -395,7 +395,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             future_status
             wait_until(const chrono::time_point<Clock, Duration>& abs_time)
             {
-              mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(this->mutex);
+              mars_boost::unique_lock<boost_ksim::mutex> lock(this->mutex);
               if (is_deferred_)
                   return future_status::deferred;
               do_callback(lock);
@@ -410,7 +410,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
               return future_status::ready;
             }
 #endif
-            void mark_exceptional_finish_internal(mars_boost_ksim::exception_ptr const& e, mars_boost_ksim::unique_lock<boost_ksim::mutex>& lock)
+            void mark_exceptional_finish_internal(mars_boost::exception_ptr const& e, mars_boost::unique_lock<boost_ksim::mutex>& lock)
             {
                 exception=e;
                 mark_finished_internal(lock);
@@ -418,8 +418,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
             void mark_exceptional_finish()
             {
-                mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(this->mutex);
-                mark_exceptional_finish_internal(mars_boost_ksim::current_exception(), lock);
+                mars_boost::unique_lock<boost_ksim::mutex> lock(this->mutex);
+                mark_exceptional_finish_internal(mars_boost::current_exception(), lock);
             }
 
             void set_exception_at_thread_exit(exception_ptr e)
@@ -436,7 +436,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
             bool has_value() const
             {
-                mars_boost_ksim::lock_guard<boost_ksim::mutex> lock(this->mutex);
+                mars_boost::lock_guard<boost_ksim::mutex> lock(this->mutex);
                 return done && ! exception;
             }
 
@@ -447,16 +447,16 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
             bool has_exception()  const
             {
-                mars_boost_ksim::lock_guard<boost_ksim::mutex> lock(this->mutex);
+                mars_boost::lock_guard<boost_ksim::mutex> lock(this->mutex);
                 return done && exception;
             }
 
-            launch launch_policy(mars_boost_ksim::unique_lock<boost_ksim::mutex>&) const
+            launch launch_policy(mars_boost::unique_lock<boost_ksim::mutex>&) const
             {
                 return policy_;
             }
 
-            future_state::state get_state(mars_boost_ksim::unique_lock<boost_ksim::mutex>&) const
+            future_state::state get_state(mars_boost::unique_lock<boost_ksim::mutex>&) const
             {
                 if(!done)
                 {
@@ -469,7 +469,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             }
             future_state::state get_state() const
             {
-                mars_boost_ksim::lock_guard<boost_ksim::mutex> guard(this->mutex);
+                mars_boost::lock_guard<boost_ksim::mutex> guard(this->mutex);
                 if(!done)
                 {
                     return future_state::waiting;
@@ -482,7 +482,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
             exception_ptr get_exception_ptr()
             {
-                mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(this->mutex);
+                mars_boost::unique_lock<boost_ksim::mutex> lock(this->mutex);
                 wait_internal(lock, false);
                 return exception;
             }
@@ -490,11 +490,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             template<typename F,typename U>
             void set_wait_callback(F f,U* u)
             {
-                mars_boost_ksim::lock_guard<boost_ksim::mutex> lock(this->mutex);
-                callback=boost_ksim::bind(f,mars_boost_ksim::ref(*u));
+                mars_boost::lock_guard<boost_ksim::mutex> lock(this->mutex);
+                callback=boost_ksim::bind(f,mars_boost::ref(*u));
             }
 
-            virtual void execute(mars_boost_ksim::unique_lock<boost_ksim::mutex>&) {}
+            virtual void execute(mars_boost::unique_lock<boost_ksim::mutex>&) {}
 
         private:
             shared_state_base(shared_state_base const&);
@@ -507,9 +507,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             detail::shared_state_base
         {
 #if defined BOOST_THREAD_FUTURE_USES_OPTIONAL
-              typedef mars_boost_ksim::optional<T> storage_type;
+              typedef mars_boost::optional<T> storage_type;
 #else
-              typedef mars_boost_ksim::csbl::unique_ptr<T> storage_type;
+              typedef mars_boost::csbl::unique_ptr<T> storage_type;
 #endif
 #ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
             typedef T const& source_reference_type;
@@ -541,7 +541,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             {
             }
 
-            void mark_finished_with_result_internal(source_reference_type result_, mars_boost_ksim::unique_lock<boost_ksim::mutex>& lock)
+            void mark_finished_with_result_internal(source_reference_type result_, mars_boost::unique_lock<boost_ksim::mutex>& lock)
             {
 #if defined BOOST_THREAD_FUTURE_USES_OPTIONAL
                 result = result_;
@@ -551,12 +551,12 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 this->mark_finished_internal(lock);
             }
 
-            void mark_finished_with_result_internal(rvalue_source_type result_, mars_boost_ksim::unique_lock<boost_ksim::mutex>& lock)
+            void mark_finished_with_result_internal(rvalue_source_type result_, mars_boost::unique_lock<boost_ksim::mutex>& lock)
             {
 #if defined BOOST_THREAD_FUTURE_USES_OPTIONAL
-                result = mars_boost_ksim::move(result_);
+                result = mars_boost::move(result_);
 #elif ! defined  BOOST_NO_CXX11_RVALUE_REFERENCES
-                result.reset(new T(mars_boost_ksim::move(result_)));
+                result.reset(new T(mars_boost::move(result_)));
 #else
                 result.reset(new T(static_cast<rvalue_source_type>(result_)));
 #endif
@@ -566,12 +566,12 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 #if ! defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES)
             template <class ...Args>
-            void mark_finished_with_result_internal(mars_boost_ksim::unique_lock<boost_ksim::mutex>& lock, BOOST_THREAD_FWD_REF(Args)... args)
+            void mark_finished_with_result_internal(mars_boost::unique_lock<boost_ksim::mutex>& lock, BOOST_THREAD_FWD_REF(Args)... args)
             {
 #if defined BOOST_THREAD_FUTURE_USES_OPTIONAL
-                result.emplace(mars_boost_ksim::forward<Args>(args)...);
+                result.emplace(mars_boost::forward<Args>(args)...);
 #else
-                result.reset(new T(mars_boost_ksim::forward<Args>(args)...));
+                result.reset(new T(mars_boost::forward<Args>(args)...));
 #endif
                 this->mark_finished_internal(lock);
             }
@@ -579,43 +579,43 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
             void mark_finished_with_result(source_reference_type result_)
             {
-                mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(this->mutex);
+                mars_boost::unique_lock<boost_ksim::mutex> lock(this->mutex);
                 this->mark_finished_with_result_internal(result_, lock);
             }
 
             void mark_finished_with_result(rvalue_source_type result_)
             {
-                mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(this->mutex);
+                mars_boost::unique_lock<boost_ksim::mutex> lock(this->mutex);
 
 #if ! defined  BOOST_NO_CXX11_RVALUE_REFERENCES
-                mark_finished_with_result_internal(mars_boost_ksim::move(result_), lock);
+                mark_finished_with_result_internal(mars_boost::move(result_), lock);
 #else
                 mark_finished_with_result_internal(static_cast<rvalue_source_type>(result_), lock);
 #endif
             }
 
-            storage_type& get_storage(mars_boost_ksim::unique_lock<boost_ksim::mutex>& lk)
+            storage_type& get_storage(mars_boost::unique_lock<boost_ksim::mutex>& lk)
             {
                 wait_internal(lk);
                 return result;
             }
-            virtual move_dest_type get(mars_boost_ksim::unique_lock<boost_ksim::mutex>& lk)
+            virtual move_dest_type get(mars_boost::unique_lock<boost_ksim::mutex>& lk)
             {
-                return mars_boost_ksim::move(*get_storage(lk));
+                return mars_boost::move(*get_storage(lk));
             }
             move_dest_type get()
             {
-                mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(this->mutex);
+                mars_boost::unique_lock<boost_ksim::mutex> lk(this->mutex);
                 return this->get(lk);
             }
 
-            virtual shared_future_get_result_type get_sh(mars_boost_ksim::unique_lock<boost_ksim::mutex>& lk)
+            virtual shared_future_get_result_type get_sh(mars_boost::unique_lock<boost_ksim::mutex>& lk)
             {
                 return *get_storage(lk);
             }
             shared_future_get_result_type get_sh()
             {
-                mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(this->mutex);
+                mars_boost::unique_lock<boost_ksim::mutex> lk(this->mutex);
                 return this->get_sh(lk);
             }
 
@@ -643,13 +643,13 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 #if ! defined  BOOST_NO_CXX11_RVALUE_REFERENCES
 #if defined BOOST_THREAD_FUTURE_USES_OPTIONAL
-                result = mars_boost_ksim::move(result_);
+                result = mars_boost::move(result_);
 #else
-                result.reset(new T(mars_boost_ksim::move(result_)));
+                result.reset(new T(mars_boost::move(result_)));
 #endif
 #else
 #if defined BOOST_THREAD_FUTURE_USES_OPTIONAL
-                result = mars_boost_ksim::move(result_);
+                result = mars_boost::move(result_);
 #else
                 result.reset(new T(static_cast<rvalue_source_type>(result_)));
 #endif
@@ -686,7 +686,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             {
             }
 
-            void mark_finished_with_result_internal(source_reference_type result_, mars_boost_ksim::unique_lock<boost_ksim::mutex>& lock)
+            void mark_finished_with_result_internal(source_reference_type result_, mars_boost::unique_lock<boost_ksim::mutex>& lock)
             {
                 result= &result_;
                 mark_finished_internal(lock);
@@ -694,29 +694,29 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
             void mark_finished_with_result(source_reference_type result_)
             {
-                mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(this->mutex);
+                mars_boost::unique_lock<boost_ksim::mutex> lock(this->mutex);
                 mark_finished_with_result_internal(result_, lock);
             }
 
-            virtual T& get(mars_boost_ksim::unique_lock<boost_ksim::mutex>& lock)
+            virtual T& get(mars_boost::unique_lock<boost_ksim::mutex>& lock)
             {
                 wait_internal(lock);
                 return *result;
             }
             T& get()
             {
-                mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(this->mutex);
+                mars_boost::unique_lock<boost_ksim::mutex> lk(this->mutex);
                 return get(lk);
             }
 
-            virtual T& get_sh(mars_boost_ksim::unique_lock<boost_ksim::mutex>& lock)
+            virtual T& get_sh(mars_boost::unique_lock<boost_ksim::mutex>& lock)
             {
                 wait_internal(lock);
                 return *result;
             }
             T& get_sh()
             {
-                mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(this->mutex);
+                mars_boost::unique_lock<boost_ksim::mutex> lock(this->mutex);
                 return get_sh(lock);
             }
 
@@ -749,34 +749,34 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
               detail::shared_state_base(ex)
             {}
 
-            void mark_finished_with_result_internal(mars_boost_ksim::unique_lock<boost_ksim::mutex>& lock)
+            void mark_finished_with_result_internal(mars_boost::unique_lock<boost_ksim::mutex>& lock)
             {
                 mark_finished_internal(lock);
             }
 
             void mark_finished_with_result()
             {
-                mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(this->mutex);
+                mars_boost::unique_lock<boost_ksim::mutex> lock(this->mutex);
                 mark_finished_with_result_internal(lock);
             }
 
-            virtual void get(mars_boost_ksim::unique_lock<boost_ksim::mutex>& lock)
+            virtual void get(mars_boost::unique_lock<boost_ksim::mutex>& lock)
             {
                 this->wait_internal(lock);
             }
             void get()
             {
-                mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(this->mutex);
+                mars_boost::unique_lock<boost_ksim::mutex> lock(this->mutex);
                 this->get(lock);
             }
 
-            virtual void get_sh(mars_boost_ksim::unique_lock<boost_ksim::mutex>& lock)
+            virtual void get_sh(mars_boost::unique_lock<boost_ksim::mutex>& lock)
             {
                 this->wait_internal(lock);
             }
             void get_sh()
             {
-                mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(this->mutex);
+                mars_boost::unique_lock<boost_ksim::mutex> lock(this->mutex);
                 this->get_sh(lock);
             }
 
@@ -804,7 +804,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           typedef shared_state<Rp> base_type;
         protected:
 #ifdef BOOST_THREAD_FUTURE_BLOCKING
-          mars_boost_ksim::thread thr_;
+          mars_boost::thread thr_;
           void join()
           {
               if (this_thread::get_id() == thr_.get_id())
@@ -828,7 +828,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #endif
           }
 
-          virtual void wait(mars_boost_ksim::unique_lock<boost_ksim::mutex>& lk, bool rethrow)
+          virtual void wait(mars_boost::unique_lock<boost_ksim::mutex>& lk, bool rethrow)
           {
 #ifdef BOOST_THREAD_FUTURE_BLOCKING
               {
@@ -853,9 +853,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           void init(BOOST_THREAD_FWD_REF(Fp) f)
           {
 #ifdef BOOST_THREAD_FUTURE_BLOCKING
-            this->thr_ = thread(&future_async_shared_state::run, static_shared_from_this(this), mars_boost_ksim::forward<Fp>(f));
+            this->thr_ = thread(&future_async_shared_state::run, static_shared_from_this(this), mars_boost::forward<Fp>(f));
 #else
-            thread(&future_async_shared_state::run, static_shared_from_this(this), mars_boost_ksim::forward<Fp>(f)).detach();
+            thread(&future_async_shared_state::run, static_shared_from_this(this), mars_boost::forward<Fp>(f)).detach();
 #endif
           }
 
@@ -878,9 +878,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           void init(BOOST_THREAD_FWD_REF(Fp) f)
           {
 #ifdef BOOST_THREAD_FUTURE_BLOCKING
-            this->thr_ = thread(&future_async_shared_state::run, static_shared_from_this(this), mars_boost_ksim::move(f));
+            this->thr_ = thread(&future_async_shared_state::run, static_shared_from_this(this), mars_boost::move(f));
 #else
-            thread(&future_async_shared_state::run, static_shared_from_this(this), mars_boost_ksim::move(f)).detach();
+            thread(&future_async_shared_state::run, static_shared_from_this(this), mars_boost::move(f)).detach();
 #endif
           }
 
@@ -904,9 +904,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           void init(BOOST_THREAD_FWD_REF(Fp) f)
           {
 #ifdef BOOST_THREAD_FUTURE_BLOCKING
-            this->thr_ = thread(&future_async_shared_state::run, static_shared_from_this(this), mars_boost_ksim::move(f));
+            this->thr_ = thread(&future_async_shared_state::run, static_shared_from_this(this), mars_boost::move(f));
 #else
-            thread(&future_async_shared_state::run, static_shared_from_this(this), mars_boost_ksim::move(f)).detach();
+            thread(&future_async_shared_state::run, static_shared_from_this(this), mars_boost::move(f)).detach();
 #endif
           }
 
@@ -934,19 +934,19 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         public:
           explicit future_deferred_shared_state(BOOST_THREAD_FWD_REF(Fp) f)
-          : func_(mars_boost_ksim::move(f))
+          : func_(mars_boost::move(f))
           {
             this->set_deferred();
           }
 
-          virtual void execute(mars_boost_ksim::unique_lock<boost_ksim::mutex>& lck) {
+          virtual void execute(mars_boost::unique_lock<boost_ksim::mutex>& lck) {
             try
             {
               Fp local_fuct=boost_ksim::move(func_);
               relocker relock(lck);
               Rp res = local_fuct();
               relock.lock();
-              this->mark_finished_with_result_internal(mars_boost_ksim::move(res), lck);
+              this->mark_finished_with_result_internal(mars_boost::move(res), lck);
             }
             catch (...)
             {
@@ -962,12 +962,12 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         public:
           explicit future_deferred_shared_state(BOOST_THREAD_FWD_REF(Fp) f)
-          : func_(mars_boost_ksim::move(f))
+          : func_(mars_boost::move(f))
           {
             this->set_deferred();
           }
 
-          virtual void execute(mars_boost_ksim::unique_lock<boost_ksim::mutex>& lck) {
+          virtual void execute(mars_boost::unique_lock<boost_ksim::mutex>& lck) {
             try
             {
               this->mark_finished_with_result_internal(func_(), lck);
@@ -987,12 +987,12 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         public:
           explicit future_deferred_shared_state(BOOST_THREAD_FWD_REF(Fp) f)
-          : func_(mars_boost_ksim::move(f))
+          : func_(mars_boost::move(f))
           {
             this->set_deferred();
           }
 
-          virtual void execute(mars_boost_ksim::unique_lock<boost_ksim::mutex>& lck) {
+          virtual void execute(mars_boost::unique_lock<boost_ksim::mutex>& lck) {
             try
             {
               Fp local_fuct=boost_ksim::move(func_);
@@ -1016,11 +1016,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             struct registered_waiter;
             struct registered_waiter
             {
-                mars_boost_ksim::shared_ptr<detail::shared_state_base> future_;
+                mars_boost::shared_ptr<detail::shared_state_base> future_;
                 detail::shared_state_base::notify_when_ready_handle handle;
                 count_type index;
 
-                registered_waiter(mars_boost_ksim::shared_ptr<detail::shared_state_base> const& a_future,
+                registered_waiter(mars_boost::shared_ptr<detail::shared_state_base> const& a_future,
                                   detail::shared_state_base::notify_when_ready_handle handle_,
                                   count_type index_):
                     future_(a_future),handle(handle_),index(index_)
@@ -1035,20 +1035,20 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                    typedef count_type count_type_portable;
 #endif
                    count_type_portable count;
-                   mars_boost_ksim::scoped_array<boost_ksim::unique_lock<boost_ksim::mutex> > locks;
+                   mars_boost::scoped_array<boost_ksim::unique_lock<boost_ksim::mutex> > locks;
 
                 all_futures_lock(std::vector<registered_waiter>& futures):
-                    count(futures.size()),locks(new mars_boost_ksim::unique_lock<boost_ksim::mutex>[count])
+                    count(futures.size()),locks(new mars_boost::unique_lock<boost_ksim::mutex>[count])
                 {
                     for(count_type_portable i=0;i<count;++i)
                     {
-                        locks[i]=BOOST_THREAD_MAKE_RV_REF(mars_boost_ksim::unique_lock<boost_ksim::mutex>(futures[i].future_->mutex));
+                        locks[i]=BOOST_THREAD_MAKE_RV_REF(mars_boost::unique_lock<boost_ksim::mutex>(futures[i].future_->mutex));
                     }
                 }
 
                 void lock()
                 {
-                    mars_boost_ksim::lock(locks.get(),locks.get()+count);
+                    mars_boost::lock(locks.get(),locks.get()+count);
                 }
 
                 void unlock()
@@ -1060,7 +1060,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 }
             };
 
-            mars_boost_ksim::condition_variable_any cv;
+            mars_boost::condition_variable_any cv;
             std::vector<registered_waiter> futures_;
             count_type future_count;
 
@@ -1137,7 +1137,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     };
 
 //    template<typename Iterator>
-//    typename mars_boost_ksim::disable_if<is_future_type<Iterator>,Iterator>::type wait_for_any(Iterator begin,Iterator end)
+//    typename mars_boost::disable_if<is_future_type<Iterator>,Iterator>::type wait_for_any(Iterator begin,Iterator end)
 //    {
 //        if(begin==end)
 //            return end;
@@ -1147,12 +1147,12 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 //        {
 //            waiter.add(*current);
 //        }
-//        return mars_boost_ksim::next(begin,waiter.wait());
+//        return mars_boost::next(begin,waiter.wait());
 //    }
 
 #ifdef BOOST_NO_CXX11_VARIADIC_TEMPLATES
     template<typename F1,typename F2>
-    typename mars_boost_ksim::enable_if<is_future_type<F1>,typename detail::future_waiter::count_type>::type wait_for_any(F1& f1,F2& f2)
+    typename mars_boost::enable_if<is_future_type<F1>,typename detail::future_waiter::count_type>::type wait_for_any(F1& f1,F2& f2)
     {
         detail::future_waiter waiter;
         waiter.add(f1);
@@ -1194,7 +1194,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     }
 #else
     template<typename F1, typename... Fs>
-    typename mars_boost_ksim::enable_if<is_future_type<F1>, typename detail::future_waiter::count_type>::type
+    typename mars_boost::enable_if<is_future_type<F1>, typename detail::future_waiter::count_type>::type
     wait_for_any(F1& f1, Fs&... fs)
     {
       detail::future_waiter waiter;
@@ -1223,7 +1223,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       protected:
       public:
 
-        typedef mars_boost_ksim::shared_ptr<detail::shared_state<R> > future_ptr;
+        typedef mars_boost::shared_ptr<detail::shared_state<R> > future_ptr;
         typedef typename detail::shared_state<R>::move_dest_type move_dest_type;
 
         static //BOOST_CONSTEXPR
@@ -1270,7 +1270,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           future_.swap(that.future_);
         }
         // functions to check state, and wait for ready
-        state get_state(mars_boost_ksim::unique_lock<boost_ksim::mutex>& lk) const
+        state get_state(mars_boost::unique_lock<boost_ksim::mutex>& lk) const
         {
             if(!future_)
             {
@@ -1292,7 +1292,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             return get_state()==future_state::ready;
         }
 
-        bool is_ready(mars_boost_ksim::unique_lock<boost_ksim::mutex>& lk) const
+        bool is_ready(mars_boost::unique_lock<boost_ksim::mutex>& lk) const
         {
             return get_state(lk)==future_state::ready;
         }
@@ -1306,7 +1306,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             return future_ && future_->has_value();
         }
 
-        launch launch_policy(mars_boost_ksim::unique_lock<boost_ksim::mutex>& lk) const
+        launch launch_policy(mars_boost::unique_lock<boost_ksim::mutex>& lk) const
         {
             if ( future_ ) return future_->launch_policy(lk);
             else return launch(launch::none);
@@ -1315,7 +1315,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         launch launch_policy() const
         {
           if ( future_ ) {
-            mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(this->future_->mutex);
+            mars_boost::unique_lock<boost_ksim::mutex> lk(this->future_->mutex);
             return future_->launch_policy(lk);
           }
           else return launch(launch::none);
@@ -1337,26 +1337,26 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
             if(!future_)
             {
-                mars_boost_ksim::throw_exception(future_uninitialized());
+                mars_boost::throw_exception(future_uninitialized());
             }
             future_->wait(false);
         }
 
         typedef detail::shared_state_base::notify_when_ready_handle notify_when_ready_handle;
 
-        mars_boost_ksim::mutex& mutex() {
+        mars_boost::mutex& mutex() {
           if(!future_)
           {
-              mars_boost_ksim::throw_exception(future_uninitialized());
+              mars_boost::throw_exception(future_uninitialized());
           }
           return future_->mutex;
         };
 
-        notify_when_ready_handle notify_when_ready(mars_boost_ksim::condition_variable_any& cv)
+        notify_when_ready_handle notify_when_ready(mars_boost::condition_variable_any& cv)
         {
           if(!future_)
           {
-              mars_boost_ksim::throw_exception(future_uninitialized());
+              mars_boost::throw_exception(future_uninitialized());
           }
           return future_->notify_when_ready(cv);
         }
@@ -1365,7 +1365,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
           if(!future_)
           {
-              mars_boost_ksim::throw_exception(future_uninitialized());
+              mars_boost::throw_exception(future_uninitialized());
           }
           return future_->unnotify_when_ready(h);
         }
@@ -1374,14 +1374,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         template<typename Duration>
         bool timed_wait(Duration const& rel_time) const
         {
-            return timed_wait_until(mars_boost_ksim::get_system_time()+rel_time);
+            return timed_wait_until(mars_boost::get_system_time()+rel_time);
         }
 
-        bool timed_wait_until(mars_boost_ksim::system_time const& abs_time) const
+        bool timed_wait_until(mars_boost::system_time const& abs_time) const
         {
             if(!future_)
             {
-                mars_boost_ksim::throw_exception(future_uninitialized());
+                mars_boost::throw_exception(future_uninitialized());
             }
             return future_->timed_wait_until(abs_time);
         }
@@ -1400,7 +1400,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
           if(!future_)
           {
-              mars_boost_ksim::throw_exception(future_uninitialized());
+              mars_boost::throw_exception(future_uninitialized());
           }
           return future_->wait_until(abs_time);
         }
@@ -1430,37 +1430,37 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         template <class F, class Rp, class Fp>
         BOOST_THREAD_FUTURE<Rp>
-        make_future_async_continuation_shared_state(mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c);
+        make_future_async_continuation_shared_state(mars_boost::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c);
 
         template <class F, class Rp, class Fp>
         BOOST_THREAD_FUTURE<Rp>
-        make_future_sync_continuation_shared_state(mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c);
+        make_future_sync_continuation_shared_state(mars_boost::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c);
 
         template <class F, class Rp, class Fp>
         BOOST_THREAD_FUTURE<Rp>
-        make_future_deferred_continuation_shared_state(mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c);
+        make_future_deferred_continuation_shared_state(mars_boost::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c);
 
         template<typename F, typename Rp, typename Fp>
         BOOST_THREAD_FUTURE<Rp>
-        make_shared_future_deferred_continuation_shared_state(mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, F f, BOOST_THREAD_FWD_REF(Fp) c);
+        make_shared_future_deferred_continuation_shared_state(mars_boost::unique_lock<boost_ksim::mutex> &lock, F f, BOOST_THREAD_FWD_REF(Fp) c);
 
         template<typename F, typename Rp, typename Fp>
         BOOST_THREAD_FUTURE<Rp>
-        make_shared_future_async_continuation_shared_state(mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, F f, BOOST_THREAD_FWD_REF(Fp) c);
+        make_shared_future_async_continuation_shared_state(mars_boost::unique_lock<boost_ksim::mutex> &lock, F f, BOOST_THREAD_FWD_REF(Fp) c);
 
         template<typename F, typename Rp, typename Fp>
         BOOST_THREAD_FUTURE<Rp>
-        make_shared_future_sync_continuation_shared_state(mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, F f, BOOST_THREAD_FWD_REF(Fp) c);
+        make_shared_future_sync_continuation_shared_state(mars_boost::unique_lock<boost_ksim::mutex> &lock, F f, BOOST_THREAD_FWD_REF(Fp) c);
 
 
   #ifdef BOOST_THREAD_PROVIDES_EXECUTORS
         template<typename Ex, typename F, typename Rp, typename Fp>
         BOOST_THREAD_FUTURE<Rp>
-        make_future_executor_continuation_shared_state(Ex& ex, mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c);
+        make_future_executor_continuation_shared_state(Ex& ex, mars_boost::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c);
 
         template<typename Ex, typename F, typename Rp, typename Fp>
         BOOST_THREAD_FUTURE<Rp>
-        make_shared_future_executor_continuation_shared_state(Ex& ex, mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, F f, BOOST_THREAD_FWD_REF(Fp) c);
+        make_shared_future_executor_continuation_shared_state(Ex& ex, mars_boost::unique_lock<boost_ksim::mutex> &lock, F f, BOOST_THREAD_FWD_REF(Fp) c);
 
         template <class Rp, class Fp, class Executor>
         BOOST_THREAD_FUTURE<Rp>
@@ -1472,12 +1472,12 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         struct future_unwrap_shared_state;
         template <class F, class Rp>
         inline BOOST_THREAD_FUTURE<Rp>
-        make_future_unwrap_shared_state(mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f);
+        make_future_unwrap_shared_state(mars_boost::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f);
 #endif
     }
 #if defined(BOOST_THREAD_PROVIDES_FUTURE_WHEN_ALL_WHEN_ANY)
       template< typename InputIterator>
-      typename mars_boost_ksim::disable_if<is_future_type<InputIterator>,
+      typename mars_boost::disable_if<is_future_type<InputIterator>,
         BOOST_THREAD_FUTURE<csbl::vector<typename InputIterator::value_type>  >
       >::type
       when_all(InputIterator first, InputIterator last);
@@ -1491,7 +1491,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     #endif
 
       template< typename InputIterator>
-      typename mars_boost_ksim::disable_if<is_future_type<InputIterator>,
+      typename mars_boost::disable_if<is_future_type<InputIterator>,
         BOOST_THREAD_FUTURE<csbl::vector<typename InputIterator::value_type>  >
       >::type
       when_any(InputIterator first, InputIterator last);
@@ -1523,36 +1523,36 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         template <class F, class Rp, class Fp>
         friend BOOST_THREAD_FUTURE<Rp>
-        detail::make_future_async_continuation_shared_state(mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c);
+        detail::make_future_async_continuation_shared_state(mars_boost::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c);
 
         template <class F, class Rp, class Fp>
         friend BOOST_THREAD_FUTURE<Rp>
-        detail::make_future_sync_continuation_shared_state(mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c);
+        detail::make_future_sync_continuation_shared_state(mars_boost::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c);
 
         template <class F, class Rp, class Fp>
         friend BOOST_THREAD_FUTURE<Rp>
-        detail::make_future_deferred_continuation_shared_state(mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c);
+        detail::make_future_deferred_continuation_shared_state(mars_boost::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c);
 
         template<typename F, typename Rp, typename Fp>
         friend BOOST_THREAD_FUTURE<Rp>
-        detail::make_shared_future_deferred_continuation_shared_state(mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, F f, BOOST_THREAD_FWD_REF(Fp) c);
+        detail::make_shared_future_deferred_continuation_shared_state(mars_boost::unique_lock<boost_ksim::mutex> &lock, F f, BOOST_THREAD_FWD_REF(Fp) c);
 
         template<typename F, typename Rp, typename Fp>
         friend BOOST_THREAD_FUTURE<Rp>
-        detail::make_shared_future_async_continuation_shared_state(mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, F f, BOOST_THREAD_FWD_REF(Fp) c);
+        detail::make_shared_future_async_continuation_shared_state(mars_boost::unique_lock<boost_ksim::mutex> &lock, F f, BOOST_THREAD_FWD_REF(Fp) c);
 
         template<typename F, typename Rp, typename Fp>
         friend BOOST_THREAD_FUTURE<Rp>
-        detail::make_shared_future_sync_continuation_shared_state(mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, F f, BOOST_THREAD_FWD_REF(Fp) c);
+        detail::make_shared_future_sync_continuation_shared_state(mars_boost::unique_lock<boost_ksim::mutex> &lock, F f, BOOST_THREAD_FWD_REF(Fp) c);
 
   #ifdef BOOST_THREAD_PROVIDES_EXECUTORS
         template<typename Ex, typename F, typename Rp, typename Fp>
         friend BOOST_THREAD_FUTURE<Rp>
-        detail::make_future_executor_continuation_shared_state(Ex& ex, mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c);
+        detail::make_future_executor_continuation_shared_state(Ex& ex, mars_boost::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c);
 
         template<typename Ex, typename F, typename Rp, typename Fp>
         friend BOOST_THREAD_FUTURE<Rp>
-        detail::make_shared_future_executor_continuation_shared_state(Ex& ex, mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, F f, BOOST_THREAD_FWD_REF(Fp) c);
+        detail::make_shared_future_executor_continuation_shared_state(Ex& ex, mars_boost::unique_lock<boost_ksim::mutex> &lock, F f, BOOST_THREAD_FWD_REF(Fp) c);
 
         template <class Rp, class Fp, class Executor>
         friend BOOST_THREAD_FUTURE<Rp>
@@ -1564,11 +1564,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         friend struct detail::future_unwrap_shared_state;
         template <class F, class Rp>
         friend BOOST_THREAD_FUTURE<Rp>
-        detail::make_future_unwrap_shared_state(mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f);
+        detail::make_future_unwrap_shared_state(mars_boost::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f);
 #endif
 #if defined(BOOST_THREAD_PROVIDES_FUTURE_WHEN_ALL_WHEN_ANY)
       template< typename InputIterator>
-      friend typename mars_boost_ksim::disable_if<is_future_type<InputIterator>,
+      friend typename mars_boost::disable_if<is_future_type<InputIterator>,
         BOOST_THREAD_FUTURE<csbl::vector<typename InputIterator::value_type>  >
       >::type
       when_all(InputIterator first, InputIterator last);
@@ -1582,7 +1582,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     #endif
 
       template< typename InputIterator>
-      friend typename mars_boost_ksim::disable_if<is_future_type<InputIterator>,
+      friend typename mars_boost::disable_if<is_future_type<InputIterator>,
         BOOST_THREAD_FUTURE<csbl::vector<typename InputIterator::value_type>  >
       >::type
       when_any(InputIterator first, InputIterator last);
@@ -1631,18 +1631,18 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         }
 
         BOOST_THREAD_FUTURE(BOOST_THREAD_RV_REF(BOOST_THREAD_FUTURE) other) BOOST_NOEXCEPT:
-        base_type(mars_boost_ksim::move(static_cast<base_type&>(BOOST_THREAD_RV(other))))
+        base_type(mars_boost::move(static_cast<base_type&>(BOOST_THREAD_RV(other))))
         {
         }
         inline BOOST_THREAD_FUTURE(BOOST_THREAD_RV_REF(BOOST_THREAD_FUTURE<BOOST_THREAD_FUTURE<R> >) other); // EXTENSION
 
         explicit BOOST_THREAD_FUTURE(BOOST_THREAD_RV_REF(shared_future<R>) other) :
-        base_type(mars_boost_ksim::move(static_cast<base_type&>(BOOST_THREAD_RV(other))))
+        base_type(mars_boost::move(static_cast<base_type&>(BOOST_THREAD_RV(other))))
         {}
 
         BOOST_THREAD_FUTURE& operator=(BOOST_THREAD_RV_REF(BOOST_THREAD_FUTURE) other) BOOST_NOEXCEPT
         {
-            this->base_type::operator=(mars_boost_ksim::move(static_cast<base_type&>(BOOST_THREAD_RV(other))));
+            this->base_type::operator=(mars_boost::move(static_cast<base_type&>(BOOST_THREAD_RV(other))));
             return *this;
         }
 
@@ -1677,12 +1677,12 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
             if (this->future_ == 0)
             {
-                mars_boost_ksim::throw_exception(future_uninitialized());
+                mars_boost::throw_exception(future_uninitialized());
             }
             unique_lock<boost_ksim::mutex> lk(this->future_->mutex);
             if (! this->future_->valid(lk))
             {
-                mars_boost_ksim::throw_exception(future_uninitialized());
+                mars_boost::throw_exception(future_uninitialized());
             }
 #ifdef BOOST_THREAD_PROVIDES_FUTURE_INVALID_AFTER_GET
             this->future_->invalidate(lk);
@@ -1691,18 +1691,18 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         }
 
         template <typename R2>
-        typename mars_boost_ksim::disable_if< is_void<R2>, move_dest_type>::type
+        typename mars_boost::disable_if< is_void<R2>, move_dest_type>::type
         get_or(BOOST_THREAD_RV_REF(R2) v)
         {
 
             if (this->future_ == 0)
             {
-                mars_boost_ksim::throw_exception(future_uninitialized());
+                mars_boost::throw_exception(future_uninitialized());
             }
             unique_lock<boost_ksim::mutex> lk(this->future_->mutex);
             if (! this->future_->valid(lk))
             {
-                mars_boost_ksim::throw_exception(future_uninitialized());
+                mars_boost::throw_exception(future_uninitialized());
             }
             this->future_->wait(lk, false);
 #ifdef BOOST_THREAD_PROVIDES_FUTURE_INVALID_AFTER_GET
@@ -1713,22 +1713,22 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
               return this->future_->get(lk);
             }
             else {
-              return mars_boost_ksim::move(v);
+              return mars_boost::move(v);
             }
         }
 
         template <typename R2>
-        typename mars_boost_ksim::disable_if< is_void<R2>, move_dest_type>::type
+        typename mars_boost::disable_if< is_void<R2>, move_dest_type>::type
         get_or(R2 const& v)  // EXTENSION
         {
             if (this->future_ == 0)
             {
-                mars_boost_ksim::throw_exception(future_uninitialized());
+                mars_boost::throw_exception(future_uninitialized());
             }
             unique_lock<boost_ksim::mutex> lk(this->future_->mutex);
             if (! this->future_->valid(lk))
             {
-                mars_boost_ksim::throw_exception(future_uninitialized());
+                mars_boost::throw_exception(future_uninitialized());
             }
             this->future_->wait(lk, false);
 #ifdef BOOST_THREAD_PROVIDES_FUTURE_INVALID_AFTER_GET
@@ -1744,22 +1744,22 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 #if defined BOOST_THREAD_PROVIDES_FUTURE_CONTINUATION
         template<typename F>
-        inline BOOST_THREAD_FUTURE<typename mars_boost_ksim::result_of<F(BOOST_THREAD_FUTURE)>::type>
+        inline BOOST_THREAD_FUTURE<typename mars_boost::result_of<F(BOOST_THREAD_FUTURE)>::type>
         then(BOOST_THREAD_FWD_REF(F) func);  // EXTENSION
         template<typename F>
-        inline BOOST_THREAD_FUTURE<typename mars_boost_ksim::result_of<F(BOOST_THREAD_FUTURE)>::type>
+        inline BOOST_THREAD_FUTURE<typename mars_boost::result_of<F(BOOST_THREAD_FUTURE)>::type>
         then(launch policy, BOOST_THREAD_FWD_REF(F) func);  // EXTENSION
   #ifdef BOOST_THREAD_PROVIDES_EXECUTORS
         template<typename Ex, typename F>
-        inline BOOST_THREAD_FUTURE<typename mars_boost_ksim::result_of<F(BOOST_THREAD_FUTURE)>::type>
+        inline BOOST_THREAD_FUTURE<typename mars_boost::result_of<F(BOOST_THREAD_FUTURE)>::type>
         then(Ex& ex, BOOST_THREAD_FWD_REF(F) func);  // EXTENSION
   #endif
 
         template <typename R2>
-        inline typename mars_boost_ksim::disable_if< is_void<R2>, BOOST_THREAD_FUTURE<R> >::type
+        inline typename mars_boost::disable_if< is_void<R2>, BOOST_THREAD_FUTURE<R> >::type
         fallback_to(BOOST_THREAD_RV_REF(R2) v);  // EXTENSION
         template <typename R2>
-        inline typename mars_boost_ksim::disable_if< is_void<R2>, BOOST_THREAD_FUTURE<R> >::type
+        inline typename mars_boost::disable_if< is_void<R2>, BOOST_THREAD_FUTURE<R> >::type
         fallback_to(R2 const& v);  // EXTENSION
 
 #endif
@@ -1787,36 +1787,36 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
             template <class F, class Rp, class Fp>
             friend BOOST_THREAD_FUTURE<Rp>
-            detail::make_future_async_continuation_shared_state(mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c);
+            detail::make_future_async_continuation_shared_state(mars_boost::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c);
 
             template <class F, class Rp, class Fp>
             friend BOOST_THREAD_FUTURE<Rp>
-            detail::make_future_sync_continuation_shared_state(mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c);
+            detail::make_future_sync_continuation_shared_state(mars_boost::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c);
 
             template <class F, class Rp, class Fp>
             friend BOOST_THREAD_FUTURE<Rp>
-            detail::make_future_deferred_continuation_shared_state(mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c);
+            detail::make_future_deferred_continuation_shared_state(mars_boost::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c);
 
             template<typename F, typename Rp, typename Fp>
             friend BOOST_THREAD_FUTURE<Rp>
-            detail::make_shared_future_deferred_continuation_shared_state(mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, F f, BOOST_THREAD_FWD_REF(Fp) c);
+            detail::make_shared_future_deferred_continuation_shared_state(mars_boost::unique_lock<boost_ksim::mutex> &lock, F f, BOOST_THREAD_FWD_REF(Fp) c);
 
             template<typename F, typename Rp, typename Fp>
             friend BOOST_THREAD_FUTURE<Rp>
-            detail::make_shared_future_async_continuation_shared_state(mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, F f, BOOST_THREAD_FWD_REF(Fp) c);
+            detail::make_shared_future_async_continuation_shared_state(mars_boost::unique_lock<boost_ksim::mutex> &lock, F f, BOOST_THREAD_FWD_REF(Fp) c);
 
             template<typename F, typename Rp, typename Fp>
             friend BOOST_THREAD_FUTURE<Rp>
-            detail::make_shared_future_sync_continuation_shared_state(mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, F f, BOOST_THREAD_FWD_REF(Fp) c);
+            detail::make_shared_future_sync_continuation_shared_state(mars_boost::unique_lock<boost_ksim::mutex> &lock, F f, BOOST_THREAD_FWD_REF(Fp) c);
 
       #ifdef BOOST_THREAD_PROVIDES_EXECUTORS
             template<typename Ex, typename F, typename Rp, typename Fp>
             friend BOOST_THREAD_FUTURE<Rp>
-            detail::make_future_executor_continuation_shared_state(Ex& ex, mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c);
+            detail::make_future_executor_continuation_shared_state(Ex& ex, mars_boost::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c);
 
             template<typename Ex, typename F, typename Rp, typename Fp>
             friend BOOST_THREAD_FUTURE<Rp>
-            detail::make_shared_future_executor_continuation_shared_state(Ex& ex, mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, F f, BOOST_THREAD_FWD_REF(Fp) c);
+            detail::make_shared_future_executor_continuation_shared_state(Ex& ex, mars_boost::unique_lock<boost_ksim::mutex> &lock, F f, BOOST_THREAD_FWD_REF(Fp) c);
 
             template <class Rp, class Fp, class Executor>
             friend BOOST_THREAD_FUTURE<Rp>
@@ -1829,11 +1829,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             friend struct detail::future_unwrap_shared_state;
         template <class F, class Rp>
         friend BOOST_THREAD_FUTURE<Rp>
-        detail::make_future_unwrap_shared_state(mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f);
+        detail::make_future_unwrap_shared_state(mars_boost::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f);
 #endif
 #if defined(BOOST_THREAD_PROVIDES_FUTURE_WHEN_ALL_WHEN_ANY)
       template< typename InputIterator>
-      friend typename mars_boost_ksim::disable_if<is_future_type<InputIterator>,
+      friend typename mars_boost::disable_if<is_future_type<InputIterator>,
         BOOST_THREAD_FUTURE<csbl::vector<typename InputIterator::value_type>  >
       >::type
       when_all(InputIterator first, InputIterator last);
@@ -1847,7 +1847,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     #endif
 
       template< typename InputIterator>
-      friend typename mars_boost_ksim::disable_if<is_future_type<InputIterator>,
+      friend typename mars_boost::disable_if<is_future_type<InputIterator>,
         BOOST_THREAD_FUTURE<csbl::vector<typename InputIterator::value_type>  >
       >::type
       when_any(InputIterator first, InputIterator last);
@@ -1897,13 +1897,13 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             }
 
             BOOST_THREAD_FUTURE(BOOST_THREAD_RV_REF(BOOST_THREAD_FUTURE) other) BOOST_NOEXCEPT:
-            base_type(mars_boost_ksim::move(static_cast<base_type&>(BOOST_THREAD_RV(other))))
+            base_type(mars_boost::move(static_cast<base_type&>(BOOST_THREAD_RV(other))))
             {
             }
 
             BOOST_THREAD_FUTURE& operator=(BOOST_THREAD_RV_REF(BOOST_THREAD_FUTURE) other) BOOST_NOEXCEPT
             {
-                this->base_type::operator=(mars_boost_ksim::move(static_cast<base_type&>(BOOST_THREAD_RV(other))));
+                this->base_type::operator=(mars_boost::move(static_cast<base_type&>(BOOST_THREAD_RV(other))));
                 return *this;
             }
 
@@ -1938,12 +1938,12 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             {
                 if (this->future_ == 0)
                 {
-                    mars_boost_ksim::throw_exception(future_uninitialized());
+                    mars_boost::throw_exception(future_uninitialized());
                 }
                 unique_lock<boost_ksim::mutex> lk(this->future_->mutex);
                 if (! this->future_->valid(lk))
                 {
-                    mars_boost_ksim::throw_exception(future_uninitialized());
+                    mars_boost::throw_exception(future_uninitialized());
                 }
     #ifdef BOOST_THREAD_PROVIDES_FUTURE_INVALID_AFTER_GET
                 this->future_->invalidate(lk);
@@ -1954,31 +1954,31 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             {
                 if (this->future_ == 0)
                 {
-                    mars_boost_ksim::throw_exception(future_uninitialized());
+                    mars_boost::throw_exception(future_uninitialized());
                 }
                 unique_lock<boost_ksim::mutex> lk(this->future_->mutex);
                 if (! this->future_->valid(lk))
                 {
-                    mars_boost_ksim::throw_exception(future_uninitialized());
+                    mars_boost::throw_exception(future_uninitialized());
                 }
                 this->future_->wait(lk, false);
     #ifdef BOOST_THREAD_PROVIDES_FUTURE_INVALID_AFTER_GET
                 this->future_->invalidate(lk);
     #endif
                 if (this->future_->has_value(lk)) return this->future_->get(lk);
-                else return mars_boost_ksim::move(v);
+                else return mars_boost::move(v);
             }
 
             move_dest_type get_or(R const& v) // EXTENSION
             {
                 if (this->future_ == 0)
                 {
-                    mars_boost_ksim::throw_exception(future_uninitialized());
+                    mars_boost::throw_exception(future_uninitialized());
                 }
                 unique_lock<boost_ksim::mutex> lk(this->future_->mutex);
                 if (! this->future_->valid(lk))
                 {
-                    mars_boost_ksim::throw_exception(future_uninitialized());
+                    mars_boost::throw_exception(future_uninitialized());
                 }
                 this->future_->wait(lk, false);
     #ifdef BOOST_THREAD_PROVIDES_FUTURE_INVALID_AFTER_GET
@@ -1991,14 +1991,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
     #if defined BOOST_THREAD_PROVIDES_FUTURE_CONTINUATION
             template<typename F>
-            inline BOOST_THREAD_FUTURE<typename mars_boost_ksim::result_of<F(BOOST_THREAD_FUTURE)>::type>
+            inline BOOST_THREAD_FUTURE<typename mars_boost::result_of<F(BOOST_THREAD_FUTURE)>::type>
             then(BOOST_THREAD_FWD_REF(F) func); // EXTENSION
             template<typename F>
-            inline BOOST_THREAD_FUTURE<typename mars_boost_ksim::result_of<F(BOOST_THREAD_FUTURE)>::type>
+            inline BOOST_THREAD_FUTURE<typename mars_boost::result_of<F(BOOST_THREAD_FUTURE)>::type>
             then(launch policy, BOOST_THREAD_FWD_REF(F) func); // EXTENSION
       #ifdef BOOST_THREAD_PROVIDES_EXECUTORS
             template<typename Ex, typename F>
-            inline BOOST_THREAD_FUTURE<typename mars_boost_ksim::result_of<F(BOOST_THREAD_FUTURE)>::type>
+            inline BOOST_THREAD_FUTURE<typename mars_boost::result_of<F(BOOST_THREAD_FUTURE)>::type>
             then(Ex &ex, BOOST_THREAD_FWD_REF(F) func); // EXTENSION
       #endif
     #endif
@@ -2028,15 +2028,15 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         template <class F, class Rp, class Fp>
         friend BOOST_THREAD_FUTURE<Rp>
-        detail::make_future_async_continuation_shared_state(mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c);
+        detail::make_future_async_continuation_shared_state(mars_boost::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c);
 
         template <class F, class Rp, class Fp>
         friend BOOST_THREAD_FUTURE<Rp>
-        detail::make_future_sync_continuation_shared_state(mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c);
+        detail::make_future_sync_continuation_shared_state(mars_boost::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c);
 
         template <class F, class Rp, class Fp>
         friend BOOST_THREAD_FUTURE<Rp>
-        detail::make_future_deferred_continuation_shared_state(mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c);
+        detail::make_future_deferred_continuation_shared_state(mars_boost::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c);
 #endif
 #if defined BOOST_THREAD_PROVIDES_SIGNATURE_PACKAGED_TASK
         template <class> friend class packaged_task;// todo check if this works in windows
@@ -2072,22 +2072,22 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         }
 
         shared_future(BOOST_THREAD_RV_REF(shared_future) other) BOOST_NOEXCEPT :
-        base_type(mars_boost_ksim::move(static_cast<base_type&>(BOOST_THREAD_RV(other))))
+        base_type(mars_boost::move(static_cast<base_type&>(BOOST_THREAD_RV(other))))
         {
         }
         shared_future(BOOST_THREAD_RV_REF( BOOST_THREAD_FUTURE<R> ) other) BOOST_NOEXCEPT :
-        base_type(mars_boost_ksim::move(static_cast<base_type&>(BOOST_THREAD_RV(other))))
+        base_type(mars_boost::move(static_cast<base_type&>(BOOST_THREAD_RV(other))))
         {
         }
 
         shared_future& operator=(BOOST_THREAD_RV_REF(shared_future) other) BOOST_NOEXCEPT
         {
-            base_type::operator=(mars_boost_ksim::move(static_cast<base_type&>(BOOST_THREAD_RV(other))));
+            base_type::operator=(mars_boost::move(static_cast<base_type&>(BOOST_THREAD_RV(other))));
             return *this;
         }
         shared_future& operator=(BOOST_THREAD_RV_REF( BOOST_THREAD_FUTURE<R> ) other) BOOST_NOEXCEPT
         {
-            base_type::operator=(mars_boost_ksim::move(static_cast<base_type&>(BOOST_THREAD_RV(other))));
+            base_type::operator=(mars_boost::move(static_cast<base_type&>(BOOST_THREAD_RV(other))));
             return *this;
         }
 
@@ -2106,34 +2106,34 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
             if(!this->future_)
             {
-                mars_boost_ksim::throw_exception(future_uninitialized());
+                mars_boost::throw_exception(future_uninitialized());
             }
             return this->future_->get_sh();
         }
 
         template <typename R2>
-        typename mars_boost_ksim::disable_if< is_void<R2>, typename detail::shared_state<R>::shared_future_get_result_type>::type
+        typename mars_boost::disable_if< is_void<R2>, typename detail::shared_state<R>::shared_future_get_result_type>::type
         get_or(BOOST_THREAD_RV_REF(R2) v)  const // EXTENSION
         {
             if(!this->future_)
             {
-                mars_boost_ksim::throw_exception(future_uninitialized());
+                mars_boost::throw_exception(future_uninitialized());
             }
             this->future_->wait();
             if (this->future_->has_value()) return this->future_->get_sh();
-            else return mars_boost_ksim::move(v);
+            else return mars_boost::move(v);
         }
 
 #if defined BOOST_THREAD_PROVIDES_FUTURE_CONTINUATION
         template<typename F>
-        inline BOOST_THREAD_FUTURE<typename mars_boost_ksim::result_of<F(shared_future)>::type>
+        inline BOOST_THREAD_FUTURE<typename mars_boost::result_of<F(shared_future)>::type>
         then(BOOST_THREAD_FWD_REF(F) func) const; // EXTENSION
         template<typename F>
-        inline BOOST_THREAD_FUTURE<typename mars_boost_ksim::result_of<F(shared_future)>::type>
+        inline BOOST_THREAD_FUTURE<typename mars_boost::result_of<F(shared_future)>::type>
         then(launch policy, BOOST_THREAD_FWD_REF(F) func) const; // EXTENSION
   #ifdef BOOST_THREAD_PROVIDES_EXECUTORS
         template<typename Ex, typename F>
-        inline BOOST_THREAD_FUTURE<typename mars_boost_ksim::result_of<F(shared_future)>::type>
+        inline BOOST_THREAD_FUTURE<typename mars_boost::result_of<F(shared_future)>::type>
         then(Ex& ex, BOOST_THREAD_FWD_REF(F) func) const; // EXTENSION
   #endif
 #endif
@@ -2145,7 +2145,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template <typename R>
     class promise
     {
-        typedef mars_boost_ksim::shared_ptr<detail::shared_state<R> > future_ptr;
+        typedef mars_boost::shared_ptr<detail::shared_state<R> > future_ptr;
 
         typedef typename detail::shared_state<R>::source_reference_type source_reference_type;
         typedef typename detail::shared_state<R>::rvalue_source_type rvalue_source_type;
@@ -2172,7 +2172,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         BOOST_THREAD_MOVABLE_ONLY(promise)
 #if defined BOOST_THREAD_PROVIDES_FUTURE_CTOR_ALLOCATORS
         template <class Allocator>
-        promise(mars_boost_ksim::allocator_arg_t, Allocator a)
+        promise(mars_boost::allocator_arg_t, Allocator a)
         {
           typedef typename Allocator::template rebind<detail::shared_state<R> >::other A2;
           A2 a2(a);
@@ -2195,11 +2195,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
             if(future_)
             {
-                mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(future_->mutex);
+                mars_boost::unique_lock<boost_ksim::mutex> lock(future_->mutex);
 
                 if(!future_->done && !future_->is_constructed)
                 {
-                    future_->mark_exceptional_finish_internal(mars_boost_ksim::copy_exception(broken_promise()), lock);
+                    future_->mark_exceptional_finish_internal(mars_boost::copy_exception(broken_promise()), lock);
                 }
             }
         }
@@ -2232,9 +2232,9 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           lazy_init();
           if (future_.get()==0)
           {
-              mars_boost_ksim::throw_exception(promise_moved());
+              mars_boost::throw_exception(promise_moved());
           }
-          mars_boost_ksim::lock_guard<boost_ksim::mutex> lk(future_->mutex);
+          mars_boost::lock_guard<boost_ksim::mutex> lk(future_->mutex);
           future_->set_executor_policy(aex, lk);
         }
 #endif
@@ -2244,11 +2244,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             lazy_init();
             if (future_.get()==0)
             {
-                mars_boost_ksim::throw_exception(promise_moved());
+                mars_boost::throw_exception(promise_moved());
             }
             if (future_obtained)
             {
-                mars_boost_ksim::throw_exception(future_already_retrieved());
+                mars_boost::throw_exception(future_already_retrieved());
             }
             future_obtained=true;
             return BOOST_THREAD_FUTURE<R>(future_);
@@ -2256,13 +2256,13 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 #if defined  BOOST_NO_CXX11_RVALUE_REFERENCES
         template <class TR>
-        typename mars_boost_ksim::enable_if_c<is_copy_constructible<TR>::value && is_same<R, TR>::value, void>::type set_value(TR const &  r)
+        typename mars_boost::enable_if_c<is_copy_constructible<TR>::value && is_same<R, TR>::value, void>::type set_value(TR const &  r)
         {
             lazy_init();
-            mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(future_->mutex);
+            mars_boost::unique_lock<boost_ksim::mutex> lock(future_->mutex);
             if(future_->done)
             {
-                mars_boost_ksim::throw_exception(promise_already_satisfied());
+                mars_boost::throw_exception(promise_already_satisfied());
             }
             future_->mark_finished_with_result_internal(r, lock);
         }
@@ -2270,10 +2270,10 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         void set_value(source_reference_type r)
         {
             lazy_init();
-            mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(future_->mutex);
+            mars_boost::unique_lock<boost_ksim::mutex> lock(future_->mutex);
             if(future_->done)
             {
-                mars_boost_ksim::throw_exception(promise_already_satisfied());
+                mars_boost::throw_exception(promise_already_satisfied());
             }
             future_->mark_finished_with_result_internal(r, lock);
         }
@@ -2282,13 +2282,13 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         void set_value(rvalue_source_type r)
         {
             lazy_init();
-            mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(future_->mutex);
+            mars_boost::unique_lock<boost_ksim::mutex> lock(future_->mutex);
             if(future_->done)
             {
-                mars_boost_ksim::throw_exception(promise_already_satisfied());
+                mars_boost::throw_exception(promise_already_satisfied());
             }
 #if ! defined  BOOST_NO_CXX11_RVALUE_REFERENCES
-            future_->mark_finished_with_result_internal(mars_boost_ksim::move(r), lock);
+            future_->mark_finished_with_result_internal(mars_boost::move(r), lock);
 #else
             future_->mark_finished_with_result_internal(static_cast<rvalue_source_type>(r), lock);
 #endif
@@ -2299,39 +2299,39 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         void emplace(BOOST_THREAD_FWD_REF(Args) ...args)
         {
             lazy_init();
-            mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(future_->mutex);
+            mars_boost::unique_lock<boost_ksim::mutex> lock(future_->mutex);
             if(future_->done)
             {
-                mars_boost_ksim::throw_exception(promise_already_satisfied());
+                mars_boost::throw_exception(promise_already_satisfied());
             }
-            future_->mark_finished_with_result_internal(lock, mars_boost_ksim::forward<Args>(args)...);
+            future_->mark_finished_with_result_internal(lock, mars_boost::forward<Args>(args)...);
         }
 
 #endif
 
-        void set_exception(mars_boost_ksim::exception_ptr p)
+        void set_exception(mars_boost::exception_ptr p)
         {
             lazy_init();
-            mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(future_->mutex);
+            mars_boost::unique_lock<boost_ksim::mutex> lock(future_->mutex);
             if(future_->done)
             {
-                mars_boost_ksim::throw_exception(promise_already_satisfied());
+                mars_boost::throw_exception(promise_already_satisfied());
             }
             future_->mark_exceptional_finish_internal(p, lock);
         }
         template <typename E>
         void set_exception(E ex)
         {
-          set_exception(mars_boost_ksim::copy_exception(ex));
+          set_exception(mars_boost::copy_exception(ex));
         }
         // setting the result with deferred notification
 #if defined  BOOST_NO_CXX11_RVALUE_REFERENCES
         template <class TR>
-        typename mars_boost_ksim::enable_if_c<is_copy_constructible<TR>::value && is_same<R, TR>::value, void>::type set_value_at_thread_exit(TR const& r)
+        typename mars_boost::enable_if_c<is_copy_constructible<TR>::value && is_same<R, TR>::value, void>::type set_value_at_thread_exit(TR const& r)
         {
           if (future_.get()==0)
           {
-              mars_boost_ksim::throw_exception(promise_moved());
+              mars_boost::throw_exception(promise_moved());
           }
           future_->set_value_at_thread_exit(r);
         }
@@ -2340,7 +2340,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
           if (future_.get()==0)
           {
-              mars_boost_ksim::throw_exception(promise_moved());
+              mars_boost::throw_exception(promise_moved());
           }
           future_->set_value_at_thread_exit(r);
         }
@@ -2349,22 +2349,22 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
           if (future_.get()==0)
           {
-              mars_boost_ksim::throw_exception(promise_moved());
+              mars_boost::throw_exception(promise_moved());
           }
-          future_->set_value_at_thread_exit(mars_boost_ksim::move(r));
+          future_->set_value_at_thread_exit(mars_boost::move(r));
         }
         void set_exception_at_thread_exit(exception_ptr e)
         {
           if (future_.get()==0)
           {
-              mars_boost_ksim::throw_exception(promise_moved());
+              mars_boost::throw_exception(promise_moved());
           }
           future_->set_exception_at_thread_exit(e);
         }
         template <typename E>
         void set_exception_at_thread_exit(E ex)
         {
-          set_exception_at_thread_exit(mars_boost_ksim::copy_exception(ex));
+          set_exception_at_thread_exit(mars_boost::copy_exception(ex));
         }
 
         template<typename F>
@@ -2379,7 +2379,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template <typename R>
     class promise<R&>
     {
-        typedef mars_boost_ksim::shared_ptr<detail::shared_state<R&> > future_ptr;
+        typedef mars_boost::shared_ptr<detail::shared_state<R&> > future_ptr;
 
         future_ptr future_;
         bool future_obtained;
@@ -2401,7 +2401,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         BOOST_THREAD_MOVABLE_ONLY(promise)
 #if defined BOOST_THREAD_PROVIDES_FUTURE_CTOR_ALLOCATORS
         template <class Allocator>
-        promise(mars_boost_ksim::allocator_arg_t, Allocator a)
+        promise(mars_boost::allocator_arg_t, Allocator a)
         {
           typedef typename Allocator::template rebind<detail::shared_state<R&> >::other A2;
           A2 a2(a);
@@ -2424,11 +2424,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
             if(future_)
             {
-                mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(future_->mutex);
+                mars_boost::unique_lock<boost_ksim::mutex> lock(future_->mutex);
 
                 if(!future_->done && !future_->is_constructed)
                 {
-                    future_->mark_exceptional_finish_internal(mars_boost_ksim::copy_exception(broken_promise()), lock);
+                    future_->mark_exceptional_finish_internal(mars_boost::copy_exception(broken_promise()), lock);
                 }
             }
         }
@@ -2461,11 +2461,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             lazy_init();
             if (future_.get()==0)
             {
-                mars_boost_ksim::throw_exception(promise_moved());
+                mars_boost::throw_exception(promise_moved());
             }
             if (future_obtained)
             {
-                mars_boost_ksim::throw_exception(future_already_retrieved());
+                mars_boost::throw_exception(future_already_retrieved());
             }
             future_obtained=true;
             return BOOST_THREAD_FUTURE<R&>(future_);
@@ -2474,28 +2474,28 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         void set_value(R& r)
         {
             lazy_init();
-            mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(future_->mutex);
+            mars_boost::unique_lock<boost_ksim::mutex> lock(future_->mutex);
             if(future_->done)
             {
-                mars_boost_ksim::throw_exception(promise_already_satisfied());
+                mars_boost::throw_exception(promise_already_satisfied());
             }
             future_->mark_finished_with_result_internal(r, lock);
         }
 
-        void set_exception(mars_boost_ksim::exception_ptr p)
+        void set_exception(mars_boost::exception_ptr p)
         {
             lazy_init();
-            mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(future_->mutex);
+            mars_boost::unique_lock<boost_ksim::mutex> lock(future_->mutex);
             if(future_->done)
             {
-                mars_boost_ksim::throw_exception(promise_already_satisfied());
+                mars_boost::throw_exception(promise_already_satisfied());
             }
             future_->mark_exceptional_finish_internal(p, lock);
         }
         template <typename E>
         void set_exception(E ex)
         {
-          set_exception(mars_boost_ksim::copy_exception(ex));
+          set_exception(mars_boost::copy_exception(ex));
         }
 
         // setting the result with deferred notification
@@ -2503,7 +2503,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
           if (future_.get()==0)
           {
-              mars_boost_ksim::throw_exception(promise_moved());
+              mars_boost::throw_exception(promise_moved());
           }
           future_->set_value_at_thread_exit(r);
         }
@@ -2512,14 +2512,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
           if (future_.get()==0)
           {
-              mars_boost_ksim::throw_exception(promise_moved());
+              mars_boost::throw_exception(promise_moved());
           }
           future_->set_exception_at_thread_exit(e);
         }
         template <typename E>
         void set_exception_at_thread_exit(E ex)
         {
-          set_exception_at_thread_exit(mars_boost_ksim::copy_exception(ex));
+          set_exception_at_thread_exit(mars_boost::copy_exception(ex));
         }
 
         template<typename F>
@@ -2533,7 +2533,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template <>
     class promise<void>
     {
-        typedef mars_boost_ksim::shared_ptr<detail::shared_state<void> > future_ptr;
+        typedef mars_boost::shared_ptr<detail::shared_state<void> > future_ptr;
 
         future_ptr future_;
         bool future_obtained;
@@ -2553,7 +2553,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 #if defined BOOST_THREAD_PROVIDES_FUTURE_CTOR_ALLOCATORS
         template <class Allocator>
-        promise(mars_boost_ksim::allocator_arg_t, Allocator a)
+        promise(mars_boost::allocator_arg_t, Allocator a)
         {
           typedef typename Allocator::template rebind<detail::shared_state<void> >::other A2;
           A2 a2(a);
@@ -2576,11 +2576,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
             if(future_)
             {
-                mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(future_->mutex);
+                mars_boost::unique_lock<boost_ksim::mutex> lock(future_->mutex);
 
                 if(!future_->done && !future_->is_constructed)
                 {
-                    future_->mark_exceptional_finish_internal(mars_boost_ksim::copy_exception(broken_promise()), lock);
+                    future_->mark_exceptional_finish_internal(mars_boost::copy_exception(broken_promise()), lock);
                 }
             }
         }
@@ -2616,11 +2616,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
             if (future_.get()==0)
             {
-                mars_boost_ksim::throw_exception(promise_moved());
+                mars_boost::throw_exception(promise_moved());
             }
             if(future_obtained)
             {
-                mars_boost_ksim::throw_exception(future_already_retrieved());
+                mars_boost::throw_exception(future_already_retrieved());
             }
             future_obtained=true;
             //return BOOST_THREAD_MAKE_RV_REF(BOOST_THREAD_FUTURE<void>(future_));
@@ -2630,28 +2630,28 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         void set_value()
         {
             lazy_init();
-            mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(future_->mutex);
+            mars_boost::unique_lock<boost_ksim::mutex> lock(future_->mutex);
             if(future_->done)
             {
-                mars_boost_ksim::throw_exception(promise_already_satisfied());
+                mars_boost::throw_exception(promise_already_satisfied());
             }
             future_->mark_finished_with_result_internal(lock);
         }
 
-        void set_exception(mars_boost_ksim::exception_ptr p)
+        void set_exception(mars_boost::exception_ptr p)
         {
             lazy_init();
-            mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(future_->mutex);
+            mars_boost::unique_lock<boost_ksim::mutex> lock(future_->mutex);
             if(future_->done)
             {
-                mars_boost_ksim::throw_exception(promise_already_satisfied());
+                mars_boost::throw_exception(promise_already_satisfied());
             }
             future_->mark_exceptional_finish_internal(p,lock);
         }
         template <typename E>
         void set_exception(E ex)
         {
-          set_exception(mars_boost_ksim::copy_exception(ex));
+          set_exception(mars_boost::copy_exception(ex));
         }
 
         // setting the result with deferred notification
@@ -2659,7 +2659,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
           if (future_.get()==0)
           {
-              mars_boost_ksim::throw_exception(promise_moved());
+              mars_boost::throw_exception(promise_moved());
           }
           future_->set_value_at_thread_exit();
         }
@@ -2668,14 +2668,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
           if (future_.get()==0)
           {
-              mars_boost_ksim::throw_exception(promise_moved());
+              mars_boost::throw_exception(promise_moved());
           }
           future_->set_exception_at_thread_exit(e);
         }
         template <typename E>
         void set_exception_at_thread_exit(E ex)
         {
-          set_exception_at_thread_exit(mars_boost_ksim::copy_exception(ex));
+          set_exception_at_thread_exit(mars_boost::copy_exception(ex));
         }
 
         template<typename F>
@@ -2688,7 +2688,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     };
 }
 #if defined BOOST_THREAD_PROVIDES_FUTURE_CTOR_ALLOCATORS
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace container {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace container {
     template <class R, class Alloc>
     struct uses_allocator< ::boost_ksim::promise<R> , Alloc> : true_type
     {
@@ -2704,7 +2704,7 @@ namespace std {
 #endif
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
     BOOST_THREAD_DCL_MOVABLE_BEG(T) promise<T> BOOST_THREAD_DCL_MOVABLE_END
@@ -2749,15 +2749,15 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #endif
             {
                 {
-                    mars_boost_ksim::lock_guard<boost_ksim::mutex> lk(this->mutex);
+                    mars_boost::lock_guard<boost_ksim::mutex> lk(this->mutex);
                     if(started)
                     {
-                        mars_boost_ksim::throw_exception(task_already_started());
+                        mars_boost::throw_exception(task_already_started());
                     }
                     started=true;
                 }
 #if defined BOOST_THREAD_PROVIDES_SIGNATURE_PACKAGED_TASK && defined(BOOST_THREAD_PROVIDES_VARIADIC_THREAD)
-                do_run(mars_boost_ksim::move(args)...);
+                do_run(mars_boost::move(args)...);
 #else
                 do_run();
 #endif
@@ -2772,15 +2772,15 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #endif
             {
                 {
-                    mars_boost_ksim::lock_guard<boost_ksim::mutex> lk(this->mutex);
+                    mars_boost::lock_guard<boost_ksim::mutex> lk(this->mutex);
                     if(started)
                     {
-                        mars_boost_ksim::throw_exception(task_already_started());
+                        mars_boost::throw_exception(task_already_started());
                     }
                     started=true;
                 }
 #if defined BOOST_THREAD_PROVIDES_SIGNATURE_PACKAGED_TASK && defined(BOOST_THREAD_PROVIDES_VARIADIC_THREAD)
-                do_apply(mars_boost_ksim::move(args)...);
+                do_apply(mars_boost::move(args)...);
 #else
                 do_apply();
 #endif
@@ -2788,11 +2788,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
             void owner_destroyed()
             {
-                mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(this->mutex);
+                mars_boost::unique_lock<boost_ksim::mutex> lk(this->mutex);
                 if(!started)
                 {
                     started=true;
-                    this->mark_exceptional_finish_internal(mars_boost_ksim::copy_exception(mars_boost_ksim::broken_promise()), lk);
+                    this->mark_exceptional_finish_internal(mars_boost::copy_exception(mars_boost::broken_promise()), lk);
                 }
             }
         };
@@ -2823,12 +2823,12 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 f(f_)
             {}
             task_shared_state(BOOST_THREAD_RV_REF(F) f_):
-              f(mars_boost_ksim::move(f_))
+              f(mars_boost::move(f_))
             {}
 
             F callable()
             {
-              return mars_boost_ksim::move(f);
+              return mars_boost::move(f);
             }
 
 #if defined BOOST_THREAD_PROVIDES_SIGNATURE_PACKAGED_TASK && defined(BOOST_THREAD_PROVIDES_VARIADIC_THREAD)
@@ -2836,7 +2836,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             {
                 try
                 {
-                    this->set_value_at_thread_exit(f(mars_boost_ksim::move(args)...));
+                    this->set_value_at_thread_exit(f(mars_boost::move(args)...));
                 }
 #else
             void do_apply()
@@ -2857,7 +2857,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             {
                 try
                 {
-                    this->mark_finished_with_result(f(mars_boost_ksim::move(args)...));
+                    this->mark_finished_with_result(f(mars_boost::move(args)...));
                 }
 #else
             void do_run()
@@ -2866,7 +2866,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 {
 #if ! defined  BOOST_NO_CXX11_RVALUE_REFERENCES
                   R res((f()));
-                  this->mark_finished_with_result(mars_boost_ksim::move(res));
+                  this->mark_finished_with_result(mars_boost::move(res));
 #else
                   this->mark_finished_with_result(f());
 #endif
@@ -2903,7 +2903,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 f(f_)
             {}
             task_shared_state(BOOST_THREAD_RV_REF(F) f_):
-                f(mars_boost_ksim::move(f_))
+                f(mars_boost::move(f_))
             {}
 
             F callable()
@@ -2916,7 +2916,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             {
                 try
                 {
-                    this->set_value_at_thread_exit(f(mars_boost_ksim::move(args)...));
+                    this->set_value_at_thread_exit(f(mars_boost::move(args)...));
                 }
 #else
             void do_apply()
@@ -2937,7 +2937,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             {
                 try
                 {
-                    this->mark_finished_with_result(f(mars_boost_ksim::move(args)...));
+                    this->mark_finished_with_result(f(mars_boost::move(args)...));
                 }
 #else
             void do_run()
@@ -2996,7 +2996,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 {
                     try
                     {
-                        this->set_value_at_thread_exit(f(mars_boost_ksim::move(args)...));
+                        this->set_value_at_thread_exit(f(mars_boost::move(args)...));
                     }
 #else
                 void do_apply()
@@ -3004,7 +3004,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                     try
                     {
                         R r((f()));
-                        this->set_value_at_thread_exit(mars_boost_ksim::move(r));
+                        this->set_value_at_thread_exit(mars_boost::move(r));
                     }
 #endif
                     catch(...)
@@ -3019,7 +3019,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 {
                     try
                     {
-                        this->mark_finished_with_result(f(mars_boost_ksim::move(args)...));
+                        this->mark_finished_with_result(f(mars_boost::move(args)...));
                     }
 #else
                 void do_run()
@@ -3027,7 +3027,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                     try
                     {
                         R res((f()));
-                        this->mark_finished_with_result(mars_boost_ksim::move(res));
+                        this->mark_finished_with_result(mars_boost::move(res));
                     }
 #endif
                     catch(...)
@@ -3067,7 +3067,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
                 CallableType callable()
                 {
-                  return mars_boost_ksim::move(f);
+                  return mars_boost::move(f);
                 }
 
 #if defined BOOST_THREAD_PROVIDES_SIGNATURE_PACKAGED_TASK && defined(BOOST_THREAD_PROVIDES_VARIADIC_THREAD)
@@ -3075,7 +3075,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 {
                     try
                     {
-                        this->set_value_at_thread_exit(f(mars_boost_ksim::move(args)...));
+                        this->set_value_at_thread_exit(f(mars_boost::move(args)...));
                     }
 #else
                 void do_apply()
@@ -3097,7 +3097,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 {
                     try
                     {
-                        this->mark_finished_with_result(f(mars_boost_ksim::move(args)...));
+                        this->mark_finished_with_result(f(mars_boost::move(args)...));
                     }
 #else
                 void do_run()
@@ -3139,18 +3139,18 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 f(f_)
             {}
             task_shared_state(BOOST_THREAD_RV_REF(F) f_):
-                f(mars_boost_ksim::move(f_))
+                f(mars_boost::move(f_))
             {}
             F callable()
             {
-              return mars_boost_ksim::move(f);
+              return mars_boost::move(f);
             }
 #if defined BOOST_THREAD_PROVIDES_SIGNATURE_PACKAGED_TASK && defined(BOOST_THREAD_PROVIDES_VARIADIC_THREAD)
             void do_apply(BOOST_THREAD_RV_REF(ArgTypes) ... args)
             {
               try
               {
-                f(mars_boost_ksim::move(args)...);
+                f(mars_boost::move(args)...);
 #else
             void do_apply()
             {
@@ -3171,7 +3171,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             {
                 try
                 {
-                    f(mars_boost_ksim::move(args)...);
+                    f(mars_boost::move(args)...);
 #else
             void do_run()
             {
@@ -3225,7 +3225,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             {
                 try
                 {
-                    f(mars_boost_ksim::move(args)...);
+                    f(mars_boost::move(args)...);
 #else
             void do_apply()
             {
@@ -3246,7 +3246,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             {
                 try
                 {
-                    f(mars_boost_ksim::move(args)...);
+                    f(mars_boost::move(args)...);
 #else
             void do_run()
             {
@@ -3269,21 +3269,21 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template<typename R, typename ...ArgTypes>
     class packaged_task<R(ArgTypes...)>
     {
-      typedef mars_boost_ksim::shared_ptr<detail::task_base_shared_state<R(ArgTypes...)> > task_ptr;
-      mars_boost_ksim::shared_ptr<detail::task_base_shared_state<R(ArgTypes...)> > task;
+      typedef mars_boost::shared_ptr<detail::task_base_shared_state<R(ArgTypes...)> > task_ptr;
+      mars_boost::shared_ptr<detail::task_base_shared_state<R(ArgTypes...)> > task;
   #else
     template<typename R>
     class packaged_task<R()>
     {
-      typedef mars_boost_ksim::shared_ptr<detail::task_base_shared_state<R()> > task_ptr;
-      mars_boost_ksim::shared_ptr<detail::task_base_shared_state<R()> > task;
+      typedef mars_boost::shared_ptr<detail::task_base_shared_state<R()> > task_ptr;
+      mars_boost::shared_ptr<detail::task_base_shared_state<R()> > task;
   #endif
 #else
     template<typename R>
     class packaged_task
     {
-      typedef mars_boost_ksim::shared_ptr<detail::task_base_shared_state<R> > task_ptr;
-      mars_boost_ksim::shared_ptr<detail::task_base_shared_state<R> > task;
+      typedef mars_boost::shared_ptr<detail::task_base_shared_state<R> > task_ptr;
+      mars_boost::shared_ptr<detail::task_base_shared_state<R> > task;
 #endif
         bool future_obtained;
         struct dummy;
@@ -3305,7 +3305,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
             typedef R(*FR)(BOOST_THREAD_FWD_REF(ArgTypes)...);
             typedef detail::task_shared_state<FR,R(ArgTypes...)> task_shared_state_type;
-            task= task_ptr(new task_shared_state_type(f, mars_boost_ksim::move(args)...));
+            task= task_ptr(new task_shared_state_type(f, mars_boost::move(args)...));
             future_obtained=false;
         }
   #else
@@ -3330,7 +3330,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #ifndef BOOST_NO_CXX11_RVALUE_REFERENCES
         template <class F>
         explicit packaged_task(BOOST_THREAD_FWD_REF(F) f
-            , typename mars_boost_ksim::disable_if<is_same<typename decay<F>::type, packaged_task>, dummy* >::type=0
+            , typename mars_boost::disable_if<is_same<typename decay<F>::type, packaged_task>, dummy* >::type=0
             )
         {
           typedef typename decay<F>::type FR;
@@ -3343,7 +3343,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #else
             typedef detail::task_shared_state<FR,R> task_shared_state_type;
 #endif
-            task = task_ptr(new task_shared_state_type(mars_boost_ksim::forward<F>(f)));
+            task = task_ptr(new task_shared_state_type(mars_boost::forward<F>(f)));
             future_obtained = false;
 
         }
@@ -3351,7 +3351,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #else
         template <class F>
         explicit packaged_task(F const& f
-            , typename mars_boost_ksim::disable_if<is_same<typename decay<F>::type, packaged_task>, dummy* >::type=0
+            , typename mars_boost::disable_if<is_same<typename decay<F>::type, packaged_task>, dummy* >::type=0
             )
         {
 #if defined BOOST_THREAD_PROVIDES_SIGNATURE_PACKAGED_TASK
@@ -3372,14 +3372,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #if defined BOOST_THREAD_PROVIDES_SIGNATURE_PACKAGED_TASK
 #if defined(BOOST_THREAD_PROVIDES_VARIADIC_THREAD)
             typedef detail::task_shared_state<F,R(ArgTypes...)> task_shared_state_type;
-            task = task_ptr(new task_shared_state_type(mars_boost_ksim::move(f)));
+            task = task_ptr(new task_shared_state_type(mars_boost::move(f)));
 #else
             typedef detail::task_shared_state<F,R()> task_shared_state_type;
-            task = task_ptr(new task_shared_state_type(mars_boost_ksim::move(f)));
+            task = task_ptr(new task_shared_state_type(mars_boost::move(f)));
 #endif
 #else
             typedef detail::task_shared_state<F,R> task_shared_state_type;
-            task = task_ptr(new task_shared_state_type(mars_boost_ksim::move(f)));
+            task = task_ptr(new task_shared_state_type(mars_boost::move(f)));
 #endif
             future_obtained=false;
 
@@ -3389,7 +3389,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #if defined BOOST_THREAD_PROVIDES_FUTURE_CTOR_ALLOCATORS
 #if defined(BOOST_THREAD_RVALUE_REFERENCES_DONT_MATCH_FUNTION_PTR)
         template <class Allocator>
-        packaged_task(mars_boost_ksim::allocator_arg_t, Allocator a, R(*f)())
+        packaged_task(mars_boost::allocator_arg_t, Allocator a, R(*f)())
         {
           typedef R(*FR)();
 #if defined BOOST_THREAD_PROVIDES_SIGNATURE_PACKAGED_TASK
@@ -3412,7 +3412,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 #if ! defined BOOST_NO_CXX11_RVALUE_REFERENCES
         template <class F, class Allocator>
-        packaged_task(mars_boost_ksim::allocator_arg_t, Allocator a, BOOST_THREAD_FWD_REF(F) f)
+        packaged_task(mars_boost::allocator_arg_t, Allocator a, BOOST_THREAD_FWD_REF(F) f)
         {
           typedef typename decay<F>::type FR;
 
@@ -3429,12 +3429,12 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           A2 a2(a);
           typedef thread_detail::allocator_destructor<A2> D;
 
-          task = task_ptr(::new(a2.allocate(1)) task_shared_state_type(mars_boost_ksim::forward<F>(f)), D(a2, 1) );
+          task = task_ptr(::new(a2.allocate(1)) task_shared_state_type(mars_boost::forward<F>(f)), D(a2, 1) );
           future_obtained = false;
         }
 #else // ! defined BOOST_NO_CXX11_RVALUE_REFERENCES
         template <class F, class Allocator>
-        packaged_task(mars_boost_ksim::allocator_arg_t, Allocator a, const F& f)
+        packaged_task(mars_boost::allocator_arg_t, Allocator a, const F& f)
         {
 #if defined BOOST_THREAD_PROVIDES_SIGNATURE_PACKAGED_TASK
   #if defined(BOOST_THREAD_PROVIDES_VARIADIC_THREAD)
@@ -3453,7 +3453,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           future_obtained = false;
         }
         template <class F, class Allocator>
-        packaged_task(mars_boost_ksim::allocator_arg_t, Allocator a, BOOST_THREAD_RV_REF(F) f)
+        packaged_task(mars_boost::allocator_arg_t, Allocator a, BOOST_THREAD_RV_REF(F) f)
         {
 #if defined BOOST_THREAD_PROVIDES_SIGNATURE_PACKAGED_TASK
   #if defined(BOOST_THREAD_PROVIDES_VARIADIC_THREAD)
@@ -3468,7 +3468,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
           A2 a2(a);
           typedef thread_detail::allocator_destructor<A2> D;
 
-          task = task_ptr(::new(a2.allocate(1)) task_shared_state_type(mars_boost_ksim::move(f)), D(a2, 1) );
+          task = task_ptr(::new(a2.allocate(1)) task_shared_state_type(mars_boost::move(f)), D(a2, 1) );
           future_obtained = false;
         }
 
@@ -3490,7 +3490,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         packaged_task& operator=(BOOST_THREAD_RV_REF(packaged_task) other) BOOST_NOEXCEPT {
 
 #if ! defined  BOOST_NO_CXX11_RVALUE_REFERENCES
-            packaged_task temp(mars_boost_ksim::move(other));
+            packaged_task temp(mars_boost::move(other));
 #else
             packaged_task temp(static_cast<BOOST_THREAD_RV_REF(packaged_task)>(other));
 #endif
@@ -3502,14 +3502,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         void set_executor(executor_ptr_type aex)
         {
           if (!valid())
-              mars_boost_ksim::throw_exception(task_moved());
-          mars_boost_ksim::lock_guard<boost_ksim::mutex> lk(task->mutex);
+              mars_boost::throw_exception(task_moved());
+          mars_boost::lock_guard<boost_ksim::mutex> lk(task->mutex);
           task->set_executor_policy(aex, lk);
         }
 #endif
         void reset() {
             if (!valid())
-              mars_boost_ksim::throw_exception(future_error(system::make_error_code(future_errc::no_state)));
+              mars_boost::throw_exception(future_error(system::make_error_code(future_errc::no_state)));
 
             // As if *this = packaged_task(task->callable());
 
@@ -3528,12 +3528,12 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         // result retrieval
         BOOST_THREAD_FUTURE<R> get_future() {
             if(!task) {
-                mars_boost_ksim::throw_exception(task_moved());
+                mars_boost::throw_exception(task_moved());
             } else if(!future_obtained) {
                 future_obtained=true;
                 return BOOST_THREAD_FUTURE<R>(task);
             } else {
-                mars_boost_ksim::throw_exception(future_already_retrieved());
+                mars_boost::throw_exception(future_already_retrieved());
             }
         }
 
@@ -3541,31 +3541,31 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #if defined BOOST_THREAD_PROVIDES_SIGNATURE_PACKAGED_TASK && defined(BOOST_THREAD_PROVIDES_VARIADIC_THREAD)
         void operator()(ArgTypes... args) {
             if(!task) {
-                mars_boost_ksim::throw_exception(task_moved());
+                mars_boost::throw_exception(task_moved());
             }
-            task->run(mars_boost_ksim::move(args)...);
+            task->run(mars_boost::move(args)...);
         }
         void make_ready_at_thread_exit(ArgTypes... args) {
           if(!task) {
-              mars_boost_ksim::throw_exception(task_moved());
+              mars_boost::throw_exception(task_moved());
           }
           if (task->has_value()) {
-                mars_boost_ksim::throw_exception(promise_already_satisfied());
+                mars_boost::throw_exception(promise_already_satisfied());
           }
-          task->apply(mars_boost_ksim::move(args)...);
+          task->apply(mars_boost::move(args)...);
         }
 #else
         void operator()() {
             if(!task) {
-                mars_boost_ksim::throw_exception(task_moved());
+                mars_boost::throw_exception(task_moved());
             }
             task->run();
         }
         void make_ready_at_thread_exit() {
           if(!task) {
-              mars_boost_ksim::throw_exception(task_moved());
+              mars_boost::throw_exception(task_moved());
           }
-          if (task->has_value()) mars_boost_ksim::throw_exception(promise_already_satisfied());
+          if (task->has_value()) mars_boost::throw_exception(promise_already_satisfied());
           task->apply();
         }
 #endif
@@ -3576,7 +3576,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     };
 }
 #if defined BOOST_THREAD_PROVIDES_FUTURE_CTOR_ALLOCATORS
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace container {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace container {
     template <class R, class Alloc>
     struct uses_allocator< ::boost_ksim::packaged_task<R> , Alloc> : true_type
     {};
@@ -3590,7 +3590,7 @@ namespace std {
 #endif
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   BOOST_THREAD_DCL_MOVABLE_BEG(T) packaged_task<T> BOOST_THREAD_DCL_MOVABLE_END
 
@@ -3603,7 +3603,7 @@ namespace detail
   BOOST_THREAD_FUTURE<Rp>
   make_future_deferred_shared_state(BOOST_THREAD_FWD_REF(Fp) f) {
     shared_ptr<future_deferred_shared_state<Rp, Fp> >
-        h(new future_deferred_shared_state<Rp, Fp>(mars_boost_ksim::forward<Fp>(f)));
+        h(new future_deferred_shared_state<Rp, Fp>(mars_boost::forward<Fp>(f)));
     return BOOST_THREAD_FUTURE<Rp>(h);
   }
 
@@ -3615,7 +3615,7 @@ namespace detail
   make_future_async_shared_state(BOOST_THREAD_FWD_REF(Fp) f) {
     shared_ptr<future_async_shared_state<Rp, Fp> >
         h(new future_async_shared_state<Rp, Fp>());
-    h->init(mars_boost_ksim::forward<Fp>(f));
+    h->init(mars_boost::forward<Fp>(f));
     return BOOST_THREAD_FUTURE<Rp>(h);
   }
 }
@@ -3636,17 +3636,17 @@ namespace detail
     typedef typename BF::result_type Rp;
 
     if (underlying_cast<int>(policy) & int(launch::async)) {
-      return BOOST_THREAD_MAKE_RV_REF(mars_boost_ksim::detail::make_future_async_shared_state<Rp>(
+      return BOOST_THREAD_MAKE_RV_REF(mars_boost::detail::make_future_async_shared_state<Rp>(
               BF(
                   f
-                  , thread_detail::decay_copy(mars_boost_ksim::forward<ArgTypes>(args))...
+                  , thread_detail::decay_copy(mars_boost::forward<ArgTypes>(args))...
               )
           ));
     } else if (underlying_cast<int>(policy) & int(launch::deferred)) {
-      return BOOST_THREAD_MAKE_RV_REF(mars_boost_ksim::detail::make_future_deferred_shared_state<Rp>(
+      return BOOST_THREAD_MAKE_RV_REF(mars_boost::detail::make_future_deferred_shared_state<Rp>(
               BF(
                   f
-                  , thread_detail::decay_copy(mars_boost_ksim::forward<ArgTypes>(args))...
+                  , thread_detail::decay_copy(mars_boost::forward<ArgTypes>(args))...
               )
           ));
     } else {
@@ -3671,7 +3671,7 @@ namespace detail
       packaged_task_type pt( f );
       BOOST_THREAD_FUTURE<R> ret = BOOST_THREAD_MAKE_RV_REF(pt.get_future());
       ret.set_async();
-      mars_boost_ksim::thread( mars_boost_ksim::move(pt) ).detach();
+      mars_boost::thread( mars_boost::move(pt) ).detach();
       return ::boost_ksim::move(ret);
     } else if (underlying_cast<int>(policy) & int(launch::deferred)) {
       std::terminate();
@@ -3689,7 +3689,7 @@ namespace detail
 #if defined(BOOST_THREAD_PROVIDES_VARIADIC_THREAD)
 
   template <class F, class ...ArgTypes>
-  BOOST_THREAD_FUTURE<typename mars_boost_ksim::result_of<typename decay<F>::type(
+  BOOST_THREAD_FUTURE<typename mars_boost::result_of<typename decay<F>::type(
       typename decay<ArgTypes>::type...
   )>::type>
   async(launch policy, BOOST_THREAD_FWD_REF(F) f, BOOST_THREAD_FWD_REF(ArgTypes)... args) {
@@ -3697,17 +3697,17 @@ namespace detail
     typedef typename BF::result_type Rp;
 
     if (underlying_cast<int>(policy) & int(launch::async)) {
-      return BOOST_THREAD_MAKE_RV_REF(mars_boost_ksim::detail::make_future_async_shared_state<Rp>(
+      return BOOST_THREAD_MAKE_RV_REF(mars_boost::detail::make_future_async_shared_state<Rp>(
               BF(
-                  thread_detail::decay_copy(mars_boost_ksim::forward<F>(f))
-                , thread_detail::decay_copy(mars_boost_ksim::forward<ArgTypes>(args))...
+                  thread_detail::decay_copy(mars_boost::forward<F>(f))
+                , thread_detail::decay_copy(mars_boost::forward<ArgTypes>(args))...
               )
           ));
     } else if (underlying_cast<int>(policy) & int(launch::deferred)) {
-      return BOOST_THREAD_MAKE_RV_REF(mars_boost_ksim::detail::make_future_deferred_shared_state<Rp>(
+      return BOOST_THREAD_MAKE_RV_REF(mars_boost::detail::make_future_deferred_shared_state<Rp>(
               BF(
-                  thread_detail::decay_copy(mars_boost_ksim::forward<F>(f))
-                , thread_detail::decay_copy(mars_boost_ksim::forward<ArgTypes>(args))...
+                  thread_detail::decay_copy(mars_boost::forward<F>(f))
+                , thread_detail::decay_copy(mars_boost::forward<ArgTypes>(args))...
               )
           ));
     } else {
@@ -3720,9 +3720,9 @@ namespace detail
 #else // defined(BOOST_THREAD_PROVIDES_VARIADIC_THREAD)
 
   template <class F>
-  BOOST_THREAD_FUTURE<typename mars_boost_ksim::result_of<typename decay<F>::type()>::type>
+  BOOST_THREAD_FUTURE<typename mars_boost::result_of<typename decay<F>::type()>::type>
   async(launch policy, BOOST_THREAD_FWD_REF(F) f) {
-    typedef typename mars_boost_ksim::result_of<typename decay<F>::type()>::type R;
+    typedef typename mars_boost::result_of<typename decay<F>::type()>::type R;
 #if defined BOOST_THREAD_PROVIDES_SIGNATURE_PACKAGED_TASK
     typedef packaged_task<R()> packaged_task_type;
 #else // defined BOOST_THREAD_PROVIDES_SIGNATURE_PACKAGED_TASK
@@ -3730,18 +3730,18 @@ namespace detail
 #endif // defined BOOST_THREAD_PROVIDES_SIGNATURE_PACKAGED_TASK
 
     if (underlying_cast<int>(policy) & int(launch::async)) {
-      packaged_task_type pt( mars_boost_ksim::forward<F>(f) );
+      packaged_task_type pt( mars_boost::forward<F>(f) );
       BOOST_THREAD_FUTURE<R> ret = pt.get_future();
       ret.set_async();
-      mars_boost_ksim::thread( mars_boost_ksim::move(pt) ).detach();
+      mars_boost::thread( mars_boost::move(pt) ).detach();
       return ::boost_ksim::move(ret);
     } else if (underlying_cast<int>(policy) & int(launch::deferred)) {
       std::terminate();
       //BOOST_THREAD_FUTURE<R> ret;
       //return ::boost_ksim::move(ret);
-      //          return mars_boost_ksim::detail::make_future_deferred_shared_state<Rp>(
+      //          return mars_boost::detail::make_future_deferred_shared_state<Rp>(
       //              BF(
-      //                  thread_detail::decay_copy(mars_boost_ksim::forward<F>(f))
+      //                  thread_detail::decay_copy(mars_boost::forward<F>(f))
       //              )
       //          );
     } else {
@@ -3768,7 +3768,7 @@ namespace detail {
     public:
 
       shared_state_nullary_task(storage_type st, BOOST_THREAD_FWD_REF(Fp) f)
-      : that(st), f_(mars_boost_ksim::move(f))
+      : that(st), f_(mars_boost::move(f))
       {};
 
 #if ! defined(BOOST_NO_CXX11_RVALUE_REFERENCES)
@@ -3786,7 +3786,7 @@ namespace detail {
       }
       // move
       shared_state_nullary_task(BOOST_THREAD_RV_REF(shared_state_nullary_task) x) //BOOST_NOEXCEPT
-      : that(x.that), f_(mars_boost_ksim::move(x.f_))
+      : that(x.that), f_(mars_boost::move(x.f_))
       {
         x.that.reset();
       }
@@ -3821,7 +3821,7 @@ namespace detail {
       Fp f_;
     public:
       shared_state_nullary_task(storage_type st, BOOST_THREAD_FWD_REF(Fp) f)
-      : that(st), f_(mars_boost_ksim::move(f))
+      : that(st), f_(mars_boost::move(f))
       {};
 
 #if ! defined(BOOST_NO_CXX11_RVALUE_REFERENCES)
@@ -3839,7 +3839,7 @@ namespace detail {
       }
       // move
       shared_state_nullary_task(BOOST_THREAD_RV_REF(shared_state_nullary_task) x) BOOST_NOEXCEPT
-      : that(x.that), f_(mars_boost_ksim::move(x.f_))
+      : that(x.that), f_(mars_boost::move(x.f_))
       {
         x.that.reset();
       }
@@ -3884,8 +3884,8 @@ namespace detail {
       {
         typedef typename decay<Fp>::type Cont;
         this->set_executor_policy(executor_ptr_type(new executor_ref<Executor>(ex)));
-        shared_state_nullary_task<Rp,Cont> t(this->shared_from_this(), mars_boost_ksim::forward<Fp>(f));
-        ex.submit(mars_boost_ksim::move(t));
+        shared_state_nullary_task<Rp,Cont> t(this->shared_from_this(), mars_boost::forward<Fp>(f));
+        ex.submit(mars_boost::move(t));
       }
 
       ~future_executor_shared_state() {}
@@ -3899,7 +3899,7 @@ namespace detail {
     make_future_executor_shared_state(Executor& ex, BOOST_THREAD_FWD_REF(Fp) f) {
       shared_ptr<future_executor_shared_state<Rp> >
           h(new future_executor_shared_state<Rp>());
-      h->init(ex, mars_boost_ksim::forward<Fp>(f));
+      h->init(ex, mars_boost::forward<Fp>(f));
       return BOOST_THREAD_FUTURE<Rp>(h);
     }
 
@@ -3922,27 +3922,27 @@ namespace detail {
     typedef detail::invoker<typename decay<F>::type, typename decay<ArgTypes>::type...> BF;
     typedef typename BF::result_type Rp;
 
-    return BOOST_THREAD_MAKE_RV_REF(mars_boost_ksim::detail::make_future_executor_shared_state<Rp>(ex,
+    return BOOST_THREAD_MAKE_RV_REF(mars_boost::detail::make_future_executor_shared_state<Rp>(ex,
         BF(
             f
-            , thread_detail::decay_copy(mars_boost_ksim::forward<ArgTypes>(args))...
+            , thread_detail::decay_copy(mars_boost::forward<ArgTypes>(args))...
         )
     ));
   }
 #endif // defined BOOST_THREAD_RVALUE_REFERENCES_DONT_MATCH_FUNTION_PTR
 
   template <class Executor, class F, class ...ArgTypes>
-  BOOST_THREAD_FUTURE<typename mars_boost_ksim::result_of<typename decay<F>::type(
+  BOOST_THREAD_FUTURE<typename mars_boost::result_of<typename decay<F>::type(
       typename decay<ArgTypes>::type...
   )>::type>
   async(Executor& ex, BOOST_THREAD_FWD_REF(F) f, BOOST_THREAD_FWD_REF(ArgTypes)... args) {
     typedef detail::invoker<typename decay<F>::type, typename decay<ArgTypes>::type...> BF;
     typedef typename BF::result_type Rp;
 
-    return BOOST_THREAD_MAKE_RV_REF(mars_boost_ksim::detail::make_future_executor_shared_state<Rp>(ex,
+    return BOOST_THREAD_MAKE_RV_REF(mars_boost::detail::make_future_executor_shared_state<Rp>(ex,
         BF(
-            thread_detail::decay_copy(mars_boost_ksim::forward<F>(f))
-            , thread_detail::decay_copy(mars_boost_ksim::forward<ArgTypes>(args))...
+            thread_detail::decay_copy(mars_boost::forward<F>(f))
+            , thread_detail::decay_copy(mars_boost::forward<ArgTypes>(args))...
         )
     ));
   }
@@ -3957,7 +3957,7 @@ namespace detail {
     typedef detail::invoker<F> BF;
     typedef typename BF::result_type Rp;
 
-    return BOOST_THREAD_MAKE_RV_REF(mars_boost_ksim::detail::make_future_executor_shared_state<Rp>(ex,
+    return BOOST_THREAD_MAKE_RV_REF(mars_boost::detail::make_future_executor_shared_state<Rp>(ex,
         BF(
             f
         )
@@ -3971,57 +3971,57 @@ namespace detail {
     typedef detail::invoker<F, typename decay<A1>::type> BF;
     typedef typename BF::result_type Rp;
 
-    return BOOST_THREAD_MAKE_RV_REF(mars_boost_ksim::detail::make_future_executor_shared_state<Rp>(ex,
+    return BOOST_THREAD_MAKE_RV_REF(mars_boost::detail::make_future_executor_shared_state<Rp>(ex,
         BF(
             f
-            , thread_detail::decay_copy(mars_boost_ksim::forward<A1>(a1))
+            , thread_detail::decay_copy(mars_boost::forward<A1>(a1))
         )
     ));
   }
 #endif // defined BOOST_THREAD_RVALUE_REFERENCES_DONT_MATCH_FUNTION_PTR
 
   template <class Executor, class F>
-  BOOST_THREAD_FUTURE<typename mars_boost_ksim::result_of<typename decay<F>::type()>::type>
+  BOOST_THREAD_FUTURE<typename mars_boost::result_of<typename decay<F>::type()>::type>
   async(Executor& ex, BOOST_THREAD_FWD_REF(F) f)  {
     typedef detail::invoker<typename decay<F>::type> BF;
     typedef typename BF::result_type Rp;
 
-    return mars_boost_ksim::detail::make_future_executor_shared_state<Rp>(ex,
+    return mars_boost::detail::make_future_executor_shared_state<Rp>(ex,
         BF(
-            thread_detail::decay_copy(mars_boost_ksim::forward<F>(f))
+            thread_detail::decay_copy(mars_boost::forward<F>(f))
         )
     );
   }
 
   template <class Executor, class F, class A1>
-  BOOST_THREAD_FUTURE<typename mars_boost_ksim::result_of<typename decay<F>::type(
+  BOOST_THREAD_FUTURE<typename mars_boost::result_of<typename decay<F>::type(
       typename decay<A1>::type
   )>::type>
   async(Executor& ex, BOOST_THREAD_FWD_REF(F) f, BOOST_THREAD_FWD_REF(A1) a1) {
     typedef detail::invoker<typename decay<F>::type, typename decay<A1>::type> BF;
     typedef typename BF::result_type Rp;
 
-    return BOOST_THREAD_MAKE_RV_REF(mars_boost_ksim::detail::make_future_executor_shared_state<Rp>(ex,
+    return BOOST_THREAD_MAKE_RV_REF(mars_boost::detail::make_future_executor_shared_state<Rp>(ex,
         BF(
-            thread_detail::decay_copy(mars_boost_ksim::forward<F>(f))
-          , thread_detail::decay_copy(mars_boost_ksim::forward<A1>(a1))
+            thread_detail::decay_copy(mars_boost::forward<F>(f))
+          , thread_detail::decay_copy(mars_boost::forward<A1>(a1))
         )
     ));
   }
 
   template <class Executor, class F, class A1, class A2>
-  BOOST_THREAD_FUTURE<typename mars_boost_ksim::result_of<typename decay<F>::type(
+  BOOST_THREAD_FUTURE<typename mars_boost::result_of<typename decay<F>::type(
       typename decay<A1>::type, typename decay<A2>::type
   )>::type>
   async(Executor& ex, BOOST_THREAD_FWD_REF(F) f, BOOST_THREAD_FWD_REF(A1) a1, BOOST_THREAD_FWD_REF(A2) a2) {
     typedef detail::invoker<typename decay<F>::type, typename decay<A1>::type, typename decay<A2>::type> BF;
     typedef typename BF::result_type Rp;
 
-    return BOOST_THREAD_MAKE_RV_REF(mars_boost_ksim::detail::make_future_executor_shared_state<Rp>(ex,
+    return BOOST_THREAD_MAKE_RV_REF(mars_boost::detail::make_future_executor_shared_state<Rp>(ex,
         BF(
-            thread_detail::decay_copy(mars_boost_ksim::forward<F>(f))
-          , thread_detail::decay_copy(mars_boost_ksim::forward<A1>(a1))
-          , thread_detail::decay_copy(mars_boost_ksim::forward<A2>(a2))
+            thread_detail::decay_copy(mars_boost::forward<F>(f))
+          , thread_detail::decay_copy(mars_boost::forward<A1>(a1))
+          , thread_detail::decay_copy(mars_boost::forward<A2>(a2))
         )
     ));
   }
@@ -4039,7 +4039,7 @@ namespace detail {
   template <class R, class... ArgTypes>
   BOOST_THREAD_FUTURE<R>
   async(R(*f)(BOOST_THREAD_FWD_REF(ArgTypes)...), BOOST_THREAD_FWD_REF(ArgTypes)... args) {
-    return BOOST_THREAD_MAKE_RV_REF(async(launch(launch::any), f, mars_boost_ksim::forward<ArgTypes>(args)...));
+    return BOOST_THREAD_MAKE_RV_REF(async(launch(launch::any), f, mars_boost::forward<ArgTypes>(args)...));
   }
   #else
   template <class R>
@@ -4052,17 +4052,17 @@ namespace detail {
 
 #if defined(BOOST_THREAD_PROVIDES_VARIADIC_THREAD)
   template <class F, class ...ArgTypes>
-  BOOST_THREAD_FUTURE<typename mars_boost_ksim::result_of<typename decay<F>::type(
+  BOOST_THREAD_FUTURE<typename mars_boost::result_of<typename decay<F>::type(
       typename decay<ArgTypes>::type...
   )>::type>
   async(BOOST_THREAD_FWD_REF(F) f, BOOST_THREAD_FWD_REF(ArgTypes)... args) {
-      return BOOST_THREAD_MAKE_RV_REF(async(launch(launch::any), mars_boost_ksim::forward<F>(f), mars_boost_ksim::forward<ArgTypes>(args)...));
+      return BOOST_THREAD_MAKE_RV_REF(async(launch(launch::any), mars_boost::forward<F>(f), mars_boost::forward<ArgTypes>(args)...));
   }
 #else
   template <class F>
-  BOOST_THREAD_FUTURE<typename mars_boost_ksim::result_of<F()>::type>
+  BOOST_THREAD_FUTURE<typename mars_boost::result_of<F()>::type>
   async(BOOST_THREAD_FWD_REF(F) f) {
-      return BOOST_THREAD_MAKE_RV_REF(async(launch(launch::any), mars_boost_ksim::forward<F>(f)));
+      return BOOST_THREAD_MAKE_RV_REF(async(launch(launch::any), mars_boost::forward<F>(f)));
   }
 #endif
 
@@ -4073,7 +4073,7 @@ namespace detail {
   BOOST_THREAD_FUTURE<typename decay<T>::type> make_future(BOOST_THREAD_FWD_REF(T) value) {
     typedef typename decay<T>::type future_value_type;
     promise<future_value_type> p;
-    p.set_value(mars_boost_ksim::forward<future_value_type>(value));
+    p.set_value(mars_boost::forward<future_value_type>(value));
     return BOOST_THREAD_MAKE_RV_REF(p.get_future());
   }
 
@@ -4129,7 +4129,7 @@ namespace detail {
   BOOST_THREAD_FUTURE<typename detail::deduced_type<T>::type> make_ready_future(BOOST_THREAD_FWD_REF(T) value) {
     typedef typename detail::deduced_type<T>::type future_value_type;
     promise<future_value_type> p;
-    p.set_value(mars_boost_ksim::forward<T>(value));
+    p.set_value(mars_boost::forward<T>(value));
     return BOOST_THREAD_MAKE_RV_REF(p.get_future());
   }
 
@@ -4189,14 +4189,14 @@ namespace detail {
   template <typename T, typename E>
   BOOST_THREAD_FUTURE<T> make_exceptional_future(E ex) {
     promise<T> p;
-    p.set_exception(mars_boost_ksim::copy_exception(ex));
+    p.set_exception(mars_boost::copy_exception(ex));
     return BOOST_THREAD_MAKE_RV_REF(p.get_future());
   }
 
   template <typename T>
   BOOST_THREAD_FUTURE<T> make_exceptional_future() {
     promise<T> p;
-    p.set_exception(mars_boost_ksim::current_exception());
+    p.set_exception(mars_boost::current_exception());
     return BOOST_THREAD_MAKE_RV_REF(p.get_future());
   }
   template <typename T>
@@ -4225,7 +4225,7 @@ namespace detail {
   shared_future<typename decay<T>::type> make_shared_future(BOOST_THREAD_FWD_REF(T) value) {
     typedef typename decay<T>::type future_type;
     promise<future_type> p;
-    p.set_value(mars_boost_ksim::forward<T>(value));
+    p.set_value(mars_boost::forward<T>(value));
     return BOOST_THREAD_MAKE_RV_REF(p.get_future().share());
   }
 
@@ -4252,19 +4252,19 @@ namespace detail
 
   public:
     continuation_shared_state(BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c)
-    : parent(mars_boost_ksim::move(f)),
-      continuation(mars_boost_ksim::move(c))
+    : parent(mars_boost::move(f)),
+      continuation(mars_boost::move(c))
     {
     }
 
-    void init(mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock)
+    void init(mars_boost::unique_lock<boost_ksim::mutex> &lock)
     {
       parent.future_->set_continuation_ptr(this->shared_from_this(), lock);
     }
 
     void call() {
       try {
-        this->mark_finished_with_result(this->continuation(mars_boost_ksim::move(this->parent)));
+        this->mark_finished_with_result(this->continuation(mars_boost::move(this->parent)));
       } catch(...) {
         this->mark_exceptional_finish();
       }
@@ -4272,20 +4272,20 @@ namespace detail
       this->parent = F();
     }
 
-    void call(mars_boost_ksim::unique_lock<boost_ksim::mutex>& lck) {
+    void call(mars_boost::unique_lock<boost_ksim::mutex>& lck) {
       try {
         relocker relock(lck);
 
         // neither continuation nor parent are protected by the lock - call() must only
         // be called once, and no one else must modify it.
-        Rp res = this->continuation(mars_boost_ksim::move(this->parent));
+        Rp res = this->continuation(mars_boost::move(this->parent));
 
         // make sure parent is really cleared to prevent memory "leaks"
         this->parent = F();
 
         relock.lock();
 
-        this->mark_finished_with_result_internal(mars_boost_ksim::move(res), lck);
+        this->mark_finished_with_result_internal(mars_boost::move(res), lck);
       } catch (...) {
         this->mark_exceptional_finish_internal(current_exception(), lck);
 
@@ -4312,12 +4312,12 @@ namespace detail
 
   public:
     continuation_shared_state(BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c)
-    : parent(mars_boost_ksim::move(f)),
-      continuation(mars_boost_ksim::move(c))
+    : parent(mars_boost::move(f)),
+      continuation(mars_boost::move(c))
     {
     }
 
-    void init(mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock)
+    void init(mars_boost::unique_lock<boost_ksim::mutex> &lock)
     {
       parent.future_->set_continuation_ptr(this->shared_from_this(), lock);
     }
@@ -4325,7 +4325,7 @@ namespace detail
     void call()
     {
       try {
-        this->continuation(mars_boost_ksim::move(this->parent));
+        this->continuation(mars_boost::move(this->parent));
         this->mark_finished_with_result();
       } catch(...) {
         this->mark_exceptional_finish();
@@ -4334,13 +4334,13 @@ namespace detail
       this->parent = F();
     }
 
-    void call(mars_boost_ksim::unique_lock<boost_ksim::mutex>& lck) {
+    void call(mars_boost::unique_lock<boost_ksim::mutex>& lck) {
       try {
         {
           relocker relock(lck);
           // neither continuation nor parent are protected by the lock - call() must only
           // be called once, and no one else must modify it.
-          this->continuation(mars_boost_ksim::move(this->parent));
+          this->continuation(mars_boost::move(this->parent));
 
           // make sure parent is really cleared to prevent memory "leaks"
           this->parent = F();
@@ -4373,12 +4373,12 @@ namespace detail
     typedef continuation_shared_state<F,Rp,Fp,future_async_shared_state_base<Rp> > base_type;
   public:
     future_async_continuation_shared_state(BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c)
-    : base_type(mars_boost_ksim::move(f), mars_boost_ksim::forward<Fp>(c))
+    : base_type(mars_boost::move(f), mars_boost::forward<Fp>(c))
     {    }
 
     void launch_continuation() {
 #if defined BOOST_THREAD_FUTURE_BLOCKING
-      mars_boost_ksim::lock_guard<boost_ksim::mutex> lk(this->mutex);
+      mars_boost::lock_guard<boost_ksim::mutex> lk(this->mutex);
       this->thr_ = thread(&future_async_continuation_shared_state::run, static_shared_from_this(this));
 #else
       thread(&base_type::run, static_shared_from_this(this)).detach();
@@ -4396,7 +4396,7 @@ namespace detail
     typedef continuation_shared_state<F,Rp,Fp,shared_state<Rp> > base_type;
   public:
     future_sync_continuation_shared_state(BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c)
-    : base_type(mars_boost_ksim::move(f), mars_boost_ksim::forward<Fp>(c))
+    : base_type(mars_boost::move(f), mars_boost::forward<Fp>(c))
     {    }
 
     void launch_continuation() {
@@ -4460,12 +4460,12 @@ namespace detail {
 
   public:
     future_executor_continuation_shared_state(BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c)
-    : base_type(mars_boost_ksim::move(f), mars_boost_ksim::forward<Fp>(c))
+    : base_type(mars_boost::move(f), mars_boost::forward<Fp>(c))
     {
     }
 
     template <class Ex>
-    void init(mars_boost_ksim::unique_lock<boost_ksim::mutex> &lk, Ex& ex)
+    void init(mars_boost::unique_lock<boost_ksim::mutex> &lk, Ex& ex)
     {
       this->set_executor_policy(executor_ptr_type(new executor_ref<Ex>(ex)), lk);
       this->base_type::init(lk);
@@ -4473,7 +4473,7 @@ namespace detail {
 
     void launch_continuation() {
       run_it<base_type> fct(static_shared_from_this(this));
-      this->get_executor()->submit(mars_boost_ksim::move(fct));
+      this->get_executor()->submit(mars_boost::move(fct));
     }
 
     ~future_executor_continuation_shared_state() {}
@@ -4491,13 +4491,13 @@ namespace detail {
 
   public:
     shared_future_async_continuation_shared_state(F f, BOOST_THREAD_FWD_REF(Fp) c)
-    : base_type(mars_boost_ksim::move(f), mars_boost_ksim::forward<Fp>(c))
+    : base_type(mars_boost::move(f), mars_boost::forward<Fp>(c))
     {
     }
 
     void launch_continuation() {
 #if defined BOOST_THREAD_FUTURE_BLOCKING
-      mars_boost_ksim::lock_guard<boost_ksim::mutex> lk(this->mutex);
+      mars_boost::lock_guard<boost_ksim::mutex> lk(this->mutex);
       this->thr_ = thread(&base_type::run, static_shared_from_this(this));
 #else
       thread(&base_type::run, static_shared_from_this(this)).detach();
@@ -4516,7 +4516,7 @@ namespace detail {
 
   public:
     shared_future_sync_continuation_shared_state(F f, BOOST_THREAD_FWD_REF(Fp) c)
-    : base_type(mars_boost_ksim::move(f), mars_boost_ksim::forward<Fp>(c))
+    : base_type(mars_boost::move(f), mars_boost::forward<Fp>(c))
     {
     }
 
@@ -4539,12 +4539,12 @@ namespace detail {
   public:
 
     shared_future_executor_continuation_shared_state(F f, BOOST_THREAD_FWD_REF(Fp) c)
-    : base_type(mars_boost_ksim::move(f), mars_boost_ksim::forward<Fp>(c))
+    : base_type(mars_boost::move(f), mars_boost::forward<Fp>(c))
     {
     }
 
     template <class Ex>
-    void init(mars_boost_ksim::unique_lock<boost_ksim::mutex> &lk, Ex& ex)
+    void init(mars_boost::unique_lock<boost_ksim::mutex> &lk, Ex& ex)
     {
       this->set_executor_policy(executor_ptr_type(new executor_ref<Ex>(ex)), lk);
       this->base_type::init(lk);
@@ -4552,7 +4552,7 @@ namespace detail {
 
     void launch_continuation() {
       run_it<base_type> fct(static_shared_from_this(this));
-      this->get_executor()->submit(mars_boost_ksim::move(fct));
+      this->get_executor()->submit(mars_boost::move(fct));
     }
 
     ~shared_future_executor_continuation_shared_state() {}
@@ -4568,12 +4568,12 @@ namespace detail {
     typedef continuation_shared_state<F,Rp,Fp> base_type;
   public:
     future_deferred_continuation_shared_state(BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c)
-    : base_type(mars_boost_ksim::move(f), mars_boost_ksim::forward<Fp>(c))
+    : base_type(mars_boost::move(f), mars_boost::forward<Fp>(c))
     {
       this->set_deferred();
     }
 
-    virtual void execute(mars_boost_ksim::unique_lock<boost_ksim::mutex>& lk) {
+    virtual void execute(mars_boost::unique_lock<boost_ksim::mutex>& lk) {
       this->parent.wait();
       this->call(lk);
     }
@@ -4591,12 +4591,12 @@ namespace detail {
 
   public:
     shared_future_deferred_continuation_shared_state(F f, BOOST_THREAD_FWD_REF(Fp) c)
-    : base_type(mars_boost_ksim::move(f), mars_boost_ksim::forward<Fp>(c))
+    : base_type(mars_boost::move(f), mars_boost::forward<Fp>(c))
     {
       this->set_deferred();
     }
 
-    virtual void execute(mars_boost_ksim::unique_lock<boost_ksim::mutex>& lk) {
+    virtual void execute(mars_boost::unique_lock<boost_ksim::mutex>& lk) {
       this->parent.wait();
       this->call(lk);
     }
@@ -4610,11 +4610,11 @@ namespace detail {
   template<typename F, typename Rp, typename Fp>
   BOOST_THREAD_FUTURE<Rp>
   make_future_deferred_continuation_shared_state(
-      mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock,
+      mars_boost::unique_lock<boost_ksim::mutex> &lock,
       BOOST_THREAD_RV_REF(F) f, BOOST_THREAD_FWD_REF(Fp) c) {
     typedef typename decay<Fp>::type Cont;
     shared_ptr<future_deferred_continuation_shared_state<F, Rp, Cont> >
-        h(new future_deferred_continuation_shared_state<F, Rp, Cont>(mars_boost_ksim::move(f), mars_boost_ksim::forward<Fp>(c)));
+        h(new future_deferred_continuation_shared_state<F, Rp, Cont>(mars_boost::move(f), mars_boost::forward<Fp>(c)));
     h->init(lock);
     return BOOST_THREAD_FUTURE<Rp>(h);
   }
@@ -4625,11 +4625,11 @@ namespace detail {
   template<typename F, typename Rp, typename Fp>
   BOOST_THREAD_FUTURE<Rp>
   make_future_async_continuation_shared_state(
-      mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f,
+      mars_boost::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f,
       BOOST_THREAD_FWD_REF(Fp) c) {
     typedef typename decay<Fp>::type Cont;
     shared_ptr<future_async_continuation_shared_state<F,Rp, Cont> >
-        h(new future_async_continuation_shared_state<F,Rp, Cont>(mars_boost_ksim::move(f), mars_boost_ksim::forward<Fp>(c)));
+        h(new future_async_continuation_shared_state<F,Rp, Cont>(mars_boost::move(f), mars_boost::forward<Fp>(c)));
     h->init(lock);
 
     return BOOST_THREAD_FUTURE<Rp>(h);
@@ -4640,11 +4640,11 @@ namespace detail {
   template<typename F, typename Rp, typename Fp>
   BOOST_THREAD_FUTURE<Rp>
   make_future_sync_continuation_shared_state(
-      mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f,
+      mars_boost::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f,
       BOOST_THREAD_FWD_REF(Fp) c) {
     typedef typename decay<Fp>::type Cont;
     shared_ptr<future_sync_continuation_shared_state<F,Rp, Cont> >
-        h(new future_sync_continuation_shared_state<F,Rp, Cont>(mars_boost_ksim::move(f), mars_boost_ksim::forward<Fp>(c)));
+        h(new future_sync_continuation_shared_state<F,Rp, Cont>(mars_boost::move(f), mars_boost::forward<Fp>(c)));
     h->init(lock);
 
     return BOOST_THREAD_FUTURE<Rp>(h);
@@ -4658,11 +4658,11 @@ namespace detail {
   template<typename Ex, typename F, typename Rp, typename Fp>
   BOOST_THREAD_FUTURE<Rp>
   make_future_executor_continuation_shared_state(Ex& ex,
-      mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f,
+      mars_boost::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f,
       BOOST_THREAD_FWD_REF(Fp) c) {
     typedef typename decay<Fp>::type Cont;
     shared_ptr<future_executor_continuation_shared_state<F,Rp, Cont> >
-        h(new future_executor_continuation_shared_state<F,Rp, Cont>(mars_boost_ksim::move(f), mars_boost_ksim::forward<Fp>(c)));
+        h(new future_executor_continuation_shared_state<F,Rp, Cont>(mars_boost::move(f), mars_boost::forward<Fp>(c)));
     h->init(lock, ex);
 
     return BOOST_THREAD_FUTURE<Rp>(h);
@@ -4675,11 +4675,11 @@ namespace detail {
   template<typename F, typename Rp, typename Fp>
   BOOST_THREAD_FUTURE<Rp>
   make_shared_future_deferred_continuation_shared_state(
-      mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock,
+      mars_boost::unique_lock<boost_ksim::mutex> &lock,
       F f, BOOST_THREAD_FWD_REF(Fp) c) {
     typedef typename decay<Fp>::type Cont;
     shared_ptr<shared_future_deferred_continuation_shared_state<F, Rp, Cont> >
-        h(new shared_future_deferred_continuation_shared_state<F, Rp, Cont>(f, mars_boost_ksim::forward<Fp>(c)));
+        h(new shared_future_deferred_continuation_shared_state<F, Rp, Cont>(f, mars_boost::forward<Fp>(c)));
     h->init(lock);
 
     return BOOST_THREAD_FUTURE<Rp>(h);
@@ -4690,11 +4690,11 @@ namespace detail {
   template<typename F, typename Rp, typename Fp>
   BOOST_THREAD_FUTURE<Rp>
   make_shared_future_async_continuation_shared_state(
-      mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, F f,
+      mars_boost::unique_lock<boost_ksim::mutex> &lock, F f,
       BOOST_THREAD_FWD_REF(Fp) c) {
     typedef typename decay<Fp>::type Cont;
     shared_ptr<shared_future_async_continuation_shared_state<F,Rp, Cont> >
-        h(new shared_future_async_continuation_shared_state<F,Rp, Cont>(f, mars_boost_ksim::forward<Fp>(c)));
+        h(new shared_future_async_continuation_shared_state<F,Rp, Cont>(f, mars_boost::forward<Fp>(c)));
     h->init(lock);
 
     return BOOST_THREAD_FUTURE<Rp>(h);
@@ -4705,11 +4705,11 @@ namespace detail {
   template<typename F, typename Rp, typename Fp>
   BOOST_THREAD_FUTURE<Rp>
   make_shared_future_sync_continuation_shared_state(
-      mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, F f,
+      mars_boost::unique_lock<boost_ksim::mutex> &lock, F f,
       BOOST_THREAD_FWD_REF(Fp) c) {
     typedef typename decay<Fp>::type Cont;
     shared_ptr<shared_future_sync_continuation_shared_state<F,Rp, Cont> >
-        h(new shared_future_sync_continuation_shared_state<F,Rp, Cont>(f, mars_boost_ksim::forward<Fp>(c)));
+        h(new shared_future_sync_continuation_shared_state<F,Rp, Cont>(f, mars_boost::forward<Fp>(c)));
     h->init(lock);
 
     return BOOST_THREAD_FUTURE<Rp>(h);
@@ -4721,11 +4721,11 @@ namespace detail {
   template<typename Ex, typename F, typename Rp, typename Fp>
   BOOST_THREAD_FUTURE<Rp>
   make_shared_future_executor_continuation_shared_state(Ex& ex,
-      mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, F f,
+      mars_boost::unique_lock<boost_ksim::mutex> &lock, F f,
       BOOST_THREAD_FWD_REF(Fp) c) {
     typedef typename decay<Fp>::type Cont;
     shared_ptr<shared_future_executor_continuation_shared_state<F, Rp, Cont> >
-        h(new shared_future_executor_continuation_shared_state<F, Rp, Cont>(f, mars_boost_ksim::forward<Fp>(c)));
+        h(new shared_future_executor_continuation_shared_state<F, Rp, Cont>(f, mars_boost::forward<Fp>(c)));
     h->init(lock, ex);
 
     return BOOST_THREAD_FUTURE<Rp>(h);
@@ -4739,60 +4739,60 @@ namespace detail {
   ////////////////////////////////
   template <typename R>
   template <typename F>
-  inline BOOST_THREAD_FUTURE<typename mars_boost_ksim::result_of<F(BOOST_THREAD_FUTURE<R>)>::type>
+  inline BOOST_THREAD_FUTURE<typename mars_boost::result_of<F(BOOST_THREAD_FUTURE<R>)>::type>
   BOOST_THREAD_FUTURE<R>::then(launch policy, BOOST_THREAD_FWD_REF(F) func) {
-    typedef typename mars_boost_ksim::result_of<F(BOOST_THREAD_FUTURE<R>)>::type future_type;
+    typedef typename mars_boost::result_of<F(BOOST_THREAD_FUTURE<R>)>::type future_type;
     BOOST_THREAD_ASSERT_PRECONDITION(this->future_!=0, future_uninitialized());
 
     // keep state alive as we move ourself but hold the lock
     shared_ptr<detail::shared_state_base> sentinel(this->future_);
-    mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(sentinel->mutex);
+    mars_boost::unique_lock<boost_ksim::mutex> lock(sentinel->mutex);
 
     if (underlying_cast<int>(policy) & int(launch::async)) {
-      return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_future_async_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
-                  lock, mars_boost_ksim::move(*this), mars_boost_ksim::forward<F>(func)
+      return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_future_async_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
+                  lock, mars_boost::move(*this), mars_boost::forward<F>(func)
               )));
     } else if (underlying_cast<int>(policy) & int(launch::deferred)) {
-      return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_future_deferred_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
-                  lock, mars_boost_ksim::move(*this), mars_boost_ksim::forward<F>(func)
+      return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_future_deferred_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
+                  lock, mars_boost::move(*this), mars_boost::forward<F>(func)
               )));
 #ifdef BOOST_THREAD_PROVIDES_EXECUTORS
     } else if (underlying_cast<int>(policy) & int(launch::executor)) {
       assert(this->future_->get_executor());
       typedef executor Ex;
       Ex& ex = *(this->future_->get_executor());
-      return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_future_executor_continuation_shared_state<Ex, BOOST_THREAD_FUTURE<R>, future_type>(ex,
-                    lock, mars_boost_ksim::move(*this), mars_boost_ksim::forward<F>(func)
+      return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_future_executor_continuation_shared_state<Ex, BOOST_THREAD_FUTURE<R>, future_type>(ex,
+                    lock, mars_boost::move(*this), mars_boost::forward<F>(func)
                 )));
 #endif
     } else if (underlying_cast<int>(policy) & int(launch::inherit)) {
 
         launch policy = this->launch_policy(lock);
         if (underlying_cast<int>(policy) & int(launch::async)) {
-          return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_future_async_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
-                      lock, mars_boost_ksim::move(*this), mars_boost_ksim::forward<F>(func)
+          return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_future_async_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
+                      lock, mars_boost::move(*this), mars_boost::forward<F>(func)
                   )));
         } else if (underlying_cast<int>(policy) & int(launch::deferred)) {
-          return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_future_deferred_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
-                      lock, mars_boost_ksim::move(*this), mars_boost_ksim::forward<F>(func)
+          return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_future_deferred_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
+                      lock, mars_boost::move(*this), mars_boost::forward<F>(func)
                   )));
 #ifdef BOOST_THREAD_PROVIDES_EXECUTORS
         } else if (underlying_cast<int>(policy) & int(launch::executor)) {
           assert(this->future_->get_executor());
           typedef executor Ex;
           Ex& ex = *(this->future_->get_executor());
-          return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_future_executor_continuation_shared_state<Ex, BOOST_THREAD_FUTURE<R>, future_type>(ex,
-                        lock, mars_boost_ksim::move(*this), mars_boost_ksim::forward<F>(func)
+          return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_future_executor_continuation_shared_state<Ex, BOOST_THREAD_FUTURE<R>, future_type>(ex,
+                        lock, mars_boost::move(*this), mars_boost::forward<F>(func)
                     )));
 #endif
         } else {
-          return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_future_async_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
-                      lock, mars_boost_ksim::move(*this), mars_boost_ksim::forward<F>(func)
+          return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_future_async_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
+                      lock, mars_boost::move(*this), mars_boost::forward<F>(func)
                   )));
         }
     } else {
-      return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_future_async_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
-                  lock, mars_boost_ksim::move(*this), mars_boost_ksim::forward<F>(func)
+      return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_future_async_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
+                  lock, mars_boost::move(*this), mars_boost::forward<F>(func)
               )));
     }
   }
@@ -4803,17 +4803,17 @@ namespace detail {
   ////////////////////////////////
   template <typename R>
   template <typename Ex, typename F>
-  inline BOOST_THREAD_FUTURE<typename mars_boost_ksim::result_of<F(BOOST_THREAD_FUTURE<R>)>::type>
+  inline BOOST_THREAD_FUTURE<typename mars_boost::result_of<F(BOOST_THREAD_FUTURE<R>)>::type>
   BOOST_THREAD_FUTURE<R>::then(Ex& ex, BOOST_THREAD_FWD_REF(F) func) {
-    typedef typename mars_boost_ksim::result_of<F(BOOST_THREAD_FUTURE<R>)>::type future_type;
+    typedef typename mars_boost::result_of<F(BOOST_THREAD_FUTURE<R>)>::type future_type;
     BOOST_THREAD_ASSERT_PRECONDITION(this->future_!=0, future_uninitialized());
 
     // keep state alive as we move ourself but hold the lock
     shared_ptr<detail::shared_state_base> sentinel(this->future_);
-    mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(sentinel->mutex);
+    mars_boost::unique_lock<boost_ksim::mutex> lock(sentinel->mutex);
 
-    return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_future_executor_continuation_shared_state<Ex, BOOST_THREAD_FUTURE<R>, future_type>(ex,
-                  lock, mars_boost_ksim::move(*this), mars_boost_ksim::forward<F>(func)
+    return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_future_executor_continuation_shared_state<Ex, BOOST_THREAD_FUTURE<R>, future_type>(ex,
+                  lock, mars_boost::move(*this), mars_boost::forward<F>(func)
               )));
   }
 #endif
@@ -4823,27 +4823,27 @@ namespace detail {
   ////////////////////////////////
   template <typename R>
   template <typename F>
-  inline BOOST_THREAD_FUTURE<typename mars_boost_ksim::result_of<F(BOOST_THREAD_FUTURE<R>)>::type>
+  inline BOOST_THREAD_FUTURE<typename mars_boost::result_of<F(BOOST_THREAD_FUTURE<R>)>::type>
   BOOST_THREAD_FUTURE<R>::then(BOOST_THREAD_FWD_REF(F) func)  {
 
 #ifndef BOOST_THREAD_CONTINUATION_SYNC
-    return this->then(this->launch_policy(), mars_boost_ksim::forward<F>(func));
+    return this->then(this->launch_policy(), mars_boost::forward<F>(func));
 #else
-    typedef typename mars_boost_ksim::result_of<F(BOOST_THREAD_FUTURE<R>)>::type future_type;
+    typedef typename mars_boost::result_of<F(BOOST_THREAD_FUTURE<R>)>::type future_type;
     BOOST_THREAD_ASSERT_PRECONDITION(this->future_!=0, future_uninitialized());
 
     // keep state alive as we move ourself but hold the lock
     shared_ptr<detail::shared_state_base> sentinel(this->future_);
-    mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(sentinel->mutex);
+    mars_boost::unique_lock<boost_ksim::mutex> lock(sentinel->mutex);
 
     launch policy = this->launch_policy(lock);
     if (underlying_cast<int>(policy) & int(launch::deferred)) {
-      return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_future_deferred_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
-                  lock, mars_boost_ksim::move(*this), mars_boost_ksim::forward<F>(func)
+      return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_future_deferred_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
+                  lock, mars_boost::move(*this), mars_boost::forward<F>(func)
               )));
     } else {
-      return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_future_async_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
-                  lock, mars_boost_ksim::move(*this), mars_boost_ksim::forward<F>(func)
+      return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_future_async_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
+                  lock, mars_boost::move(*this), mars_boost::forward<F>(func)
               )));
     }
 #endif
@@ -4856,69 +4856,69 @@ namespace detail {
   ////////////////////////////////
   template <typename R2>
   template <typename F>
-  inline BOOST_THREAD_FUTURE<typename mars_boost_ksim::result_of<F(BOOST_THREAD_FUTURE<BOOST_THREAD_FUTURE<R2> >)>::type>
+  inline BOOST_THREAD_FUTURE<typename mars_boost::result_of<F(BOOST_THREAD_FUTURE<BOOST_THREAD_FUTURE<R2> >)>::type>
   BOOST_THREAD_FUTURE<BOOST_THREAD_FUTURE<R2> >::then(launch policy, BOOST_THREAD_FWD_REF(F) func) {
     typedef BOOST_THREAD_FUTURE<R2> R;
-    typedef typename mars_boost_ksim::result_of<F(BOOST_THREAD_FUTURE<R>)>::type future_type;
+    typedef typename mars_boost::result_of<F(BOOST_THREAD_FUTURE<R>)>::type future_type;
     BOOST_THREAD_ASSERT_PRECONDITION(this->future_!=0, future_uninitialized());
 
     // keep state alive as we move ourself but hold the lock
     shared_ptr<detail::shared_state_base> sentinel(this->future_);
-    mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(sentinel->mutex);
+    mars_boost::unique_lock<boost_ksim::mutex> lock(sentinel->mutex);
 
     if (underlying_cast<int>(policy) & int(launch::async)) {
-      return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_future_async_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
-                  lock, mars_boost_ksim::move(*this), mars_boost_ksim::forward<F>(func)
+      return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_future_async_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
+                  lock, mars_boost::move(*this), mars_boost::forward<F>(func)
               )));
     } else if (underlying_cast<int>(policy) & int(launch::deferred)) {
-      return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_future_deferred_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
-                  lock, mars_boost_ksim::move(*this), mars_boost_ksim::forward<F>(func)
+      return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_future_deferred_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
+                  lock, mars_boost::move(*this), mars_boost::forward<F>(func)
               )));
     } else if (underlying_cast<int>(policy) & int(launch::sync)) {
-      return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_future_sync_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
-                  lock, mars_boost_ksim::move(*this), mars_boost_ksim::forward<F>(func)
+      return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_future_sync_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
+                  lock, mars_boost::move(*this), mars_boost::forward<F>(func)
               )));
 #ifdef BOOST_THREAD_PROVIDES_EXECUTORS
     } else if (underlying_cast<int>(policy) & int(launch::executor)) {
       assert(this->future_->get_executor());
       typedef executor Ex;
       Ex& ex = *(this->future_->get_executor());
-      return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_future_executor_continuation_shared_state<Ex, BOOST_THREAD_FUTURE<R>, future_type>(ex,
-                    lock, mars_boost_ksim::move(*this), mars_boost_ksim::forward<F>(func)
+      return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_future_executor_continuation_shared_state<Ex, BOOST_THREAD_FUTURE<R>, future_type>(ex,
+                    lock, mars_boost::move(*this), mars_boost::forward<F>(func)
                 )));
 #endif
     } else if (underlying_cast<int>(policy) & int(launch::inherit)) {
         launch policy = this->launch_policy(lock);
 
         if (underlying_cast<int>(policy) & int(launch::async)) {
-          return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_future_async_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
-                      lock, mars_boost_ksim::move(*this), mars_boost_ksim::forward<F>(func)
+          return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_future_async_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
+                      lock, mars_boost::move(*this), mars_boost::forward<F>(func)
                   )));
         } else if (underlying_cast<int>(policy) & int(launch::deferred)) {
-          return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_future_deferred_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
-                      lock, mars_boost_ksim::move(*this), mars_boost_ksim::forward<F>(func)
+          return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_future_deferred_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
+                      lock, mars_boost::move(*this), mars_boost::forward<F>(func)
                   )));
         } else if (underlying_cast<int>(policy) & int(launch::sync)) {
-          return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_future_sync_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
-                      lock, mars_boost_ksim::move(*this), mars_boost_ksim::forward<F>(func)
+          return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_future_sync_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
+                      lock, mars_boost::move(*this), mars_boost::forward<F>(func)
                   )));
 #ifdef BOOST_THREAD_PROVIDES_EXECUTORS
         } else if (underlying_cast<int>(policy) & int(launch::executor)) {
           assert(this->future_->get_executor());
           typedef executor Ex;
           Ex& ex = *(this->future_->get_executor());
-          return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_future_executor_continuation_shared_state<Ex, BOOST_THREAD_FUTURE<R>, future_type>(ex,
-                        lock, mars_boost_ksim::move(*this), mars_boost_ksim::forward<F>(func)
+          return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_future_executor_continuation_shared_state<Ex, BOOST_THREAD_FUTURE<R>, future_type>(ex,
+                        lock, mars_boost::move(*this), mars_boost::forward<F>(func)
                     )));
 #endif
         } else {
-          return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_future_async_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
-                      lock, mars_boost_ksim::move(*this), mars_boost_ksim::forward<F>(func)
+          return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_future_async_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
+                      lock, mars_boost::move(*this), mars_boost::forward<F>(func)
                   )));
         }
     } else {
-      return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_future_async_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
-                  lock, mars_boost_ksim::move(*this), mars_boost_ksim::forward<F>(func)
+      return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_future_async_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
+                  lock, mars_boost::move(*this), mars_boost::forward<F>(func)
               )));
     }
   }
@@ -4930,18 +4930,18 @@ namespace detail {
   ////////////////////////////////
   template <typename R2>
   template <typename Ex, typename F>
-  inline BOOST_THREAD_FUTURE<typename mars_boost_ksim::result_of<F(BOOST_THREAD_FUTURE<BOOST_THREAD_FUTURE<R2> >)>::type>
+  inline BOOST_THREAD_FUTURE<typename mars_boost::result_of<F(BOOST_THREAD_FUTURE<BOOST_THREAD_FUTURE<R2> >)>::type>
   BOOST_THREAD_FUTURE<BOOST_THREAD_FUTURE<R2> >::then(Ex& ex, BOOST_THREAD_FWD_REF(F) func) {
     typedef BOOST_THREAD_FUTURE<R2> R;
-    typedef typename mars_boost_ksim::result_of<F(BOOST_THREAD_FUTURE<R>)>::type future_type;
+    typedef typename mars_boost::result_of<F(BOOST_THREAD_FUTURE<R>)>::type future_type;
     BOOST_THREAD_ASSERT_PRECONDITION(this->future_!=0, future_uninitialized());
 
     // keep state alive as we move ourself but hold the lock
     shared_ptr<detail::shared_state_base> sentinel(this->future_);
-    mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(sentinel->mutex);
+    mars_boost::unique_lock<boost_ksim::mutex> lock(sentinel->mutex);
 
-    return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_future_executor_continuation_shared_state<Ex, BOOST_THREAD_FUTURE<R>, future_type>(ex,
-                  lock, mars_boost_ksim::move(*this), mars_boost_ksim::forward<F>(func)
+    return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_future_executor_continuation_shared_state<Ex, BOOST_THREAD_FUTURE<R>, future_type>(ex,
+                  lock, mars_boost::move(*this), mars_boost::forward<F>(func)
               )));
   }
 #endif
@@ -4952,29 +4952,29 @@ namespace detail {
   ////////////////////////////////
   template <typename R2>
   template <typename F>
-  inline BOOST_THREAD_FUTURE<typename mars_boost_ksim::result_of<F(BOOST_THREAD_FUTURE<BOOST_THREAD_FUTURE<R2> >)>::type>
+  inline BOOST_THREAD_FUTURE<typename mars_boost::result_of<F(BOOST_THREAD_FUTURE<BOOST_THREAD_FUTURE<R2> >)>::type>
   BOOST_THREAD_FUTURE<BOOST_THREAD_FUTURE<R2> >::then(BOOST_THREAD_FWD_REF(F) func)  {
 
 #ifndef BOOST_THREAD_CONTINUATION_SYNC
-    return this->then(this->launch_policy(), mars_boost_ksim::forward<F>(func));
+    return this->then(this->launch_policy(), mars_boost::forward<F>(func));
 #else
     typedef BOOST_THREAD_FUTURE<R2> R;
-    typedef typename mars_boost_ksim::result_of<F(BOOST_THREAD_FUTURE<R>)>::type future_type;
+    typedef typename mars_boost::result_of<F(BOOST_THREAD_FUTURE<R>)>::type future_type;
     BOOST_THREAD_ASSERT_PRECONDITION(this->future_!=0, future_uninitialized());
 
     // keep state alive as we move ourself but hold the lock
     shared_ptr<detail::shared_state_base> sentinel(this->future_);
-    mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(sentinel->mutex);
+    mars_boost::unique_lock<boost_ksim::mutex> lock(sentinel->mutex);
 
     launch policy = this->launch_policy(lock);
 
     if  (underlying_cast<int>(policy) & int(launch::deferred)) {
-      return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_future_deferred_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
-                  lock, mars_boost_ksim::move(*this), mars_boost_ksim::forward<F>(func)
+      return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_future_deferred_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
+                  lock, mars_boost::move(*this), mars_boost::forward<F>(func)
               )));
     } else {
-      return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_future_sync_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
-                  lock, mars_boost_ksim::move(*this), mars_boost_ksim::forward<F>(func)
+      return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_future_sync_continuation_shared_state<BOOST_THREAD_FUTURE<R>, future_type>(
+                  lock, mars_boost::move(*this), mars_boost::forward<F>(func)
               )));
     }
 #endif
@@ -4986,65 +4986,65 @@ namespace detail {
   ////////////////////////////////
   template <typename R>
   template <typename F>
-  inline BOOST_THREAD_FUTURE<typename mars_boost_ksim::result_of<F(shared_future<R>)>::type>
+  inline BOOST_THREAD_FUTURE<typename mars_boost::result_of<F(shared_future<R>)>::type>
   shared_future<R>::then(launch policy, BOOST_THREAD_FWD_REF(F) func)  const
   {
-    typedef typename mars_boost_ksim::result_of<F(shared_future<R>)>::type future_type;
+    typedef typename mars_boost::result_of<F(shared_future<R>)>::type future_type;
     BOOST_THREAD_ASSERT_PRECONDITION(this->future_!=0, future_uninitialized());
 
-    mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(this->future_->mutex);
+    mars_boost::unique_lock<boost_ksim::mutex> lock(this->future_->mutex);
     if (underlying_cast<int>(policy) & int(launch::async)) {
-      return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_shared_future_async_continuation_shared_state<shared_future<R>, future_type>(
-                  lock, *this, mars_boost_ksim::forward<F>(func)
+      return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_shared_future_async_continuation_shared_state<shared_future<R>, future_type>(
+                  lock, *this, mars_boost::forward<F>(func)
               )));
     } else if (underlying_cast<int>(policy) & int(launch::deferred)) {
-      return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_shared_future_deferred_continuation_shared_state<shared_future<R>, future_type>(
-                  lock, *this, mars_boost_ksim::forward<F>(func)
+      return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_shared_future_deferred_continuation_shared_state<shared_future<R>, future_type>(
+                  lock, *this, mars_boost::forward<F>(func)
               )));
     } else if (underlying_cast<int>(policy) & int(launch::sync)) {
-      return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_shared_future_sync_continuation_shared_state<shared_future<R>, future_type>(
-                  lock, *this, mars_boost_ksim::forward<F>(func)
+      return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_shared_future_sync_continuation_shared_state<shared_future<R>, future_type>(
+                  lock, *this, mars_boost::forward<F>(func)
               )));
 #ifdef BOOST_THREAD_PROVIDES_EXECUTORS
     } else if (underlying_cast<int>(policy) & int(launch::executor)) {
       typedef executor Ex;
       Ex& ex = *(this->future_->get_executor());
-      return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_shared_future_executor_continuation_shared_state<Ex, shared_future<R>, future_type>(ex,
-                    lock, *this, mars_boost_ksim::forward<F>(func)
+      return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_shared_future_executor_continuation_shared_state<Ex, shared_future<R>, future_type>(ex,
+                    lock, *this, mars_boost::forward<F>(func)
                 )));
 #endif
     } else if (underlying_cast<int>(policy) & int(launch::inherit)) {
 
         launch policy = this->launch_policy(lock);
         if (underlying_cast<int>(policy) & int(launch::async)) {
-          return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_shared_future_async_continuation_shared_state<shared_future<R>, future_type>(
-                      lock, *this, mars_boost_ksim::forward<F>(func)
+          return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_shared_future_async_continuation_shared_state<shared_future<R>, future_type>(
+                      lock, *this, mars_boost::forward<F>(func)
                   )));
         } else if (underlying_cast<int>(policy) & int(launch::deferred)) {
-          return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_shared_future_deferred_continuation_shared_state<shared_future<R>, future_type>(
-                      lock, *this, mars_boost_ksim::forward<F>(func)
+          return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_shared_future_deferred_continuation_shared_state<shared_future<R>, future_type>(
+                      lock, *this, mars_boost::forward<F>(func)
                   )));
         } else if (underlying_cast<int>(policy) & int(launch::sync)) {
-          return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_shared_future_sync_continuation_shared_state<shared_future<R>, future_type>(
-                      lock, *this, mars_boost_ksim::forward<F>(func)
+          return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_shared_future_sync_continuation_shared_state<shared_future<R>, future_type>(
+                      lock, *this, mars_boost::forward<F>(func)
                   )));
 #ifdef BOOST_THREAD_PROVIDES_EXECUTORS
         } else if (underlying_cast<int>(policy) & int(launch::executor)) {
           typedef executor Ex;
           Ex& ex = *(this->future_->get_executor());
-          return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_shared_future_executor_continuation_shared_state<Ex, shared_future<R>, future_type>(ex,
-                        lock, *this, mars_boost_ksim::forward<F>(func)
+          return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_shared_future_executor_continuation_shared_state<Ex, shared_future<R>, future_type>(ex,
+                        lock, *this, mars_boost::forward<F>(func)
                     )));
 #endif
         } else {
-          return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_shared_future_async_continuation_shared_state<shared_future<R>, future_type>(
-                      lock, *this, mars_boost_ksim::forward<F>(func)
+          return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_shared_future_async_continuation_shared_state<shared_future<R>, future_type>(
+                      lock, *this, mars_boost::forward<F>(func)
                   )));
         }
 
     } else {
-      return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_shared_future_async_continuation_shared_state<shared_future<R>, future_type>(
-                  lock, *this, mars_boost_ksim::forward<F>(func)
+      return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_shared_future_async_continuation_shared_state<shared_future<R>, future_type>(
+                  lock, *this, mars_boost::forward<F>(func)
               )));
     }
   }
@@ -5055,15 +5055,15 @@ namespace detail {
   ////////////////////////////////
   template <typename R>
   template <typename Ex, typename F>
-  inline BOOST_THREAD_FUTURE<typename mars_boost_ksim::result_of<F(shared_future<R>)>::type>
+  inline BOOST_THREAD_FUTURE<typename mars_boost::result_of<F(shared_future<R>)>::type>
   shared_future<R>::then(Ex& ex, BOOST_THREAD_FWD_REF(F) func)  const
   {
-    typedef typename mars_boost_ksim::result_of<F(shared_future<R>)>::type future_type;
+    typedef typename mars_boost::result_of<F(shared_future<R>)>::type future_type;
     BOOST_THREAD_ASSERT_PRECONDITION(this->future_!=0, future_uninitialized());
 
-    mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(this->future_->mutex);
-    return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_shared_future_executor_continuation_shared_state<Ex, shared_future<R>, future_type>(ex,
-                  lock, *this, mars_boost_ksim::forward<F>(func)
+    mars_boost::unique_lock<boost_ksim::mutex> lock(this->future_->mutex);
+    return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_shared_future_executor_continuation_shared_state<Ex, shared_future<R>, future_type>(ex,
+                  lock, *this, mars_boost::forward<F>(func)
               )));
   }
 #endif
@@ -5074,23 +5074,23 @@ namespace detail {
   ////////////////////////////////
   template <typename R>
   template <typename F>
-  inline BOOST_THREAD_FUTURE<typename mars_boost_ksim::result_of<F(shared_future<R>)>::type>
+  inline BOOST_THREAD_FUTURE<typename mars_boost::result_of<F(shared_future<R>)>::type>
   shared_future<R>::then(BOOST_THREAD_FWD_REF(F) func)  const {
 #ifndef BOOST_THREAD_CONTINUATION_SYNC
-    return this->then(this->launch_policy(), mars_boost_ksim::forward<F>(func));
+    return this->then(this->launch_policy(), mars_boost::forward<F>(func));
 #else
-    typedef typename mars_boost_ksim::result_of<F(shared_future<R>)>::type future_type;
+    typedef typename mars_boost::result_of<F(shared_future<R>)>::type future_type;
     BOOST_THREAD_ASSERT_PRECONDITION(this->future_!=0, future_uninitialized());
 
-    mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(this->future_->mutex);
+    mars_boost::unique_lock<boost_ksim::mutex> lock(this->future_->mutex);
     launch policy = this->launch_policy(lock);
     if (underlying_cast<int>(policy) & int(launch::deferred)) {
-      return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_shared_future_deferred_continuation_shared_state<shared_future<R>, future_type>(
-                  lock, *this, mars_boost_ksim::forward<F>(func)
+      return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_shared_future_deferred_continuation_shared_state<shared_future<R>, future_type>(
+                  lock, *this, mars_boost::forward<F>(func)
               )));
     } else {
-      return BOOST_THREAD_MAKE_RV_REF((mars_boost_ksim::detail::make_shared_future_sync_continuation_shared_state<shared_future<R>, future_type>(
-                  lock, *this, mars_boost_ksim::forward<F>(func)
+      return BOOST_THREAD_MAKE_RV_REF((mars_boost::detail::make_shared_future_sync_continuation_shared_state<shared_future<R>, future_type>(
+                  lock, *this, mars_boost::forward<F>(func)
               )));
     }
 #endif
@@ -5104,11 +5104,11 @@ namespace detail
     T value_;
     typedef T result_type;
     mfallbacker_to(BOOST_THREAD_RV_REF(T) v)
-    : value_(mars_boost_ksim::move(v))
+    : value_(mars_boost::move(v))
     {}
 
     T operator()(BOOST_THREAD_FUTURE<T> fut) {
-      return fut.get_or(mars_boost_ksim::move(value_));
+      return fut.get_or(mars_boost::move(value_));
     }
   };
   template <typename T>
@@ -5132,14 +5132,14 @@ namespace detail
 
   template <typename R>
   template <typename R2>
-  inline typename mars_boost_ksim::disable_if< is_void<R2>, BOOST_THREAD_FUTURE<R> >::type
+  inline typename mars_boost::disable_if< is_void<R2>, BOOST_THREAD_FUTURE<R> >::type
   BOOST_THREAD_FUTURE<R>::fallback_to(BOOST_THREAD_RV_REF(R2) v) {
-    return then(detail::mfallbacker_to<R>(mars_boost_ksim::move(v)));
+    return then(detail::mfallbacker_to<R>(mars_boost::move(v)));
   }
 
   template <typename R>
   template <typename R2>
-  inline typename mars_boost_ksim::disable_if< is_void<R2>, BOOST_THREAD_FUTURE<R> >::type
+  inline typename mars_boost::disable_if< is_void<R2>, BOOST_THREAD_FUTURE<R> >::type
   BOOST_THREAD_FUTURE<R>::fallback_to(R2 const& v) {
     return then(detail::cfallbacker_to<R>(v));
   }
@@ -5160,12 +5160,12 @@ namespace detail
     typename F::value_type unwrapped;
   public:
     explicit future_unwrap_shared_state(BOOST_THREAD_RV_REF(F) f)
-    : wrapped(mars_boost_ksim::move(f)) {
+    : wrapped(mars_boost::move(f)) {
     }
 
     void launch_continuation()
     {
-      mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(this->mutex);
+      mars_boost::unique_lock<boost_ksim::mutex> lk(this->mutex);
       // assert(wrapped.is_ready());
       if (! unwrapped.valid() )
       {
@@ -5176,10 +5176,10 @@ namespace detail
           if (unwrapped.valid())
           {
             lk.unlock();
-            mars_boost_ksim::unique_lock<boost_ksim::mutex> lk2(unwrapped.future_->mutex);
+            mars_boost::unique_lock<boost_ksim::mutex> lk2(unwrapped.future_->mutex);
             unwrapped.future_->set_continuation_ptr(this->shared_from_this(), lk2);
           } else {
-            this->mark_exceptional_finish_internal(mars_boost_ksim::copy_exception(future_uninitialized()), lk);
+            this->mark_exceptional_finish_internal(mars_boost::copy_exception(future_uninitialized()), lk);
           }
         }
       } else {
@@ -5200,12 +5200,12 @@ namespace detail
     typename F::value_type unwrapped;
   public:
     explicit future_unwrap_shared_state(BOOST_THREAD_RV_REF(F) f)
-    : wrapped(mars_boost_ksim::move(f)) {
+    : wrapped(mars_boost::move(f)) {
     }
 
     void launch_continuation()
     {
-      mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(this->mutex);
+      mars_boost::unique_lock<boost_ksim::mutex> lk(this->mutex);
       // assert(wrapped.is_ready());
       if (! unwrapped.valid() )
       {
@@ -5216,10 +5216,10 @@ namespace detail
           if (unwrapped.valid())
           {
             lk.unlock();
-            mars_boost_ksim::unique_lock<boost_ksim::mutex> lk2(unwrapped.future_->mutex);
+            mars_boost::unique_lock<boost_ksim::mutex> lk2(unwrapped.future_->mutex);
             unwrapped.future_->set_continuation_ptr(this->shared_from_this(), lk2);
           } else {
-            this->mark_exceptional_finish_internal(mars_boost_ksim::copy_exception(future_uninitialized()), lk);
+            this->mark_exceptional_finish_internal(mars_boost::copy_exception(future_uninitialized()), lk);
           }
         }
       } else {
@@ -5235,9 +5235,9 @@ namespace detail
 
   template <class F, class Rp>
   BOOST_THREAD_FUTURE<Rp>
-  make_future_unwrap_shared_state(mars_boost_ksim::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f) {
+  make_future_unwrap_shared_state(mars_boost::unique_lock<boost_ksim::mutex> &lock, BOOST_THREAD_RV_REF(F) f) {
     shared_ptr<future_unwrap_shared_state<F, Rp> >
-        h(new future_unwrap_shared_state<F, Rp>(mars_boost_ksim::move(f)));
+        h(new future_unwrap_shared_state<F, Rp>(mars_boost::move(f)));
     h->wrapped.future_->set_continuation_ptr(h, lock);
 
     return BOOST_THREAD_FUTURE<Rp>(h);
@@ -5256,9 +5256,9 @@ namespace detail
 
     // keep state alive as we move ourself but hold the lock
     shared_ptr<detail::shared_state_base> sentinel(this->future_);
-    mars_boost_ksim::unique_lock<boost_ksim::mutex> lock(sentinel->mutex);
+    mars_boost::unique_lock<boost_ksim::mutex> lock(sentinel->mutex);
 
-    return mars_boost_ksim::detail::make_future_unwrap_shared_state<BOOST_THREAD_FUTURE<BOOST_THREAD_FUTURE<R2> >, R2>(lock, mars_boost_ksim::move(*this));
+    return mars_boost::detail::make_future_unwrap_shared_state<BOOST_THREAD_FUTURE<BOOST_THREAD_FUTURE<R2> >, R2>(lock, mars_boost::move(*this));
   }
 #endif
 
@@ -5287,8 +5287,8 @@ namespace detail
     static void run(shared_ptr<boost_ksim::detail::shared_state_base> that_) {
       future_when_all_vector_shared_state* that = static_cast<future_when_all_vector_shared_state*>(that_.get());
       try {
-        mars_boost_ksim::wait_for_all(that->vec_.begin(), that->vec_.end());
-        that->mark_finished_with_result(mars_boost_ksim::move(that->vec_));
+        mars_boost::wait_for_all(that->vec_.begin(), that->vec_.end());
+        that->mark_finished_with_result(mars_boost::move(that->vec_));
       } catch(...) {
         that->mark_exceptional_finish();
       }
@@ -5325,17 +5325,17 @@ namespace detail
     }
 
     future_when_all_vector_shared_state(vector_tag, BOOST_THREAD_RV_REF(csbl::vector<F>) v)
-    : vec_(mars_boost_ksim::move(v))
+    : vec_(mars_boost::move(v))
     {
     }
 
 #if ! defined(BOOST_NO_CXX11_VARIADIC_TEMPLATES)
     template< typename T0, typename ...T>
     future_when_all_vector_shared_state(values_tag, BOOST_THREAD_FWD_REF(T0) f, BOOST_THREAD_FWD_REF(T) ... futures) {
-      vec_.push_back(mars_boost_ksim::forward<T0>(f));
+      vec_.push_back(mars_boost::forward<T0>(f));
       typename alias_t<char[]>::type{
           ( //first part of magic unpacker
-          vec_.push_back(mars_boost_ksim::forward<T>(futures)),'0'
+          vec_.push_back(mars_boost::forward<T>(futures)),'0'
           )..., '0'
       }; //second part of magic unpacker
     }
@@ -5358,8 +5358,8 @@ namespace detail
     {
       future_when_any_vector_shared_state* that = static_cast<future_when_any_vector_shared_state*>(that_.get());
       try {
-        mars_boost_ksim::wait_for_any(that->vec_.begin(), that->vec_.end());
-        that->mark_finished_with_result(mars_boost_ksim::move(that->vec_));
+        mars_boost::wait_for_any(that->vec_.begin(), that->vec_.end());
+        that->mark_finished_with_result(mars_boost::move(that->vec_));
       } catch(...) {
         that->mark_exceptional_finish();
       }
@@ -5396,7 +5396,7 @@ namespace detail
     }
 
     future_when_any_vector_shared_state(vector_tag, BOOST_THREAD_RV_REF(csbl::vector<F>) v)
-    : vec_(mars_boost_ksim::move(v))
+    : vec_(mars_boost::move(v))
     {
     }
 
@@ -5405,10 +5405,10 @@ namespace detail
     future_when_any_vector_shared_state(values_tag,
         BOOST_THREAD_FWD_REF(T0) f, BOOST_THREAD_FWD_REF(T) ... futures
     ) {
-      vec_.push_back(mars_boost_ksim::forward<T0>(f));
+      vec_.push_back(mars_boost::forward<T0>(f));
       typename alias_t<char[]>::type{
           ( //first part of magic unpacker
-          vec_.push_back(mars_boost_ksim::forward<T>(futures))
+          vec_.push_back(mars_boost::forward<T>(futures))
           ,'0'
           )...,
           '0'
@@ -5423,14 +5423,14 @@ namespace detail
   struct wait_for_all_fctr {
     template <class ...T>
     void operator()(T&&... v) {
-      mars_boost_ksim::wait_for_all(mars_boost_ksim::forward<T>(v)...);
+      mars_boost::wait_for_all(mars_boost::forward<T>(v)...);
     }
   };
 
   struct wait_for_any_fctr {
     template <class ...T>
     void operator()(T&&... v) {
-      mars_boost_ksim::wait_for_any(mars_boost_ksim::forward<T>(v)...);
+      mars_boost::wait_for_any(mars_boost::forward<T>(v)...);
     }
   };
 
@@ -5460,10 +5460,10 @@ namespace detail
     static void run(shared_ptr<boost_ksim::detail::shared_state_base> that_) {
       future_when_all_tuple_shared_state* that = static_cast<future_when_all_tuple_shared_state*>(that_.get());
       try {
-        // TODO make use of apply(that->tup_, mars_boost_ksim::detail::wait_for_all_fctor());
+        // TODO make use of apply(that->tup_, mars_boost::detail::wait_for_all_fctor());
         that->wait_for_all(Index());
 
-        that->mark_finished_with_result(mars_boost_ksim::move(that->tup_));
+        that->mark_finished_with_result(mars_boost::move(that->tup_));
       } catch(...) {
         that->mark_exceptional_finish();
       }
@@ -5498,7 +5498,7 @@ namespace detail
   public:
     template< typename F, typename ...Fs>
     future_when_all_tuple_shared_state(values_tag, BOOST_THREAD_FWD_REF(F) f, BOOST_THREAD_FWD_REF(Fs) ... futures) :
-      tup_(mars_boost_ksim::csbl::make_tuple(mars_boost_ksim::forward<F>(f), mars_boost_ksim::forward<Fs>(futures)...))
+      tup_(mars_boost::csbl::make_tuple(mars_boost::forward<F>(f), mars_boost::forward<Fs>(futures)...))
     {
     }
 
@@ -5536,7 +5536,7 @@ namespace detail
         // TODO make use of apply(that->tup_, wait_for_any_fctr);
         that->wait_for_any(Index());
 
-        that->mark_finished_with_result(mars_boost_ksim::move(that->tup_));
+        that->mark_finished_with_result(mars_boost::move(that->tup_));
       } catch(...) {
         that->mark_exceptional_finish();
       }
@@ -5571,7 +5571,7 @@ namespace detail
     future_when_any_tuple_shared_state(values_tag,
         BOOST_THREAD_FWD_REF(F) f, BOOST_THREAD_FWD_REF(Fs) ... futures
     ) :
-      tup_(mars_boost_ksim::csbl::make_tuple(mars_boost_ksim::forward<F>(f), mars_boost_ksim::forward<Fs>(futures)...))
+      tup_(mars_boost::csbl::make_tuple(mars_boost::forward<F>(f), mars_boost::forward<Fs>(futures)...))
     {
     }
 
@@ -5582,7 +5582,7 @@ namespace detail
 }
 
   template< typename InputIterator>
-  typename mars_boost_ksim::disable_if<is_future_type<InputIterator>,
+  typename mars_boost::disable_if<is_future_type<InputIterator>,
     BOOST_THREAD_FUTURE<csbl::vector<typename InputIterator::value_type>  >
   >::type
   when_all(InputIterator first, InputIterator last) {
@@ -5609,14 +5609,14 @@ namespace detail
     typedef detail::future_when_all_tuple_shared_state<container_type, typename decay<T0>::type, typename decay<T>::type...> factory_type;
 
     shared_ptr<factory_type>
-        h(new factory_type(detail::values_tag_value, mars_boost_ksim::forward<T0>(f), mars_boost_ksim::forward<T>(futures)...));
+        h(new factory_type(detail::values_tag_value, mars_boost::forward<T0>(f), mars_boost::forward<T>(futures)...));
     h->init();
     return BOOST_THREAD_FUTURE<container_type>(h);
   }
 #endif
 
   template< typename InputIterator>
-  typename mars_boost_ksim::disable_if<is_future_type<InputIterator>,
+  typename mars_boost::disable_if<is_future_type<InputIterator>,
     BOOST_THREAD_FUTURE<csbl::vector<typename InputIterator::value_type>  >
   >::type
   when_any(InputIterator first, InputIterator last) {
@@ -5643,7 +5643,7 @@ namespace detail
     typedef detail::future_when_any_tuple_shared_state<container_type, typename decay<T0>::type, typename decay<T>::type...> factory_type;
 
     shared_ptr<factory_type>
-        h(new factory_type(detail::values_tag_value, mars_boost_ksim::forward<T0>(f), mars_boost_ksim::forward<T>(futures)...));
+        h(new factory_type(detail::values_tag_value, mars_boost::forward<T0>(f), mars_boost::forward<T>(futures)...));
     h->init();
     return BOOST_THREAD_FUTURE<container_type>(h);
   }

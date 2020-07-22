@@ -20,7 +20,7 @@
 #include <boost/assert.hpp>
 #include <boost/cstdint.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace random {
 namespace detail {
 
@@ -246,7 +246,7 @@ public:
     // base should have the same number of bits as mod
     // base, and mod should both be able to hold a power
     // of 2 >= mod_bits.  out needs to be twice as large.
-    static void mod_pow_x(mars_boost_ksim::uintmax_t exponent, const digit_t * mod, std::size_t mod_bits, digit_t * out)
+    static void mod_pow_x(mars_boost::uintmax_t exponent, const digit_t * mod, std::size_t mod_bits, digit_t * out)
     {
         const std::size_t bits = std::numeric_limits<digit_t>::digits;
         const std::size_t n = (mod_bits + bits - 1) / bits;
@@ -256,8 +256,8 @@ public:
             std::fill_n(out + 1, n - 1, digit_t(0));
             return;
         }
-        mars_boost_ksim::uintmax_t i = std::numeric_limits<mars_boost_ksim::uintmax_t>::digits - 1;
-        while(((mars_boost_ksim::uintmax_t(1) << i) & exponent) == 0) {
+        mars_boost::uintmax_t i = std::numeric_limits<mars_boost::uintmax_t>::digits - 1;
+        while(((mars_boost::uintmax_t(1) << i) & exponent) == 0) {
             --i;
         }
         out[0] = 2;
@@ -266,7 +266,7 @@ public:
         while(i--) {
             sqr(out, n);
             m(out, 2 * mod_bits - 1);
-            if((mars_boost_ksim::uintmax_t(1) << i) & exponent) {
+            if((mars_boost::uintmax_t(1) << i) & exponent) {
                 shift_left(out, n, 1);
                 if(out[highbit / bits] & (digit_t(1) << highbit%bits))
                     add(n, out, mod, out);
@@ -337,7 +337,7 @@ public:
         _size = n;
     }
     friend polynomial operator*(const polynomial &lhs, const polynomial &rhs);
-    friend polynomial mod_pow_x(mars_boost_ksim::uintmax_t exponent, polynomial mod);
+    friend polynomial mod_pow_x(mars_boost::uintmax_t exponent, polynomial mod);
 private:
     std::vector<polynomial_ops::digit_t> _storage;
     std::size_t _size;
@@ -365,7 +365,7 @@ inline polynomial operator*(const polynomial &lhs, const polynomial &rhs)
     return result;
 }
 
-inline polynomial mod_pow_x(mars_boost_ksim::uintmax_t exponent, polynomial mod)
+inline polynomial mod_pow_x(mars_boost::uintmax_t exponent, polynomial mod)
 {
     polynomial result;
     mod.normalize();

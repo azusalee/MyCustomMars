@@ -19,17 +19,17 @@
 
 #include <boost/core/typeinfo.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 namespace detail
 {
 
-typedef mars_boost_ksim::core::typeinfo sp_typeinfo;
+typedef mars_boost::core::typeinfo sp_typeinfo;
 
 } // namespace detail
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #define BOOST_SP_TYPEID(T) BOOST_CORE_TYPEID(T)
 

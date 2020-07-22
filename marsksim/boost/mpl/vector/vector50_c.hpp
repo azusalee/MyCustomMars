@@ -33,7 +33,7 @@
 #   include <boost/mpl/aux_/config/ctps.hpp>
 #   include <boost/preprocessor/iterate.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl {
 
 #   define BOOST_PP_ITERATION_PARAMS_1 \
     (3,(41, 50, <boost/mpl/vector/aux_/numbered_c.hpp>))

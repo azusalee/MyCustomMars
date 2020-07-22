@@ -16,7 +16,7 @@
 #include <boost/type_traits/remove_reference.hpp>
 #include <boost/type_traits/remove_cv.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim 
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost 
 {
 
    namespace detail
@@ -34,10 +34,10 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     private:
         typedef typename remove_reference<T>::type Ty;
     public:
-       typedef typename mars_boost_ksim::detail::decay_imp<Ty, mars_boost_ksim::is_array<Ty>::value, mars_boost_ksim::is_function<Ty>::value>::type type;
+       typedef typename mars_boost::detail::decay_imp<Ty, mars_boost::is_array<Ty>::value, mars_boost::is_function<Ty>::value>::type type;
     };
     
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 
 #endif // BOOST_TT_DECAY_HPP_INCLUDED

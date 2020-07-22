@@ -19,7 +19,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   class latch
   {
@@ -71,7 +71,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     /// Blocks until the latch has counted down to zero.
     void wait()
     {
-      mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(mutex_);
+      mars_boost::unique_lock<boost_ksim::mutex> lk(mutex_);
       if (count_ == 0) return;
       std::size_t generation(generation_);
       cond_.wait(lk, detail::not_equal(generation, generation_));
@@ -80,7 +80,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     /// @return true if the internal counter is already 0, false otherwise
     bool try_wait()
     {
-      mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(mutex_);
+      mars_boost::unique_lock<boost_ksim::mutex> lk(mutex_);
       return (count_ == 0);
     }
 
@@ -89,7 +89,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template <class Rep, class Period>
     cv_status wait_for(const chrono::duration<Rep, Period>& rel_time)
     {
-      mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(mutex_);
+      mars_boost::unique_lock<boost_ksim::mutex> lk(mutex_);
       if (count_ == 0) return cv_status::no_timeout;
       std::size_t generation(generation_);
       return cond_.wait_for(lk, rel_time, detail::not_equal(generation, generation_))
@@ -102,7 +102,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     template <class Clock, class Duration>
     cv_status wait_until(const chrono::time_point<Clock, Duration>& abs_time)
     {
-      mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(mutex_);
+      mars_boost::unique_lock<boost_ksim::mutex> lk(mutex_);
       if (count_ == 0) return cv_status::no_timeout;
       std::size_t generation(generation_);
       return cond_.wait_until(lk, abs_time, detail::not_equal(generation, generation_))
@@ -114,14 +114,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     /// @Requires count must be greater than 0
     void count_down()
     {
-      mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(mutex_);
+      mars_boost::unique_lock<boost_ksim::mutex> lk(mutex_);
       count_down(lk);
     }
     /// Effect: Decrement the count if it is > 0 and notify anyone waiting if we reached zero.
     /// Returns: true if count_ was 0 or reached 0.
     bool try_count_down()
     {
-      mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(mutex_);
+      mars_boost::unique_lock<boost_ksim::mutex> lk(mutex_);
       return try_count_down(lk);
     }
     void signal()
@@ -134,7 +134,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     /// @Requires count must be greater than 0
     void count_down_and_wait()
     {
-      mars_boost_ksim::unique_lock<boost_ksim::mutex> lk(mutex_);
+      mars_boost::unique_lock<boost_ksim::mutex> lk(mutex_);
       std::size_t generation(generation_);
       if (count_down(lk))
       {
@@ -151,7 +151,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     /// #Requires This method may only be invoked when there are no other threads currently inside the count_down_and_wait() method.
     void reset(std::size_t count)
     {
-      mars_boost_ksim::lock_guard<boost_ksim::mutex> lk(mutex_);
+      mars_boost::lock_guard<boost_ksim::mutex> lk(mutex_);
       //BOOST_ASSERT(count_ == 0);
       count_ = count;
     }
@@ -163,7 +163,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     std::size_t generation_;
   };
 
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #include <boost/config/abi_suffix.hpp>
 

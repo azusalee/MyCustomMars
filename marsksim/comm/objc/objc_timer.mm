@@ -12,12 +12,12 @@
 #include "comm/thread/lock.h"
 #include "comm/alarm.h"
 
-void onAlarm(long long _id)
+void onAlarmksimksim(long long _id)
 {
-//    Alarm::OnAlarm(reinterpret_cast<Alarm*>(_id));
+//    Alarmksim::OnAlarmksim(reinterpret_cast<Alarmksim*>(_id));
 }
 
-@interface TimerRuner : NSObject
+@interface TimerRunerksim : NSObject
 -(void) Run:(NSTimer*)timer;
 @end
 
@@ -32,13 +32,13 @@ struct TimerRecord
     
     long long id_;
     NSTimer* timer;
-    TimerRuner* timer_runer;
+    TimerRunerksim* timer_runer;
 };
 
 static std::list<TimerRecord> gs_lst_timer_record;
 static Mutex gs_mutex;
 
-@implementation TimerRuner
+@implementation TimerRunerksim
 
 -(void) Run:(NSTimer*)timer
 {
@@ -62,7 +62,7 @@ static Mutex gs_mutex;
             long long id_ = it->id_;
             gs_lst_timer_record.erase(it);
 
-            onAlarm(id_);
+            onAlarmksimksim(id_);
             break;
         }
     }
@@ -70,7 +70,7 @@ static Mutex gs_mutex;
 
 @end
 
-bool StartAlarm(long long _id, int after)
+bool StartksimAlarmksim(long long _id, int after)
 {
     ScopedLock lock(gs_mutex);
     for (std::list<TimerRecord>::iterator it = gs_lst_timer_record.begin(); it!=gs_lst_timer_record.end(); ++it)
@@ -82,7 +82,7 @@ bool StartAlarm(long long _id, int after)
     NSRunLoop *runLoop = [NSRunLoop mainRunLoop];
     TimerRecord tr;
     tr.id_ = _id;
-    tr.timer_runer = [[TimerRuner alloc] init];
+    tr.timer_runer = [[TimerRunerksim alloc] init];
     tr.timer = [NSTimer timerWithTimeInterval:interval target:tr.timer_runer selector:@selector(Run:) userInfo:tr.timer repeats:NO];
     [tr.timer retain];
     [runLoop addTimer:tr.timer forMode:NSDefaultRunLoopMode];
@@ -90,7 +90,7 @@ bool StartAlarm(long long _id, int after)
     return true;
 }
 
-bool StopAlarm(long long _id)
+bool StopksimAlarmksim(long long _id)
 {
     ScopedLock lock(gs_mutex);
     for (std::list<TimerRecord>::iterator it = gs_lst_timer_record.begin(); it!=gs_lst_timer_record.end(); ++it)
@@ -115,4 +115,4 @@ bool StopAlarm(long long _id)
     return false;
 }
 
-void comm_export_symbols_0(){}
+void comm_export_symbolsksim_0(){}

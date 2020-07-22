@@ -15,7 +15,7 @@
 #if defined BOOST_NO_CXX11_ALLOCATOR
 #include <boost/container/scoped_allocator.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace csbl
   {
@@ -24,7 +24,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
   }
 }
 #else
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace csbl
   {
@@ -33,7 +33,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
   }
 }
 #endif // BOOST_NO_CXX11_ALLOCATOR
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   using ::boost_ksim::csbl::allocator_arg_t;
   using ::boost_ksim::csbl::allocator_arg;

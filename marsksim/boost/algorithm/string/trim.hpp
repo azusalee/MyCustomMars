@@ -35,7 +35,7 @@
 
 */
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
     namespace algorithm {
 
     //  left trim  -----------------------------------------------//
@@ -63,14 +63,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             const RangeT& Input,
             PredicateT IsSpace)
         {
-            iterator_range<BOOST_STRING_TYPENAME range_const_iterator<RangeT>::type> lit_range(::mars_boost_ksim::as_literal(Input));
+            iterator_range<BOOST_STRING_TYPENAME range_const_iterator<RangeT>::type> lit_range(::mars_boost::as_literal(Input));
 
             std::copy( 
-                ::mars_boost_ksim::algorithm::detail::trim_begin( 
-                    ::mars_boost_ksim::begin(lit_range), 
-                    ::mars_boost_ksim::end(lit_range), 
+                ::mars_boost::algorithm::detail::trim_begin( 
+                    ::mars_boost::begin(lit_range), 
+                    ::mars_boost::end(lit_range), 
                     IsSpace ),
-                ::mars_boost_ksim::end(lit_range),
+                ::mars_boost::end(lit_range),
                 Output);
 
             return Output;
@@ -84,11 +84,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         inline SequenceT trim_left_copy_if(const SequenceT& Input, PredicateT IsSpace)
         {
             return SequenceT( 
-                ::mars_boost_ksim::algorithm::detail::trim_begin( 
-                    ::mars_boost_ksim::begin(Input), 
-                    ::mars_boost_ksim::end(Input), 
+                ::mars_boost::algorithm::detail::trim_begin( 
+                    ::mars_boost::begin(Input), 
+                    ::mars_boost::end(Input), 
                     IsSpace ),
-                ::mars_boost_ksim::end(Input));
+                ::mars_boost::end(Input));
         }
 
         //! Left trim - parametric
@@ -106,7 +106,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         inline SequenceT trim_left_copy(const SequenceT& Input, const std::locale& Loc=std::locale())
         {
             return            
-                ::mars_boost_ksim::algorithm::trim_left_copy_if(
+                ::mars_boost::algorithm::trim_left_copy_if(
                     Input, 
                     is_space(Loc));
         }
@@ -124,10 +124,10 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         inline void trim_left_if(SequenceT& Input, PredicateT IsSpace)
         {
             Input.erase( 
-                ::mars_boost_ksim::begin(Input),
-                ::mars_boost_ksim::algorithm::detail::trim_begin( 
-                    ::mars_boost_ksim::begin(Input), 
-                    ::mars_boost_ksim::end(Input), 
+                ::mars_boost::begin(Input),
+                ::mars_boost::algorithm::detail::trim_begin( 
+                    ::mars_boost::begin(Input), 
+                    ::mars_boost::end(Input), 
                     IsSpace));
         }
 
@@ -142,7 +142,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         template<typename SequenceT>
         inline void trim_left(SequenceT& Input, const std::locale& Loc=std::locale())
         {
-            ::mars_boost_ksim::algorithm::trim_left_if( 
+            ::mars_boost::algorithm::trim_left_if( 
                 Input, 
                 is_space(Loc));
         }
@@ -171,13 +171,13 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             const RangeT& Input,
             PredicateT IsSpace )
         {
-            iterator_range<BOOST_STRING_TYPENAME range_const_iterator<RangeT>::type> lit_range(::mars_boost_ksim::as_literal(Input));
+            iterator_range<BOOST_STRING_TYPENAME range_const_iterator<RangeT>::type> lit_range(::mars_boost::as_literal(Input));
          
             std::copy( 
-                ::mars_boost_ksim::begin(lit_range),
-                ::mars_boost_ksim::algorithm::detail::trim_end( 
-                    ::mars_boost_ksim::begin(lit_range), 
-                    ::mars_boost_ksim::end(lit_range), 
+                ::mars_boost::begin(lit_range),
+                ::mars_boost::algorithm::detail::trim_end( 
+                    ::mars_boost::begin(lit_range), 
+                    ::mars_boost::end(lit_range), 
                     IsSpace ),
                 Output );
 
@@ -192,10 +192,10 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         inline SequenceT trim_right_copy_if(const SequenceT& Input, PredicateT IsSpace)
         {
             return SequenceT( 
-                ::mars_boost_ksim::begin(Input),
-                ::mars_boost_ksim::algorithm::detail::trim_end( 
-                    ::mars_boost_ksim::begin(Input), 
-                    ::mars_boost_ksim::end(Input), 
+                ::mars_boost::begin(Input),
+                ::mars_boost::algorithm::detail::trim_end( 
+                    ::mars_boost::begin(Input), 
+                    ::mars_boost::end(Input), 
                     IsSpace)
                 );
         }
@@ -215,7 +215,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         inline SequenceT trim_right_copy(const SequenceT& Input, const std::locale& Loc=std::locale())
         {
             return 
-                ::mars_boost_ksim::algorithm::trim_right_copy_if( 
+                ::mars_boost::algorithm::trim_right_copy_if( 
                     Input, 
                     is_space(Loc));
         }
@@ -234,11 +234,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         inline void trim_right_if(SequenceT& Input, PredicateT IsSpace)
         {
             Input.erase(
-                ::mars_boost_ksim::algorithm::detail::trim_end( 
-                    ::mars_boost_ksim::begin(Input), 
-                    ::mars_boost_ksim::end(Input), 
+                ::mars_boost::algorithm::detail::trim_end( 
+                    ::mars_boost::begin(Input), 
+                    ::mars_boost::end(Input), 
                     IsSpace ),
-                ::mars_boost_ksim::end(Input)
+                ::mars_boost::end(Input)
                 );
         }
 
@@ -254,7 +254,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         template<typename SequenceT>
         inline void trim_right(SequenceT& Input, const std::locale& Loc=std::locale())
         {
-            ::mars_boost_ksim::algorithm::trim_right_if(
+            ::mars_boost::algorithm::trim_right_if(
                 Input, 
                 is_space(Loc) );
         }
@@ -283,18 +283,18 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             const RangeT& Input,
             PredicateT IsSpace)
         {
-            iterator_range<BOOST_STRING_TYPENAME range_const_iterator<RangeT>::type> lit_range(::mars_boost_ksim::as_literal(Input));
+            iterator_range<BOOST_STRING_TYPENAME range_const_iterator<RangeT>::type> lit_range(::mars_boost::as_literal(Input));
 
             BOOST_STRING_TYPENAME 
                 range_const_iterator<RangeT>::type TrimEnd=
-                ::mars_boost_ksim::algorithm::detail::trim_end( 
-                    ::mars_boost_ksim::begin(lit_range), 
-                    ::mars_boost_ksim::end(lit_range), 
+                ::mars_boost::algorithm::detail::trim_end( 
+                    ::mars_boost::begin(lit_range), 
+                    ::mars_boost::end(lit_range), 
                     IsSpace);
 
             std::copy( 
                 detail::trim_begin( 
-                    ::mars_boost_ksim::begin(lit_range), TrimEnd, IsSpace),
+                    ::mars_boost::begin(lit_range), TrimEnd, IsSpace),
                 TrimEnd,
                 Output
                 );
@@ -311,14 +311,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
             BOOST_STRING_TYPENAME 
                 range_const_iterator<SequenceT>::type TrimEnd=
-                    ::mars_boost_ksim::algorithm::detail::trim_end( 
-                        ::mars_boost_ksim::begin(Input), 
-                        ::mars_boost_ksim::end(Input), 
+                    ::mars_boost::algorithm::detail::trim_end( 
+                        ::mars_boost::begin(Input), 
+                        ::mars_boost::end(Input), 
                         IsSpace);
 
             return SequenceT( 
                 detail::trim_begin( 
-                    ::mars_boost_ksim::begin(Input), 
+                    ::mars_boost::begin(Input), 
                     TrimEnd, 
                     IsSpace),
                 TrimEnd
@@ -340,7 +340,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         inline SequenceT trim_copy( const SequenceT& Input, const std::locale& Loc=std::locale() )
         {
             return
-                ::mars_boost_ksim::algorithm::trim_copy_if(
+                ::mars_boost::algorithm::trim_copy_if(
                     Input, 
                     is_space(Loc) );
         }
@@ -357,8 +357,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         template<typename SequenceT, typename PredicateT>
         inline void trim_if(SequenceT& Input, PredicateT IsSpace)
         {
-            ::mars_boost_ksim::algorithm::trim_right_if( Input, IsSpace );
-            ::mars_boost_ksim::algorithm::trim_left_if( Input, IsSpace );
+            ::mars_boost::algorithm::trim_right_if( Input, IsSpace );
+            ::mars_boost::algorithm::trim_left_if( Input, IsSpace );
         }
 
         //! Trim
@@ -372,7 +372,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         template<typename SequenceT>
         inline void trim(SequenceT& Input, const std::locale& Loc=std::locale())
         {
-            ::mars_boost_ksim::algorithm::trim_if(
+            ::mars_boost::algorithm::trim_if(
                 Input, 
                 is_space( Loc ) );
         }
@@ -393,6 +393,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     using algorithm::trim_copy;
     using algorithm::trim_copy_if;
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif  // BOOST_STRING_TRIM_HPP

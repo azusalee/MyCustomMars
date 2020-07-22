@@ -17,7 +17,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace executors
   {
@@ -69,7 +69,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
      * Whatever exception that can be throw while storing the closure.
      */
     void submit(BOOST_THREAD_RV_REF(work) closure) {
-      ex.submit(mars_boost_ksim::move(closure));
+      ex.submit(mars_boost::move(closure));
     }
 //    void submit(work& closure) {
 //      ex.submit(closure);
@@ -139,7 +139,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
     void submit(BOOST_THREAD_RV_REF(work) closure)
     {
-      ex->submit(mars_boost_ksim::move(closure));
+      ex->submit(mars_boost::move(closure));
     }
 
 #if defined(BOOST_NO_CXX11_RVALUE_REFERENCES)
@@ -147,22 +147,22 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     void submit(Closure & closure)
     {
       //work w ((closure));
-      //submit(mars_boost_ksim::move(w));
+      //submit(mars_boost::move(w));
       submit(work(closure));
     }
 #endif
     void submit(void (*closure)())
     {
       work w ((closure));
-      submit(mars_boost_ksim::move(w));
+      submit(mars_boost::move(w));
       //submit(work(closure));
     }
 
     template <typename Closure>
     void submit(BOOST_THREAD_FWD_REF(Closure) closure)
     {
-      work w((mars_boost_ksim::forward<Closure>(closure)));
-      submit(mars_boost_ksim::move(w));
+      work w((mars_boost::forward<Closure>(closure)));
+      submit(mars_boost::move(w));
     }
 
 //    size_t num_pending_closures() const

@@ -18,7 +18,7 @@
 #include <boost/config.hpp>
 #include <string>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace
 mars_boost
     {
     template <class T>
@@ -69,10 +69,10 @@ mars_boost
         }
     }
 
-#define BOOST_EXCEPTION_STATIC_TYPEID(T) ::mars_boost_ksim::exception_detail::type_info_(BOOST_CORE_TYPEID(T))
+#define BOOST_EXCEPTION_STATIC_TYPEID(T) ::mars_boost::exception_detail::type_info_(BOOST_CORE_TYPEID(T))
 
 #ifndef BOOST_NO_RTTI
-#define BOOST_EXCEPTION_DYNAMIC_TYPEID(x) ::mars_boost_ksim::exception_detail::type_info_(typeid(x))
+#define BOOST_EXCEPTION_DYNAMIC_TYPEID(x) ::mars_boost::exception_detail::type_info_(typeid(x))
 #endif
 
 #if defined(_MSC_VER) && !defined(BOOST_EXCEPTION_ENABLE_WARNINGS)

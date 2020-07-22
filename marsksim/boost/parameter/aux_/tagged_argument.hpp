@@ -17,7 +17,7 @@
 # include <boost/type_traits/is_convertible.hpp>
 # include <boost/type_traits/is_reference.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace parameter { namespace aux {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace parameter { namespace aux {
 
 struct empty_arg_list;
 struct arg_list_tag;
@@ -45,7 +45,7 @@ struct tagged_argument : tagged_argument_base
         struct apply
         {
           typedef typename mpl::eval_if<
-                mars_boost_ksim::is_same<KW, key_type>
+                mars_boost::is_same<KW, key_type>
               , mpl::if_<Reference, reference, value_type>
               , mpl::identity<Default>
           >::type type;
@@ -182,7 +182,7 @@ struct is_tagged_argument
     >
 {};
 
-}}} // namespace mars_boost_ksim::parameter::aux
+}}} // namespace mars_boost::parameter::aux
 
 #endif // BOOST_PARAMETER_TAGGED_ARGUMENT_050328_HPP
 

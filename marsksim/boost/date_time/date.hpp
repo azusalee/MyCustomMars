@@ -13,7 +13,7 @@
 #include <boost/date_time/year_month_day.hpp>
 #include <boost/date_time/special_defs.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace date_time {
 
   //!Representation of timepoint at the one day level resolution.
@@ -51,8 +51,8 @@ namespace date_time {
 
   template<class T, class calendar, class duration_type_>
   class date : private
-       mars_boost_ksim::less_than_comparable<T
-     , mars_boost_ksim::equality_comparable<T
+       mars_boost::less_than_comparable<T
+     , mars_boost::equality_comparable<T
     > >
   {
   public:

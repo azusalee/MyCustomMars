@@ -15,7 +15,7 @@
 #include <boost/iterator/iterator_facade.hpp>
 #include <boost/range/iterator_range.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range_detail
     {
@@ -32,18 +32,18 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         // loop on many compilers.
         template<typename Integer>
         class integer_iterator
-            : public mars_boost_ksim::iterator_facade<
+            : public mars_boost::iterator_facade<
                         integer_iterator<Integer>,
                         Integer,
-                        mars_boost_ksim::random_access_traversal_tag,
+                        mars_boost::random_access_traversal_tag,
                         Integer,
                         std::ptrdiff_t
                     >
         {
-            typedef mars_boost_ksim::iterator_facade<
+            typedef mars_boost::iterator_facade<
                         integer_iterator<Integer>,
                         Integer,
-                        mars_boost_ksim::random_access_traversal_tag,
+                        mars_boost::random_access_traversal_tag,
                         Integer,
                         std::ptrdiff_t
                     > base_t;
@@ -109,18 +109,18 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         // is the solution.
         template<typename Integer>
         class integer_iterator_with_step
-            : public mars_boost_ksim::iterator_facade<
+            : public mars_boost::iterator_facade<
                         integer_iterator_with_step<Integer>,
                         Integer,
-                        mars_boost_ksim::random_access_traversal_tag,
+                        mars_boost::random_access_traversal_tag,
                         Integer,
                         std::ptrdiff_t
                     >
         {
-            typedef mars_boost_ksim::iterator_facade<
+            typedef mars_boost::iterator_facade<
                         integer_iterator_with_step<Integer>,
                         Integer,
-                        mars_boost_ksim::random_access_traversal_tag,
+                        mars_boost::random_access_traversal_tag,
                         Integer,
                         std::ptrdiff_t
                     > base_t;
@@ -231,6 +231,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             iterator_t(first, num_steps, step_size));
     }
 
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

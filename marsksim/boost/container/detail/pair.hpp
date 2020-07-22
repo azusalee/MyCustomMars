@@ -33,7 +33,7 @@
 #include <boost/intrusive/detail/minimal_pair_header.hpp>      //pair
 #include <boost/move/utility_core.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace container {
 namespace container_detail {
 
@@ -103,7 +103,7 @@ struct pair
 
    //pair move constructor
    pair(BOOST_RV_REF(pair) p)
-      : first(::mars_boost_ksim::move(p.first)), second(::mars_boost_ksim::move(p.second))
+      : first(::mars_boost::move(p.first)), second(::mars_boost::move(p.second))
    {}
 
    template <class D, class S>
@@ -113,7 +113,7 @@ struct pair
 
    template <class D, class S>
    pair(BOOST_RV_REF_BEG pair<D, S> BOOST_RV_REF_END p)
-      : first(::mars_boost_ksim::move(p.first)), second(::mars_boost_ksim::move(p.second))
+      : first(::mars_boost::move(p.first)), second(::mars_boost::move(p.second))
    {}
 
    //pair from two values
@@ -124,8 +124,8 @@ struct pair
 
    template<class U, class V>
    pair(BOOST_FWD_REF(U) u, BOOST_FWD_REF(V) v)
-      : first(::mars_boost_ksim::forward<U>(u))
-      , second(::mars_boost_ksim::forward<V>(v))
+      : first(::mars_boost::forward<U>(u))
+      , second(::mars_boost::forward<V>(v))
    {}
 
    //And now compatibility with std::pair
@@ -139,12 +139,12 @@ struct pair
    {}
 
    pair(BOOST_RV_REF_BEG std::pair<T1, T2> BOOST_RV_REF_END p)
-      : first(::mars_boost_ksim::move(p.first)), second(::mars_boost_ksim::move(p.second))
+      : first(::mars_boost::move(p.first)), second(::mars_boost::move(p.second))
    {}
 
    template <class D, class S>
    pair(BOOST_RV_REF_BEG std::pair<D, S> BOOST_RV_REF_END p)
-      : first(::mars_boost_ksim::move(p.first)), second(::mars_boost_ksim::move(p.second))
+      : first(::mars_boost::move(p.first)), second(::mars_boost::move(p.second))
    {}
 
    //piecewise_construct missing
@@ -164,16 +164,16 @@ struct pair
    //pair move assignment
    pair& operator=(BOOST_RV_REF(pair) p)
    {
-      first  = ::mars_boost_ksim::move(p.first);
-      second = ::mars_boost_ksim::move(p.second);
+      first  = ::mars_boost::move(p.first);
+      second = ::mars_boost::move(p.second);
       return *this;
    }
 
    template <class D, class S>
-   typename ::mars_boost_ksim::container::container_detail::disable_if_or
+   typename ::mars_boost::container::container_detail::disable_if_or
       < pair &
-      , ::mars_boost_ksim::container::container_detail::is_same<T1, D>
-      , ::mars_boost_ksim::container::container_detail::is_same<T2, S>
+      , ::mars_boost::container::container_detail::is_same<T1, D>
+      , ::mars_boost::container::container_detail::is_same<T2, S>
       >::type
       operator=(const pair<D, S>&p)
    {
@@ -183,15 +183,15 @@ struct pair
    }
 
    template <class D, class S>
-   typename ::mars_boost_ksim::container::container_detail::disable_if_or
+   typename ::mars_boost::container::container_detail::disable_if_or
       < pair &
-      , ::mars_boost_ksim::container::container_detail::is_same<T1, D>
-      , ::mars_boost_ksim::container::container_detail::is_same<T2, S>
+      , ::mars_boost::container::container_detail::is_same<T1, D>
+      , ::mars_boost::container::container_detail::is_same<T2, S>
       >::type
       operator=(BOOST_RV_REF_BEG pair<D, S> BOOST_RV_REF_END p)
    {
-      first  = ::mars_boost_ksim::move(p.first);
-      second = ::mars_boost_ksim::move(p.second);
+      first  = ::mars_boost::move(p.first);
+      second = ::mars_boost::move(p.second);
       return *this;
    }
 //std::pair copy assignment
@@ -205,32 +205,32 @@ struct pair
    template <class D, class S>
    pair& operator=(const std::pair<D, S> &p)
    {
-      first  = ::mars_boost_ksim::move(p.first);
-      second = ::mars_boost_ksim::move(p.second);
+      first  = ::mars_boost::move(p.first);
+      second = ::mars_boost::move(p.second);
       return *this;
    }
 
    //std::pair move assignment
    pair& operator=(BOOST_RV_REF_BEG std::pair<T1, T2> BOOST_RV_REF_END p)
    {
-      first  = ::mars_boost_ksim::move(p.first);
-      second = ::mars_boost_ksim::move(p.second);
+      first  = ::mars_boost::move(p.first);
+      second = ::mars_boost::move(p.second);
       return *this;
    }
 
    template <class D, class S>
    pair& operator=(BOOST_RV_REF_BEG std::pair<D, S> BOOST_RV_REF_END p)
    {
-      first  = ::mars_boost_ksim::move(p.first);
-      second = ::mars_boost_ksim::move(p.second);
+      first  = ::mars_boost::move(p.first);
+      second = ::mars_boost::move(p.second);
       return *this;
    }
 
    //swap
    void swap(pair& p)
    {
-      ::mars_boost_ksim::adl_move_swap(this->first, p.first);
-      ::mars_boost_ksim::adl_move_swap(this->second, p.second);
+      ::mars_boost::adl_move_swap(this->first, p.first);
+      ::mars_boost::adl_move_swap(this->second, p.second);
    }
 };
 
@@ -278,7 +278,7 @@ template<class T>
 struct is_enum;
 
 template<class T, class U>
-struct is_enum< ::mars_boost_ksim::container::container_detail::pair<T, U> >
+struct is_enum< ::mars_boost::container::container_detail::pair<T, U> >
 {
    static const bool value = false;
 };
@@ -289,7 +289,7 @@ struct is_class;
 //This specialization is needed to avoid instantiation of pair in
 //is_class, and allow recursive maps.
 template <class T1, class T2>
-struct is_class< ::mars_boost_ksim::container::container_detail::pair<T1, T2> >
+struct is_class< ::mars_boost::container::container_detail::pair<T1, T2> >
 {
    static const bool value = true;
 };
@@ -297,7 +297,7 @@ struct is_class< ::mars_boost_ksim::container::container_detail::pair<T1, T2> >
 #ifdef BOOST_NO_CXX11_RVALUE_REFERENCES
 
 template<class T1, class T2>
-struct has_move_emulation_enabled< ::mars_boost_ksim::container::container_detail::pair<T1, T2> >
+struct has_move_emulation_enabled< ::mars_boost::container::container_detail::pair<T1, T2> >
 {
    static const bool value = true;
 };
@@ -310,7 +310,7 @@ template<class T>
 struct is_class_or_union;
 
 template <class T1, class T2>
-struct is_class_or_union< ::mars_boost_ksim::container::container_detail::pair<T1, T2> >
+struct is_class_or_union< ::mars_boost::container::container_detail::pair<T1, T2> >
 //This specialization is needed to avoid instantiation of pair in
 //is_class, and allow recursive maps.
 {
@@ -320,7 +320,7 @@ struct is_class_or_union< ::mars_boost_ksim::container::container_detail::pair<T
 
 }  //namespace move_detail{
 
-}  //namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+}  //namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 #include <boost/container/detail/config_end.hpp>
 

@@ -29,12 +29,12 @@
 #define BOOST_PP_FILENAME_1 <boost/signals2/detail/signal_template.hpp>
 #include BOOST_PP_ITERATE()
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace signals2
   {
     template<typename Signature,
-      typename Combiner = optional_last_value<typename mars_boost_ksim::function_traits<Signature>::result_type>,
+      typename Combiner = optional_last_value<typename mars_boost::function_traits<Signature>::result_type>,
       typename Group = int,
       typename GroupCompare = std::less<Group>,
       typename SlotFunction = function<Signature>,
@@ -44,7 +44,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       Signature, Combiner, Group, GroupCompare, SlotFunction, ExtendedSlotFunction, Mutex>::type
     {
     private:
-      typedef typename detail::signalN<mars_boost_ksim::function_traits<Signature>::arity,
+      typedef typename detail::signalN<mars_boost::function_traits<Signature>::arity,
         Signature, Combiner, Group, GroupCompare, SlotFunction, ExtendedSlotFunction, Mutex>::type base_type;
     public:
       signal(const Combiner &combiner_arg = Combiner(), const GroupCompare &group_compare = GroupCompare()):

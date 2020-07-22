@@ -22,7 +22,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
   /**
@@ -32,7 +32,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
    */
 
   //[externally_locked
-  template <typename T, typename MutexType = mars_boost_ksim::mutex>
+  template <typename T, typename MutexType = mars_boost::mutex>
   class externally_locked;
   template <typename T, typename MutexType>
   class externally_locked

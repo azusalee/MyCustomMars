@@ -55,9 +55,9 @@
 // BOOST_MOVE_IS_POD(T) should evaluate to true if T is a POD type
 // BOOST_MOVE_HAS_TRIVIAL_CONSTRUCTOR(T) should evaluate to true if "T x;" has no effect
 // BOOST_MOVE_HAS_TRIVIAL_COPY(T) should evaluate to true if T(t) <==> memcpy
-// BOOST_MOVE_HAS_TRIVIAL_MOVE_CONSTRUCTOR(T) should evaluate to true if T(mars_boost_ksim::move(t)) <==> memcpy
+// BOOST_MOVE_HAS_TRIVIAL_MOVE_CONSTRUCTOR(T) should evaluate to true if T(mars_boost::move(t)) <==> memcpy
 // BOOST_MOVE_HAS_TRIVIAL_ASSIGN(T) should evaluate to true if t = u <==> memcpy
-// BOOST_MOVE_HAS_TRIVIAL_MOVE_ASSIGN(T) should evaluate to true if t = mars_boost_ksim::move(u) <==> memcpy
+// BOOST_MOVE_HAS_TRIVIAL_MOVE_ASSIGN(T) should evaluate to true if t = mars_boost::move(u) <==> memcpy
 // BOOST_MOVE_HAS_TRIVIAL_DESTRUCTOR(T) should evaluate to true if ~T() has no effect
 // BOOST_MOVE_HAS_NOTHROW_CONSTRUCTOR(T) should evaluate to true if "T x;" can not throw
 // BOOST_MOVE_HAS_NOTHROW_COPY(T) should evaluate to true if T(t) can not throw
@@ -88,17 +88,17 @@
 #   define BOOST_MOVE_IS_POD(T)                    (__is_pod(T) && __has_trivial_constructor(T))
 #   define BOOST_MOVE_IS_EMPTY(T)                  __is_empty(T)
 #   define BOOST_MOVE_HAS_TRIVIAL_CONSTRUCTOR(T)   __has_trivial_constructor(T)
-#   define BOOST_MOVE_HAS_TRIVIAL_COPY(T)          (__has_trivial_copy(T)|| ::mars_boost_ksim::move_detail::is_pod<T>::value)
-#   define BOOST_MOVE_HAS_TRIVIAL_ASSIGN(T)        (__has_trivial_assign(T) || ::mars_boost_ksim::move_detail::is_pod<T>::value)
-#   define BOOST_MOVE_HAS_TRIVIAL_DESTRUCTOR(T)    (__has_trivial_destructor(T) || ::mars_boost_ksim::move_detail::is_pod<T>::value)
-#   define BOOST_MOVE_HAS_NOTHROW_CONSTRUCTOR(T)   (__has_nothrow_constructor(T) || ::mars_boost_ksim::move_detail::is_trivially_default_constructible<T>::value)
-#   define BOOST_MOVE_HAS_NOTHROW_COPY(T)          (__has_nothrow_copy(T) || ::mars_boost_ksim::move_detail::is_trivially_copy_constructible<T>::value)
-#   define BOOST_MOVE_HAS_NOTHROW_ASSIGN(T)        (__has_nothrow_assign(T) || ::mars_boost_ksim::move_detail::is_trivially_copy_assignable<T>::value)
+#   define BOOST_MOVE_HAS_TRIVIAL_COPY(T)          (__has_trivial_copy(T)|| ::mars_boost::move_detail::is_pod<T>::value)
+#   define BOOST_MOVE_HAS_TRIVIAL_ASSIGN(T)        (__has_trivial_assign(T) || ::mars_boost::move_detail::is_pod<T>::value)
+#   define BOOST_MOVE_HAS_TRIVIAL_DESTRUCTOR(T)    (__has_trivial_destructor(T) || ::mars_boost::move_detail::is_pod<T>::value)
+#   define BOOST_MOVE_HAS_NOTHROW_CONSTRUCTOR(T)   (__has_nothrow_constructor(T) || ::mars_boost::move_detail::is_trivially_default_constructible<T>::value)
+#   define BOOST_MOVE_HAS_NOTHROW_COPY(T)          (__has_nothrow_copy(T) || ::mars_boost::move_detail::is_trivially_copy_constructible<T>::value)
+#   define BOOST_MOVE_HAS_NOTHROW_ASSIGN(T)        (__has_nothrow_assign(T) || ::mars_boost::move_detail::is_trivially_copy_assignable<T>::value)
 
 #   define BOOST_MOVE_IS_ENUM(T) __is_enum(T)
 #   if defined(_MSC_VER) && (_MSC_VER >= 1700)
-#       define BOOST_MOVE_HAS_TRIVIAL_MOVE_CONSTRUCTOR(T)   (__has_trivial_move_constructor(T) || ::mars_boost_ksim::move_detail::is_pod<T>::value)
-#       define BOOST_MOVE_HAS_TRIVIAL_MOVE_ASSIGN(T)        (__has_trivial_move_assign(T) || ::mars_boost_ksim::move_detail::is_pod<T>::value)
+#       define BOOST_MOVE_HAS_TRIVIAL_MOVE_CONSTRUCTOR(T)   (__has_trivial_move_constructor(T) || ::mars_boost::move_detail::is_pod<T>::value)
+#       define BOOST_MOVE_HAS_TRIVIAL_MOVE_ASSIGN(T)        (__has_trivial_move_assign(T) || ::mars_boost::move_detail::is_pod<T>::value)
 #   endif
 #endif
 
@@ -119,7 +119,7 @@
 #   if __has_feature(has_trivial_copy)
 #     //There are problems with deleted copy constructors detected as trivially copyable.
 #     //http://stackoverflow.com/questions/12754886/has-trivial-copy-behaves-differently-in-clang-and-gcc-whos-right
-#     define BOOST_MOVE_HAS_TRIVIAL_COPY(T) (__has_trivial_copy(T) && ::mars_boost_ksim::move_detail::is_copy_constructible<T>::value)
+#     define BOOST_MOVE_HAS_TRIVIAL_COPY(T) (__has_trivial_copy(T) && ::mars_boost::move_detail::is_copy_constructible<T>::value)
 #   endif
 #   if __has_feature(has_trivial_assign)
 #     define BOOST_MOVE_HAS_TRIVIAL_ASSIGN(T) (__has_trivial_assign(T) )
@@ -151,7 +151,7 @@
 #if defined(__GNUC__) && ((__GNUC__ > 4) || ((__GNUC__ == 4) && (__GNUC_MINOR__ >= 3) && !defined(__GCCXML__))) && !defined(BOOST_CLANG)
 
 #ifdef BOOST_INTEL
-#  define BOOST_MOVE_INTEL_TT_OPTS || ::mars_boost_ksim::move_detail::is_pod<T>::value
+#  define BOOST_MOVE_INTEL_TT_OPTS || ::mars_boost::move_detail::is_pod<T>::value
 #else
 #  define BOOST_MOVE_INTEL_TT_OPTS
 #endif
@@ -220,99 +220,99 @@
 
 #ifdef BOOST_MOVE_IS_POD
    //in some compilers the intrinsic is limited to class types so add scalar and void
-   #define BOOST_MOVE_IS_POD_IMPL(T) (::mars_boost_ksim::move_detail::is_scalar<T>::value ||\
-                                      ::mars_boost_ksim::move_detail::is_void<T>::value   ||\
+   #define BOOST_MOVE_IS_POD_IMPL(T) (::mars_boost::move_detail::is_scalar<T>::value ||\
+                                      ::mars_boost::move_detail::is_void<T>::value   ||\
                                        BOOST_MOVE_IS_POD(T))
 #else
    #define BOOST_MOVE_IS_POD_IMPL(T) \
-      (::mars_boost_ksim::move_detail::is_scalar<T>::value || ::mars_boost_ksim::move_detail::is_void<T>::value)
+      (::mars_boost::move_detail::is_scalar<T>::value || ::mars_boost::move_detail::is_void<T>::value)
 #endif
 
 #ifdef BOOST_MOVE_IS_EMPTY
    #define BOOST_MOVE_IS_EMPTY_IMPL(T) BOOST_MOVE_IS_EMPTY(T)
 #else
-   #define BOOST_MOVE_IS_EMPTY_IMPL(T)    ::mars_boost_ksim::move_detail::is_empty_nonintrinsic<T>::value
+   #define BOOST_MOVE_IS_EMPTY_IMPL(T)    ::mars_boost::move_detail::is_empty_nonintrinsic<T>::value
 #endif
 
 #ifdef BOOST_MOVE_HAS_TRIVIAL_COPY
    #define BOOST_MOVE_IS_TRIVIALLY_COPY_CONSTRUCTIBLE(T)   BOOST_MOVE_HAS_TRIVIAL_COPY(T)
 #else
-   #define BOOST_MOVE_IS_TRIVIALLY_COPY_CONSTRUCTIBLE(T)   ::mars_boost_ksim::move_detail::is_pod<T>::value
+   #define BOOST_MOVE_IS_TRIVIALLY_COPY_CONSTRUCTIBLE(T)   ::mars_boost::move_detail::is_pod<T>::value
 #endif
 
 #ifdef BOOST_MOVE_HAS_TRIVIAL_CONSTRUCTOR
    #define BOOST_MOVE_IS_TRIVIALLY_DEFAULT_CONSTRUCTIBLE(T)  BOOST_MOVE_HAS_TRIVIAL_CONSTRUCTOR(T)
 #else
-   #define BOOST_MOVE_IS_TRIVIALLY_DEFAULT_CONSTRUCTIBLE(T)  ::mars_boost_ksim::move_detail::is_pod<T>::value
+   #define BOOST_MOVE_IS_TRIVIALLY_DEFAULT_CONSTRUCTIBLE(T)  ::mars_boost::move_detail::is_pod<T>::value
 #endif
 
 #ifdef BOOST_MOVE_HAS_TRIVIAL_COPY
    #define BOOST_MOVE_IS_TRIVIALLY_COPY_CONSTRUCTIBLE(T)   BOOST_MOVE_HAS_TRIVIAL_COPY(T)
 #else
-   #define BOOST_MOVE_IS_TRIVIALLY_COPY_CONSTRUCTIBLE(T)   ::mars_boost_ksim::move_detail::is_pod<T>::value
+   #define BOOST_MOVE_IS_TRIVIALLY_COPY_CONSTRUCTIBLE(T)   ::mars_boost::move_detail::is_pod<T>::value
 #endif
 
 #ifdef BOOST_MOVE_HAS_TRIVIAL_MOVE_CONSTRUCTOR
    #define BOOST_MOVE_IS_TRIVIALLY_MOVE_CONSTRUCTIBLE(T)   BOOST_MOVE_HAS_TRIVIAL_MOVE_CONSTRUCTOR(T)
 #else
-   #define BOOST_MOVE_IS_TRIVIALLY_MOVE_CONSTRUCTIBLE(T)   ::mars_boost_ksim::move_detail::is_pod<T>::value
+   #define BOOST_MOVE_IS_TRIVIALLY_MOVE_CONSTRUCTIBLE(T)   ::mars_boost::move_detail::is_pod<T>::value
 #endif
 
 #ifdef BOOST_MOVE_HAS_TRIVIAL_ASSIGN
    #define BOOST_MOVE_IS_TRIVIALLY_COPY_ASSIGNABLE(T) BOOST_MOVE_HAS_TRIVIAL_ASSIGN(T)
 #else
-   #define BOOST_MOVE_IS_TRIVIALLY_COPY_ASSIGNABLE(T) ::mars_boost_ksim::move_detail::is_pod<T>::value
+   #define BOOST_MOVE_IS_TRIVIALLY_COPY_ASSIGNABLE(T) ::mars_boost::move_detail::is_pod<T>::value
 #endif
 
 #ifdef BOOST_MOVE_HAS_TRIVIAL_MOVE_ASSIGN
    #define BOOST_MOVE_IS_TRIVIALLY_MOVE_ASSIGNABLE(T)  BOOST_MOVE_HAS_TRIVIAL_MOVE_ASSIGN(T)
 #else
-   #define BOOST_MOVE_IS_TRIVIALLY_MOVE_ASSIGNABLE(T)  ::mars_boost_ksim::move_detail::is_pod<T>::value
+   #define BOOST_MOVE_IS_TRIVIALLY_MOVE_ASSIGNABLE(T)  ::mars_boost::move_detail::is_pod<T>::value
 #endif
 
 #ifdef BOOST_MOVE_HAS_TRIVIAL_DESTRUCTOR
    #define BOOST_MOVE_IS_TRIVIALLY_DESTRUCTIBLE(T)   BOOST_MOVE_HAS_TRIVIAL_DESTRUCTOR(T)
 #else
-   #define BOOST_MOVE_IS_TRIVIALLY_DESTRUCTIBLE(T)   ::mars_boost_ksim::move_detail::is_pod<T>::value
+   #define BOOST_MOVE_IS_TRIVIALLY_DESTRUCTIBLE(T)   ::mars_boost::move_detail::is_pod<T>::value
 #endif
 
 #ifdef BOOST_MOVE_HAS_NOTHROW_CONSTRUCTOR
    #define BOOST_MOVE_IS_NOTHROW_DEFAULT_CONSTRUCTIBLE(T)  BOOST_MOVE_HAS_NOTHROW_CONSTRUCTOR(T)
 #else
-   #define BOOST_MOVE_IS_NOTHROW_DEFAULT_CONSTRUCTIBLE(T)  ::mars_boost_ksim::move_detail::is_pod<T>::value
+   #define BOOST_MOVE_IS_NOTHROW_DEFAULT_CONSTRUCTIBLE(T)  ::mars_boost::move_detail::is_pod<T>::value
 #endif
 
 #ifdef BOOST_MOVE_HAS_NOTHROW_COPY
    #define BOOST_MOVE_IS_NOTHROW_COPY_CONSTRUCTIBLE(T)   BOOST_MOVE_HAS_NOTHROW_COPY(T)
 #else
-   #define BOOST_MOVE_IS_NOTHROW_COPY_CONSTRUCTIBLE(T)   ::mars_boost_ksim::move_detail::is_pod<T>::value
+   #define BOOST_MOVE_IS_NOTHROW_COPY_CONSTRUCTIBLE(T)   ::mars_boost::move_detail::is_pod<T>::value
 #endif
 
 #ifdef BOOST_MOVE_HAS_NOTHROW_MOVE
    #define BOOST_MOVE_IS_NOTHROW_MOVE_CONSTRUCTIBLE(T)   BOOST_MOVE_HAS_NOTHROW_MOVE(T)
 #else
-   #define BOOST_MOVE_IS_NOTHROW_MOVE_CONSTRUCTIBLE(T)   ::mars_boost_ksim::move_detail::is_pod<T>::value
+   #define BOOST_MOVE_IS_NOTHROW_MOVE_CONSTRUCTIBLE(T)   ::mars_boost::move_detail::is_pod<T>::value
 #endif
 
 #ifdef BOOST_MOVE_HAS_NOTHROW_ASSIGN
    #define BOOST_MOVE_IS_NOTHROW_COPY_ASSIGNABLE(T) BOOST_MOVE_HAS_NOTHROW_ASSIGN(T)
 #else
-   #define BOOST_MOVE_IS_NOTHROW_COPY_ASSIGNABLE(T) ::mars_boost_ksim::move_detail::is_pod<T>::value
+   #define BOOST_MOVE_IS_NOTHROW_COPY_ASSIGNABLE(T) ::mars_boost::move_detail::is_pod<T>::value
 #endif
 
 #ifdef BOOST_MOVE_HAS_NOTHROW_MOVE_ASSIGN
    #define BOOST_MOVE_IS_NOTHROW_MOVE_ASSIGNABLE(T) BOOST_MOVE_HAS_NOTHROW_MOVE_ASSIGN(T)
 #else
-   #define BOOST_MOVE_IS_NOTHROW_MOVE_ASSIGNABLE(T) ::mars_boost_ksim::move_detail::is_pod<T>::value
+   #define BOOST_MOVE_IS_NOTHROW_MOVE_ASSIGNABLE(T) ::mars_boost::move_detail::is_pod<T>::value
 #endif
 
 #ifdef BOOST_MOVE_IS_ENUM
    #define BOOST_MOVE_IS_ENUM_IMPL(T)   BOOST_MOVE_IS_ENUM(T)
 #else
-   #define BOOST_MOVE_IS_ENUM_IMPL(T)   ::mars_boost_ksim::move_detail::is_enum_nonintrinsic<T>::value
+   #define BOOST_MOVE_IS_ENUM_IMPL(T)   ::mars_boost::move_detail::is_enum_nonintrinsic<T>::value
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace move_detail {
 
 //////////////////////////
@@ -415,7 +415,7 @@ template <> struct make_unsigned_impl<signed short>               {  typedef uns
 template <> struct make_unsigned_impl<signed int>                 {  typedef unsigned int   type; };
 template <> struct make_unsigned_impl<signed long>                {  typedef unsigned long  type; };
 #ifdef BOOST_HAS_LONG_LONG
-template <> struct make_unsigned_impl< ::mars_boost_ksim::long_long_type >  {  typedef ::mars_boost_ksim::ulong_long_type type; };
+template <> struct make_unsigned_impl< ::mars_boost::long_long_type >  {  typedef ::mars_boost::ulong_long_type type; };
 #endif
 
 template <class T>
@@ -460,8 +460,8 @@ template<> struct is_integral_cv<             unsigned int>{  static const bool 
 template<> struct is_integral_cv<                     long>{  static const bool value = true; };
 template<> struct is_integral_cv<            unsigned long>{  static const bool value = true; };
 #ifdef BOOST_HAS_LONG_LONG
-template<> struct is_integral_cv< ::mars_boost_ksim:: long_long_type>{  static const bool value = true; };
-template<> struct is_integral_cv< ::mars_boost_ksim::ulong_long_type>{  static const bool value = true; };
+template<> struct is_integral_cv< ::mars_boost:: long_long_type>{  static const bool value = true; };
+template<> struct is_integral_cv< ::mars_boost::ulong_long_type>{  static const bool value = true; };
 #endif
 
 template<class T>
@@ -744,7 +744,7 @@ struct is_copy_constructible
    // Intel compiler has problems with SFINAE for copy constructors and deleted functions:
    //
    // error: function *function_name* cannot be referenced -- it is a deleted function
-   // static yes_type test(U&, decltype(U(mars_boost_ksim::declval<U&>()))* = 0);
+   // static yes_type test(U&, decltype(U(mars_boost::declval<U&>()))* = 0);
    //                                                        ^ 
    // MSVC 12.0 (Visual 2013) has problems when the copy constructor has been deleted. See:
    // https://connect.microsoft.com/VisualStudio/feedback/details/800328/std-is-copy-constructible-is-broken
@@ -780,7 +780,7 @@ struct is_copy_assignable
 // Intel compiler has problems with SFINAE for copy constructors and deleted functions:
 //
 // error: function *function_name* cannot be referenced -- it is a deleted function
-// static mars_boost_ksim::type_traits::yes_type test(T1&, decltype(T1(mars_boost_ksim::declval<T1&>()))* = 0);
+// static mars_boost::type_traits::yes_type test(T1&, decltype(T1(mars_boost::declval<T1&>()))* = 0);
 //                                                        ^ 
 //
 // MSVC 12.0 (Visual 2013) has problems when the copy constructor has been deleted. See:
@@ -821,8 +821,8 @@ struct is_trivially_copy_constructible
 {
    //In several compilers BOOST_MOVE_IS_TRIVIALLY_COPY_CONSTRUCTIBLE return true even with
    //deleted copy constructors so make sure the type is copy constructible.
-   static const bool value = ::mars_boost_ksim::move_detail::is_pod<T>::value ||
-                             ( ::mars_boost_ksim::move_detail::is_copy_constructible<T>::value &&
+   static const bool value = ::mars_boost::move_detail::is_pod<T>::value ||
+                             ( ::mars_boost::move_detail::is_copy_constructible<T>::value &&
                                BOOST_MOVE_IS_TRIVIALLY_COPY_CONSTRUCTIBLE(T) );
 };
 
@@ -841,8 +841,8 @@ struct is_trivially_copy_assignable
 {
    //In several compilers BOOST_MOVE_IS_TRIVIALLY_COPY_CONSTRUCTIBLE return true even with
    //deleted copy constructors so make sure the type is copy constructible.
-   static const bool value = ::mars_boost_ksim::move_detail::is_pod<T>::value ||
-                             ( ::mars_boost_ksim::move_detail::is_copy_assignable<T>::value &&
+   static const bool value = ::mars_boost::move_detail::is_pod<T>::value ||
+                             ( ::mars_boost::move_detail::is_copy_assignable<T>::value &&
                                BOOST_MOVE_IS_TRIVIALLY_COPY_ASSIGNABLE(T) );
 };                             
 
@@ -952,7 +952,7 @@ union max_align
    int         int_;
    long        long_;
    #ifdef BOOST_HAS_LONG_LONG
-   ::mars_boost_ksim::long_long_type   long_long_;
+   ::mars_boost::long_long_type   long_long_;
    #endif
    float       float_;
    double      double_;
@@ -1035,8 +1035,8 @@ struct aligned_next<Len, Align, max_align_t, false>
    BOOST_MOVE_ALIGNED_NEXT_STEP(long double, max_align_t)
    BOOST_MOVE_ALIGNED_NEXT_STEP(double, long double)
    #ifdef BOOST_HAS_LONG_LONG
-      BOOST_MOVE_ALIGNED_NEXT_STEP(::mars_boost_ksim::long_long_type, double)
-      BOOST_MOVE_ALIGNED_NEXT_STEP(long, ::mars_boost_ksim::long_long_type)
+      BOOST_MOVE_ALIGNED_NEXT_STEP(::mars_boost::long_long_type, double)
+      BOOST_MOVE_ALIGNED_NEXT_STEP(long, ::mars_boost::long_long_type)
    #else
       BOOST_MOVE_ALIGNED_NEXT_STEP(long, double)
    #endif
@@ -1071,7 +1071,7 @@ struct aligned_storage
 };
 
 }  //namespace move_detail {
-}  //namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+}  //namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 #include <boost/move/detail/config_end.hpp>
 

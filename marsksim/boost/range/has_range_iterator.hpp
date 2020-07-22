@@ -20,7 +20,7 @@
 #include <boost/type_traits/remove_reference.hpp>
 #include <boost/utility/enable_if.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range_detail
     {
@@ -28,7 +28,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         template<class T, class Enabler = void>
         struct has_range_iterator_impl
-            : mars_boost_ksim::mpl::false_
+            : mars_boost::mpl::false_
         {
         };
 
@@ -43,13 +43,13 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 >::type
             >::type
         >
-            : mars_boost_ksim::mpl::true_
+            : mars_boost::mpl::true_
         {
         };
 
         template<class T, class Enabler = void>
         struct has_range_const_iterator_impl
-            : mars_boost_ksim::mpl::false_
+            : mars_boost::mpl::false_
         {
         };
 
@@ -60,7 +60,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 has_type<range_const_iterator<T> >
             >::type
         >
-            : mars_boost_ksim::mpl::true_
+            : mars_boost::mpl::true_
         {
         };
 
@@ -77,7 +77,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         : range_detail::has_range_const_iterator_impl<
             BOOST_DEDUCED_TYPENAME remove_reference<T>::type>
     {};
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard
 

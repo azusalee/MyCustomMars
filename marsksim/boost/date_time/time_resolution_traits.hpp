@@ -15,7 +15,7 @@
 #include <boost/date_time/int_adapter.hpp>
 #include <boost/date_time/compiler_config.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace date_time {
 
   //! Simple function to calculate absolute value of a numeric type
@@ -29,32 +29,32 @@ namespace date_time {
 
   //! traits struct for time_resolution_traits implementation type
   struct time_resolution_traits_bi32_impl {
-    typedef mars_boost_ksim::int32_t int_type;
-    typedef mars_boost_ksim::int32_t impl_type;
+    typedef mars_boost::int32_t int_type;
+    typedef mars_boost::int32_t impl_type;
     static int_type as_number(impl_type i){ return i;}
     //! Used to determine if implemented type is int_adapter or int
     static bool is_adapted() { return false;}
   };
   //! traits struct for time_resolution_traits implementation type
   struct time_resolution_traits_adapted32_impl {
-    typedef mars_boost_ksim::int32_t int_type;
-    typedef mars_boost_ksim::date_time::int_adapter<mars_boost_ksim::int32_t> impl_type;
+    typedef mars_boost::int32_t int_type;
+    typedef mars_boost::date_time::int_adapter<mars_boost::int32_t> impl_type;
     static int_type as_number(impl_type i){ return i.as_number();}
     //! Used to determine if implemented type is int_adapter or int
     static bool is_adapted() { return true;}
   };
   //! traits struct for time_resolution_traits implementation type
   struct time_resolution_traits_bi64_impl {
-    typedef mars_boost_ksim::int64_t int_type;
-    typedef mars_boost_ksim::int64_t impl_type;
+    typedef mars_boost::int64_t int_type;
+    typedef mars_boost::int64_t impl_type;
     static int_type as_number(impl_type i){ return i;}
     //! Used to determine if implemented type is int_adapter or int
     static bool is_adapted() { return false;}
   };
   //! traits struct for time_resolution_traits implementation type
   struct time_resolution_traits_adapted64_impl {
-    typedef mars_boost_ksim::int64_t int_type;
-    typedef mars_boost_ksim::date_time::int_adapter<mars_boost_ksim::int64_t> impl_type;
+    typedef mars_boost::int64_t int_type;
+    typedef mars_boost::date_time::int_adapter<mars_boost::int64_t> impl_type;
     static int_type as_number(impl_type i){ return i.as_number();}
     //! Used to determine if implemented type is int_adapter or int
     static bool is_adapted() { return true;}
@@ -63,12 +63,12 @@ namespace date_time {
   template<typename frac_sec_type,
            time_resolutions res,
 #if (defined(BOOST_MSVC) && (_MSC_VER < 1300))
-           mars_boost_ksim::int64_t resolution_adjust,
+           mars_boost::int64_t resolution_adjust,
 #else
            typename frac_sec_type::int_type resolution_adjust,
 #endif
            unsigned short frac_digits,
-           typename var_type = mars_boost_ksim::int32_t >
+           typename var_type = mars_boost::int32_t >
   class time_resolution_traits {
   public:
     typedef typename frac_sec_type::int_type fractional_seconds_type;
@@ -91,7 +91,7 @@ namespace date_time {
 
     //Would like this to be frac_sec_type, but some compilers complain
 #if (defined(BOOST_MSVC) && (_MSC_VER < 1300))
-    BOOST_STATIC_CONSTANT(mars_boost_ksim::int64_t, ticks_per_second = resolution_adjust);
+    BOOST_STATIC_CONSTANT(mars_boost::int64_t, ticks_per_second = resolution_adjust);
 #else
     BOOST_STATIC_CONSTANT(fractional_seconds_type, ticks_per_second = resolution_adjust);
 #endif

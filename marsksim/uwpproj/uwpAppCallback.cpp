@@ -5,7 +5,7 @@
 using namespace marsksim;
 
 
-std::string uwpAppCallback::GetAppFilePath()
+std::string uwpAppCallbackksim::GetAppFilePath()
 {
 	ICallback_Comm^ callback = Runtime2Cs_Comm::Singletonksim()->GetCallBack();
 
@@ -22,7 +22,7 @@ std::string uwpAppCallback::GetAppFilePath()
 	return strRetFilePath;
 }
 
-marsksim::app::AccountInfo uwpAppCallback::GetAccountInfo()
+marsksim::app::AccountInfo uwpAppCallbackksim::GetAccountInfo()
 {
 	marsksim::app::AccountInfo info;
 
@@ -43,7 +43,7 @@ marsksim::app::AccountInfo uwpAppCallback::GetAccountInfo()
 	return info;
 }
 
-unsigned int uwpAppCallback::GetClientVersion()
+unsigned int uwpAppCallbackksim::GetClientVersion()
 {
 	ICallback_Comm^ callback = Runtime2Cs_Comm::Singletonksim()->GetCallBack();
 	if (nullptr == callback)
@@ -54,7 +54,7 @@ unsigned int uwpAppCallback::GetClientVersion()
 	return callback->GetClientVersion();
 }
 
-marsksim::app::DeviceInfo uwpAppCallback::GetDeviceInfo()
+marsksim::app::DeviceInfo uwpAppCallbackksim::GetDeviceInfo()
 {
 	marsksim::app::DeviceInfo info;
 

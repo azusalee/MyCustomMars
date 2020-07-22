@@ -25,20 +25,20 @@
 
 #ifndef BOOST_NO_EXCEPTIONS
 #include <boost/exception/current_exception_cast.hpp>
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace
 mars_boost
     {
     namespace
     exception_detail
         {
-        std::string diagnostic_information_impl( mars_boost_ksim::exception const *, std::exception const *, bool, bool );
+        std::string diagnostic_information_impl( mars_boost::exception const *, std::exception const *, bool, bool );
         }
 
     inline
     std::string
     current_exception_diagnostic_information( bool verbose=true)
         {
-        mars_boost_ksim::exception const * be=current_exception_cast<mars_boost_ksim::exception const>();
+        mars_boost::exception const * be=current_exception_cast<mars_boost::exception const>();
         std::exception const * se=current_exception_cast<std::exception const>();
         if( be || se )
             return exception_detail::diagnostic_information_impl(be,se,true,verbose);
@@ -48,7 +48,7 @@ mars_boost
     }
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace
 mars_boost
     {
     namespace
@@ -107,13 +107,13 @@ mars_boost
 
         inline
         std::string
-        diagnostic_information_impl( mars_boost_ksim::exception const * be, std::exception const * se, bool with_what, bool verbose )
+        diagnostic_information_impl( mars_boost::exception const * be, std::exception const * se, bool with_what, bool verbose )
             {
             if( !be && !se )
                 return "Unknown exception.";
 #ifndef BOOST_NO_RTTI
             if( !be )
-                be=dynamic_cast<mars_boost_ksim::exception const *>(se);
+                be=dynamic_cast<mars_boost::exception const *>(se);
             if( !se )
                 se=dynamic_cast<std::exception const *>(be);
 #endif
@@ -183,7 +183,7 @@ mars_boost
             if( char const * di=exception_detail::get_diagnostic_information(e,0) )
                 return di;
             else
-                return "Failed to produce mars_boost_ksim::diagnostic_information_what()";
+                return "Failed to produce mars_boost::diagnostic_information_what()";
 #ifndef BOOST_NO_EXCEPTIONS
             }
         catch(

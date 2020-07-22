@@ -7,7 +7,7 @@
 #ifndef BOOST_COROUTINES_FLAGS_H
 #define BOOST_COROUTINES_FLAGS_H
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace coroutines {
 
 enum flag_unwind_t

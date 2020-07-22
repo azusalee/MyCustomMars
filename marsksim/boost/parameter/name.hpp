@@ -21,7 +21,7 @@
 #  include <boost/utility/enable_if.hpp>
 #  include <boost/mpl/lambda.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace parameter { namespace aux {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace parameter { namespace aux {
 
 // Tag type passed to MPL lambda.
 struct lambda_tag;
@@ -38,14 +38,14 @@ struct is_name_tag
   : mpl::false_
 {};
 
-}}} // namespace mars_boost_ksim::parameter::aux
+}}} // namespace mars_boost::parameter::aux
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl {
 
 template <class T>
 struct lambda<
     T
-  , typename mars_boost_ksim::enable_if<
+  , typename mars_boost::enable_if<
         parameter::aux::is_name_tag<T>, parameter::aux::lambda_tag
     >::type
 >
@@ -55,7 +55,7 @@ struct lambda<
     typedef result_ type;
 };
 
-}} // namespace mars_boost_ksim::mpl
+}} // namespace mars_boost::mpl
 
 # endif
 
@@ -84,19 +84,19 @@ struct lambda<
               return BOOST_PP_STRINGIZE(tag);                       \
           }                                                         \
                                                                     \
-          typedef mars_boost_ksim::parameter::value_type<                     \
-              mars_boost_ksim::mpl::_2, tag, mars_boost_ksim::parameter::void_          \
+          typedef mars_boost::parameter::value_type<                     \
+              mars_boost::mpl::_2, tag, mars_boost::parameter::void_          \
           > _;                                                      \
                                                                     \
-          typedef mars_boost_ksim::parameter::value_type<                     \
-              mars_boost_ksim::mpl::_2, tag, mars_boost_ksim::parameter::void_          \
+          typedef mars_boost::parameter::value_type<                     \
+              mars_boost::mpl::_2, tag, mars_boost::parameter::void_          \
           > _1;                                                     \
       };                                                            \
     }                                                               \
     namespace                                                       \
     {                                                               \
-       ::mars_boost_ksim::parameter::keyword<tag_namespace::tag> const& name  \
-       = ::mars_boost_ksim::parameter::keyword<tag_namespace::tag>::instance; \
+       ::mars_boost::parameter::keyword<tag_namespace::tag> const& name  \
+       = ::mars_boost::parameter::keyword<tag_namespace::tag>::instance; \
     }
 
 # define BOOST_PARAMETER_COMPLEX_NAME_TUPLE1(tag,namespace)         \
@@ -138,7 +138,7 @@ struct lambda<
     }                                                               \
     template <class T>                                              \
     struct name                                                     \
-      : mars_boost_ksim::parameter::template_keyword<tag::name, T>            \
+      : mars_boost::parameter::template_keyword<tag::name, T>            \
     {};                                                             \
 /**/
 

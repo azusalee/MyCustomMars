@@ -32,7 +32,7 @@
 #undef PP3
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace type_traits {
 
 // Note it is acceptable to use ellipsis here, since the argument will
@@ -416,7 +416,7 @@ yes_type is_function_ptr_tester(R (__cdecl*)( T0 , T1 , T2 , T3 , T4 , T5 , T6 ,
 #endif // BOOST_TT_PREPROCESSING_MODE
 
 } // namespace type_traits
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_DETAIL_IS_FUNCTION_PTR_TESTER_HPP_INCLUDED
 

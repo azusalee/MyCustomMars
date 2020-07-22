@@ -11,11 +11,11 @@
 
 #include <boost/type_traits/remove_extent.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim 
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost 
 {
 
 template <class T> struct remove_bounds : public remove_extent<T> {};
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_REMOVE_BOUNDS_HPP_INCLUDED

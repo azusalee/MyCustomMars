@@ -17,7 +17,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
   struct caller_context_t
@@ -31,7 +31,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     }
   };
 
-#define BOOST_CONTEXTOF mars_boost_ksim::caller_context_t(__FILE__, __LINE__, BOOST_CURRENT_FUNCTION)
+#define BOOST_CONTEXTOF mars_boost::caller_context_t(__FILE__, __LINE__, BOOST_CURRENT_FUNCTION)
 
   template <typename OStream>
   OStream& operator<<(OStream& os, caller_context_t const& ctx)
@@ -39,7 +39,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #if defined BOOST_THREAD_USES_LOG_THREAD_ID
     {
       io::ios_flags_saver ifs( os );
-      os << std::left << std::setw(14) << mars_boost_ksim::this_thread::get_id() << " ";
+      os << std::left << std::setw(14) << mars_boost::this_thread::get_id() << " ";
     }
 #endif
     {

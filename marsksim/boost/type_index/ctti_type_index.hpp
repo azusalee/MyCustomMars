@@ -10,9 +10,9 @@
 #define BOOST_TYPE_INDEX_CTTI_TYPE_INDEX_HPP
 
 /// \file ctti_type_index.hpp
-/// \brief Contains mars_boost_ksim::typeindex::ctti_type_index class.
+/// \brief Contains mars_boost::typeindex::ctti_type_index class.
 ///
-/// mars_boost_ksim::typeindex::ctti_type_index class can be used as a drop-in replacement 
+/// mars_boost::typeindex::ctti_type_index class can be used as a drop-in replacement 
 /// for std::type_index.
 ///
 /// It is used in situations when typeid() method is not available or 
@@ -30,7 +30,7 @@
 # pragma once
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace typeindex {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace typeindex {
 
 namespace detail {
 
@@ -85,7 +85,7 @@ inline const detail::ctti_data& ctti_construct() BOOST_NOEXCEPT {
     // value.
     //
     // Alignments are checked in `type_index_test_ctti_alignment.cpp` test.
-    return *reinterpret_cast<const detail::ctti_data*>(mars_boost_ksim::detail::ctti<T>::n());
+    return *reinterpret_cast<const detail::ctti_data*>(mars_boost::detail::ctti<T>::n());
 }
 
 /// \class ctti_type_index
@@ -133,8 +133,8 @@ inline const ctti_type_index::type_info_t& ctti_type_index::type_info() const BO
 
 template <class T>
 inline ctti_type_index ctti_type_index::type_id() BOOST_NOEXCEPT {
-    typedef BOOST_DEDUCED_TYPENAME mars_boost_ksim::remove_reference<T>::type no_ref_t;
-    typedef BOOST_DEDUCED_TYPENAME mars_boost_ksim::remove_cv<no_ref_t>::type no_cvr_t;
+    typedef BOOST_DEDUCED_TYPENAME mars_boost::remove_reference<T>::type no_ref_t;
+    typedef BOOST_DEDUCED_TYPENAME mars_boost::remove_cv<no_ref_t>::type no_cvr_t;
     return ctti_construct<no_cvr_t>();
 }
 
@@ -169,11 +169,11 @@ inline std::string ctti_type_index::pretty_name() const {
 
 
 inline std::size_t ctti_type_index::hash_code() const BOOST_NOEXCEPT {
-    return mars_boost_ksim::hash_range(raw_name(), raw_name() + get_raw_name_length());
+    return mars_boost::hash_range(raw_name(), raw_name() + get_raw_name_length());
 }
 
 
-}} // namespace mars_boost_ksim::typeindex
+}} // namespace mars_boost::typeindex
 
 #endif // BOOST_TYPE_INDEX_CTTI_TYPE_INDEX_HPP
 

@@ -8,7 +8,7 @@
 
 #if defined(BOOST_HAS_WINTHREADS) && (defined(BOOST_THREAD_BUILD_LIB) /*|| defined(BOOST_THREAD_TEST) || defined(UNDER_CE)) && (!defined(_MSC_VER) || defined(UNDER_CE)*/)
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     /*
     This file is a "null" implementation of tss cleanup; it's

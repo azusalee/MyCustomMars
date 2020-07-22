@@ -124,12 +124,12 @@ struct assert_relation {};
 
 #else // BOOST_MPL_CFG_ASSERT_USE_RELATION_NAMES
 
-mars_boost_ksim::mpl::aux::weighted_tag<1>::type operator==( assert_, assert_ );
-mars_boost_ksim::mpl::aux::weighted_tag<2>::type operator!=( assert_, assert_ );
-mars_boost_ksim::mpl::aux::weighted_tag<3>::type operator>(  assert_, assert_ );
-mars_boost_ksim::mpl::aux::weighted_tag<4>::type operator>=( assert_, assert_ );
-mars_boost_ksim::mpl::aux::weighted_tag<5>::type operator<( assert_, assert_ );
-mars_boost_ksim::mpl::aux::weighted_tag<6>::type operator<=( assert_, assert_ );
+mars_boost::mpl::aux::weighted_tag<1>::type operator==( assert_, assert_ );
+mars_boost::mpl::aux::weighted_tag<2>::type operator!=( assert_, assert_ );
+mars_boost::mpl::aux::weighted_tag<3>::type operator>(  assert_, assert_ );
+mars_boost::mpl::aux::weighted_tag<4>::type operator>=( assert_, assert_ );
+mars_boost::mpl::aux::weighted_tag<5>::type operator<( assert_, assert_ );
+mars_boost::mpl::aux::weighted_tag<6>::type operator<=( assert_, assert_ );
 
 template< assert_::relations r, long x, long y > struct assert_relation {};
 
@@ -147,7 +147,7 @@ template<class Pred>
 struct eval_assert {
     typedef typename extract_assert_pred<Pred>::type P;
     typedef typename P::type p_type;
-    typedef typename ::mars_boost_ksim::mpl::if_c<p_type::value,
+    typedef typename ::mars_boost::mpl::if_c<p_type::value,
         AUX778076_ASSERT_ARG(assert<false>),
         failed ************ P::************
     >::type type;
@@ -157,9 +157,9 @@ template<class Pred>
 struct eval_assert_not {
     typedef typename extract_assert_pred<Pred>::type P;
     typedef typename P::type p_type;
-    typedef typename ::mars_boost_ksim::mpl::if_c<!p_type::value,
+    typedef typename ::mars_boost::mpl::if_c<!p_type::value,
         AUX778076_ASSERT_ARG(assert<false>),
-        failed ************ ::mars_boost_ksim::mpl::not_<P>::************
+        failed ************ ::mars_boost::mpl::not_<P>::************
     >::type type;
 };
 
@@ -190,7 +190,7 @@ failed ************ (Pred::************
     );
 
 template< typename Pred >
-failed ************ (mars_boost_ksim::mpl::not_<Pred>::************ 
+failed ************ (mars_boost::mpl::not_<Pred>::************ 
       assert_not_arg( void (*)(Pred), typename assert_arg_pred_not<Pred>::type )
     );
 
@@ -226,7 +226,7 @@ typename assert_arg_type<Pred>::type
 assert_arg(void (*)(Pred), int);
 
 template< typename Pred >
-typename assert_arg_type< mars_boost_ksim::mpl::not_<Pred> >::type 
+typename assert_arg_type< mars_boost::mpl::not_<Pred> >::type 
 assert_not_arg(void (*)(Pred), int);
 
 #   if !defined(BOOST_MPL_CFG_ASSERT_USE_RELATION_NAMES)
@@ -253,9 +253,9 @@ BOOST_MPL_AUX_ADL_BARRIER_NAMESPACE_CLOSE
 BOOST_MPL_AUX_ASSERT_CONSTANT( \
       std::size_t \
     , BOOST_PP_CAT(mpl_assertion_in_line_,BOOST_MPL_AUX_PP_COUNTER()) = sizeof( \
-          mars_boost_ksim::mpl::assertion_failed<false>( \
-              mars_boost_ksim::mpl::make_assert_arg< \
-                  typename mars_boost_ksim::mpl::eval_assert<void pred>::type \
+          mars_boost::mpl::assertion_failed<false>( \
+              mars_boost::mpl::make_assert_arg< \
+                  typename mars_boost::mpl::eval_assert<void pred>::type \
                 >() \
             ) \
         ) \
@@ -268,9 +268,9 @@ BOOST_MPL_AUX_ASSERT_CONSTANT( \
 BOOST_MPL_AUX_ASSERT_CONSTANT( \
       std::size_t \
     , BOOST_PP_CAT(mpl_assertion_in_line_,BOOST_MPL_AUX_PP_COUNTER()) = sizeof( \
-          mars_boost_ksim::mpl::assertion_failed<false>( \
-              mars_boost_ksim::mpl::make_assert_arg< \
-                  typename mars_boost_ksim::mpl::eval_assert_not<void pred>::type \
+          mars_boost::mpl::assertion_failed<false>( \
+              mars_boost::mpl::make_assert_arg< \
+                  typename mars_boost::mpl::eval_assert_not<void pred>::type \
                 >() \
             ) \
         ) \
@@ -285,8 +285,8 @@ BOOST_MPL_AUX_ASSERT_CONSTANT( \
 BOOST_MPL_AUX_ASSERT_CONSTANT( \
       std::size_t \
     , BOOST_PP_CAT(mpl_assertion_in_line_,BOOST_MPL_AUX_PP_COUNTER()) = sizeof( \
-          mars_boost_ksim::mpl::assertion_failed<false>( \
-              mars_boost_ksim::mpl::assert_arg( (void (*) pred)0, 1 ) \
+          mars_boost::mpl::assertion_failed<false>( \
+              mars_boost::mpl::assert_arg( (void (*) pred)0, 1 ) \
             ) \
         ) \
     ) \
@@ -298,8 +298,8 @@ BOOST_MPL_AUX_ASSERT_CONSTANT( \
 #   define BOOST_MPL_ASSERT_NOT(pred) \
 enum { \
       BOOST_PP_CAT(mpl_assertion_in_line_,BOOST_MPL_AUX_PP_COUNTER()) = sizeof( \
-          mars_boost_ksim::mpl::assertion<false>::failed( \
-              mars_boost_ksim::mpl::assert_not_arg( (void (*) pred)0, 1 ) \
+          mars_boost::mpl::assertion<false>::failed( \
+              mars_boost::mpl::assert_not_arg( (void (*) pred)0, 1 ) \
             ) \
         ) \
 }\
@@ -309,8 +309,8 @@ enum { \
 BOOST_MPL_AUX_ASSERT_CONSTANT( \
       std::size_t \
     , BOOST_PP_CAT(mpl_assertion_in_line_,BOOST_MPL_AUX_PP_COUNTER()) = sizeof( \
-          mars_boost_ksim::mpl::assertion_failed<false>( \
-              mars_boost_ksim::mpl::assert_not_arg( (void (*) pred)0, 1 ) \
+          mars_boost::mpl::assertion_failed<false>( \
+              mars_boost::mpl::assert_not_arg( (void (*) pred)0, 1 ) \
             ) \
         ) \
    ) \
@@ -330,10 +330,10 @@ enum { BOOST_PP_CAT(mpl_assert_rel_value,counter) = (x rel y) }; \
 BOOST_MPL_AUX_ASSERT_CONSTANT( \
       std::size_t \
     , BOOST_PP_CAT(mpl_assertion_in_line_,counter) = sizeof( \
-        mars_boost_ksim::mpl::assertion_failed<BOOST_PP_CAT(mpl_assert_rel_value,counter)>( \
-            (mars_boost_ksim::mpl::failed ************ ( mars_boost_ksim::mpl::assert_relation< \
-                  mars_boost_ksim::mpl::assert_::relations( sizeof( \
-                      mars_boost_ksim::mpl::assert_::arg rel mars_boost_ksim::mpl::assert_::arg \
+        mars_boost::mpl::assertion_failed<BOOST_PP_CAT(mpl_assert_rel_value,counter)>( \
+            (mars_boost::mpl::failed ************ ( mars_boost::mpl::assert_relation< \
+                  mars_boost::mpl::assert_::relations( sizeof( \
+                      mars_boost::mpl::assert_::arg rel mars_boost::mpl::assert_::arg \
                     ) ) \
                 , x \
                 , y \
@@ -346,16 +346,16 @@ BOOST_MPL_AUX_ASSERT_CONSTANT( \
 BOOST_MPL_AUX_ASSERT_CONSTANT( \
       std::size_t \
     , BOOST_PP_CAT(mpl_assert_rel,counter) = sizeof( \
-          mars_boost_ksim::mpl::assert_::arg rel mars_boost_ksim::mpl::assert_::arg \
+          mars_boost::mpl::assert_::arg rel mars_boost::mpl::assert_::arg \
         ) \
     ); \
 BOOST_MPL_AUX_ASSERT_CONSTANT( bool, BOOST_PP_CAT(mpl_assert_rel_value,counter) = (x rel y) ); \
 BOOST_MPL_AUX_ASSERT_CONSTANT( \
       std::size_t \
     , BOOST_PP_CAT(mpl_assertion_in_line_,counter) = sizeof( \
-        mars_boost_ksim::mpl::assertion_failed<BOOST_PP_CAT(mpl_assert_rel_value,counter)>( \
-              mars_boost_ksim::mpl::assert_rel_arg( mars_boost_ksim::mpl::assert_relation< \
-                  mars_boost_ksim::mpl::assert_::relations(BOOST_PP_CAT(mpl_assert_rel,counter)) \
+        mars_boost::mpl::assertion_failed<BOOST_PP_CAT(mpl_assert_rel_value,counter)>( \
+              mars_boost::mpl::assert_rel_arg( mars_boost::mpl::assert_relation< \
+                  mars_boost::mpl::assert_::relations(BOOST_PP_CAT(mpl_assert_rel,counter)) \
                 , x \
                 , y \
                 >() ) \
@@ -376,8 +376,8 @@ BOOST_MPL_ASSERT_RELATION_IMPL(BOOST_MPL_AUX_PP_COUNTER(), x, rel, y) \
 BOOST_MPL_AUX_ASSERT_CONSTANT( \
       std::size_t \
     , BOOST_PP_CAT(mpl_assertion_in_line_,BOOST_MPL_AUX_PP_COUNTER()) = sizeof( \
-        mars_boost_ksim::mpl::assertion_failed<(x rel y)>( mars_boost_ksim::mpl::assert_rel_arg( \
-              mars_boost_ksim::mpl::BOOST_MPL_AUX_ASSERT_RELATION(x,y,(&mars_boost_ksim::mpl::operator rel))() \
+        mars_boost::mpl::assertion_failed<(x rel y)>( mars_boost::mpl::assert_rel_arg( \
+              mars_boost::mpl::BOOST_MPL_AUX_ASSERT_RELATION(x,y,(&mars_boost::mpl::operator rel))() \
             ) ) \
         ) \
     ) \
@@ -387,8 +387,8 @@ BOOST_MPL_AUX_ASSERT_CONSTANT( \
 BOOST_MPL_AUX_ASSERT_CONSTANT( \
       std::size_t \
     , BOOST_PP_CAT(mpl_assertion_in_line_,BOOST_MPL_AUX_PP_COUNTER()) = sizeof( \
-        mars_boost_ksim::mpl::assertion_failed<(x rel y)>( (mars_boost_ksim::mpl::failed ************ ( \
-            mars_boost_ksim::mpl::BOOST_MPL_AUX_ASSERT_RELATION(x,y,(&mars_boost_ksim::mpl::operator rel))::************))0 ) \
+        mars_boost::mpl::assertion_failed<(x rel y)>( (mars_boost::mpl::failed ************ ( \
+            mars_boost::mpl::BOOST_MPL_AUX_ASSERT_RELATION(x,y,(&mars_boost::mpl::operator rel))::************))0 ) \
         ) \
     ) \
 /**/
@@ -402,31 +402,31 @@ BOOST_MPL_AUX_ASSERT_CONSTANT( \
 #if BOOST_WORKAROUND(__MWERKS__, BOOST_TESTED_AT(0x3202))
 #   define BOOST_MPL_ASSERT_MSG_IMPL( counter, c, msg, types_ ) \
 struct msg; \
-typedef struct BOOST_PP_CAT(msg,counter) : mars_boost_ksim::mpl::assert_ \
+typedef struct BOOST_PP_CAT(msg,counter) : mars_boost::mpl::assert_ \
 { \
-    using mars_boost_ksim::mpl::assert_::types; \
-    static mars_boost_ksim::mpl::failed ************ (msg::************ assert_arg()) types_ \
+    using mars_boost::mpl::assert_::types; \
+    static mars_boost::mpl::failed ************ (msg::************ assert_arg()) types_ \
     { return 0; } \
 } BOOST_PP_CAT(mpl_assert_arg,counter); \
 BOOST_MPL_AUX_ASSERT_CONSTANT( \
       std::size_t \
     , BOOST_PP_CAT(mpl_assertion_in_line_,counter) = sizeof( \
-        mars_boost_ksim::mpl::assertion<(c)>::failed( BOOST_PP_CAT(mpl_assert_arg,counter)::assert_arg() ) \
+        mars_boost::mpl::assertion<(c)>::failed( BOOST_PP_CAT(mpl_assert_arg,counter)::assert_arg() ) \
         ) \
     ) \
 /**/
 #else
 #   define BOOST_MPL_ASSERT_MSG_IMPL( counter, c, msg, types_ )  \
 struct msg; \
-typedef struct BOOST_PP_CAT(msg,counter) : mars_boost_ksim::mpl::assert_ \
+typedef struct BOOST_PP_CAT(msg,counter) : mars_boost::mpl::assert_ \
 { \
-    static mars_boost_ksim::mpl::failed ************ (msg::************ assert_arg()) types_ \
+    static mars_boost::mpl::failed ************ (msg::************ assert_arg()) types_ \
     { return 0; } \
 } BOOST_PP_CAT(mpl_assert_arg,counter); \
 BOOST_MPL_AUX_ASSERT_CONSTANT( \
       std::size_t \
     , BOOST_PP_CAT(mpl_assertion_in_line_,counter) = sizeof( \
-        mars_boost_ksim::mpl::assertion_failed<(c)>( BOOST_PP_CAT(mpl_assert_arg,counter)::assert_arg() ) \
+        mars_boost::mpl::assertion_failed<(c)>( BOOST_PP_CAT(mpl_assert_arg,counter)::assert_arg() ) \
         ) \
     ) \
 /**/

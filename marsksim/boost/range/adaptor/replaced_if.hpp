@@ -22,7 +22,7 @@
 #include <boost/iterator/transform_iterator.hpp>
 #include <boost/optional/optional.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range_detail
     {
@@ -60,21 +60,21 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 Pred  m_pred;
                 Value m_to;
             };
-            mars_boost_ksim::optional<data> m_impl;
+            mars_boost::optional<data> m_impl;
         };
 
         template< class Pred, class R >
         class replaced_if_range :
-            public mars_boost_ksim::iterator_range<
-                mars_boost_ksim::transform_iterator<
+            public mars_boost::iterator_range<
+                mars_boost::transform_iterator<
                     replace_value_if< Pred, BOOST_DEDUCED_TYPENAME range_value<R>::type >,
                     BOOST_DEDUCED_TYPENAME range_iterator<R>::type > >
         {
         private:
             typedef replace_value_if< Pred, BOOST_DEDUCED_TYPENAME range_value<R>::type > Fn;
 
-            typedef mars_boost_ksim::iterator_range<
-                mars_boost_ksim::transform_iterator<
+            typedef mars_boost::iterator_range<
+                mars_boost::transform_iterator<
                     replace_value_if< Pred, BOOST_DEDUCED_TYPENAME range_value<R>::type >,
                     BOOST_DEDUCED_TYPENAME range_iterator<R>::type > > base_t;
 
@@ -82,8 +82,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             typedef BOOST_DEDUCED_TYPENAME range_value<R>::type value_type;
 
             replaced_if_range( R& r, const Pred& pred, value_type to )
-                : base_t( make_transform_iterator( mars_boost_ksim::begin(r), Fn(pred, to) ),
-                          make_transform_iterator( mars_boost_ksim::end(r), Fn(pred, to) ) )
+                : base_t( make_transform_iterator( mars_boost::begin(r), Fn(pred, to) ),
+                          make_transform_iterator( mars_boost::end(r), Fn(pred, to) ) )
             { }
         };
 

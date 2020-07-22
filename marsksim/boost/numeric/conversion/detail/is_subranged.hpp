@@ -25,7 +25,7 @@
 #include "boost/numeric/conversion/detail/sign_mixture.hpp"
 #include "boost/numeric/conversion/detail/udt_builtin_mixture.hpp"
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace numeric { namespace convdetail
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace numeric { namespace convdetail
 {
   //---------------------------------------------------------------
   // Implementations of the compile time predicate "T is subranged"
@@ -227,7 +227,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     typedef typename selected::type type ;
   } ;
 
-} } } // namespace mars_boost_ksim::numeric::convdetail
+} } } // namespace mars_boost::numeric::convdetail
 
 #endif
 

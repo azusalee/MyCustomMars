@@ -21,7 +21,7 @@
 #include <boost/type_traits/detail/mp_defer.hpp>
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 // variadic common_type
@@ -72,7 +72,7 @@ struct common_type: common_type<typename common_type<T1, T2>::type, T3, T4, T5, 
 
 // one argument
 
-template<class T> struct common_type<T>: mars_boost_ksim::decay<T>
+template<class T> struct common_type<T>: mars_boost::decay<T>
 {
 };
 
@@ -91,7 +91,7 @@ namespace type_traits_detail
 
 // internal compiler error on msvc-12.0
 
-template<class T1, class T2> using builtin_common_type = typename mars_boost_ksim::decay<decltype( mars_boost_ksim::declval<bool>()? mars_boost_ksim::declval<T1>(): mars_boost_ksim::declval<T2>() )>::type;
+template<class T1, class T2> using builtin_common_type = typename mars_boost::decay<decltype( mars_boost::declval<bool>()? mars_boost::declval<T1>(): mars_boost::declval<T2>() )>::type;
 
 template<class T1, class T2> struct common_type_impl: mp_defer<builtin_common_type, T1, T2>
 {
@@ -99,13 +99,13 @@ template<class T1, class T2> struct common_type_impl: mp_defer<builtin_common_ty
 
 #else
 
-template<class T1, class T2> using builtin_common_type = decltype( mars_boost_ksim::declval<bool>()? mars_boost_ksim::declval<T1>(): mars_boost_ksim::declval<T2>() );
+template<class T1, class T2> using builtin_common_type = decltype( mars_boost::declval<bool>()? mars_boost::declval<T1>(): mars_boost::declval<T2>() );
 
 template<class T1, class T2> struct common_type_impl_2: mp_defer<builtin_common_type, T1, T2>
 {
 };
 
-template<class T1, class T2> using decay_common_type = typename mars_boost_ksim::decay<typename common_type_impl_2<T1, T2>::type>::type;
+template<class T1, class T2> using decay_common_type = typename mars_boost::decay<typename common_type_impl_2<T1, T2>::type>::type;
 
 template<class T1, class T2> struct common_type_impl: mp_defer<decay_common_type, T1, T2>
 {
@@ -115,7 +115,7 @@ template<class T1, class T2> struct common_type_impl: mp_defer<decay_common_type
 
 #else
 
-template<class T1, class T2> struct common_type_impl: mars_boost_ksim::decay<decltype( mars_boost_ksim::declval<bool>()? mars_boost_ksim::declval<T1>(): mars_boost_ksim::declval<T2>() )>
+template<class T1, class T2> struct common_type_impl: mars_boost::decay<decltype( mars_boost::declval<bool>()? mars_boost::declval<T1>(): mars_boost::declval<T2>() )>
 {
 };
 
@@ -125,7 +125,7 @@ template<class T1, class T2> struct common_type_impl: mars_boost_ksim::decay<dec
 
 // decay helper
 
-template<class T1, class T2, class T1d = typename mars_boost_ksim::decay<T1>::type, class T2d = typename mars_boost_ksim::decay<T2>::type> struct common_type_decay_helper: mars_boost_ksim::common_type<T1d, T2d>
+template<class T1, class T2, class T1d = typename mars_boost::decay<T1>::type, class T2d = typename mars_boost::decay<T2>::type> struct common_type_decay_helper: mars_boost::common_type<T1d, T2d>
 {
 };
 
@@ -139,6 +139,6 @@ template<class T1, class T2> struct common_type<T1, T2>: type_traits_detail::com
 {
 };
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // #ifndef BOOST_TYPE_TRAITS_COMMON_TYPE_HPP_INCLUDED

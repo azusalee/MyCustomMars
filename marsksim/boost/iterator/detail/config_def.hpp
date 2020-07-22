@@ -104,7 +104,7 @@
         T p;
     };
 
-    bool x = mars_boost_ksim::is_convertible<foo<int const*>, foo<int*> >::value;
+    bool x = mars_boost::is_convertible<foo<int const*>, foo<int*> >::value;
 #  endif
 
 #endif

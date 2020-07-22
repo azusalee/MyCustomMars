@@ -14,7 +14,7 @@
 #include <boost/memory_order.hpp>
 #include <pthread.h>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace thread_detail
   {
@@ -87,4 +87,4 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
   } // namespace thread_detail
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost

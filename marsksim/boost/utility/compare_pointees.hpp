@@ -14,7 +14,7 @@
 
 #include<functional>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 // template<class OP> bool equal_pointees(OP const& x, OP const& y);
 // template<class OP> struct equal_pointees_t;
@@ -62,7 +62,7 @@ struct less_pointees_t : std::binary_function<OptionalPointee,OptionalPointee,bo
     { return less_pointees(x,y) ; }
 } ;
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif
 

@@ -15,20 +15,20 @@
 #include <boost/type_traits/add_volatile.hpp>
 #include <boost/type_traits/conditional.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 template<class T, class U> struct copy_cv
 {
 private:
 
-    typedef typename mars_boost_ksim::conditional<mars_boost_ksim::is_const<U>::value, typename mars_boost_ksim::add_const<T>::type, T>::type CT;
+    typedef typename mars_boost::conditional<mars_boost::is_const<U>::value, typename mars_boost::add_const<T>::type, T>::type CT;
 
 public:
 
-    typedef typename mars_boost_ksim::conditional<mars_boost_ksim::is_volatile<U>::value, typename mars_boost_ksim::add_volatile<CT>::type, CT>::type type;
+    typedef typename mars_boost::conditional<mars_boost::is_volatile<U>::value, typename mars_boost::add_volatile<CT>::type, CT>::type type;
 };
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // #ifndef BOOST_TYPE_TRAITS_COPY_CV_HPP_INCLUDED

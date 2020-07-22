@@ -22,18 +22,18 @@
 #include "comm/time_utils.h"
 
 
-CommFrequencyLimit::CommFrequencyLimit(size_t _count, uint64_t _time_span)
+CommFrequencyLimitksim::CommFrequencyLimitksim(size_t _count, uint64_t _time_span)
     : count_(_count)
     , time_span_(_time_span) {
     xassert2(count_ > 0);
     xassert2(time_span_ > 0);
 }
 
-CommFrequencyLimit::~CommFrequencyLimit()
+CommFrequencyLimitksim::~CommFrequencyLimitksim()
 {}
 
 // true pass, false limit
-bool CommFrequencyLimit::Check() {
+bool CommFrequencyLimitksim::Check() {
     uint64_t now = ::gettickcount();
     if (!touch_times_.empty() && (now<touch_times_.front()) ) { //if user modify the time, amend it
     	xwarn2(TSF"Must be modified time.now=%_", now);
@@ -61,7 +61,7 @@ bool CommFrequencyLimit::Check() {
     return true;
 }
 
-void CommFrequencyLimit::__DelOlderTouchTime(uint64_t _time) {
+void CommFrequencyLimitksim::__DelOlderTouchTime(uint64_t _time) {
     for (std::list<uint64_t>::iterator iter = touch_times_.begin(); iter != touch_times_.end();) {
         if ((_time - (*iter)) > time_span_) {
             iter = touch_times_.erase(iter);

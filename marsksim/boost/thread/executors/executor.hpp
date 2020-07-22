@@ -17,7 +17,7 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace executors
   {
@@ -89,21 +89,21 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     void submit(Closure & closure)
     {
       work w ((closure));
-      submit(mars_boost_ksim::move(w));
+      submit(mars_boost::move(w));
     }
 #endif
     void submit(void (*closure)())
     {
       work w ((closure));
-      submit(mars_boost_ksim::move(w));
+      submit(mars_boost::move(w));
     }
 
     template <typename Closure>
     void submit(BOOST_THREAD_FWD_REF(Closure) closure)
     {
-      //submit(work(mars_boost_ksim::forward<Closure>(closure)));
-      work w((mars_boost_ksim::forward<Closure>(closure)));
-      submit(mars_boost_ksim::move(w));
+      //submit(work(mars_boost::forward<Closure>(closure)));
+      work w((mars_boost::forward<Closure>(closure)));
+      submit(mars_boost::move(w));
     }
 
     /**

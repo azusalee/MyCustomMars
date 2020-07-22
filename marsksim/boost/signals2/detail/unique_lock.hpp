@@ -1,5 +1,5 @@
 /*
-  Provides a basic subset of mars_boost_ksim::unique_lock functionality.  Provided only because
+  Provides a basic subset of mars_boost::unique_lock functionality.  Provided only because
   including boost/thread/locks.hpp requires linking to thread library
 */
 // Copyright Frank Mori Hess 2008.
@@ -14,7 +14,7 @@
 
 #include <boost/noncopyable.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
   namespace signals2
   {
@@ -37,6 +37,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       };
     } // namespace detail
   } // namespace signals2
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif  // BOOST_SIGNALS2_UNIQUE_LOCK_HPP

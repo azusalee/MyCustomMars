@@ -8,8 +8,8 @@
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 //
-//  mars_boost_ksim::signals2::mutex is a modification of
-//  mars_boost_ksim::detail::lightweight_mutex to follow the newer Lockable
+//  mars_boost::signals2::mutex is a modification of
+//  mars_boost::detail::lightweight_mutex to follow the newer Lockable
 //  concept of Boost.Thread.
 //
 

@@ -20,7 +20,7 @@
 # include <pthread.h>
 # include <unistd.h>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace chrono {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace chrono {
 
     thread_clock::time_point thread_clock::now( ) BOOST_NOEXCEPT
     {
@@ -66,7 +66,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         {
             if (BOOST_CHRONO_IS_THROWS(ec))
             {
-                mars_boost_ksim::throw_exception(
+                mars_boost::throw_exception(
                         system::system_error(
                                 errno,
                                 BOOST_CHRONO_SYSTEM_CATEGORY,

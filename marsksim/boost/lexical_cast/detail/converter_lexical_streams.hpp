@@ -48,7 +48,7 @@
         // but beware: lexical_cast will understand only 'C' locale delimeters and thousands
         // separators.
 #       error "Unable to use <locale> header. Define BOOST_LEXICAL_CAST_ASSUME_C_LOCALE to force "
-#       error "mars_boost_ksim::lexical_cast to use only 'C' locale during conversions."
+#       error "mars_boost::lexical_cast to use only 'C' locale during conversions."
 #   endif
 #endif
 
@@ -81,7 +81,7 @@
 #   include <cwchar>
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
     namespace detail // basic_unlockedbuf
     {
@@ -133,14 +133,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 , bool RequiresStringbuffer
                 , std::size_t CharacterBufferSize
                 >
-        class lexical_istream_limited_src: mars_boost_ksim::noncopyable {
+        class lexical_istream_limited_src: mars_boost::noncopyable {
             typedef BOOST_DEDUCED_TYPENAME out_stream_helper_trait<CharT, Traits>::buffer_t
                 buffer_t;
 
             typedef BOOST_DEDUCED_TYPENAME out_stream_helper_trait<CharT, Traits>::out_stream_t
                 out_stream_t;
     
-            typedef BOOST_DEDUCED_TYPENAME mars_boost_ksim::mpl::if_c<
+            typedef BOOST_DEDUCED_TYPENAME mars_boost::mpl::if_c<
                 RequiresStringbuffer,
                 out_stream_t,
                 do_not_construct_out_stream_t
@@ -185,8 +185,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             template <class T>
             bool shl_char(T ch) {
                 BOOST_STATIC_ASSERT_MSG(( sizeof(T) <= sizeof(CharT)) ,
-                    "mars_boost_ksim::lexical_cast does not support narrowing of char types."
-                    "Use mars_boost_ksim::locale instead" );
+                    "mars_boost::lexical_cast does not support narrowing of char types."
+                    "Use mars_boost::locale instead" );
 #ifndef BOOST_LEXICAL_CAST_ASSUME_C_LOCALE
                 std::locale loc;
                 CharT const w = BOOST_USE_FACET(std::ctype<CharT>, loc).widen(ch);
@@ -208,8 +208,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             template <class T>
             bool shl_char_array(T const* str) {
                 BOOST_STATIC_ASSERT_MSG(( sizeof(T) <= sizeof(CharT)),
-                    "mars_boost_ksim::lexical_cast does not support narrowing of char types."
-                    "Use mars_boost_ksim::locale instead" );
+                    "mars_boost::lexical_cast does not support narrowing of char types."
+                    "Use mars_boost::locale instead" );
                 return shl_input_streamable(str);
             }
             
@@ -224,7 +224,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #if defined(BOOST_NO_STRINGSTREAM) || defined(BOOST_NO_STD_LOCALE)
                 // If you have compilation error at this point, than your STL library
                 // does not support such conversions. Try updating it.
-                BOOST_STATIC_ASSERT((mars_boost_ksim::is_same<char, CharT>::value));
+                BOOST_STATIC_ASSERT((mars_boost::is_same<char, CharT>::value));
 #endif
 
 #ifndef BOOST_NO_EXCEPTIONS
@@ -256,7 +256,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             template <class T>
             inline bool shl_signed(const T n) {
                 CharT* tmp_finish = buffer + CharacterBufferSize;
-                typedef BOOST_DEDUCED_TYPENAME mars_boost_ksim::make_unsigned<T>::type utype;
+                typedef BOOST_DEDUCED_TYPENAME mars_boost::make_unsigned<T>::type utype;
                 CharT* tmp_start = lcast_put_unsigned<Traits, utype, CharT>(lcast_to_unsigned(n), tmp_finish).convert();
                 if (n < 0) {
                     --tmp_start;
@@ -283,7 +283,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #else
                     sprintf(begin, 
 #endif
-                    "%.*g", static_cast<int>(mars_boost_ksim::detail::lcast_get_precision<float>()), val_as_double);
+                    "%.*g", static_cast<int>(mars_boost::detail::lcast_get_precision<float>()), val_as_double);
                 return finish > start;
             }
 
@@ -295,7 +295,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #else
                     sprintf(begin, 
 #endif
-                    "%.*g", static_cast<int>(mars_boost_ksim::detail::lcast_get_precision<double>()), val);
+                    "%.*g", static_cast<int>(mars_boost::detail::lcast_get_precision<double>()), val);
                 return finish > start;
             }
 
@@ -308,7 +308,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #else
                     sprintf(begin, 
 #endif
-                    "%.*Lg", static_cast<int>(mars_boost_ksim::detail::lcast_get_precision<long double>()), val );
+                    "%.*Lg", static_cast<int>(mars_boost::detail::lcast_get_precision<long double>()), val );
                 return finish > start;
             }
 #endif
@@ -320,7 +320,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
                 const double val_as_double = val;
                 finish = start + swprintf(begin, CharacterBufferSize,
                                        L"%.*g",
-                                       static_cast<int>(mars_boost_ksim::detail::lcast_get_precision<float >()),
+                                       static_cast<int>(mars_boost::detail::lcast_get_precision<float >()),
                                        val_as_double );
                 return finish > start;
             }
@@ -328,14 +328,14 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             bool shl_real_type(double val, wchar_t* begin) {
                 using namespace std;
                 finish = start + swprintf(begin, CharacterBufferSize,
-                                          L"%.*g", static_cast<int>(mars_boost_ksim::detail::lcast_get_precision<double >()), val );
+                                          L"%.*g", static_cast<int>(mars_boost::detail::lcast_get_precision<double >()), val );
                 return finish > start;
             }
 
             bool shl_real_type(long double val, wchar_t* begin) {
                 using namespace std;
                 finish = start + swprintf(begin, CharacterBufferSize,
-                                          L"%.*Lg", static_cast<int>(mars_boost_ksim::detail::lcast_get_precision<long double >()), val );
+                                          L"%.*Lg", static_cast<int>(mars_boost::detail::lcast_get_precision<long double >()), val );
                 return finish > start;
             }
 #endif
@@ -360,7 +360,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             }
 
             template<class Alloc>
-            bool operator<<(mars_boost_ksim::container::basic_string<CharT,Traits,Alloc> const& str) BOOST_NOEXCEPT {
+            bool operator<<(mars_boost::container::basic_string<CharT,Traits,Alloc> const& str) BOOST_NOEXCEPT {
                 start = str.data();
                 finish = start + str.length();
                 return true;
@@ -374,7 +374,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             }
 
             template <class C>
-            BOOST_DEDUCED_TYPENAME mars_boost_ksim::disable_if<mars_boost_ksim::is_const<C>, bool>::type 
+            BOOST_DEDUCED_TYPENAME mars_boost::disable_if<mars_boost::is_const<C>, bool>::type 
             operator<<(const iterator_range<C*>& rng) BOOST_NOEXCEPT {
                 return (*this) << iterator_range<const C*>(rng.begin(), rng.end());
             }
@@ -433,16 +433,16 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             bool operator<<(unsigned long n)            { return shl_unsigned(n); }
 
 #if defined(BOOST_HAS_LONG_LONG)
-            bool operator<<(mars_boost_ksim::ulong_long_type n)   { return shl_unsigned(n); }
-            bool operator<<(mars_boost_ksim::long_long_type n)    { return shl_signed(n); }
+            bool operator<<(mars_boost::ulong_long_type n)   { return shl_unsigned(n); }
+            bool operator<<(mars_boost::long_long_type n)    { return shl_signed(n); }
 #elif defined(BOOST_HAS_MS_INT64)
             bool operator<<(unsigned __int64 n)         { return shl_unsigned(n); }
             bool operator<<(         __int64 n)         { return shl_signed(n); }
 #endif
 
 #ifdef BOOST_HAS_INT128
-            bool operator<<(const mars_boost_ksim::uint128_type& n)   { return shl_unsigned(n); }
-            bool operator<<(const mars_boost_ksim::int128_type& n)    { return shl_signed(n); }
+            bool operator<<(const mars_boost::uint128_type& n)   { return shl_unsigned(n); }
+            bool operator<<(const mars_boost::int128_type& n)    { return shl_signed(n); }
 #endif
             bool operator<<(float val)                  { return shl_real(val); }
             bool operator<<(double val)                 { return shl_real(val); }
@@ -456,28 +456,28 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             
             // Adding constness to characters. Constness does not change layout
             template <class C, std::size_t N>
-            BOOST_DEDUCED_TYPENAME mars_boost_ksim::disable_if<mars_boost_ksim::is_const<C>, bool>::type
-            operator<<(mars_boost_ksim::array<C, N> const& input) BOOST_NOEXCEPT { 
+            BOOST_DEDUCED_TYPENAME mars_boost::disable_if<mars_boost::is_const<C>, bool>::type
+            operator<<(mars_boost::array<C, N> const& input) BOOST_NOEXCEPT { 
                 BOOST_STATIC_ASSERT_MSG(
-                    (sizeof(mars_boost_ksim::array<const C, N>) == sizeof(mars_boost_ksim::array<C, N>)),
-                    "mars_boost_ksim::array<C, N> and mars_boost_ksim::array<const C, N> must have exactly the same layout."
+                    (sizeof(mars_boost::array<const C, N>) == sizeof(mars_boost::array<C, N>)),
+                    "mars_boost::array<C, N> and mars_boost::array<const C, N> must have exactly the same layout."
                 );
-                return ((*this) << reinterpret_cast<mars_boost_ksim::array<const C, N> const& >(input)); 
+                return ((*this) << reinterpret_cast<mars_boost::array<const C, N> const& >(input)); 
             }
 
             template <std::size_t N>
-            bool operator<<(mars_boost_ksim::array<const CharT, N> const& input) BOOST_NOEXCEPT { 
+            bool operator<<(mars_boost::array<const CharT, N> const& input) BOOST_NOEXCEPT { 
                 return shl_char_array_limited(input.begin(), N); 
             }
 
             template <std::size_t N>
-            bool operator<<(mars_boost_ksim::array<const unsigned char, N> const& input) BOOST_NOEXCEPT { 
-                return ((*this) << reinterpret_cast<mars_boost_ksim::array<const char, N> const& >(input)); 
+            bool operator<<(mars_boost::array<const unsigned char, N> const& input) BOOST_NOEXCEPT { 
+                return ((*this) << reinterpret_cast<mars_boost::array<const char, N> const& >(input)); 
             }
 
             template <std::size_t N>
-            bool operator<<(mars_boost_ksim::array<const signed char, N> const& input) BOOST_NOEXCEPT { 
-                return ((*this) << reinterpret_cast<mars_boost_ksim::array<const char, N> const& >(input)); 
+            bool operator<<(mars_boost::array<const signed char, N> const& input) BOOST_NOEXCEPT { 
+                return ((*this) << reinterpret_cast<mars_boost::array<const char, N> const& >(input)); 
             }
  
 #ifndef BOOST_NO_CXX11_HDR_ARRAY
@@ -485,11 +485,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             template <class C, std::size_t N>
             bool operator<<(std::array<C, N> const& input) BOOST_NOEXCEPT { 
                 BOOST_STATIC_ASSERT_MSG(
-                    (sizeof(std::array<C, N>) == sizeof(mars_boost_ksim::array<C, N>)),
-                    "std::array and mars_boost_ksim::array must have exactly the same layout. "
-                    "Bug in implementation of std::array or mars_boost_ksim::array."
+                    (sizeof(std::array<C, N>) == sizeof(mars_boost::array<C, N>)),
+                    "std::array and mars_boost::array must have exactly the same layout. "
+                    "Bug in implementation of std::array or mars_boost::array."
                 );
-                return ((*this) << reinterpret_cast<mars_boost_ksim::array<C, N> const& >(input)); 
+                return ((*this) << reinterpret_cast<mars_boost::array<C, N> const& >(input)); 
             }
 #endif
             template <class InStreamable>
@@ -498,7 +498,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
 
         template <class CharT, class Traits>
-        class lexical_ostream_limited_src: mars_boost_ksim::noncopyable {
+        class lexical_ostream_limited_src: mars_boost::noncopyable {
             //`[start, finish)` is the range to output by `operator >>` 
             const CharT*        start;
             const CharT* const  finish;
@@ -563,13 +563,13 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             bool shr_using_base_class(InputStreamable& output)
             {
                 BOOST_STATIC_ASSERT_MSG(
-                    (!mars_boost_ksim::is_pointer<InputStreamable>::value),
-                    "mars_boost_ksim::lexical_cast can not convert to pointers"
+                    (!mars_boost::is_pointer<InputStreamable>::value),
+                    "mars_boost::lexical_cast can not convert to pointers"
                 );
 
 #if defined(BOOST_NO_STRINGSTREAM) || defined(BOOST_NO_STD_LOCALE)
-                BOOST_STATIC_ASSERT_MSG((mars_boost_ksim::is_same<char, CharT>::value),
-                    "mars_boost_ksim::lexical_cast can not convert, because your STL library does not "
+                BOOST_STATIC_ASSERT_MSG((mars_boost::is_same<char, CharT>::value),
+                    "mars_boost::lexical_cast can not convert, because your STL library does not "
                     "support such conversions. Try updating it."
                 );
 #endif
@@ -611,8 +611,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             template<class T>
             inline bool shr_xchar(T& output) BOOST_NOEXCEPT {
                 BOOST_STATIC_ASSERT_MSG(( sizeof(CharT) == sizeof(T) ),
-                    "mars_boost_ksim::lexical_cast does not support narrowing of character types."
-                    "Use mars_boost_ksim::locale instead" );
+                    "mars_boost::lexical_cast does not support narrowing of character types."
+                    "Use mars_boost::locale instead" );
                 bool const ok = (finish - start == 1);
                 if (ok) {
                     CharT out;
@@ -644,16 +644,16 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             bool operator>>(int& output)                        { return shr_signed(output); }
             bool operator>>(long int& output)                   { return shr_signed(output); }
 #if defined(BOOST_HAS_LONG_LONG)
-            bool operator>>(mars_boost_ksim::ulong_long_type& output)     { return shr_unsigned(output); }
-            bool operator>>(mars_boost_ksim::long_long_type& output)      { return shr_signed(output); }
+            bool operator>>(mars_boost::ulong_long_type& output)     { return shr_unsigned(output); }
+            bool operator>>(mars_boost::long_long_type& output)      { return shr_signed(output); }
 #elif defined(BOOST_HAS_MS_INT64)
             bool operator>>(unsigned __int64& output)           { return shr_unsigned(output); }
             bool operator>>(__int64& output)                    { return shr_signed(output); }
 #endif
 
 #ifdef BOOST_HAS_INT128
-            bool operator>>(mars_boost_ksim::uint128_type& output)        { return shr_unsigned(output); }
-            bool operator>>(mars_boost_ksim::int128_type& output)         { return shr_signed(output); }
+            bool operator>>(mars_boost::uint128_type& output)        { return shr_unsigned(output); }
+            bool operator>>(mars_boost::int128_type& output)         { return shr_signed(output); }
 #endif
 
             bool operator>>(char& output)                       { return shr_xchar(output); }
@@ -674,33 +674,33 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             }
 
             template<class Alloc>
-            bool operator>>(mars_boost_ksim::container::basic_string<CharT,Traits,Alloc>& str) { 
+            bool operator>>(mars_boost::container::basic_string<CharT,Traits,Alloc>& str) { 
                 str.assign(start, finish); return true; 
             }
 
             template <std::size_t N>
-            bool operator>>(mars_boost_ksim::array<CharT, N>& output) BOOST_NOEXCEPT { 
+            bool operator>>(mars_boost::array<CharT, N>& output) BOOST_NOEXCEPT { 
                 return shr_std_array<N>(output); 
             }
 
             template <std::size_t N>
-            bool operator>>(mars_boost_ksim::array<unsigned char, N>& output) BOOST_NOEXCEPT { 
-                return ((*this) >> reinterpret_cast<mars_boost_ksim::array<char, N>& >(output)); 
+            bool operator>>(mars_boost::array<unsigned char, N>& output) BOOST_NOEXCEPT { 
+                return ((*this) >> reinterpret_cast<mars_boost::array<char, N>& >(output)); 
             }
 
             template <std::size_t N>
-            bool operator>>(mars_boost_ksim::array<signed char, N>& output) BOOST_NOEXCEPT { 
-                return ((*this) >> reinterpret_cast<mars_boost_ksim::array<char, N>& >(output)); 
+            bool operator>>(mars_boost::array<signed char, N>& output) BOOST_NOEXCEPT { 
+                return ((*this) >> reinterpret_cast<mars_boost::array<char, N>& >(output)); 
             }
  
 #ifndef BOOST_NO_CXX11_HDR_ARRAY
             template <class C, std::size_t N>
             bool operator>>(std::array<C, N>& output) BOOST_NOEXCEPT { 
                 BOOST_STATIC_ASSERT_MSG(
-                    (sizeof(mars_boost_ksim::array<C, N>) == sizeof(mars_boost_ksim::array<C, N>)),
-                    "std::array<C, N> and mars_boost_ksim::array<C, N> must have exactly the same layout."
+                    (sizeof(mars_boost::array<C, N>) == sizeof(mars_boost::array<C, N>)),
+                    "std::array<C, N> and mars_boost::array<C, N> must have exactly the same layout."
                 );
-                return ((*this) >> reinterpret_cast<mars_boost_ksim::array<C, N>& >(output));
+                return ((*this) >> reinterpret_cast<mars_boost::array<C, N>& >(output));
             }
 #endif
 
@@ -779,7 +779,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             }
         };
     }
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #undef BOOST_LCAST_NO_WCHAR_T
 

@@ -37,7 +37,7 @@
 # include <boost/mpl/always.hpp>
 # include <boost/mpl/apply_wrap.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace parameter { namespace aux {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace parameter { namespace aux {
 
 #  if ! defined(BOOST_NO_SFINAE) && ! BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x592))
 
@@ -88,7 +88,7 @@ struct unwrap_predicate<void (Target)>
 template <
     class Parameters
   , BOOST_PP_ENUM_BINARY_PARAMS(
-        BOOST_PARAMETER_MAX_ARITY, class A, = mars_boost_ksim::parameter::void_ BOOST_PP_INTERCEPT
+        BOOST_PARAMETER_MAX_ARITY, class A, = mars_boost::parameter::void_ BOOST_PP_INTERCEPT
     )
 >
 struct match
@@ -103,7 +103,7 @@ struct match
 template <
     class Parameters
   , BOOST_PP_ENUM_BINARY_PARAMS(
-        BOOST_PARAMETER_MAX_ARITY, class A, = mars_boost_ksim::parameter::void_ BOOST_PP_INTERCEPT
+        BOOST_PARAMETER_MAX_ARITY, class A, = mars_boost::parameter::void_ BOOST_PP_INTERCEPT
     )
 >
 struct argument_pack
@@ -169,7 +169,7 @@ struct funptr_predicate
     struct apply
     {
         BOOST_STATIC_CONSTANT(bool, result = 
-            sizeof(check_predicate(mars_boost_ksim::type<T>(), (Args*)0, &p)) == 1
+            sizeof(check_predicate(mars_boost::type<T>(), (Args*)0, &p)) == 1
         );
 
         typedef mpl::bool_<apply<T,Args>::result> type;
@@ -183,7 +183,7 @@ struct funptr_predicate<void**>
 
 # endif
 
-}}} // namespace mars_boost_ksim::parameter::aux
+}}} // namespace mars_boost::parameter::aux
 
 # if BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x564))
 // From Paul Mensonides
@@ -319,7 +319,7 @@ struct funptr_predicate<void**>
 
 # if ! defined(BOOST_NO_SFINAE) && ! BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x592))
 #  define BOOST_PARAMETER_FUNCTION_FWD_MATCH_Z(z, name, parameters, n) \
-    , typename mars_boost_ksim::parameter::aux::match< \
+    , typename mars_boost::parameter::aux::match< \
           parameters, BOOST_PP_ENUM_PARAMS(n, ParameterArgumentType) \
       >::type = parameters()
 # else
@@ -357,7 +357,7 @@ struct funptr_predicate<void**>
     BOOST_PP_EXPR_IF(n, typename) \
         BOOST_PARAMETER_FUNCTION_RESULT_NAME(BOOST_PP_TUPLE_ELEM(7,3,data))<   \
         BOOST_PP_EXPR_IF(n, typename) \
-        mars_boost_ksim::parameter::aux::argument_pack< \
+        mars_boost::parameter::aux::argument_pack< \
             BOOST_PARAMETER_FUNCTION_PARAMETERS_NAME(BOOST_PP_TUPLE_ELEM(7,3,data)) \
             BOOST_PP_COMMA_IF(n) \
             BOOST_PP_IF( \
@@ -447,7 +447,7 @@ struct funptr_predicate<void**>
     )
 /**/
 
-// Builds mars_boost_ksim::parameter::parameters<> specialization
+// Builds mars_boost::parameter::parameters<> specialization
 #  define BOOST_PARAMETER_FUNCTION_PARAMETERS_QUALIFIER_optional(tag) \
     optional<tag
 
@@ -455,16 +455,16 @@ struct funptr_predicate<void**>
     required<tag
 
 #  define BOOST_PARAMETER_FUNCTION_PARAMETERS_QUALIFIER_deduced_optional(tag) \
-    optional<mars_boost_ksim::parameter::deduced<tag>
+    optional<mars_boost::parameter::deduced<tag>
 
 #  define BOOST_PARAMETER_FUNCTION_PARAMETERS_QUALIFIER_deduced_required(tag) \
-    required<mars_boost_ksim::parameter::deduced<tag>
+    required<mars_boost::parameter::deduced<tag>
 
 # if !BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x564))
 
 #  define BOOST_PARAMETER_FUNCTION_PARAMETERS_M(r,tag_namespace,i,elem) \
     BOOST_PP_COMMA_IF(i) \
-    mars_boost_ksim::parameter::BOOST_PP_CAT( \
+    mars_boost::parameter::BOOST_PP_CAT( \
         BOOST_PARAMETER_FUNCTION_PARAMETERS_QUALIFIER_ \
       , BOOST_PARAMETER_FN_ARG_QUALIFIER(elem) \
     )( \
@@ -472,14 +472,14 @@ struct funptr_predicate<void**>
             BOOST_PARAMETER_FN_ARG_KEYWORD(elem) \
         ) \
     ) \
-      , typename mars_boost_ksim::parameter::aux::unwrap_predicate< \
+      , typename mars_boost::parameter::aux::unwrap_predicate< \
             void BOOST_PARAMETER_FN_ARG_PRED(elem) \
         >::type \
     >
 # elif BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x564))
 #  define BOOST_PARAMETER_FUNCTION_PARAMETERS_M(r,tag_namespace,i,elem) \
     BOOST_PP_COMMA_IF(i) \
-    mars_boost_ksim::parameter::BOOST_PP_CAT( \
+    mars_boost::parameter::BOOST_PP_CAT( \
         BOOST_PARAMETER_FUNCTION_PARAMETERS_QUALIFIER_ \
       , BOOST_PARAMETER_FN_ARG_QUALIFIER(elem) \
     )( \
@@ -487,7 +487,7 @@ struct funptr_predicate<void**>
             BOOST_PARAMETER_FN_ARG_KEYWORD(elem) \
         ) \
     ) \
-      , mars_boost_ksim::mpl::always<mars_boost_ksim::mpl::true_> \
+      , mars_boost::mpl::always<mars_boost::mpl::true_> \
     >
 # endif
 
@@ -496,7 +496,7 @@ struct funptr_predicate<void**>
     struct BOOST_PP_CAT(                                                            \
             BOOST_PP_CAT(boost_param_params_, __LINE__)                             \
           , BOOST_PARAMETER_MEMBER_FUNCTION_NAME(base)                              \
-    ) : mars_boost_ksim::parameter::parameters<                                               \
+    ) : mars_boost::parameter::parameters<                                               \
             BOOST_PP_SEQ_FOR_EACH_I(                                                \
                 BOOST_PARAMETER_FUNCTION_PARAMETERS_M, tag_namespace, args          \
             )                                                                       \
@@ -611,9 +611,9 @@ struct funptr_predicate<void**>
 
 // Generates a keyword | default expression.
 # define BOOST_PARAMETER_FUNCTION_DEFAULT_EVAL_DEFAULT(arg, tag_namespace) \
-    mars_boost_ksim::parameter::keyword< \
+    mars_boost::parameter::keyword< \
         tag_namespace::BOOST_PARAMETER_FN_ARG_KEYWORD(arg) \
-    >::instance | mars_boost_ksim::parameter::aux::use_default_tag()
+    >::instance | mars_boost::parameter::aux::use_default_tag()
 
 # define BOOST_PARAMETER_FUNCTION_DEFAULT_FUNCTION_GET_ARG(arg, tag_ns) \
     BOOST_PARAMETER_FUNCTION_CAST( \
@@ -649,7 +649,7 @@ struct funptr_predicate<void**>
 
 # define BOOST_PARAMETER_FUNCTION_DEFAULT_EVAL_ACTUAL_DEFAULT(arg) \
     BOOST_PARAMETER_FUNCTION_CAST( \
-        mars_boost_ksim::parameter::aux::as_lvalue(BOOST_PARAMETER_FN_ARG_DEFAULT(arg), 0L) \
+        mars_boost::parameter::aux::as_lvalue(BOOST_PARAMETER_FN_ARG_DEFAULT(arg), 0L) \
       , BOOST_PARAMETER_FN_ARG_PRED(arg) \
       , Args \
     )
@@ -674,7 +674,7 @@ struct funptr_predicate<void**>
           , BOOST_PP_INC(n) \
           , split_args \
         ) \
-      , mars_boost_ksim::parameter::aux::use_default_tag \
+      , mars_boost::parameter::aux::use_default_tag \
     ) BOOST_PP_EXPR_IF(const_, const) \
     { \
         return BOOST_PARAMETER_FUNCTION_DEFAULT_NAME(name)( \
@@ -764,7 +764,7 @@ struct funptr_predicate<void**>
 # define BOOST_PARAMETER_FUNCTION_DEFAULT_GET_ARG(r, tag_ns, arg) \
     , BOOST_PARAMETER_FUNCTION_CAST( \
           args[ \
-              mars_boost_ksim::parameter::keyword<tag_ns::BOOST_PARAMETER_FN_ARG_KEYWORD(arg)>::instance \
+              mars_boost::parameter::keyword<tag_ns::BOOST_PARAMETER_FN_ARG_KEYWORD(arg)>::instance \
           ] \
         , BOOST_PARAMETER_FN_ARG_PRED(arg) \
         , Args \

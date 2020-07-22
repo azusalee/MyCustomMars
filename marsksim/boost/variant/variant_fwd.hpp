@@ -176,7 +176,7 @@
 #endif // BOOST_VARIANT_DO_NOT_USE_VARIADIC_TEMPLATES workaround
 
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 namespace detail { namespace variant {
 
@@ -295,8 +295,8 @@ template < BOOST_VARIANT_AUX_DECLARE_PARAMS > class variant;
 ///////////////////////////////////////////////////////////////////////////////
 // metafunction make_recursive_variant
 //
-// Exposes a mars_boost_ksim::variant with recursive_variant_ tags (below) substituted
-// with the variant itself (wrapped as needed with mars_boost_ksim::recursive_wrapper).
+// Exposes a mars_boost::variant with recursive_variant_ tags (below) substituted
+// with the variant itself (wrapped as needed with mars_boost::recursive_wrapper).
 //
 template < BOOST_VARIANT_AUX_DECLARE_PARAMS > struct make_recursive_variant;
 
@@ -328,6 +328,6 @@ template <typename Types> struct make_variant_over;
 //
 template <typename Types> struct make_recursive_variant_over;
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_VARIANT_VARIANT_FWD_HPP

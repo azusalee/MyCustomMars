@@ -32,7 +32,7 @@
 #include <boost/type_traits/remove_reference.hpp>
 #include <boost/next_prior.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range_detail
     {
@@ -187,33 +187,33 @@ public:
 
     template<typename Range1, typename Range2>
     join_iterator(Range1& r1, Range2& r2, join_iterator_begin_tag)
-        : m_section(mars_boost_ksim::empty(r1) ? 1u : 0u)
-        , m_it(mars_boost_ksim::empty(r1) ? 1u : 0u, mars_boost_ksim::begin(r1), mars_boost_ksim::begin(r2))
-        , m_link(link_t(mars_boost_ksim::end(r1), mars_boost_ksim::begin(r2)))
+        : m_section(mars_boost::empty(r1) ? 1u : 0u)
+        , m_it(mars_boost::empty(r1) ? 1u : 0u, mars_boost::begin(r1), mars_boost::begin(r2))
+        , m_link(link_t(mars_boost::end(r1), mars_boost::begin(r2)))
     {
     }
 
     template<typename Range1, typename Range2>
     join_iterator(const Range1& r1, const Range2& r2, join_iterator_begin_tag)
-        : m_section(mars_boost_ksim::empty(r1) ? 1u : 0u)
-        , m_it(mars_boost_ksim::empty(r1) ? 1u : 0u, mars_boost_ksim::const_begin(r1), mars_boost_ksim::const_begin(r2))
-        , m_link(link_t(mars_boost_ksim::const_end(r1), mars_boost_ksim::const_begin(r2)))
+        : m_section(mars_boost::empty(r1) ? 1u : 0u)
+        , m_it(mars_boost::empty(r1) ? 1u : 0u, mars_boost::const_begin(r1), mars_boost::const_begin(r2))
+        , m_link(link_t(mars_boost::const_end(r1), mars_boost::const_begin(r2)))
     {
     }
 
     template<typename Range1, typename Range2>
     join_iterator(Range1& r1, Range2& r2, join_iterator_end_tag)
         : m_section(1u)
-        , m_it(1u, mars_boost_ksim::end(r1), mars_boost_ksim::end(r2))
-        , m_link(link_t(mars_boost_ksim::end(r1), mars_boost_ksim::begin(r2)))
+        , m_it(1u, mars_boost::end(r1), mars_boost::end(r2))
+        , m_link(link_t(mars_boost::end(r1), mars_boost::begin(r2)))
     {
     }
 
     template<typename Range1, typename Range2>
     join_iterator(const Range1& r1, const Range2& r2, join_iterator_end_tag)
         : m_section(1u)
-        , m_it(1u, mars_boost_ksim::const_end(r1), mars_boost_ksim::const_end(r2))
-        , m_link(link_t(mars_boost_ksim::const_end(r1), mars_boost_ksim::const_begin(r2)))
+        , m_it(1u, mars_boost::const_end(r1), mars_boost::const_end(r2))
+        , m_link(link_t(mars_boost::const_end(r1), mars_boost::const_begin(r2)))
     {
     }
 
@@ -239,7 +239,7 @@ private:
         {
             if (m_it.it2() == m_link.first2)
             {
-                m_it.it1() = mars_boost_ksim::prior(m_link.last1);
+                m_it.it1() = mars_boost::prior(m_link.last1);
                 m_section = 0u;
             }
             else
@@ -349,6 +349,6 @@ private:
 
     } // namespace range_detail
 
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

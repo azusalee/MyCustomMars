@@ -25,7 +25,7 @@
 #include <boost/range/iterator.hpp>
 #include <boost/range/const_iterator.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 #if !BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x564))
@@ -110,7 +110,7 @@ inline BOOST_DEDUCED_TYPENAME range_iterator<const T>::type end( const T& r )
 
 #endif // BOOST_NO_FUNCTION_TEMPLATE_ORDERING
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range_adl_barrier
     {
@@ -118,11 +118,11 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         inline BOOST_DEDUCED_TYPENAME range_iterator<const T>::type
         const_end( const T& r )
         {
-            return mars_boost_ksim::range_adl_barrier::end( r );
+            return mars_boost::range_adl_barrier::end( r );
         }
     } // namespace range_adl_barrier
     using namespace range_adl_barrier;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif
 

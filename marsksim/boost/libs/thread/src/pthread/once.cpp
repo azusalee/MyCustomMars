@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include <memory>
 #include <string.h> // memcmp.
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace thread_detail
     {

@@ -14,7 +14,7 @@
 #include <boost/thread/concurrent_queues/sync_timed_queue.hpp>
 #include <boost/thread/executors/work.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 namespace executors
 {
@@ -24,7 +24,7 @@ namespace detail
   class priority_executor_base
   {
   public:
-    //typedef mars_boost_ksim::function<void()> work;
+    //typedef mars_boost::function<void()> work;
     typedef executors::work_pq work;
   protected:
     typedef Queue queue_type;

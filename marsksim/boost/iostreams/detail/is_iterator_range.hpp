@@ -15,7 +15,7 @@
 // Must come last.
 #include <boost/iostreams/detail/config/disable_warnings.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { 
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { 
 
 # if !BOOST_WORKAROUND(BOOST_MSVC, <= 1300) //---------------------------------//
 
@@ -25,7 +25,7 @@ class iterator_range;
     
 namespace iostreams {
 
-BOOST_IOSTREAMS_BOOL_TRAIT_DEF(is_iterator_range, mars_boost_ksim::iterator_range, 1)
+BOOST_IOSTREAMS_BOOL_TRAIT_DEF(is_iterator_range, mars_boost::iterator_range, 1)
 
 } // End namespace iostreams.
 
@@ -42,7 +42,7 @@ namespace iostreams {
 
 # endif // # if !BOOST_WORKAROUND(BOOST_MSVC, < 1300) //----------------------//
 
-} // End namespace mars_boost_ksim.
+} // End namespace mars_boost.
 
 #include <boost/iostreams/detail/config/enable_warnings.hpp>
 

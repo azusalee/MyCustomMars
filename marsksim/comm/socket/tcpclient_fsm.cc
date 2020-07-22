@@ -12,7 +12,7 @@
 
 
 /*
- * TcpClientFSM.cpp
+ * TcpClientksimFSM.cpp
  *
  *  Created on: 2014-8-19
  *      Author: yerungui
@@ -30,7 +30,7 @@
 
 #include "comm/platform_comm.h"
 
-TcpClientFSM::TcpClientFSM(const sockaddr& _addr):addr_(&_addr) {
+TcpClientksimFSM::TcpClientksimFSM(const sockaddr& _addr):addr_(&_addr) {
     status_ = EStart;
     last_status_ = EStart;
     error_ = 0;
@@ -42,57 +42,57 @@ TcpClientFSM::TcpClientFSM(const sockaddr& _addr):addr_(&_addr) {
     end_connecttime_ = 0;
 }
 
-TcpClientFSM::~TcpClientFSM() {
+TcpClientksimFSM::~TcpClientksimFSM() {
     Close(false);
     xassert2(INVALID_SOCKET == sock_, "%d", sock_);
 }
 
-void TcpClientFSM::RequestSend() {
+void TcpClientksimFSM::RequestSend() {
     request_send_ = true;
 }
 
-TcpClientFSM::TSocketStatus TcpClientFSM::Status() const {
+TcpClientksimFSM::TSocketStatus TcpClientksimFSM::Status() const {
     return status_;
 }
 
-void TcpClientFSM::Status(TSocketStatus _status) {
+void TcpClientksimFSM::Status(TSocketStatus _status) {
     last_status_ = _status;
     status_ = _status;
 }
 
-TcpClientFSM::TSocketStatus TcpClientFSM::LastStatus() const {
+TcpClientksimFSM::TSocketStatus TcpClientksimFSM::LastStatus() const {
     return last_status_;
 }
 
-int TcpClientFSM::Error() const {
+int TcpClientksimFSM::Error() const {
     return error_;
 }
 
-bool TcpClientFSM::IsEndStatus() const {
+bool TcpClientksimFSM::IsEndStatus() const {
     return EEnd == status_;
 }
 
-SOCKET TcpClientFSM::Socket() const {
+SOCKET TcpClientksimFSM::Socket() const {
     return sock_;
 }
 
-void TcpClientFSM::Socket(SOCKET _sock) {
+void TcpClientksimFSM::Socket(SOCKET _sock) {
     sock_ = _sock;
 }
 
-const sockaddr& TcpClientFSM::Address() const {
+const sockaddr& TcpClientksimFSM::Address() const {
     return addr_.address();
 }
 
-const char* TcpClientFSM::IP() const {
+const char* TcpClientksimFSM::IP() const {
     return addr_.ip();
 }
 
-uint16_t TcpClientFSM::Port() const {
+uint16_t TcpClientksimFSM::Port() const {
     return addr_.port();
 }
 
-void TcpClientFSM::Close(bool _notify) {
+void TcpClientksimFSM::Close(bool _notify) {
     if (INVALID_SOCKET == sock_) return;
 
     if (remote_close_ || 0 != error_) {
@@ -113,11 +113,11 @@ void TcpClientFSM::Close(bool _notify) {
     if (_notify) _OnClose(last_status_, 0, remote_close_);
 }
 
-bool TcpClientFSM::RemoteClose() const {
+bool TcpClientksimFSM::RemoteClose() const {
     return remote_close_;
 }
 
-void TcpClientFSM::PreSelect(SocketSelect& _sel, XLogger& _log) {
+void TcpClientksimFSM::PreSelect(SocketSelect& _sel, XLogger& _log) {
     
     switch(status_) {
         case EStart: {
@@ -138,7 +138,7 @@ void TcpClientFSM::PreSelect(SocketSelect& _sel, XLogger& _log) {
     }
 }
 
-void TcpClientFSM::AfterSelect(SocketSelect& _sel, XLogger& _log) {
+void TcpClientksimFSM::AfterSelect(SocketSelect& _sel, XLogger& _log) {
     if (EConnecting == status_) AfterConnectSelect(_sel, _log);
     else if (EReadWrite == status_)  AfterReadWriteSelect(_sel, _log);
 
@@ -147,7 +147,7 @@ void TcpClientFSM::AfterSelect(SocketSelect& _sel, XLogger& _log) {
     }
 }
 
-int TcpClientFSM::Timeout() const {
+int TcpClientksimFSM::Timeout() const {
     if (EConnecting == status_) return ConnectTimeout();
 
     if (EReadWrite == status_) return ReadWriteTimeout();
@@ -157,7 +157,7 @@ int TcpClientFSM::Timeout() const {
     return INT_MAX;
 }
 
-void TcpClientFSM::PreConnectSelect(SocketSelect& _sel, XLogger& _log) {
+void TcpClientksimFSM::PreConnectSelect(SocketSelect& _sel, XLogger& _log) {
     xassert2(EStart == status_, "%d", status_);
     _OnCreate();
 
@@ -222,7 +222,7 @@ void TcpClientFSM::PreConnectSelect(SocketSelect& _sel, XLogger& _log) {
     if (0 == error_) _OnConnect();
 }
 
-void TcpClientFSM::AfterConnectSelect(const SocketSelect& _sel, XLogger& _log) {
+void TcpClientksimFSM::AfterConnectSelect(const SocketSelect& _sel, XLogger& _log) {
     xassert2(EConnecting == status_, "%d", status_);
 
     int timeout = ConnectTimeout();
@@ -271,7 +271,7 @@ void TcpClientFSM::AfterConnectSelect(const SocketSelect& _sel, XLogger& _log) {
     }
 }
 
-void TcpClientFSM::PreReadWriteSelect(SocketSelect& _sel, XLogger& _log) {
+void TcpClientksimFSM::PreReadWriteSelect(SocketSelect& _sel, XLogger& _log) {
     xassert2(EReadWrite == status_, "%d", status_);
 
     _sel.Read_FD_SET(sock_);
@@ -280,7 +280,7 @@ void TcpClientFSM::PreReadWriteSelect(SocketSelect& _sel, XLogger& _log) {
     if (0 < send_buf_.Length() || request_send_) _sel.Write_FD_SET(sock_);
 }
 
-void TcpClientFSM::AfterReadWriteSelect(const SocketSelect& _sel, XLogger& _log) {
+void TcpClientksimFSM::AfterReadWriteSelect(const SocketSelect& _sel, XLogger& _log) {
     xassert2(EReadWrite == status_, "%d", status_);
 
     int timeout = ReadWriteTimeout();
@@ -360,8 +360,8 @@ void TcpClientFSM::AfterReadWriteSelect(const SocketSelect& _sel, XLogger& _log)
     }
 }
 
-int TcpClientFSM::ConnectTimeout() const { return INT_MAX; }
-int TcpClientFSM::ReadWriteTimeout() const { return INT_MAX; }
-int TcpClientFSM::ConnectAbsTimeout() const { return INT_MAX; }
-int TcpClientFSM::ReadWriteAbsTimeout() const { return INT_MAX;}
-int TcpClientFSM::Rtt() const { return int(end_connecttime_ - start_connecttime_);}
+int TcpClientksimFSM::ConnectTimeout() const { return INT_MAX; }
+int TcpClientksimFSM::ReadWriteTimeout() const { return INT_MAX; }
+int TcpClientksimFSM::ConnectAbsTimeout() const { return INT_MAX; }
+int TcpClientksimFSM::ReadWriteAbsTimeout() const { return INT_MAX;}
+int TcpClientksimFSM::Rtt() const { return int(end_connecttime_ - start_connecttime_);}

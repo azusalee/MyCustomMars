@@ -18,7 +18,7 @@
 #include <boost/range/begin.hpp>
 #include <boost/range/end.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {  namespace algorithm {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {  namespace algorithm {
 
 //  Use the C++11 versions of any_of if it is available
 #if __cplusplus >= 201103L && TARGET_OS_IPHONE
@@ -52,7 +52,7 @@ bool any_of ( InputIterator first, InputIterator last, Predicate p )
 template<typename Range, typename Predicate> 
 bool any_of ( const Range &r, Predicate p )
 {
-    return mars_boost_ksim::algorithm::any_of (mars_boost_ksim::begin (r), mars_boost_ksim::end (r), p);
+    return mars_boost::algorithm::any_of (mars_boost::begin (r), mars_boost::end (r), p);
 } 
 
 /// \fn any_of_equal ( InputIterator first, InputIterator last, const V &val )
@@ -82,7 +82,7 @@ bool any_of_equal ( InputIterator first, InputIterator last, const V &val )
 template<typename Range, typename V> 
 bool any_of_equal ( const Range &r, const V &val ) 
 {
-    return mars_boost_ksim::algorithm::any_of_equal (mars_boost_ksim::begin (r), mars_boost_ksim::end (r), val);
+    return mars_boost::algorithm::any_of_equal (mars_boost::begin (r), mars_boost::end (r), val);
 }
 
 }} // namespace boost and algorithm

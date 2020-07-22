@@ -12,16 +12,16 @@
 
 #include <boost/config/abi_prefix.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
-    typedef mars_boost_ksim::posix_time::ptime system_time;
+    typedef mars_boost::posix_time::ptime system_time;
     
     inline system_time get_system_time()
     {
 #if defined(BOOST_DATE_TIME_HAS_HIGH_PRECISION_CLOCK)
-        return mars_boost_ksim::date_time::microsec_clock<system_time>::universal_time();
+        return mars_boost::date_time::microsec_clock<system_time>::universal_time();
 #else // defined(BOOST_DATE_TIME_HAS_HIGH_PRECISION_CLOCK)
-        return mars_boost_ksim::date_time::second_clock<system_time>::universal_time();
+        return mars_boost::date_time::second_clock<system_time>::universal_time();
 #endif // defined(BOOST_DATE_TIME_HAS_HIGH_PRECISION_CLOCK)
     }
 
@@ -29,7 +29,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
     {
         inline system_time get_system_time_sentinel()
         {
-            return system_time(mars_boost_ksim::posix_time::pos_infin);
+            return system_time(mars_boost::posix_time::pos_infin);
         }
 
         inline unsigned long get_milliseconds_until(system_time const& target_time)

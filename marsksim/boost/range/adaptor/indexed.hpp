@@ -34,7 +34,7 @@
 
 #include <boost/tuple/tuple.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace adaptors
     {
@@ -93,22 +93,22 @@ public:
     // member functions index(), value() (non-const and const)
     index_type index()
     {
-        return mars_boost_ksim::tuples::get<0>(*this);
+        return mars_boost::tuples::get<0>(*this);
     }
 
     const_index_type index() const
     {
-        return mars_boost_ksim::tuples::get<0>(*this);
+        return mars_boost::tuples::get<0>(*this);
     }
 
     value_type value()
     {
-        return mars_boost_ksim::tuples::get<1>(*this);
+        return mars_boost::tuples::get<1>(*this);
     }
 
     const_value_type value() const
     {
-        return mars_boost_ksim::tuples::get<1>(*this);
+        return mars_boost::tuples::get<1>(*this);
     }
 };
 
@@ -218,7 +218,7 @@ public:
     }
 
  private:
-    friend class mars_boost_ksim::iterator_core_access;
+    friend class mars_boost::iterator_core_access;
 
     reference dereference() const
     {
@@ -274,7 +274,7 @@ struct indexed_range
     > base_t;
 
     BOOST_RANGE_CONCEPT_ASSERT((
-        mars_boost_ksim::SinglePassRangeConcept<SinglePassRange>));
+        mars_boost::SinglePassRangeConcept<SinglePassRange>));
 public:
     typedef indexed_iterator<
         typename range_iterator<SinglePassRange>::type
@@ -289,8 +289,8 @@ public:
         SinglePassRange& r,
         single_pass_traversal_tag
         )
-        : base_t(iterator(mars_boost_ksim::begin(r), i),
-                 iterator(mars_boost_ksim::end(r), i))
+        : base_t(iterator(mars_boost::begin(r), i),
+                 iterator(mars_boost::end(r), i))
     {
     }
 
@@ -299,8 +299,8 @@ public:
         SinglePassRange& r,
         random_access_traversal_tag
         )
-        : base_t(iterator(mars_boost_ksim::begin(r), i),
-                 iterator(mars_boost_ksim::end(r), i + mars_boost_ksim::size(r)))
+        : base_t(iterator(mars_boost::begin(r), i),
+                 iterator(mars_boost::end(r), i + mars_boost::size(r)))
     {
     }
 };
@@ -317,7 +317,7 @@ inline indexed_range<SinglePassRange>
 operator|(SinglePassRange& r, indexed e)
 {
     BOOST_RANGE_CONCEPT_ASSERT((
-        mars_boost_ksim::SinglePassRangeConcept<SinglePassRange>
+        mars_boost::SinglePassRangeConcept<SinglePassRange>
     ));
     return indexed_range<SinglePassRange>(
                 e.val, r,
@@ -329,7 +329,7 @@ inline indexed_range<const SinglePassRange>
 operator|(const SinglePassRange& r, indexed e)
 {
     BOOST_RANGE_CONCEPT_ASSERT((
-        mars_boost_ksim::SinglePassRangeConcept<const SinglePassRange>
+        mars_boost::SinglePassRangeConcept<const SinglePassRange>
     ));
     return indexed_range<const SinglePassRange>(
                 e.val, r,
@@ -343,7 +343,7 @@ index(
     typename range_difference<SinglePassRange>::type index_value = 0)
 {
     BOOST_RANGE_CONCEPT_ASSERT((
-        mars_boost_ksim::SinglePassRangeConcept<SinglePassRange>
+        mars_boost::SinglePassRangeConcept<SinglePassRange>
     ));
     return indexed_range<SinglePassRange>(
                 index_value, rng,
@@ -357,7 +357,7 @@ index(
     typename range_difference<const SinglePassRange>::type index_value = 0)
 {
     BOOST_RANGE_CONCEPT_ASSERT((
-        mars_boost_ksim::SinglePassRangeConcept<SinglePassRange>
+        mars_boost::SinglePassRangeConcept<SinglePassRange>
     ));
     return indexed_range<const SinglePassRange>(
                 index_value, rng,
@@ -365,6 +365,6 @@ index(
 }
 
     } // namespace adaptors
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

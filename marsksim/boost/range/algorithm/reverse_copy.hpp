@@ -16,7 +16,7 @@
 #include <boost/iterator/iterator_concepts.hpp>
 #include <algorithm>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range
     {
@@ -30,11 +30,11 @@ template<class BidirectionalRange, class OutputIterator>
 inline OutputIterator reverse_copy(const BidirectionalRange& rng, OutputIterator out)
 {
     BOOST_RANGE_CONCEPT_ASSERT(( BidirectionalRangeConcept<const BidirectionalRange> ));
-    return std::reverse_copy(mars_boost_ksim::begin(rng), mars_boost_ksim::end(rng), out);
+    return std::reverse_copy(mars_boost::begin(rng), mars_boost::end(rng), out);
 }
 
     } // namespace range
     using range::reverse_copy;
-} // namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+} // namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 
 #endif // include guard

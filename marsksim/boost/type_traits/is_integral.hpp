@@ -12,7 +12,7 @@
 #include <boost/config.hpp>
 #include <boost/type_traits/integral_constant.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 #if defined( __CODEGEARC__ )
    template <class T>
@@ -64,16 +64,16 @@ template<> struct is_integral<__int64> : public true_type{};
 #endif
 
 # if defined(BOOST_HAS_LONG_LONG)
-template<> struct is_integral< ::mars_boost_ksim::ulong_long_type> : public true_type{};
-template<> struct is_integral< ::mars_boost_ksim::long_long_type> : public true_type{};
+template<> struct is_integral< ::mars_boost::ulong_long_type> : public true_type{};
+template<> struct is_integral< ::mars_boost::long_long_type> : public true_type{};
 #elif defined(BOOST_HAS_MS_INT64)
 template<> struct is_integral<unsigned __int64> : public true_type{};
 template<> struct is_integral<__int64> : public true_type{};
 #endif
         
 #ifdef BOOST_HAS_INT128
-template<> struct is_integral<mars_boost_ksim::int128_type> : public true_type{};
-template<> struct is_integral<mars_boost_ksim::uint128_type> : public true_type{};
+template<> struct is_integral<mars_boost::int128_type> : public true_type{};
+template<> struct is_integral<mars_boost::uint128_type> : public true_type{};
 #endif
 #ifndef BOOST_NO_CXX11_CHAR16_T
 template<> struct is_integral<char16_t> : public true_type{};
@@ -84,6 +84,6 @@ template<> struct is_integral<char32_t> : public true_type{};
 
 #endif  // non-CodeGear implementation
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_IS_INTEGRAL_HPP_INCLUDED

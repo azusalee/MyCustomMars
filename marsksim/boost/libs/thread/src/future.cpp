@@ -10,14 +10,14 @@
 #include <boost/thread/futures/future_error_code.hpp>
 #include <string>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
   namespace thread_detail
   {
 
     class  future_error_category :
-      public mars_boost_ksim::system::error_category
+      public mars_boost::system::error_category
     {
     public:
         virtual const char* name() const BOOST_NOEXCEPT;

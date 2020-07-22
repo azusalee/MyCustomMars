@@ -16,7 +16,7 @@
 #define BOOST_OPTIONAL_OPTIONAL_FWD_FLC_19NOV2002_HPP
 
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 template<class T> class optional ;
 
@@ -24,7 +24,7 @@ template<class T> void swap ( optional<T>& , optional<T>& );
 
 template<class T> struct optional_swap_should_use_default_constructor ;
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif
 

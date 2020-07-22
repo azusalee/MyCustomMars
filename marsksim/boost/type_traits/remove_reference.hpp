@@ -12,7 +12,7 @@
 #include <boost/config.hpp>
 #include <boost/detail/workaround.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 
 namespace detail{
@@ -35,7 +35,7 @@ struct remove_rvalue_ref<T&&>
 
 } // namespace detail
 
-template <class T> struct remove_reference{ typedef typename mars_boost_ksim::detail::remove_rvalue_ref<T>::type type; };
+template <class T> struct remove_reference{ typedef typename mars_boost::detail::remove_rvalue_ref<T>::type type; };
 template <class T> struct remove_reference<T&>{ typedef T type; };
 
 #if defined(BOOST_ILLEGAL_CV_REFERENCES)
@@ -49,6 +49,6 @@ template <class T> struct remove_reference<T&const volatile>{ typedef T type; };
 #endif
 
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_REMOVE_REFERENCE_HPP_INCLUDED

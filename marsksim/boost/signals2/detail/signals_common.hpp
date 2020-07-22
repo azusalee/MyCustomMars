@@ -17,7 +17,7 @@
 #include <boost/signals2/signal_base.hpp>
 #include <boost/type_traits/is_base_of.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
   namespace signals2 {
     namespace detail {
       // Determine if the given type T is a signal
@@ -72,6 +72,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
       }
     } // end namespace detail
   } // end namespace signals2
-} // end namespace mars_boost_ksim
+} // end namespace mars_boost
 
 #endif // BOOST_SIGNALS2_SIGNALS_COMMON_HPP

@@ -20,7 +20,7 @@
  composition operators.
 */
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
     namespace algorithm {
 
 //  predicate facade ------------------------------------------------------//
@@ -36,7 +36,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         struct predicate_facade {};
 
     } // namespace algorithm
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 
 #endif  // BOOST_STRING_CLASSIFICATION_DETAIL_HPP

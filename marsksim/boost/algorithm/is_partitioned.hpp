@@ -17,7 +17,7 @@
 #include <boost/range/begin.hpp>
 #include <boost/range/end.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {  namespace algorithm {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {  namespace algorithm {
 
 #if __cplusplus >= 201103L
 //  Use the C++11 versions of is_partitioned if it is available
@@ -56,7 +56,7 @@ bool is_partitioned ( InputIterator first, InputIterator last, UnaryPredicate p 
 template <typename Range, typename UnaryPredicate>
 bool is_partitioned ( const Range &r, UnaryPredicate p )
 {
-    return mars_boost_ksim::algorithm::is_partitioned (mars_boost_ksim::begin(r), mars_boost_ksim::end(r), p);
+    return mars_boost::algorithm::is_partitioned (mars_boost::begin(r), mars_boost::end(r), p);
 }
 
 

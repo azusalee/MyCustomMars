@@ -10,7 +10,7 @@
 # include <boost/detail/workaround.hpp>
 # include <boost/mpl/int.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace type_of
     {
@@ -20,7 +20,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         char (*encode_index(...))[1];
 
-# define BOOST_TYPEOF_INDEX(T) (sizeof(*mars_boost_ksim::type_of::encode_index((mars_boost_ksim::type_of::encode_counter<1000>*)0)))
+# define BOOST_TYPEOF_INDEX(T) (sizeof(*mars_boost::type_of::encode_index((mars_boost::type_of::encode_counter<1000>*)0)))
 # define BOOST_TYPEOF_NEXT_INDEX(next) friend char (*encode_index(encode_counter<next>*))[next];
 
 
@@ -76,21 +76,21 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
         msvc_register_type<T,Organizer> typeof_register_type(const T&,Organizer* =0);
 
 # define BOOST_TYPEOF(expr) \
-    mars_boost_ksim::type_of::msvc_typeid_wrapper<sizeof(*mars_boost_ksim::type_of::encode_start(expr))>::type
+    mars_boost::type_of::msvc_typeid_wrapper<sizeof(*mars_boost::type_of::encode_start(expr))>::type
 
 # define BOOST_TYPEOF_TPL(expr) typename BOOST_TYPEOF(expr)
 
 # define BOOST_TYPEOF_NESTED_TYPEDEF_TPL(name,expr) \
     struct name {\
-        BOOST_STATIC_CONSTANT(int,_typeof_register_value=sizeof(mars_boost_ksim::type_of::typeof_register_type<name>(expr)));\
-        typedef typename mars_boost_ksim::type_of::msvc_extract_type<name>::id2type id2type;\
+        BOOST_STATIC_CONSTANT(int,_typeof_register_value=sizeof(mars_boost::type_of::typeof_register_type<name>(expr)));\
+        typedef typename mars_boost::type_of::msvc_extract_type<name>::id2type id2type;\
         typedef typename id2type::type type;\
     };
 
 # define BOOST_TYPEOF_NESTED_TYPEDEF(name,expr) \
     struct name {\
-        BOOST_STATIC_CONSTANT(int,_typeof_register_value=sizeof(mars_boost_ksim::type_of::typeof_register_type<name>(expr)));\
-        typedef mars_boost_ksim::type_of::msvc_extract_type<name>::id2type id2type;\
+        BOOST_STATIC_CONSTANT(int,_typeof_register_value=sizeof(mars_boost::type_of::typeof_register_type<name>(expr)));\
+        typedef mars_boost::type_of::msvc_extract_type<name>::id2type id2type;\
         typedef id2type::type type;\
     };
 

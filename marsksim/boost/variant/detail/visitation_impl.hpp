@@ -59,7 +59,7 @@
 
 #endif
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace detail { namespace variant {
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -164,7 +164,7 @@ visitation_impl_invoke(int, Visitor&, VoidPtrCV, apply_visitor_unrolled*, NBF, l
 {
     // should never be here at runtime!
     typedef typename Visitor::result_type result_type;
-    return ::mars_boost_ksim::detail::variant::forced_return< result_type >();
+    return ::mars_boost::detail::variant::forced_return< result_type >();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -188,7 +188,7 @@ visitation_impl(
 {
     // should never be here at runtime!
     typedef typename Visitor::result_type result_type;
-    return ::mars_boost_ksim::detail::variant::forced_return< result_type >();
+    return ::mars_boost::detail::variant::forced_return< result_type >();
 }
 
 template <
@@ -268,7 +268,7 @@ visitation_impl(
 }
 
 }} // namespace detail::variant
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #if BOOST_WORKAROUND(BOOST_MSVC, >= 1400)  
 # pragma warning(pop)  

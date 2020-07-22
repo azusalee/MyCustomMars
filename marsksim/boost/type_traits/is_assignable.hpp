@@ -12,7 +12,7 @@
 #include <boost/type_traits/integral_constant.hpp>
 #include <boost/detail/workaround.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim{
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost{
 
    template <class T, class U = T> struct is_assignable;
 
@@ -23,22 +23,22 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #include <boost/type_traits/detail/yes_no_type.hpp>
 #include <boost/type_traits/declval.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim{
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost{
 
    namespace detail{
 
       struct is_assignable_imp
       {
-         template<typename T, typename U, typename = decltype(mars_boost_ksim::declval<T>() = mars_boost_ksim::declval<U>())>
-         static mars_boost_ksim::type_traits::yes_type test(int);
+         template<typename T, typename U, typename = decltype(mars_boost::declval<T>() = mars_boost::declval<U>())>
+         static mars_boost::type_traits::yes_type test(int);
 
          template<typename, typename>
-         static mars_boost_ksim::type_traits::no_type test(...);
+         static mars_boost::type_traits::no_type test(...);
       };
 
    }
 
-   template <class T, class U> struct is_assignable : public integral_constant<bool, sizeof(detail::is_assignable_imp::test<T, U>(0)) == sizeof(mars_boost_ksim::type_traits::yes_type)>{};
+   template <class T, class U> struct is_assignable : public integral_constant<bool, sizeof(detail::is_assignable_imp::test<T, U>(0)) == sizeof(mars_boost::type_traits::yes_type)>{};
    template <class T, std::size_t N, class U> struct is_assignable<T[N], U> : public is_assignable<T, U>{};
    template <class T, std::size_t N, class U> struct is_assignable<T(&)[N], U> : public is_assignable<T&, U>{};
    template <class T, class U> struct is_assignable<T[], U> : public is_assignable<T, U>{};
@@ -53,7 +53,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 #include <boost/type_traits/has_trivial_assign.hpp>
 #include <boost/type_traits/remove_reference.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim{
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost{
 
    // We don't know how to implement this:
    template <class T, class U> struct is_assignable : public integral_constant<bool, false>{};
@@ -71,6 +71,6 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
    */
 #endif
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_TT_IS_ASSIGNABLE_HPP_INCLUDED

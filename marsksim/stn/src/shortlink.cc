@@ -46,7 +46,7 @@
 
 
 #define AYNC_HANDLER asyncreg_.Get()
-#define STATIC_RETURN_SYNC2ASYNC_FUNC(func) RETURN_SYNC2ASYNC_FUNC(func, )
+#define STATIC_RETURN_SYNC2ASYNC_FUNCksim(func) RETURN_SYNC2ASYNC_FUNCksim(func, )
 
 using namespace marsksim::stn;
 using namespace marsksim::app;
@@ -473,7 +473,7 @@ void ShortLink::__RunReadWrite(SOCKET _socket, int& _err_type, int& _err_code, C
 }
 
 void ShortLink::__UpdateProfile(const ConnectProfile& _conn_profile) {
-	STATIC_RETURN_SYNC2ASYNC_FUNC(boost_ksim::bind(&ShortLink::__UpdateProfile, this, _conn_profile));
+	STATIC_RETURN_SYNC2ASYNC_FUNCksim(boost_ksim::bind(&ShortLink::__UpdateProfile, this, _conn_profile));
 	conn_profile_ = _conn_profile;
 }
 

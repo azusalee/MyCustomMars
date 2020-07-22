@@ -19,7 +19,7 @@
 #include <boost/mpl/aux_/traits_lambda_spec.hpp>
 #include <boost/type_traits/is_same.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl {
 
 // default implementation; conrete sequences might override it by 
 // specializing either the 'empty_impl' or the primary 'empty' template

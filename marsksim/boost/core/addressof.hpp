@@ -16,7 +16,7 @@
 # include <boost/detail/workaround.hpp>
 # include <cstddef>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
 
 namespace detail
@@ -109,11 +109,11 @@ T * addressof( T & v )
 {
 #if (defined( __BORLANDC__ ) && BOOST_WORKAROUND( __BORLANDC__, BOOST_TESTED_AT( 0x610 ) ) ) || (defined(__SUNPRO_CC) && BOOST_WORKAROUND(__SUNPRO_CC, <= 0x5120))
 
-    return mars_boost_ksim::detail::addressof_impl<T>::f( v, 0 );
+    return mars_boost::detail::addressof_impl<T>::f( v, 0 );
 
 #else
 
-    return mars_boost_ksim::detail::addressof_impl<T>::f( mars_boost_ksim::detail::addr_impl_ref<T>( v ), 0 );
+    return mars_boost::detail::addressof_impl<T>::f( mars_boost::detail::addr_impl_ref<T>( v ), 0 );
 
 #endif
 }
@@ -157,6 +157,6 @@ const T (*addressof(const T (&t)[N]))[N]
 }
 #endif
 
-} // namespace mars_boost_ksim
+} // namespace mars_boost
 
 #endif // BOOST_CORE_ADDRESSOF_HPP

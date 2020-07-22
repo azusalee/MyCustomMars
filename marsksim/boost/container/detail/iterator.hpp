@@ -23,18 +23,18 @@
 
 #include <boost/intrusive/detail/iterator.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 namespace container {
 
-using ::mars_boost_ksim::intrusive::iterator_traits;
-using ::mars_boost_ksim::intrusive::iterator_distance;
-using ::mars_boost_ksim::intrusive::iterator_advance;
-using ::mars_boost_ksim::intrusive::iterator;
-using ::mars_boost_ksim::intrusive::iterator_enable_if_tag;
-using ::mars_boost_ksim::intrusive::iterator_disable_if_tag;
-using ::mars_boost_ksim::intrusive::iterator_arrow_result;
+using ::mars_boost::intrusive::iterator_traits;
+using ::mars_boost::intrusive::iterator_distance;
+using ::mars_boost::intrusive::iterator_advance;
+using ::mars_boost::intrusive::iterator;
+using ::mars_boost::intrusive::iterator_enable_if_tag;
+using ::mars_boost::intrusive::iterator_disable_if_tag;
+using ::mars_boost::intrusive::iterator_arrow_result;
 
 }  //namespace container {
-}  //namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim {
+}  //namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost {
 
 #endif   //#ifndef BOOST_CONTAINER_DETAIL_ITERATORS_HPP

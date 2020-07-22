@@ -37,7 +37,7 @@
 
 #include <boost/type_traits/is_same.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim { namespace mpl {
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost { namespace mpl {
 
 #if BOOST_WORKAROUND(BOOST_MSVC, <= 1300)
 
@@ -66,7 +66,7 @@ struct is_sequence
 #if BOOST_WORKAROUND(BOOST_MSVC, < 1300)
           aux::msvc_is_class<T> 
 #else
-          mars_boost_ksim::is_class<T> 
+          mars_boost::is_class<T> 
 #endif
         , aux::is_sequence_impl<T>
         , bool_<false>

@@ -18,7 +18,7 @@
 #include <boost/iterator/transform_iterator.hpp>
 #include <boost/utility/result_of.hpp>
 
-namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace mars_boost_ksim
+namespace mars_boost {} namespace boost_ksim = mars_boost; namespace mars_boost
 {
     namespace range_detail
     {
@@ -38,7 +38,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
 
         template< class F, class R >
         struct transformed_range :
-            public mars_boost_ksim::iterator_range<
+            public mars_boost::iterator_range<
                 typename transform_iterator_gen<
                     F, typename range_iterator<R>::type>::type>
         {
@@ -46,7 +46,7 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             typedef typename transform_iterator_gen<
                 F, typename range_iterator<R>::type>::type transform_iter_t;
 
-            typedef mars_boost_ksim::iterator_range<transform_iter_t> base;
+            typedef mars_boost::iterator_range<transform_iter_t> base;
 
         public:
             typedef typename default_constructible_unary_fn_gen<
@@ -60,8 +60,8 @@ namespace mars_boost_ksim {} namespace boost_ksim = mars_boost_ksim; namespace m
             typedef R source_range_type;
 
             transformed_range(transform_fn_type f, R& r)
-                : base(transform_iter_t(mars_boost_ksim::begin(r), f),
-                       transform_iter_t(mars_boost_ksim::end(r), f))
+                : base(transform_iter_t(mars_boost::begin(r), f),
+                       transform_iter_t(mars_boost::end(r), f))
             {
             }
         };

@@ -147,14 +147,14 @@ void SignallingKeeper::__OnTimeOut()
     __SendSignallingBuffer();
 }
 
-void SignallingKeeper::OnError(UdpClient* _this, int _errno)
+void SignallingKeeper::OnError(UdpClientksim* _this, int _errno)
 {
 }
-void SignallingKeeper::OnDataGramRead(UdpClient* _this, void* _buf, size_t _len)
+void SignallingKeeper::OnDataGramRead(UdpClientksim* _this, void* _buf, size_t _len)
 {
 }
 
-void SignallingKeeper::OnDataSent(UdpClient* _this)
+void SignallingKeeper::OnDataSent(UdpClientksim* _this)
 {
     OnNetWorkDataChanged("", 0, 0);
 }
